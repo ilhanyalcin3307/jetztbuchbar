@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const cron = require('node-cron');
 const simpleGit = require('simple-git');
+const fetch = require('node-fetch');
 
 const {
   getWikipediaSummary,
@@ -53,6 +54,52 @@ function saveTracker(tracker) {
   fs.writeFileSync(TRACKER_FILE, JSON.stringify(tracker, null, 2), 'utf8');
 }
 
+// ── Sitemap + Google ping ─────────────────────────────────────────────────────
+
+function generateSitemap() {
+  const BASE = 'https://www.jetztbuchbar.de';
+  const today = new Date().toISOString().split('T')[0];
+  const staticPages = [
+    { url: '/', priority: '1.0', freq: 'weekly' },
+    { url: '/ueber-uns.html', priority: '0.4', freq: 'monthly' },
+    { url: '/impressum.html', priority: '0.2', freq: 'monthly' },
+    { url: '/datenschutz.html', priority: '0.2', freq: 'monthly' },
+  ];
+  const htmlFiles = fs.readdirSync(ROOT_DIR)
+    .filter(f => f.endsWith('.html') && !['index.html','ueber-uns.html','impressum.html','datenschutz.html'].includes(f))
+    .sort();
+  const priorityMap = {
+    tuerkei:'0.9', spanien:'0.9', griechenland:'0.9', aegypten:'0.9',
+    marokko:'0.9', dubai:'0.9', kroatien:'0.9', portugal:'0.9',
+    tunesien:'0.9', bulgarien:'0.9', malta:'0.9', zypern:'0.9',
+    'kap-verde':'0.9', jordanien:'0.9',
+    antalya:'0.85', bodrum:'0.85', 'kreta-urlaub':'0.85', 'santorini-urlaub':'0.85',
+    'beste-reisezeit':'0.8', 'hotels-':'0.75', default:'0.7',
+  };
+  function getPriority(file) {
+    const slug = file.replace('.html','');
+    if (priorityMap[slug]) return priorityMap[slug];
+    for (const k of Object.keys(priorityMap)) { if (slug.startsWith(k)) return priorityMap[k]; }
+    return priorityMap.default;
+  }
+  const urls = [
+    ...staticPages.map(p => `  <url>\n    <loc>${BASE}${p.url}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${p.freq}</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`),
+    ...htmlFiles.map(f => `  <url>\n    <loc>${BASE}/${f}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${getPriority(f)}</priority>\n  </url>`),
+  ];
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
+  fs.writeFileSync(path.join(ROOT_DIR, 'sitemap.xml'), xml, 'utf8');
+  console.log(`[sitemap] ${urls.length} URLs written.`);
+}
+
+async function pingGoogle() {
+  try {
+    const res = await fetch(`https://www.google.com/ping?sitemap=${encodeURIComponent('https://www.jetztbuchbar.de/sitemap.xml')}`);
+    console.log(`[ping] Google ping → HTTP ${res.status}`);
+  } catch (err) {
+    console.warn(`[ping] Google ping failed: ${err.message}`);
+  }
+}
+
 // ── Git helper ────────────────────────────────────────────────────────────────
 
 async function gitPush(filename, commitMsg) {
@@ -60,11 +107,14 @@ async function gitPush(filename, commitMsg) {
     console.warn('[git] GITHUB_TOKEN not set – skipping push.');
     return;
   }
+  generateSitemap();
+  await pingGoogle();
   const remoteUrl = `https://${GITHUB_TOKEN}@github.com/${REPO_OWNER}/${REPO_NAME}.git`;
   const git = simpleGit(ROOT_DIR);
   try {
     await git.remote(['set-url', 'origin', remoteUrl]);
     await git.add(filename);
+    await git.add('sitemap.xml');
     await git.commit(commitMsg);
     await git.push('origin', 'main');
     console.log(`[git] Pushed: ${commitMsg}`);

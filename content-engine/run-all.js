@@ -8,6 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 const simpleGit = require('simple-git');
+const fetch = require('node-fetch');
 
 const {
   getWikipediaSummary,
@@ -540,6 +541,72 @@ async function generatePage(page) {
   }
 }
 
+// ── Sitemap generator ─────────────────────────────────────────────────────────
+
+function generateSitemap() {
+  const BASE = 'https://www.jetztbuchbar.de';
+  const today = new Date().toISOString().split('T')[0];
+
+  // Static pages
+  const staticPages = [
+    { url: '/', priority: '1.0', freq: 'weekly' },
+    { url: '/ueber-uns.html', priority: '0.4', freq: 'monthly' },
+    { url: '/impressum.html', priority: '0.2', freq: 'monthly' },
+    { url: '/datenschutz.html', priority: '0.2', freq: 'monthly' },
+  ];
+
+  // Generated pages — scan root dir for HTML files
+  const htmlFiles = fs.readdirSync(ROOT_DIR)
+    .filter(f => f.endsWith('.html') && !['index.html','ueber-uns.html','impressum.html','datenschutz.html'].includes(f))
+    .sort();
+
+  const priorityMap = {
+    // destination
+    tuerkei: '0.9', spanien: '0.9', griechenland: '0.9', aegypten: '0.9',
+    marokko: '0.9', dubai: '0.9', kroatien: '0.9', portugal: '0.9',
+    tunesien: '0.9', bulgarien: '0.9', malta: '0.9', zypern: '0.9',
+    'kap-verde': '0.9', jordanien: '0.9',
+    // city
+    antalya: '0.85', bodrum: '0.85', 'kreta-urlaub': '0.85', 'santorini-urlaub': '0.85',
+    // reisezeit
+    'beste-reisezeit': '0.8',
+    // hotels
+    'hotels-': '0.75',
+    // others
+    default: '0.7',
+  };
+
+  function getPriority(file) {
+    const slug = file.replace('.html','');
+    if (priorityMap[slug]) return priorityMap[slug];
+    for (const k of Object.keys(priorityMap)) {
+      if (slug.startsWith(k)) return priorityMap[k];
+    }
+    return priorityMap.default;
+  }
+
+  const urls = [
+    ...staticPages.map(p => `  <url>\n    <loc>${BASE}${p.url}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${p.freq}</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`),
+    ...htmlFiles.map(f => `  <url>\n    <loc>${BASE}/${f}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${getPriority(f)}</priority>\n  </url>`),
+  ];
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
+  const outPath = path.join(ROOT_DIR, 'sitemap.xml');
+  fs.writeFileSync(outPath, xml, 'utf8');
+  console.log(`[sitemap] Written: ${urls.length} URLs → sitemap.xml`);
+  return outPath;
+}
+
+async function pingGoogle() {
+  const sitemapUrl = 'https://www.jetztbuchbar.de/sitemap.xml';
+  try {
+    const res = await fetch(`https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`);
+    console.log(`[ping] Google ping → HTTP ${res.status}`);
+  } catch (err) {
+    console.warn(`[ping] Google ping failed: ${err.message}`);
+  }
+}
+
 // ── Bulk run ──────────────────────────────────────────────────────────────────
 
 async function bulkRun() {
@@ -565,7 +632,19 @@ async function bulkRun() {
   }
 
   if (generatedFiles.length === 0) {
-    console.log('[bulk] Nothing to push.');
+    // Still regenerate sitemap in case pages were added manually
+    const sitemapPath = generateSitemap();
+    await pingGoogle();
+    console.log('[bulk] No new pages, but sitemap refreshed.');
+    if (GITHUB_TOKEN) {
+      const git = simpleGit(ROOT_DIR);
+      const remoteUrl = `https://${GITHUB_TOKEN}@github.com/${REPO_OWNER}/${REPO_NAME}.git`;
+      await git.remote(['set-url', 'origin', remoteUrl]);
+      await git.add('sitemap.xml');
+      const today = new Date().toISOString().split('T')[0];
+      await git.commit(`chore: refresh sitemap.xml ${today}`).catch(() => {});
+      await git.push('origin', 'main').catch(() => {});
+    }
     return;
   }
 
@@ -575,11 +654,17 @@ async function bulkRun() {
   }
 
   console.log(`\n[git] Committing ${generatedFiles.length} files...`);
+
+  // Generate sitemap before committing
+  const sitemapPath = generateSitemap();
+  await pingGoogle();
+
   const remoteUrl = `https://${GITHUB_TOKEN}@github.com/${REPO_OWNER}/${REPO_NAME}.git`;
   const git = simpleGit(ROOT_DIR);
   try {
     await git.remote(['set-url', 'origin', remoteUrl]);
     for (const f of generatedFiles) await git.add(f);
+    await git.add('sitemap.xml');
     await git.add('content-engine/generated-pages.json');
     const today = new Date().toISOString().split('T')[0];
     await git.commit(`content: bulk generate ${generatedFiles.length} SEO pages ${today}`);

@@ -1,0 +1,93 @@
+# JetztBuchbar.de
+
+> Reisevergleichsportal für DACH-Reisende: Destinationsguides, Klimadaten, Reisetipps und Hotelbuchungen für über 50 Urlaubsziele.
+
+## Beschreibung
+
+JetztBuchbar.de ist ein deutschsprachiges Reiseinformationsportal für Urlauber aus Deutschland, Österreich und der Schweiz (DACH). Die Website bietet detaillierte Destinationsguides mit Klimadaten, interaktiven Karten, Sehenswürdigkeiten sowie praktische Reisetipps.
+
+## Hauptseiten
+
+- https://www.jetztbuchbar.de/ — Startseite mit allen Reisezielen
+
+## Reiseziele (Länder)
+
+- https://www.jetztbuchbar.de/tuerkei.html — Türkei Urlaub
+- https://www.jetztbuchbar.de/spanien.html — Spanien Urlaub
+- https://www.jetztbuchbar.de/griechenland.html — Griechenland Urlaub
+- https://www.jetztbuchbar.de/aegypten.html — Ägypten Urlaub
+- https://www.jetztbuchbar.de/marokko.html — Marokko Urlaub
+- https://www.jetztbuchbar.de/dubai.html — Dubai Urlaub
+- https://www.jetztbuchbar.de/kroatien.html — Kroatien Urlaub
+- https://www.jetztbuchbar.de/portugal.html — Portugal Urlaub
+- https://www.jetztbuchbar.de/tunesien.html — Tunesien Urlaub
+- https://www.jetztbuchbar.de/bulgarien.html — Bulgarien Urlaub
+- https://www.jetztbuchbar.de/malta.html — Malta Urlaub
+- https://www.jetztbuchbar.de/zypern.html — Zypern Urlaub
+- https://www.jetztbuchbar.de/kap-verde.html — Kap Verde Urlaub
+- https://www.jetztbuchbar.de/jordanien.html — Jordanien Urlaub
+
+## Städte & Regionen
+
+- https://www.jetztbuchbar.de/antalya.html — Antalya Türkische Riviera
+- https://www.jetztbuchbar.de/bodrum.html — Bodrum Ägäis
+- https://www.jetztbuchbar.de/kreta-urlaub.html — Kreta Urlaub
+- https://www.jetztbuchbar.de/santorini-urlaub.html — Santorini Urlaub
+- https://www.jetztbuchbar.de/algarve.html — Algarve Portugal
+- https://www.jetztbuchbar.de/costa-brava.html — Costa Brava Spanien
+- https://www.jetztbuchbar.de/bodensee-region.html — Bodensee Region
+- https://www.jetztbuchbar.de/amalfikueste.html — Amalfiküste Italien
+
+## Beste Reisezeit
+
+- https://www.jetztbuchbar.de/beste-reisezeit-tuerkei.html — Beste Reisezeit Türkei
+- https://www.jetztbuchbar.de/beste-reisezeit-spanien.html — Beste Reisezeit Spanien
+- https://www.jetztbuchbar.de/beste-reisezeit-griechenland.html — Beste Reisezeit Griechenland
+- https://www.jetztbuchbar.de/beste-reisezeit-aegypten.html — Beste Reisezeit Ägypten
+- https://www.jetztbuchbar.de/beste-reisezeit-marokko.html — Beste Reisezeit Marokko
+- https://www.jetztbuchbar.de/beste-reisezeit-dubai.html — Beste Reisezeit Dubai
+- https://www.jetztbuchbar.de/beste-reisezeit-portugal.html — Beste Reisezeit Portugal
+- https://www.jetztbuchbar.de/beste-reisezeit-malta.html — Beste Reisezeit Malta
+
+## Hotels
+
+- https://www.jetztbuchbar.de/hotels-antalya.html — Hotels Antalya
+- https://www.jetztbuchbar.de/hotels-dubai.html — Hotels Dubai
+- https://www.jetztbuchbar.de/hotels-kreta.html — Hotels Kreta
+- https://www.jetztbuchbar.de/hotels-mallorca.html — Hotels Mallorca
+- https://www.jetztbuchbar.de/hotels-lissabon.html — Hotels Lissabon
+
+## Aktivitäten
+
+- https://www.jetztbuchbar.de/schnorcheln-kreta.html — Schnorcheln Kreta
+- https://www.jetztbuchbar.de/tauchen-malta.html — Tauchen Malta
+- https://www.jetztbuchbar.de/wuestensafari-dubai.html — Wüstensafari Dubai
+- https://www.jetztbuchbar.de/wandern-kroatien.html — Wandern Kroatien
+- https://www.jetztbuchbar.de/surfen-kap-verde.html — Surfen Kap Verde
+
+## Reisethemen
+
+- https://www.jetztbuchbar.de/last-minute-urlaub.html — Last Minute Urlaub
+- https://www.jetztbuchbar.de/all-inclusive-urlaub.html — All Inclusive Urlaub
+- https://www.jetztbuchbar.de/urlaub-mit-kindern.html — Urlaub mit Kindern
+- https://www.jetztbuchbar.de/flitterwochen.html — Flitterwochen & Honeymoon
+
+## Reisetipps & Ratgeber
+
+- https://www.jetztbuchbar.de/handgepaeck-regeln.html — Handgepäck Regeln
+- https://www.jetztbuchbar.de/reiseversicherung-vergleich.html — Reiseversicherung Vergleich
+- https://www.jetztbuchbar.de/packliste-sommerurlaub.html — Packliste Sommerurlaub
+- https://www.jetztbuchbar.de/guenstig-fliegen-tipps.html — Günstig Fliegen Tipps
+
+## Reiseziel-Vergleiche
+
+- https://www.jetztbuchbar.de/tuerkei-vs-aegypten.html — Türkei vs. Ägypten
+- https://www.jetztbuchbar.de/mallorca-vs-kreta.html — Mallorca vs. Kreta
+- https://www.jetztbuchbar.de/dubai-vs-abu-dhabi.html — Dubai vs. Abu Dhabi
+
+## Kontakt & Rechtliches
+
+- https://www.jetztbuchbar.de/ueber-uns.html — Über uns
+- https://www.jetztbuchbar.de/impressum.html — Impressum
+- https://www.jetztbuchbar.de/datenschutz.html — Datenschutz
+- sales@jetztbuchbar.de

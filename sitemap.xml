@@ -28,94 +28,112 @@
     <loc>https://www.jetztbuchbar.de/aegypten.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/aegypten/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/aegypten/reisezeit/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/algarve.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/all-inclusive-urlaub.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/amalfikueste.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/antalya.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/beste-reisezeit-aegypten.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/beste-reisezeit-dubai.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/beste-reisezeit-griechenland.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/beste-reisezeit-malta.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/beste-reisezeit-marokko.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/beste-reisezeit-portugal.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/beste-reisezeit-spanien.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/beste-reisezeit-tuerkei.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/bodensee-region.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/bodrum.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/bulgarien.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/bulgarien/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -124,76 +142,154 @@
     <loc>https://www.jetztbuchbar.de/costa-brava.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/deutschland/bodensee/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/dubai-vs-abu-dhabi.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/dubai.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/dubai/hotels-dubai/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/dubai/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/dubai/reisezeit/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/dubai/wuestensafari/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/flitterwochen.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/griechenland.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/griechenland/hotels-kreta/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/griechenland/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/griechenland/kreta/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/griechenland/reisezeit/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/griechenland/santorini/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/griechenland/schnorcheln-kreta/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/guenstig-fliegen-tipps.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/handgepaeck-regeln.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/hotels-antalya.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/hotels-dubai.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/hotels-kreta.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/hotels-lissabon.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/hotels-mallorca.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/italien/amalfikueste/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/jordanien.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/jordanien/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -202,106 +298,292 @@
     <loc>https://www.jetztbuchbar.de/kap-verde.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/kap-verde/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/kap-verde/surfen/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/kreta-urlaub.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/kroatien.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://www.jetztbuchbar.de/last-minute-urlaub.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.jetztbuchbar.de/mallorca-vs-kreta.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.jetztbuchbar.de/malta.html</loc>
+    <loc>https://www.jetztbuchbar.de/kroatien/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.jetztbuchbar.de/marokko.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.jetztbuchbar.de/packliste-sommerurlaub.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.jetztbuchbar.de/portugal.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.jetztbuchbar.de/reiseversicherung-vergleich.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.jetztbuchbar.de/santorini-urlaub.html</loc>
+    <loc>https://www.jetztbuchbar.de/kroatien/wandern/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://www.jetztbuchbar.de/last-minute-urlaub.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/mallorca-vs-kreta.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/malta.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/malta/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/malta/reisezeit/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/malta/tauchen/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/marokko.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/marokko/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/marokko/reisezeit/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/packliste-sommerurlaub.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/portugal.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/portugal/algarve/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/portugal/hotels-lissabon/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/portugal/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/portugal/reisezeit/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/reiseversicherung-vergleich.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/santorini-urlaub.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
     <loc>https://www.jetztbuchbar.de/schnorcheln-kreta.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/spanien.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/spanien/costa-brava/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/spanien/hotels-mallorca/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/spanien/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/spanien/reisezeit/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/surfen-kap-verde.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/tauchen-malta.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/themen/all-inclusive/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/themen/flitterwochen/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/themen/last-minute/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/themen/urlaub-mit-kindern/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/tipps/guenstig-fliegen/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/tipps/handgepaeck/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/tipps/packliste/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/tipps/reiseversicherung/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/tuerkei-vs-aegypten.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/tuerkei.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/tuerkei/antalya/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/tuerkei/bodrum/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/tuerkei/hotels-antalya/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/tuerkei/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.jetztbuchbar.de/tuerkei/reisezeit/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://www.jetztbuchbar.de/tunesien.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/tunesien/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -310,22 +592,46 @@
     <loc>https://www.jetztbuchbar.de/urlaub-mit-kindern.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/vergleiche/dubai-vs-abu-dhabi/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/vergleiche/mallorca-vs-kreta/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/vergleiche/tuerkei-vs-aegypten/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/wandern-kroatien.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/wuestensafari-dubai.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/zypern.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/zypern/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>

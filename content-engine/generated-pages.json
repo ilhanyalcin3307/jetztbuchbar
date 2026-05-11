@@ -1,1 +1,190 @@
-{}
+{
+  "marokko": {
+    "generatedAt": "2026-05-11T11:54:11.392Z",
+    "file": "marokko.html"
+  },
+  "tunesien": {
+    "generatedAt": "2026-05-11T11:54:11.601Z",
+    "file": "tunesien.html"
+  },
+  "dubai": {
+    "generatedAt": "2026-05-11T11:54:11.894Z",
+    "file": "dubai.html"
+  },
+  "kroatien": {
+    "generatedAt": "2026-05-11T11:54:12.080Z",
+    "file": "kroatien.html"
+  },
+  "portugal": {
+    "generatedAt": "2026-05-11T11:54:12.261Z",
+    "file": "portugal.html"
+  },
+  "bulgarien": {
+    "generatedAt": "2026-05-11T11:54:12.434Z",
+    "file": "bulgarien.html"
+  },
+  "malta": {
+    "generatedAt": "2026-05-11T11:54:12.604Z",
+    "file": "malta.html"
+  },
+  "zypern": {
+    "generatedAt": "2026-05-11T11:54:12.774Z",
+    "file": "zypern.html"
+  },
+  "kap-verde": {
+    "generatedAt": "2026-05-11T11:54:12.946Z",
+    "file": "kap-verde.html"
+  },
+  "jordanien": {
+    "generatedAt": "2026-05-11T11:54:13.126Z",
+    "file": "jordanien.html"
+  },
+  "antalya": {
+    "generatedAt": "2026-05-11T11:54:13.575Z",
+    "file": "antalya.html"
+  },
+  "bodrum": {
+    "generatedAt": "2026-05-11T11:54:13.765Z",
+    "file": "bodrum.html"
+  },
+  "kreta-stadt": {
+    "generatedAt": "2026-05-11T11:54:14.077Z",
+    "file": "kreta-urlaub.html"
+  },
+  "santorini-stadt": {
+    "generatedAt": "2026-05-11T11:54:14.520Z",
+    "file": "santorini-urlaub.html"
+  },
+  "reisezeit-tuerkei": {
+    "generatedAt": "2026-05-11T11:54:14.610Z",
+    "file": "beste-reisezeit-tuerkei.html"
+  },
+  "reisezeit-spanien": {
+    "generatedAt": "2026-05-11T11:54:14.694Z",
+    "file": "beste-reisezeit-spanien.html"
+  },
+  "reisezeit-griechenland": {
+    "generatedAt": "2026-05-11T11:54:14.784Z",
+    "file": "beste-reisezeit-griechenland.html"
+  },
+  "reisezeit-aegypten": {
+    "generatedAt": "2026-05-11T11:54:14.874Z",
+    "file": "beste-reisezeit-aegypten.html"
+  },
+  "reisezeit-marokko": {
+    "generatedAt": "2026-05-11T11:54:14.940Z",
+    "file": "beste-reisezeit-marokko.html"
+  },
+  "reisezeit-dubai": {
+    "generatedAt": "2026-05-11T11:54:15.108Z",
+    "file": "beste-reisezeit-dubai.html"
+  },
+  "reisezeit-portugal": {
+    "generatedAt": "2026-05-11T11:54:15.174Z",
+    "file": "beste-reisezeit-portugal.html"
+  },
+  "reisezeit-malta": {
+    "generatedAt": "2026-05-11T11:54:15.248Z",
+    "file": "beste-reisezeit-malta.html"
+  },
+  "urlaub-mit-kindern": {
+    "generatedAt": "2026-05-11T11:54:15.250Z",
+    "file": "urlaub-mit-kindern.html"
+  },
+  "flitterwochen": {
+    "generatedAt": "2026-05-11T11:54:15.250Z",
+    "file": "flitterwochen.html"
+  },
+  "last-minute": {
+    "generatedAt": "2026-05-11T11:54:15.251Z",
+    "file": "last-minute-urlaub.html"
+  },
+  "all-inclusive": {
+    "generatedAt": "2026-05-11T11:54:15.251Z",
+    "file": "all-inclusive-urlaub.html"
+  },
+  "hotels-antalya": {
+    "generatedAt": "2026-05-11T11:54:15.460Z",
+    "file": "hotels-antalya.html"
+  },
+  "hotels-dubai": {
+    "generatedAt": "2026-05-11T11:54:15.645Z",
+    "file": "hotels-dubai.html"
+  },
+  "hotels-kreta": {
+    "generatedAt": "2026-05-11T11:54:15.866Z",
+    "file": "hotels-kreta.html"
+  },
+  "hotels-mallorca": {
+    "generatedAt": "2026-05-11T11:54:16.169Z",
+    "file": "hotels-mallorca.html"
+  },
+  "hotels-lissabon": {
+    "generatedAt": "2026-05-11T11:54:16.358Z",
+    "file": "hotels-lissabon.html"
+  },
+  "schnorcheln-kreta": {
+    "generatedAt": "2026-05-11T11:54:16.417Z",
+    "file": "schnorcheln-kreta.html"
+  },
+  "tauchen-malta": {
+    "generatedAt": "2026-05-11T11:54:16.478Z",
+    "file": "tauchen-malta.html"
+  },
+  "wuestensafari-dubai": {
+    "generatedAt": "2026-05-11T11:54:16.611Z",
+    "file": "wuestensafari-dubai.html"
+  },
+  "wandern-kroatien": {
+    "generatedAt": "2026-05-11T11:54:16.696Z",
+    "file": "wandern-kroatien.html"
+  },
+  "surfen-kap-verde": {
+    "generatedAt": "2026-05-11T11:54:16.757Z",
+    "file": "surfen-kap-verde.html"
+  },
+  "algarve": {
+    "generatedAt": "2026-05-11T11:54:16.911Z",
+    "file": "algarve.html"
+  },
+  "costa-brava": {
+    "generatedAt": "2026-05-11T11:54:17.486Z",
+    "file": "costa-brava.html"
+  },
+  "bodensee-region": {
+    "generatedAt": "2026-05-11T11:54:17.722Z",
+    "file": "bodensee-region.html"
+  },
+  "amalfikueste": {
+    "generatedAt": "2026-05-11T11:54:17.893Z",
+    "file": "amalfikueste.html"
+  },
+  "handgepaeck-regeln": {
+    "generatedAt": "2026-05-11T11:54:17.894Z",
+    "file": "handgepaeck-regeln.html"
+  },
+  "reiseversicherung-vergleich": {
+    "generatedAt": "2026-05-11T11:54:17.895Z",
+    "file": "reiseversicherung-vergleich.html"
+  },
+  "packliste-sommerurlaub": {
+    "generatedAt": "2026-05-11T11:54:17.895Z",
+    "file": "packliste-sommerurlaub.html"
+  },
+  "guenstig-fliegen-tipps": {
+    "generatedAt": "2026-05-11T11:54:17.896Z",
+    "file": "guenstig-fliegen-tipps.html"
+  },
+  "tuerkei-vs-aegypten": {
+    "generatedAt": "2026-05-11T11:54:18.184Z",
+    "file": "tuerkei-vs-aegypten.html"
+  },
+  "mallorca-vs-kreta": {
+    "generatedAt": "2026-05-11T11:54:18.254Z",
+    "file": "mallorca-vs-kreta.html"
+  },
+  "dubai-vs-abu-dhabi": {
+    "generatedAt": "2026-05-11T11:54:18.314Z",
+    "file": "dubai-vs-abu-dhabi.html"
+  }
+}

@@ -55,22 +55,6 @@
     "generatedAt": "2026-05-11T10:57:47.597Z",
     "file": "santorini-urlaub.html"
   },
-  "reisezeit-tuerkei": {
-    "generatedAt": "2026-05-11T10:57:47.598Z",
-    "file": "beste-reisezeit-tuerkei.html"
-  },
-  "reisezeit-spanien": {
-    "generatedAt": "2026-05-11T10:57:47.599Z",
-    "file": "beste-reisezeit-spanien.html"
-  },
-  "reisezeit-griechenland": {
-    "generatedAt": "2026-05-11T10:57:47.599Z",
-    "file": "beste-reisezeit-griechenland.html"
-  },
-  "reisezeit-aegypten": {
-    "generatedAt": "2026-05-11T10:57:47.599Z",
-    "file": "beste-reisezeit-aegypten.html"
-  },
   "reisezeit-marokko": {
     "generatedAt": "2026-05-11T10:57:47.680Z",
     "file": "beste-reisezeit-marokko.html"
@@ -102,5 +86,21 @@
   "all-inclusive": {
     "generatedAt": "2026-05-11T10:57:47.918Z",
     "file": "all-inclusive-urlaub.html"
+  },
+  "reisezeit-tuerkei": {
+    "generatedAt": "2026-05-11T10:58:39.111Z",
+    "file": "beste-reisezeit-tuerkei.html"
+  },
+  "reisezeit-spanien": {
+    "generatedAt": "2026-05-11T10:58:39.202Z",
+    "file": "beste-reisezeit-spanien.html"
+  },
+  "reisezeit-griechenland": {
+    "generatedAt": "2026-05-11T10:58:39.289Z",
+    "file": "beste-reisezeit-griechenland.html"
+  },
+  "reisezeit-aegypten": {
+    "generatedAt": "2026-05-11T10:58:39.399Z",
+    "file": "beste-reisezeit-aegypten.html"
   }
 }

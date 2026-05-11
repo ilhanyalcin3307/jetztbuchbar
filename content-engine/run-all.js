@@ -747,4 +747,10 @@ async function bulkRun() {
   }
 }
 
-bulkRun().catch(err => { console.error('[bulk] Fatal:', err.message); process.exit(1); });
+bulkRun()
+  .then(() => {
+    // After bulk refresh, run the auto-expand engine (10 new seeds/day)
+    const { expandRun } = require('./auto-expand');
+    return expandRun();
+  })
+  .catch(err => { console.error('[bulk] Fatal:', err.message); process.exit(1); });

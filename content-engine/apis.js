@@ -174,6 +174,60 @@ const COORDS = {
   'costa brava':  { lat: 41.90, lon: 3.10 },
   bodensee:       { lat: 47.64, lon: 9.32 },
   amalfi:         { lat: 40.63, lon: 14.60 },
+  // Türkei – neue Städte
+  marmaris:       { lat: 36.85, lon: 28.27 },
+  fethiye:        { lat: 36.62, lon: 29.11 },
+  cesme:          { lat: 38.32, lon: 26.30 },
+  kappadokien:    { lat: 38.65, lon: 34.83 },
+  pamukkale:      { lat: 37.92, lon: 29.12 },
+  // Spanien – neue Städte
+  sevilla:        { lat: 37.39, lon: -5.99 },
+  valencia:       { lat: 39.47, lon: -0.37 },
+  malaga:         { lat: 36.72, lon: -4.42 },
+  // Griechenland – neue Städte
+  athen:          { lat: 37.97, lon: 23.73 },
+  zakynthos:      { lat: 37.78, lon: 20.90 },
+  kos:            { lat: 36.89, lon: 27.29 },
+  // Kroatien – neue Städte
+  hvar:           { lat: 43.17, lon: 16.44 },
+  zadar:          { lat: 44.12, lon: 15.23 },
+  pula:           { lat: 44.87, lon: 13.85 },
+  split:          { lat: 43.51, lon: 16.44 },
+  // Portugal – neue Städte
+  porto:          { lat: 41.15, lon: -8.61 },
+  faro:           { lat: 37.02, lon: -7.94 },
+  madeira:        { lat: 32.75, lon: -17.00 },
+  // Marokko – neue Städte
+  fes:            { lat: 34.03, lon: -5.00 },
+  essaouira:      { lat: 31.51, lon: -9.76 },
+  // Bulgarien – neue Städte
+  varna:          { lat: 43.21, lon: 27.91 },
+  bansko:         { lat: 41.83, lon: 23.49 },
+  // Malta – neue Städte
+  valletta:       { lat: 35.90, lon: 14.51 },
+  gozo:           { lat: 36.05, lon: 14.25 },
+  // Zypern – neue Städte
+  paphos:         { lat: 34.77, lon: 32.42 },
+  limassol:       { lat: 34.68, lon: 33.04 },
+  'ayia napa':    { lat: 34.98, lon: 34.00 },
+  // Kap Verde – neue Inseln
+  sal:            { lat: 16.73, lon: -22.94 },
+  'boa vista':    { lat: 16.10, lon: -22.82 },
+  // Jordanien – neue Städte
+  amman:          { lat: 31.96, lon: 35.95 },
+  aqaba:          { lat: 29.53, lon: 35.01 },
+  petra:          { lat: 30.33, lon: 35.44 },
+  'wadi rum':     { lat: 29.60, lon: 35.42 },
+  // Tunesien – neue Städte
+  tunis:          { lat: 36.81, lon: 10.18 },
+  hammamet:       { lat: 36.40, lon: 10.61 },
+  // Regionen
+  istrien:        { lat: 45.18, lon: 13.90 },
+  dalmatien:      { lat: 43.51, lon: 16.44 },
+  kykladen:       { lat: 37.00, lon: 25.15 },
+  peloponnes:     { lat: 37.50, lon: 22.00 },
+  'douro-tal':    { lat: 41.15, lon: -7.80 },
+  'atlas gebirge': { lat: 31.00, lon: -7.50 },
 };
 
 const MONTHS_DE = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];

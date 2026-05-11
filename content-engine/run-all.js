@@ -182,7 +182,15 @@ async function generateReisezeitPage(page) {
       </table>
     </div>`;
 
+  const breadcrumbRz = page.parentFile ? `
+    <nav class="breadcrumb">
+      <a href="/index.html">Startseite</a> &rsaquo;
+      <a href="/${escapeHtml(page.parentFile)}">${escapeHtml(page.nameDe)}</a> &rsaquo;
+      <span>Beste Reisezeit</span>
+    </nav>` : '';
+
   const content = `
+    ${breadcrumbRz}
     <div class="section">
       <div class="container-narrow">
         <h2 class="section-title">📅 Reisezeit <span>Monat für Monat</span></h2>
@@ -214,7 +222,7 @@ async function generateThemaPage(page) {
   const heroCredit = imgRes ? { name: imgRes.creditName, link: imgRes.creditLink } : null;
   const destLinks = page.destinations.map(d => {
     const slug = d.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/\s+/g,'-');
-    return `<a href="/${escapeHtml(slug)}.html" class="dest-tag">${escapeHtml(d)}</a>`;
+    return `<a href="/${escapeHtml(slug)}/" class="dest-tag">${escapeHtml(d)}</a>`;
   }).join('');
 
   const content = `
@@ -263,7 +271,15 @@ async function generateHotelPage(page) {
   const heroImage  = img ? img.url : null;
   const heroCredit = img ? { name: img.creditName, link: img.creditLink } : null;
 
+  const breadcrumb = page.parent ? `
+    <nav class="breadcrumb">
+      <a href="/index.html">Startseite</a> &rsaquo;
+      <a href="/${escapeHtml(page.parentFile)}">${escapeHtml(page.parent)}</a> &rsaquo;
+      <span>${escapeHtml(page.nameDe)}</span>
+    </nav>` : '';
+
   const content = `
+    ${breadcrumb}
     <div class="section">
       <div class="container-narrow">
         <div class="wiki-intro">In ${escapeHtml(page.nameDe)} warten Unterkünfte für jeden Anspruch – von Budgethotels bis zu 5-Sterne-Resorts. Unsere Auswahl hilft Ihnen, das perfekte Hotel zu finden.</div>
@@ -308,7 +324,15 @@ async function generateAktivitaetPage(page) {
   const heroImage  = img ? img.url : null;
   const heroCredit = img ? { name: img.creditName, link: img.creditLink } : null;
 
+  const breadcrumbAkt = page.parent ? `
+    <nav class="breadcrumb">
+      <a href="/index.html">Startseite</a> &rsaquo;
+      <a href="/${escapeHtml(page.parentFile)}">${escapeHtml(page.parent)}</a> &rsaquo;
+      <span>${escapeHtml(page.nameDe)}</span>
+    </nav>` : '';
+
   const content = `
+    ${breadcrumbAkt}
     <div class="section">
       <div class="container-narrow">
         <div class="wiki-intro">${escapeHtml(page.aktivitaet)} in ${escapeHtml(page.nameDe)} ist ein Erlebnis der Extraklasse. Wir zeigen Ihnen die besten Spots, Tipps und alles was Sie für Ihren Aktivurlaub wissen müssen.</div>
@@ -355,7 +379,15 @@ async function generateRegionPage(page) {
   const heroImage  = img ? img.url : null;
   const heroCredit = img ? { name: img.creditName, link: img.creditLink } : null;
 
+  const breadcrumbReg = page.parent ? `
+    <nav class="breadcrumb">
+      <a href="/index.html">Startseite</a> &rsaquo;
+      <a href="/${escapeHtml(page.parentFile)}">${escapeHtml(page.parent)}</a> &rsaquo;
+      <span>${escapeHtml(page.nameDe)}</span>
+    </nav>` : '';
+
   const content = `
+    ${breadcrumbReg}
     <div class="section">
       <div class="container-narrow">
         ${wikiText ? `<div class="wiki-intro">${escapeHtml(wikiText)}</div>` : ''}
@@ -416,14 +448,14 @@ async function generateReisetippsPage(page) {
       <div class="container">
         <h2 class="section-title">🌍 Beliebte <span>Reiseziele</span></h2>
         <div class="dest-tags">
-          <a href="/tuerkei.html" class="dest-tag">🇹🇷 Türkei</a>
-          <a href="/spanien.html" class="dest-tag">🇪🇸 Spanien</a>
-          <a href="/griechenland.html" class="dest-tag">🇬🇷 Griechenland</a>
-          <a href="/portugal.html" class="dest-tag">🇵🇹 Portugal</a>
-          <a href="/kroatien.html" class="dest-tag">🇭🇷 Kroatien</a>
-          <a href="/dubai.html" class="dest-tag">🇦🇪 Dubai</a>
-          <a href="/marokko.html" class="dest-tag">🇲🇦 Marokko</a>
-          <a href="/aegypten.html" class="dest-tag">🇪🇬 Ägypten</a>
+          <a href="/tuerkei/" class="dest-tag">🇹🇷 Türkei</a>
+          <a href="/spanien/" class="dest-tag">🇪🇸 Spanien</a>
+          <a href="/griechenland/" class="dest-tag">🇬🇷 Griechenland</a>
+          <a href="/portugal/" class="dest-tag">🇵🇹 Portugal</a>
+          <a href="/kroatien/" class="dest-tag">🇭🇷 Kroatien</a>
+          <a href="/dubai/" class="dest-tag">🇦🇪 Dubai</a>
+          <a href="/marokko/" class="dest-tag">🇲🇦 Marokko</a>
+          <a href="/aegypten/" class="dest-tag">🇪🇬 Ägypten</a>
         </div>
       </div>
     </div>
@@ -502,8 +534,8 @@ async function generateVergleichPage(page) {
       <div class="container">
         <h2 class="section-title">🌍 Direkt zur <span>Destination</span></h2>
         <div class="dest-tags">
-          <a href="/${escapeHtml(slug1)}.html" class="dest-tag">→ ${escapeHtml(page.dest1)} entdecken</a>
-          <a href="/${escapeHtml(slug2)}.html" class="dest-tag">→ ${escapeHtml(page.dest2)} entdecken</a>
+          <a href="/${escapeHtml(slug1)}/" class="dest-tag">→ ${escapeHtml(page.dest1)} entdecken</a>
+          <a href="/${escapeHtml(slug2)}/" class="dest-tag">→ ${escapeHtml(page.dest2)} entdecken</a>
         </div>
       </div>
     </div>
@@ -556,39 +588,54 @@ function generateSitemap() {
     { url: '/datenschutz.html', priority: '0.2', freq: 'monthly' },
   ];
 
-  // Generated pages — scan root dir for HTML files
-  const htmlFiles = fs.readdirSync(ROOT_DIR)
-    .filter(f => f.endsWith('.html') && !['index.html','ueber-uns.html','impressum.html','datenschutz.html'].includes(f))
+  // Recursive HTML file scanner
+  function collectHtmlFiles(dir, baseDir) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    let files = [];
+    for (const entry of entries) {
+      if (entry.isDirectory() && !['content-engine', '.git', 'node_modules'].includes(entry.name)) {
+        files = files.concat(collectHtmlFiles(path.join(dir, entry.name), baseDir));
+      } else if (entry.isFile() && entry.name.endsWith('.html')) {
+        files.push(path.relative(baseDir, path.join(dir, entry.name)).replace(/\\/g, '/'));
+      }
+    }
+    return files;
+  }
+
+  // Normalize path to URL: foo/bar/index.html → /foo/bar/  (trailing slash)
+  function toUrl(rel) {
+    if (rel === 'index.html') return '/';
+    if (rel.endsWith('/index.html')) return '/' + rel.slice(0, -'index.html'.length);
+    return '/' + rel;
+  }
+
+  const allHtmlFiles = collectHtmlFiles(ROOT_DIR, ROOT_DIR)
+    .filter(f => !['index.html','ueber-uns.html','impressum.html','datenschutz.html'].includes(f))
     .sort();
 
   const priorityMap = {
-    // destination
-    tuerkei: '0.9', spanien: '0.9', griechenland: '0.9', aegypten: '0.9',
-    marokko: '0.9', dubai: '0.9', kroatien: '0.9', portugal: '0.9',
-    tunesien: '0.9', bulgarien: '0.9', malta: '0.9', zypern: '0.9',
-    'kap-verde': '0.9', jordanien: '0.9',
-    // city
-    antalya: '0.85', bodrum: '0.85', 'kreta-urlaub': '0.85', 'santorini-urlaub': '0.85',
-    // reisezeit
-    'beste-reisezeit': '0.8',
-    // hotels
-    'hotels-': '0.75',
-    // others
-    default: '0.7',
+    'tuerkei/index.html': '0.9', 'spanien/index.html': '0.9', 'griechenland/index.html': '0.9',
+    'aegypten/index.html': '0.9', 'marokko/index.html': '0.9', 'dubai/index.html': '0.9',
+    'kroatien/index.html': '0.9', 'portugal/index.html': '0.9', 'tunesien/index.html': '0.9',
+    'bulgarien/index.html': '0.9', 'malta/index.html': '0.9', 'zypern/index.html': '0.9',
+    'kap-verde/index.html': '0.9', 'jordanien/index.html': '0.9',
   };
 
-  function getPriority(file) {
-    const slug = file.replace('.html','');
-    if (priorityMap[slug]) return priorityMap[slug];
-    for (const k of Object.keys(priorityMap)) {
-      if (slug.startsWith(k)) return priorityMap[k];
+  function getPriority(rel) {
+    if (priorityMap[rel]) return priorityMap[rel];
+    const parts = rel.split('/');
+    if (parts.length === 3 && parts[2] === 'index.html') {
+      if (['themen','tipps','vergleiche'].includes(parts[0])) return '0.75';
+      if (parts[1] === 'reisezeit') return '0.80';
+      if (parts[1].startsWith('hotels-') || parts[1] === 'hotels') return '0.80';
+      return '0.85'; // city / aktivitaet / region
     }
-    return priorityMap.default;
+    return '0.70';
   }
 
   const urls = [
     ...staticPages.map(p => `  <url>\n    <loc>${BASE}${p.url}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${p.freq}</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`),
-    ...htmlFiles.map(f => `  <url>\n    <loc>${BASE}/${f}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${getPriority(f)}</priority>\n  </url>`),
+    ...allHtmlFiles.map(f => { const url = toUrl(f); return `  <url>\n    <loc>${BASE}${url}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${getPriority(f)}</priority>\n  </url>`; }),
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
@@ -644,6 +691,7 @@ async function bulkRun() {
       console.log(`[gen] ${page.file}`);
       const html = await generatePage(page);
       const outPath = path.join(ROOT_DIR, page.file);
+      fs.mkdirSync(path.dirname(outPath), { recursive: true });
       fs.writeFileSync(outPath, html, 'utf8');
       const wasRefresh = !!tracker[page.id];
       tracker[page.id] = { generatedAt: new Date().toISOString(), file: page.file };

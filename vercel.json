@@ -1,0 +1,63 @@
+{
+  "redirects": [
+    { "source": "/tuerkei.html",                      "destination": "/tuerkei/",                          "permanent": true },
+    { "source": "/spanien.html",                       "destination": "/spanien/",                           "permanent": true },
+    { "source": "/griechenland.html",                  "destination": "/griechenland/",                      "permanent": true },
+    { "source": "/aegypten.html",                      "destination": "/aegypten/",                          "permanent": true },
+    { "source": "/marokko.html",                       "destination": "/marokko/",                           "permanent": true },
+    { "source": "/tunesien.html",                      "destination": "/tunesien/",                          "permanent": true },
+    { "source": "/dubai.html",                         "destination": "/dubai/",                             "permanent": true },
+    { "source": "/kroatien.html",                      "destination": "/kroatien/",                          "permanent": true },
+    { "source": "/portugal.html",                      "destination": "/portugal/",                          "permanent": true },
+    { "source": "/bulgarien.html",                     "destination": "/bulgarien/",                         "permanent": true },
+    { "source": "/malta.html",                         "destination": "/malta/",                             "permanent": true },
+    { "source": "/zypern.html",                        "destination": "/zypern/",                            "permanent": true },
+    { "source": "/kap-verde.html",                     "destination": "/kap-verde/",                         "permanent": true },
+    { "source": "/jordanien.html",                     "destination": "/jordanien/",                         "permanent": true },
+
+    { "source": "/antalya.html",                       "destination": "/tuerkei/antalya/",                   "permanent": true },
+    { "source": "/bodrum.html",                        "destination": "/tuerkei/bodrum/",                    "permanent": true },
+    { "source": "/kreta-urlaub.html",                  "destination": "/griechenland/kreta/",                "permanent": true },
+    { "source": "/santorini-urlaub.html",              "destination": "/griechenland/santorini/",            "permanent": true },
+
+    { "source": "/hotels-antalya.html",                "destination": "/tuerkei/hotels-antalya/",            "permanent": true },
+    { "source": "/hotels-dubai.html",                  "destination": "/dubai/hotels-dubai/",                "permanent": true },
+    { "source": "/hotels-kreta.html",                  "destination": "/griechenland/hotels-kreta/",         "permanent": true },
+    { "source": "/hotels-mallorca.html",               "destination": "/spanien/hotels-mallorca/",           "permanent": true },
+    { "source": "/hotels-lissabon.html",               "destination": "/portugal/hotels-lissabon/",          "permanent": true },
+
+    { "source": "/schnorcheln-kreta.html",             "destination": "/griechenland/schnorcheln-kreta/",    "permanent": true },
+    { "source": "/tauchen-malta.html",                 "destination": "/malta/tauchen/",                     "permanent": true },
+    { "source": "/wuestensafari-dubai.html",           "destination": "/dubai/wuestensafari/",               "permanent": true },
+    { "source": "/wandern-kroatien.html",              "destination": "/kroatien/wandern/",                  "permanent": true },
+    { "source": "/surfen-kap-verde.html",              "destination": "/kap-verde/surfen/",                  "permanent": true },
+
+    { "source": "/algarve.html",                       "destination": "/portugal/algarve/",                  "permanent": true },
+    { "source": "/costa-brava.html",                   "destination": "/spanien/costa-brava/",               "permanent": true },
+    { "source": "/bodensee-region.html",               "destination": "/deutschland/bodensee/",              "permanent": true },
+    { "source": "/amalfikueste.html",                  "destination": "/italien/amalfikueste/",              "permanent": true },
+
+    { "source": "/beste-reisezeit-tuerkei.html",       "destination": "/tuerkei/reisezeit/",                 "permanent": true },
+    { "source": "/beste-reisezeit-spanien.html",       "destination": "/spanien/reisezeit/",                 "permanent": true },
+    { "source": "/beste-reisezeit-griechenland.html",  "destination": "/griechenland/reisezeit/",            "permanent": true },
+    { "source": "/beste-reisezeit-aegypten.html",      "destination": "/aegypten/reisezeit/",                "permanent": true },
+    { "source": "/beste-reisezeit-marokko.html",       "destination": "/marokko/reisezeit/",                 "permanent": true },
+    { "source": "/beste-reisezeit-dubai.html",         "destination": "/dubai/reisezeit/",                   "permanent": true },
+    { "source": "/beste-reisezeit-portugal.html",      "destination": "/portugal/reisezeit/",                "permanent": true },
+    { "source": "/beste-reisezeit-malta.html",         "destination": "/malta/reisezeit/",                   "permanent": true },
+
+    { "source": "/urlaub-mit-kindern.html",            "destination": "/themen/urlaub-mit-kindern/",         "permanent": true },
+    { "source": "/flitterwochen.html",                 "destination": "/themen/flitterwochen/",              "permanent": true },
+    { "source": "/last-minute-urlaub.html",            "destination": "/themen/last-minute/",                "permanent": true },
+    { "source": "/all-inclusive-urlaub.html",          "destination": "/themen/all-inclusive/",              "permanent": true },
+
+    { "source": "/handgepaeck-regeln.html",            "destination": "/tipps/handgepaeck/",                 "permanent": true },
+    { "source": "/reiseversicherung-vergleich.html",   "destination": "/tipps/reiseversicherung/",           "permanent": true },
+    { "source": "/packliste-sommerurlaub.html",        "destination": "/tipps/packliste/",                   "permanent": true },
+    { "source": "/guenstig-fliegen-tipps.html",        "destination": "/tipps/guenstig-fliegen/",            "permanent": true },
+
+    { "source": "/tuerkei-vs-aegypten.html",           "destination": "/vergleiche/tuerkei-vs-aegypten/",    "permanent": true },
+    { "source": "/mallorca-vs-kreta.html",             "destination": "/vergleiche/mallorca-vs-kreta/",      "permanent": true },
+    { "source": "/dubai-vs-abu-dhabi.html",            "destination": "/vergleiche/dubai-vs-abu-dhabi/",     "permanent": true }
+  ]
+}

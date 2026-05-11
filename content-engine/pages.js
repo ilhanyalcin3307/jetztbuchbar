@@ -10,7 +10,7 @@
 const DESTINATION_PAGES = [
   {
     id: 'tuerkei',
-    file: 'tuerkei.html',
+    file: 'tuerkei/index.html',
     type: 'destination',
     icon: '🇹🇷',
     nameDe: 'Türkei',
@@ -39,7 +39,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'spanien',
-    file: 'spanien.html',
+    file: 'spanien/index.html',
     type: 'destination',
     icon: '🇪🇸',
     nameDe: 'Spanien',
@@ -68,7 +68,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'griechenland',
-    file: 'griechenland.html',
+    file: 'griechenland/index.html',
     type: 'destination',
     icon: '🇬🇷',
     nameDe: 'Griechenland',
@@ -97,7 +97,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'aegypten',
-    file: 'aegypten.html',
+    file: 'aegypten/index.html',
     type: 'destination',
     icon: '🇪🇬',
     nameDe: 'Ägypten',
@@ -126,7 +126,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'marokko',
-    file: 'marokko.html',
+    file: 'marokko/index.html',
     type: 'destination',
     icon: '🇲🇦',
     nameDe: 'Marokko',
@@ -155,7 +155,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'tunesien',
-    file: 'tunesien.html',
+    file: 'tunesien/index.html',
     type: 'destination',
     icon: '🇹🇳',
     nameDe: 'Tunesien',
@@ -184,7 +184,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'dubai',
-    file: 'dubai.html',
+    file: 'dubai/index.html',
     type: 'destination',
     icon: '🇦🇪',
     nameDe: 'Dubai',
@@ -213,7 +213,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'kroatien',
-    file: 'kroatien.html',
+    file: 'kroatien/index.html',
     type: 'destination',
     icon: '🇭🇷',
     nameDe: 'Kroatien',
@@ -242,7 +242,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'portugal',
-    file: 'portugal.html',
+    file: 'portugal/index.html',
     type: 'destination',
     icon: '🇵🇹',
     nameDe: 'Portugal',
@@ -271,7 +271,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'bulgarien',
-    file: 'bulgarien.html',
+    file: 'bulgarien/index.html',
     type: 'destination',
     icon: '🇧🇬',
     nameDe: 'Bulgarien',
@@ -300,7 +300,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'malta',
-    file: 'malta.html',
+    file: 'malta/index.html',
     type: 'destination',
     icon: '🇲🇹',
     nameDe: 'Malta',
@@ -329,7 +329,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'zypern',
-    file: 'zypern.html',
+    file: 'zypern/index.html',
     type: 'destination',
     icon: '🇨🇾',
     nameDe: 'Zypern',
@@ -358,7 +358,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'kap-verde',
-    file: 'kap-verde.html',
+    file: 'kap-verde/index.html',
     type: 'destination',
     icon: '🇨🇻',
     nameDe: 'Kap Verde',
@@ -387,7 +387,7 @@ const DESTINATION_PAGES = [
   },
   {
     id: 'jordanien',
-    file: 'jordanien.html',
+    file: 'jordanien/index.html',
     type: 'destination',
     icon: '🇯🇴',
     nameDe: 'Jordanien',
@@ -420,24 +420,24 @@ const DESTINATION_PAGES = [
 
 const CITY_PAGES = [
   // Türkei
-  { id: 'antalya', file: 'antalya.html', parent: 'Türkei', parentFile: 'tuerkei.html', icon: '🌊', nameDe: 'Antalya', title: 'Urlaub in Antalya – Die türkische Riviera | JetztBuchbar.de', description: 'Antalya Urlaub 2026: Strände, All-Inclusive-Resorts und die historische Altstadt Kaleiçi. Beste Angebote für DACH-Reisende.', h1Parts: ['Urlaub in', 'Antalya'], heroSub: 'Türkisblaues Meer, goldene Strände und eine 2000 Jahre alte Altstadt – Antalya ist das Herz der türkischen Riviera.', wikiSearch: 'Antalya', climateKey: 'antalya', tips: ['All-Inclusive-Resorts in Belek und Lara bieten top Qualität zum günstigen Preis.', 'Die Altstadt Kaleiçi mit dem Hadrianstor ist ein Muss – besonders abends sehr atmosphärisch.', 'Antalya-Flughafen ist einer der meistfrequentierten der Türkei – viele Direktflüge aus DACH.', 'Düden-Wasserfall und Köprülü-Canyon für Naturliebhaber und Aktivurlauber empfohlen.', 'Viele Resorts bieten kostenlose Kinderbetreuung – ideal für Familien.'], faqs: [{ q: 'Wann ist die beste Reisezeit für Antalya?', a: 'April bis Oktober. Hochsaison Juli/August mit bis zu 40 °C. Mai/Juni und September/Oktober angenehmer.' }, { q: 'Wie weit ist das Stadtzentrum vom Strand?', a: 'Je nach Hotel 5–30 Minuten. Die Resorts in Lara, Belek und Kemer liegen direkt am Meer.' }, { q: 'Gibt es Direktflüge von Wien nach Antalya?', a: 'Ja, Austrian Airlines, TUI und Charterfluggesellschaften fliegen in der Saison direkt nach Antalya (ca. 2,5 Stunden).' }, { q: 'Ist Antalya familienfreundlich?', a: 'Sehr. Riesige Resorts mit Wasserparks, Kinderbetreuung und Aquaparks machen Antalya zu einem Top-Familienziel.' }, { q: 'Was kostet All-Inclusive in Antalya?', a: 'Pro Person ab ca. 400–600 € für 7 Nächte All-Inclusive, je nach Hotel und Saison.' }], poiSearch: 'Antalya' },
-  { id: 'bodrum', file: 'bodrum.html', parent: 'Türkei', parentFile: 'tuerkei.html', icon: '⛵', nameDe: 'Bodrum', title: 'Urlaub in Bodrum – Ägäis, Yachten & Nachtleben | JetztBuchbar.de', description: 'Bodrum Urlaub 2026: weiße Häuser, Buchten, Nachtleben und Yacht-Chartern an der Türkischen Ägäis.', h1Parts: ['Urlaub in', 'Bodrum'], heroSub: 'Weiß getünchte Häuser, smaragdgrüne Buchten und eine lebhafte Partyszene – Bodrum ist das St. Tropez der Türkei.', wikiSearch: 'Bodrum', climateKey: 'bodrum', tips: ['Bodrum Castle (Schloss St. Peter) und das Unterwasserarchäologiemuseum nicht verpassen.', 'Bootstrip zu den Buchten (Akyarlar, Karaincir) unbedingt machen – am schönsten per Gulet-Boot.', 'Bodrum Bazaar für lokale Einkäufe: Gewürze, Keramik, Lederwaren.', 'Das Nachtleben in Bodrum ist legendär – Halikarnas Open Air Club ist weltbekannt.', 'Für Ruhesuchende: Güvercinlik und Torba sind ruhigere Alternativen zum pulsierenden Zentrum.'], faqs: [{ q: 'Wann ist die beste Reisezeit für Bodrum?', a: 'Juni bis September. Bodrum ist bekannt für seinen Wind (Meltemi) – ideal zum Segeln, aber gelegentlich unangenehm am Strand.' }, { q: 'Gibt es Direktflüge nach Bodrum?', a: 'Ja, Bodrum Milas Airport hat in der Saison Direktverbindungen aus Wien, München und Zürich.' }, { q: 'Ist Bodrum teurer als andere Türkei-Ziele?', a: 'Ja, Bodrum ist exklusiver und teurer als Antalya oder Alanya – dafür glamouröser und internationaler.' }, { q: 'Welche Strände sind in Bodrum am besten?', a: 'Bitez für Windsurfer, Camel Beach für Familien, und Gümbet für Partytouristen.' }, { q: 'Kann man von Bodrum nach Griechenland?', a: 'Ja! Mit der Fähre ist Kos und Rhodos von Bodrum aus in 30–60 Minuten erreichbar.' }], poiSearch: 'Bodrum' },
+  { id: 'antalya', file: 'tuerkei/antalya/index.html', parent: 'Türkei', parentFile: 'tuerkei/', icon: '🌊', nameDe: 'Antalya', title: 'Urlaub in Antalya – Die türkische Riviera | JetztBuchbar.de', description: 'Antalya Urlaub 2026: Strände, All-Inclusive-Resorts und die historische Altstadt Kaleiçi. Beste Angebote für DACH-Reisende.', h1Parts: ['Urlaub in', 'Antalya'], heroSub: 'Türkisblaues Meer, goldene Strände und eine 2000 Jahre alte Altstadt – Antalya ist das Herz der türkischen Riviera.', wikiSearch: 'Antalya', climateKey: 'antalya', tips: ['All-Inclusive-Resorts in Belek und Lara bieten top Qualität zum günstigen Preis.', 'Die Altstadt Kaleiçi mit dem Hadrianstor ist ein Muss – besonders abends sehr atmosphärisch.', 'Antalya-Flughafen ist einer der meistfrequentierten der Türkei – viele Direktflüge aus DACH.', 'Düden-Wasserfall und Köprülü-Canyon für Naturliebhaber und Aktivurlauber empfohlen.', 'Viele Resorts bieten kostenlose Kinderbetreuung – ideal für Familien.'], faqs: [{ q: 'Wann ist die beste Reisezeit für Antalya?', a: 'April bis Oktober. Hochsaison Juli/August mit bis zu 40 °C. Mai/Juni und September/Oktober angenehmer.' }, { q: 'Wie weit ist das Stadtzentrum vom Strand?', a: 'Je nach Hotel 5–30 Minuten. Die Resorts in Lara, Belek und Kemer liegen direkt am Meer.' }, { q: 'Gibt es Direktflüge von Wien nach Antalya?', a: 'Ja, Austrian Airlines, TUI und Charterfluggesellschaften fliegen in der Saison direkt nach Antalya (ca. 2,5 Stunden).' }, { q: 'Ist Antalya familienfreundlich?', a: 'Sehr. Riesige Resorts mit Wasserparks, Kinderbetreuung und Aquaparks machen Antalya zu einem Top-Familienziel.' }, { q: 'Was kostet All-Inclusive in Antalya?', a: 'Pro Person ab ca. 400–600 € für 7 Nächte All-Inclusive, je nach Hotel und Saison.' }], poiSearch: 'Antalya' },
+  { id: 'bodrum', file: 'tuerkei/bodrum/index.html', parent: 'Türkei', parentFile: 'tuerkei/', icon: '⛵', nameDe: 'Bodrum', title: 'Urlaub in Bodrum – Ägäis, Yachten & Nachtleben | JetztBuchbar.de', description: 'Bodrum Urlaub 2026: weiße Häuser, Buchten, Nachtleben und Yacht-Chartern an der Türkischen Ägäis.', h1Parts: ['Urlaub in', 'Bodrum'], heroSub: 'Weiß getünchte Häuser, smaragdgrüne Buchten und eine lebhafte Partyszene – Bodrum ist das St. Tropez der Türkei.', wikiSearch: 'Bodrum', climateKey: 'bodrum', tips: ['Bodrum Castle (Schloss St. Peter) und das Unterwasserarchäologiemuseum nicht verpassen.', 'Bootstrip zu den Buchten (Akyarlar, Karaincir) unbedingt machen – am schönsten per Gulet-Boot.', 'Bodrum Bazaar für lokale Einkäufe: Gewürze, Keramik, Lederwaren.', 'Das Nachtleben in Bodrum ist legendär – Halikarnas Open Air Club ist weltbekannt.', 'Für Ruhesuchende: Güvercinlik und Torba sind ruhigere Alternativen zum pulsierenden Zentrum.'], faqs: [{ q: 'Wann ist die beste Reisezeit für Bodrum?', a: 'Juni bis September. Bodrum ist bekannt für seinen Wind (Meltemi) – ideal zum Segeln, aber gelegentlich unangenehm am Strand.' }, { q: 'Gibt es Direktflüge nach Bodrum?', a: 'Ja, Bodrum Milas Airport hat in der Saison Direktverbindungen aus Wien, München und Zürich.' }, { q: 'Ist Bodrum teurer als andere Türkei-Ziele?', a: 'Ja, Bodrum ist exklusiver und teurer als Antalya oder Alanya – dafür glamouröser und internationaler.' }, { q: 'Welche Strände sind in Bodrum am besten?', a: 'Bitez für Windsurfer, Camel Beach für Familien, und Gümbet für Partytouristen.' }, { q: 'Kann man von Bodrum nach Griechenland?', a: 'Ja! Mit der Fähre ist Kos und Rhodos von Bodrum aus in 30–60 Minuten erreichbar.' }], poiSearch: 'Bodrum' },
   // Griechenland
-  { id: 'kreta-stadt', file: 'kreta-urlaub.html', parent: 'Griechenland', parentFile: 'griechenland.html', icon: '🏔️', nameDe: 'Kreta', title: 'Urlaub auf Kreta – Heraklion, Chania & Strände | JetztBuchbar.de', description: 'Kreta Urlaub 2026: Heraklion, Chania, Samaria-Schlucht, Elafonisi. Griechenlands größte Insel entdecken.', h1Parts: ['Urlaub auf', 'Kreta'], heroSub: "Griechenlands größte Insel bietet alles: minoische Paläste, schneeweiße Strände und eine herausragende Küche.", wikiSearch: 'Kreta', climateKey: 'kreta', tips: ['Die Samaria-Schlucht ist eine der längsten Europas – für die 16 km Wanderung früh starten.', 'Elafonisi im Südwesten: der rosafarbene Strand mit türkisblauem Wasser ist einzigartig in Europa.', 'Knossos – der minoische Palast bei Heraklion – ist Pflicht für Geschichtsinteressierte.', 'Frische Meeresfrüchte in Elounda oder Agios Nikolaos – weit günstiger als auf kleineren Inseln.', 'Mietwagen empfohlen: Kreta ist groß, die schönsten Teile liegen weit auseinander.'], faqs: [{ q: 'Wie komme ich nach Kreta?', a: 'Direktflüge nach Heraklion (HER) oder Chania (CHQ) von Wien oder München in ca. 2,5–3 Stunden.' }, { q: 'Welche Seite Kretas ist schöner – Nord oder Süd?', a: 'Norden für Komfort und Resorts, Süden für wilde Natur und einsame Strände. Am besten beide erleben.' }, { q: 'Ist Kreta für Familien geeignet?', a: 'Sehr. Viele familienfreundliche Resorts, ruhige Buchten und Kinderanimation. Besonders Hersonissos und Malia empfohlen.' }, { q: 'Was kostet Urlaub auf Kreta?', a: 'Günstiger als viele andere griechische Inseln. 7 Nächte Halbpension ab ca. 500–700 € pro Person.' }, { q: 'Wann hat Kreta Hauptsaison?', a: 'Juli und August sind vollbesetzt. Mai, Juni und September sind ideal mit weniger Touristen und niedrigeren Preisen.' }], poiSearch: 'Heraklion Kreta' },
-  { id: 'santorini-stadt', file: 'santorini-urlaub.html', parent: 'Griechenland', parentFile: 'griechenland.html', icon: '🌅', nameDe: 'Santorini', title: 'Urlaub auf Santorini – Oia, Sonnenuntergang & Vulkan | JetztBuchbar.de', description: 'Santorini Urlaub 2026: Oia, Fira, Caldera, Vulkantour. Das romantischste Reiseziel Griechenlands.', h1Parts: ['Urlaub auf', 'Santorini'], heroSub: 'Weiß-blaue Kykladen-Architektur, spektakuläre Caldera und der berühmteste Sonnenuntergang der Welt – Santorini verzaubert jeden.', wikiSearch: 'Santorin', climateKey: 'santorini', tips: ['Den Sonnenuntergang von Oia erleben – frühzeitig einen Platz sichern, es wird voll.', 'Mit dem Boot zur Caldera und zum aktiven Vulkan – unvergessliches Erlebnis.', 'Akrotiri: die minoische Ausgrabungsstätte ist das "Pompeji Griechenlands".', 'Santorini-Wein probieren: Assyrtiko-Weißwein wächst auf der vulkanischen Erde und ist weltweit einzigartig.', 'Preise sind hoch – früh buchen und für Restaurants Reservierungen machen.'], faqs: [{ q: 'Wie komme ich nach Santorini?', a: 'Direktflug nach Thira (JTR) ca. 2,5 Stunden ab Wien/München, oder Fähre von Athen (Piräus) in 5–8 Stunden.' }, { q: 'Ist Santorini geeignet für Familien?', a: 'Eher nein – Santorini ist romantisch und auf Paare/Honeymoon ausgerichtet. Wenig Strandoptionen, viele Treppen.' }, { q: 'Wann ist die beste Reisezeit für Santorini?', a: 'Mai bis Oktober. Außerhalb der Hochsaison (Juli/August) sind Preise günstiger und weniger überfüllt.' }, { q: 'Was kostet eine Übernachtung in Oia?', a: 'Oia gehört zu den teuersten Reisezielen Griechenlands – Zimmer ab 150 € pro Nacht in der Hauptsaison, Suiten mit Caldera-Blick bis 1000 €+.' }, { q: 'Warum sind die Häuser in Santorini weiß und blau?', a: 'Weiß reflektiert die Sommerhitze, und Blau war historisch günstigste Farbe. Heute ist es gesetzlich vorgeschrieben für das Erscheinungsbild der Insel.' }], poiSearch: 'Santorini' },
+  { id: 'kreta-stadt', file: 'griechenland/kreta/index.html', parent: 'Griechenland', parentFile: 'griechenland/', icon: '🏔️', nameDe: 'Kreta', title: 'Urlaub auf Kreta – Heraklion, Chania & Strände | JetztBuchbar.de', description: 'Kreta Urlaub 2026: Heraklion, Chania, Samaria-Schlucht, Elafonisi. Griechenlands größte Insel entdecken.', h1Parts: ['Urlaub auf', 'Kreta'], heroSub: "Griechenlands größte Insel bietet alles: minoische Paläste, schneeweiße Strände und eine herausragende Küche.", wikiSearch: 'Kreta', climateKey: 'kreta', tips: ['Die Samaria-Schlucht ist eine der längsten Europas – für die 16 km Wanderung früh starten.', 'Elafonisi im Südwesten: der rosafarbene Strand mit türkisblauem Wasser ist einzigartig in Europa.', 'Knossos – der minoische Palast bei Heraklion – ist Pflicht für Geschichtsinteressierte.', 'Frische Meeresfrüchte in Elounda oder Agios Nikolaos – weit günstiger als auf kleineren Inseln.', 'Mietwagen empfohlen: Kreta ist groß, die schönsten Teile liegen weit auseinander.'], faqs: [{ q: 'Wie komme ich nach Kreta?', a: 'Direktflüge nach Heraklion (HER) oder Chania (CHQ) von Wien oder München in ca. 2,5–3 Stunden.' }, { q: 'Welche Seite Kretas ist schöner – Nord oder Süd?', a: 'Norden für Komfort und Resorts, Süden für wilde Natur und einsame Strände. Am besten beide erleben.' }, { q: 'Ist Kreta für Familien geeignet?', a: 'Sehr. Viele familienfreundliche Resorts, ruhige Buchten und Kinderanimation. Besonders Hersonissos und Malia empfohlen.' }, { q: 'Was kostet Urlaub auf Kreta?', a: 'Günstiger als viele andere griechische Inseln. 7 Nächte Halbpension ab ca. 500–700 € pro Person.' }, { q: 'Wann hat Kreta Hauptsaison?', a: 'Juli und August sind vollbesetzt. Mai, Juni und September sind ideal mit weniger Touristen und niedrigeren Preisen.' }], poiSearch: 'Heraklion Kreta' },
+  { id: 'santorini-stadt', file: 'griechenland/santorini/index.html', parent: 'Griechenland', parentFile: 'griechenland/', icon: '🌅', nameDe: 'Santorini', title: 'Urlaub auf Santorini – Oia, Sonnenuntergang & Vulkan | JetztBuchbar.de', description: 'Santorini Urlaub 2026: Oia, Fira, Caldera, Vulkantour. Das romantischste Reiseziel Griechenlands.', h1Parts: ['Urlaub auf', 'Santorini'], heroSub: 'Weiß-blaue Kykladen-Architektur, spektakuläre Caldera und der berühmteste Sonnenuntergang der Welt – Santorini verzaubert jeden.', wikiSearch: 'Santorin', climateKey: 'santorini', tips: ['Den Sonnenuntergang von Oia erleben – frühzeitig einen Platz sichern, es wird voll.', 'Mit dem Boot zur Caldera und zum aktiven Vulkan – unvergessliches Erlebnis.', 'Akrotiri: die minoische Ausgrabungsstätte ist das "Pompeji Griechenlands".', 'Santorini-Wein probieren: Assyrtiko-Weißwein wächst auf der vulkanischen Erde und ist weltweit einzigartig.', 'Preise sind hoch – früh buchen und für Restaurants Reservierungen machen.'], faqs: [{ q: 'Wie komme ich nach Santorini?', a: 'Direktflug nach Thira (JTR) ca. 2,5 Stunden ab Wien/München, oder Fähre von Athen (Piräus) in 5–8 Stunden.' }, { q: 'Ist Santorini geeignet für Familien?', a: 'Eher nein – Santorini ist romantisch und auf Paare/Honeymoon ausgerichtet. Wenig Strandoptionen, viele Treppen.' }, { q: 'Wann ist die beste Reisezeit für Santorini?', a: 'Mai bis Oktober. Außerhalb der Hochsaison (Juli/August) sind Preise günstiger und weniger überfüllt.' }, { q: 'Was kostet eine Übernachtung in Oia?', a: 'Oia gehört zu den teuersten Reisezielen Griechenlands – Zimmer ab 150 € pro Nacht in der Hauptsaison, Suiten mit Caldera-Blick bis 1000 €+.' }, { q: 'Warum sind die Häuser in Santorini weiß und blau?', a: 'Weiß reflektiert die Sommerhitze, und Blau war historisch günstigste Farbe. Heute ist es gesetzlich vorgeschrieben für das Erscheinungsbild der Insel.' }], poiSearch: 'Santorini' },
 ];
 
 // ── Reisezeit pages ───────────────────────────────────────────────────────────
 
 const REISEZEIT_PAGES = [
-  { id: 'reisezeit-tuerkei', file: 'beste-reisezeit-tuerkei.html', nameDe: 'Türkei', destFile: 'tuerkei.html', icon: '🇹🇷', title: 'Beste Reisezeit Türkei 2026 – Wann reisen? | JetztBuchbar.de', description: 'Wann ist die beste Reisezeit für die Türkei? Klima, Temperaturen und Tipps für jede Jahreszeit.' },
-  { id: 'reisezeit-spanien', file: 'beste-reisezeit-spanien.html', nameDe: 'Spanien', destFile: 'spanien.html', icon: '🇪🇸', title: 'Beste Reisezeit Spanien 2026 – Mallorca, Teneriffa & mehr | JetztBuchbar.de', description: 'Wann ist die beste Reisezeit für Spanien? Klimatabelle, Temperaturen und Tipps nach Region.' },
-  { id: 'reisezeit-griechenland', file: 'beste-reisezeit-griechenland.html', nameDe: 'Griechenland', destFile: 'griechenland.html', icon: '🇬🇷', title: 'Beste Reisezeit Griechenland 2026 | JetztBuchbar.de', description: 'Wann ist die beste Reisezeit für Griechenland? Kreta, Santorini und die Inseln im Klimavergleich.' },
-  { id: 'reisezeit-aegypten', file: 'beste-reisezeit-aegypten.html', nameDe: 'Ägypten', destFile: 'aegypten.html', icon: '🇪🇬', title: 'Beste Reisezeit Ägypten 2026 – Hurghada & Sharm | JetztBuchbar.de', description: 'Wann ist die beste Reisezeit für Ägypten? Klimavergleich Hurghada, Sharm el-Sheikh und Kairo.' },
-  { id: 'reisezeit-marokko', file: 'beste-reisezeit-marokko.html', nameDe: 'Marokko', destFile: 'marokko.html', icon: '🇲🇦', title: 'Beste Reisezeit Marokko 2026 | JetztBuchbar.de', description: 'Wann nach Marokko reisen? Klimatabelle Marrakesch, Agadir und die beste Jahreszeit.' },
-  { id: 'reisezeit-dubai', file: 'beste-reisezeit-dubai.html', nameDe: 'Dubai', destFile: 'dubai.html', icon: '🇦🇪', title: 'Beste Reisezeit Dubai 2026 – Oktober bis April ideal | JetztBuchbar.de', description: 'Wann nach Dubai reisen? Klimatable, Temperaturen und Tipps für den perfekten Zeitpunkt.' },
-  { id: 'reisezeit-portugal', file: 'beste-reisezeit-portugal.html', nameDe: 'Portugal', destFile: 'portugal.html', icon: '🇵🇹', title: 'Beste Reisezeit Portugal 2026 – Algarve & Lissabon | JetztBuchbar.de', description: 'Wann nach Portugal reisen? Klimavergleich Algarve, Lissabon und Porto nach Monaten.' },
-  { id: 'reisezeit-malta', file: 'beste-reisezeit-malta.html', nameDe: 'Malta', destFile: 'malta.html', icon: '🇲🇹', title: 'Beste Reisezeit Malta 2026 | JetztBuchbar.de', description: 'Wann nach Malta reisen? Klimatabelle und Empfehlungen für den besten Urlaubszeitpunkt.' },
+  { id: 'reisezeit-tuerkei', file: 'tuerkei/reisezeit/index.html', nameDe: 'Türkei', destFile: 'tuerkei/', parent: 'Türkei', parentFile: 'tuerkei/', icon: '🇹🇷', title: 'Beste Reisezeit Türkei 2026 – Wann reisen? | JetztBuchbar.de', description: 'Wann ist die beste Reisezeit für die Türkei? Klima, Temperaturen und Tipps für jede Jahreszeit.' },
+  { id: 'reisezeit-spanien', file: 'spanien/reisezeit/index.html', nameDe: 'Spanien', destFile: 'spanien/', parent: 'Spanien', parentFile: 'spanien/', icon: '🇪🇸', title: 'Beste Reisezeit Spanien 2026 – Mallorca, Teneriffa & mehr | JetztBuchbar.de', description: 'Wann ist die beste Reisezeit für Spanien? Klimatabelle, Temperaturen und Tipps nach Region.' },
+  { id: 'reisezeit-griechenland', file: 'griechenland/reisezeit/index.html', nameDe: 'Griechenland', destFile: 'griechenland/', parent: 'Griechenland', parentFile: 'griechenland/', icon: '🇬🇷', title: 'Beste Reisezeit Griechenland 2026 | JetztBuchbar.de', description: 'Wann ist die beste Reisezeit für Griechenland? Kreta, Santorini und die Inseln im Klimavergleich.' },
+  { id: 'reisezeit-aegypten', file: 'aegypten/reisezeit/index.html', nameDe: 'Ägypten', destFile: 'aegypten/', parent: 'Ägypten', parentFile: 'aegypten/', icon: '🇪🇬', title: 'Beste Reisezeit Ägypten 2026 – Hurghada & Sharm | JetztBuchbar.de', description: 'Wann ist die beste Reisezeit für Ägypten? Klimavergleich Hurghada, Sharm el-Sheikh und Kairo.' },
+  { id: 'reisezeit-marokko', file: 'marokko/reisezeit/index.html', nameDe: 'Marokko', destFile: 'marokko/', parent: 'Marokko', parentFile: 'marokko/', icon: '🇲🇦', title: 'Beste Reisezeit Marokko 2026 | JetztBuchbar.de', description: 'Wann nach Marokko reisen? Klimatabelle Marrakesch, Agadir und die beste Jahreszeit.' },
+  { id: 'reisezeit-dubai', file: 'dubai/reisezeit/index.html', nameDe: 'Dubai', destFile: 'dubai/', parent: 'Dubai', parentFile: 'dubai/', icon: '🇦🇪', title: 'Beste Reisezeit Dubai 2026 – Oktober bis April ideal | JetztBuchbar.de', description: 'Wann nach Dubai reisen? Klimatable, Temperaturen und Tipps für den perfekten Zeitpunkt.' },
+  { id: 'reisezeit-portugal', file: 'portugal/reisezeit/index.html', nameDe: 'Portugal', destFile: 'portugal/', parent: 'Portugal', parentFile: 'portugal/', icon: '🇵🇹', title: 'Beste Reisezeit Portugal 2026 – Algarve & Lissabon | JetztBuchbar.de', description: 'Wann nach Portugal reisen? Klimavergleich Algarve, Lissabon und Porto nach Monaten.' },
+  { id: 'reisezeit-malta', file: 'malta/reisezeit/index.html', nameDe: 'Malta', destFile: 'malta/', parent: 'Malta', parentFile: 'malta/', icon: '🇲🇹', title: 'Beste Reisezeit Malta 2026 | JetztBuchbar.de', description: 'Wann nach Malta reisen? Klimatabelle und Empfehlungen für den besten Urlaubszeitpunkt.' },
 ];
 
 // ── Thema pages ───────────────────────────────────────────────────────────────
@@ -445,7 +445,7 @@ const REISEZEIT_PAGES = [
 const THEMA_PAGES = [
   {
     id: 'urlaub-mit-kindern',
-    file: 'urlaub-mit-kindern.html',
+    file: 'themen/urlaub-mit-kindern/index.html',
     icon: '👨‍👩‍👧‍👦',
     title: 'Urlaub mit Kindern 2026 – Die besten Familienziele | JetztBuchbar.de',
     description: 'Die besten Familienreiseziele 2026: Türkei, Spanien, Griechenland. Tipps für Urlaub mit Kindern und Top-Resorts.',
@@ -470,7 +470,7 @@ const THEMA_PAGES = [
   },
   {
     id: 'flitterwochen',
-    file: 'flitterwochen.html',
+    file: 'themen/flitterwochen/index.html',
     icon: '💑',
     title: 'Flitterwochen & Hochzeitsreisen 2026 – Romantische Ziele | JetztBuchbar.de',
     description: 'Traumhafte Flitterwochen-Ziele 2026: Santorini, Malediven, Dubai, Bali. Tipps und Inspiration für Ihre Hochzeitsreise.',
@@ -495,7 +495,7 @@ const THEMA_PAGES = [
   },
   {
     id: 'last-minute',
-    file: 'last-minute-urlaub.html',
+    file: 'themen/last-minute/index.html',
     icon: '⚡',
     title: 'Last Minute Urlaub 2026 – Günstig spontan reisen | JetztBuchbar.de',
     description: 'Last Minute Urlaub günstig buchen: Türkei, Spanien, Griechenland, Ägypten. Die besten Tipps für spontanes Reisen.',
@@ -520,7 +520,7 @@ const THEMA_PAGES = [
   },
   {
     id: 'all-inclusive',
-    file: 'all-inclusive-urlaub.html',
+    file: 'themen/all-inclusive/index.html',
     icon: '🍹',
     title: 'All Inclusive Urlaub 2026 – Beste Resorts & Ziele | JetztBuchbar.de',
     description: 'All-Inclusive-Urlaub 2026 günstig buchen: Türkei, Spanien, Ägypten. Die besten All-Inclusive-Resorts für jeden Geldbeutel.',
@@ -550,7 +550,9 @@ const THEMA_PAGES = [
 const HOTEL_PAGES = [
   {
     id: 'hotels-antalya',
-    file: 'hotels-antalya.html',
+    file: 'tuerkei/hotels-antalya/index.html',
+    parent: 'Türkei',
+    parentFile: 'tuerkei/',
     type: 'hotel',
     icon: '🏨',
     nameDe: 'Antalya',
@@ -576,7 +578,9 @@ const HOTEL_PAGES = [
   },
   {
     id: 'hotels-dubai',
-    file: 'hotels-dubai.html',
+    file: 'dubai/hotels-dubai/index.html',
+    parent: 'Dubai',
+    parentFile: 'dubai/',
     type: 'hotel',
     icon: '🏙️',
     nameDe: 'Dubai',
@@ -602,7 +606,9 @@ const HOTEL_PAGES = [
   },
   {
     id: 'hotels-kreta',
-    file: 'hotels-kreta.html',
+    file: 'griechenland/hotels-kreta/index.html',
+    parent: 'Griechenland',
+    parentFile: 'griechenland/',
     type: 'hotel',
     icon: '🏖️',
     nameDe: 'Kreta',
@@ -628,7 +634,9 @@ const HOTEL_PAGES = [
   },
   {
     id: 'hotels-mallorca',
-    file: 'hotels-mallorca.html',
+    file: 'spanien/hotels-mallorca/index.html',
+    parent: 'Spanien',
+    parentFile: 'spanien/',
     type: 'hotel',
     icon: '⛵',
     nameDe: 'Mallorca',
@@ -654,7 +662,9 @@ const HOTEL_PAGES = [
   },
   {
     id: 'hotels-lissabon',
-    file: 'hotels-lissabon.html',
+    file: 'portugal/hotels-lissabon/index.html',
+    parent: 'Portugal',
+    parentFile: 'portugal/',
     type: 'hotel',
     icon: '🏛️',
     nameDe: 'Lissabon',
@@ -685,7 +695,9 @@ const HOTEL_PAGES = [
 const AKTIVITAET_PAGES = [
   {
     id: 'schnorcheln-kreta',
-    file: 'schnorcheln-kreta.html',
+    file: 'griechenland/schnorcheln-kreta/index.html',
+    parent: 'Griechenland',
+    parentFile: 'griechenland/',
     type: 'aktivitaet',
     icon: '🤿',
     nameDe: 'Kreta',
@@ -712,7 +724,9 @@ const AKTIVITAET_PAGES = [
   },
   {
     id: 'tauchen-malta',
-    file: 'tauchen-malta.html',
+    file: 'malta/tauchen/index.html',
+    parent: 'Malta',
+    parentFile: 'malta/',
     type: 'aktivitaet',
     icon: '🐠',
     nameDe: 'Malta',
@@ -739,7 +753,9 @@ const AKTIVITAET_PAGES = [
   },
   {
     id: 'wuestensafari-dubai',
-    file: 'wuestensafari-dubai.html',
+    file: 'dubai/wuestensafari/index.html',
+    parent: 'Dubai',
+    parentFile: 'dubai/',
     type: 'aktivitaet',
     icon: '🐪',
     nameDe: 'Dubai',
@@ -766,7 +782,9 @@ const AKTIVITAET_PAGES = [
   },
   {
     id: 'wandern-kroatien',
-    file: 'wandern-kroatien.html',
+    file: 'kroatien/wandern/index.html',
+    parent: 'Kroatien',
+    parentFile: 'kroatien/',
     type: 'aktivitaet',
     icon: '🥾',
     nameDe: 'Kroatien',
@@ -793,7 +811,9 @@ const AKTIVITAET_PAGES = [
   },
   {
     id: 'surfen-kap-verde',
-    file: 'surfen-kap-verde.html',
+    file: 'kap-verde/surfen/index.html',
+    parent: 'Kap Verde',
+    parentFile: 'kap-verde/',
     type: 'aktivitaet',
     icon: '🏄',
     nameDe: 'Kap Verde',
@@ -825,7 +845,9 @@ const AKTIVITAET_PAGES = [
 const REGION_PAGES = [
   {
     id: 'algarve',
-    file: 'algarve.html',
+    file: 'portugal/algarve/index.html',
+    parent: 'Portugal',
+    parentFile: 'portugal/',
     type: 'region',
     icon: '🪨',
     nameDe: 'Algarve',
@@ -852,7 +874,9 @@ const REGION_PAGES = [
   },
   {
     id: 'costa-brava',
-    file: 'costa-brava.html',
+    file: 'spanien/costa-brava/index.html',
+    parent: 'Spanien',
+    parentFile: 'spanien/',
     type: 'region',
     icon: '🌊',
     nameDe: 'Costa Brava',
@@ -879,7 +903,9 @@ const REGION_PAGES = [
   },
   {
     id: 'bodensee-region',
-    file: 'bodensee-region.html',
+    file: 'deutschland/bodensee/index.html',
+    parent: 'Deutschland',
+    parentFile: 'deutschland/',
     type: 'region',
     icon: '⛵',
     nameDe: 'Bodensee',
@@ -906,7 +932,9 @@ const REGION_PAGES = [
   },
   {
     id: 'amalfikueste',
-    file: 'amalfikueste.html',
+    file: 'italien/amalfikueste/index.html',
+    parent: 'Italien',
+    parentFile: 'italien/',
     type: 'region',
     icon: '🍋',
     nameDe: 'Amalfiküste',
@@ -938,7 +966,7 @@ const REGION_PAGES = [
 const REISETIPPS_PAGES = [
   {
     id: 'handgepaeck-regeln',
-    file: 'handgepaeck-regeln.html',
+    file: 'tipps/handgepaeck/index.html',
     type: 'reisetipps',
     icon: '🧳',
     thema: 'Handgepäck',
@@ -963,7 +991,7 @@ const REISETIPPS_PAGES = [
   },
   {
     id: 'reiseversicherung-vergleich',
-    file: 'reiseversicherung-vergleich.html',
+    file: 'tipps/reiseversicherung/index.html',
     type: 'reisetipps',
     icon: '🛡️',
     thema: 'Reiseversicherung',
@@ -988,7 +1016,7 @@ const REISETIPPS_PAGES = [
   },
   {
     id: 'packliste-sommerurlaub',
-    file: 'packliste-sommerurlaub.html',
+    file: 'tipps/packliste/index.html',
     type: 'reisetipps',
     icon: '☀️',
     thema: 'Packliste',
@@ -1013,7 +1041,7 @@ const REISETIPPS_PAGES = [
   },
   {
     id: 'guenstig-fliegen-tipps',
-    file: 'guenstig-fliegen-tipps.html',
+    file: 'tipps/guenstig-fliegen/index.html',
     type: 'reisetipps',
     icon: '✈️',
     thema: 'Günstig fliegen',
@@ -1043,7 +1071,7 @@ const REISETIPPS_PAGES = [
 const VERGLEICH_PAGES = [
   {
     id: 'tuerkei-vs-aegypten',
-    file: 'tuerkei-vs-aegypten.html',
+    file: 'vergleiche/tuerkei-vs-aegypten/index.html',
     type: 'vergleich',
     icon: '⚖️',
     dest1: 'Türkei',
@@ -1069,7 +1097,7 @@ const VERGLEICH_PAGES = [
   },
   {
     id: 'mallorca-vs-kreta',
-    file: 'mallorca-vs-kreta.html',
+    file: 'vergleiche/mallorca-vs-kreta/index.html',
     type: 'vergleich',
     icon: '⚖️',
     dest1: 'Mallorca',
@@ -1096,7 +1124,7 @@ const VERGLEICH_PAGES = [
   },
   {
     id: 'dubai-vs-abu-dhabi',
-    file: 'dubai-vs-abu-dhabi.html',
+    file: 'vergleiche/dubai-vs-abu-dhabi/index.html',
     type: 'vergleich',
     icon: '⚖️',
     dest1: 'Dubai',

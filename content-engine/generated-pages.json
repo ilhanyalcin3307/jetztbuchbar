@@ -186,5 +186,21 @@
   "dubai-vs-abu-dhabi": {
     "generatedAt": "2026-05-11T12:18:47.242Z",
     "file": "dubai-vs-abu-dhabi.html"
+  },
+  "tuerkei": {
+    "generatedAt": "2026-05-11T17:16:39.950Z",
+    "file": "tuerkei.html"
+  },
+  "spanien": {
+    "generatedAt": "2026-05-11T17:16:40.422Z",
+    "file": "spanien.html"
+  },
+  "griechenland": {
+    "generatedAt": "2026-05-11T17:16:40.591Z",
+    "file": "griechenland.html"
+  },
+  "aegypten": {
+    "generatedAt": "2026-05-11T17:16:40.919Z",
+    "file": "aegypten.html"
   }
 }

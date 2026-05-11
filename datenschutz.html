@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datenschutz – JetztBuchbar.de</title>
+  <meta name="description" content="Datenschutzerklärung von JetztBuchbar.de gemäß DSGVO." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="Datenschutz – JetztBuchbar.de" />
+  <meta property="og:description" content="Datenschutzerklärung von JetztBuchbar.de gemäß DSGVO." />
+  <meta property="og:url" content="https://www.jetztbuchbar.de/datenschutz.html" />
+  <meta property="og:type" content="website" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --bg-card: #121212; --accent: #00c896; --accent-dark: #00a87e;
+      --text: #f0f0f0; --text-muted: #888; --border: #1e1e1e; --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.25rem, 5vw, 3rem); height: 64px;
+      background: rgba(10,10,10,0.85); backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+    }
+    .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
+    nav { display: flex; gap: 2rem; }
+    nav a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+
+    main {
+      max-width: 780px; margin: 0 auto;
+      padding: clamp(3rem, 8vw, 5rem) clamp(1.25rem, 5vw, 3rem);
+    }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; letter-spacing: -0.5px; margin-bottom: 2rem; }
+    h1 span { color: var(--accent); }
+    h2 { font-size: 1.15rem; font-weight: 700; margin: 2rem 0 0.5rem; color: var(--accent); }
+    p { color: var(--text-muted); margin-bottom: 0.75rem; }
+    ul { color: var(--text-muted); padding-left: 1.5rem; margin-bottom: 0.75rem; }
+    ul li { margin-bottom: 0.4rem; }
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem;
+    }
+    .notice {
+      border-left: 3px solid var(--accent); padding: 1rem 1.25rem;
+      background: rgba(0,200,150,0.06); border-radius: 0 var(--radius) var(--radius) 0;
+      color: var(--text-muted); font-size: 0.9rem; margin-top: 2rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.75rem clamp(1.25rem, 5vw, 3rem);
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1rem;
+    }
+    .footer-left { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+    .footer-left span { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-left a { font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
+    .footer-left a:hover { color: var(--accent); text-decoration: none; }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .social-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-icon:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,200,150,0.08); text-decoration: none; }
+    @media (max-width: 600px) { nav { gap: 1.25rem; } footer { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="index.html#angebote">Angebote</a>
+      <a href="index.html#destinationen">Destinationen</a>
+      <a href="ueber-uns.html">Über uns</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Datenschutz<span>erklärung</span></h1>
+
+    <div class="card">
+      <h2>1. Verantwortlicher</h2>
+      <p><strong>JetztBuchbar.de</strong><br />Wien, Österreich<br />E-Mail: <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a></p>
+      <p>Diese Datenschutzerklärung informiert Sie gemäß der Datenschutz-Grundverordnung (DSGVO) sowie dem österreichischen Datenschutzgesetz (DSG) über die Verarbeitung Ihrer personenbezogenen Daten auf dieser Website.</p>
+    </div>
+
+    <div class="card">
+      <h2>2. Welche Daten wir erheben</h2>
+      <p>Wir erheben ausschließlich Daten, die Sie uns freiwillig mitteilen:</p>
+      <ul>
+        <li><strong>E-Mail-Adresse</strong> – bei der Anmeldung zu unserem Newsletter über das Anmeldeformular auf der Website</li>
+        <li><strong>Server-Logfiles</strong> – technische Daten (IP-Adresse, Browsertyp, Datum/Uhrzeit des Abrufs), die beim Aufruf der Website automatisch übermittelt werden</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>3. Zweck der Datenverarbeitung</h2>
+      <p>Die von Ihnen angegebene E-Mail-Adresse wird ausschließlich dazu verwendet, Ihnen Informationen über neue Reiseangebote und Neuigkeiten von JetztBuchbar.de zuzusenden. Eine Nutzung für andere Zwecke findet nicht statt.</p>
+      <p>Rechtsgrundlage ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.</p>
+    </div>
+
+    <div class="card">
+      <h2>4. Keine Weitergabe an Dritte</h2>
+      <p>Ihre personenbezogenen Daten werden nicht an Dritte weitergegeben, verkauft oder anderweitig übermittelt. Eine Ausnahme besteht nur, wenn dies gesetzlich vorgeschrieben ist oder Sie ausdrücklich eingewilligt haben.</p>
+    </div>
+
+    <div class="card">
+      <h2>5. Speicherdauer</h2>
+      <p>Ihre E-Mail-Adresse wird so lange gespeichert, bis Sie sich vom Newsletter abmelden oder die Löschung beantragen. Nach Widerruf Ihrer Einwilligung werden Ihre Daten unverzüglich gelöscht.</p>
+    </div>
+
+    <div class="card">
+      <h2>6. Ihre Rechte</h2>
+      <p>Sie haben jederzeit das Recht auf:</p>
+      <ul>
+        <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
+        <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+        <li>Löschung Ihrer Daten (Art. 17 DSGVO)</li>
+        <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+        <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+        <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+        <li>Widerruf Ihrer Einwilligung mit Wirkung für die Zukunft</li>
+      </ul>
+      <p>Wenden Sie sich dazu an: <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a></p>
+    </div>
+
+    <div class="card">
+      <h2>7. Cookies</h2>
+      <p>Diese Website verwendet derzeit keine Cookies und kein Tracking.</p>
+    </div>
+
+    <div class="card">
+      <h2>8. Beschwerderecht</h2>
+      <p>Sie haben das Recht, bei der österreichischen Datenschutzbehörde (DSB) Beschwerde einzulegen: <a href="https://www.dsb.gv.at" target="_blank" rel="noopener">www.dsb.gv.at</a></p>
+    </div>
+
+    <div class="notice">
+      Stand: Mai 2026 | Kontakt: <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-left">
+      <span>© 2026 JetztBuchbar.de</span>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+      <span>Wien, Österreich</span>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">&#x1F4F7;</a>
+      <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
+    </div>
+  </footer>
+
+</body>
+</html>

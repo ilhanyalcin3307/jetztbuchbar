@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impressum – JetztBuchbar.de</title>
+  <meta name="description" content="Impressum von JetztBuchbar.de – Pflichtangaben gemäß §5 ECG." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="Impressum – JetztBuchbar.de" />
+  <meta property="og:description" content="Impressum von JetztBuchbar.de" />
+  <meta property="og:url" content="https://www.jetztbuchbar.de/impressum.html" />
+  <meta property="og:type" content="website" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --bg-card: #121212; --accent: #00c896; --accent-dark: #00a87e;
+      --text: #f0f0f0; --text-muted: #888; --border: #1e1e1e; --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.25rem, 5vw, 3rem); height: 64px;
+      background: rgba(10,10,10,0.85); backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+    }
+    .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
+    nav { display: flex; gap: 2rem; }
+    nav a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+
+    main {
+      max-width: 780px; margin: 0 auto;
+      padding: clamp(3rem, 8vw, 5rem) clamp(1.25rem, 5vw, 3rem);
+    }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; letter-spacing: -0.5px; margin-bottom: 2rem; }
+    h1 span { color: var(--accent); }
+    h2 { font-size: 1.15rem; font-weight: 700; margin: 2rem 0 0.5rem; color: var(--accent); }
+    p { color: var(--text-muted); margin-bottom: 0.75rem; }
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem;
+    }
+    .notice {
+      border-left: 3px solid var(--accent); padding: 1rem 1.25rem;
+      background: rgba(0,200,150,0.06); border-radius: 0 var(--radius) var(--radius) 0;
+      color: var(--text-muted); font-size: 0.9rem; margin-top: 2rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.75rem clamp(1.25rem, 5vw, 3rem);
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1rem;
+    }
+    .footer-left { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+    .footer-left span { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-left a { font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
+    .footer-left a:hover { color: var(--accent); text-decoration: none; }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .social-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-icon:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,200,150,0.08); text-decoration: none; }
+    @media (max-width: 600px) { nav { gap: 1.25rem; } footer { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="index.html#angebote">Angebote</a>
+      <a href="index.html#destinationen">Destinationen</a>
+      <a href="ueber-uns.html">Über uns</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Impressum <span>&amp;</span> Pflichtangaben</h1>
+
+    <div class="card">
+      <h2>Angaben gemäß §5 ECG (E-Commerce-Gesetz)</h2>
+      <p><strong>Firma:</strong> JetztBuchbar.de</p>
+      <p><strong>Adresse:</strong> Wien, Österreich</p>
+      <p><strong>E-Mail:</strong> <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a></p>
+    </div>
+
+    <div class="card">
+      <h2>Inhalt des Angebots</h2>
+      <p>Dieses Angebot dient ausschließlich zu Informationszwecken. Wir bemühen uns, die Inhalte dieser Website stets aktuell und korrekt zu halten. Für die Richtigkeit, Vollständigkeit und Aktualität der bereitgestellten Informationen übernehmen wir jedoch keine Gewähr.</p>
+    </div>
+
+    <div class="card">
+      <h2>Haftung für Links</h2>
+      <p>Unser Angebot enthält Links zu externen Websites Dritter. Auf deren Inhalte haben wir keinen Einfluss und übernehmen daher keine Gewähr für diese fremden Inhalte. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+    </div>
+
+    <div class="card">
+      <h2>Urheberrecht</h2>
+      <p>Die durch den Betreiber dieser Seite erstellten Inhalte und Werke unterliegen dem österreichischen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors.</p>
+    </div>
+
+    <div class="notice">
+      Dieses Impressum wurde nach bestem Wissen und Gewissen erstellt. Bei Fragen wenden Sie sich bitte an: <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-left">
+      <span>© 2026 JetztBuchbar.de</span>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+      <span>Wien, Österreich</span>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">&#x1F4F7;</a>
+      <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
+    </div>
+  </footer>
+
+</body>
+</html>

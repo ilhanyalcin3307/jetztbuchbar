@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Urlaub in Ägypten – Hurghada, Sharm el-Sheikh &amp; mehr | JetztBuchbar.de</title>
+  <meta name="description" content="Ägypten Urlaub 2026 günstig buchen: Hurghada, Sharm el-Sheikh, Marsa Alam, Kairo. Beste Reisezeit, Tipps und Angebote für DACH-Reisende." />
+  <meta property="og:title" content="Urlaub in Ägypten – Hurghada, Sharm el-Sheikh &amp; mehr" />
+  <meta property="og:description" content="Ägypten Urlaub 2026: Hurghada, Sharm el-Sheikh, Marsa Alam, Kairo." />
+  <meta property="og:url" content="https://www.jetztbuchbar.de/aegypten.html" />
+  <meta property="og:type" content="website" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --bg-card: #121212; --bg-card-hover: #181818;
+      --accent: #00c896; --accent-dark: #00a87e;
+      --text: #f0f0f0; --text-muted: #888; --border: #1e1e1e; --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1.25rem, 5vw, 3rem); height: 64px; background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
+    nav { display: flex; gap: 2rem; }
+    nav a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+    .hero { padding: clamp(4rem, 10vw, 7rem) clamp(1.25rem, 5vw, 3rem) clamp(3rem, 6vw, 5rem); text-align: center; background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,200,150,0.12) 0%, transparent 70%), var(--bg); }
+    .hero-flag { font-size: 3.5rem; display: block; margin-bottom: 1rem; }
+    h1 { font-size: clamp(1.9rem, 4.5vw, 3.2rem); font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 1rem; }
+    h1 span { color: var(--accent); }
+    .hero-sub { font-size: clamp(0.95rem, 1.8vw, 1.1rem); color: var(--text-muted); max-width: 580px; margin: 0 auto; }
+    section { padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem); }
+    .section-title { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 2rem; }
+    .section-title span { color: var(--accent); }
+    .regions { background: #0d0d0d; }
+    .regions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; max-width: 1100px; margin: 0 auto; }
+    .region-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1.5rem 1.75rem; transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s; }
+    .region-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,200,150,0.1); }
+    .region-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .region-card p { font-size: 0.88rem; color: var(--text-muted); }
+    .reisezeit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.75rem; max-width: 900px; margin: 0 auto; }
+    .month { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 0.5rem; text-align: center; font-size: 0.82rem; color: var(--text-muted); }
+    .month.ideal { border-color: var(--accent); color: var(--accent); background: rgba(0,200,150,0.08); font-weight: 600; }
+    .tips-list { list-style: none; max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.85rem; }
+    .tips-list li { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; font-size: 0.92rem; color: var(--text-muted); display: flex; gap: 0.75rem; align-items: flex-start; }
+    .tips-list li::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
+    .faq { background: #0d0d0d; }
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+    .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+    .faq-item h3 { font-size: 0.98rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .faq-item p { font-size: 0.9rem; color: var(--text-muted); }
+    .cta-section { text-align: center; }
+    .btn-primary { display: inline-block; padding: 0.85rem 2.2rem; background: var(--accent); color: #000; font-weight: 700; font-size: 1rem; border-radius: 50px; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 0 24px rgba(0,200,150,0.35); }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,200,150,0.5); }
+    .btn-secondary { display: inline-block; padding: 0.75rem 1.75rem; margin-top: 1rem; border: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; border-radius: 50px; transition: border-color 0.2s, color 0.2s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    footer { border-top: 1px solid var(--border); padding: 1.75rem clamp(1.25rem, 5vw, 3rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+    .footer-left { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+    .footer-left span { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-left a { font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
+    .footer-left a:hover { color: var(--accent); }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .social-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+    .social-icon:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,200,150,0.08); }
+    @media (max-width: 600px) { nav { gap: 1.25rem; } footer { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="index.html#angebote">Angebote</a>
+      <a href="index.html#destinationen">Destinationen</a>
+      <a href="ueber-uns.html">Über uns</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <span class="hero-flag">🇪🇬</span>
+    <h1>Urlaub in <span>Ägypten</span> –<br />Hurghada, Sharm el-Sheikh &amp; mehr</h1>
+    <p class="hero-sub">Rotes Meer, antike Pharaonenkultur und Traumstrände – Ägypten ist eines der faszinierendsten Reiseziele der Welt.</p>
+  </div>
+
+  <section class="regions">
+    <h2 class="section-title">Beliebte <span>Regionen</span></h2>
+    <div class="regions-grid">
+      <div class="region-card">
+        <h3>🐠 Hurghada</h3>
+        <p>Ägyptens beliebtestes Baderesort am Roten Meer: hervorragende Schnorchelgründe, weitläufige All-Inclusive-Resorts und ein lebhaftes Nachtleben.</p>
+      </div>
+      <div class="region-card">
+        <h3>🤿 Sharm el-Sheikh</h3>
+        <p>Das Taucherparadies Ägyptens – kristallklares Wasser, bunte Korallenriffe und direkter Zugang zu einigen der schönsten Unterwasserwelten der Erde.</p>
+      </div>
+      <div class="region-card">
+        <h3>🪸 Marsa Alam</h3>
+        <p>Das noch relativ ursprüngliche Juwel am Roten Meer – naturnahe Riffe, Dugong-Sichtungen und ruhigeres Urlaubsambiente für Taucher und Erholungssuchende.</p>
+      </div>
+      <div class="region-card">
+        <h3>🏛️ Kairo &amp; Pyramiden</h3>
+        <p>Die ältesten Weltwunder der Menschheit: die Pyramiden von Gizeh, die Sphinx, das Ägyptische Museum – ein unvergessliches Kulturerlebnis.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Beste <span>Reisezeit</span></h2>
+    <div class="reisezeit-grid">
+      <div class="month ideal">Januar ✓</div>
+      <div class="month ideal">Februar ✓</div>
+      <div class="month ideal">März ✓</div>
+      <div class="month ideal">April ✓</div>
+      <div class="month ideal">Mai ✓</div>
+      <div class="month">Juni</div>
+      <div class="month">Juli</div>
+      <div class="month">August</div>
+      <div class="month ideal">September ✓</div>
+      <div class="month ideal">Oktober ✓</div>
+      <div class="month ideal">November ✓</div>
+      <div class="month ideal">Dezember ✓</div>
+    </div>
+    <p style="text-align:center; color: var(--text-muted); margin-top: 1.5rem; font-size: 0.9rem;">Oktober bis Mai ist die ideale Reisezeit mit 25–32 °C. Sommer (Juni–August) ist sehr heiß (bis 45 °C), aber günstig. Ägypten ist ein perfektes Winterziel.</p>
+  </section>
+
+  <section style="background: #0d0d0d;">
+    <h2 class="section-title">Reise<span>tipps</span></h2>
+    <ul class="tips-list">
+      <li>Visum erforderlich: Staatsbürger aus Deutschland, Österreich und der Schweiz benötigen ein Visum, das bequem als E-Visum auf visa2egypt.gov.eg beantragt werden kann.</li>
+      <li>Sonnenschutz mit hohem LSF und ausreichend Wasser trinken – die Sonne in Ägypten ist das ganze Jahr über sehr intensiv.</li>
+      <li>All-Inclusive empfohlen: In Hurghada und Sharm el-Sheikh bieten All-Inclusive-Pakete das beste Preis-Leistungs-Verhältnis und sorgen für sorglose Erholung.</li>
+      <li>Kulturelle Sensibilität: Außerhalb der Resorts angemessene Kleidung tragen – Schultern und Knie bedecken, besonders beim Besuch von Moscheen oder Märkten.</li>
+      <li>Kairo-Ausflug planen: Von Hurghada oder Sharm ist ein Tages- oder Zweitagesausflug nach Kairo und zu den Pyramiden von Gizeh ein absolutes Highlight.</li>
+    </ul>
+  </section>
+
+  <section class="faq">
+    <h2 class="section-title">Häufige <span>Fragen</span></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3>Brauche ich ein Visum für Ägypten?</h3>
+        <p>Ja. Bürger aus Deutschland, Österreich und der Schweiz benötigen ein Visum. Das E-Visum kann einfach online auf visa2egypt.gov.eg beantragt werden.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Wie lang ist der Flug nach Hurghada?</h3>
+        <p>Von Wien oder München dauert ein Direktflug nach Hurghada ca. 4–4,5 Stunden. Nach Sharm el-Sheikh sind es ca. 4,5–5 Stunden.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Welche Währung gilt in Ägypten?</h3>
+        <p>Die offizielle Währung ist das Ägyptische Pfund (EGP). In Resorts werden oft Euro oder US-Dollar akzeptiert, für Ausflüge ist lokale Währung empfehlenswert.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Ist Ägypten sicher für Touristen?</h3>
+        <p>Die Touristenregionen Hurghada, Sharm el-Sheikh und Marsa Alam gelten als sicher und werden von vielen Millionen Urlaubern jährlich besucht. Aktuelle Reisehinweise des Außenministeriums beachten.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Lohnt sich ein Ausflug nach Kairo?</h3>
+        <p>Absolut. Die Pyramiden von Gizeh, die Sphinx und das Ägyptische Museum gehören zu den größten Kulturschätzen der Menschheit – ein Erlebnis, das man nicht vergisst.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2 class="section-title">Jetzt <span>Ägypten-Urlaub</span> buchen</h2>
+    <p style="color: var(--text-muted); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">Entdecke die Magie des Roten Meeres und der Pharaonen – zum besten Preis.</p>
+    <a href="index.html#kontakt" class="btn-primary">Angebote entdecken</a><br />
+    <a href="index.html" class="btn-secondary">← Zurück zur Startseite</a>
+  </section>
+
+  <footer>
+    <div class="footer-left">
+      <span>© 2026 JetztBuchbar.de</span>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+      <span>Wien, Österreich</span>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">&#x1F4F7;</a>
+      <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
+    </div>
+  </footer>
+
+</body>
+</html>

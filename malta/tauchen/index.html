@@ -192,7 +192,6 @@
     </nav>
   </header>
   <div class="hero">
-    <span class="hero-icon">🐠</span>
     <h1>Tauchen in <span>Malta</span></h1>
     <p class="hero-sub">Wracks aus dem Zweiten Weltkrieg, geheimnisvolle Grotten und Sichtweiten bis 40 Meter – Malta ist das Tauchmekka Europas.</p>
   </div>
@@ -214,7 +213,7 @@
   <div class="section">
     <div class="container">
       <h2 class="section-title">📍 Malta auf der <span>Karte</span></h2>
-      <div class="map-wrapper" id="map-dffsay">
+      <div class="map-wrapper" id="map-5is5gg">
         <div class="map-overlay" onclick="(function(el){el.closest('.map-wrapper').classList.add('active');})(this)">
           <span class="map-overlay-hint">Klicken zum Aktivieren · Strg+Scroll zum Zoomen</span>
         </div>
@@ -228,7 +227,7 @@
       <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Karte anklicken zum Aktivieren. Außerhalb klicken zum Deaktivieren.</p>
       <script>
       (function(){
-        var w = document.getElementById('map-dffsay');
+        var w = document.getElementById('map-5is5gg');
         if(!w) return;
         document.addEventListener('click', function(e){ if(!w.contains(e.target)) w.classList.remove('active'); });
       })();
@@ -260,10 +259,8 @@
       </div>
     </div>
     <div class="poi-card">
-      <div class="poi-visual">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/VillaCapra_2007_07_18_1.jpg/640px-VillaCapra_2007_07_18_1.jpg" alt="Villa" loading="lazy" />
-          <div class="poi-visual-overlay"></div>
-          <span class="poi-img-credit">© Wikimedia Commons</span>
+      <div class="poi-visual poi-visual-fallback" style="background:linear-gradient(135deg,#003d32 0%,#00796b 55%,#00c896 100%)">
+          <span class="poi-visual-icon">📍</span>
         </div>
       <div class="poi-body">
         <div class="poi-tags"><span class="poi-tag">Kultur</span></div>

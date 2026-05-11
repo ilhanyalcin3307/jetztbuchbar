@@ -1,0 +1,291 @@
+'use strict';
+
+const { MONTHS_DE } = require('./apis');
+
+// ── Shared CSS (same design as index.html) ────────────────────────────────────
+
+const SHARED_CSS = `
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --bg-card: #121212; --bg-card-hover: #181818;
+      --accent: #00c896; --accent-dark: #00a87e;
+      --text: #f0f0f0; --text-muted: #888; --border: #1e1e1e; --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1.25rem, 5vw, 3rem); height: 64px; background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
+    nav { display: flex; gap: 2rem; }
+    nav a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+    .hero { padding: clamp(4rem, 10vw, 7rem) clamp(1.25rem, 5vw, 3rem) clamp(3rem, 6vw, 5rem); text-align: center; background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,200,150,0.12) 0%, transparent 70%), var(--bg); }
+    .hero-icon { font-size: 3.5rem; display: block; margin-bottom: 1rem; }
+    h1 { font-size: clamp(1.9rem, 4.5vw, 3.2rem); font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 1rem; }
+    h1 span { color: var(--accent); }
+    .hero-sub { font-size: clamp(0.95rem, 1.8vw, 1.1rem); color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+    section { padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem); }
+    .alt-bg { background: #0d0d0d; }
+    .section-title { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 2rem; }
+    .section-title span { color: var(--accent); }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; max-width: 1100px; margin: 0 auto; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s; }
+    .card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,200,150,0.1); }
+    .card h3 { font-size: 1.02rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .card p { font-size: 0.88rem; color: var(--text-muted); }
+    .climate-table { width: 100%; max-width: 900px; margin: 0 auto; border-collapse: collapse; font-size: 0.88rem; }
+    .climate-table th, .climate-table td { padding: 0.6rem 0.75rem; text-align: center; border: 1px solid var(--border); }
+    .climate-table th { background: var(--bg-card); color: var(--accent); font-weight: 700; }
+    .climate-table td { color: var(--text-muted); }
+    .climate-table tr:hover td { background: rgba(0,200,150,0.05); color: var(--text); }
+    .tips-list { list-style: none; max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.85rem; }
+    .tips-list li { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; font-size: 0.92rem; color: var(--text-muted); display: flex; gap: 0.75rem; align-items: flex-start; }
+    .tips-list li::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+    .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+    .faq-item h3 { font-size: 0.98rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .faq-item p { font-size: 0.9rem; color: var(--text-muted); }
+    .country-info { display: flex; flex-wrap: wrap; gap: 1rem; max-width: 800px; margin: 0 auto; }
+    .info-chip { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 1.1rem; font-size: 0.88rem; color: var(--text-muted); }
+    .info-chip strong { color: var(--text); }
+    .cta-section { text-align: center; }
+    .btn-primary { display: inline-block; padding: 0.85rem 2.2rem; background: var(--accent); color: #000; font-weight: 700; font-size: 1rem; border-radius: 50px; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 0 24px rgba(0,200,150,0.35); }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,200,150,0.5); }
+    .btn-secondary { display: inline-block; padding: 0.75rem 1.75rem; margin-top: 1rem; border: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; border-radius: 50px; transition: border-color 0.2s, color 0.2s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    footer { border-top: 1px solid var(--border); padding: 1.75rem clamp(1.25rem, 5vw, 3rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+    .footer-left { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+    .footer-left span, .footer-left a { font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
+    .footer-left a:hover { color: var(--accent); }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .social-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+    .social-icon:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,200,150,0.08); }
+    @media (max-width: 600px) { nav { gap: 1.25rem; } footer { flex-direction: column; align-items: flex-start; } }
+`;
+
+// ── Shared partials ───────────────────────────────────────────────────────────
+
+function renderHeader() {
+  return `
+  <header>
+    <a href="/index.html" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="/index.html#angebote">Angebote</a>
+      <a href="/index.html#destinationen">Destinationen</a>
+      <a href="/ueber-uns.html">Über uns</a>
+      <a href="/index.html#kontakt">Kontakt</a>
+    </nav>
+  </header>`;
+}
+
+function renderFooter() {
+  return `
+  <footer>
+    <div class="footer-left">
+      <span>© ${new Date().getFullYear()} JetztBuchbar.de</span>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+      <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+      <span>Wien, Österreich</span>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">&#x1F4F7;</a>
+      <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
+    </div>
+  </footer>`;
+}
+
+// ── Climate table ─────────────────────────────────────────────────────────────
+
+function renderClimateTable(climateData) {
+  if (!climateData || !climateData.length) return '';
+  const headerRow = climateData.map(d => `<th>${d.month}</th>`).join('');
+  const tempRow   = climateData.map(d => `<td>${d.temp != null ? d.temp + ' °C' : '–'}</td>`).join('');
+  const precipRow = climateData.map(d => `<td>${d.precip != null ? d.precip + ' mm' : '–'}</td>`).join('');
+
+  return `
+  <div style="overflow-x:auto;">
+    <table class="climate-table">
+      <thead>
+        <tr><th>Monat</th>${headerRow}</tr>
+      </thead>
+      <tbody>
+        <tr><td style="font-weight:700;color:var(--text);">Temperatur</td>${tempRow}</tr>
+        <tr><td style="font-weight:700;color:var(--text);">Niederschlag</td>${precipRow}</tr>
+      </tbody>
+    </table>
+  </div>`;
+}
+
+// ── POI section ───────────────────────────────────────────────────────────────
+
+function renderPOIs(pois, destinationName) {
+  if (!pois || !pois.length) return '';
+  const cards = pois.map(poi => `
+    <div class="card">
+      <h3>📍 ${escapeHtml(poi.name)}</h3>
+      <p>${poi.dist != null ? `ca. ${poi.dist} km vom Zentrum` : 'Beliebtes Ausflugsziel'}</p>
+    </div>`).join('');
+
+  return `
+  <section class="alt-bg">
+    <h2 class="section-title">Top <span>Sehenswürdigkeiten</span></h2>
+    <div class="card-grid" style="max-width:1100px;margin:0 auto;">
+      ${cards}
+    </div>
+  </section>`;
+}
+
+// ── Country info chips ────────────────────────────────────────────────────────
+
+function renderCountryInfo(info) {
+  if (!info) return '';
+  const chips = [];
+  if (info.capital)    chips.push(`<div class="info-chip"><strong>Hauptstadt:</strong> ${escapeHtml(info.capital)}</div>`);
+  if (info.currency)   chips.push(`<div class="info-chip"><strong>Währung:</strong> ${escapeHtml(info.currency)}</div>`);
+  if (info.language)   chips.push(`<div class="info-chip"><strong>Sprache:</strong> ${escapeHtml(info.language)}</div>`);
+  if (info.population) chips.push(`<div class="info-chip"><strong>Einwohner:</strong> ${escapeHtml(info.population)}</div>`);
+  if (!chips.length) return '';
+
+  return `
+  <section>
+    <h2 class="section-title">Land &amp; <span>Infos</span></h2>
+    <div class="country-info">${chips.join('')}</div>
+  </section>`;
+}
+
+// ── Tips section ──────────────────────────────────────────────────────────────
+
+function renderTips(tips) {
+  if (!tips || !tips.length) return '';
+  const items = tips.map(t => `<li>${escapeHtml(t)}</li>`).join('');
+  return `
+  <section class="alt-bg">
+    <h2 class="section-title">Reise<span>tipps</span></h2>
+    <ul class="tips-list">${items}</ul>
+  </section>`;
+}
+
+// ── FAQ section ───────────────────────────────────────────────────────────────
+
+function renderFAQ(faqs) {
+  if (!faqs || !faqs.length) return '';
+  const items = faqs.map(f => `
+    <div class="faq-item">
+      <h3>${escapeHtml(f.q)}</h3>
+      <p>${escapeHtml(f.a)}</p>
+    </div>`).join('');
+  return `
+  <section>
+    <h2 class="section-title">Häufige <span>Fragen</span></h2>
+    <div class="faq-list">${items}</div>
+  </section>`;
+}
+
+// ── CTA section ───────────────────────────────────────────────────────────────
+
+function renderCTA(destinationName) {
+  return `
+  <section class="cta-section">
+    <h2 class="section-title">Jetzt <span>${escapeHtml(destinationName)}-Urlaub</span> buchen</h2>
+    <p style="color:var(--text-muted);margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto;">
+      Vergleiche die besten Angebote und sichere dir deinen Traumurlaub.
+    </p>
+    <a href="mailto:sales@jetztbuchbar.de" class="btn-primary">Angebot anfragen</a><br />
+    <a href="/index.html" class="btn-secondary">← Zurück zur Startseite</a>
+  </section>`;
+}
+
+// ── Full page assembler ───────────────────────────────────────────────────────
+
+/**
+ * Assembles a complete HTML page from parts.
+ *
+ * @param {Object} opts
+ * @param {string} opts.title        - <title> tag content
+ * @param {string} opts.description  - meta description
+ * @param {string} opts.ogUrl        - og:url
+ * @param {string} opts.heroIcon     - emoji for hero section
+ * @param {string} opts.h1           - H1 content (may include <span>)
+ * @param {string} opts.heroSub      - hero subtitle text
+ * @param {string} opts.intro        - intro paragraph (Wikipedia summary etc.)
+ * @param {string} opts.countryHtml  - rendered country info block
+ * @param {string} opts.poisHtml     - rendered POI block
+ * @param {string} opts.climateHtml  - rendered climate table block
+ * @param {string} opts.tipsHtml     - rendered tips block
+ * @param {string} opts.faqHtml      - rendered FAQ block
+ * @param {string} opts.ctaHtml      - rendered CTA block
+ */
+function assemblePage(opts) {
+  const {
+    title, description, ogUrl,
+    heroIcon, h1, heroSub, intro,
+    countryHtml = '', poisHtml = '', climateHtml = '',
+    tipsHtml = '', faqHtml = '', ctaHtml = '',
+  } = opts;
+
+  return `<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${escapeHtml(title)}</title>
+  <meta name="description" content="${escapeHtml(description)}" />
+  <meta property="og:title" content="${escapeHtml(title)}" />
+  <meta property="og:description" content="${escapeHtml(description)}" />
+  <meta property="og:url" content="${escapeHtml(ogUrl)}" />
+  <meta property="og:type" content="website" />
+  <style>${SHARED_CSS}</style>
+</head>
+<body>
+
+  ${renderHeader()}
+
+  <div class="hero">
+    <span class="hero-icon">${heroIcon}</span>
+    <h1>${h1}</h1>
+    <p class="hero-sub">${escapeHtml(heroSub)}</p>
+  </div>
+
+  ${intro ? `
+  <section>
+    <div style="max-width:820px;margin:0 auto;">
+      <p style="color:var(--text-muted);font-size:1.05rem;line-height:1.8;">${escapeHtml(intro)}</p>
+    </div>
+  </section>` : ''}
+
+  ${countryHtml}
+  ${poisHtml}
+  ${climateHtml ? `<section class="alt-bg"><h2 class="section-title">Klima &amp; <span>Reisezeit</span></h2>${climateHtml}</section>` : ''}
+  ${tipsHtml}
+  ${faqHtml}
+  ${ctaHtml}
+
+  ${renderFooter()}
+
+</body>
+</html>`;
+}
+
+// ── Utility ───────────────────────────────────────────────────────────────────
+
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+module.exports = {
+  assemblePage,
+  renderClimateTable,
+  renderPOIs,
+  renderCountryInfo,
+  renderTips,
+  renderFAQ,
+  renderCTA,
+  escapeHtml,
+};

@@ -99,9 +99,14 @@
   .poi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
   .poi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s; display: flex; flex-direction: column; }
   .poi-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
-  .poi-visual { height: 148px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; flex-shrink: 0; }
-  .poi-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.1) 0%, transparent 65%), repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.025) 18px, rgba(255,255,255,0.025) 19px); }
+  .poi-visual { height: 180px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; flex-shrink: 0; }
+  .poi-visual img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .poi-card:hover .poi-visual img { transform: scale(1.06); }
+  .poi-visual-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%); pointer-events: none; }
+  .poi-visual-fallback { height: 148px; }
+  .poi-visual-fallback::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.1) 0%, transparent 65%), repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.025) 18px, rgba(255,255,255,0.025) 19px); }
   .poi-visual-icon { font-size: 3.2rem; filter: drop-shadow(0 3px 14px rgba(0,0,0,0.45)); z-index: 1; line-height: 1; }
+  .poi-img-credit { position: absolute; bottom: 0.3rem; right: 0.5rem; font-size: 0.6rem; color: rgba(255,255,255,0.45); z-index: 2; }
   .poi-body { padding: 1.15rem 1.35rem; flex: 1; display: flex; flex-direction: column; gap: 0.55rem; }
   .poi-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
   .poi-tag { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 50px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.1); }
@@ -203,7 +208,7 @@
   <div class="section">
     <div class="container">
       <h2 class="section-title">📍 Amalfiküste auf der <span>Karte</span></h2>
-      <div class="map-wrapper" id="map-dxmji9">
+      <div class="map-wrapper" id="map-wwkqqv">
         <div class="map-overlay" onclick="(function(el){el.closest('.map-wrapper').classList.add('active');})(this)">
           <span class="map-overlay-hint">Klicken zum Aktivieren · Strg+Scroll zum Zoomen</span>
         </div>
@@ -217,7 +222,7 @@
       <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Karte anklicken zum Aktivieren. Außerhalb klicken zum Deaktivieren.</p>
       <script>
       (function(){
-        var w = document.getElementById('map-dxmji9');
+        var w = document.getElementById('map-wwkqqv');
         if(!w) return;
         document.addEventListener('click', function(e){ if(!w.contains(e.target)) w.classList.remove('active'); });
       })();
@@ -226,6 +231,98 @@
   </div>
 
     
+  <div class="section">
+    <div class="container">
+      <h2 class="section-title">🗺️ Top <span>Sehenswürdigkeiten</span></h2>
+      <p style="color:var(--text-muted);margin-bottom:1.75rem;font-size:0.93rem;">Die beliebtesten Sehenswürdigkeiten und Ausflugsziele in Amalfiküste.</p>
+      <div class="poi-grid">
+    <div class="poi-card">
+      <div class="poi-visual poi-visual-fallback" style="background:linear-gradient(135deg,#1a3a4a 0%,#1565c0 55%,#42a5f5 100%)">
+          <span class="poi-visual-icon">🕌</span>
+        </div>
+      <div class="poi-body">
+        <div class="poi-tags"><span class="poi-tag">Religiös</span></div>
+        <div class="poi-name">iglesia pentecostal</div>
+        <div class="poi-desc">Bedeutendes religiöses Bauwerk mit einzigartiger Atmosphäre, reich verzierten Details und tiefer kultureller Bedeutung.</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 Zentrum</span>
+          <div class="poi-links">
+            <a href="https://www.google.com/maps/search/iglesia%20pentecostal%20Amalfik%C3%BCste" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=iglesia%20pentecostal" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="poi-card">
+      <div class="poi-visual poi-visual-fallback" style="background:linear-gradient(135deg,#1a3a4a 0%,#1565c0 55%,#42a5f5 100%)">
+          <span class="poi-visual-icon">🕌</span>
+        </div>
+      <div class="poi-body">
+        <div class="poi-tags"><span class="poi-tag">Religiös</span></div>
+        <div class="poi-name">Movimiento misionero mundial</div>
+        <div class="poi-desc">Bedeutendes religiöses Bauwerk mit einzigartiger Atmosphäre, reich verzierten Details und tiefer kultureller Bedeutung.</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 Zentrum</span>
+          <div class="poi-links">
+            <a href="https://www.google.com/maps/search/Movimiento%20misionero%20mundial%20Amalfik%C3%BCste" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Movimiento%20misionero%20mundial" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="poi-card">
+      <div class="poi-visual poi-visual-fallback" style="background:linear-gradient(135deg,#1a3a4a 0%,#1565c0 55%,#42a5f5 100%)">
+          <span class="poi-visual-icon">🕌</span>
+        </div>
+      <div class="poi-body">
+        <div class="poi-tags"><span class="poi-tag">Religiös</span></div>
+        <div class="poi-name">Iglesia evangelica interamericana Dios es amor</div>
+        <div class="poi-desc">Bedeutendes religiöses Bauwerk mit einzigartiger Atmosphäre, reich verzierten Details und tiefer kultureller Bedeutung.</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 Zentrum</span>
+          <div class="poi-links">
+            <a href="https://www.google.com/maps/search/Iglesia%20evangelica%20interamericana%20Dios%20es%20amor%20Amalfik%C3%BCste" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Iglesia%20evangelica%20interamericana%20Dios%20es%20amor" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="poi-card">
+      <div class="poi-visual poi-visual-fallback" style="background:linear-gradient(135deg,#1a3a4a 0%,#1565c0 55%,#42a5f5 100%)">
+          <span class="poi-visual-icon">🕌</span>
+        </div>
+      <div class="poi-body">
+        <div class="poi-tags"><span class="poi-tag">Religiös</span></div>
+        <div class="poi-name">Iglesia evangelica interamericana Dios es amor level 2</div>
+        <div class="poi-desc">Bedeutendes religiöses Bauwerk mit einzigartiger Atmosphäre, reich verzierten Details und tiefer kultureller Bedeutung.</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 Zentrum</span>
+          <div class="poi-links">
+            <a href="https://www.google.com/maps/search/Iglesia%20evangelica%20interamericana%20Dios%20es%20amor%20level%202%20Amalfik%C3%BCste" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Iglesia%20evangelica%20interamericana%20Dios%20es%20amor%20level%202" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="poi-card">
+      <div class="poi-visual poi-visual-fallback" style="background:linear-gradient(135deg,#1a3a4a 0%,#1565c0 55%,#42a5f5 100%)">
+          <span class="poi-visual-icon">🕌</span>
+        </div>
+      <div class="poi-body">
+        <div class="poi-tags"><span class="poi-tag">Religiös</span></div>
+        <div class="poi-name">Salon del reino de los testigos de Jehová</div>
+        <div class="poi-desc">Bedeutendes religiöses Bauwerk mit einzigartiger Atmosphäre, reich verzierten Details und tiefer kultureller Bedeutung.</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 Zentrum</span>
+          <div class="poi-links">
+            <a href="https://www.google.com/maps/search/Salon%20del%20reino%20de%20los%20testigos%20de%20Jehov%C3%A1%20Amalfik%C3%BCste" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Salon%20del%20reino%20de%20los%20testigos%20de%20Jehov%C3%A1" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    </div>
+  </div>
 
     
 

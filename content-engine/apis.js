@@ -107,6 +107,13 @@ const COORDS = {
   'marsa alam':   { lat: 25.07, lon: 34.89 },
   luxor:          { lat: 25.69, lon: 32.64 },
   kairo:          { lat: 30.06, lon: 31.25 },
+  // Hauptländer (für Reisezeit-Seiten)
+  tuerkei:        { lat: 39.00, lon: 35.24 },
+  türkei:         { lat: 39.00, lon: 35.24 },
+  spanien:        { lat: 40.42, lon: -3.70 },
+  griechenland:   { lat: 39.07, lon: 21.82 },
+  ägypten:        { lat: 26.82, lon: 30.80 },
+  aegypten:       { lat: 26.82, lon: 30.80 },
   // Neue Destinationen
   marokko:        { lat: 31.79, lon: -7.09 },
   marrakesch:     { lat: 31.63, lon: -8.00 },
@@ -144,27 +151,31 @@ async function getClimateData(destinationKey) {
     return null;
   }
 
-  const url = `https://climate-api.open-meteo.com/v1/climate?latitude=${coords.lat}&longitude=${coords.lon}&start_date=1991-01-01&end_date=2020-12-31&models=EC_Earth3P_HR&monthly=temperature_2m_mean,precipitation_sum`;
+  const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${coords.lat}&longitude=${coords.lon}&start_date=2018-01-01&end_date=2022-12-31&daily=temperature_2m_mean,precipitation_sum&timezone=auto`;
   const data = await safeFetch(url, `OpenMeteo:${destinationKey}`);
-  if (!data || !data.monthly) return null;
+  if (!data || !data.daily) return null;
 
-  const temps = data.monthly.temperature_2m_mean || [];
-  const precip = data.monthly.precipitation_sum || [];
+  const times = data.daily.time || [];
+  const temps = data.daily.temperature_2m_mean || [];
+  const precip = data.daily.precipitation_sum || [];
 
-  // Average across all years for each month (1–12)
+  // Group daily values by month index (0–11)
+  const monthlyTemps = Array.from({ length: 12 }, () => []);
+  const monthlyPrecip = Array.from({ length: 12 }, () => []);
+
+  times.forEach((dateStr, i) => {
+    const m = parseInt(dateStr.split('-')[1], 10) - 1;
+    if (temps[i] != null) monthlyTemps[m].push(temps[i]);
+    if (precip[i] != null) monthlyPrecip[m].push(precip[i]);
+  });
+
   const monthly = MONTHS_DE.map((month, i) => {
-    const monthTemps = [];
-    const monthPrecip = [];
-    // monthly array has entries for each month of each year
-    for (let j = i; j < temps.length; j += 12) {
-      if (temps[j] != null) monthTemps.push(temps[j]);
-      if (precip[j] != null) monthPrecip.push(precip[j]);
-    }
-    const avgTemp = monthTemps.length
-      ? Math.round(monthTemps.reduce((a, b) => a + b, 0) / monthTemps.length)
+    const avgTemp = monthlyTemps[i].length
+      ? Math.round(monthlyTemps[i].reduce((a, b) => a + b, 0) / monthlyTemps[i].length * 10) / 10
       : null;
-    const avgPrecip = monthPrecip.length
-      ? Math.round(monthPrecip.reduce((a, b) => a + b, 0) / monthPrecip.length)
+    // Sum per month / number of years = avg monthly precipitation
+    const avgPrecip = monthlyPrecip[i].length
+      ? Math.round(monthlyPrecip[i].reduce((a, b) => a + b, 0) / 5)
       : null;
     return { month, temp: avgTemp, precip: avgPrecip };
   });

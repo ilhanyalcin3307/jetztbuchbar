@@ -200,6 +200,11 @@
       border-radius: var(--radius);
       padding: 2rem 1.75rem;
       transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
     }
 
     .feature-card:hover {
@@ -224,6 +229,30 @@
       font-size: 0.92rem;
       color: var(--text-muted);
       line-height: 1.65;
+      flex: 1;
+    }
+
+    .feature-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.25rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+    }
+
+    .feature-card:hover .feature-cta {
+      gap: 0.7rem;
+    }
+
+    .feature-cta svg {
+      transition: transform 0.2s;
+    }
+
+    .feature-card:hover .feature-cta svg {
+      transform: translateX(3px);
     }
 
     /* ── DESTINATIONS ────────────────────────────────────── */
@@ -512,21 +541,24 @@
   <section class="features" id="warum-jetztbuchbar">
     <h2 class="section-title">Warum <span>JetztBuchbar</span>?</h2>
     <div class="features-grid">
-      <div class="feature-card">
+      <a href="guenstig-fliegen-tipps.html" class="feature-card">
         <span class="feature-icon">✈️</span>
         <h3>Beste Preise</h3>
         <p>Vergleiche hunderte Angebote auf einen Blick und finde immer den günstigsten Preis für deinen Urlaub.</p>
-      </div>
-      <div class="feature-card">
+        <span class="feature-cta">Spartipps lesen <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a href="#destinationen" class="feature-card">
         <span class="feature-icon">🌍</span>
         <h3>Top Destinationen</h3>
         <p>Türkei, Spanien, Griechenland und mehr – entdecke die beliebtesten Reiseziele Europas und darüber hinaus.</p>
-      </div>
-      <div class="feature-card">
+        <span class="feature-cta">Alle Reiseziele <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a href="mailto:sales@jetztbuchbar.de?subject=Urlaubsangebot anfragen" class="feature-card">
         <span class="feature-icon">⚡</span>
         <h3>Sofort buchbar</h3>
         <p>Schnell, einfach und sicher buchen – in wenigen Minuten zum Traumurlaub, ohne Umwege.</p>
-      </div>
+        <span class="feature-cta">Angebot anfragen <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
     </div>
   </section>
 

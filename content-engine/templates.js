@@ -218,11 +218,21 @@ function renderCTA(destinationName) {
  */
 function assemblePage(opts) {
   const {
-    title, description, ogUrl,
-    heroIcon, h1, heroSub, intro,
-    countryHtml = '', poisHtml = '', climateHtml = '',
-    tipsHtml = '', faqHtml = '', ctaHtml = '',
+    title, description,
+    // New interface: h1Parts array + icon + content block
+    h1Parts, icon, content = '',
+    heroSub = '',
   } = opts;
+
+  // Build h1: first part normal, second part highlighted with accent color
+  let h1Html = '';
+  if (h1Parts && h1Parts.length) {
+    h1Html = h1Parts.length >= 2
+      ? `${escapeHtml(h1Parts[0])} <span style="color:var(--accent)">${escapeHtml(h1Parts[1])}</span>`
+      : escapeHtml(h1Parts[0]);
+  }
+
+  const heroIcon = icon || '';
 
   return `<!DOCTYPE html>
 <html lang="de">
@@ -233,7 +243,6 @@ function assemblePage(opts) {
   <meta name="description" content="${escapeHtml(description)}" />
   <meta property="og:title" content="${escapeHtml(title)}" />
   <meta property="og:description" content="${escapeHtml(description)}" />
-  <meta property="og:url" content="${escapeHtml(ogUrl)}" />
   <meta property="og:type" content="website" />
   <style>${SHARED_CSS}</style>
 </head>
@@ -243,23 +252,11 @@ function assemblePage(opts) {
 
   <div class="hero">
     <span class="hero-icon">${heroIcon}</span>
-    <h1>${h1}</h1>
+    <h1>${h1Html}</h1>
     <p class="hero-sub">${escapeHtml(heroSub)}</p>
   </div>
 
-  ${intro ? `
-  <section>
-    <div style="max-width:820px;margin:0 auto;">
-      <p style="color:var(--text-muted);font-size:1.05rem;line-height:1.8;">${escapeHtml(intro)}</p>
-    </div>
-  </section>` : ''}
-
-  ${countryHtml}
-  ${poisHtml}
-  ${climateHtml ? `<section class="alt-bg"><h2 class="section-title">Klima &amp; <span>Reisezeit</span></h2>${climateHtml}</section>` : ''}
-  ${tipsHtml}
-  ${faqHtml}
-  ${ctaHtml}
+  ${content}
 
   ${renderFooter()}
 

@@ -23,18 +23,20 @@ async function safeFetch(url, label) {
 // ── Wikipedia DE ──────────────────────────────────────────────────────────────
 
 /**
- * Fetches a short summary (2-3 sentences) from German Wikipedia.
+ * Fetches an extended summary (up to 6 sentences) from German Wikipedia.
  * Returns plain text or null on failure.
  */
 async function getWikipediaSummary(searchTerm) {
-  // First: search for the best matching article title
-  const searchUrl = `https://de.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(searchTerm)}`;
-  const data = await safeFetch(searchUrl, `Wikipedia:${searchTerm}`);
-  if (!data || !data.extract) return null;
-
-  // Trim to max 3 sentences to avoid duplicate content risk
-  const sentences = data.extract.split(/(?<=[.!?])\s+/);
-  return sentences.slice(0, 3).join(' ');
+  // MediaWiki Action API: extracts up to 6 sentences for a richer intro
+  const url = `https://de.wikipedia.org/w/api.php?action=query&format=json&titles=${encodeURIComponent(searchTerm)}&prop=extracts&exsentences=6&exlimit=1&explaintext=1&exsectionformat=plain&redirects=1`;
+  const data = await safeFetch(url, `Wikipedia:${searchTerm}`);
+  if (!data || !data.query || !data.query.pages) return null;
+  const pages = Object.values(data.query.pages);
+  if (!pages.length || pages[0].missing !== undefined) return null;
+  const extract = pages[0].extract;
+  if (!extract) return null;
+  // Clean up: trim, collapse whitespace
+  return extract.replace(/\s+/g, ' ').trim();
 }
 
 // ── OpenTripMap ───────────────────────────────────────────────────────────────
@@ -42,8 +44,31 @@ async function getWikipediaSummary(searchTerm) {
 const OPENTRIPMAP_KEY = process.env.OPENTRIPMAP_KEY || '';
 
 /**
- * Returns top N POIs for a destination name.
- * Internally: geocode destination → fetch nearby POIs by radius.
+ * Fetches a Wikipedia article thumbnail for a given name.
+ * Uses the REST summary endpoint which returns thumbnail.source (Wikimedia Commons image).
+ * Returns image URL string or null.
+ */
+async function getWikipediaThumbnail(name) {
+  const url = `https://de.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`;
+  try {
+    const data = await safeFetch(url, `WP-thumb:${name}`);
+    if (data && data.thumbnail && data.thumbnail.source) {
+      // Request wider version: replace /320px- with /640px- in the URL
+      return data.thumbnail.source.replace(/\/\d+px-/, '/640px-');
+    }
+    // Fallback: try English Wikipedia
+    const enUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`;
+    const enData = await safeFetch(enUrl, `WP-thumb-en:${name}`);
+    if (enData && enData.thumbnail && enData.thumbnail.source) {
+      return enData.thumbnail.source.replace(/\/\d+px-/, '/640px-');
+    }
+  } catch (_) {}
+  return null;
+}
+
+/**
+ * Returns top N POIs for a destination name, each with a Wikipedia thumbnail.
+ * Internally: geocode destination → fetch nearby POIs by radius → fetch images.
  */
 async function getTopPOIs(destinationName, limit = 5) {
   if (!OPENTRIPMAP_KEY) {
@@ -64,14 +89,22 @@ async function getTopPOIs(destinationName, limit = 5) {
   const pois = await safeFetch(poisUrl, `OTM-pois:${destinationName}`);
   if (!Array.isArray(pois)) return [];
 
-  // Return simplified list
-  return pois
+  const filtered = pois
     .filter(p => p.name && p.name.trim())
     .map(p => ({
       name: p.name,
       kinds: p.kinds ? p.kinds.split(',')[0] : '',
       dist: p.dist ? Math.round(p.dist / 1000) : null,
     }));
+
+  // Step 3: Fetch Wikipedia thumbnails in parallel
+  const thumbResults = await Promise.allSettled(
+    filtered.map(p => getWikipediaThumbnail(p.name))
+  );
+  return filtered.map((p, i) => ({
+    ...p,
+    image: thumbResults[i].status === 'fulfilled' ? thumbResults[i].value : null,
+  }));
 }
 
 // ── Open-Meteo ────────────────────────────────────────────────────────────────

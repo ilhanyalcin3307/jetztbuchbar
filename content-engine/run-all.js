@@ -28,6 +28,7 @@ const {
   renderTips,
   renderFAQ,
   renderCTA,
+  renderIntro,
   escapeHtml,
 } = require('./templates');
 
@@ -69,7 +70,7 @@ async function generateDestinationPage(page) {
   const content = `
     <div class="section">
       <div class="container">
-        ${wiki ? `<div class="wiki-intro">${escapeHtml(wiki)}</div>` : ''}
+        ${renderIntro(wiki, page.intro)}
         ${countryData ? renderCountryInfo(countryData) : ''}
       </div>
     </div>
@@ -123,7 +124,7 @@ async function generateCityPage(page) {
 
     <div class="section">
       <div class="container-narrow">
-        ${wiki ? `<div class="wiki-intro">${escapeHtml(wiki)}</div>` : ''}
+        ${renderIntro(wiki, page.intro)}
       </div>
     </div>
 

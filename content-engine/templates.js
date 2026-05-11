@@ -50,6 +50,14 @@ const SHARED_CSS = `
 
   /* Wiki intro */
   .wiki-intro { background: linear-gradient(135deg, rgba(0,200,150,0.06), rgba(0,200,150,0.02)); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 1.5rem 1.75rem; font-size: 1.02rem; color: var(--text-soft); line-height: 1.8; margin-bottom: 2rem; }
+  /* Intro editorial text */
+  .intro-text { font-size: 1rem; color: var(--text-soft); line-height: 1.85; margin-bottom: 1.5rem; }
+  .intro-text p { margin-bottom: 1rem; }
+  .intro-text p:last-child { margin-bottom: 0; }
+  .intro-highlights { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.85rem; margin: 1.5rem 0 2rem; }
+  .intro-highlight { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem 1.1rem; font-size: 0.88rem; color: var(--text-soft); display: flex; gap: 0.65rem; align-items: flex-start; transition: border-color 0.2s; }
+  .intro-highlight:hover { border-color: var(--accent); }
+  .intro-highlight .ih-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.05rem; }
 
   /* Country stat grid */
   .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
@@ -60,8 +68,13 @@ const SHARED_CSS = `
   .stat-icon { font-size: 1.5rem; margin-bottom: 0.25rem; }
 
   /* Map */
-  .map-wrapper { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); margin-top: 1.5rem; }
-  .map-wrapper iframe { display: block; width: 100%; height: 400px; border: none; }
+  .map-wrapper { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); margin-top: 1.5rem; position: relative; }
+  .map-wrapper iframe { display: block; width: 100%; height: 400px; border: none; pointer-events: none; }
+  .map-wrapper.active iframe { pointer-events: auto; }
+  .map-overlay { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.0); cursor: pointer; transition: background 0.2s; }
+  .map-overlay-hint { background: rgba(10,10,10,0.82); backdrop-filter: blur(6px); color: #fff; padding: 0.55rem 1.25rem; border-radius: 50px; font-size: 0.82rem; font-weight: 600; pointer-events: none; opacity: 0; transition: opacity 0.25s; border: 1px solid rgba(255,255,255,0.12); }
+  .map-wrapper:not(.active):hover .map-overlay-hint { opacity: 1; }
+  .map-wrapper.active .map-overlay { display: none; }
 
   /* Climate chart */
   .climate-wrap { overflow-x: auto; padding-bottom: 0.5rem; }
@@ -77,13 +90,28 @@ const SHARED_CSS = `
   .climate-legend span { display: flex; align-items: center; gap: 0.4rem; }
   .climate-legend .dot { width: 10px; height: 10px; border-radius: 2px; background: var(--accent); }
 
-  /* POI cards */
-  .poi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-  .poi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.5rem; transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s; }
-  .poi-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,200,150,0.1); }
-  .poi-icon { font-size: 1.75rem; margin-bottom: 0.6rem; display: block; }
-  .poi-name { font-size: 0.97rem; font-weight: 700; margin-bottom: 0.3rem; }
-  .poi-meta { font-size: 0.8rem; color: var(--text-muted); }
+  /* POI cards — rich design */
+  .poi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .poi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s; display: flex; flex-direction: column; }
+  .poi-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+  .poi-visual { height: 180px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; flex-shrink: 0; }
+  .poi-visual img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .poi-card:hover .poi-visual img { transform: scale(1.06); }
+  .poi-visual-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%); pointer-events: none; }
+  .poi-visual-fallback { height: 148px; }
+  .poi-visual-fallback::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.1) 0%, transparent 65%), repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.025) 18px, rgba(255,255,255,0.025) 19px); }
+  .poi-visual-icon { font-size: 3.2rem; filter: drop-shadow(0 3px 14px rgba(0,0,0,0.45)); z-index: 1; line-height: 1; }
+  .poi-img-credit { position: absolute; bottom: 0.3rem; right: 0.5rem; font-size: 0.6rem; color: rgba(255,255,255,0.45); z-index: 2; }
+  .poi-body { padding: 1.15rem 1.35rem; flex: 1; display: flex; flex-direction: column; gap: 0.55rem; }
+  .poi-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .poi-tag { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 50px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.1); }
+  .poi-name { font-size: 1.08rem; font-weight: 800; line-height: 1.25; color: var(--text); }
+  .poi-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; flex: 1; }
+  .poi-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 0.85rem; margin-top: auto; border-top: 1px solid var(--border); }
+  .poi-dist { font-size: 0.77rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.35rem; }
+  .poi-links { display: flex; gap: 0.45rem; }
+  .poi-link { font-size: 0.73rem; font-weight: 600; padding: 0.28rem 0.7rem; border-radius: 50px; border: 1px solid var(--border-soft); color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; white-space: nowrap; }
+  .poi-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
 
   /* Numbered tips */
   .tips-grid { display: flex; flex-direction: column; gap: 0.85rem; }
@@ -186,11 +214,15 @@ function renderMap(lat, lon, name) {
   const delta = 1.8;
   const bbox  = `${lon - delta},${lat - delta},${lon + delta},${lat + delta}`;
   const osmUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
+  const mapId  = `map-${Math.random().toString(36).slice(2,8)}`;
   return `
   <div class="section">
     <div class="container">
       <h2 class="section-title">📍 ${escapeHtml(name)} auf der <span>Karte</span></h2>
-      <div class="map-wrapper">
+      <div class="map-wrapper" id="${mapId}">
+        <div class="map-overlay" onclick="(function(el){el.closest('.map-wrapper').classList.add('active');})(this)">
+          <span class="map-overlay-hint">Klicken zum Aktivieren · Strg+Scroll zum Zoomen</span>
+        </div>
         <iframe
           src="${osmUrl}"
           loading="lazy"
@@ -198,6 +230,14 @@ function renderMap(lat, lon, name) {
           aria-label="OpenStreetMap Karte von ${escapeHtml(name)}">
         </iframe>
       </div>
+      <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Karte anklicken zum Aktivieren. Außerhalb klicken zum Deaktivieren.</p>
+      <script>
+      (function(){
+        var w = document.getElementById('${mapId}');
+        if(!w) return;
+        document.addEventListener('click', function(e){ if(!w.contains(e.target)) w.classList.remove('active'); });
+      })();
+      <\/script>
     </div>
   </div>`;
 }
@@ -266,22 +306,128 @@ function renderClimateTable(climateData) {
 
 // ── POI section ───────────────────────────────────────────────────────────────
 
-const POI_ICONS = {
-  historic:   '🏛️', churches: '⛪', natural: '🌿', museums: '🖼️',
-  restaurants: '🍽️', viewpoints: '👁️', parks: '🌳', beaches: '🏖️',
-  default: '📍',
+// Category config: gradient background + icon per category
+const POI_CAT = {
+  beaches:      { icon: '🏖️', gradient: 'linear-gradient(135deg,#005f73 0%,#0a9396 55%,#94d2bd 100%)', tags: ['Strand','Schwimmen','Küste'] },
+  viewpoints:   { icon: '🔭', gradient: 'linear-gradient(135deg,#3a0ca3 0%,#7209b7 55%,#f72585 100%)', tags: ['Aussichtspunkt','Panorama'] },
+  museums:      { icon: '🖼️', gradient: 'linear-gradient(135deg,#1a237e 0%,#283593 50%,#3f51b5 100%)', tags: ['Museum','Ausstellung'] },
+  natural:      { icon: '🌿', gradient: 'linear-gradient(135deg,#1b4332 0%,#2d6a4f 50%,#52b788 100%)', tags: ['Natur','Landschaft'] },
+  parks:        { icon: '🌳', gradient: 'linear-gradient(135deg,#1e3a1f 0%,#2e7d32 55%,#66bb6a 100%)', tags: ['Park','Erholung'] },
+  churches:     { icon: '⛪', gradient: 'linear-gradient(135deg,#2c0060 0%,#6a0572 55%,#9b5de5 100%)', tags: ['Kirche','Architektur'] },
+  religion:     { icon: '🕌', gradient: 'linear-gradient(135deg,#1a3a4a 0%,#1565c0 55%,#42a5f5 100%)', tags: ['Religiös','Kulturdenkmal'] },
+  historic:     { icon: '🏛️', gradient: 'linear-gradient(135deg,#6b3a2a 0%,#b05b2c 50%,#e08a4a 100%)', tags: ['Historisch','Denkmal'] },
+  architecture: { icon: '🏗️', gradient: 'linear-gradient(135deg,#1c2340 0%,#2e3f7c 55%,#5c73c4 100%)', tags: ['Architektur','Kulturgut'] },
+  restaurants:  { icon: '🍽️', gradient: 'linear-gradient(135deg,#7a0000 0%,#b71c1c 55%,#e53935 100%)', tags: ['Gastronomie','Küche'] },
+  amusements:   { icon: '🎢', gradient: 'linear-gradient(135deg,#1a1a2e 0%,#e94560 55%,#f5a623 100%)', tags: ['Freizeit','Unterhaltung'] },
+  default:      { icon: '📍', gradient: 'linear-gradient(135deg,#003d32 0%,#00796b 55%,#00c896 100%)', tags: ['Sehenswürdigkeit'] },
 };
+
+const POI_DESC = {
+  beaches:      'Traumhafter Strand mit kristallklarem Wasser – perfekt für Entspannung, Schnorcheln und Wassersport unter der Sonne.',
+  viewpoints:   'Spektakulärer Aussichtspunkt mit atemberaubendem Panoramablick – für Fotografen und Naturliebhaber ein absolutes Highlight.',
+  museums:      'Faszinierendes Museum mit umfangreichen Sammlungen zu lokaler Geschichte, Kunst und Kultur – ein Pflichtbesuch für Kulturinteressierte.',
+  natural:      'Beeindruckende Naturlandschaft – ein Paradies für Wanderer, Naturliebhaber und alle, die die Seele baumeln lassen möchten.',
+  parks:        'Weitläufige Parkanlage, beliebt bei Einheimischen und Touristen gleichermaßen – ideal für Spaziergänge und Picknicks.',
+  churches:     'Prachtvolles Gotteshaus mit beeindruckender Architektur, jahrhundertealter Geschichte und bedeutenden Kunstschätzen im Inneren.',
+  religion:     'Bedeutendes religiöses Bauwerk mit einzigartiger Atmosphäre, reich verzierten Details und tiefer kultureller Bedeutung.',
+  historic:     'Historisches Kulturdenkmal von nationaler Bedeutung – ein fesselndes Zeugnis vergangener Epochen und Zivilisationen.',
+  architecture: 'Architektonisches Meisterwerk, das die Geschichte und den Charakter der Region auf eindrucksvolle Weise verkörpert.',
+  restaurants:  'Kulinarisches Highlight der Region: Hier treffen authentische Aromen auf einladende Atmosphäre und gastfreundlicher Service.',
+  amusements:   'Beliebtes Freizeitzentrum – hier ist Spaß und Unterhaltung für die ganze Familie garantiert.',
+  default:      'Eines der meistbesuchten Ausflugsziele der Region mit einer Geschichte, die Besucher aus aller Welt begeistert.',
+};
+
+// Human-readable tag labels from kinds string
+const KIND_TAG_MAP = [
+  ['beach',         'Strand'],
+  ['viewpoint',     'Aussichtspunkt'],
+  ['museum',        'Museum'],
+  ['natural',       'Natur'],
+  ['park',          'Park'],
+  ['church',        'Kirche'],
+  ['cathedral',     'Kathedrale'],
+  ['mosque',        'Moschee'],
+  ['islamic',       'Islamisch'],
+  ['religion',      'Religiös'],
+  ['historic',      'Historisch'],
+  ['monument',      'Denkmal'],
+  ['fortress',      'Festung'],
+  ['fort',          'Festung'],
+  ['palace',        'Palast'],
+  ['castle',        'Burg'],
+  ['tower',         'Turm'],
+  ['architecture',  'Architektur'],
+  ['cultural',      'Kultur'],
+  ['garden',        'Garten'],
+  ['landscape',     'Landschaft'],
+  ['amusement',     'Freizeit'],
+];
+
+function getPOICat(kinds) {
+  const k = (kinds || '').toLowerCase();
+  if (k.includes('beach'))        return 'beaches';
+  if (k.includes('viewpoint'))    return 'viewpoints';
+  if (k.includes('museum'))       return 'museums';
+  if (k.includes('park'))         return 'parks';
+  if (k.includes('church') || k.includes('cathedral')) return 'churches';
+  if (k.includes('mosque') || k.includes('islamic') || k.includes('religion')) return 'religion';
+  if (k.includes('natural') || k.includes('landscape')) return 'natural';
+  if (k.includes('historic') || k.includes('monument') || k.includes('fort') || k.includes('castle') || k.includes('tower') || k.includes('palace')) return 'historic';
+  if (k.includes('architect'))    return 'architecture';
+  if (k.includes('restaurant'))   return 'restaurants';
+  if (k.includes('amusement'))    return 'amusements';
+  return 'default';
+}
+
+function getPOITags(kinds) {
+  const k = (kinds || '').toLowerCase();
+  const found = [];
+  for (const [key, label] of KIND_TAG_MAP) {
+    if (k.includes(key) && !found.includes(label)) found.push(label);
+    if (found.length >= 3) break;
+  }
+  return found;
+}
 
 function renderPOIs(pois, destinationName) {
   if (!pois || !pois.length) return '';
   const cards = pois.map(poi => {
-    const iconKey = Object.keys(POI_ICONS).find(k => (poi.kinds || '').includes(k)) || 'default';
-    const icon = POI_ICONS[iconKey];
+    const catKey  = getPOICat(poi.kinds);
+    const cat     = POI_CAT[catKey];
+    const desc    = POI_DESC[catKey];
+    const tags    = getPOITags(poi.kinds);
+    if (!tags.length) tags.push(...cat.tags.slice(0, 2));
+    const distText = poi.dist != null && poi.dist > 0
+      ? `${poi.dist} km entfernt`
+      : 'Zentrum';
+    const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(poi.name + ' ' + destinationName)}`;
+    const wikiUrl = `https://de.wikipedia.org/w/index.php?search=${encodeURIComponent(poi.name)}`;
+    const tagsHtml = tags.map(t => `<span class="poi-tag">${escapeHtml(t)}</span>`).join('');
+
+    const visualHtml = poi.image
+      ? `<div class="poi-visual">
+          <img src="${poi.image}" alt="${escapeHtml(poi.name)}" loading="lazy" />
+          <div class="poi-visual-overlay"></div>
+          <span class="poi-img-credit">© Wikimedia Commons</span>
+        </div>`
+      : `<div class="poi-visual poi-visual-fallback" style="background:${cat.gradient}">
+          <span class="poi-visual-icon">${cat.icon}</span>
+        </div>`;
     return `
     <div class="poi-card">
-      <span class="poi-icon">${icon}</span>
-      <div class="poi-name">${escapeHtml(poi.name)}</div>
-      <div class="poi-meta">${poi.dist != null ? `ca. ${poi.dist} km vom Zentrum` : 'Beliebtes Ausflugsziel'}</div>
+      ${visualHtml}
+      <div class="poi-body">
+        <div class="poi-tags">${tagsHtml}</div>
+        <div class="poi-name">${escapeHtml(poi.name)}</div>
+        <div class="poi-desc">${desc}</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 ${distText}</span>
+          <div class="poi-links">
+            <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="${wikiUrl}" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
+      </div>
     </div>`;
   }).join('');
 
@@ -289,6 +435,7 @@ function renderPOIs(pois, destinationName) {
   <div class="section">
     <div class="container">
       <h2 class="section-title">🗺️ Top <span>Sehenswürdigkeiten</span></h2>
+      <p style="color:var(--text-muted);margin-bottom:1.75rem;font-size:0.93rem;">Die beliebtesten Sehenswürdigkeiten und Ausflugsziele in ${escapeHtml(destinationName)}.</p>
       <div class="poi-grid">${cards}</div>
     </div>
   </div>`;
@@ -341,6 +488,22 @@ function renderFAQ(faqs) {
       <div class="faq-a">${escapeHtml(f.a)}</div>
     </div>`).join('');
   return `<div class="faq-list">${items}</div>`;
+}
+
+// ── Intro section (wiki + optional editorial paragraphs) ─────────────────────
+
+function renderIntro(wikiText, introParas) {
+  // introParas: array of strings (optional, from page.intro)
+  const wikiBlock = wikiText
+    ? `<div class="wiki-intro">${escapeHtml(wikiText)}</div>`
+    : '';
+
+  if (!introParas || !introParas.length) return wikiBlock;
+
+  const parasHtml = introParas.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+  return `
+  ${wikiBlock}
+  <div class="intro-text">${parasHtml}</div>`;
 }
 
 // ── CTA ───────────────────────────────────────────────────────────────────────
@@ -430,6 +593,7 @@ module.exports = {
   renderTips,
   renderFAQ,
   renderCTA,
+  renderIntro,
   escapeHtml,
 };
 

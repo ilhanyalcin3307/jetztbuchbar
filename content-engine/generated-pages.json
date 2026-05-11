@@ -19,10 +19,6 @@
     "generatedAt": "2026-05-11T12:03:25.021Z",
     "file": "portugal.html"
   },
-  "bulgarien": {
-    "generatedAt": "2026-05-11T12:03:25.365Z",
-    "file": "bulgarien.html"
-  },
   "malta": {
     "generatedAt": "2026-05-11T12:03:25.825Z",
     "file": "malta.html"
@@ -39,21 +35,9 @@
     "generatedAt": "2026-05-11T12:03:28.031Z",
     "file": "jordanien.html"
   },
-  "antalya": {
-    "generatedAt": "2026-05-11T12:03:29.218Z",
-    "file": "antalya.html"
-  },
   "bodrum": {
     "generatedAt": "2026-05-11T12:03:29.535Z",
     "file": "bodrum.html"
-  },
-  "kreta-stadt": {
-    "generatedAt": "2026-05-11T12:03:29.874Z",
-    "file": "kreta-urlaub.html"
-  },
-  "santorini-stadt": {
-    "generatedAt": "2026-05-11T12:03:30.312Z",
-    "file": "santorini-urlaub.html"
   },
   "reisezeit-tuerkei": {
     "generatedAt": "2026-05-11T12:03:30.977Z",
@@ -111,54 +95,6 @@
     "generatedAt": "2026-05-11T12:03:33.659Z",
     "file": "hotels-dubai.html"
   },
-  "hotels-kreta": {
-    "generatedAt": "2026-05-11T12:03:33.988Z",
-    "file": "hotels-kreta.html"
-  },
-  "hotels-mallorca": {
-    "generatedAt": "2026-05-11T12:03:34.340Z",
-    "file": "hotels-mallorca.html"
-  },
-  "hotels-lissabon": {
-    "generatedAt": "2026-05-11T12:03:34.717Z",
-    "file": "hotels-lissabon.html"
-  },
-  "schnorcheln-kreta": {
-    "generatedAt": "2026-05-11T12:03:35.093Z",
-    "file": "schnorcheln-kreta.html"
-  },
-  "tauchen-malta": {
-    "generatedAt": "2026-05-11T12:03:35.502Z",
-    "file": "tauchen-malta.html"
-  },
-  "wuestensafari-dubai": {
-    "generatedAt": "2026-05-11T12:03:35.834Z",
-    "file": "wuestensafari-dubai.html"
-  },
-  "wandern-kroatien": {
-    "generatedAt": "2026-05-11T12:03:36.155Z",
-    "file": "wandern-kroatien.html"
-  },
-  "surfen-kap-verde": {
-    "generatedAt": "2026-05-11T12:03:36.555Z",
-    "file": "surfen-kap-verde.html"
-  },
-  "algarve": {
-    "generatedAt": "2026-05-11T12:03:36.908Z",
-    "file": "algarve.html"
-  },
-  "costa-brava": {
-    "generatedAt": "2026-05-11T12:03:37.436Z",
-    "file": "costa-brava.html"
-  },
-  "bodensee-region": {
-    "generatedAt": "2026-05-11T12:03:37.745Z",
-    "file": "bodensee-region.html"
-  },
-  "amalfikueste": {
-    "generatedAt": "2026-05-11T12:03:38.133Z",
-    "file": "amalfikueste.html"
-  },
   "handgepaeck-regeln": {
     "generatedAt": "2026-05-11T12:03:38.650Z",
     "file": "handgepaeck-regeln.html"
@@ -175,16 +111,80 @@
     "generatedAt": "2026-05-11T12:03:39.775Z",
     "file": "guenstig-fliegen-tipps.html"
   },
+  "bulgarien": {
+    "generatedAt": "2026-05-11T12:18:44.430Z",
+    "file": "bulgarien.html"
+  },
+  "antalya": {
+    "generatedAt": "2026-05-11T12:18:44.677Z",
+    "file": "antalya.html"
+  },
+  "kreta-stadt": {
+    "generatedAt": "2026-05-11T12:18:44.901Z",
+    "file": "kreta-urlaub.html"
+  },
+  "santorini-stadt": {
+    "generatedAt": "2026-05-11T12:18:45.251Z",
+    "file": "santorini-urlaub.html"
+  },
+  "hotels-kreta": {
+    "generatedAt": "2026-05-11T12:18:45.426Z",
+    "file": "hotels-kreta.html"
+  },
+  "hotels-mallorca": {
+    "generatedAt": "2026-05-11T12:18:45.515Z",
+    "file": "hotels-mallorca.html"
+  },
+  "hotels-lissabon": {
+    "generatedAt": "2026-05-11T12:18:45.674Z",
+    "file": "hotels-lissabon.html"
+  },
+  "schnorcheln-kreta": {
+    "generatedAt": "2026-05-11T12:18:45.743Z",
+    "file": "schnorcheln-kreta.html"
+  },
+  "tauchen-malta": {
+    "generatedAt": "2026-05-11T12:18:45.819Z",
+    "file": "tauchen-malta.html"
+  },
+  "wuestensafari-dubai": {
+    "generatedAt": "2026-05-11T12:18:45.895Z",
+    "file": "wuestensafari-dubai.html"
+  },
+  "wandern-kroatien": {
+    "generatedAt": "2026-05-11T12:18:45.970Z",
+    "file": "wandern-kroatien.html"
+  },
+  "surfen-kap-verde": {
+    "generatedAt": "2026-05-11T12:18:46.080Z",
+    "file": "surfen-kap-verde.html"
+  },
+  "algarve": {
+    "generatedAt": "2026-05-11T12:18:46.194Z",
+    "file": "algarve.html"
+  },
+  "costa-brava": {
+    "generatedAt": "2026-05-11T12:18:46.401Z",
+    "file": "costa-brava.html"
+  },
+  "bodensee-region": {
+    "generatedAt": "2026-05-11T12:18:46.550Z",
+    "file": "bodensee-region.html"
+  },
+  "amalfikueste": {
+    "generatedAt": "2026-05-11T12:18:46.772Z",
+    "file": "amalfikueste.html"
+  },
   "tuerkei-vs-aegypten": {
-    "generatedAt": "2026-05-11T12:03:40.083Z",
+    "generatedAt": "2026-05-11T12:18:47.015Z",
     "file": "tuerkei-vs-aegypten.html"
   },
   "mallorca-vs-kreta": {
-    "generatedAt": "2026-05-11T12:03:40.509Z",
+    "generatedAt": "2026-05-11T12:18:47.084Z",
     "file": "mallorca-vs-kreta.html"
   },
   "dubai-vs-abu-dhabi": {
-    "generatedAt": "2026-05-11T12:03:40.936Z",
+    "generatedAt": "2026-05-11T12:18:47.242Z",
     "file": "dubai-vs-abu-dhabi.html"
   }
 }

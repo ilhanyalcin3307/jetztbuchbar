@@ -27,10 +27,6 @@
     "generatedAt": "2026-05-11T12:03:26.663Z",
     "file": "zypern.html"
   },
-  "kap-verde": {
-    "generatedAt": "2026-05-11T12:03:27.386Z",
-    "file": "kap-verde.html"
-  },
   "jordanien": {
     "generatedAt": "2026-05-11T12:03:28.031Z",
     "file": "jordanien.html"
@@ -131,14 +127,6 @@
     "generatedAt": "2026-05-11T12:18:45.426Z",
     "file": "hotels-kreta.html"
   },
-  "hotels-mallorca": {
-    "generatedAt": "2026-05-11T12:18:45.515Z",
-    "file": "hotels-mallorca.html"
-  },
-  "hotels-lissabon": {
-    "generatedAt": "2026-05-11T12:18:45.674Z",
-    "file": "hotels-lissabon.html"
-  },
   "schnorcheln-kreta": {
     "generatedAt": "2026-05-11T12:18:45.743Z",
     "file": "schnorcheln-kreta.html"
@@ -158,10 +146,6 @@
   "surfen-kap-verde": {
     "generatedAt": "2026-05-11T12:18:46.080Z",
     "file": "surfen-kap-verde.html"
-  },
-  "algarve": {
-    "generatedAt": "2026-05-11T12:18:46.194Z",
-    "file": "algarve.html"
   },
   "costa-brava": {
     "generatedAt": "2026-05-11T12:18:46.401Z",
@@ -202,5 +186,21 @@
   "aegypten": {
     "generatedAt": "2026-05-11T17:16:40.919Z",
     "file": "aegypten.html"
+  },
+  "hotels-mallorca": {
+    "generatedAt": "2026-05-11T17:23:32.927Z",
+    "file": "hotels-mallorca.html"
+  },
+  "hotels-lissabon": {
+    "generatedAt": "2026-05-11T17:23:33.971Z",
+    "file": "hotels-lissabon.html"
+  },
+  "algarve": {
+    "generatedAt": "2026-05-11T17:23:34.112Z",
+    "file": "algarve.html"
+  },
+  "kap-verde": {
+    "generatedAt": "2026-05-11T17:25:48.604Z",
+    "file": "kap-verde.html"
   }
 }

@@ -383,7 +383,7 @@ const DESTINATION_PAGES = [
       { q: 'Welche Währung gilt auf Kap Verde?', a: 'Der Cabo Verde Escudo (CVE) – an den Euro gebunden. Wechselkurs ca. 110 CVE pro Euro.' },
       { q: 'Ist Kap Verde für Familien geeignet?', a: 'Ja, besonders die Insel Sal mit ruhigem Wasser und flachen Stränden ist sehr familienfreundlich.' },
     ],
-    poiSearch: 'Sal Kapverden',
+    poiSearch: 'Praia',
   },
   {
     id: 'jordanien',

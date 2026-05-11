@@ -10,11 +10,13 @@ const {
   getTopPOIs,
   getClimateData,
   getCountryInfo,
+  COORDS,
 } = require('./apis');
 
 const {
   assemblePage,
-  renderClimateTable,
+  renderMap,
+  renderClimateChart,
   renderPOIs,
   renderCountryInfo,
   renderTips,
@@ -91,43 +93,37 @@ async function generateDestinationPage(page) {
   const poisData = pois.status === 'fulfilled' ? pois.value : [];
   const climateData = climate.status === 'fulfilled' ? climate.value : null;
   const countryData = country.status === 'fulfilled' ? country.value : null;
+  const coords = COORDS[page.climateKey] || COORDS[page.nameDe.toLowerCase()] || null;
 
-  const contentSections = `
-    <section class="country-intro">
+  const content = `
+    <div class="section">
       <div class="container">
-        <h2>${escapeHtml(page.icon)} ${escapeHtml(page.nameDe)} im Überblick</h2>
+        ${wiki ? `<div class="wiki-intro">${escapeHtml(wiki)}</div>` : ''}
         ${countryData ? renderCountryInfo(countryData) : ''}
-        ${wiki ? `<p class="wiki-summary">${escapeHtml(wiki)}</p>` : ''}
       </div>
-    </section>
+    </div>
+
+    ${coords ? renderMap(coords.lat, coords.lon, page.nameDe) : ''}
 
     ${poisData.length > 0 ? renderPOIs(poisData, page.nameDe) : ''}
 
-    ${climateData ? `
-    <section class="climate-section">
-      <div class="container">
-        <h2>Klima &amp; Beste Reisezeit</h2>
-        <p>Die folgende Tabelle zeigt die monatlichen Durchschnittstemperaturen und Niederschlagswerte für ${escapeHtml(page.nameDe)}:</p>
-        ${renderClimateTable(climateData)}
-      </div>
-    </section>` : ''}
+    ${climateData ? renderClimateChart(climateData, page.nameDe) : ''}
 
-    <section class="tips-section">
-      <div class="container">
-        <h2>Reisetipps für ${escapeHtml(page.nameDe)}</h2>
+    <div class="section">
+      <div class="container-narrow">
+        <h2 class="section-title">✅ Reise<span>tipps</span></h2>
         ${renderTips(page.tips)}
       </div>
-    </section>
+    </div>
 
-    <section class="faq-section">
-      <div class="container">
-        <h2>Häufige Fragen zu ${escapeHtml(page.nameDe)}</h2>
+    <div class="section-alt">
+      <div class="container-narrow">
+        <h2 class="section-title">❓ Häufige <span>Fragen</span></h2>
         ${renderFAQ(page.faqs)}
       </div>
-    </section>
+    </div>
 
-    ${renderCTA(page.nameDe)}
-  `;
+    ${renderCTA(page.nameDe)}`;
 
   const html = assemblePage({
     title: page.title,
@@ -135,7 +131,7 @@ async function generateDestinationPage(page) {
     h1Parts: page.h1Parts,
     heroSub: page.heroSub,
     icon: page.icon,
-    content: contentSections,
+    content,
   });
 
   const outPath = path.join(ROOT_DIR, page.file);
@@ -155,52 +151,42 @@ async function generateCityPage(page) {
   const wiki = wikiSummary.status === 'fulfilled' ? wikiSummary.value : '';
   const poisData = pois.status === 'fulfilled' ? pois.value : [];
   const climateData = climate.status === 'fulfilled' ? climate.value : null;
+  const coords = COORDS[page.climateKey] || COORDS[page.nameDe.toLowerCase()] || null;
 
-  const breadcrumb = `
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <div class="container">
-        <a href="/index.html">Startseite</a> &rsaquo;
-        <a href="/${escapeHtml(page.parentFile)}">${escapeHtml(page.parent)}</a> &rsaquo;
-        <span>${escapeHtml(page.nameDe)}</span>
+  const content = `
+    <nav class="breadcrumb">
+      <a href="/index.html">Startseite</a> &rsaquo;
+      <a href="/${escapeHtml(page.parentFile)}">${escapeHtml(page.parent)}</a> &rsaquo;
+      <span>${escapeHtml(page.nameDe)}</span>
+    </nav>
+
+    <div class="section">
+      <div class="container-narrow">
+        ${wiki ? `<div class="wiki-intro">${escapeHtml(wiki)}</div>` : ''}
       </div>
-    </nav>`;
+    </div>
 
-  const contentSections = `
-    ${breadcrumb}
-
-    <section class="city-intro">
-      <div class="container">
-        <h2>${escapeHtml(page.icon)} ${escapeHtml(page.nameDe)} – ${escapeHtml(page.parent)}</h2>
-        ${wiki ? `<p class="wiki-summary">${escapeHtml(wiki)}</p>` : ''}
-      </div>
-    </section>
+    ${coords ? renderMap(coords.lat, coords.lon, page.nameDe) : ''}
 
     ${poisData.length > 0 ? renderPOIs(poisData, page.nameDe) : ''}
 
-    ${climateData ? `
-    <section class="climate-section">
-      <div class="container">
-        <h2>Klima in ${escapeHtml(page.nameDe)}</h2>
-        ${renderClimateTable(climateData)}
-      </div>
-    </section>` : ''}
+    ${climateData ? renderClimateChart(climateData, page.nameDe) : ''}
 
-    <section class="tips-section">
-      <div class="container">
-        <h2>Tipps für ${escapeHtml(page.nameDe)}</h2>
+    <div class="section">
+      <div class="container-narrow">
+        <h2 class="section-title">✅ Tipps für <span>${escapeHtml(page.nameDe)}</span></h2>
         ${renderTips(page.tips)}
       </div>
-    </section>
+    </div>
 
-    <section class="faq-section">
-      <div class="container">
-        <h2>FAQ: ${escapeHtml(page.nameDe)}</h2>
+    <div class="section-alt">
+      <div class="container-narrow">
+        <h2 class="section-title">❓ FAQ: <span>${escapeHtml(page.nameDe)}</span></h2>
         ${renderFAQ(page.faqs)}
       </div>
-    </section>
+    </div>
 
-    ${renderCTA(page.nameDe)}
-  `;
+    ${renderCTA(page.nameDe)}`;
 
   const html = assemblePage({
     title: page.title,
@@ -208,7 +194,7 @@ async function generateCityPage(page) {
     h1Parts: page.h1Parts,
     heroSub: page.heroSub,
     icon: page.icon,
-    content: contentSections,
+    content,
   });
 
   const outPath = path.join(ROOT_DIR, page.file);
@@ -248,42 +234,37 @@ async function generateReisezeitPage(page) {
       </tbody>
     </table>`;
 
-  const contentSections = `
-    <section class="reisezeit-intro">
-      <div class="container">
-        <h2>Wann ist die beste Reisezeit für ${escapeHtml(page.nameDe)}?</h2>
-        <p>Die beste Reisezeit für ${escapeHtml(page.nameDe)} hängt davon ab, was Sie suchen: Badesaison, Kulturreise, günstige Preise oder wenig Touristenmassen. Diese Übersicht hilft Ihnen bei der Entscheidung.</p>
+  const coords = COORDS[page.nameDe.toLowerCase()] || null;
+
+  const content = `
+    <div class="section">
+      <div class="container-narrow">
+        <h2 class="section-title">📅 Reisezeit <span>Monat für Monat</span></h2>
+        <p style="color:var(--text-muted);margin-bottom:1.5rem;">Ob Badesaison, Kulturreise oder günstige Preise – hier die optimale Reisezeit für ${escapeHtml(page.nameDe)}.</p>
         ${seasonTable}
       </div>
-    </section>
+    </div>
 
-    ${climate ? `
-    <section class="climate-section">
-      <div class="container">
-        <h2>Klimatabelle ${escapeHtml(page.nameDe)}</h2>
-        <p>Monatliche Durchschnittstemperaturen und Niederschlag (Klimanormalwerte 1991–2020):</p>
-        ${renderClimateTable(climate)}
+    ${climate ? renderClimateChart(climate, page.nameDe) : ''}
+
+    ${coords ? renderMap(coords.lat, coords.lon, page.nameDe) : ''}
+
+    <div class="section">
+      <div class="container-narrow">
+        <h2 class="section-title">Mehr über <span>${escapeHtml(page.nameDe)}</span></h2>
+        <a href="/${escapeHtml(page.destFile)}" class="dest-link-btn">${escapeHtml(page.icon)} ${escapeHtml(page.nameDe)} – Kompletter Reiseguide &rarr;</a>
       </div>
-    </section>` : ''}
+    </div>
 
-    <section class="dest-link-section">
-      <div class="container">
-        <h2>Mehr über ${escapeHtml(page.nameDe)}</h2>
-        <p>Alle Informationen, Regionen, Tipps und Angebote für ${escapeHtml(page.nameDe)} finden Sie auf unserer Hauptseite:</p>
-        <a href="/${escapeHtml(page.destFile)}" class="btn-primary">${escapeHtml(page.icon)} ${escapeHtml(page.nameDe)} – Reiseguide &rarr;</a>
-      </div>
-    </section>
-
-    ${renderCTA(page.nameDe)}
-  `;
+    ${renderCTA(page.nameDe)}`;
 
   const html = assemblePage({
     title: page.title,
     description: page.description,
     h1Parts: ['Beste Reisezeit', page.nameDe],
-    heroSub: `Wann lohnt sich eine Reise nach ${page.nameDe}? Wir zeigen Monat für Monat, was Sie erwartet.`,
+    heroSub: `Monat für Monat erklärt: wann lohnt sich eine Reise nach ${page.nameDe}?`,
     icon: page.icon,
-    content: contentSections,
+    content,
   });
 
   const outPath = path.join(ROOT_DIR, page.file);
@@ -301,37 +282,35 @@ async function generateThemaPage(page) {
     return `<a href="/${escapeHtml(slug)}.html" class="dest-tag">${escapeHtml(d)}</a>`;
   }).join('');
 
-  const contentSections = `
-    <section class="thema-intro">
-      <div class="container">
-        <h2>${escapeHtml(page.icon)} ${escapeHtml(page.h1Parts.join(' '))}</h2>
-        <p>${escapeHtml(page.intro)}</p>
+  const content = `
+    <div class="section">
+      <div class="container-narrow">
+        <div class="wiki-intro">${escapeHtml(page.intro)}</div>
       </div>
-    </section>
+    </div>
 
-    <section class="tips-section">
-      <div class="container">
-        <h2>Unsere Top-Tipps</h2>
+    <div class="section-alt">
+      <div class="container-narrow">
+        <h2 class="section-title">✅ Unsere <span>Top-Tipps</span></h2>
         ${renderTips(page.tips)}
       </div>
-    </section>
+    </div>
 
-    <section class="faq-section">
-      <div class="container">
-        <h2>Häufige Fragen</h2>
+    <div class="section">
+      <div class="container-narrow">
+        <h2 class="section-title">❓ Häufige <span>Fragen</span></h2>
         ${renderFAQ(page.faqs)}
       </div>
-    </section>
+    </div>
 
-    <section class="related-dests">
+    <div class="section-alt">
       <div class="container">
-        <h2>Empfohlene Reiseziele</h2>
+        <h2 class="section-title">🌍 Empfohlene <span>Reiseziele</span></h2>
         <div class="dest-tags">${destLinks}</div>
       </div>
-    </section>
+    </div>
 
-    ${renderCTA(page.h1Parts.join(' '))}
-  `;
+    ${renderCTA(page.h1Parts.join(' '))}`;
 
   const html = assemblePage({
     title: page.title,
@@ -339,7 +318,7 @@ async function generateThemaPage(page) {
     h1Parts: page.h1Parts,
     heroSub: page.heroSub,
     icon: page.icon,
-    content: contentSections,
+    content,
   });
 
   const outPath = path.join(ROOT_DIR, page.file);

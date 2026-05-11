@@ -55,6 +55,14 @@
 
   /* Wiki intro */
   .wiki-intro { background: linear-gradient(135deg, rgba(0,200,150,0.06), rgba(0,200,150,0.02)); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 1.5rem 1.75rem; font-size: 1.02rem; color: var(--text-soft); line-height: 1.8; margin-bottom: 2rem; }
+  /* Intro editorial text */
+  .intro-text { font-size: 1rem; color: var(--text-soft); line-height: 1.85; margin-bottom: 1.5rem; }
+  .intro-text p { margin-bottom: 1rem; }
+  .intro-text p:last-child { margin-bottom: 0; }
+  .intro-highlights { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.85rem; margin: 1.5rem 0 2rem; }
+  .intro-highlight { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem 1.1rem; font-size: 0.88rem; color: var(--text-soft); display: flex; gap: 0.65rem; align-items: flex-start; transition: border-color 0.2s; }
+  .intro-highlight:hover { border-color: var(--accent); }
+  .intro-highlight .ih-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.05rem; }
 
   /* Country stat grid */
   .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
@@ -65,8 +73,13 @@
   .stat-icon { font-size: 1.5rem; margin-bottom: 0.25rem; }
 
   /* Map */
-  .map-wrapper { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); margin-top: 1.5rem; }
-  .map-wrapper iframe { display: block; width: 100%; height: 400px; border: none; }
+  .map-wrapper { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); margin-top: 1.5rem; position: relative; }
+  .map-wrapper iframe { display: block; width: 100%; height: 400px; border: none; pointer-events: none; }
+  .map-wrapper.active iframe { pointer-events: auto; }
+  .map-overlay { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.0); cursor: pointer; transition: background 0.2s; }
+  .map-overlay-hint { background: rgba(10,10,10,0.82); backdrop-filter: blur(6px); color: #fff; padding: 0.55rem 1.25rem; border-radius: 50px; font-size: 0.82rem; font-weight: 600; pointer-events: none; opacity: 0; transition: opacity 0.25s; border: 1px solid rgba(255,255,255,0.12); }
+  .map-wrapper:not(.active):hover .map-overlay-hint { opacity: 1; }
+  .map-wrapper.active .map-overlay { display: none; }
 
   /* Climate chart */
   .climate-wrap { overflow-x: auto; padding-bottom: 0.5rem; }
@@ -83,12 +96,18 @@
   .climate-legend .dot { width: 10px; height: 10px; border-radius: 2px; background: var(--accent); }
 
   /* POI cards */
-  .poi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-  .poi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.5rem; transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s; }
-  .poi-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,200,150,0.1); }
-  .poi-icon { font-size: 1.75rem; margin-bottom: 0.6rem; display: block; }
-  .poi-name { font-size: 0.97rem; font-weight: 700; margin-bottom: 0.3rem; }
-  .poi-meta { font-size: 0.8rem; color: var(--text-muted); }
+  .poi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+  .poi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+  .poi-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,200,150,0.12); }
+  .poi-card-header { padding: 1.25rem 1.4rem 0; display: flex; align-items: flex-start; gap: 1rem; }
+  .poi-icon-wrap { width: 48px; height: 48px; min-width: 48px; border-radius: var(--radius-sm); background: var(--accent-glow); border: 1px solid rgba(0,200,150,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+  .poi-card-title { flex: 1; }
+  .poi-name { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; line-height: 1.3; }
+  .poi-type-badge { display: inline-block; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); background: rgba(0,200,150,0.1); border: 1px solid rgba(0,200,150,0.2); border-radius: 50px; padding: 0.18rem 0.65rem; }
+  .poi-card-body { padding: 0.85rem 1.4rem 1.25rem; flex: 1; }
+  .poi-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.65rem; }
+  .poi-meta { font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem; }
+  .poi-meta::before { content: '📍'; font-size: 0.75rem; }
 
   /* Numbered tips */
   .tips-grid { display: flex; flex-direction: column; gap: 0.85rem; }
@@ -180,7 +199,10 @@
   <div class="section">
     <div class="container">
       <h2 class="section-title">📍 Kreta auf der <span>Karte</span></h2>
-      <div class="map-wrapper">
+      <div class="map-wrapper" id="map-5rpece">
+        <div class="map-overlay" onclick="(function(el){el.closest('.map-wrapper').classList.add('active');})(this)">
+          <span class="map-overlay-hint">Klicken zum Aktivieren · Strg+Scroll zum Zoomen</span>
+        </div>
         <iframe
           src="https://www.openstreetmap.org/export/embed.html?bbox=23.29,33.440000000000005,26.89,37.04&layer=mapnik&marker=35.24,25.09"
           loading="lazy"
@@ -188,6 +210,14 @@
           aria-label="OpenStreetMap Karte von Kreta">
         </iframe>
       </div>
+      <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Karte anklicken zum Aktivieren. Außerhalb klicken zum Deaktivieren.</p>
+      <script>
+      (function(){
+        var w = document.getElementById('map-5rpece');
+        if(!w) return;
+        document.addEventListener('click', function(e){ if(!w.contains(e.target)) w.classList.remove('active'); });
+      })();
+      </script>
     </div>
   </div>
 
@@ -195,130 +225,38 @@
   <div class="section">
     <div class="container">
       <h2 class="section-title">🗺️ Top <span>Sehenswürdigkeiten</span></h2>
+      <p style="color:var(--text-muted);margin-bottom:1.75rem;font-size:0.93rem;">Die beliebtesten Sehenswürdigkeiten und Ausflugsziele in Kreta.</p>
       <div class="poi-grid">
     <div class="poi-card">
-      <span class="poi-icon">📍</span>
-      <div class="poi-name">Αγία Αικατερίνη</div>
-      <div class="poi-meta">ca. 0 km vom Zentrum</div>
+      <div class="poi-card-header">
+        <div class="poi-icon-wrap">📍</div>
+        <div class="poi-card-title">
+          <div class="poi-name">Αγία Αικατερίνη</div>
+          <span class="poi-type-badge">Sehenswürdigkeit</span>
+        </div>
+      </div>
+      <div class="poi-card-body">
+        <div class="poi-desc">Eines der meistbesuchten und beliebtesten Ausflugsziele der Region.</div>
+        <div class="poi-meta">Im Zentrum</div>
+      </div>
     </div>
     <div class="poi-card">
-      <span class="poi-icon">📍</span>
-      <div class="poi-name">старый город Ираклион</div>
-      <div class="poi-meta">ca. 0 km vom Zentrum</div>
+      <div class="poi-card-header">
+        <div class="poi-icon-wrap">📍</div>
+        <div class="poi-card-title">
+          <div class="poi-name">старый город Ираклион</div>
+          <span class="poi-type-badge">Sehenswürdigkeit</span>
+        </div>
+      </div>
+      <div class="poi-card-body">
+        <div class="poi-desc">Eines der meistbesuchten und beliebtesten Ausflugsziele der Region.</div>
+        <div class="poi-meta">Im Zentrum</div>
+      </div>
     </div></div>
     </div>
   </div>
 
     
-  <div class="section-alt">
-    <div class="container">
-      <h2 class="section-title">☀️ Klima &amp; <span>Beste Reisezeit</span></h2>
-      <p style="color:var(--text-muted);margin-bottom:1.5rem;font-size:0.93rem;">Monatliche Durchschnittstemperaturen in Kreta (Ø 2018–2022)</p>
-      <div class="climate-wrap">
-        <div class="climate-chart">
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:8%;opacity:0.45;"></div>
-        </div>
-        <span class="climate-temp">10°</span>
-        <span class="climate-precip">87mm</span>
-        <span class="climate-label">Jan</span>
-      </div>
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:12%;opacity:0.47500000000000003;"></div>
-        </div>
-        <span class="climate-temp">10.8°</span>
-        <span class="climate-precip">89mm</span>
-        <span class="climate-label">Feb</span>
-      </div>
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:17%;opacity:0.505;"></div>
-        </div>
-        <span class="climate-temp">11.7°</span>
-        <span class="climate-precip">71mm</span>
-        <span class="climate-label">Mär</span>
-      </div>
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:37%;opacity:0.625;"></div>
-        </div>
-        <span class="climate-temp">15.4°</span>
-        <span class="climate-precip">29mm</span>
-        <span class="climate-label">Apr</span>
-      </div>
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:61%;opacity:0.76;"></div>
-        </div>
-        <span class="climate-temp">19.7°</span>
-        <span class="climate-precip">14mm</span>
-        <span class="climate-label">Mai</span>
-      </div>
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:80%;opacity:0.875;"></div>
-        </div>
-        <span class="climate-temp">23.3°</span>
-        <span class="climate-precip">13mm</span>
-        <span class="climate-label">Jun</span>
-      </div>
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:92%;opacity:0.9450000000000001;"></div>
-        </div>
-        <span class="climate-temp">25.5°</span>
-        <span class="climate-precip">7mm</span>
-        <span class="climate-label">Jul</span>
-      </div>
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:93%;opacity:0.95;"></div>
-        </div>
-        <span class="climate-temp">25.6°</span>
-        <span class="climate-precip">8mm</span>
-        <span class="climate-label">Aug</span>
-      </div>
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:76%;opacity:0.8500000000000001;"></div>
-        </div>
-        <span class="climate-temp">22.5°</span>
-        <span class="climate-precip">19mm</span>
-        <span class="climate-label">Sep</span>
-      </div>
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:56%;opacity:0.73;"></div>
-        </div>
-        <span class="climate-temp">18.8°</span>
-        <span class="climate-precip">38mm</span>
-        <span class="climate-label">Okt</span>
-      </div>
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:40%;opacity:0.635;"></div>
-        </div>
-        <span class="climate-temp">15.8°</span>
-        <span class="climate-precip">65mm</span>
-        <span class="climate-label">Nov</span>
-      </div>
-      <div class="climate-month">
-        <div class="climate-bar-wrap">
-          <div class="climate-bar" style="height:19%;opacity:0.515;"></div>
-        </div>
-        <span class="climate-temp">12°</span>
-        <span class="climate-precip">72mm</span>
-        <span class="climate-label">Dez</span>
-      </div></div>
-      </div>
-      <div class="climate-legend">
-        <span><span class="dot"></span> Temperatur (°C)</span>
-        <span style="color:var(--text-muted);font-size:0.77rem;">Niederschlag (mm) unter den Balken</span>
-      </div>
-    </div>
-  </div>
 
     <div class="section">
       <div class="container-narrow">

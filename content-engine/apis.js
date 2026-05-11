@@ -135,6 +135,12 @@ const COORDS = {
   'kap verde':    { lat: 16.00, lon: -24.00 },
   jordanien:      { lat: 31.24, lon: 36.51 },
   petra:          { lat: 30.33, lon: 35.44 },
+  // Extra für neue Seiten
+  münchen:        { lat: 48.14, lon: 11.58 },
+  neapel:         { lat: 40.85, lon: 14.27 },
+  'costa brava':  { lat: 41.90, lon: 3.10 },
+  bodensee:       { lat: 47.64, lon: 9.32 },
+  amalfi:         { lat: 40.63, lon: 14.60 },
 };
 
 const MONTHS_DE = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
@@ -228,6 +234,93 @@ async function getCountryInfo(destinationDE) {
   };
 }
 
+// ── Unsplash ──────────────────────────────────────────────────────────────────
+
+// German → English mapping for better Unsplash search results
+const UNSPLASH_QUERY_MAP = {
+  'marokko':       'Morocco travel landscape',
+  'tunesien':      'Tunisia travel beach',
+  'dubai':         'Dubai skyline travel',
+  'kroatien':      'Croatia coast travel',
+  'portugal':      'Portugal travel landscape',
+  'bulgarien':     'Bulgaria Black Sea beach',
+  'malta':         'Malta Mediterranean travel',
+  'zypern':        'Cyprus travel beach',
+  'kap-verde':     'Cape Verde beach travel',
+  'kap verde':     'Cape Verde beach travel',
+  'jordanien':     'Jordan Petra travel',
+  'antalya':       'Antalya Turkey beach',
+  'bodrum':        'Bodrum Turkey travel',
+  'kreta':         'Crete Greece travel',
+  'santorini':     'Santorini Greece island',
+  'türkei':        'Turkey travel landscape',
+  'tuerkei':       'Turkey travel landscape',
+  'spanien':       'Spain travel landscape',
+  'griechenland':  'Greece travel landscape',
+  'ägypten':       'Egypt travel landscape',
+  'aegypten':      'Egypt travel landscape',
+  'mallorca':      'Mallorca Spain travel',
+  'lissabon':      'Lisbon Portugal travel',
+  'algarve':       'Algarve Portugal cliffs',
+  'costa brava':   'Costa Brava Spain travel',
+  'bodensee':      'Lake Constance Germany travel',
+  'amalfiküste':   'Amalfi Coast Italy travel',
+  'amalfi':        'Amalfi Coast Italy travel',
+  'neapel':        'Naples Italy travel',
+  'münchen':       'Bavaria Germany travel',
+  'barcelona':     'Barcelona Spain travel',
+  'hotels-antalya':'Antalya Turkey resort hotel',
+  'hotels-dubai':  'Dubai luxury hotel',
+  'hotels-kreta':  'Crete Greece resort',
+  'hotels-mallorca':'Mallorca hotel resort',
+  'hotels-lissabon':'Lisbon Portugal boutique hotel',
+  'schnorcheln-kreta': 'Crete snorkeling underwater',
+  'tauchen-malta': 'Malta diving underwater',
+  'wuestensafari-dubai': 'Dubai desert safari dunes',
+  'wandern-kroatien': 'Croatia hiking nature',
+  'surfen-kap-verde': 'Cape Verde kitesurfing',
+  'handgepaeck':   'airport travel luggage',
+  'reiseversicherung': 'travel insurance trip',
+  'packliste':     'travel packing suitcase',
+  'fliegen':       'airplane travel flight',
+  'türkei-ägypten': 'Turkey Egypt travel comparison',
+  'mallorca-kreta': 'Mediterranean island travel',
+  'dubai-abu-dhabi': 'UAE skyline travel',
+};
+
+/**
+ * Fetches a travel photo from Unsplash for a given destination/topic.
+ * Returns { url, creditName, creditLink } or null on failure.
+ */
+async function getUnsplashImage(queryKey) {
+  const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY;
+  if (!UNSPLASH_KEY) {
+    console.warn('[API] UNSPLASH_ACCESS_KEY not set, skipping image');
+    return null;
+  }
+
+  const key = (queryKey || '').toLowerCase();
+  const query = UNSPLASH_QUERY_MAP[key] || `${queryKey} travel landscape`;
+
+  const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape&client_id=${UNSPLASH_KEY}`;
+
+  try {
+    const res = await fetch(url, { timeout: 10000 });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const photo = data.results && data.results[0];
+    if (!photo) return null;
+    return {
+      url:         photo.urls.regular,
+      creditName:  photo.user.name,
+      creditLink:  photo.user.links.html + '?utm_source=jetztbuchbar&utm_medium=referral',
+    };
+  } catch (err) {
+    console.error(`[API] Unsplash:${queryKey} failed: ${err.message}`);
+    return null;
+  }
+}
+
 // ── Exports ───────────────────────────────────────────────────────────────────
 
 module.exports = {
@@ -235,6 +328,7 @@ module.exports = {
   getTopPOIs,
   getClimateData,
   getCountryInfo,
+  getUnsplashImage,
   COORDS,
   MONTHS_DE,
 };

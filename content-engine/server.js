@@ -10,6 +10,7 @@ const {
   getTopPOIs,
   getClimateData,
   getCountryInfo,
+  getUnsplashImage,
   COORDS,
 } = require('./apis');
 
@@ -25,13 +26,8 @@ const {
   escapeHtml,
 } = require('./templates');
 
-const {
-  DESTINATION_PAGES,
-  CITY_PAGES,
-  REISEZEIT_PAGES,
-  THEMA_PAGES,
-  ALL_PAGES,
-} = require('./pages');
+const { ALL_PAGES, DESTINATION_PAGES, CITY_PAGES, REISEZEIT_PAGES, THEMA_PAGES,
+  HOTEL_PAGES, AKTIVITAET_PAGES, REGION_PAGES, REISETIPPS_PAGES, VERGLEICH_PAGES } = require('./pages');
 
 // ── Config ────────────────────────────────────────────────────────────────────
 
@@ -82,11 +78,12 @@ async function gitPush(filename, commitMsg) {
 async function generateDestinationPage(page) {
   console.log(`[gen] destination → ${page.file}`);
 
-  const [wikiSummary, pois, climate, country] = await Promise.allSettled([
+  const [wikiSummary, pois, climate, country, image] = await Promise.allSettled([
     getWikipediaSummary(page.wikiSearch),
     getTopPOIs(page.poiSearch, 5),
     getClimateData(page.climateKey),
     getCountryInfo(page.countryKey),
+    getUnsplashImage(page.climateKey || page.nameDe.toLowerCase()),
   ]);
 
   const wiki = wikiSummary.status === 'fulfilled' ? wikiSummary.value : '';
@@ -94,6 +91,9 @@ async function generateDestinationPage(page) {
   const climateData = climate.status === 'fulfilled' ? climate.value : null;
   const countryData = country.status === 'fulfilled' ? country.value : null;
   const coords = COORDS[page.climateKey] || COORDS[page.nameDe.toLowerCase()] || null;
+  const img = image.status === 'fulfilled' ? image.value : null;
+  const heroImage  = img ? img.url : null;
+  const heroCredit = img ? { name: img.creditName, link: img.creditLink } : null;
 
   const content = `
     <div class="section">
@@ -132,6 +132,8 @@ async function generateDestinationPage(page) {
     heroSub: page.heroSub,
     icon: page.icon,
     content,
+    heroImage,
+    heroCredit,
   });
 
   const outPath = path.join(ROOT_DIR, page.file);
@@ -142,16 +144,20 @@ async function generateDestinationPage(page) {
 async function generateCityPage(page) {
   console.log(`[gen] city → ${page.file}`);
 
-  const [wikiSummary, pois, climate] = await Promise.allSettled([
+  const [wikiSummary, pois, climate, image] = await Promise.allSettled([
     getWikipediaSummary(page.wikiSearch),
     getTopPOIs(page.poiSearch, 5),
     getClimateData(page.climateKey),
+    getUnsplashImage(page.climateKey || page.nameDe.toLowerCase()),
   ]);
 
   const wiki = wikiSummary.status === 'fulfilled' ? wikiSummary.value : '';
   const poisData = pois.status === 'fulfilled' ? pois.value : [];
   const climateData = climate.status === 'fulfilled' ? climate.value : null;
   const coords = COORDS[page.climateKey] || COORDS[page.nameDe.toLowerCase()] || null;
+  const img = image.status === 'fulfilled' ? image.value : null;
+  const heroImage  = img ? img.url : null;
+  const heroCredit = img ? { name: img.creditName, link: img.creditLink } : null;
 
   const content = `
     <nav class="breadcrumb">
@@ -195,6 +201,8 @@ async function generateCityPage(page) {
     heroSub: page.heroSub,
     icon: page.icon,
     content,
+    heroImage,
+    heroCredit,
   });
 
   const outPath = path.join(ROOT_DIR, page.file);
@@ -205,7 +213,14 @@ async function generateCityPage(page) {
 async function generateReisezeitPage(page) {
   console.log(`[gen] reisezeit → ${page.file}`);
 
-  const climate = await getClimateData(page.nameDe.toLowerCase()).catch(() => null);
+  const [climateRes, imageRes] = await Promise.allSettled([
+    getClimateData(page.nameDe.toLowerCase()),
+    getUnsplashImage(page.nameDe.toLowerCase()),
+  ]);
+  const climate = climateRes.status === 'fulfilled' ? climateRes.value : null;
+  const imgR = imageRes.status === 'fulfilled' ? imageRes.value : null;
+  const heroImage  = imgR ? imgR.url : null;
+  const heroCredit = imgR ? { name: imgR.creditName, link: imgR.creditLink } : null;
 
   const months = [
     'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
@@ -265,6 +280,8 @@ async function generateReisezeitPage(page) {
     heroSub: `Monat für Monat erklärt: wann lohnt sich eine Reise nach ${page.nameDe}?`,
     icon: page.icon,
     content,
+    heroImage,
+    heroCredit,
   });
 
   const outPath = path.join(ROOT_DIR, page.file);
@@ -274,6 +291,10 @@ async function generateReisezeitPage(page) {
 
 async function generateThemaPage(page) {
   console.log(`[gen] thema → ${page.file}`);
+
+  const imgRes = await getUnsplashImage(page.themaQuery || 'travel vacation beach').catch(() => null);
+  const heroImage  = imgRes ? imgRes.url : null;
+  const heroCredit = imgRes ? { name: imgRes.creditName, link: imgRes.creditLink } : null;
 
   const destLinks = page.destinations.map(d => {
     const slug = d.toLowerCase()
@@ -319,8 +340,184 @@ async function generateThemaPage(page) {
     heroSub: page.heroSub,
     icon: page.icon,
     content,
+    heroImage,
+    heroCredit,
   });
 
+  const outPath = path.join(ROOT_DIR, page.file);
+  fs.writeFileSync(outPath, html, 'utf8');
+  return outPath;
+}
+
+async function generateHotelPage(page) {
+  const [pois, climate, image] = await Promise.allSettled([
+    getTopPOIs(page.nameDe, 4),
+    getClimateData(page.climateKey),
+    getUnsplashImage(page.id || page.nameDe.toLowerCase()),
+  ]);
+  const poisData = pois.status === 'fulfilled' ? pois.value : [];
+  const climateData = climate.status === 'fulfilled' ? climate.value : null;
+  const coords = COORDS[page.climateKey] || COORDS[page.nameDe.toLowerCase()] || null;
+  const img = image.status === 'fulfilled' ? image.value : null;
+  const heroImage  = img ? img.url : null;
+  const heroCredit = img ? { name: img.creditName, link: img.creditLink } : null;
+
+  const content = `
+    <div class="section"><div class="container-narrow">
+      <div class="wiki-intro">In ${escapeHtml(page.nameDe)} warten Unterkünfte für jeden Anspruch – von Budgethotels bis zu 5-Sterne-Resorts.</div>
+    </div></div>
+    ${coords ? renderMap(coords.lat, coords.lon, page.nameDe) : ''}
+    ${poisData.length > 0 ? renderPOIs(poisData, page.nameDe) : ''}
+    ${climateData ? renderClimateChart(climateData, page.nameDe) : ''}
+    <div class="section"><div class="container-narrow">
+      <h2 class="section-title">✅ Hotel<span>tipps</span></h2>
+      ${renderTips(page.tips)}
+    </div></div>
+    <div class="section-alt"><div class="container-narrow">
+      <h2 class="section-title">❓ Häufige <span>Fragen</span></h2>
+      ${renderFAQ(page.faqs)}
+    </div></div>
+    ${renderCTA(page.nameDe)}`;
+
+  const html = assemblePage({ title: page.title, description: page.description, h1Parts: page.h1Parts, heroSub: page.heroSub, icon: page.icon, content, heroImage, heroCredit });
+  const outPath = path.join(ROOT_DIR, page.file);
+  fs.writeFileSync(outPath, html, 'utf8');
+  return outPath;
+}
+
+async function generateAktivitaetPage(page) {
+  const [pois, climate, image] = await Promise.allSettled([
+    getTopPOIs(page.nameDe, 4),
+    getClimateData(page.climateKey),
+    getUnsplashImage(page.id || page.nameDe.toLowerCase()),
+  ]);
+  const poisData = pois.status === 'fulfilled' ? pois.value : [];
+  const climateData = climate.status === 'fulfilled' ? climate.value : null;
+  const coords = COORDS[page.climateKey] || COORDS[page.nameDe.toLowerCase()] || null;
+  const img = image.status === 'fulfilled' ? image.value : null;
+  const heroImage  = img ? img.url : null;
+  const heroCredit = img ? { name: img.creditName, link: img.creditLink } : null;
+
+  const content = `
+    <div class="section"><div class="container-narrow">
+      <div class="wiki-intro">${escapeHtml(page.aktivitaet)} in ${escapeHtml(page.nameDe)} ist ein Erlebnis der Extraklasse.</div>
+    </div></div>
+    ${coords ? renderMap(coords.lat, coords.lon, page.nameDe) : ''}
+    ${poisData.length > 0 ? renderPOIs(poisData, page.nameDe) : ''}
+    ${climateData ? renderClimateChart(climateData, page.nameDe) : ''}
+    <div class="section"><div class="container-narrow">
+      <h2 class="section-title">✅ Unsere <span>Tipps</span></h2>
+      ${renderTips(page.tips)}
+    </div></div>
+    <div class="section-alt"><div class="container-narrow">
+      <h2 class="section-title">❓ Häufige <span>Fragen</span></h2>
+      ${renderFAQ(page.faqs)}
+    </div></div>
+    ${renderCTA(page.nameDe)}`;
+
+  const html = assemblePage({ title: page.title, description: page.description, h1Parts: page.h1Parts, heroSub: page.heroSub, icon: page.icon, content, heroImage, heroCredit });
+  const outPath = path.join(ROOT_DIR, page.file);
+  fs.writeFileSync(outPath, html, 'utf8');
+  return outPath;
+}
+
+async function generateRegionPage(page) {
+  const [wiki, pois, climate, image] = await Promise.allSettled([
+    getWikipediaSummary(page.nameDe),
+    getTopPOIs(page.nameDe, 5),
+    getClimateData(page.climateKey),
+    getUnsplashImage(page.id || page.nameDe.toLowerCase()),
+  ]);
+  const wikiText = wiki.status === 'fulfilled' ? wiki.value : '';
+  const poisData = pois.status === 'fulfilled' ? pois.value : [];
+  const climateData = climate.status === 'fulfilled' ? climate.value : null;
+  const coords = COORDS[page.climateKey] || COORDS[page.nameDe.toLowerCase()] || null;
+  const img = image.status === 'fulfilled' ? image.value : null;
+  const heroImage  = img ? img.url : null;
+  const heroCredit = img ? { name: img.creditName, link: img.creditLink } : null;
+
+  const content = `
+    <div class="section"><div class="container-narrow">
+      ${wikiText ? `<div class="wiki-intro">${escapeHtml(wikiText)}</div>` : ''}
+    </div></div>
+    ${coords ? renderMap(coords.lat, coords.lon, page.nameDe) : ''}
+    ${poisData.length > 0 ? renderPOIs(poisData, page.nameDe) : ''}
+    ${climateData ? renderClimateChart(climateData, page.nameDe) : ''}
+    <div class="section"><div class="container-narrow">
+      <h2 class="section-title">✅ Reise<span>tipps</span></h2>
+      ${renderTips(page.tips)}
+    </div></div>
+    <div class="section-alt"><div class="container-narrow">
+      <h2 class="section-title">❓ Häufige <span>Fragen</span></h2>
+      ${renderFAQ(page.faqs)}
+    </div></div>
+    ${renderCTA(page.nameDe)}`;
+
+  const html = assemblePage({ title: page.title, description: page.description, h1Parts: page.h1Parts, heroSub: page.heroSub, icon: page.icon, content, heroImage, heroCredit });
+  const outPath = path.join(ROOT_DIR, page.file);
+  fs.writeFileSync(outPath, html, 'utf8');
+  return outPath;
+}
+
+async function generateReisetippsPage(page) {
+  const imgRes = await getUnsplashImage(page.id || page.thema || 'travel').catch(() => null);
+  const heroImage  = imgRes ? imgRes.url : null;
+  const heroCredit = imgRes ? { name: imgRes.creditName, link: imgRes.creditLink } : null;
+  const content = `
+    <div class="section"><div class="container-narrow">
+      <div class="wiki-intro">Gut informiert verreist besser. Hier finden Sie alle wichtigen Informationen zu: <strong>${escapeHtml(page.thema)}</strong>.</div>
+    </div></div>
+    <div class="section-alt"><div class="container-narrow">
+      <h2 class="section-title">✅ Die wichtigsten <span>Tipps</span></h2>
+      ${renderTips(page.tips)}
+    </div></div>
+    <div class="section"><div class="container-narrow">
+      <h2 class="section-title">❓ Häufige <span>Fragen</span></h2>
+      ${renderFAQ(page.faqs)}
+    </div></div>
+    ${renderCTA('Ihrem Traumurlaub')}`;
+
+  const html = assemblePage({ title: page.title, description: page.description, h1Parts: page.h1Parts, heroSub: page.heroSub, icon: page.icon, content, heroImage, heroCredit });
+  const outPath = path.join(ROOT_DIR, page.file);
+  fs.writeFileSync(outPath, html, 'utf8');
+  return outPath;
+}
+
+async function generateVergleichPage(page) {
+  const [c1, imageRes] = await Promise.allSettled([
+    getClimateData(page.dest1.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue')),
+    getUnsplashImage(page.id || page.dest1.toLowerCase()),
+  ]);
+  const climate1 = c1.status === 'fulfilled' ? c1.value : null;
+  const img = imageRes.status === 'fulfilled' ? imageRes.value : null;
+  const heroImage  = img ? img.url : null;
+  const heroCredit = img ? { name: img.creditName, link: img.creditLink } : null;
+  const slug1 = page.dest1.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/\s+/g,'-');
+  const slug2 = page.dest2.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/\s+/g,'-');
+
+  const content = `
+    <div class="section"><div class="container-narrow">
+      <div class="wiki-intro">Wir vergleichen <strong>${escapeHtml(page.dest1)}</strong> und <strong>${escapeHtml(page.dest2)}</strong> direkt – damit Sie die beste Entscheidung treffen können.</div>
+    </div></div>
+    ${climate1 ? renderClimateChart(climate1, page.dest1) : ''}
+    <div class="section"><div class="container-narrow">
+      <h2 class="section-title">✅ Unsere <span>Empfehlungen</span></h2>
+      ${renderTips(page.tips)}
+    </div></div>
+    <div class="section-alt"><div class="container-narrow">
+      <h2 class="section-title">❓ Häufige <span>Fragen</span></h2>
+      ${renderFAQ(page.faqs)}
+    </div></div>
+    <div class="section"><div class="container">
+      <h2 class="section-title">🌍 Direkt zur <span>Destination</span></h2>
+      <div class="dest-tags">
+        <a href="/${escapeHtml(slug1)}.html" class="dest-tag">→ ${escapeHtml(page.dest1)} entdecken</a>
+        <a href="/${escapeHtml(slug2)}.html" class="dest-tag">→ ${escapeHtml(page.dest2)} entdecken</a>
+      </div>
+    </div></div>
+    ${renderCTA(`${page.dest1} oder ${page.dest2}`)}`;
+
+  const html = assemblePage({ title: page.title, description: page.description, h1Parts: page.h1Parts, heroSub: page.heroSub, icon: page.icon, content, heroImage, heroCredit });
   const outPath = path.join(ROOT_DIR, page.file);
   fs.writeFileSync(outPath, html, 'utf8');
   return outPath;
@@ -334,6 +531,11 @@ async function generatePage(page) {
     case 'city':        return generateCityPage(page);
     case 'reisezeit':   return generateReisezeitPage(page);
     case 'thema':       return generateThemaPage(page);
+    case 'hotel':       return generateHotelPage(page);
+    case 'aktivitaet':  return generateAktivitaetPage(page);
+    case 'region':      return generateRegionPage(page);
+    case 'reisetipps':  return generateReisetippsPage(page);
+    case 'vergleich':   return generateVergleichPage(page);
     default:
       console.warn(`[gen] Unknown type "${page.type}" for ${page.file}`);
       return null;
@@ -345,10 +547,15 @@ async function generatePage(page) {
 function normalizePages(pages) {
   return pages.map(p => {
     if (p.type) return p;
-    if (DESTINATION_PAGES.includes(p)) return { ...p, type: 'destination' };
-    if (CITY_PAGES.includes(p))        return { ...p, type: 'city' };
-    if (REISEZEIT_PAGES.includes(p))   return { ...p, type: 'reisezeit' };
-    if (THEMA_PAGES.includes(p))       return { ...p, type: 'thema' };
+    if (DESTINATION_PAGES.includes(p))  return { ...p, type: 'destination' };
+    if (CITY_PAGES.includes(p))         return { ...p, type: 'city' };
+    if (REISEZEIT_PAGES.includes(p))    return { ...p, type: 'reisezeit' };
+    if (THEMA_PAGES.includes(p))        return { ...p, type: 'thema' };
+    if (HOTEL_PAGES.includes(p))        return { ...p, type: 'hotel' };
+    if (AKTIVITAET_PAGES.includes(p))   return { ...p, type: 'aktivitaet' };
+    if (REGION_PAGES.includes(p))       return { ...p, type: 'region' };
+    if (REISETIPPS_PAGES.includes(p))   return { ...p, type: 'reisetipps' };
+    if (VERGLEICH_PAGES.includes(p))    return { ...p, type: 'vergleich' };
     return p;
   });
 }

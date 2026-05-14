@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Changelog – Jetztbuchbar</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 32px 16px;
+    }
+    .container { max-width: 860px; margin: 0 auto; }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header h1 { font-size: 1.6rem; font-weight: 700; color: #fff; }
+    header h1 span { color: #6366f1; }
+    #summary {
+      background: #1e2130;
+      border: 1px solid #2d3148;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+    #summary strong { color: #a5b4fc; }
+    #loading {
+      text-align: center;
+      padding: 60px;
+      color: #64748b;
+      font-size: 1rem;
+    }
+    .date-group { margin-bottom: 32px; }
+    .date-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .date-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #c7d2fe;
+      background: #1e2130;
+      border: 1px solid #3730a3;
+      border-radius: 6px;
+      padding: 4px 12px;
+    }
+    .date-count {
+      font-size: 0.78rem;
+      color: #64748b;
+    }
+    .page-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+    }
+    .page-card {
+      background: #1a1d2e;
+      border: 1px solid #252840;
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .page-card:hover {
+      border-color: #6366f1;
+      background: #1e2038;
+    }
+    .page-card .slug {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      word-break: break-all;
+    }
+    .page-card .path {
+      font-size: 0.72rem;
+      color: #64748b;
+      word-break: break-all;
+    }
+    .page-card .badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+      width: fit-content;
+    }
+    .badge-city    { background: #1d4ed8; color: #bfdbfe; }
+    .badge-country { background: #065f46; color: #a7f3d0; }
+    .badge-reisezeit { background: #7c3aed; color: #ddd6fe; }
+    .badge-hotels  { background: #9a3412; color: #fed7aa; }
+    .badge-themen  { background: #0f766e; color: #99f6e4; }
+    .badge-tipps   { background: #92400e; color: #fef3c7; }
+    .badge-vergleich { background: #4c1d95; color: #ede9fe; }
+    .badge-aktivitaet { background: #1e3a5f; color: #bae6fd; }
+    .badge-other   { background: #374151; color: #d1d5db; }
+    .page-card .time {
+      font-size: 0.65rem;
+      color: #475569;
+    }
+    .page-card a {
+      font-size: 0.72rem;
+      color: #818cf8;
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .page-card a:hover { color: #a5b4fc; text-decoration: underline; }
+    #error {
+      background: #450a0a;
+      border: 1px solid #7f1d1d;
+      border-radius: 8px;
+      padding: 20px;
+      color: #fca5a5;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📋 <span>Jetztbuchbar</span> Changelog</h1>
+      <div id="summary">Lade Daten…</div>
+    </header>
+    <div id="error">⚠️ JSON-Dateien konnten nicht geladen werden. Bitte lokal via Server öffnen (z.B. Live Server).</div>
+    <div id="loading">⏳ Seiten werden geladen…</div>
+    <div id="content"></div>
+  </div>
+
+  <script>
+    const BASE_URL = 'https://jetztbuchbar.de/';
+
+    function getBadge(slug, file) {
+      if (slug.startsWith('reisezeit'))        return ['reisezeit',   '🗓️ Reisezeit'];
+      if (slug.startsWith('hotels'))           return ['hotels',      '🏨 Hotels'];
+      if (file.startsWith('themen/'))          return ['themen',      '🎯 Thema'];
+      if (file.startsWith('tipps/'))           return ['tipps',       '💡 Tipp'];
+      if (file.startsWith('vergleiche/'))      return ['vergleich',   '⚖️ Vergleich'];
+      const aktivitaeten = ['schnorcheln','tauchen','wandern','surfen','wuestensafari','safari'];
+      if (aktivitaeten.some(a => slug.includes(a))) return ['aktivitaet', '🏄 Aktivität'];
+      const cities = ['istanbul','izmir','side','alanya','marmaris','fethiye','cesme',
+                      'kappadokien','pamukkale','kusadasi','antalya','bodrum',
+                      'kreta','santorini','algarve','costa-brava','amalfikueste','bodensee'];
+      if (cities.includes(slug) || (file.match(/\//g)||[]).length >= 2) return ['city', '📍 Stadt'];
+      return ['country', '🌍 Land'];
+    }
+
+    function formatDate(isoStr) {
+      const d = new Date(isoStr);
+      return d.toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+    }
+
+    function formatTime(isoStr) {
+      const d = new Date(isoStr);
+      return d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function dateKey(isoStr) {
+      return isoStr.slice(0, 10); // YYYY-MM-DD
+    }
+
+    function buildURL(file) {
+      return BASE_URL + file.replace('index.html', '');
+    }
+
+    async function load() {
+      try {
+        const [pagesRes, expansionRes] = await Promise.all([
+          fetch('/content-engine/generated-pages.json'),
+          fetch('/content-engine/expansion-tracker.json')
+        ]);
+
+        const pagesData     = await pagesRes.json();
+        const expansionData = await expansionRes.json();
+
+        // Birleştir
+        const all = {};
+        for (const [slug, info] of Object.entries(pagesData)) {
+          all[slug] = { ...info, slug, source: 'pages' };
+        }
+        for (const [slug, info] of Object.entries(expansionData)) {
+          if (!all[slug]) {
+            all[slug] = { ...info, slug, source: 'expansion' };
+          }
+        }
+
+        // Tarihe göre grupla
+        const byDate = {};
+        for (const entry of Object.values(all)) {
+          const key = dateKey(entry.generatedAt);
+          if (!byDate[key]) byDate[key] = [];
+          byDate[key].push(entry);
+        }
+
+        // Tarihleri sırala (en yeni önce)
+        const sortedDates = Object.keys(byDate).sort((a, b) => b.localeCompare(a));
+
+        const totalPages = Object.keys(all).length;
+        document.getElementById('summary').innerHTML =
+          `<strong>${totalPages}</strong> Seiten gesamt · <strong>${sortedDates.length}</strong> ${sortedDates.length === 1 ? 'Tag' : 'Tage'} mit Änderungen`;
+        document.getElementById('loading').style.display = 'none';
+
+        const container = document.getElementById('content');
+        for (const dateStr of sortedDates) {
+          const entries = byDate[dateStr].sort((a, b) =>
+            new Date(a.generatedAt) - new Date(b.generatedAt)
+          );
+
+          const group = document.createElement('div');
+          group.className = 'date-group';
+
+          const header = document.createElement('div');
+          header.className = 'date-header';
+          header.innerHTML = `
+            <span class="date-label">📅 ${formatDate(entries[0].generatedAt)}</span>
+            <span class="date-count">${entries.length} Seite${entries.length !== 1 ? 'n' : ''}</span>
+          `;
+          group.appendChild(header);
+
+          const grid = document.createElement('div');
+          grid.className = 'page-grid';
+
+          for (const entry of entries) {
+            const [badgeClass, badgeLabel] = getBadge(entry.slug, entry.file);
+            const url = buildURL(entry.file);
+            const card = document.createElement('div');
+            card.className = 'page-card';
+            card.innerHTML = `
+              <div class="slug">${entry.slug}</div>
+              <div class="path">${entry.file}</div>
+              <span class="badge badge-${badgeClass}">${badgeLabel}</span>
+              <a href="${url}" target="_blank" rel="noopener">🔗 ${url}</a>
+              <div class="time">⏰ ${formatTime(entry.generatedAt)} Uhr</div>
+            `;
+            grid.appendChild(card);
+          }
+
+          group.appendChild(grid);
+          container.appendChild(group);
+        }
+
+      } catch (err) {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error').style.display = 'block';
+        console.error(err);
+      }
+    }
+
+    load();
+  </script>
+</body>
+</html>

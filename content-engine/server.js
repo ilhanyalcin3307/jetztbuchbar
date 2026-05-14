@@ -576,6 +576,7 @@ async function generateVergleichPage(page) {
 // ── Dispatcher ────────────────────────────────────────────────────────────────
 
 async function generatePage(page) {
+  fs.mkdirSync(path.dirname(path.join(ROOT_DIR, page.file)), { recursive: true });
   switch (page.type) {
     case 'destination': return generateDestinationPage(page);
     case 'city':        return generateCityPage(page);

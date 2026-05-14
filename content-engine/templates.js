@@ -560,7 +560,6 @@ function assemblePage(opts) {
 <body>
   ${renderHeader()}
   <div class="hero"${heroStyle}>
-    <span class="hero-icon">${icon || ''}</span>
     <h1>${h1Html}</h1>
     <p class="hero-sub">${escapeHtml(heroSub)}</p>
   </div>

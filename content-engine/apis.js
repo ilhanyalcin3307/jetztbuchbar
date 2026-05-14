@@ -186,6 +186,19 @@ const COORDS = {
   'costa brava':  { lat: 41.90, lon: 3.10 },
   bodensee:       { lat: 47.64, lon: 9.32 },
   amalfi:         { lat: 40.63, lon: 14.60 },
+  // Italien – neue Städte
+  italien:        { lat: 41.87, lon: 12.57 },
+  rom:            { lat: 41.90, lon: 12.49 },
+  venedig:        { lat: 45.44, lon: 12.33 },
+  florenz:        { lat: 43.77, lon: 11.26 },
+  sizilien:       { lat: 37.60, lon: 14.02 },
+  mailand:        { lat: 45.46, lon: 9.19 },
+  // Frankreich – neue Städte
+  frankreich:     { lat: 46.23, lon: 2.21 },
+  paris:          { lat: 48.86, lon: 2.35 },
+  nizza:          { lat: 43.71, lon: 7.26 },
+  marseille:      { lat: 43.30, lon: 5.37 },
+  'côte d\'azur': { lat: 43.60, lon: 7.10 },
   // Türkei – neue Städte
   marmaris:       { lat: 36.85, lon: 28.27 },
   fethiye:        { lat: 36.62, lon: 29.11 },

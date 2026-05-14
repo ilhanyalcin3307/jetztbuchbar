@@ -83,14 +83,22 @@ async function getTopPOIs(destinationName, limit = 5) {
 
   const { lat, lon } = geo;
 
-  // Step 2: Fetch POIs (radius 20km, interesting_places category)
-  const radius = 20000;
-  const poisUrl = `https://api.opentripmap.com/0.1/en/places/radius?radius=${radius}&lon=${lon}&lat=${lat}&kinds=interesting_places&limit=${limit}&format=json&apikey=${OPENTRIPMAP_KEY}`;
+  // Step 2: Fetch POIs — only high-interest places (rate=3), broad cultural categories
+  // Fetch more than needed so we can filter by those with Wikipedia images
+  const radius = 15000;
+  const fetchLimit = Math.min(limit * 4, 20);
+  const poisUrl = `https://api.opentripmap.com/0.1/en/places/radius?radius=${radius}&lon=${lon}&lat=${lat}&kinds=cultural,architecture,historic,natural,museums,religion&rate=3&limit=${fetchLimit}&format=json&apikey=${OPENTRIPMAP_KEY}`;
   const pois = await safeFetch(poisUrl, `OTM-pois:${destinationName}`);
-  if (!Array.isArray(pois)) return [];
+  if (!Array.isArray(pois) || !pois.length) {
+    // Fallback: broader search with rate=2
+    const fallbackUrl = `https://api.opentripmap.com/0.1/en/places/radius?radius=${radius}&lon=${lon}&lat=${lat}&kinds=interesting_places&rate=2&limit=${fetchLimit}&format=json&apikey=${OPENTRIPMAP_KEY}`;
+    const fallback = await safeFetch(fallbackUrl, `OTM-pois-fallback:${destinationName}`);
+    if (!Array.isArray(fallback)) return [];
+    pois.push(...fallback);
+  }
 
   const filtered = pois
-    .filter(p => p.name && p.name.trim())
+    .filter(p => p.name && p.name.trim().length > 2)
     .map(p => ({
       name: p.name,
       kinds: p.kinds ? p.kinds.split(',')[0] : '',
@@ -101,10 +109,14 @@ async function getTopPOIs(destinationName, limit = 5) {
   const thumbResults = await Promise.allSettled(
     filtered.map(p => getWikipediaThumbnail(p.name))
   );
-  return filtered.map((p, i) => ({
-    ...p,
-    image: thumbResults[i].status === 'fulfilled' ? thumbResults[i].value : null,
-  }));
+  const withImage = [];
+  const withoutImage = [];
+  filtered.forEach((p, i) => {
+    const img = thumbResults[i].status === 'fulfilled' ? thumbResults[i].value : null;
+    (img ? withImage : withoutImage).push({ ...p, image: img });
+  });
+  // Prioritize POIs that have a Wikipedia image, then fill up with the rest
+  return [...withImage, ...withoutImage].slice(0, limit);
 }
 
 // ── Open-Meteo ────────────────────────────────────────────────────────────────

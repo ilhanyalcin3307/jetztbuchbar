@@ -3,14 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JetztBuchbar.de – Reisen &amp; Urlaub günstig buchen</title>
-  <meta name="description" content="Finde die besten Reiseangebote für deinen Traumurlaub. Türkei, Spanien, Griechenland und mehr – jetzt vergleichen und buchen." />
+  <title>JetztBuchbar.de – Flüge &amp; Hotels günstig buchen</title>
+  <meta name="description" content="Flüge und Hotels direkt vergleichen und günstig buchen. Top Reiseangebote für Türkei, Spanien, Griechenland und weltweit – sofort buchbar." />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="JetztBuchbar.de – Reisen &amp; Urlaub günstig buchen" />
-  <meta property="og:description" content="Finde die besten Reiseangebote für deinen Traumurlaub. Türkei, Spanien, Griechenland und mehr – jetzt vergleichen und buchen." />
+  <meta property="og:title" content="JetztBuchbar.de – Flüge &amp; Hotels günstig buchen" />
+  <meta property="og:description" content="Flüge und Hotels direkt vergleichen und günstig buchen. Sofort buchbar." />
   <meta property="og:url" content="https://www.jetztbuchbar.de/" />
   <meta property="og:type" content="website" />
+
+  <!-- Travelpayouts WL -->
+  <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
+  (function () {
+        var script = document.createElement("script");
+        script.async = 1;
+        script.type = "module";
+        script.src = "https://tpemb.com/wl_web/main.js?wl_id=17471";
+        document.head.appendChild(script);
+      })();
+</script>
 
   <style>
     *, *::before, *::after {
@@ -22,7 +33,6 @@
     :root {
       --bg: #0a0a0a;
       --bg-card: #121212;
-      --bg-card-hover: #181818;
       --accent: #00c896;
       --accent-dark: #00a87e;
       --text: #f0f0f0;
@@ -31,9 +41,7 @@
       --radius: 12px;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
@@ -43,22 +51,19 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
-    /* ── HEADER ──────────────────────────────────────────── */
+    /* ── HEADER ── */
     header {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 clamp(1.25rem, 5vw, 3rem);
       height: 64px;
-      background: rgba(10, 10, 10, 0.85);
+      background: rgba(10,10,10,0.88);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
@@ -71,10 +76,7 @@
       color: var(--accent);
     }
 
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
+    nav { display: flex; gap: 2rem; }
 
     nav a {
       font-size: 0.9rem;
@@ -83,343 +85,90 @@
       transition: color 0.2s;
     }
 
-    nav a:hover {
-      color: var(--accent);
-    }
+    nav a:hover { color: var(--accent); }
 
-    /* ── HERO ────────────────────────────────────────────── */
+    /* ── HERO ── */
     .hero {
       position: relative;
-      overflow: hidden;
-      padding: clamp(6rem, 14vw, 11rem) clamp(1.25rem, 5vw, 3rem);
+      padding: clamp(4rem, 10vw, 7rem) clamp(1.25rem, 5vw, 3rem) 0;
       text-align: center;
       background-image:
-        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
-        url('https://images.unsplash.com/photo-1563784462386-044fd95e9852?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NDgzMDd8MHwxfHNlYXJjaHwxfHx0cmF2ZWwlMjB3b3JsZCUyMHZhY2F0aW9uJTIwc3VtbWVyJTIwYmVhY2h8ZW58MHwwfHx8MTc3ODUxOTAwN3ww&ixlib=rb-4.1.0&q=80&w=1920');
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75) 60%, #0a0a0a 100%),
+        url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920&q=75');
       background-size: cover;
-      background-position: center;
+      background-position: center 40%;
     }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(0,200,150,0.08) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .hero-photo-credit {
-      position: absolute;
-      bottom: 0.5rem;
-      right: clamp(1.25rem, 5vw, 3rem);
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.45);
-    }
-    .hero-photo-credit a {
-      color: inherit;
-      text-decoration: underline;
-    }
-    .hero-photo-credit a:hover { color: rgba(255,255,255,0.75); }
+    .hero-text { margin-bottom: clamp(2rem, 4vw, 3rem); }
 
     .hero h1 {
-      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      font-size: clamp(2rem, 5vw, 3.6rem);
       font-weight: 900;
       letter-spacing: -1.5px;
       line-height: 1.1;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
     }
 
-    .hero h1 span {
-      color: var(--accent);
-    }
+    .hero h1 span { color: var(--accent); }
 
     .hero p {
-      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
       color: var(--text-muted);
-      max-width: 560px;
-      margin: 0 auto 2.5rem;
+      max-width: 520px;
+      margin: 0 auto;
     }
 
-    .btn-primary {
-      display: inline-block;
-      padding: 0.85rem 2.2rem;
-      background: var(--accent);
-      color: #000;
-      font-weight: 700;
-      font-size: 1rem;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 0 24px rgba(0,200,150,0.35);
+    /* ── WIDGET ── */
+    /*
+      Kein overflow:hidden, kein festes height –
+      das Widget bestimmt seine Höhe selbst.
+    */
+    .widget-wrap {
+      max-width: 1060px;
+      margin: 0 auto;
     }
 
-    .btn-primary:hover {
-      background: var(--accent-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 0 36px rgba(0,200,150,0.5);
+    #tpwl-search {
+      position: relative;
+      z-index: 10;
     }
 
-    .btn-primary:active {
-      transform: translateY(0);
+    /* Ergebnisse fließen hier nahtlos nach unten */
+    .widget-results {
+      background: var(--bg);
+      padding-bottom: clamp(2rem, 5vw, 4rem);
     }
 
-    /* ── SECTION SHARED ──────────────────────────────────── */
-    section {
-      padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3rem);
+    #tpwl-tickets {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
     }
 
-    .section-title {
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .section-title span {
-      color: var(--accent);
-    }
-
-    /* ── FEATURES ────────────────────────────────────────── */
-    .features {
+    /* ── INFO-STREIFEN ── */
+    .info-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem 3rem;
+      padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 5vw, 3rem);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       background: #0d0d0d;
     }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem 1.75rem;
-      transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
-    }
-
-    .feature-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 32px rgba(0,200,150,0.1);
-    }
-
-    .feature-icon {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .feature-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .feature-card p {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      flex: 1;
-    }
-
-    .feature-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-top: 1.25rem;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.03em;
-    }
-
-    .feature-card:hover .feature-cta {
-      gap: 0.7rem;
-    }
-
-    .feature-cta svg {
-      transition: transform 0.2s;
-    }
-
-    .feature-card:hover .feature-cta svg {
-      transform: translateX(3px);
-    }
-
-    /* ── DESTINATIONS ────────────────────────────────────── */
-    .destinations-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.25rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .dest-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .dest-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 32px rgba(0,200,150,0.12);
-    }
-
-    .dest-thumb {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      display: block;
-      background: #1a1a1a;
-      transition: transform 0.4s ease;
-    }
-
-    .dest-card:hover .dest-thumb {
-      transform: scale(1.05);
-    }
-
-    .dest-thumb-wrap {
-      overflow: hidden;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .dest-thumb-fallback {
-      width: 100%;
-      height: 150px;
+    .info-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #141414, #1e1e1e);
-    }
-
-    .dest-card-body {
-      padding: 1.25rem 1.25rem 1.4rem;
-      text-align: center;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .dest-flag {
-      font-size: 2rem;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    .dest-card h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-    }
-
-    .dest-card p {
-      font-size: 0.83rem;
-      color: var(--text-muted);
-      flex: 1;
-    }
-
-    .dest-badge {
-      display: inline-block;
-      margin-top: 0.75rem;
-      padding: 0.22rem 0.75rem;
-      background: rgba(0,200,150,0.1);
-      color: var(--accent);
-      border: 1px solid rgba(0,200,150,0.25);
-      border-radius: 50px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    /* ── SIGNUP ──────────────────────────────────────────── */
-    .signup {
-      background:
-        radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0,200,150,0.07) 0%, transparent 70%),
-        #0d0d0d;
-    }
-
-    .signup-inner {
-      max-width: 540px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .signup-inner p {
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-      font-size: 1rem;
-    }
-
-    .signup-form {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .signup-form input[type="email"] {
-      flex: 1 1 240px;
-      padding: 0.85rem 1.25rem;
-      border-radius: 50px;
-      border: 1px solid var(--border);
-      background: #161616;
-      color: var(--text);
-      font-size: 0.95rem;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .signup-form input[type="email"]:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0,200,150,0.15);
-    }
-
-    .signup-form input[type="email"]::placeholder {
+      gap: 0.6rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
     }
 
-    .signup-form button {
-      padding: 0.85rem 1.8rem;
-      background: var(--accent);
-      color: #000;
-      font-weight: 700;
-      font-size: 0.95rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: background 0.2s, transform 0.15s;
-      white-space: nowrap;
-    }
+    .info-item span:first-child { font-size: 1.4rem; }
+    .info-item strong { color: var(--text); }
 
-    .signup-form button:hover {
-      background: var(--accent-dark);
-      transform: translateY(-2px);
-    }
-
-    .signup-form button:active {
-      transform: translateY(0);
-    }
-
-    /* ── FOOTER ──────────────────────────────────────────── */
+    /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
       padding: 1.75rem clamp(1.25rem, 5vw, 3rem);
@@ -437,10 +186,7 @@
       gap: 1.25rem;
     }
 
-    .footer-left span {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
+    .footer-left span { font-size: 0.85rem; color: var(--text-muted); }
 
     .footer-left a {
       font-size: 0.85rem;
@@ -448,14 +194,9 @@
       transition: color 0.2s;
     }
 
-    .footer-left a:hover {
-      color: var(--accent);
-    }
+    .footer-left a:hover { color: var(--accent); }
 
-    .footer-social {
-      display: flex;
-      gap: 0.75rem;
-    }
+    .footer-social { display: flex; gap: 0.75rem; }
 
     .social-icon {
       width: 36px;
@@ -469,7 +210,6 @@
       font-size: 0.85rem;
       color: var(--text-muted);
       transition: border-color 0.2s, color 0.2s, background 0.2s;
-      cursor: pointer;
     }
 
     .social-icon:hover {
@@ -478,31 +218,11 @@
       background: rgba(0,200,150,0.08);
     }
 
-    /* ── RESPONSIVE ──────────────────────────────────────── */
+    /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
-      nav {
-        gap: 1.25rem;
-      }
-
-      .hero h1 {
-        letter-spacing: -0.75px;
-      }
-
-      .signup-form {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .signup-form input[type="email"],
-      .signup-form button {
-        width: 100%;
-        flex: none;
-      }
-
-      footer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      nav { gap: 1.25rem; }
+      .hero h1 { letter-spacing: -0.75px; }
+      footer { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -510,591 +230,57 @@
 
   <!-- ── HEADER ── -->
   <header>
-    <a href="#" class="logo">JetztBuchbar</a>
+    <a href="/" class="logo">JetztBuchbar</a>
     <nav>
-      <a href="#angebote">Angebote</a>
-      <a href="#destinationen">Destinationen</a>
-      <a href="ueber-uns.html">Über uns</a>
-      <a href="#kontakt">Kontakt</a>
+      <a href="/tuerkei/">Türkei</a>
+      <a href="/griechenland/">Griechenland</a>
+      <a href="/spanien/">Spanien</a>
+      <a href="/ueber-uns.html">Über uns</a>
     </nav>
   </header>
 
-  <!-- ── HERO ── -->
-  <section class="hero" id="start">
-    <h1>Dein Traumurlaub.<br /><span>Jetzt buchbar.</span></h1>
-    <p>Die besten Reiseangebote für Deutschland, Österreich und die Schweiz</p>
-    <a href="#angebote" class="btn-primary">Angebote entdecken</a>
-    <p class="hero-photo-credit">Foto: <a href="https://unsplash.com/@iamdavid_10?utm_source=jetztbuchbar&utm_medium=referral" target="_blank" rel="noopener noreferrer">David Švihovec</a> / <a href="https://unsplash.com?utm_source=jetztbuchbar&utm_medium=referral" target="_blank" rel="noopener noreferrer">Unsplash</a></p>
-  </section>
-
-  <!-- ── FEATURES ── -->
-  <!-- ── BOOKING WIDGET ── -->
-  <section id="angebote" style="padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 3rem); background: #0d0d0d;">
-    <div style="max-width: 1100px; margin: 0 auto;">
-      <h2 class="section-title" style="text-align:center; margin-bottom: 1.75rem;">Jetzt <span>Angebot finden</span></h2>
-      <div style="border-radius: 14px; overflow: hidden; border: 1px solid #1e1e1e; background: #111;">
-        <script async src="https://tpemb.com/content?trs=218201&shmarker=420168&tab=H%2CFH%2CCA&background=1&overlay=000000&button_color=FFCB00&target=2&powered_by=false&campaign_id=594&promo_id=8682" charset="utf-8"></script>
-      </div>
+  <!-- ── HERO + SUCHMASKE ── -->
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Flüge &amp; Hotels<br /><span>direkt buchen.</span></h1>
+      <p>Hunderte Airlines und Hotels – vergleichen, auswählen, sofort buchen.</p>
     </div>
-  </section>
-
-  <section class="features" id="warum-jetztbuchbar">
-    <h2 class="section-title">Warum <span>JetztBuchbar</span>?</h2>
-    <div class="features-grid">
-      <a href="tipps/guenstig-fliegen/" class="feature-card">
-        <span class="feature-icon">✈️</span>
-        <h3>Beste Preise</h3>
-        <p>Vergleiche hunderte Angebote auf einen Blick und finde immer den günstigsten Preis für deinen Urlaub.</p>
-        <span class="feature-cta">Spartipps lesen <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </a>
-      <a href="#destinationen" class="feature-card">
-        <span class="feature-icon">🌍</span>
-        <h3>Top Destinationen</h3>
-        <p>Türkei, Spanien, Griechenland und mehr – entdecke die beliebtesten Reiseziele Europas und darüber hinaus.</p>
-        <span class="feature-cta">Alle Reiseziele <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </a>
-      <a href="mailto:sales@jetztbuchbar.de?subject=Urlaubsangebot anfragen" class="feature-card">
-        <span class="feature-icon">⚡</span>
-        <h3>Sofort buchbar</h3>
-        <p>Schnell, einfach und sicher buchen – in wenigen Minuten zum Traumurlaub, ohne Umwege.</p>
-        <span class="feature-cta">Angebot anfragen <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </a>
+    <div class="widget-wrap">
+      <div id="tpwl-search"></div>
     </div>
-  </section>
+  </div>
 
-  <!-- ── DESTINATIONS ── -->
-  <section id="destinationen">
-    <h2 class="section-title">Beliebte <span>Reiseziele</span></h2>
-    <div class="destinations-grid">
-      <a href="tuerkei/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1651160020454-e4e47579da6a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Türkei Strand" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇹🇷</span>
-          <h3>Türkei</h3>
-          <p>Antalya, Istanbul, Bodrum</p>
-          <span class="dest-badge">Ab 299 €</span>
-        </div>
-      </a>
-      <a href="spanien/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1509304890243-11f891c4270c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Spanien Meer" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇪🇸</span>
-          <h3>Spanien</h3>
-          <p>Mallorca, Teneriffa, Barcelona</p>
-          <span class="dest-badge">Ab 249 €</span>
-        </div>
-      </a>
-      <a href="griechenland/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1622778859697-e9eec6e1743e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Griechenland Santorini" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇬🇷</span>
-          <h3>Griechenland</h3>
-          <p>Kreta, Santorini, Rhodos</p>
-          <span class="dest-badge">Ab 279 €</span>
-        </div>
-      </a>
-      <a href="aegypten/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1618582240632-1937f4c91d7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Ägypten Rotes Meer" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇪🇬</span>
-          <h3>Ägypten</h3>
-          <p>Hurghada, Sharm el-Sheikh</p>
-          <span class="dest-badge">Ab 389 €</span>
-        </div>
-      </a>
-      <a href="marokko/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1663167529628-4050fc9a15f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Marokko Landschaft" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇲🇦</span>
-          <h3>Marokko</h3>
-          <p>Marrakesch, Agadir, Essaouira</p>
-          <span class="dest-badge">Ab 349 €</span>
-        </div>
-      </a>
-      <a href="dubai/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1647886056843-d2fc10e57cd4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Dubai Skyline" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇦🇪</span>
-          <h3>Dubai</h3>
-          <p>Burj Khalifa, JBR Beach, Wüste</p>
-          <span class="dest-badge">Ab 549 €</span>
-        </div>
-      </a>
-      <a href="kroatien/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1612621450155-a574ebb71f9e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Kroatien Küste" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇭🇷</span>
-          <h3>Kroatien</h3>
-          <p>Dubrovnik, Split, Hvar</p>
-          <span class="dest-badge">Ab 329 €</span>
-        </div>
-      </a>
-      <a href="portugal/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1630163263856-8652d9e78194?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Portugal Landschaft" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇵🇹</span>
-          <h3>Portugal</h3>
-          <p>Lissabon, Algarve, Porto</p>
-          <span class="dest-badge">Ab 299 €</span>
-        </div>
-      </a>
-      <a href="tunesien/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1556011572-b9c800494766?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Tunesien Strand" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇹🇳</span>
-          <h3>Tunesien</h3>
-          <p>Djerba, Hammamet, Sousse</p>
-          <span class="dest-badge">Ab 279 €</span>
-        </div>
-      </a>
-      <a href="bulgarien/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1683653417446-0c7009151621?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Bulgarien Strand" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇧🇬</span>
-          <h3>Bulgarien</h3>
-          <p>Sonnenstrand, Sofia, Varna</p>
-          <span class="dest-badge">Ab 199 €</span>
-        </div>
-      </a>
-      <a href="malta/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1730190206154-66bf41958e62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Malta Mittelmeer" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇲🇹</span>
-          <h3>Malta</h3>
-          <p>Valletta, Gozo, Blue Lagoon</p>
-          <span class="dest-badge">Ab 319 €</span>
-        </div>
-      </a>
-      <a href="zypern/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1664993118495-6647529d58d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Zypern Strand" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇨🇾</span>
-          <h3>Zypern</h3>
-          <p>Paphos, Ayia Napa, Limassol</p>
-          <span class="dest-badge">Ab 309 €</span>
-        </div>
-      </a>
-      <a href="kap-verde/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1621944668311-7a97c80f0190?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Kap Verde Strand" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇨🇻</span>
-          <h3>Kap Verde</h3>
-          <p>Sal, Boa Vista, Santiago</p>
-          <span class="dest-badge">Ab 499 €</span>
-        </div>
-      </a>
-      <a href="jordanien/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1662747974561-f2f5ea3825a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Jordanien Petra" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🇯🇴</span>
-          <h3>Jordanien</h3>
-          <p>Petra, Wadi Rum, Totes Meer</p>
-          <span class="dest-badge">Ab 449 €</span>
-        </div>
-      </a>
-    </div>
-  </section>
+  <!-- ── SUCHERGEBNISSE (expandieren nach unten) ── -->
+  <div class="widget-results">
+    <div id="tpwl-tickets"></div>
+  </div>
 
-  <!-- ── THEMEN ── -->
-  <section id="themen">
-    <h2 class="section-title">Reisen nach <span>Thema</span></h2>
-    <div class="destinations-grid">
-      <a href="themen/last-minute/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1724862473431-b811086538d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Last Minute Urlaub" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">⚡</span>
-          <h3>Last Minute</h3>
-          <p>Spontan verreisen & sparen</p>
-          <span class="dest-badge">Jetzt sparen</span>
-        </div>
-      </a>
-      <a href="themen/all-inclusive/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1597172173960-b8da219af0ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="All Inclusive Hotel" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🍹</span>
-          <h3>All Inclusive</h3>
-          <p>Rundum-sorglos-Urlaub</p>
-          <span class="dest-badge">Top Resorts</span>
-        </div>
-      </a>
-      <a href="themen/urlaub-mit-kindern/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1724862473431-b811086538d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Familienurlaub am Strand" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">👨‍👩‍👧‍👦</span>
-          <h3>Familienurlaub</h3>
-          <p>Urlaub mit Kindern</p>
-          <span class="dest-badge">Familientipps</span>
-        </div>
-      </a>
-      <a href="themen/flitterwochen/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1621944668311-7a97c80f0190?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Flitterwochen Strand" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">💑</span>
-          <h3>Flitterwochen</h3>
-          <p>Romantische Traumziele</p>
-          <span class="dest-badge">Traumreise</span>
-        </div>
-      </a>
+  <!-- ── INFO-STREIFEN ── -->
+  <div class="info-bar">
+    <div class="info-item">
+      <span>✈️</span>
+      <span><strong>Hunderte Airlines</strong> im Vergleich</span>
     </div>
-  </section>
-
-  <!-- ── STÄDTE ── -->
-  <section id="staedte">
-    <h2 class="section-title">Beliebte <span>Städte & Regionen</span></h2>
-    <div class="destinations-grid">
-      <a href="tuerkei/antalya/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1648644769787-6e4f77f26703?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Antalya" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🌊</span>
-          <h3>Antalya</h3>
-          <p>Türkische Riviera</p>
-          <span class="dest-badge">Strandurlaub</span>
-        </div>
-      </a>
-      <a href="tuerkei/bodrum/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1591078314943-85c674b3789b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Bodrum" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">⛵</span>
-          <h3>Bodrum</h3>
-          <p>Ägäis, Türkei</p>
-          <span class="dest-badge">Exklusiv</span>
-        </div>
-      </a>
-      <a href="griechenland/kreta/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1558870964-72e29d300edd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Kreta" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🏔️</span>
-          <h3>Kreta</h3>
-          <p>Heraklion, Chania, Elounda</p>
-          <span class="dest-badge">Griechenland</span>
-        </div>
-      </a>
-      <a href="griechenland/santorini/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1664112115778-0ed2f2da97e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Santorini" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🌅</span>
-          <h3>Santorini</h3>
-          <p>Oia, Fira, Perissa</p>
-          <span class="dest-badge">Romantisch</span>
-        </div>
-      </a>
-      <a href="portugal/algarve/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1658437192420-13cd43bbe2bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Algarve" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🏖️</span>
-          <h3>Algarve</h3>
-          <p>Lagos, Albufeira, Faro</p>
-          <span class="dest-badge">Portugal</span>
-        </div>
-      </a>
-      <a href="spanien/costa-brava/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1767622656415-e07aac72bda4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Costa Brava" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🌞</span>
-          <h3>Costa Brava</h3>
-          <p>Lloret, Tossa de Mar, Girona</p>
-          <span class="dest-badge">Spanien</span>
-        </div>
-      </a>
-      <a href="deutschland/bodensee/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1767731415424-00a0eb1a7f18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Bodensee" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🏞️</span>
-          <h3>Bodensee</h3>
-          <p>Konstanz, Lindau, Bregenz</p>
-          <span class="dest-badge">Deutschland</span>
-        </div>
-      </a>
-      <a href="italien/amalfikueste/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1657920941055-75b08c891143?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Amalfiküste" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🍋</span>
-          <h3>Amalfiküste</h3>
-          <p>Positano, Amalfi, Ravello</p>
-          <span class="dest-badge">Italien</span>
-        </div>
-      </a>
+    <div class="info-item">
+      <span>🏨</span>
+      <span><strong>Hotels &amp; Resorts</strong> weltweit</span>
     </div>
-  </section>
-
-  <!-- ── BESTE REISEZEITEN ── -->
-  <section id="reisezeiten">
-    <h2 class="section-title">Beste <span>Reisezeit</span> – wann reisen?</h2>
-    <div class="destinations-grid">
-      <a href="tuerkei/reisezeit/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1694712646806-ec213a1005af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Reisezeit Türkei" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🗓️</span>
-          <h3>Türkei</h3>
-          <p>Beste Reisezeit</p>
-          <span class="dest-badge">Reisezeit</span>
-        </div>
-      </a>
-      <a href="spanien/reisezeit/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1589667882371-a531d1db0987?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Reisezeit Spanien" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🗓️</span>
-          <h3>Spanien</h3>
-          <p>Beste Reisezeit</p>
-          <span class="dest-badge">Reisezeit</span>
-        </div>
-      </a>
-      <a href="griechenland/reisezeit/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1668691030690-ffa1bfb4ed6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Reisezeit Griechenland" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🗓️</span>
-          <h3>Griechenland</h3>
-          <p>Beste Reisezeit</p>
-          <span class="dest-badge">Reisezeit</span>
-        </div>
-      </a>
-      <a href="aegypten/reisezeit/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1639752652780-be701b9d8def?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Reisezeit Ägypten" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🗓️</span>
-          <h3>Ägypten</h3>
-          <p>Beste Reisezeit</p>
-          <span class="dest-badge">Reisezeit</span>
-        </div>
-      </a>
-      <a href="marokko/reisezeit/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1663167529628-4050fc9a15f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Reisezeit Marokko" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🗓️</span>
-          <h3>Marokko</h3>
-          <p>Beste Reisezeit</p>
-          <span class="dest-badge">Reisezeit</span>
-        </div>
-      </a>
-      <a href="dubai/reisezeit/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1647886056843-d2fc10e57cd4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Reisezeit Dubai" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🗓️</span>
-          <h3>Dubai</h3>
-          <p>Beste Reisezeit</p>
-          <span class="dest-badge">Reisezeit</span>
-        </div>
-      </a>
-      <a href="portugal/reisezeit/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1630163263856-8652d9e78194?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Reisezeit Portugal" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🗓️</span>
-          <h3>Portugal</h3>
-          <p>Beste Reisezeit</p>
-          <span class="dest-badge">Reisezeit</span>
-        </div>
-      </a>
-      <a href="malta/reisezeit/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1730190206154-66bf41958e62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Reisezeit Malta" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🗓️</span>
-          <h3>Malta</h3>
-          <p>Beste Reisezeit</p>
-          <span class="dest-badge">Reisezeit</span>
-        </div>
-      </a>
+    <div class="info-item">
+      <span>💶</span>
+      <span><strong>Günstigster Preis</strong> garantiert</span>
     </div>
-  </section>
-
-  <!-- ── HOTELS ── -->
-  <section id="hotels">
-    <h2 class="section-title">Top <span>Hotels</span> im Überblick</h2>
-    <div class="destinations-grid">
-      <a href="tuerkei/hotels-antalya/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1730196568851-382fa149eaa3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Hotels Antalya" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🏨</span>
-          <h3>Hotels Antalya</h3>
-          <p>Bestbewertete Resorts</p>
-          <span class="dest-badge">Türkei</span>
-        </div>
-      </a>
-      <a href="dubai/hotels-dubai/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1597172173960-b8da219af0ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Hotels Dubai" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🏨</span>
-          <h3>Hotels Dubai</h3>
-          <p>Luxus am Persischen Golf</p>
-          <span class="dest-badge">Luxus</span>
-        </div>
-      </a>
-      <a href="griechenland/hotels-kreta/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1663529472561-a6ea9e09369a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Hotels Kreta" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🏨</span>
-          <h3>Hotels Kreta</h3>
-          <p>Griechische Gastfreundschaft</p>
-          <span class="dest-badge">Griechenland</span>
-        </div>
-      </a>
-      <a href="spanien/hotels-mallorca/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1623068769255-923b5307dd7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Hotels Mallorca" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🏨</span>
-          <h3>Hotels Mallorca</h3>
-          <p>Strand & Komfort</p>
-          <span class="dest-badge">Spanien</span>
-        </div>
-      </a>
-      <a href="portugal/hotels-lissabon/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1531911120215-9f628dc6e9fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Hotels Lissabon" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🏨</span>
-          <h3>Hotels Lissabon</h3>
-          <p>Charme & Flair</p>
-          <span class="dest-badge">Portugal</span>
-        </div>
-      </a>
+    <div class="info-item">
+      <span>🔒</span>
+      <span><strong>Sichere</strong> Buchung</span>
     </div>
-  </section>
-
-  <!-- ── AKTIVITÄTEN ── -->
-  <section id="aktivitaeten">
-    <h2 class="section-title">Aktivurlaub & <span>Erlebnisse</span></h2>
-    <div class="destinations-grid">
-      <a href="griechenland/schnorcheln-kreta/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1467044705596-744699fa8931?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Schnorcheln Kreta" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🤿</span>
-          <h3>Schnorcheln Kreta</h3>
-          <p>Kristallklares Wasser</p>
-          <span class="dest-badge">Wassersport</span>
-        </div>
-      </a>
-      <a href="malta/tauchen/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1730190206154-66bf41958e62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Tauchen Malta" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🤿</span>
-          <h3>Tauchen Malta</h3>
-          <p>Unterwasserwelten</p>
-          <span class="dest-badge">Tauchen</span>
-        </div>
-      </a>
-      <a href="dubai/wuestensafari/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1638024510305-c36fcc0bf3b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Wüstensafari Dubai" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🐪</span>
-          <h3>Wüstensafari Dubai</h3>
-          <p>Abenteuer in der Wüste</p>
-          <span class="dest-badge">Abenteuer</span>
-        </div>
-      </a>
-      <a href="kroatien/wandern/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1700571552167-49641e9e026e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Wandern Kroatien" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🥾</span>
-          <h3>Wandern Kroatien</h3>
-          <p>Nationalparks & Natur</p>
-          <span class="dest-badge">Natur</span>
-        </div>
-      </a>
-      <a href="kap-verde/surfen/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1651666990398-5585ad2c9eac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Surfen Kap Verde" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🏄</span>
-          <h3>Surfen Kap Verde</h3>
-          <p>Atlantische Wellen</p>
-          <span class="dest-badge">Surfen</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ── REISETIPPS ── -->
-  <section id="reisetipps">
-    <h2 class="section-title">Nützliche <span>Reisetipps</span></h2>
-    <div class="destinations-grid">
-      <a href="tipps/handgepaeck/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1506253413221-3a168cc7b3b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Handgepäck Regeln" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🧳</span>
-          <h3>Handgepäck Regeln</h3>
-          <p>Alles was erlaubt ist</p>
-          <span class="dest-badge">Ratgeber</span>
-        </div>
-      </a>
-      <a href="tipps/reiseversicherung/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1565084247761-48f601e1b5ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Reiseversicherung" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">🛡️</span>
-          <h3>Reiseversicherung</h3>
-          <p>Sicher unterwegs</p>
-          <span class="dest-badge">Vergleich</span>
-        </div>
-      </a>
-      <a href="tipps/packliste/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1712256663682-3287af4e920e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Packliste Sommerurlaub" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">📋</span>
-          <h3>Packliste</h3>
-          <p>Sommerurlaub Checkliste</p>
-          <span class="dest-badge">Checkliste</span>
-        </div>
-      </a>
-      <a href="tipps/guenstig-fliegen/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1506253413221-3a168cc7b3b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Günstig fliegen" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">✈️</span>
-          <h3>Günstig fliegen</h3>
-          <p>Spartipps für Flüge</p>
-          <span class="dest-badge">Spartipps</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ── VERGLEICHE ── -->
-  <section id="vergleiche">
-    <h2 class="section-title">Reiseziel <span>Vergleich</span></h2>
-    <div class="destinations-grid">
-      <a href="vergleiche/tuerkei-vs-aegypten/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1651160020454-e4e47579da6a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Türkei vs Ägypten" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">⚖️</span>
-          <h3>Türkei vs. Ägypten</h3>
-          <p>Der große Vergleich</p>
-          <span class="dest-badge">Vergleich</span>
-        </div>
-      </a>
-      <a href="vergleiche/mallorca-vs-kreta/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1509304890243-11f891c4270c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Mallorca vs Kreta" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">⚖️</span>
-          <h3>Mallorca vs. Kreta</h3>
-          <p>Mediterrane Inseln</p>
-          <span class="dest-badge">Vergleich</span>
-        </div>
-      </a>
-      <a href="vergleiche/dubai-vs-abu-dhabi/" class="dest-card">
-        <div class="dest-thumb-wrap"><img class="dest-thumb" src="https://images.unsplash.com/photo-1606138369267-ff17948d119c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=400&q=70" alt="Dubai vs Abu Dhabi" loading="lazy" /></div>
-        <div class="dest-card-body">
-          <span class="dest-flag">⚖️</span>
-          <h3>Dubai vs. Abu Dhabi</h3>
-          <p>Emirate im Vergleich</p>
-          <span class="dest-badge">Vergleich</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ── SIGNUP ── -->
-  <section class="signup" id="kontakt">
-    <div class="signup-inner">
-      <h2 class="section-title">Bald verfügbar –<br /><span>sei dabei!</span></h2>
-      <p>Trag dich ein und erhalte als Erster unsere besten Angebote</p>
-      <form class="signup-form" onsubmit="return false;">
-        <input type="email" placeholder="deine@email.de" autocomplete="email" />
-        <button type="submit">Jetzt anmelden</button>
-      </form>
-    </div>
-  </section>
+  </div>
 
   <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-left">
       <span>© 2026 JetztBuchbar.de</span>
-      <a href="impressum.html">Impressum</a>
-      <a href="datenschutz.html">Datenschutz</a>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
       <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
       <span>Wien, Österreich</span>
     </div>

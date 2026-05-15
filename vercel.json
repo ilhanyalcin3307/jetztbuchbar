@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/booking",                            "destination": "/",                                  "permanent": true },
     { "source": "/tuerkei.html",                      "destination": "/tuerkei/",                          "permanent": true },
     { "source": "/spanien.html",                       "destination": "/spanien/",                           "permanent": true },
     { "source": "/griechenland.html",                  "destination": "/griechenland/",                      "permanent": true },

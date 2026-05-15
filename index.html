@@ -177,13 +177,15 @@
     .stab-panel.active { display: block; }
 
     #panel-transfer {
-      min-height: 200px;
-      padding: 2rem clamp(1.25rem, 5vw, 3rem);
-      display: none;
-      justify-content: center;
+      padding: 2rem 0;
     }
 
-    #panel-transfer.active { display: flex; }
+    .transfer-widget-wrap {
+      max-width: 1060px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+    }
 
     #tpwl-search {
       position: relative;
@@ -324,7 +326,9 @@
         <div id="tpwl-search"></div>
       </div>
       <div id="panel-transfer" class="stab-panel" role="tabpanel">
-        <!-- Transfer-Widget wird beim ersten Klick geladen -->
+        <div class="transfer-widget-wrap" id="transfer-widget-wrap">
+          <!-- Transfer-Widget wird beim ersten Klick geladen -->
+        </div>
       </div>
     </div>
   </div>
@@ -401,7 +405,7 @@
             s.async = true;
             s.charset = 'utf-8';
             s.src = 'https://tpemb.com/content?currency=EUR&trs=218201&shmarker=420168&locale=de&powered_by=false&transfer_options_limit=10&transfer_options=MCR&disable_currency_selector=false&hide_form_extras=false&hide_external_links=true&campaign_id=1&promo_id=3879';
-            panelTrans.appendChild(s);
+            document.getElementById('transfer-widget-wrap').appendChild(s);
           }
         } else {
           // Flüge or Hotels → show search panel

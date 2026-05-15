@@ -118,6 +118,49 @@
       margin: 0 auto;
     }
 
+    /* ── TAB-BAR ── */
+    .stab-bar {
+      display: flex;
+      gap: 4px;
+      max-width: 1060px;
+      margin: 0 auto 0;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .stab-bar::-webkit-scrollbar { display: none; }
+
+    .stab {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.35rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #aaa;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-bottom: none;
+      border-radius: 10px 10px 0 0;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .stab:hover { color: var(--text); background: rgba(255,255,255,0.10); }
+
+    .stab.active {
+      color: #0a0a0a;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .stab .stab-icon { font-size: 1rem; }
+
     /* ── WIDGET ── */
     /*
       Kein overflow:hidden, kein festes height –
@@ -126,7 +169,21 @@
     .widget-wrap {
       max-width: 1060px;
       margin: 0 auto;
+      border-top: 2px solid var(--accent);
     }
+
+    /* Tab panels */
+    .stab-panel { display: none; }
+    .stab-panel.active { display: block; }
+
+    #panel-transfer {
+      min-height: 200px;
+      padding: 2rem clamp(1.25rem, 5vw, 3rem);
+      display: none;
+      justify-content: center;
+    }
+
+    #panel-transfer.active { display: flex; }
 
     #tpwl-search {
       position: relative;
@@ -138,6 +195,8 @@
       background: var(--bg);
       padding-bottom: clamp(2rem, 5vw, 4rem);
     }
+
+    .widget-results.hidden { display: none; }
 
     #tpwl-tickets {
       max-width: 1060px;
@@ -245,13 +304,33 @@
       <h1>Flüge &amp; Hotels<br /><span>direkt buchen.</span></h1>
       <p>Hunderte Airlines und Hotels – vergleichen, auswählen, sofort buchen.</p>
     </div>
+
+    <!-- ── TAB-BAR ── -->
+    <div class="stab-bar" role="tablist" aria-label="Suchtyp wählen">
+      <button class="stab active" role="tab" aria-selected="true"  aria-controls="panel-search"   data-panel="search"   data-type="flights">
+        <span class="stab-icon">✈</span> Flüge
+      </button>
+      <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-search"   data-panel="search"   data-type="hotels">
+        <span class="stab-icon">🏨</span> Hotels
+      </button>
+      <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-transfer" data-panel="transfer" data-type="transfer">
+        <span class="stab-icon">🚌</span> Transfer
+      </button>
+    </div>
+
+    <!-- ── PANELS ── -->
     <div class="widget-wrap">
-      <div id="tpwl-search"></div>
+      <div id="panel-search" class="stab-panel active" role="tabpanel">
+        <div id="tpwl-search"></div>
+      </div>
+      <div id="panel-transfer" class="stab-panel" role="tabpanel">
+        <!-- Transfer-Widget wird beim ersten Klick geladen -->
+      </div>
     </div>
   </div>
 
   <!-- ── SUCHERGEBNISSE (expandieren nach unten) ── -->
-  <div class="widget-results">
+  <div class="widget-results" id="widget-results">
     <div id="tpwl-tickets"></div>
   </div>
 
@@ -289,6 +368,70 @@
       <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
     </div>
   </footer>
+  <!-- ── TAB SWITCHING ── -->
+  <script>
+    (function () {
+      var tabs        = document.querySelectorAll('.stab');
+      var panelSearch = document.getElementById('panel-search');
+      var panelTrans  = document.getElementById('panel-transfer');
+      var results     = document.getElementById('widget-results');
+      var transLoaded = false;
+
+      function activate(tab) {
+        // Update tab state
+        tabs.forEach(function (t) {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        var panel = tab.dataset.panel;
+        var type  = tab.dataset.type;
+
+        if (panel === 'transfer') {
+          panelSearch.classList.remove('active');
+          panelTrans.classList.add('active');
+          results.classList.add('hidden');
+
+          // Lazy-load Transfer widget on first click
+          if (!transLoaded) {
+            transLoaded = true;
+            var s = document.createElement('script');
+            s.async = true;
+            s.charset = 'utf-8';
+            s.src = 'https://tpemb.com/content?currency=EUR&trs=218201&shmarker=420168&locale=de&powered_by=false&transfer_options_limit=10&transfer_options=MCR&disable_currency_selector=false&hide_form_extras=false&hide_external_links=true&campaign_id=1&promo_id=3879';
+            panelTrans.appendChild(s);
+          }
+        } else {
+          // Flüge or Hotels → show search panel
+          panelTrans.classList.remove('active');
+          panelSearch.classList.add('active');
+          results.classList.remove('hidden');
+
+          // Best-effort: activate the correct internal widget tab
+          if (type === 'hotels') {
+            setTimeout(function () {
+              // Travelpayouts WL widget uses [data-type] or role-based tabs
+              var sel = [
+                '#tpwl-search [data-type="hotels"]',
+                '#tpwl-search .tp-hotels-tab',
+                '#tpwl-search [data-product="hotels"]',
+                '#tpwl-search [class*="hotel"][role="tab"]',
+                '#tpwl-search [class*="hotel"]'
+              ].join(', ');
+              var hotelTab = document.querySelector(sel);
+              if (hotelTab) hotelTab.click();
+            }, 350);
+          }
+        }
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () { activate(tab); });
+      });
+    })();
+  </script>
 
 </body>
 </html>

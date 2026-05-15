@@ -213,7 +213,7 @@
   <div class="section">
     <div class="container">
       <h2 class="section-title">📍 Barcelona auf der <span>Karte</span></h2>
-      <div class="map-wrapper" id="map-rao0al">
+      <div class="map-wrapper" id="map-xtnfyi">
         <div class="map-overlay" onclick="(function(el){el.closest('.map-wrapper').classList.add('active');})(this)">
           <span class="map-overlay-hint">Klicken zum Aktivieren · Strg+Scroll zum Zoomen</span>
         </div>
@@ -227,7 +227,7 @@
       <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Karte anklicken zum Aktivieren. Außerhalb klicken zum Deaktivieren.</p>
       <script>
       (function(){
-        var w = document.getElementById('map-rao0al');
+        var w = document.getElementById('map-xtnfyi');
         if(!w) return;
         document.addEventListener('click', function(e){ if(!w.contains(e.target)) w.classList.remove('active'); });
       })();
@@ -241,6 +241,25 @@
       <h2 class="section-title">🗺️ Top <span>Sehenswürdigkeiten</span></h2>
       <p style="color:var(--text-muted);margin-bottom:1.75rem;font-size:0.93rem;">Die beliebtesten Sehenswürdigkeiten und Ausflugsziele in Barcelona.</p>
       <div class="poi-grid">
+    <div class="poi-card">
+      <div class="poi-visual">
+          <img src="https://commons.wikimedia.org/wiki/File:Teatro_Popular_Melico_Salazar.jpg" alt="Teatro Melico Salazar" loading="lazy" />
+          <div class="poi-visual-overlay"></div>
+          <span class="poi-img-credit">© Wikimedia Commons</span>
+        </div>
+      <div class="poi-body">
+        <div class="poi-tags"><span class="poi-tag">Kultur</span></div>
+        <div class="poi-name">Teatro Melico Salazar</div>
+        <div class="poi-desc">Eines der meistbesuchten Ausflugsziele der Region mit einer Geschichte, die Besucher aus aller Welt begeistert.</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 2 km entfernt</span>
+          <div class="poi-links">
+            <a href="https://www.google.com/maps/search/Teatro%20Melico%20Salazar%20Barcelona" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Teatro%20Melico%20Salazar" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="poi-card">
       <div class="poi-visual">
           <img src="https://commons.wikimedia.org/wiki/File:Costa_Rica-Teatro_Nacional.JPG" alt="Teatro Nacional" loading="lazy" />
@@ -262,38 +281,38 @@
     </div>
     <div class="poi-card">
       <div class="poi-visual">
-          <img src="https://commons.wikimedia.org/wiki/File:Fachada_del_Museo_Nacional_de_Costa_Rica.JPG" alt="Museo Nacional de Costa Rica" loading="lazy" />
+          <img src="https://commons.wikimedia.org/wiki/File:Costa_Rican_Gold_Museum.jpg" alt="Museo del Oro Precolombino" loading="lazy" />
           <div class="poi-visual-overlay"></div>
           <span class="poi-img-credit">© Wikimedia Commons</span>
         </div>
       <div class="poi-body">
-        <div class="poi-tags"><span class="poi-tag">Museum</span></div>
-        <div class="poi-name">Museo Nacional de Costa Rica</div>
-        <div class="poi-desc">Faszinierendes Museum mit umfangreichen Sammlungen zu lokaler Geschichte, Kunst und Kultur – ein Pflichtbesuch für Kulturinteressierte.</div>
+        <div class="poi-tags"><span class="poi-tag">Kultur</span></div>
+        <div class="poi-name">Museo del Oro Precolombino</div>
+        <div class="poi-desc">Eines der meistbesuchten Ausflugsziele der Region mit einer Geschichte, die Besucher aus aller Welt begeistert.</div>
         <div class="poi-footer">
           <span class="poi-dist">📍 2 km entfernt</span>
           <div class="poi-links">
-            <a href="https://www.google.com/maps/search/Museo%20Nacional%20de%20Costa%20Rica%20Barcelona" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
-            <a href="https://de.wikipedia.org/w/index.php?search=Museo%20Nacional%20de%20Costa%20Rica" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+            <a href="https://www.google.com/maps/search/Museo%20del%20Oro%20Precolombino%20Barcelona" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Museo%20del%20Oro%20Precolombino" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
           </div>
         </div>
       </div>
     </div>
     <div class="poi-card">
       <div class="poi-visual">
-          <img src="https://commons.wikimedia.org/wiki/File:MorazanSJ.jpg" alt="Parque Morazán" loading="lazy" />
+          <img src="https://commons.wikimedia.org/wiki/File:Museo_de_Jade_y_Arte_Precolombino.jpg" alt="Museo del Jade y la Cultura Precolombina" loading="lazy" />
           <div class="poi-visual-overlay"></div>
           <span class="poi-img-credit">© Wikimedia Commons</span>
         </div>
       <div class="poi-body">
-        <div class="poi-tags"><span class="poi-tag">Sehenswürdigkeit</span></div>
-        <div class="poi-name">Parque Morazán</div>
+        <div class="poi-tags"><span class="poi-tag">Kultur</span></div>
+        <div class="poi-name">Museo del Jade y la Cultura Precolombina</div>
         <div class="poi-desc">Eines der meistbesuchten Ausflugsziele der Region mit einer Geschichte, die Besucher aus aller Welt begeistert.</div>
         <div class="poi-footer">
           <span class="poi-dist">📍 2 km entfernt</span>
           <div class="poi-links">
-            <a href="https://www.google.com/maps/search/Parque%20Moraz%C3%A1n%20Barcelona" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
-            <a href="https://de.wikipedia.org/w/index.php?search=Parque%20Moraz%C3%A1n" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+            <a href="https://www.google.com/maps/search/Museo%20del%20Jade%20y%20la%20Cultura%20Precolombina%20Barcelona" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Museo%20del%20Jade%20y%20la%20Cultura%20Precolombina" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
           </div>
         </div>
       </div>
@@ -313,25 +332,6 @@
           <div class="poi-links">
             <a href="https://www.google.com/maps/search/Parque%20Espa%C3%B1a%20Barcelona" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
             <a href="https://de.wikipedia.org/w/index.php?search=Parque%20Espa%C3%B1a" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="poi-card">
-      <div class="poi-visual">
-          <img src="https://commons.wikimedia.org/wiki/File:Mapamadc.png" alt="Museum of Contemporary Art and Design" loading="lazy" />
-          <div class="poi-visual-overlay"></div>
-          <span class="poi-img-credit">© Wikimedia Commons</span>
-        </div>
-      <div class="poi-body">
-        <div class="poi-tags"><span class="poi-tag">Kultur</span></div>
-        <div class="poi-name">Museum of Contemporary Art and Design</div>
-        <div class="poi-desc">Eines der meistbesuchten Ausflugsziele der Region mit einer Geschichte, die Besucher aus aller Welt begeistert.</div>
-        <div class="poi-footer">
-          <span class="poi-dist">📍 2 km entfernt</span>
-          <div class="poi-links">
-            <a href="https://www.google.com/maps/search/Museum%20of%20Contemporary%20Art%20and%20Design%20Barcelona" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
-            <a href="https://de.wikipedia.org/w/index.php?search=Museum%20of%20Contemporary%20Art%20and%20Design" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
           </div>
         </div>
       </div>

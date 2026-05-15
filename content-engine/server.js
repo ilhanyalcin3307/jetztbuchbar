@@ -607,6 +607,15 @@ function normalizePages(pages) {
     if (REGION_PAGES.includes(p))       return { ...p, type: 'region' };
     if (REISETIPPS_PAGES.includes(p))   return { ...p, type: 'reisetipps' };
     if (VERGLEICH_PAGES.includes(p))    return { ...p, type: 'vergleich' };
+    // Fallback: infer type from file path for pages added without explicit type
+    if (p.file) {
+      if (p.file.includes('/reisezeit/'))   return { ...p, type: 'reisezeit' };
+      if (p.file.startsWith('themen/'))     return { ...p, type: 'thema' };
+      if (p.file.startsWith('tipps/'))      return { ...p, type: 'reisetipps' };
+      if (p.file.startsWith('vergleiche/')) return { ...p, type: 'vergleich' };
+      if (p.file.includes('/hotels-'))      return { ...p, type: 'hotel' };
+      return { ...p, type: 'city' };
+    }
     return p;
   });
 }

@@ -3,8 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Booking | JetztBuchbar.de</title>
-  <script data-no-defer="1">
+  <title>Flüge &amp; Hotels buchen | JetztBuchbar.de</title>
+  <meta name="description" content="Jetzt Flüge und Hotels direkt vergleichen und buchen. Günstige Reiseangebote für Türkei, Spanien, Griechenland und weltweit." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Flüge &amp; Hotels buchen | JetztBuchbar.de" />
+  <meta property="og:description" content="Jetzt Flüge und Hotels direkt vergleichen und buchen." />
+  <meta property="og:url" content="https://www.jetztbuchbar.de/booking" />
+  <meta property="og:type" content="website" />
+
+  <!-- Travelpayouts WL -->
+  <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
     (function () {
       var script = document.createElement("script");
       script.async = 1;
@@ -13,9 +22,273 @@
       document.head.appendChild(script);
     })();
   </script>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #121212;
+      --accent: #00c896;
+      --accent-dark: #00a87e;
+      --text: #f0f0f0;
+      --text-muted: #888;
+      --border: #1e1e1e;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+      height: 64px;
+      background: rgba(10,10,10,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--accent);
+    }
+
+    nav { display: flex; gap: 2rem; }
+
+    nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      padding: clamp(4rem, 10vw, 7rem) clamp(1.25rem, 5vw, 3rem) 0;
+      text-align: center;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75) 60%, #0a0a0a 100%),
+        url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920&q=75');
+      background-size: cover;
+      background-position: center 40%;
+    }
+
+    .hero-text { margin-bottom: clamp(2rem, 4vw, 3rem); }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── WIDGET ── */
+    /*
+      Kein overflow:hidden, kein festes height –
+      das Widget bestimmt seine Höhe selbst.
+    */
+    .widget-wrap {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    #tpwl-search {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Ergebnisse fließen hier nahtlos nach unten */
+    .widget-results {
+      background: var(--bg);
+      padding-bottom: clamp(2rem, 5vw, 4rem);
+    }
+
+    #tpwl-tickets {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+    }
+
+    /* ── INFO-STREIFEN ── */
+    .info-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem 3rem;
+      padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 5vw, 3rem);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: #0d0d0d;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .info-item span:first-child { font-size: 1.4rem; }
+    .info-item strong { color: var(--text); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.75rem clamp(1.25rem, 5vw, 3rem);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .footer-left span { font-size: 0.85rem; color: var(--text-muted); }
+
+    .footer-left a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .footer-left a:hover { color: var(--accent); }
+
+    .footer-social { display: flex; gap: 0.75rem; }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .social-icon:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0,200,150,0.08);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { gap: 1.25rem; }
+      .hero h1 { letter-spacing: -0.75px; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
-  <div id="tpwl-search"></div>
-  <div id="tpwl-tickets"></div>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <a href="/" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="/#angebote">Angebote</a>
+      <a href="/#destinationen">Destinationen</a>
+      <a href="/ueber-uns.html">Über uns</a>
+      <a href="/#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- ── HERO + SUCHMASKE ── -->
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Flüge &amp; Hotels<br /><span>direkt buchen.</span></h1>
+      <p>Hunderte Airlines und Hotels – vergleichen, auswählen, sofort buchen.</p>
+    </div>
+    <div class="widget-wrap">
+      <div id="tpwl-search"></div>
+    </div>
+  </div>
+
+  <!-- ── SUCHERGEBNISSE (expandieren nach unten) ── -->
+  <div class="widget-results">
+    <div id="tpwl-tickets"></div>
+  </div>
+
+  <!-- ── INFO-STREIFEN ── -->
+  <div class="info-bar">
+    <div class="info-item">
+      <span>✈️</span>
+      <span><strong>Hunderte Airlines</strong> im Vergleich</span>
+    </div>
+    <div class="info-item">
+      <span>🏨</span>
+      <span><strong>Hotels &amp; Resorts</strong> weltweit</span>
+    </div>
+    <div class="info-item">
+      <span>💶</span>
+      <span><strong>Günstigster Preis</strong> garantiert</span>
+    </div>
+    <div class="info-item">
+      <span>🔒</span>
+      <span><strong>Sichere</strong> Buchung</span>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-left">
+      <span>© 2026 JetztBuchbar.de</span>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+      <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+      <span>Wien, Österreich</span>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">&#x1F4F7;</a>
+      <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
+    </div>
+  </footer>
+
 </body>
 </html>

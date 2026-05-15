@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tickets &amp; Touren online buchen – Museen, Attraktionen &amp; Aktivitäten | JetztBuchbar.de</title>
+  <meta name="description" content="Skipline-Tickets für Museen, Sehenswürdigkeiten &amp; Touren weltweit online buchen. Kein Anstehen – direkt zum Einlass. Über 50 Destinationen verfügbar." />
+  <meta property="og:title" content="Tickets &amp; Touren online buchen | JetztBuchbar.de" />
+  <meta property="og:description" content="Skipline-Tickets für Museen, Sehenswürdigkeiten &amp; Touren weltweit. Kein Anstehen – direkt zum Einlass." />
+  <meta property="og:url" content="https://www.jetztbuchbar.de/themen/tickets/" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://www.jetztbuchbar.de/themen/tickets/" />
+
+  <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a0a; --bg-card: #111; --bg-card-hover: #161616; --bg-alt: #0d0d0d;
+    --accent: #00c896; --accent-dark: #00a87e; --accent-glow: rgba(0,200,150,0.15);
+    --text: #f0f0f0; --text-muted: #777; --text-soft: #aaa;
+    --border: #1e1e1e; --border-soft: #252525; --radius: 14px; --radius-sm: 8px;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1.25rem, 5vw, 3rem); height: 64px; background: rgba(10,10,10,0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
+  nav { display: flex; gap: 2rem; }
+  nav a { font-size: 0.88rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+  nav a:hover { color: var(--accent); }
+
+  /* Breadcrumb */
+  .breadcrumb { padding: 0.85rem clamp(1.25rem, 5vw, 3rem); background: var(--bg-alt); border-bottom: 1px solid var(--border); font-size: 0.83rem; color: var(--text-muted); }
+  .breadcrumb a { color: var(--text-muted); transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb span { color: var(--text-soft); }
+
+  /* Hero */
+  .hero { padding: clamp(4rem, 10vw, 7rem) clamp(1.25rem, 5vw, 3rem) clamp(3rem, 6vw, 5rem); text-align: center; background: radial-gradient(ellipse 90% 60% at 50% -5%, rgba(0,200,150,0.14) 0%, transparent 65%), var(--bg); position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle 1px at 20% 40%, rgba(0,200,150,0.35) 0%, transparent 100%), radial-gradient(circle 1px at 80% 60%, rgba(0,200,150,0.25) 0%, transparent 100%); pointer-events: none; }
+  .hero-icon { font-size: 4rem; display: block; margin-bottom: 1.25rem; filter: drop-shadow(0 0 20px rgba(0,200,150,0.35)); }
+  h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 1.25rem; }
+  h1 span { color: var(--accent); }
+  .hero-sub { font-size: clamp(0.95rem, 1.8vw, 1.15rem); color: var(--text-soft); max-width: 640px; margin: 0 auto 2rem; line-height: 1.65; }
+  .hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.65rem; margin-top: 1.5rem; }
+  .hero-badge { background: var(--bg-card); border: 1px solid var(--border); border-radius: 50px; padding: 0.4rem 1rem; font-size: 0.82rem; color: var(--text-soft); display: flex; align-items: center; gap: 0.4rem; }
+
+  /* Container */
+  .container { max-width: 1100px; margin: 0 auto; }
+  .container-narrow { max-width: 820px; margin: 0 auto; }
+
+  /* Sections */
+  .section { padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem); }
+  .section-alt { background: var(--bg-alt); padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem); }
+  .section-title { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.6rem; }
+  .section-title span { color: var(--accent); }
+  .section-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.65; }
+
+  /* Widget wrapper */
+  .widget-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; overflow: hidden; min-height: 200px; }
+  .widget-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .widget-label::before { content: ''; width: 18px; height: 2px; background: var(--accent); }
+
+  /* City picker */
+  .city-picker { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 2rem; }
+  .city-btn { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.75rem 1rem; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s; text-align: left; display: flex; align-items: center; gap: 0.6rem; font-family: inherit; }
+  .city-btn:hover { border-color: rgba(255,255,255,0.15); color: var(--text); background: var(--bg-card-hover); }
+  .city-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+  .city-btn .city-flag { font-size: 1.2rem; line-height: 1; }
+  #city-widget-wrap { min-height: 250px; position: relative; }
+  #city-widget-wrap .widget-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.9rem; gap: 0.75rem; }
+
+  /* Features */
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+  .feature-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.35rem 1.5rem; transition: border-color 0.2s; }
+  .feature-card:hover { border-color: var(--border-soft); }
+  .feature-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .feature-title { font-size: 0.97rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .feature-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* Top products grid */
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+  .product-tag { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.35rem; display: flex; align-items: flex-start; gap: 1rem; transition: border-color 0.2s, background 0.2s; }
+  .product-tag:hover { border-color: rgba(0,200,150,0.25); background: var(--bg-card-hover); }
+  .product-tag-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .product-tag-info .name { font-size: 0.93rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+  .product-tag-info .city { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 0.85rem; }
+  .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s; }
+  .faq-item:hover { border-color: var(--border-soft); }
+  .faq-q { padding: 1.1rem 1.5rem; font-size: 0.97rem; font-weight: 700; display: flex; gap: 0.85rem; align-items: flex-start; }
+  .faq-q::before { content: "?"; color: var(--accent); font-size: 1rem; font-weight: 900; flex-shrink: 0; margin-top: 0.05rem; }
+  .faq-a { padding: 0 1.5rem 1.1rem 3rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; border-top: 1px solid var(--border); padding-top: 0.85rem; }
+
+  /* Dest tags */
+  .dest-tags { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1rem; }
+  .dest-tag { background: var(--bg-card); border: 1px solid var(--border); border-radius: 50px; padding: 0.45rem 1.1rem; font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .dest-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+  /* CTA */
+  .cta-box { background: linear-gradient(135deg, rgba(0,200,150,0.08), rgba(0,200,150,0.03)); border: 1px solid rgba(0,200,150,0.2); border-radius: var(--radius); padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 3rem); text-align: center; }
+  .cta-box h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.85rem; }
+  .cta-box p { color: var(--text-muted); margin-bottom: 2rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .btn-primary { display: inline-block; padding: 0.9rem 2.4rem; background: var(--accent); color: #000; font-weight: 700; font-size: 1rem; border-radius: 50px; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 0 28px rgba(0,200,150,0.35); }
+  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,200,150,0.5); }
+  .btn-secondary { display: inline-block; padding: 0.75rem 1.75rem; margin-top: 1rem; border: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; border-radius: 50px; transition: border-color 0.2s, color 0.2s; }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Tips */
+  .tips-grid { display: flex; flex-direction: column; gap: 0.85rem; }
+  .tip-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.4rem; display: flex; gap: 1.1rem; align-items: flex-start; transition: border-color 0.2s; }
+  .tip-card:hover { border-color: var(--border-soft); }
+  .tip-num { width: 32px; height: 32px; min-width: 32px; background: var(--accent-glow); border: 1px solid rgba(0,200,150,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; color: var(--accent); }
+  .tip-text { font-size: 0.92rem; color: var(--text-soft); line-height: 1.65; padding-top: 0.15rem; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 1.75rem clamp(1.25rem, 5vw, 3rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+  .footer-left { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+  .footer-left span, .footer-left a { font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .social-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .social-icon:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+  @media (max-width: 640px) {
+    nav { gap: 1.25rem; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .hero-icon { font-size: 3rem; }
+    .city-picker { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/index.html" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="/index.html#angebote">Angebote</a>
+      <a href="/index.html#destinationen">Destinationen</a>
+      <a href="/ueber-uns.html">Über uns</a>
+      <a href="/index.html#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="/index.html">Startseite</a> &rsaquo;
+    <a href="/themen/">Themen</a> &rsaquo;
+    <span>Tickets &amp; Touren</span>
+  </div>
+
+  <div class="hero">
+    <span class="hero-icon">🎫</span>
+    <h1>Tickets &amp; Touren <span>online buchen</span></h1>
+    <p class="hero-sub">Museen, Sehenswürdigkeiten &amp; geführte Touren weltweit – Skipline-Tickets sichern und den Urlaub noch entspannter genießen.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">✅ Sofortbestätigung</span>
+      <span class="hero-badge">📱 Mobile Tickets</span>
+      <span class="hero-badge">🔒 Sichere Buchung</span>
+      <span class="hero-badge">⏭️ Warteschlange überspringen</span>
+      <span class="hero-badge">🌍 50+ Städte</span>
+    </div>
+  </div>
+
+  <!-- ── HAUPTWIDGET (global, volle Breite) ─────────────────── -->
+  <div class="section">
+    <div class="container">
+      <p class="widget-label">Aktuelle Top-Angebote</p>
+      <h2 class="section-title">🏛️ Beliebte <span>Attraktionen</span></h2>
+      <p class="section-sub">Die meistgebuchten Museen, Touren und Erlebnisse weltweit – direkt online buchen, kein Anstehen.</p>
+      <div class="widget-wrap">
+        <script async src="https://tpemb.com/content?currency=EUR&trs=218201&shmarker=420168&language=de&layout=full&orientation=horizontal&powered_by=false&campaign_id=89&promo_id=3984" charset="utf-8"></script>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CITY PICKER ────────────────────────────────────────── -->
+  <div class="section-alt">
+    <div class="container">
+      <h2 class="section-title">🗺️ Nach <span>Reiseziel</span> stöbern</h2>
+      <p class="section-sub">Wähle eine Stadt und entdecke die besten Tickets &amp; Touren direkt vor Ort.</p>
+
+      <div class="city-picker" id="cityPicker">
+        <button class="city-btn active" data-locale="66342" onclick="loadCityWidget(this)"><span class="city-flag">🇪🇸</span> Barcelona</button>
+        <button class="city-btn" data-locale="71631" onclick="loadCityWidget(this)"><span class="city-flag">🇮🇹</span> Rom</button>
+        <button class="city-btn" data-locale="66746" onclick="loadCityWidget(this)"><span class="city-flag">🇫🇷</span> Paris</button>
+        <button class="city-btn" data-locale="79079" onclick="loadCityWidget(this)"><span class="city-flag">🇹🇷</span> Istanbul</button>
+        <button class="city-btn" data-locale="60005" onclick="loadCityWidget(this)"><span class="city-flag">🇦🇪</span> Dubai</button>
+        <button class="city-btn" data-locale="99239" onclick="loadCityWidget(this)"><span class="city-flag">🇬🇷</span> Athen</button>
+        <button class="city-btn" data-locale="75061" onclick="loadCityWidget(this)"><span class="city-flag">🇳🇱</span> Amsterdam</button>
+        <button class="city-btn" data-locale="71854" onclick="loadCityWidget(this)"><span class="city-flag">🇮🇹</span> Florenz</button>
+        <button class="city-btn" data-locale="76528" onclick="loadCityWidget(this)"><span class="city-flag">🇵🇹</span> Lissabon</button>
+        <button class="city-btn" data-locale="65144" onclick="loadCityWidget(this)"><span class="city-flag">🇩🇪</span> Berlin</button>
+        <button class="city-btn" data-locale="71510" onclick="loadCityWidget(this)"><span class="city-flag">🇮🇹</span> Venedig</button>
+        <button class="city-btn" data-locale="71631" onclick="loadCityWidget(this)"><span class="city-flag">🇮🇹</span> Neapel</button>
+        <button class="city-btn" data-locale="60335" onclick="loadCityWidget(this)"><span class="city-flag">🇦🇹</span> Wien</button>
+        <button class="city-btn" data-locale="66254" onclick="loadCityWidget(this)"><span class="city-flag">🇪🇸</span> Madrid</button>
+        <button class="city-btn" data-locale="471"   onclick="loadCityWidget(this)"><span class="city-flag">🇪🇸</span> Mallorca</button>
+        <button class="city-btn" data-locale="65870" onclick="loadCityWidget(this)"><span class="city-flag">🇪🇸</span> Sevilla</button>
+        <button class="city-btn" data-locale="65847" onclick="loadCityWidget(this)"><span class="city-flag">🇪🇸</span> Valencia</button>
+        <button class="city-btn" data-locale="68069" onclick="loadCityWidget(this)"><span class="city-flag">🇭🇷</span> Split</button>
+        <button class="city-btn" data-locale="78987" onclick="loadCityWidget(this)"><span class="city-flag">🇹🇷</span> Antalya</button>
+        <button class="city-btn" data-locale="78967" onclick="loadCityWidget(this)"><span class="city-flag">🇹🇷</span> Bodrum</button>
+        <button class="city-btn" data-locale="76528" onclick="loadCityWidget(this)"><span class="city-flag">🇵🇹</span> Porto</button>
+        <button class="city-btn" data-locale="73787" onclick="loadCityWidget(this)"><span class="city-flag">🇲🇹</span> Valletta</button>
+        <button class="city-btn" data-locale="60013" onclick="loadCityWidget(this)"><span class="city-flag">🇦🇪</span> Abu Dhabi</button>
+        <button class="city-btn" data-locale="64162" onclick="loadCityWidget(this)"><span class="city-flag">🇨🇿</span> Prag</button>
+      </div>
+
+      <div class="widget-wrap" id="city-widget-wrap">
+        <div class="widget-loading" id="widget-loading" style="display:none;">
+          <span>⏳</span> <span>Angebote werden geladen…</span>
+        </div>
+        <div id="city-widget-container">
+          <!-- initial Barcelona widget -->
+          <script async src="https://tpemb.com/content?currency=EUR&trs=218201&shmarker=420168&language=de&locale=66342&layout=horizontal&cards=4&powered_by=false&campaign_id=89&promo_id=3947" charset="utf-8"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WARUM ONLINE BUCHEN ────────────────────────────────── -->
+  <div class="section">
+    <div class="container">
+      <h2 class="section-title">💡 Warum Tickets <span>online buchen?</span></h2>
+      <p class="section-sub">Spare Zeit und vermeide Stress – online gebuchte Tickets bieten klare Vorteile gegenüber dem Kauf vor Ort.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⏭️</div>
+          <div class="feature-title">Warteschlange überspringen</div>
+          <div class="feature-desc">Kein stundenlanger Ansteh an Kassen – mit Skipline-Ticket direkt zum Einlass und mehr Zeit für das Erlebnis selbst.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <div class="feature-title">Oft günstiger als vor Ort</div>
+          <div class="feature-desc">Viele Attraktionen bieten Online-Rabatte oder vergünstigte Kombi-Tickets an, die an der Tageskasse nicht verfügbar sind.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <div class="feature-title">Alles am Smartphone</div>
+          <div class="feature-desc">Mobile Tickets, QR-Codes und digitale Voucher – kein Ausdrucken nötig. Einfach vorzeigen und rein.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📅</div>
+          <div class="feature-title">Zeitfenster wählen</div>
+          <div class="feature-desc">Beliebte Museen wie den Louvre oder die Sagrada Família nur mit Zeitfenster-Ticket betreten – Online-Buchung sichert deinen Platz.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <div class="feature-title">Kostenlose Stornierung</div>
+          <div class="feature-desc">Viele Tickets sind bis 24 Stunden vor dem Besuch kostenlos stornierbar – perfekt für flexible Reisepläne.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <div class="feature-title">50+ Städte weltweit</div>
+          <div class="feature-desc">Von Barcelona bis Bangkok, von Wien bis Dubai – Tickets für die meistbesuchten Attraktionen weltweit in einer Buchung.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOP SEHENSWÜRDIGKEITEN ─────────────────────────────── -->
+  <div class="section-alt">
+    <div class="container">
+      <h2 class="section-title">🏆 Top <span>Sehenswürdigkeiten</span> weltweit</h2>
+      <p class="section-sub">Die beliebtesten Attraktionen unserer Nutzer – alle online buchbar.</p>
+      <div class="products-grid">
+        <div class="product-tag"><span class="product-tag-icon">⚔️</span><div class="product-tag-info"><div class="name">Kolosseum + Forum Romanum</div><div class="city">🇮🇹 Rom, Italien</div></div></div>
+        <div class="product-tag"><span class="product-tag-icon">🕌</span><div class="product-tag-info"><div class="name">Sagrada Família: Fast Track</div><div class="city">🇪🇸 Barcelona, Spanien</div></div></div>
+        <div class="product-tag"><span class="product-tag-icon">🗼</span><div class="product-tag-info"><div class="name">Louvre Museum: E-Ticket</div><div class="city">🇫🇷 Paris, Frankreich</div></div></div>
+        <div class="product-tag"><span class="product-tag-icon">🏛️</span><div class="product-tag-info"><div class="name">Vatikanische Museen &amp; Sixtina</div><div class="city">🇮🇹 Rom, Italien</div></div></div>
+        <div class="product-tag"><span class="product-tag-icon">🏙️</span><div class="product-tag-info"><div class="name">Burj Khalifa: 124. &amp; 125. Etage</div><div class="city">🇦🇪 Dubai, VAE</div></div></div>
+        <div class="product-tag"><span class="product-tag-icon">🎨</span><div class="product-tag-info"><div class="name">Uffizien: Priority Entrance</div><div class="city">🇮🇹 Florenz, Italien</div></div></div>
+        <div class="product-tag"><span class="product-tag-icon">🏺</span><div class="product-tag-info"><div class="name">Akropolis von Athen</div><div class="city">🇬🇷 Athen, Griechenland</div></div></div>
+        <div class="product-tag"><span class="product-tag-icon">🎡</span><div class="product-tag-info"><div class="name">Park Güell</div><div class="city">🇪🇸 Barcelona, Spanien</div></div></div>
+        <div class="product-tag"><span class="product-tag-icon">🏰</span><div class="product-tag-info"><div class="name">Tower of London</div><div class="city">🇬🇧 London, UK</div></div></div>
+        <div class="product-tag"><span class="product-tag-icon">🎨</span><div class="product-tag-info"><div class="name">Rijksmuseum: Skip The Line</div><div class="city">🇳🇱 Amsterdam, Niederlande</div></div></div>
+        <div class="product-tag"><span class="product-tag-icon">👑</span><div class="product-tag-info"><div class="name">Schloss Versailles + Audio Guide</div><div class="city">🇫🇷 Versailles, Frankreich</div></div></div>
+        <div class="product-tag"><span class="product-tag-icon">🌊</span><div class="product-tag-info"><div class="name">Pompei: Skip The Line</div><div class="city">🇮🇹 Neapel, Italien</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BUCHTIPPS ──────────────────────────────────────────── -->
+  <div class="section">
+    <div class="container-narrow">
+      <h2 class="section-title">✅ Unsere <span>Buchtipps</span></h2>
+      <p class="section-sub">So holst du das meiste aus deinen Tickets heraus.</p>
+      <div class="tips-grid">
+        <div class="tip-card"><div class="tip-num">1</div><div class="tip-text"><strong>Früh buchen:</strong> Für Museen mit Zeitfenster (Vatikan, Louvre, Sagrada Família) solltest du mindestens 2–4 Wochen im Voraus buchen – besonders in der Hochsaison.</div></div>
+        <div class="tip-card"><div class="tip-num">2</div><div class="tip-text"><strong>Kombiangebote nutzen:</strong> Viele Anbieter bündeln mehrere Attraktionen in einem Ticket – oft 15–30 % günstiger als Einzelkauf.</div></div>
+        <div class="tip-card"><div class="tip-num">3</div><div class="tip-text"><strong>Dienstags oder mittwochs besuchen:</strong> Wochentags sind die meisten Museen deutlich weniger überfüllt als am Wochenende.</div></div>
+        <div class="tip-card"><div class="tip-num">4</div><div class="tip-text"><strong>Stornierungsbedingungen prüfen:</strong> Achte auf flexible Tickets mit kostenloser Stornierung bis 24h vorher – ideal bei unsicherem Wetter oder Programmänderungen.</div></div>
+        <div class="tip-card"><div class="tip-num">5</div><div class="tip-text"><strong>Kinder- und Familienpreise:</strong> Viele Tickets sind für Kinder unter 12 deutlich günstiger oder kostenlos – immer vorher prüfen.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FAQ ───────────────────────────────────────────────── -->
+  <div class="section-alt">
+    <div class="container-narrow">
+      <h2 class="section-title">❓ Häufige <span>Fragen</span></h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">Was ist ein Skipline-Ticket?</div>
+          <div class="faq-a">Ein Skipline-Ticket ermöglicht dir, die normale Warteschlange an der Kasse zu überspringen. Du gehst direkt zum Einlass und sparst so wertvolle Urlaubszeit – besonders bei beliebten Attraktionen wie dem Kolosseum oder der Sagrada Família.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Wie erhalte ich meine Tickets nach der Buchung?</div>
+          <div class="faq-a">Nach der Online-Buchung erhältst du deine Tickets sofort per E-Mail als PDF oder als mobilen QR-Code. Drucken ist in den meisten Fällen nicht nötig – einfach das Smartphone vorzeigen.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Kann ich Tickets stornieren oder umbuchen?</div>
+          <div class="faq-a">Die meisten Tickets sind bis 24–48 Stunden vor dem gebuchten Termin kostenlos stornierbar. Bei Zeitfenster-Tickets ist eine Umbuchung oft bis kurz vor dem Besuch möglich.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Welche Attraktionen benötigen Zeitfenster-Tickets?</div>
+          <div class="faq-a">Besonders stark frequentierte Sehenswürdigkeiten haben feste Einlasszeiten: Vatikanische Museen, Louvre, Uffizien (Florenz), Sagrada Família, Kolosseum und Park Güell. Ohne Online-Buchung mit Zeitfenster riskierst du ausverkaufte Einlassslots.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Gibt es auch Touren und Aktivitäten, nicht nur Museumtickets?</div>
+          <div class="faq-a">Ja – neben Museumseintritten bieten wir geführte Stadttouren, Bootsausflüge, Foodtouren, Wüstensafaris, Heißluftballon-Fahrten und mehr. Das Angebot variiert je nach Destination.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">In welcher Währung wird abgerechnet?</div>
+          <div class="faq-a">Alle Preise werden in Euro (EUR) angezeigt. Die Abrechnung erfolgt ebenfalls in Euro, unabhängig vom Reiseziel.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WEITERE THEMEN ─────────────────────────────────────── -->
+  <div class="section">
+    <div class="container">
+      <h2 class="section-title">🌍 Weitere <span>Reisethemen</span></h2>
+      <div class="dest-tags">
+        <a href="/themen/all-inclusive/" class="dest-tag">All Inclusive</a>
+        <a href="/themen/last-minute/" class="dest-tag">Last Minute</a>
+        <a href="/themen/urlaub-mit-kindern/" class="dest-tag">Urlaub mit Kindern</a>
+        <a href="/themen/flitterwochen/" class="dest-tag">Flitterwochen</a>
+        <a href="/tipps/reiseversicherung/" class="dest-tag">Reiseversicherung</a>
+        <a href="/tipps/packliste/" class="dest-tag">Packliste</a>
+        <a href="/spanien/" class="dest-tag">Spanien</a>
+        <a href="/griechenland/" class="dest-tag">Griechenland</a>
+        <a href="/italien/" class="dest-tag">Italien</a>
+        <a href="/tuerkei/" class="dest-tag">Türkei</a>
+        <a href="/dubai/" class="dest-tag">Dubai</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CTA ───────────────────────────────────────────────── -->
+  <div class="section-alt">
+    <div class="container-narrow">
+      <div class="cta-box">
+        <h2>Urlaub planen &amp; <span style="color:var(--accent)">alles aus einem Guss</span></h2>
+        <p>Flug, Hotel und jetzt auch Tickets – JetztBuchbar.de bündelt die besten Angebote für deinen Traumurlaub.</p>
+        <a href="/index.html#angebote" class="btn-primary">🏖️ Reiseangebote ansehen</a>
+        <br />
+        <a href="/index.html" class="btn-secondary">← Zurück zur Startseite</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-left">
+      <span>© 2026 JetztBuchbar.de</span>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+      <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+      <span>Wien, Österreich</span>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">&#x1F4F7;</a>
+      <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
+    </div>
+  </footer>
+
+  <script>
+    // City widget loader — injects a fresh tpemb script for the selected city
+    function loadCityWidget(btn) {
+      // Update active state
+      document.querySelectorAll('#cityPicker .city-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const locale = btn.getAttribute('data-locale');
+      const container = document.getElementById('city-widget-container');
+      const loading   = document.getElementById('widget-loading');
+
+      // Show loading indicator
+      container.style.opacity = '0.3';
+      loading.style.display   = 'flex';
+
+      // Replace container content with a fresh script element
+      // (tpemb renders inline where the <script> lives)
+      container.innerHTML = '';
+      const s = document.createElement('script');
+      s.async   = true;
+      s.charset = 'utf-8';
+      s.src     = 'https://tpemb.com/content?currency=EUR&trs=218201&shmarker=420168'
+                + '&language=de&locale=' + locale
+                + '&layout=horizontal&cards=4&powered_by=false&campaign_id=89&promo_id=3947';
+
+      s.onload = function() {
+        container.style.opacity = '1';
+        loading.style.display   = 'none';
+      };
+      // Fallback: hide loading after 5s regardless
+      setTimeout(function() {
+        container.style.opacity = '1';
+        loading.style.display   = 'none';
+      }, 5000);
+
+      container.appendChild(s);
+    }
+  </script>
+</body>
+</html>

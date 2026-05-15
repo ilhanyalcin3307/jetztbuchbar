@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flüge vergleichen &amp; buchen 2026 – Günstig fliegen | JetztBuchbar.de</title>
+  <meta name="description" content="Flüge günstig vergleichen und direkt buchen – alle Airlines, alle Ziele. Finde die besten Flugpreise für deinen nächsten Urlaub." />
+  <meta property="og:title" content="Flüge vergleichen &amp; buchen 2026 | JetztBuchbar.de" />
+  <meta property="og:description" content="Flüge günstig vergleichen und direkt buchen – alle Airlines, alle Ziele." />
+  <meta property="og:url" content="https://www.jetztbuchbar.de/fluege/" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://www.jetztbuchbar.de/fluege/" />
+
+  <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a0a; --bg-card: #111; --bg-card-hover: #161616; --bg-alt: #0d0d0d;
+    --accent: #00c896; --accent-dark: #00a87e; --accent-glow: rgba(0,200,150,0.15);
+    --text: #f0f0f0; --text-muted: #777; --text-soft: #aaa;
+    --border: #1e1e1e; --border-soft: #252525; --radius: 14px; --radius-sm: 8px;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1.25rem, 5vw, 3rem); height: 64px; background: rgba(10,10,10,0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
+  nav { display: flex; gap: 2rem; }
+  nav a { font-size: 0.88rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+  nav a:hover { color: var(--accent); }
+
+  /* Breadcrumb */
+  .breadcrumb { padding: 0.85rem clamp(1.25rem, 5vw, 3rem); background: var(--bg-alt); border-bottom: 1px solid var(--border); font-size: 0.83rem; color: var(--text-muted); }
+  .breadcrumb a { color: var(--text-muted); transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb span { color: var(--text-soft); }
+
+  /* Hero */
+  .hero { padding: clamp(4rem, 10vw, 7rem) clamp(1.25rem, 5vw, 3rem) clamp(3rem, 6vw, 5rem); text-align: center; background: radial-gradient(ellipse 90% 60% at 50% -5%, rgba(0,200,150,0.14) 0%, transparent 65%), var(--bg); position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle 1px at 20% 40%, rgba(0,200,150,0.35) 0%, transparent 100%), radial-gradient(circle 1px at 80% 60%, rgba(0,200,150,0.25) 0%, transparent 100%); pointer-events: none; }
+  .hero-icon { font-size: 4rem; display: block; margin-bottom: 1.25rem; filter: drop-shadow(0 0 20px rgba(0,200,150,0.35)); }
+  h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 1.25rem; }
+  h1 span { color: var(--accent); }
+  .hero-sub { font-size: clamp(0.95rem, 1.8vw, 1.15rem); color: var(--text-soft); max-width: 640px; margin: 0 auto 2rem; line-height: 1.65; }
+  .hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.65rem; margin-top: 1.5rem; }
+  .hero-badge { background: var(--bg-card); border: 1px solid var(--border); border-radius: 50px; padding: 0.4rem 1rem; font-size: 0.82rem; color: var(--text-soft); display: flex; align-items: center; gap: 0.4rem; }
+
+  /* Container */
+  .container { max-width: 1100px; margin: 0 auto; }
+  .container-narrow { max-width: 820px; margin: 0 auto; }
+
+  /* Sections */
+  .section { padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem); }
+  .section-alt { background: var(--bg-alt); padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem); }
+  .section-title { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.6rem; }
+  .section-title span { color: var(--accent); }
+  .section-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.65; }
+
+  /* Widget wrapper */
+  .widget-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; overflow: hidden; min-height: 220px; }
+  .widget-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .widget-label::before { content: ''; width: 18px; height: 2px; background: var(--accent); }
+
+  /* Popular routes grid */
+  .routes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+  .route-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.15rem 1.35rem; display: flex; align-items: center; gap: 1rem; transition: border-color 0.2s, background 0.2s, transform 0.15s; }
+  .route-card:hover { border-color: rgba(0,200,150,0.3); background: var(--bg-card-hover); transform: translateY(-2px); }
+  .route-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .route-info .from-to { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 0.15rem; display: flex; align-items: center; gap: 0.4rem; }
+  .route-info .route-arrow { color: var(--accent); font-size: 0.8rem; }
+  .route-info .route-note { font-size: 0.77rem; color: var(--text-muted); }
+
+  /* Features */
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+  .feature-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.35rem 1.5rem; transition: border-color 0.2s; }
+  .feature-card:hover { border-color: var(--border-soft); }
+  .feature-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .feature-title { font-size: 0.97rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .feature-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* Tips */
+  .tips-grid { display: flex; flex-direction: column; gap: 0.85rem; }
+  .tip-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.4rem; display: flex; gap: 1.1rem; align-items: flex-start; transition: border-color 0.2s; }
+  .tip-card:hover { border-color: var(--border-soft); }
+  .tip-num { width: 32px; height: 32px; min-width: 32px; background: var(--accent-glow); border: 1px solid rgba(0,200,150,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; color: var(--accent); }
+  .tip-text { font-size: 0.92rem; color: var(--text-soft); line-height: 1.65; padding-top: 0.15rem; }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 0.85rem; }
+  .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s; }
+  .faq-item:hover { border-color: var(--border-soft); }
+  .faq-q { padding: 1.1rem 1.5rem; font-size: 0.97rem; font-weight: 700; display: flex; gap: 0.85rem; align-items: flex-start; }
+  .faq-q::before { content: "?"; color: var(--accent); font-size: 1rem; font-weight: 900; flex-shrink: 0; margin-top: 0.05rem; }
+  .faq-a { padding: 0 1.5rem 1.1rem 3rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; border-top: 1px solid var(--border); padding-top: 0.85rem; }
+
+  /* Dest tags */
+  .dest-tags { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1rem; }
+  .dest-tag { background: var(--bg-card); border: 1px solid var(--border); border-radius: 50px; padding: 0.45rem 1.1rem; font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .dest-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+  /* CTA */
+  .cta-box { background: linear-gradient(135deg, rgba(0,200,150,0.08), rgba(0,200,150,0.03)); border: 1px solid rgba(0,200,150,0.2); border-radius: var(--radius); padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 3rem); text-align: center; }
+  .cta-box h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.85rem; }
+  .cta-box p { color: var(--text-muted); margin-bottom: 2rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .btn-primary { display: inline-block; padding: 0.9rem 2.4rem; background: var(--accent); color: #000; font-weight: 700; font-size: 1rem; border-radius: 50px; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 0 28px rgba(0,200,150,0.35); }
+  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,200,150,0.5); }
+  .btn-secondary { display: inline-block; padding: 0.75rem 1.75rem; margin-top: 1rem; border: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; border-radius: 50px; transition: border-color 0.2s, color 0.2s; }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 1.75rem clamp(1.25rem, 5vw, 3rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+  .footer-left { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+  .footer-left span, .footer-left a { font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .social-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .social-icon:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+  @media (max-width: 640px) {
+    nav { gap: 1.25rem; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .hero-icon { font-size: 3rem; }
+    .routes-grid { grid-template-columns: 1fr 1fr; }
+  }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/index.html" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="/index.html#angebote">Angebote</a>
+      <a href="/index.html#destinationen">Destinationen</a>
+      <a href="/ueber-uns.html">Über uns</a>
+      <a href="/index.html#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="/index.html">Startseite</a> &rsaquo;
+    <span>Flüge</span>
+  </div>
+
+  <div class="hero">
+    <span class="hero-icon">✈️</span>
+    <h1>Flüge <span>vergleichen &amp; buchen</span></h1>
+    <p class="hero-sub">Alle Airlines, alle Ziele – finde den günstigsten Flug für deinen nächsten Urlaub und buche direkt in Sekunden.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">💸 Bestpreisgarantie</span>
+      <span class="hero-badge">🔍 Alle Airlines im Vergleich</span>
+      <span class="hero-badge">📱 Sofortbestätigung</span>
+      <span class="hero-badge">🔄 Flexible Umbuchung</span>
+      <span class="hero-badge">🌍 Weltweit</span>
+    </div>
+  </div>
+
+  <!-- ── FLUG-SUCHWIDGET ────────────────────────────────────── -->
+  <div class="section">
+    <div class="container">
+      <p class="widget-label">Flugsuche</p>
+      <h2 class="section-title">✈️ Jetzt <span>Flug suchen</span></h2>
+      <p class="section-sub">Flüge ab deinem Abflughafen direkt vergleichen – inkl. Hotels. Einfach Ziel, Datum und Passagiere eingeben.</p>
+      <div class="widget-wrap">
+        <script async src="https://tpemb.com/content?currency=eur&trs=218201&shmarker=420168&locale=de&stops=any&show_hotels=true&powered_by=false&border_radius=0&plain=true&color_button=%2300A991&color_button_text=%23ffffff&promo_id=3414&campaign_id=111" charset="utf-8"></script>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BELIEBTE ROUTEN ────────────────────────────────────── -->
+  <div class="section-alt">
+    <div class="container">
+      <h2 class="section-title">🔥 Beliebte <span>Flugrouten</span></h2>
+      <p class="section-sub">Die meistgebuchten Flugstrecken unserer Nutzer – jetzt Preise vergleichen.</p>
+      <div class="routes-grid">
+        <div class="route-card"><span class="route-icon">🇹🇷</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Antalya</div><div class="route-note">ca. 3,5 Std. · Direkt verfügbar</div></div></div>
+        <div class="route-card"><span class="route-icon">🇪🇸</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Mallorca</div><div class="route-note">ca. 2,5 Std. · Direkt verfügbar</div></div></div>
+        <div class="route-card"><span class="route-icon">🇬🇷</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Kreta</div><div class="route-note">ca. 3 Std. · Direkt verfügbar</div></div></div>
+        <div class="route-card"><span class="route-icon">🇦🇪</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Dubai</div><div class="route-note">ca. 7 Std. · Direkt verfügbar</div></div></div>
+        <div class="route-card"><span class="route-icon">🇪🇬</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Hurghada</div><div class="route-note">ca. 5 Std. · Direkt verfügbar</div></div></div>
+        <div class="route-card"><span class="route-icon">🇵🇹</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Lissabon</div><div class="route-note">ca. 3,5 Std. · Direkt verfügbar</div></div></div>
+        <div class="route-card"><span class="route-icon">🇮🇹</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Rom</div><div class="route-note">ca. 2 Std. · Direkt verfügbar</div></div></div>
+        <div class="route-card"><span class="route-icon">🇬🇷</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Santorini</div><div class="route-note">ca. 3,5 Std. · Oft Umstieg</div></div></div>
+        <div class="route-card"><span class="route-icon">🇲🇦</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Marrakesch</div><div class="route-note">ca. 4 Std. · Direkt verfügbar</div></div></div>
+        <div class="route-card"><span class="route-icon">🇭🇷</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Dubrovnik</div><div class="route-note">ca. 2,5 Std. · Direkt verfügbar</div></div></div>
+        <div class="route-card"><span class="route-icon">🇪🇸</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Barcelona</div><div class="route-note">ca. 2 Std. · Direkt verfügbar</div></div></div>
+        <div class="route-card"><span class="route-icon">🇹🇳</span><div class="route-info"><div class="from-to">Deutschland <span class="route-arrow">→</span> Tunis</div><div class="route-note">ca. 3 Std. · Direkt verfügbar</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WARUM HIER BUCHEN ──────────────────────────────────── -->
+  <div class="section">
+    <div class="container">
+      <h2 class="section-title">💡 Warum hier <span>buchen?</span></h2>
+      <p class="section-sub">Unser Flugvergleich durchsucht hunderte Airlines und findet das beste Angebot für deine Route.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <div class="feature-title">Alle Airlines im Blick</div>
+          <div class="feature-desc">Von Billigfliegern bis Full-Service – Ryanair, easyJet, Lufthansa, Turkish Airlines und mehr in einem Vergleich.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <div class="feature-title">Günstigste Preise</div>
+          <div class="feature-desc">Preiskalender und flexible Datumssuche zeigen dir, wann dein Flug am günstigsten ist – oft ±3 Tage sparen 30 %.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏨</div>
+          <div class="feature-title">Flug + Hotel kombinieren</div>
+          <div class="feature-desc">Direkt beim Flug auch das Hotel suchen und buchen – spart Zeit und oft bis zu 20 % gegenüber Einzelbuchung.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <div class="feature-title">Sofortbestätigung</div>
+          <div class="feature-desc">Buchungsbestätigung und E-Ticket kommen sofort per E-Mail – kein Warten, kein Papierkram.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <div class="feature-title">Sichere Zahlung</div>
+          <div class="feature-desc">SSL-verschlüsselte Zahlung per Kreditkarte, PayPal oder Überweisung – deine Daten sind jederzeit geschützt.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <div class="feature-title">Umbuchung &amp; Stornierung</div>
+          <div class="feature-desc">Viele Tarife erlauben kostenlose Umbuchung oder Stornierung bis 24 Stunden vor Abflug.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SPARTIPPS ──────────────────────────────────────────── -->
+  <div class="section-alt">
+    <div class="container-narrow">
+      <h2 class="section-title">✅ <span>Spartipps</span> für günstige Flüge</h2>
+      <p class="section-sub">Mit diesen Tricks buchst du deinen nächsten Flug bis zu 50 % günstiger.</p>
+      <div class="tips-grid">
+        <div class="tip-card"><div class="tip-num">1</div><div class="tip-text"><strong>Flexible Daten nutzen:</strong> Der Preiskalender zeigt dir, welche Abflugtage im Monat am günstigsten sind – oft mittwochs oder dienstags bis zu 40 % billiger.</div></div>
+        <div class="tip-card"><div class="tip-num">2</div><div class="tip-text"><strong>6–8 Wochen vorher buchen:</strong> Der Sweet Spot für Europastrecken liegt 6–8 Wochen vor Abflug. Für Fernstrecken (Dubai, Asien) lieber 3–4 Monate.</div></div>
+        <div class="tip-card"><div class="tip-num">3</div><div class="tip-text"><strong>Alternativer Flughafen:</strong> Wien, Mailand oder Brüssel statt Frankfurt oder München buchen – Umwegflüge sparen oft 50–100 € pro Person.</div></div>
+        <div class="tip-card"><div class="tip-num">4</div><div class="tip-text"><strong>Nur Handgepäck:</strong> Bei Kurzreisen reicht ein Kabinentrolley – spart 30–60 € pro Strecke bei Billigairlines.</div></div>
+        <div class="tip-card"><div class="tip-num">5</div><div class="tip-text"><strong>Preisalarm aktivieren:</strong> Viele Buchungsportale bieten E-Mail-Alerts, sobald der Preis für deine gewünschte Strecke sinkt.</div></div>
+        <div class="tip-card"><div class="tip-num">6</div><div class="tip-text"><strong>Hinflug ≠ Rückflug:</strong> Manchmal ist es günstiger, Hin- und Rückflug bei verschiedenen Airlines zu buchen – lohnt sich besonders bei Open-Jaw-Routen.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FAQ ───────────────────────────────────────────────── -->
+  <div class="section">
+    <div class="container-narrow">
+      <h2 class="section-title">❓ Häufige <span>Fragen</span></h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">Wann sind Flüge am günstigsten?</div>
+          <div class="faq-a">Am günstigsten sind Flüge dienstags und mittwochs, abseits der Schulferien. Frühe Morgenstunden oder späte Nachtflüge sind ebenfalls oft günstiger als Flüge am Nachmittag. Der Preiskalender in der Suche oben zeigt dir das günstigste Datum direkt an.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Wie früh sollte ich mein Flugticket buchen?</div>
+          <div class="faq-a">Für Europastrecken empfehlen wir 6–10 Wochen im Voraus. Für Fernziele (Dubai, Asien, Amerika) sind 3–5 Monate ideal. Last-Minute-Deals gibt es zwar, aber nur für sehr flexible Reisende ohne feste Hotelplanung.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Was ist der Unterschied zwischen Direkt- und Non-Stopflug?</div>
+          <div class="faq-a">Ein Non-Stopflug hat keine Zwischenlandung. Ein Direktflug kann zwar zwischenlanden (zum Auftanken oder für Passagiere), aber du bleibst an Bord. In der Praxis werden beide Begriffe oft synonym verwendet.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Brauche ich eine Reiseversicherung?</div>
+          <div class="faq-a">Wir empfehlen immer eine Reiserücktrittsversicherung und Auslandskrankenversicherung. Besonders bei Last-Minute-Buchungen ist das wichtig – einige Kreditkarten bieten Basis-Reiseschutz kostenlos an.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Kann ich auch Flug + Hotel zusammen buchen?</div>
+          <div class="faq-a">Ja – unser Widget oben zeigt direkt auch Hotels an. Kombinierte Buchungen sind oft günstiger als Einzelbuchungen und bündeln alles in einer Bestätigung.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Welche Dokumente benötige ich für den Flug?</div>
+          <div class="faq-a">Innerhalb der EU reicht der Personalausweis. Für Reisen außerhalb der EU (Türkei, Dubai, Ägypten, Marokko etc.) ist ein gültiger Reisepass erforderlich – mindestens 6 Monate gültig nach Rückreisedatum.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WEITERE THEMEN ─────────────────────────────────────── -->
+  <div class="section-alt">
+    <div class="container">
+      <h2 class="section-title">🌍 Weitere <span>Reisethemen</span></h2>
+      <div class="dest-tags">
+        <a href="/themen/tickets/" class="dest-tag">🎫 Tickets &amp; Touren</a>
+        <a href="/themen/last-minute/" class="dest-tag">⚡ Last Minute</a>
+        <a href="/themen/all-inclusive/" class="dest-tag">🍹 All Inclusive</a>
+        <a href="/themen/urlaub-mit-kindern/" class="dest-tag">👨‍👩‍👧 Mit Kindern</a>
+        <a href="/tipps/guenstig-fliegen/" class="dest-tag">✈️ Günstig fliegen</a>
+        <a href="/tipps/handgepaeck/" class="dest-tag">🎒 Handgepäck-Tipps</a>
+        <a href="/tipps/reiseversicherung/" class="dest-tag">🛡️ Reiseversicherung</a>
+        <a href="/tuerkei/" class="dest-tag">🇹🇷 Türkei</a>
+        <a href="/spanien/" class="dest-tag">🇪🇸 Spanien</a>
+        <a href="/griechenland/" class="dest-tag">🇬🇷 Griechenland</a>
+        <a href="/dubai/" class="dest-tag">🇦🇪 Dubai</a>
+        <a href="/aegypten/" class="dest-tag">🇪🇬 Ägypten</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CTA ───────────────────────────────────────────────── -->
+  <div class="section">
+    <div class="container-narrow">
+      <div class="cta-box">
+        <h2>Traumurlaub komplett <span style="color:var(--accent)">aus einer Hand</span></h2>
+        <p>Flug, Hotel und Tickets – JetztBuchbar.de bündelt alles für deinen perfekten Urlaub.</p>
+        <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="btn-primary">✈️ Jetzt Flug suchen</a>
+        <br />
+        <a href="/index.html" class="btn-secondary">← Zurück zur Startseite</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-left">
+      <span>© 2026 JetztBuchbar.de</span>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+      <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+      <span>Wien, Österreich</span>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">&#x1F4F7;</a>
+      <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -98,7 +98,7 @@ const SHARED_CSS = `
   .poi-visual img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
   .poi-card:hover .poi-visual img { transform: scale(1.06); }
   .poi-visual-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%); pointer-events: none; }
-  .poi-visual-fallback { height: 148px; }
+  .poi-visual-fallback { height: 180px; }
   .poi-visual-fallback::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.1) 0%, transparent 65%), repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.025) 18px, rgba(255,255,255,0.025) 19px); }
   .poi-visual-icon { font-size: 3.2rem; filter: drop-shadow(0 3px 14px rgba(0,0,0,0.45)); z-index: 1; line-height: 1; }
   .poi-img-credit { position: absolute; bottom: 0.3rem; right: 0.5rem; font-size: 0.6rem; color: rgba(255,255,255,0.45); z-index: 2; }

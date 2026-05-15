@@ -100,22 +100,45 @@ async function getTopPOIs(destinationName, limit = 5) {
   const filtered = pois
     .filter(p => p.name && p.name.trim().length > 2)
     .map(p => ({
-      name: p.name,
+      xid:   p.xid,
+      name:  p.name,
       kinds: p.kinds ? p.kinds.split(',')[0] : '',
-      dist: p.dist ? Math.round(p.dist / 1000) : null,
+      dist:  p.dist ? Math.round(p.dist / 1000) : null,
     }));
 
-  // Step 3: Fetch Wikipedia thumbnails in parallel
-  const thumbResults = await Promise.allSettled(
-    filtered.map(p => getWikipediaThumbnail(p.name))
+  // Step 3: Fetch OTM detail for each POI (has direct image + wikipedia link)
+  const detailResults = await Promise.allSettled(
+    filtered.map(p =>
+      safeFetch(
+        `https://api.opentripmap.com/0.1/en/places/xid/${p.xid}?apikey=${OPENTRIPMAP_KEY}`,
+        `OTM-detail:${p.xid}`
+      )
+    )
   );
+
+  // Step 4: Resolve best image per POI
   const withImage = [];
   const withoutImage = [];
+
+  const thumbFallbacks = await Promise.allSettled(
+    filtered.map((p, i) => {
+      const detail = detailResults[i].status === 'fulfilled' ? detailResults[i].value : null;
+      if (detail && detail.image) return Promise.resolve(detail.image);
+      // Try Wikipedia article name extracted from detail.wikipedia URL
+      if (detail && detail.wikipedia) {
+        const articleName = decodeURIComponent(detail.wikipedia.split('/wiki/').pop());
+        return getWikipediaThumbnail(articleName);
+      }
+      // Last resort: POI name
+      return getWikipediaThumbnail(p.name);
+    })
+  );
+
   filtered.forEach((p, i) => {
-    const img = thumbResults[i].status === 'fulfilled' ? thumbResults[i].value : null;
+    const img = thumbFallbacks[i].status === 'fulfilled' ? thumbFallbacks[i].value : null;
     (img ? withImage : withoutImage).push({ ...p, image: img });
   });
-  // Prioritize POIs that have a Wikipedia image, then fill up with the rest
+  // Prioritize POIs that have an image, then fill up with the rest
   return [...withImage, ...withoutImage].slice(0, limit);
 }
 
@@ -423,7 +446,7 @@ async function getUnsplashImage(queryKey) {
     const photo = data.results && data.results[0];
     if (!photo) return null;
     return {
-      url:         photo.urls.regular,
+      url:         photo.urls.full || photo.urls.regular,
       creditName:  photo.user.name,
       creditLink:  photo.user.links.html + '?utm_source=jetztbuchbar&utm_medium=referral',
     };

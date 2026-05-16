@@ -18,9 +18,9 @@ if (!API_KEY) {
 const BASE        = 'https://giatadrive.com/api/v1';
 const HEADERS     = { Authorization: 'Bearer ' + API_KEY, Accept: 'application/json' };
 const OUTPUT      = path.join(__dirname, '..', 'api', 'giata-search-index.json');
-const BATCH_SIZE  = 15;
-const DELAY_MS    = 250;
-const SAMPLE_SIZE = 40;
+const BATCH_SIZE  = 20;
+const DELAY_MS    = 150;
+const SAMPLE_SIZE = 200;
 const COUNTRIES   = ['TR','GR','ES','EG','PT','HR','IT','MA','MT','TN','BG','CY','JO','AE','MV'];
 
 function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }

@@ -456,8 +456,8 @@
     /* Comparison grid */
     .hc-table {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
       align-items: start;
     }
 
@@ -549,10 +549,10 @@
     .hc-empty-slot:hover .hc-add-btn { color: var(--accent); }
     .hc-add-icon { font-size: 2rem; line-height: 1; }
 
-    @media (max-width: 600px) {
+    @media (max-width: 900px) {
       .hc-table { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 420px) {
+    @media (max-width: 480px) {
       .hc-table { grid-template-columns: 1fr; }
     }
 

@@ -101,6 +101,14 @@ module.exports = async function handler(req, res) {
       return res.status(200).json(mapProperty(data));
     }
 
+    // --- Raw (debug): volle Giata-Antwort ohne Mapping ---
+    if (action === 'raw' && id) {
+      const resp = await fetch(`${GIATA_BASE}/properties/${id}`, { headers });
+      if (!resp.ok) throw new Error(`Giata ${resp.status}`);
+      const data = await resp.json();
+      return res.status(200).json(data);
+    }
+
     // --- Suche: Search-Index verwenden wenn vorhanden ---
     if (action === 'search' && q) {
       const index = loadSearchIndex();

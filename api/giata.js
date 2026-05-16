@@ -141,10 +141,30 @@ function mapProperty(d) {
   const city    = (d.city?.names  || []).find(n => n.locale === 'de')?.value || d.city?.names?.[0]?.value || '';
   const country = (d.country?.names || []).find(n => n.locale === 'de')?.value || d.country?.names?.[0]?.value || '';
   const stars   = Math.round(parseFloat((d.ratings || []).find(r => r.isDefault)?.value || 0));
-  const heroImg = (d.images || []).find(i => i.heroImage) || d.images?.[0];
-  const image   = heroImg?.sizes?.[800]?.href || heroImg?.sizes?.[400]?.href || '';
-  const facts   = d.facts || {};
 
+  // Hauptbild (erstes Bild, 800px)
+  const heroImg = (d.images || []).find(i => i.heroImage) || d.images?.[0];
+  const image   = heroImg?.sizes?.['800']?.href || heroImg?.sizes?.[800]?.href || '';
+
+  // Galerie: bis zu 8 Bilder à 800px
+  const images = (d.images || [])
+    .map(img => img.sizes?.['800']?.href || img.sizes?.[800]?.href)
+    .filter(Boolean)
+    .slice(0, 8);
+
+  // GPS-Koordinaten
+  const geo = (d.geoCodes || [])[0];
+  const lat = geo ? (geo.latitude  ?? null) : null;
+  const lng = geo ? (geo.longitude ?? null) : null;
+
+  // Beschreibungstexte (Deutsch → Englisch als Fallback)
+  const sections = d.texts?.de?.sections || d.texts?.en?.sections || [];
+  const description = sections
+    .filter(s => s.para)
+    .slice(0, 4)
+    .map(s => ({ title: s.title || '', text: s.para || '' }));
+
+  const facts = d.facts || {};
   const facilities = {};
   try {
     for (const [key, ids] of Object.entries(FACT_IDS)) {
@@ -158,7 +178,7 @@ function mapProperty(d) {
   try { facilities.concept = extractConcept(d); } catch (e) {}
   try { facilities.rooms   = extractRoomCount(d); } catch (e) {}
 
-  return { giataId: String(d.giataId || d.id || ''), name, city, country, stars, image, facilities, bookUrl: '/' };
+  return { giataId: String(d.giataId || d.id || ''), name, city, country, stars, image, images, lat, lng, facilities, description, bookUrl: '/' };
 }
 
 function extractConcept(d) {

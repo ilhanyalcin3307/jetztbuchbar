@@ -23,6 +23,10 @@
       })();
 </script>
 
+  <!-- Leaflet (Karte) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -557,6 +561,67 @@
       .hc-table { grid-template-columns: 1fr; }
     }
 
+    /* ── SLIDER ── */
+    .hc-slider {
+      position: relative; overflow: hidden;
+      aspect-ratio: 4/3; background: #000;
+    }
+    .hc-slider-img {
+      width: 100%; height: 100%; object-fit: cover;
+      position: absolute; top: 0; left: 0;
+      opacity: 0; transition: opacity 0.45s ease;
+      display: block;
+    }
+    .hc-slider-img.sl-active { opacity: 1; }
+    .hc-slider-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.55); border: none; color: #fff;
+      cursor: pointer; z-index: 5; width: 30px; height: 30px;
+      border-radius: 50%; font-size: 1.1rem; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .hc-slider-btn:hover { background: rgba(0,0,0,0.82); }
+    .hc-slider-btn.sl-prev { left: 7px; }
+    .hc-slider-btn.sl-next { right: 7px; }
+    .hc-slider-dots {
+      position: absolute; bottom: 7px; left: 0; right: 0;
+      display: flex; justify-content: center; gap: 5px; z-index: 5;
+    }
+    .hc-slider-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.45); border: none; padding: 0;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .hc-slider-dot.sl-active { background: #fff; }
+
+    /* ── KARTE ── */
+    #hc-map {
+      width: 100%; height: 400px;
+      border-radius: var(--radius);
+      margin-top: 1.75rem;
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    /* ── BESCHREIBUNG ── */
+    .hc-desc-toggle {
+      width: 100%; background: none;
+      border: 1px solid var(--border); border-radius: 6px;
+      color: var(--accent); font-size: 0.78rem;
+      padding: 0.38rem 0.6rem; cursor: pointer;
+      margin-top: 0.6rem; transition: background 0.2s, border-color 0.2s;
+    }
+    .hc-desc-toggle:hover { background: rgba(0,200,150,0.07); border-color: var(--accent); }
+    .hc-desc-body {
+      display: none; margin-top: 0.6rem;
+      font-size: 0.77rem; color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .hc-desc-body.hc-desc-open { display: block; }
+    .hc-desc-section { margin-bottom: 0.7rem; }
+    .hc-desc-section h4 { font-size: 0.79rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+
   </style>
 </head>
 <body>
@@ -614,6 +679,7 @@
           <div class="hc-table" id="hc-table">
             <!-- wird per JS gerendert -->
           </div>
+          <div id="hc-map"></div>
         </div>
       </div>
 
@@ -1134,19 +1200,89 @@
         .replace(/"/g, '&quot;');
     }
 
+    // ── slider timers ──
+    var sliderTimers = {};
+
+    function slId(giataId) {
+      return 'sl-' + String(giataId).replace(/[^a-z0-9]/gi, '');
+    }
+
+    function descId(giataId) {
+      return 'desc-' + String(giataId).replace(/[^a-z0-9]/gi, '');
+    }
+
+    function advanceSlider(id, dir) {
+      var wrap = document.getElementById(id);
+      if (!wrap) return;
+      var imgs = wrap.querySelectorAll('.hc-slider-img');
+      var dots = wrap.querySelectorAll('.hc-slider-dot');
+      if (!imgs.length) return;
+      var cur = 0;
+      for (var i = 0; i < imgs.length; i++) { if (imgs[i].classList.contains('sl-active')) { cur = i; break; } }
+      var next = (cur + dir + imgs.length) % imgs.length;
+      imgs[cur].classList.remove('sl-active');
+      imgs[next].classList.add('sl-active');
+      if (dots[cur]) dots[cur].classList.remove('sl-active');
+      if (dots[next]) dots[next].classList.add('sl-active');
+    }
+
+    window.hcSlide = function (id, delta) { advanceSlider(id, delta); };
+
+    window.hcSlideIdx = function (id, idx) {
+      var wrap = document.getElementById(id);
+      if (!wrap) return;
+      var imgs = wrap.querySelectorAll('.hc-slider-img');
+      var dots = wrap.querySelectorAll('.hc-slider-dot');
+      for (var i = 0; i < imgs.length; i++) {
+        imgs[i].classList.toggle('sl-active', i === idx);
+        if (dots[i]) dots[i].classList.toggle('sl-active', i === idx);
+      }
+    };
+
+    function startSliderTimer(id, count) {
+      if (sliderTimers[id]) clearInterval(sliderTimers[id]);
+      if (count > 1) sliderTimers[id] = setInterval(function () { advanceSlider(id, 1); }, 3000);
+    }
+
+    function stopAllTimers() {
+      Object.keys(sliderTimers).forEach(function (k) { clearInterval(sliderTimers[k]); });
+      sliderTimers = {};
+    }
+
+    function renderSlider(h) {
+      var imgs = (h.images && h.images.length) ? h.images : (h.image ? [h.image] : []);
+      var fallback = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70';
+      if (!imgs.length) imgs = [fallback];
+      var id = slId(h.giataId);
+      var imgHtml = imgs.map(function (url, i) {
+        return '<img class="hc-slider-img' + (i === 0 ? ' sl-active' : '') + '" src="' + esc(url) + '" alt="' + esc(h.name) + '" loading="lazy" onerror="this.src=\'' + fallback + '\'">';
+      }).join('');
+      var btnHtml = imgs.length > 1
+        ? '<button class="hc-slider-btn sl-prev" onclick="hcSlide(\'' + id + '\',-1)">&#8249;</button>'
+          + '<button class="hc-slider-btn sl-next" onclick="hcSlide(\'' + id + '\',1)">&#8250;</button>'
+        : '';
+      var dotHtml = imgs.length > 1
+        ? '<div class="hc-slider-dots">' + imgs.map(function (_, i) {
+            return '<button class="hc-slider-dot' + (i === 0 ? ' sl-active' : '') + '" onclick="hcSlideIdx(\'' + id + '\',' + i + ')"></button>';
+          }).join('') + '</div>'
+        : '';
+      return '<div class="hc-slider" id="' + id + '">' + imgHtml + btnHtml + dotHtml + '</div>';
+    }
+
     // ── render ──
 
     function renderTable() {
       if (!tableEl) return;
+      stopAllTimers();
       var html = '';
-      compared.forEach(function (h) {
-        html += renderHotelCol(h);
-      });
-      // Empty slots
-      for (var i = compared.length; i < 4; i++) {
-        html += renderEmptySlot(i);
-      }
+      compared.forEach(function (h) { html += renderHotelCol(h); });
+      for (var i = compared.length; i < 4; i++) { html += renderEmptySlot(i); }
       tableEl.innerHTML = html;
+      compared.forEach(function (h) {
+        var imgs = (h.images && h.images.length) ? h.images : (h.image ? [h.image] : []);
+        startSliderTimer(slId(h.giataId), imgs.length);
+      });
+      updateMap();
     }
 
     function renderHotelCol(h) {
@@ -1159,24 +1295,33 @@
         } else if (f.type === 'number') {
           valHtml = val ? '<span class="hc-fac-text">' + esc(val) + '</span>' : '<span class="hc-fac-no">&mdash;</span>';
         } else {
-          valHtml = val
-            ? '<span class="hc-fac-yes">✓</span>'
-            : '<span class="hc-fac-no">✕</span>';
+          valHtml = val ? '<span class="hc-fac-yes">✓</span>' : '<span class="hc-fac-no">✕</span>';
         }
         facRows += '<div class="hc-fac-row">'
           + '<span class="hc-fac-label">' + f.icon + ' ' + esc(f.label) + '</span>'
-          + valHtml
-          + '</div>';
+          + valHtml + '</div>';
       });
+
+      var descHtml = '';
+      if (h.description && h.description.length) {
+        var dId = descId(h.giataId);
+        var gId = esc(String(h.giataId));
+        var sectHtml = h.description.map(function (s) {
+          return '<div class="hc-desc-section"><h4>' + esc(s.title) + '</h4><p>' + esc(s.text) + '</p></div>';
+        }).join('');
+        descHtml = '<button class="hc-desc-toggle" id="btn-' + dId + '" onclick="hcToggleDesc(\'' + gId + '\')">Mehr lesen ▼</button>'
+          + '<div class="hc-desc-body" id="' + dId + '">' + sectHtml + '</div>';
+      }
 
       return '<div class="hc-col">'
         + '<button class="hc-col-remove" onclick="hcRemove(\'' + esc(h.giataId) + '\')" title="Entfernen">&times;</button>'
-        + '<img class="hc-col-img" src="' + esc(h.image) + '" alt="' + esc(h.name) + '" loading="lazy" onerror="this.src=\'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70\'">'
+        + renderSlider(h)
         + '<div class="hc-col-body">'
           + '<div class="hc-col-name">' + esc(h.name) + '</div>'
           + '<div class="hc-col-location">📍 ' + esc(h.city) + ', ' + esc(h.country) + '</div>'
           + '<div class="hc-stars">' + stars(h.stars) + '</div>'
           + facRows
+          + descHtml
           + '<div class="hc-price"><strong>Auf Anfrage</strong>pro Nacht</div>'
           + '<a class="hc-book-btn" href="' + esc(h.bookUrl) + '">Jetzt buchen</a>'
         + '</div>'
@@ -1244,6 +1389,51 @@
     }
 
     // ── public API (window-level for inline onclick) ──
+
+    // Harita
+    var hcMap = null;
+    var hcMarkers = [];
+
+    function updateMap() {
+      var mapEl = document.getElementById('hc-map');
+      if (!mapEl || typeof L === 'undefined') return;
+      var withCoords = compared.filter(function (h) { return h.lat != null && h.lng != null; });
+      if (!withCoords.length) { mapEl.style.display = 'none'; return; }
+      mapEl.style.display = 'block';
+      if (!hcMap) {
+        hcMap = L.map('hc-map', { scrollWheelZoom: false });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          maxZoom: 18
+        }).addTo(hcMap);
+      } else {
+        hcMarkers.forEach(function (m) { hcMap.removeLayer(m); });
+        hcMarkers = [];
+      }
+      var bounds = [];
+      withCoords.forEach(function (h) {
+        var marker = L.marker([h.lat, h.lng]).addTo(hcMap);
+        marker.bindTooltip('<strong>' + h.name + '</strong><br><small>' + h.city + ', ' + h.country + '</small>', { permanent: true, direction: 'top', offset: [0, -12], className: 'hc-map-tooltip' });
+        marker.bindPopup('<strong>' + h.name + '</strong><br>' + h.city + ', ' + h.country + '<br>&#9733; ' + h.stars);
+        hcMarkers.push(marker);
+        bounds.push([h.lat, h.lng]);
+      });
+      setTimeout(function () {
+        if (bounds.length === 1) { hcMap.setView(bounds[0], 13); }
+        else { hcMap.fitBounds(bounds, { padding: [50, 50] }); }
+        hcMap.invalidateSize();
+      }, 100);
+    }
+
+    // Beschreibung Toggle
+    window.hcToggleDesc = function (giataId) {
+      var dId = 'desc-' + String(giataId).replace(/[^a-z0-9]/gi, '');
+      var bodyEl = document.getElementById(dId);
+      var btnEl  = document.getElementById('btn-' + dId);
+      if (!bodyEl) return;
+      var open = bodyEl.classList.toggle('hc-desc-open');
+      if (btnEl) btnEl.textContent = open ? 'Weniger ▲' : 'Mehr lesen ▼';
+    };
 
     window.hcRemove = function (giataId) {
       compared = compared.filter(function (h) { return h.giataId !== giataId; });

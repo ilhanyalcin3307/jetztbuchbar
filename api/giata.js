@@ -167,10 +167,10 @@ function extractRoomCount(d) {
   return null;
 }
 
-// Search-Index aus dem Projektverzeichnis laden (gebaut via content-engine/build-giata-index.js)
+// Search-Index aus dem /api-Verzeichnis laden (wird beim Build generiert)
 function loadSearchIndex() {
   try {
-    const indexPath = path.join(__dirname, '..', 'giata-search-index.json');
+    const indexPath = path.join(__dirname, 'giata-search-index.json');
     return JSON.parse(fs.readFileSync(indexPath, 'utf8'));
   } catch (e) {
     return null;

@@ -1,18 +1,117 @@
 #!/usr/bin/env node
 /**
  * build-giata-index.js
- * Baut einen lokalen Such-Index aus der Giata Drive API.
- * Ausgabe: ../giata-search-index.json
+ * Wird automatisch beim Vercel-Build ausgeführt (npm run build).
+ * Benötigt: GIATA_API_KEY als Umgebungsvariable (Vercel Production Env).
+ * Ausgabe: ../api/giata-search-index.json
  *
- * Verwendung:
- *   GIATA_API_KEY=your_key node build-giata-index.js
- *   oder: .env Datei mit GIATA_API_KEY=... im Projekt-Root anlegen
- *
- * Parameter:
- *   --countries TR,GR,ES,EG   (Komma-getrennte ISO-Ländercodes, Standard: bekannte Reiseziele)
- *   --stars 4                 (Mindest-Sternezahl, Standard: 0 = alle)
- *   --limit 500               (Max. Hotels pro Land, Standard: 200)
+ * Lokale Nutzung:
+ *   GIATA_API_KEY=your_key node content-engine/build-giata-index.js
  */
+
+const fs   = require('fs');
+const path = require('path');
+
+const API_KEY = process.env.GIATA_API_KEY;
+if (!API_KEY) {
+  console.log('ℹ️  GIATA_API_KEY nicht gesetzt – Search-Index-Build übersprungen.');
+  process.exit(0); // Build nicht fehlschlagen
+}
+
+const BASE        = 'https://giatadrive.com/api/v1';
+const HEADERS     = { Authorization: `Bearer ${API_KEY}`, Accept: 'application/json' };
+const OUTPUT      = path.join(__dirname, '..', 'api', 'giata-search-index.json');
+const BATCH_SIZE  = 15;   // gleichzeitige Anfragen
+const DELAY_MS    = 200;  // Pause zwischen Batches
+const SAMPLE_SIZE = 40;   // Hotels pro Land (evenly sampled)
+
+// Beliebte Urlaubsländer (ISO 3166-1 Alpha-2)
+const COUNTRIES = ['TR','GR','ES','EG','PT','HR','IT','MA','MT','TN','BG','CY','JO','AE','MV'];
+
+async function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function fetchJson(url) {
+  const resp = await fetch(url, { headers: HEADERS, signal: AbortSignal.timeout(10000) });
+  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+  return resp.json();
+}
+
+/** Giata property-URLs für ein Land laden (gibt {urls:[...]} zurück) */
+async function fetchUrls(countryCode) {
+  const data = await fetchJson(`${BASE}/properties?countryCode=${countryCode}`);
+  // Echtes Format: { "urls": ["https://giatadrive.com/api/v1/properties/12345", ...] }
+  return data.urls || data.properties || (Array.isArray(data) ? data : []);
+}
+
+/** giataId aus URL extrahieren */
+function idFromUrl(url) {
+  const m = String(url.href || url).match(/\/properties\/(\d+)$/);
+  return m ? m[1] : null;
+}
+
+/** Gleichmäßige Stichprobe: N aus Array wählen */
+function sample(arr, n) {
+  if (arr.length <= n) return arr;
+  const step = arr.length / n;
+  return Array.from({ length: n }, (_, i) => arr[Math.floor(i * step)]);
+}
+
+/** Kompakte Hotel-Info aus Giata-Property extrahieren */
+function extractInfo(d) {
+  const name    = (d.names  || []).find(n => n.isDefault)?.value || (d.names || [])[0]?.value || '';
+  const city    = (d.city?.names || []).find(n => n.locale === 'de')?.value
+                  || (d.city?.names || [])[0]?.value || d.city?.name || '';
+  const country = (d.country?.names || []).find(n => n.locale === 'de')?.value
+                  || (d.country?.names || [])[0]?.value || d.country?.name || '';
+  const stars   = Math.round(parseFloat(
+    (d.ratings || []).find(r => r.isDefault)?.value || (d.ratings || [])[0]?.value || 0
+  ));
+  if (!name) return null;
+  return { giataId: String(d.giataId || d.id), name, city, country, stars };
+}
+
+async function main() {
+  console.log('🏗  Giata Search-Index wird aufgebaut …');
+  const index = [];
+
+  for (const cc of COUNTRIES) {
+    process.stdout.write(`  ${cc} – URLs laden … `);
+    let urls;
+    try {
+      urls = await fetchUrls(cc);
+    } catch (e) {
+      console.log(`⚠️  ${e.message} – übersprungen`);
+      continue;
+    }
+    console.log(`${urls.length} gefunden, Sample: ${Math.min(SAMPLE_SIZE, urls.length)}`);
+
+    const sampled = sample(urls, SAMPLE_SIZE);
+    const ids     = sampled.map(idFromUrl).filter(Boolean);
+
+    for (let i = 0; i < ids.length; i += BATCH_SIZE) {
+      const batch = ids.slice(i, i + BATCH_SIZE);
+      await Promise.all(batch.map(async gId => {
+        try {
+          const d    = await fetchJson(`${BASE}/properties/${gId}`);
+          const info = extractInfo(d);
+          if (info) index.push(info);
+        } catch { /* einzelne Fehler ignorieren */ }
+      }));
+      await sleep(DELAY_MS);
+    }
+    console.log(`  ✅ ${index.length} Hotels im Index`);
+  }
+
+  index.sort((a, b) => a.name.localeCompare(b.name, 'de'));
+  fs.writeFileSync(OUTPUT, JSON.stringify(index), 'utf8');
+  console.log(`\n✅ Index gespeichert (${index.length} Hotels): ${OUTPUT}`);
+}
+
+main().catch(e => {
+  console.error('❌ Build-Index Fehler:', e.message);
+  process.exit(0); // Build trotzdem erfolgreich beenden
+});
+
 
 const fs   = require('fs');
 const path = require('path');

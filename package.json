@@ -1,0 +1,7 @@
+{
+  "name": "jetztbuchbar",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node content-engine/build-giata-index.js"
+  }
+}

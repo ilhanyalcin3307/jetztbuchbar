@@ -128,6 +128,16 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ results, indexMissing: true });
     }
 
+    // --- getidlist: Alle Property-IDs eines Landes (nur URL-Liste, keine Details) ---
+    if (action === 'getidlist' && req.query.cc) {
+      const cc = req.query.cc.toUpperCase();
+      const listData = await fetch(`${GIATA_BASE}/properties?countryCode=${cc}`, { headers }).then(r => r.json());
+      const items = listData.urls || listData.properties || (Array.isArray(listData) ? listData : []);
+      const getId = u => { const m = String(u.href || u).match(/\/properties\/(\d+)$/); return m ? m[1] : null; };
+      const ids = items.map(getId).filter(Boolean);
+      return res.status(200).json({ cc, count: ids.length, ids });
+    }
+
     // --- livesearch: Giata-Länderliste abrufen und nach Name filtern ---
     if (action === 'livesearch' && q && req.query.cc) {
       const cc = req.query.cc.toUpperCase();

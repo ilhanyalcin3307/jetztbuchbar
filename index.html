@@ -1286,6 +1286,21 @@
 
       renderTable();
 
+      // API-Status prüfen → Banner dynamisch aktualisieren
+      fetch('/api/giata?action=ping')
+        .then(function (r) { return r.json(); })
+        .then(function (s) {
+          var banner = document.getElementById('hc-demo-banner');
+          if (!banner) return;
+          if (s.apiKey && s.searchIndex) {
+            banner.style.display = 'none';
+          } else if (s.apiKey && !s.searchIndex) {
+            banner.innerHTML = '<span>⚡</span><span><strong>API verbunden</strong> — Suchindex wird aufgebaut. Suche bald verfügbar. Vorgeschlagene Hotels können bereits verglichen werden.</span>';
+          }
+          // kein apiKey → Standard-Demo-Banner bleibt
+        })
+        .catch(function () { /* Banner bleibt unverändert */ });
+
       searchInput.addEventListener('input', function () {
         clearTimeout(searchTimer);
         var q = searchInput.value.trim();

@@ -3,6 +3,8 @@
 // Docs: https://giatadrive.com/specs
 
 const GIATA_BASE = 'https://giatadrive.com/api/v1';
+const fs   = require('fs');
+const path = require('path');
 
 // Giata Fact-IDs für relevante Einrichtungen
 // Genaue IDs via https://giatadrive.com/api/v1/i18n/facts/de prüfen
@@ -56,6 +58,16 @@ module.exports = async function handler(req, res) {
   const { action, q, id } = req.query;
   const apiKey = process.env.GIATA_API_KEY;
 
+  // --- Ping: API-Status prüfen (immer verfügbar) ---
+  if (action === 'ping') {
+    const index = loadSearchIndex();
+    return res.status(200).json({
+      apiKey:      !!apiKey,
+      searchIndex: !!index,
+      indexSize:   index ? index.length : 0,
+    });
+  }
+
   // Demo-Modus wenn kein API-Key gesetzt
   if (!apiKey) {
     if (action === 'search' && q) {
@@ -86,14 +98,23 @@ module.exports = async function handler(req, res) {
       return res.status(200).json(mapProperty(data));
     }
 
-    // --- Suche: Hinweis – Giata hat kein Text-Search-Endpunkt.
-    // Für produktiven Einsatz muss ein Such-Index über content-engine aufgebaut werden.
-    // Datei: content-engine/build-giata-index.js (noch zu erstellen)
+    // --- Suche: Search-Index verwenden wenn vorhanden ---
     if (action === 'search' && q) {
-      return res.status(200).json({
-        results: [],
-        hint: 'Search index not built yet. Run content-engine/build-giata-index.js first.',
-      });
+      const index = loadSearchIndex();
+      if (index) {
+        const ql = q.toLowerCase();
+        const results = index
+          .filter(h => (h.name + ' ' + h.city + ' ' + h.country).toLowerCase().includes(ql))
+          .slice(0, 10)
+          .map(({ giataId, name, city, country, stars }) => ({ giataId, name, city, country, stars }));
+        return res.status(200).json({ results });
+      }
+      // Index noch nicht erstellt – Demo-Fallback
+      const ql = q.toLowerCase();
+      const results = DEMO_HOTELS
+        .filter(h => (h.name + ' ' + h.city).toLowerCase().includes(ql))
+        .map(({ giataId, name, city, country, stars }) => ({ giataId, name, city, country, stars }));
+      return res.status(200).json({ results, indexMissing: true });
     }
 
     return res.status(400).json({ error: 'Invalid action' });
@@ -144,4 +165,14 @@ function extractRoomCount(d) {
     }
   }
   return null;
+}
+
+// Search-Index aus dem Projektverzeichnis laden (gebaut via content-engine/build-giata-index.js)
+function loadSearchIndex() {
+  try {
+    const indexPath = path.join(__dirname, '..', 'giata-search-index.json');
+    return JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+  } catch (e) {
+    return null;
+  }
 }

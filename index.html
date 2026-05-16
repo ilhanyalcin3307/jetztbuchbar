@@ -312,7 +312,7 @@
       <button class="stab active" role="tab" aria-selected="true"  aria-controls="panel-search"   data-panel="search"   data-type="flights">
         <span class="stab-icon">✈</span> Flüge
       </button>
-      <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-search"   data-panel="search"   data-type="hotels">
+      <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-hotel"    data-panel="hotel"    data-type="hotels">
         <span class="stab-icon">🏨</span> Hotels
       </button>
       <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-transfer" data-panel="transfer" data-type="transfer">
@@ -327,6 +327,11 @@
     <div class="widget-wrap">
       <div id="panel-search" class="stab-panel active" role="tabpanel">
         <div id="tpwl-search"></div>
+      </div>
+      <div id="panel-hotel" class="stab-panel" role="tabpanel">
+        <div class="transfer-widget-wrap" id="hotel-widget-wrap">
+          <!-- Hotel-Widget wird beim ersten Klick geladen -->
+        </div>
       </div>
       <div id="panel-transfer" class="stab-panel" role="tabpanel">
         <div class="transfer-widget-wrap" id="transfer-widget-wrap">
@@ -385,9 +390,11 @@
     (function () {
       var tabs        = document.querySelectorAll('.stab');
       var panelSearch   = document.getElementById('panel-search');
+      var panelHotel    = document.getElementById('panel-hotel');
       var panelTrans    = document.getElementById('panel-transfer');
       var panelRadreise = document.getElementById('panel-radreise');
       var results       = document.getElementById('widget-results');
+      var hotelLoaded   = false;
       var transLoaded   = false;
       var radLoaded     = false;
 
@@ -403,8 +410,25 @@
         var panel = tab.dataset.panel;
         var type  = tab.dataset.type;
 
-        if (panel === 'transfer') {
+        if (panel === 'hotel') {
           panelSearch.classList.remove('active');
+          panelHotel.classList.add('active');
+          panelTrans.classList.remove('active');
+          panelRadreise.classList.remove('active');
+          results.classList.add('hidden');
+
+          // Lazy-load Hotel widget on first click
+          if (!hotelLoaded) {
+            hotelLoaded = true;
+            var h = document.createElement('script');
+            h.async = true;
+            h.charset = 'utf-8';
+            h.src = 'https://tpemb.com/content?trs=218201&shmarker=420168&locale=en&powered_by=false&primary_override=%235392F9&color_button=%235392F9&color_icons=%235392F9&dark=%23262626&color_border=%235392F9&color_focused=%2332a8dd&border_radius=5&no_labels=true&plain=true&promo_id=8303&campaign_id=104';
+            document.getElementById('hotel-widget-wrap').appendChild(h);
+          }
+        } else if (panel === 'transfer') {
+          panelSearch.classList.remove('active');
+          panelHotel.classList.remove('active');
           panelTrans.classList.add('active');
           panelRadreise.classList.remove('active');
           results.classList.add('hidden');
@@ -420,6 +444,7 @@
           }
         } else if (panel === 'radreise') {
           panelSearch.classList.remove('active');
+          panelHotel.classList.remove('active');
           panelTrans.classList.remove('active');
           panelRadreise.classList.add('active');
           results.classList.add('hidden');
@@ -434,27 +459,12 @@
             document.getElementById('radreise-widget-wrap').appendChild(r);
           }
         } else {
-          // Flüge or Hotels → show search panel
+          // Flüge → show search panel
+          panelHotel.classList.remove('active');
           panelTrans.classList.remove('active');
           panelRadreise.classList.remove('active');
           panelSearch.classList.add('active');
           results.classList.remove('hidden');
-
-          // Best-effort: activate the correct internal widget tab
-          if (type === 'hotels') {
-            setTimeout(function () {
-              // Travelpayouts WL widget uses [data-type] or role-based tabs
-              var sel = [
-                '#tpwl-search [data-type="hotels"]',
-                '#tpwl-search .tp-hotels-tab',
-                '#tpwl-search [data-product="hotels"]',
-                '#tpwl-search [class*="hotel"][role="tab"]',
-                '#tpwl-search [class*="hotel"]'
-              ].join(', ');
-              var hotelTab = document.querySelector(sel);
-              if (hotelTab) hotelTab.click();
-            }, 350);
-          }
         }
       }
 

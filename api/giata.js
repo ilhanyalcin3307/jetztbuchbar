@@ -138,37 +138,16 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ cc, count: ids.length, ids });
     }
 
-    // --- livesearch: Giata-Länderliste abrufen und nach Name filtern ---
+    // --- livesearch: Batch-Scan mit Offset ---
     if (action === 'livesearch' && q && req.query.cc) {
       const cc = req.query.cc.toUpperCase();
       const ql = q.toLowerCase();
       const offset = parseInt(req.query.offset || '0', 10);
-
-      // 1. Versuche natives Name-Filtering der Giata-API
-      const nativeResp = await fetch(`${GIATA_BASE}/properties?countryCode=${cc}&name=${encodeURIComponent(q)}`, { headers });
-      if (nativeResp.ok) {
-        const nd = await nativeResp.json();
-        const nativeItems = nd.urls || nd.properties || (Array.isArray(nd) ? nd : []);
-        if (nativeItems.length > 0 && nativeItems.length < 1000) {
-          // Echter Filter hat gewirkt
-          const getId = u => { const m = String(u.href || u).match(/\/properties\/(\d+)$/); return m ? m[1] : null; };
-          const ids = nativeItems.map(getId).filter(Boolean).slice(0, 5);
-          const results = await Promise.allSettled(ids.map(async id => {
-            const r = await fetch(`${GIATA_BASE}/properties/${id}`, { headers });
-            if (!r.ok) return null;
-            const d = await r.json();
-            const name = (d.names || []).find(n => n.isDefault)?.value || d.names?.[0]?.value || '';
-            return name ? { giataId: String(d.giataId || id), name } : null;
-          }));
-          return res.status(200).json({ results: results.filter(r => r.status==='fulfilled' && r.value).map(r=>r.value), nativeFilter: true });
-        }
-      }
-
-      // 2. Fallback: Batch-Scan mit Offset
       const listData = await fetch(`${GIATA_BASE}/properties?countryCode=${cc}`, { headers }).then(r => r.json());
       const items = listData.urls || listData.properties || (Array.isArray(listData) ? listData : []);
       const getId = u => { const m = String(u.href || u).match(/\/properties\/(\d+)$/); return m ? m[1] : null; };
-      const ids = items.map(getId).filter(Boolean).slice(offset, offset + 150);
+      const allIds = items.map(getId).filter(Boolean);
+      const ids = allIds.slice(offset, offset + 150);
       const BATCH = 15;
       const found = [];
       for (let i = 0; i < ids.length; i += BATCH) {
@@ -183,7 +162,7 @@ module.exports = async function handler(req, res) {
         results.forEach(r => { if (r.status === 'fulfilled' && r.value) found.push(r.value); });
         if (found.length >= 2) break;
       }
-      return res.status(200).json({ results: found, total: items.length, checked: offset + ids.length });
+      return res.status(200).json({ results: found, total: allIds.length, checked: offset + ids.length });
     }
 
     return res.status(400).json({ error: 'Invalid action' });

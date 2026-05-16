@@ -1147,10 +1147,16 @@
       { key: 'rooms',      label: 'Zimmeranzahl',   icon: '🛏️',  type: 'number' },
     ];
 
-    var DEMO_HOTELS = [
+    // Standardmäßig geladene Hotel-IDs (echte Giata-IDs)
+    var DEFAULT_IDS = ['42194', '232017', '574183', '10958'];
+
+    // DEMO_HOTELS wird nicht mehr benötigt – alle Hotels kommen live von der API
+    var DEMO_HOTELS = [];
+
+    /* ENTFERNT: [
       {
         giataId: 'demo-1',
-        name: 'Rixos Premium Belek',
+        name: 'PLACEHOLDER Rixos Premium Belek',
         city: 'Belek', country: 'Türkei', stars: 5,
         image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=70',
         images: [
@@ -1215,9 +1221,9 @@
         facilities: { pool:true, spa:true, beach:true, aquapark:false, fitness:true, concept:'All Inclusive', rooms:469, restaurant:true, bar:true, kidsclub:true, wifi:true, parking:true },
         bookUrl: '/spanien/teneriffa/',
       },
-    ];
+    ] */
 
-    var compared = [].concat(DEMO_HOTELS);
+    var compared = [];
     var tableEl, searchInput, autocompleteEl;
     var searchTimer;
 
@@ -1403,23 +1409,10 @@
           var res = (data.results || []).filter(function (r) {
             return !compared.some(function (c) { return c.giataId === r.giataId; });
           });
-          if (!res.length) {
-            // Fallback: filter demo hotels locally
-            var ql = q.toLowerCase();
-            res = DEMO_HOTELS
-              .filter(function (h) { return (h.name + ' ' + h.city).toLowerCase().indexOf(ql) !== -1; })
-              .filter(function (h) { return !compared.some(function (c) { return c.giataId === h.giataId; }); });
-          }
           showAutocomplete(res);
         })
         .catch(function () {
-          // Offline fallback
-          var ql = q.toLowerCase();
-          var res = DEMO_HOTELS.filter(function (h) {
-            return (h.name + ' ' + h.city).toLowerCase().indexOf(ql) !== -1
-              && !compared.some(function (c) { return c.giataId === h.giataId; });
-          });
-          showAutocomplete(res);
+          showAutocomplete([]);
         });
     }
 
@@ -1491,21 +1484,12 @@
         .then(function (hotel) {
           if (hotel && hotel.giataId) {
             compared.push(hotel);
-          } else {
-            // Fallback to demo list
-            var demo = DEMO_HOTELS.find(function (h) { return h.giataId === giataId; });
-            if (demo) compared.push(demo);
+            renderTable();
           }
-          renderTable();
           hideAutocomplete();
           if (searchInput) searchInput.value = '';
         })
         .catch(function () {
-          var demo = DEMO_HOTELS.find(function (h) { return h.giataId === giataId; });
-          if (demo && !compared.some(function (c) { return c.giataId === giataId; })) {
-            compared.push(demo);
-            renderTable();
-          }
           hideAutocomplete();
           if (searchInput) searchInput.value = '';
         });
@@ -1526,7 +1510,18 @@
 
       if (!tableEl || !searchInput || !autocompleteEl) return;
 
-      renderTable();
+      // Loading-Anzeige
+      tableEl.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">⏳ Lade Hotels…</div>';
+
+      // 4 Standard-Hotels parallel von API laden
+      Promise.all(DEFAULT_IDS.map(function (id) {
+        return fetch('/api/giata?action=property&id=' + id)
+          .then(function (r) { return r.json(); })
+          .catch(function () { return null; });
+      })).then(function (hotels) {
+        compared = hotels.filter(function (h) { return h && h.giataId; });
+        renderTable();
+      });
 
       // API-Status prüfen → Banner dynamisch aktualisieren
       fetch('/api/giata?action=ping')

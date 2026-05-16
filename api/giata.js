@@ -128,6 +128,32 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ results, indexMissing: true });
     }
 
+    // --- livesearch: Giata-Länderliste abrufen und nach Name filtern ---
+    if (action === 'livesearch' && q && req.query.cc) {
+      const cc = req.query.cc.toUpperCase();
+      const ql = q.toLowerCase();
+      const listData = await fetch(`${GIATA_BASE}/properties?countryCode=${cc}`, { headers }).then(r => r.json());
+      const items = listData.urls || listData.properties || (Array.isArray(listData) ? listData : []);
+      const getId = u => { const m = String(u.href || u).match(/\/properties\/(\d+)$/); return m ? m[1] : null; };
+      const ids = items.map(getId).filter(Boolean);
+      // Batch-fetch bis zu 200 Einträge, Treffer sofort zurückgeben
+      const BATCH = 15;
+      const found = [];
+      for (let i = 0; i < ids.length && i < 400; i += BATCH) {
+        const batch = ids.slice(i, i + BATCH);
+        const results = await Promise.allSettled(batch.map(async id => {
+          const r = await fetch(`${GIATA_BASE}/properties/${id}`, { headers });
+          if (!r.ok) return null;
+          const d = await r.json();
+          const name = (d.names || []).find(n => n.isDefault)?.value || d.names?.[0]?.value || '';
+          return name.toLowerCase().includes(ql) ? { giataId: String(d.giataId || id), name } : null;
+        }));
+        results.forEach(r => { if (r.status === 'fulfilled' && r.value) found.push(r.value); });
+        if (found.length >= 3) break;
+      }
+      return res.status(200).json({ results: found, checked: Math.min(ids.length, 400) });
+    }
+
     return res.status(400).json({ error: 'Invalid action' });
   } catch (err) {
     console.error('[giata proxy]', err.message);

@@ -138,13 +138,19 @@ function mapProperty(d) {
   const facts   = d.facts || {};
 
   const facilities = {};
-  for (const [key, ids] of Object.entries(FACT_IDS)) {
-    facilities[key] = ids.some(id => facts[String(id)] !== undefined);
-  }
-  facilities.concept = extractConcept(d);
-  facilities.rooms   = extractRoomCount(d);
+  try {
+    for (const [key, ids] of Object.entries(FACT_IDS)) {
+      facilities[key] = ids.some(id => {
+        const val = facts[String(id)];
+        return val !== undefined && val !== null;
+      });
+    }
+  } catch (e) { /* facts format unknown – skip */ }
 
-  return { giataId: d.giataId, name, city, country, stars, image, facilities, bookUrl: '/' };
+  try { facilities.concept = extractConcept(d); } catch (e) {}
+  try { facilities.rooms   = extractRoomCount(d); } catch (e) {}
+
+  return { giataId: String(d.giataId || d.id || ''), name, city, country, stars, image, facilities, bookUrl: '/' };
 }
 
 function extractConcept(d) {
@@ -160,7 +166,8 @@ function extractConcept(d) {
 
 function extractRoomCount(d) {
   for (const instances of Object.values(d.facts || {})) {
-    for (const inst of instances) {
+    const arr = Array.isArray(instances) ? instances : (instances ? [instances] : []);
+    for (const inst of arr) {
       for (const attr of (inst.attributes || [])) {
         const v = parseInt(attr.value, 10);
         if (!isNaN(v) && v >= 20 && v <= 5000) return v;

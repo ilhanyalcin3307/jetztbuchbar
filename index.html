@@ -365,6 +365,197 @@
       .hero h1 { letter-spacing: -0.75px; }
       footer { flex-direction: column; align-items: flex-start; }
     }
+    /* ── HOTEL-VERGLEICH WIDGET ── */
+    .hc-wrap {
+      padding: 2rem clamp(1.25rem, 5vw, 3rem) 3rem;
+      max-width: 1260px;
+      margin: 0 auto;
+    }
+
+    .hc-demo-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(0,200,150,0.07);
+      border: 1px solid rgba(0,200,150,0.2);
+      border-radius: var(--radius);
+      padding: 0.7rem 1rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .hc-demo-banner strong { color: var(--accent); }
+
+    .hc-search-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .hc-search-box {
+      position: relative;
+      flex: 1;
+      max-width: 420px;
+    }
+
+    .hc-search-icon {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 0.95rem;
+    }
+
+    #hc-search-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.7rem 1rem 0.7rem 2.4rem;
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #hc-search-input:focus { border-color: var(--accent); }
+    #hc-search-input::placeholder { color: var(--text-muted); }
+
+    .hc-autocomplete {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0; right: 0;
+      background: #181818;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      z-index: 300;
+      max-height: 260px;
+      overflow-y: auto;
+      display: none;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .hc-autocomplete.open { display: block; }
+
+    .hc-ac-item {
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .hc-ac-item:last-child { border-bottom: none; }
+    .hc-ac-item:hover { background: rgba(255,255,255,0.06); }
+    .hc-ac-name { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+    .hc-ac-loc  { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* Comparison grid */
+    .hc-table {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .hc-col {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hc-col-remove {
+      position: absolute; top: 0.5rem; right: 0.5rem;
+      background: rgba(0,0,0,0.65);
+      border: none; border-radius: 50%;
+      width: 26px; height: 26px;
+      color: #fff; font-size: 0.75rem;
+      cursor: pointer; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .hc-col-remove:hover { background: #e53e3e; }
+
+    .hc-col-img {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover; display: block;
+    }
+
+    .hc-col-body { padding: 0.9rem; }
+
+    .hc-col-name {
+      font-size: 0.93rem; font-weight: 700;
+      line-height: 1.3; margin-bottom: 0.25rem;
+    }
+    .hc-col-location { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+    .hc-stars { color: #f59e0b; font-size: 0.88rem; margin-bottom: 0.9rem; letter-spacing: 1px; }
+
+    .hc-fac-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.8rem;
+    }
+    .hc-fac-row:last-child { border-bottom: none; }
+    .hc-fac-label { display: flex; align-items: center; gap: 0.35rem; color: var(--text-muted); }
+    .hc-fac-yes   { color: var(--accent); font-size: 1rem; font-weight: 700; }
+    .hc-fac-no    { color: #444; font-size: 1rem; }
+    .hc-fac-text  { color: var(--text); font-size: 0.79rem; max-width: 100px; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .hc-price {
+      text-align: center;
+      padding: 0.7rem 0 0.3rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .hc-price strong { display: block; font-size: 1.25rem; font-weight: 800; color: var(--accent); }
+
+    .hc-book-btn {
+      display: block; width: 100%; margin-top: 0.65rem;
+      padding: 0.6rem; background: var(--accent);
+      color: #0a0a0a; border: none; border-radius: 8px;
+      font-weight: 700; font-size: 0.88rem;
+      cursor: pointer; text-align: center; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .hc-book-btn:hover { background: var(--accent-dark); }
+
+    .hc-empty-slot {
+      background: var(--bg-card);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 220px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .hc-empty-slot:hover { border-color: var(--accent); background: rgba(0,200,150,0.04); }
+
+    .hc-add-btn {
+      background: none; border: none; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.4rem; color: var(--text-muted); transition: color 0.2s;
+      font-size: 0.85rem;
+    }
+    .hc-empty-slot:hover .hc-add-btn { color: var(--accent); }
+    .hc-add-icon { font-size: 2rem; line-height: 1; }
+
+    @media (max-width: 600px) {
+      .hc-table { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 420px) {
+      .hc-table { grid-template-columns: 1fr; }
+    }
+
   </style>
 </head>
 <body>
@@ -387,6 +578,9 @@
 
     <!-- ── TAB-BAR ── -->
     <div class="stab-bar" role="tablist" aria-label="Suchtyp wählen">
+      <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-vergleich" data-panel="vergleich" data-type="vergleich">
+        <span class="stab-icon">🏨</span> Vergleich Hotels
+      </button>
       <button class="stab active" role="tab" aria-selected="true"  aria-controls="panel-search"   data-panel="search"   data-type="flights">
         <span class="stab-icon">✈</span> Flüge
       </button>
@@ -403,6 +597,25 @@
 
     <!-- ── PANELS ── -->
     <div class="widget-wrap">
+      <div id="panel-vergleich" class="stab-panel" role="tabpanel">
+        <div class="hc-wrap">
+          <div class="hc-demo-banner">
+            <span>ℹ️</span>
+            <span><strong>Demo-Modus:</strong> Beispiel-Hotels werden angezeigt. Mit Giata-API-Key werden echte Hoteldaten geladen. <a href="https://giatadrive.com/user/signup" target="_blank" rel="noopener" style="color:var(--accent)">API-Key anfordern →</a></span>
+          </div>
+          <div class="hc-search-row">
+            <div class="hc-search-box">
+              <span class="hc-search-icon">🔍</span>
+              <input type="text" id="hc-search-input" placeholder="Hotelname oder Ort suchen…" autocomplete="off">
+              <div class="hc-autocomplete" id="hc-autocomplete"></div>
+            </div>
+          </div>
+          <div class="hc-table" id="hc-table">
+            <!-- wird per JS gerendert -->
+          </div>
+        </div>
+      </div>
+
       <div id="panel-search" class="stab-panel active" role="tabpanel">
         <div id="tpwl-search"></div>
       </div>
@@ -730,20 +943,23 @@
       var heroTitle = document.getElementById('hero-title');
       var heroSub   = document.getElementById('hero-sub');
       var heroTexts = {
-        flights:  { h: 'Flüge weltweit<br><span>günstig buchen.</span>',       p: 'Hunderte Airlines vergleichen – sofort buchen.' },
-        hotels:   { h: 'Hotels &amp; Resorts<br><span>direkt buchen.</span>',   p: 'Millionen Unterkünfte weltweit – vergleichen &amp; buchen.' },
-        transfer: { h: 'Flughafentransfer<br><span>einfach buchen.</span>',     p: 'Zuverlässige Transfers weltweit – schnell &amp; sicher.' },
-        radreise: { h: 'Radreisen entdecken<br><span>jetzt buchen.</span>',     p: 'Die schönsten Radrouten weltweit – günstig buchen.' }
+        flights:   { h: 'Flüge weltweit<br><span>günstig buchen.</span>',       p: 'Hunderte Airlines vergleichen – sofort buchen.' },
+        hotels:    { h: 'Hotels &amp; Resorts<br><span>direkt buchen.</span>',   p: 'Millionen Unterkünfte weltweit – vergleichen &amp; buchen.' },
+        transfer:  { h: 'Flughafentransfer<br><span>einfach buchen.</span>',     p: 'Zuverlässige Transfers weltweit – schnell &amp; sicher.' },
+        radreise:  { h: 'Radreisen entdecken<br><span>jetzt buchen.</span>',     p: 'Die schönsten Radrouten weltweit – günstig buchen.' },
+        vergleich: { h: 'Hotels vergleichen<br><span>bis zu 4 auf einen Blick.</span>', p: 'Finde das beste Hotel – Preise, Ausstattung &amp; Lage im direkten Vergleich.' }
       };
 
-      var panelSearch   = document.getElementById('panel-search');
-      var panelHotel    = document.getElementById('panel-hotel');
-      var panelTrans    = document.getElementById('panel-transfer');
-      var panelRadreise = document.getElementById('panel-radreise');
-      var results       = document.getElementById('widget-results');
-      var hotelLoaded   = false;
-      var transLoaded   = false;
-      var radLoaded     = false;
+      var panelSearch    = document.getElementById('panel-search');
+      var panelHotel     = document.getElementById('panel-hotel');
+      var panelTrans     = document.getElementById('panel-transfer');
+      var panelRadreise  = document.getElementById('panel-radreise');
+      var panelVergleich = document.getElementById('panel-vergleich');
+      var results        = document.getElementById('widget-results');
+      var hotelLoaded    = false;
+      var transLoaded    = false;
+      var radLoaded      = false;
+      var vergleichInited = false;
 
       function activate(tab) {
         // Update tab state
@@ -762,11 +978,20 @@
         heroTitle.innerHTML = txt.h;
         heroSub.innerHTML   = txt.p;
 
-        if (panel === 'hotel') {
+        if (panel === 'vergleich') {
+          panelSearch.classList.remove('active');
+          panelHotel.classList.remove('active');
+          panelTrans.classList.remove('active');
+          panelRadreise.classList.remove('active');
+          panelVergleich.classList.add('active');
+          results.classList.add('hidden');
+          if (!vergleichInited) { vergleichInited = true; initHotelCompare(); }
+        } else if (panel === 'hotel') {
           panelSearch.classList.remove('active');
           panelHotel.classList.add('active');
           panelTrans.classList.remove('active');
           panelRadreise.classList.remove('active');
+          panelVergleich.classList.remove('active');
           results.classList.add('hidden');
 
           // Lazy-load Hotel widget on first click
@@ -783,6 +1008,7 @@
           panelHotel.classList.remove('active');
           panelTrans.classList.add('active');
           panelRadreise.classList.remove('active');
+          panelVergleich.classList.remove('active');
           results.classList.add('hidden');
 
           // Lazy-load Transfer widget on first click
@@ -799,6 +1025,7 @@
           panelHotel.classList.remove('active');
           panelTrans.classList.remove('active');
           panelRadreise.classList.add('active');
+          panelVergleich.classList.remove('active');
           results.classList.add('hidden');
 
           // Lazy-load Radreise widget on first click
@@ -815,6 +1042,7 @@
           panelHotel.classList.remove('active');
           panelTrans.classList.remove('active');
           panelRadreise.classList.remove('active');
+          panelVergleich.classList.remove('active');
           panelSearch.classList.add('active');
           results.classList.remove('hidden');
         }
@@ -824,6 +1052,258 @@
         tab.addEventListener('click', function () { activate(tab); });
       });
     })();
+  </script>
+
+  <!-- ─── HOTEL-VERGLEICH WIDGET ─── -->
+  <script>
+  (function () {
+    'use strict';
+
+    var FACILITIES = [
+      { key: 'pool',       label: 'Außenpool',     icon: '🏊' },
+      { key: 'spa',        label: 'Spa & Wellness', icon: '🧖' },
+      { key: 'beach',      label: 'Strandlage',     icon: '🏖️' },
+      { key: 'aquapark',   label: 'Aquapark',       icon: '💦' },
+      { key: 'fitness',    label: 'Fitness',        icon: '💪' },
+      { key: 'restaurant', label: 'Restaurant',     icon: '🍽️' },
+      { key: 'bar',        label: 'Bar',            icon: '🍹' },
+      { key: 'kidsclub',   label: 'Kinderclub',     icon: '👧' },
+      { key: 'wifi',       label: 'WLAN',           icon: '📶' },
+      { key: 'parking',    label: 'Parkplatz',      icon: '🅿️' },
+      { key: 'concept',    label: 'Konzept',        icon: '🏷️',  type: 'text' },
+      { key: 'rooms',      label: 'Zimmeranzahl',   icon: '🛏️',  type: 'number' },
+    ];
+
+    var DEMO_HOTELS = [
+      {
+        giataId: 'demo-1',
+        name: 'Rixos Premium Belek',
+        city: 'Antalya', country: 'Türkei', stars: 5,
+        image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70',
+        facilities: { pool:true, spa:true, beach:true, aquapark:true, fitness:true, concept:'Ultra All Inclusive', rooms:750, restaurant:true, bar:true, kidsclub:true, wifi:true, parking:true },
+        bookUrl: '/tuerkei/antalya/',
+      },
+      {
+        giataId: 'demo-2',
+        name: 'Aldemar Knossos Royal',
+        city: 'Kreta', country: 'Griechenland', stars: 5,
+        image: 'https://images.unsplash.com/photo-1558870964-72e29d300edd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70',
+        facilities: { pool:true, spa:true, beach:true, aquapark:false, fitness:true, concept:'All Inclusive', rooms:320, restaurant:true, bar:true, kidsclub:true, wifi:true, parking:false },
+        bookUrl: '/griechenland/kreta/',
+      },
+      {
+        giataId: 'demo-3',
+        name: 'Meliá Atlantico Isla Canela',
+        city: 'Isla Canela', country: 'Spanien', stars: 4,
+        image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70',
+        facilities: { pool:true, spa:false, beach:true, aquapark:false, fitness:true, concept:'All Inclusive', rooms:252, restaurant:true, bar:true, kidsclub:false, wifi:true, parking:true },
+        bookUrl: '/spanien/',
+      },
+    ];
+
+    var compared = [].concat(DEMO_HOTELS);
+    var tableEl, searchInput, autocompleteEl;
+    var searchTimer;
+
+    // ── helpers ──
+
+    function stars(n) {
+      return '★'.repeat(n) + '☆'.repeat(Math.max(0, 5 - n));
+    }
+
+    function esc(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // ── render ──
+
+    function renderTable() {
+      if (!tableEl) return;
+      var html = '';
+      compared.forEach(function (h) {
+        html += renderHotelCol(h);
+      });
+      // Empty slots
+      for (var i = compared.length; i < 4; i++) {
+        html += renderEmptySlot(i);
+      }
+      tableEl.innerHTML = html;
+    }
+
+    function renderHotelCol(h) {
+      var facRows = '';
+      FACILITIES.forEach(function (f) {
+        var val = h.facilities ? h.facilities[f.key] : undefined;
+        var valHtml;
+        if (f.type === 'text') {
+          valHtml = val ? '<span class="hc-fac-text">' + esc(val) + '</span>' : '<span class="hc-fac-no">&mdash;</span>';
+        } else if (f.type === 'number') {
+          valHtml = val ? '<span class="hc-fac-text">' + esc(val) + '</span>' : '<span class="hc-fac-no">&mdash;</span>';
+        } else {
+          valHtml = val
+            ? '<span class="hc-fac-yes">✓</span>'
+            : '<span class="hc-fac-no">✕</span>';
+        }
+        facRows += '<div class="hc-fac-row">'
+          + '<span class="hc-fac-label">' + f.icon + ' ' + esc(f.label) + '</span>'
+          + valHtml
+          + '</div>';
+      });
+
+      return '<div class="hc-col">'
+        + '<button class="hc-col-remove" onclick="hcRemove(\'' + esc(h.giataId) + '\')" title="Entfernen">&times;</button>'
+        + '<img class="hc-col-img" src="' + esc(h.image) + '" alt="' + esc(h.name) + '" loading="lazy" onerror="this.src=\'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70\'">'
+        + '<div class="hc-col-body">'
+          + '<div class="hc-col-name">' + esc(h.name) + '</div>'
+          + '<div class="hc-col-location">📍 ' + esc(h.city) + ', ' + esc(h.country) + '</div>'
+          + '<div class="hc-stars">' + stars(h.stars) + '</div>'
+          + facRows
+          + '<div class="hc-price"><strong>Auf Anfrage</strong>pro Nacht</div>'
+          + '<a class="hc-book-btn" href="' + esc(h.bookUrl) + '">Jetzt buchen</a>'
+        + '</div>'
+        + '</div>';
+    }
+
+    function renderEmptySlot(idx) {
+      return '<div class="hc-empty-slot" onclick="hcFocusSearch()" title="Hotel hinzufügen">'
+        + '<button class="hc-add-btn">'
+          + '<span class="hc-add-icon">＋</span>'
+          + '<span>Hotel hinzufügen</span>'
+        + '</button>'
+        + '</div>';
+    }
+
+    // ── autocomplete ──
+
+    function showAutocomplete(results) {
+      if (!autocompleteEl) return;
+      if (!results || !results.length) {
+        autocompleteEl.innerHTML = '<div class="hc-ac-item"><span class="hc-ac-name" style="color:var(--text-muted)">Keine Ergebnisse</span></div>';
+        autocompleteEl.classList.add('open');
+        return;
+      }
+      var html = '';
+      results.forEach(function (r) {
+        html += '<div class="hc-ac-item" onclick="hcPickHotel(\'' + esc(r.giataId) + '\')">'
+          + '<span class="hc-ac-name">' + esc(r.name) + '</span>'
+          + '<span class="hc-ac-loc">' + esc(r.city) + ', ' + esc(r.country) + '</span>'
+          + '</div>';
+      });
+      autocompleteEl.innerHTML = html;
+      autocompleteEl.classList.add('open');
+    }
+
+    function hideAutocomplete() {
+      if (autocompleteEl) autocompleteEl.classList.remove('open');
+    }
+
+    function searchHotels(q) {
+      fetch('/api/giata?action=search&q=' + encodeURIComponent(q))
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var res = (data.results || []).filter(function (r) {
+            return !compared.some(function (c) { return c.giataId === r.giataId; });
+          });
+          if (!res.length) {
+            // Fallback: filter demo hotels locally
+            var ql = q.toLowerCase();
+            res = DEMO_HOTELS
+              .filter(function (h) { return (h.name + ' ' + h.city).toLowerCase().indexOf(ql) !== -1; })
+              .filter(function (h) { return !compared.some(function (c) { return c.giataId === h.giataId; }); });
+          }
+          showAutocomplete(res);
+        })
+        .catch(function () {
+          // Offline fallback
+          var ql = q.toLowerCase();
+          var res = DEMO_HOTELS.filter(function (h) {
+            return (h.name + ' ' + h.city).toLowerCase().indexOf(ql) !== -1
+              && !compared.some(function (c) { return c.giataId === h.giataId; });
+          });
+          showAutocomplete(res);
+        });
+    }
+
+    // ── public API (window-level for inline onclick) ──
+
+    window.hcRemove = function (giataId) {
+      compared = compared.filter(function (h) { return h.giataId !== giataId; });
+      renderTable();
+    };
+
+    window.hcPickHotel = function (giataId) {
+      if (compared.length >= 4) {
+        alert('Maximal 4 Hotels können gleichzeitig verglichen werden.');
+        return;
+      }
+      // Check if already in list
+      if (compared.some(function (h) { return h.giataId === giataId; })) {
+        hideAutocomplete();
+        return;
+      }
+      // Try to get full data from API
+      fetch('/api/giata?action=property&id=' + encodeURIComponent(giataId))
+        .then(function (r) { return r.json(); })
+        .then(function (hotel) {
+          if (hotel && hotel.giataId) {
+            compared.push(hotel);
+          } else {
+            // Fallback to demo list
+            var demo = DEMO_HOTELS.find(function (h) { return h.giataId === giataId; });
+            if (demo) compared.push(demo);
+          }
+          renderTable();
+          hideAutocomplete();
+          if (searchInput) searchInput.value = '';
+        })
+        .catch(function () {
+          var demo = DEMO_HOTELS.find(function (h) { return h.giataId === giataId; });
+          if (demo && !compared.some(function (c) { return c.giataId === giataId; })) {
+            compared.push(demo);
+            renderTable();
+          }
+          hideAutocomplete();
+          if (searchInput) searchInput.value = '';
+        });
+    };
+
+    window.hcFocusSearch = function () {
+      if (searchInput) searchInput.focus();
+    };
+
+    // ── init (called on first tab click) ──
+
+    window.initHotelCompare = function () {
+      tableEl        = document.getElementById('hc-table');
+      searchInput    = document.getElementById('hc-search-input');
+      autocompleteEl = document.getElementById('hc-autocomplete');
+
+      if (!tableEl || !searchInput || !autocompleteEl) return;
+
+      renderTable();
+
+      searchInput.addEventListener('input', function () {
+        clearTimeout(searchTimer);
+        var q = searchInput.value.trim();
+        if (q.length < 2) { hideAutocomplete(); return; }
+        searchTimer = setTimeout(function () { searchHotels(q); }, 300);
+      });
+
+      searchInput.addEventListener('blur', function () {
+        setTimeout(hideAutocomplete, 200);
+      });
+
+      searchInput.addEventListener('focus', function () {
+        if (searchInput.value.trim().length >= 2) {
+          searchHotels(searchInput.value.trim());
+        }
+      });
+    };
+  })();
   </script>
 
 </body>

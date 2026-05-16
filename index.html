@@ -303,8 +303,8 @@
   <!-- ── HERO + SUCHMASKE ── -->
   <div class="hero">
     <div class="hero-text">
-      <h1>Flüge &amp; Hotels<br /><span>direkt buchen.</span></h1>
-      <p>Hunderte Airlines und Hotels – vergleichen, auswählen, sofort buchen.</p>
+      <h1 id="hero-title">Flüge weltweit<br /><span>günstig buchen.</span></h1>
+      <p id="hero-sub">Hunderte Airlines vergleichen – sofort buchen.</p>
     </div>
 
     <!-- ── TAB-BAR ── -->
@@ -389,6 +389,15 @@
   <script>
     (function () {
       var tabs        = document.querySelectorAll('.stab');
+      var heroTitle = document.getElementById('hero-title');
+      var heroSub   = document.getElementById('hero-sub');
+      var heroTexts = {
+        flights:  { h: 'Flüge weltweit<br><span>günstig buchen.</span>',       p: 'Hunderte Airlines vergleichen – sofort buchen.' },
+        hotels:   { h: 'Hotels &amp; Resorts<br><span>direkt buchen.</span>',   p: 'Millionen Unterkünfte weltweit – vergleichen &amp; buchen.' },
+        transfer: { h: 'Flughafentransfer<br><span>einfach buchen.</span>',     p: 'Zuverlässige Transfers weltweit – schnell &amp; sicher.' },
+        radreise: { h: 'Radreisen entdecken<br><span>jetzt buchen.</span>',     p: 'Die schönsten Radrouten weltweit – günstig buchen.' }
+      };
+
       var panelSearch   = document.getElementById('panel-search');
       var panelHotel    = document.getElementById('panel-hotel');
       var panelTrans    = document.getElementById('panel-transfer');
@@ -409,6 +418,11 @@
 
         var panel = tab.dataset.panel;
         var type  = tab.dataset.type;
+
+        // Update hero text
+        var txt = heroTexts[type] || heroTexts.flights;
+        heroTitle.innerHTML = txt.h;
+        heroSub.innerHTML   = txt.p;
 
         if (panel === 'hotel') {
           panelSearch.classList.remove('active');

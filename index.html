@@ -229,6 +229,80 @@
     .info-item span:first-child { font-size: 1.4rem; }
     .info-item strong { color: var(--text); }
 
+    /* ── REISEZIELE CARDS ── */
+    .destinations {
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 5vw, 3rem);
+      max-width: 1260px;
+      margin: 0 auto;
+    }
+
+    .destinations h2 {
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .destinations h2 span { color: var(--accent); }
+
+    .destinations-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .dest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .dest-card {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 3/2;
+      display: block;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .dest-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }
+
+    .dest-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .dest-card:hover img { transform: scale(1.06); }
+
+    .dest-card-label {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 0.9rem 1rem;
+    }
+
+    .dest-card-label span {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+
+    @media (max-width: 600px) {
+      .dest-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -293,10 +367,8 @@
   <header>
     <a href="/" class="logo">JetztBuchbar</a>
     <nav>
-      <a href="/tuerkei/">Türkei</a>
-      <a href="/griechenland/">Griechenland</a>
-      <a href="/spanien/">Spanien</a>
       <a href="/ueber-uns.html">Über uns</a>
+      <a href="/kontakt.html">Kontakt</a>
     </nav>
   </header>
 
@@ -370,6 +442,78 @@
       <span><strong>Sichere</strong> Buchung</span>
     </div>
   </div>
+
+  <!-- ── REISEZIELE ── -->
+  <section class="destinations">
+    <h2>Beliebte <span>Reiseziele</span></h2>
+    <p class="destinations-sub">Entdecke unsere Reiseguides und finde das beste Angebot für dein Traumziel.</p>
+    <div class="dest-grid">
+      <a href="/tuerkei/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=600&q=70&auto=format&fit=crop" alt="Türkei" loading="lazy">
+        <div class="dest-card-label"><span>Türkei</span></div>
+      </a>
+      <a href="/griechenland/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&q=70&auto=format&fit=crop" alt="Griechenland" loading="lazy">
+        <div class="dest-card-label"><span>Griechenland</span></div>
+      </a>
+      <a href="/spanien/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=600&q=70&auto=format&fit=crop" alt="Spanien" loading="lazy">
+        <div class="dest-card-label"><span>Spanien</span></div>
+      </a>
+      <a href="/dubai/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=70&auto=format&fit=crop" alt="Dubai" loading="lazy">
+        <div class="dest-card-label"><span>Dubai</span></div>
+      </a>
+      <a href="/portugal/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&q=70&auto=format&fit=crop" alt="Portugal" loading="lazy">
+        <div class="dest-card-label"><span>Portugal</span></div>
+      </a>
+      <a href="/italien/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=600&q=70&auto=format&fit=crop" alt="Italien" loading="lazy">
+        <div class="dest-card-label"><span>Italien</span></div>
+      </a>
+      <a href="/kroatien/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1555990793-da11153b6455?w=600&q=70&auto=format&fit=crop" alt="Kroatien" loading="lazy">
+        <div class="dest-card-label"><span>Kroatien</span></div>
+      </a>
+      <a href="/malta/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1559493091-3ca2e1e89b21?w=600&q=70&auto=format&fit=crop" alt="Malta" loading="lazy">
+        <div class="dest-card-label"><span>Malta</span></div>
+      </a>
+      <a href="/marokko/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=600&q=70&auto=format&fit=crop" alt="Marokko" loading="lazy">
+        <div class="dest-card-label"><span>Marokko</span></div>
+      </a>
+      <a href="/aegypten/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1539768942893-daf53e448371?w=600&q=70&auto=format&fit=crop" alt="Ägypten" loading="lazy">
+        <div class="dest-card-label"><span>Ägypten</span></div>
+      </a>
+      <a href="/zypern/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=70&auto=format&fit=crop" alt="Zypern" loading="lazy">
+        <div class="dest-card-label"><span>Zypern</span></div>
+      </a>
+      <a href="/frankreich/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1431274172761-fcdab704a4b2?w=600&q=70&auto=format&fit=crop" alt="Frankreich" loading="lazy">
+        <div class="dest-card-label"><span>Frankreich</span></div>
+      </a>
+      <a href="/jordanien/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=600&q=70&auto=format&fit=crop" alt="Jordanien" loading="lazy">
+        <div class="dest-card-label"><span>Jordanien</span></div>
+      </a>
+      <a href="/tunesien/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?w=600&q=70&auto=format&fit=crop" alt="Tunesien" loading="lazy">
+        <div class="dest-card-label"><span>Tunesien</span></div>
+      </a>
+      <a href="/kap-verde/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1560969184-10fe8719e047?w=600&q=70&auto=format&fit=crop" alt="Kap Verde" loading="lazy">
+        <div class="dest-card-label"><span>Kap Verde</span></div>
+      </a>
+      <a href="/bulgarien/" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1571406252241-db0280bd38db?w=600&q=70&auto=format&fit=crop" alt="Bulgarien" loading="lazy">
+        <div class="dest-card-label"><span>Bulgarien</span></div>
+      </a>
+    </div>
+  </section>
 
   <!-- ── FOOTER ── -->
   <footer>
@@ -453,7 +597,7 @@
             var s = document.createElement('script');
             s.async = true;
             s.charset = 'utf-8';
-            s.src = 'https://tpemb.com/content?currency=EUR&trs=218201&shmarker=420168&language=en&theme=4&powered_by=false&campaign_id=1&promo_id=1486';
+            s.src = 'https://tpemb.com/content?currency=EUR&trs=218201&shmarker=420168&locale=de&powered_by=false&transfer_options_limit=10&transfer_options=MCR&disable_currency_selector=true&hide_form_extras=true&hide_external_links=true&campaign_id=1&promo_id=3879';
             document.getElementById('transfer-widget-wrap').appendChild(s);
           }
         } else if (panel === 'radreise') {

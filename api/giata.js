@@ -93,7 +93,10 @@ module.exports = async function handler(req, res) {
     // --- Property Details ---
     if (action === 'property' && id) {
       const resp = await fetch(`${GIATA_BASE}/properties/${id}`, { headers });
-      if (!resp.ok) throw new Error(`Giata ${resp.status}`);
+      if (!resp.ok) {
+        const body = await resp.text().catch(() => '');
+        throw new Error(`Giata ${resp.status}: ${body.slice(0, 200)}`);
+      }
       const data = await resp.json();
       return res.status(200).json(mapProperty(data));
     }
@@ -120,7 +123,7 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid action' });
   } catch (err) {
     console.error('[giata proxy]', err.message);
-    return res.status(500).json({ error: 'Upstream API error' });
+    return res.status(500).json({ error: 'Upstream API error', detail: err.message });
   }
 };
 

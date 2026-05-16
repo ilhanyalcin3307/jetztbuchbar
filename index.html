@@ -578,10 +578,10 @@
 
     <!-- ── TAB-BAR ── -->
     <div class="stab-bar" role="tablist" aria-label="Suchtyp wählen">
-      <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-vergleich" data-panel="vergleich" data-type="vergleich">
+      <button class="stab active" role="tab" aria-selected="true"  aria-controls="panel-vergleich" data-panel="vergleich" data-type="vergleich">
         <span class="stab-icon">🏨</span> Vergleich Hotels
       </button>
-      <button class="stab active" role="tab" aria-selected="true"  aria-controls="panel-search"   data-panel="search"   data-type="flights">
+      <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-search"   data-panel="search"   data-type="flights">
         <span class="stab-icon">✈</span> Flüge
       </button>
       <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-hotel"    data-panel="hotel"    data-type="hotels">
@@ -597,9 +597,9 @@
 
     <!-- ── PANELS ── -->
     <div class="widget-wrap">
-      <div id="panel-vergleich" class="stab-panel" role="tabpanel">
+      <div id="panel-vergleich" class="stab-panel active" role="tabpanel">
         <div class="hc-wrap">
-          <div class="hc-demo-banner">
+          <div class="hc-demo-banner" id="hc-demo-banner" style="display:none">
             <span>ℹ️</span>
             <span><strong>Demo-Modus:</strong> Beispiel-Hotels werden angezeigt. Mit Giata-API-Key werden echte Hoteldaten geladen. <a href="https://giatadrive.com/user/signup" target="_blank" rel="noopener" style="color:var(--accent)">API-Key anfordern →</a></span>
           </div>
@@ -616,7 +616,7 @@
         </div>
       </div>
 
-      <div id="panel-search" class="stab-panel active" role="tabpanel">
+      <div id="panel-search" class="stab-panel" role="tabpanel">
         <div id="tpwl-search"></div>
       </div>
       <div id="panel-hotel" class="stab-panel" role="tabpanel">
@@ -944,6 +944,7 @@
       var heroSub   = document.getElementById('hero-sub');
       var heroTexts = {
         flights:   { h: 'Flüge weltweit<br><span>günstig buchen.</span>',       p: 'Hunderte Airlines vergleichen – sofort buchen.' },
+        // Default-Tab ist Vergleich Hotels
         hotels:    { h: 'Hotels &amp; Resorts<br><span>direkt buchen.</span>',   p: 'Millionen Unterkünfte weltweit – vergleichen &amp; buchen.' },
         transfer:  { h: 'Flughafentransfer<br><span>einfach buchen.</span>',     p: 'Zuverlässige Transfers weltweit – schnell &amp; sicher.' },
         radreise:  { h: 'Radreisen entdecken<br><span>jetzt buchen.</span>',     p: 'Die schönsten Radrouten weltweit – günstig buchen.' },
@@ -1051,6 +1052,11 @@
       tabs.forEach(function (tab) {
         tab.addEventListener('click', function () { activate(tab); });
       });
+
+      // Beim Laden Vergleich-Tab initialisieren (Hero-Text)
+      var vergleichTxt = heroTexts['vergleich'];
+      heroTitle.innerHTML = vergleichTxt.h;
+      heroSub.innerHTML   = vergleichTxt.p;
     })();
   </script>
 
@@ -1278,6 +1284,8 @@
     // ── init (called on first tab click) ──
 
     window.initHotelCompare = function () {
+      if (window._hcInited) return;
+      window._hcInited = true;
       tableEl        = document.getElementById('hc-table');
       searchInput    = document.getElementById('hc-search-input');
       autocompleteEl = document.getElementById('hc-autocomplete');
@@ -1318,6 +1326,9 @@
         }
       });
     };
+
+    // Direkt beim Seitenstart aufrufen (Vergleich ist der Default-Tab)
+    window.initHotelCompare();
   })();
   </script>
 

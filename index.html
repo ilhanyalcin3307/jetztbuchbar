@@ -553,16 +553,6 @@
     .hc-fac-no    { color: #444; font-size: 1rem; }
     .hc-fac-text  { color: var(--text); font-size: 0.79rem; max-width: 100px; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    .hc-price {
-      text-align: center;
-      padding: 0.7rem 0 0.3rem;
-      border-top: 1px solid var(--border);
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    .hc-price strong { display: block; font-size: 1.25rem; font-weight: 800; color: var(--accent); }
-
     .hc-book-btn {
       display: block; width: 100%; margin-top: 0.65rem;
       padding: 0.6rem; background: var(--accent);
@@ -572,6 +562,19 @@
       transition: background 0.2s;
     }
     .hc-book-btn:hover { background: var(--accent-dark); }
+
+    /* ── ANFRAGEN-TOAST ── */
+    .hc-toast {
+      position: fixed; bottom: 5.5rem; right: 1.5rem;
+      background: #1a1a1a; border: 1px solid var(--accent);
+      color: var(--text); font-size: 0.8rem; line-height: 1.4;
+      padding: 0.65rem 1rem; border-radius: 8px;
+      z-index: 9999; max-width: 300px;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.22s, transform 0.22s;
+      pointer-events: none;
+    }
+    .hc-toast.hc-toast-show { opacity: 1; transform: translateY(0); }
 
     .hc-empty-slot {
       background: var(--bg-card);
@@ -1797,8 +1800,7 @@
           + '<div class="hc-stars">' + stars(h.stars) + '</div>'
           + facRows
           + descHtml
-          + '<div class="hc-price"><strong>Auf Anfrage</strong>pro Nacht</div>'
-          + '<a class="hc-book-btn" href="' + esc(h.bookUrl) + '">Jetzt buchen</a>'
+          + '<button class="hc-book-btn" data-anfragen="' + esc(h.name) + '">Sofort anfragen</button>'
         + '</div>'
         + '</div>';
     }
@@ -1978,7 +1980,43 @@
           searchHotels(searchInput.value.trim());
         }
       });
+
+      // ── Anfragen-Button: event delegation ──
+      tableEl.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-anfragen]');
+        if (!btn) return;
+        hcAnfragen(btn.getAttribute('data-anfragen'));
+      });
     };
+
+    // ── Tawk.to Anfrage: Chat öffnen + Nachricht in Zwischenablage ──
+    function hcAnfragen(hotelName) {
+      var msg = 'Ich interessiere mich für ' + hotelName + ' – bitte senden Sie mir ein Angebot.';
+      // Clipboard
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(msg).catch(function () {});
+      }
+      // Tawk.to öffnen
+      if (window.Tawk_API && typeof Tawk_API.maximize === 'function') {
+        Tawk_API.maximize();
+      }
+      // Toast
+      showToast('💬 Chat geöffnet – Nachricht kopiert.\nEinfach einfügen (Strg+V / ⌘V) und senden.');
+    }
+
+    function showToast(text) {
+      var el = document.getElementById('hc-toast');
+      if (!el) {
+        el = document.createElement('div');
+        el.id = 'hc-toast';
+        el.className = 'hc-toast';
+        document.body.appendChild(el);
+      }
+      el.textContent = text;
+      el.classList.add('hc-toast-show');
+      clearTimeout(el._t);
+      el._t = setTimeout(function () { el.classList.remove('hc-toast-show'); }, 4500);
+    }
 
     // Direkt beim Seitenstart aufrufen (Vergleich ist der Default-Tab)
     window.initHotelCompare();

@@ -1407,52 +1407,98 @@
       var f = h.facilities || {};
       var st = h.stars || 0;
       if (st >= 5) s += 3; else if (st >= 4) s += 2; else if (st >= 3) s += 1;
-      if (f.beach)    s += 3;
-      if (f.aquapark) s += 2;
-      if (f.spa)      s += 2;
-      if (f.kidsclub) s += 2;
-      if (f.pool)     s += 1;
-      if (f.fitness)  s += 1;
+      if (f.beach)    s += 4;
+      if (f.aquapark) s += 3;
+      if (f.spa)      s += 3;
+      if (f.kidsclub) s += 3;
+      if (f.pool)     s += 2;
+      if (f.fitness)  s += 2;
       if (f.wifi)     s += 1;
       return s;
     }
 
-    function buildFazitText(h, isWinner, rank) {
+    function buildFazitText(item, rank, allScored) {
+      var h = item.h;
       var f = h.facilities || {};
-      var highlights = [];
-      if (f.beach)    highlights.push('Strandlage');
-      if (f.spa)      highlights.push('Spa & Wellness');
-      if (f.aquapark) highlights.push('Aquapark');
-      if (f.kidsclub) highlights.push('Kinderclub');
-      if (f.pool)     highlights.push('Außenpool');
-      if (f.fitness)  highlights.push('Fitness');
-      if (f.wifi)     highlights.push('WLAN');
-
+      var isWinner = rank === 1;
       var name = h.name || 'Dieses Hotel';
       var stars = h.stars || 0;
-      var starLabel = stars >= 5 ? '5-Sterne-Luxus' : stars === 4 ? '4-Sterne-Qualität' : '3-Sterne-Komfort';
+      var concept = f.concept || null;
 
-      if (!highlights.length) {
-        return name + ' bietet soliden ' + starLabel + ' ohne besondere Highlights im Vergleich.';
+      // All feature candidates ordered by scoring weight
+      var FEAT_DEFS = [
+        { key: 'beach',    label: 'Strandlage' },
+        { key: 'aquapark', label: 'Aquapark' },
+        { key: 'spa',      label: 'Spa & Wellness' },
+        { key: 'kidsclub', label: 'Kinderclub' },
+        { key: 'pool',     label: 'Außenpool' },
+        { key: 'fitness',  label: 'Fitness' },
+        { key: 'wifi',     label: 'WLAN' }
+      ];
+
+      var myFeats = FEAT_DEFS.filter(function (fd) { return !!f[fd.key]; });
+      var others  = allScored.filter(function (o) { return o.h.giataId !== h.giataId; });
+
+      // Features this hotel has that at least one other lacks (differentiators)
+      var unique = myFeats.filter(function (fd) {
+        return others.some(function (o) { return !(o.h.facilities || {})[fd.key]; });
+      });
+
+      // Features this hotel has that NO other has at all
+      var exclusive = myFeats.filter(function (fd) {
+        return others.every(function (o) { return !(o.h.facilities || {})[fd.key]; });
+      });
+
+      // Star label
+      var starLabel = stars >= 5 ? '5-Sterne-Luxus' : stars === 4 ? '4-Sterne-Qualität' : 'Komfort-Klasse';
+
+      if (!myFeats.length && !concept) {
+        return name + ' bietet soliden ' + starLabel + ' ohne Alleinstellungsmerkmale im direkten Vergleich.';
       }
 
-      var top = highlights.slice(0, 3);
-      var featStr;
-      if (top.length === 1) featStr = top[0];
-      else if (top.length === 2) featStr = top[0] + ' und ' + top[1];
-      else featStr = top[0] + ', ' + top[1] + ' und ' + top[2];
+      // Choose which features to lead with: exclusive > unique > top 3 own
+      var leadFeats = exclusive.length  ? exclusive.slice(0, 3)
+                    : unique.length     ? unique.slice(0, 3)
+                    : myFeats.slice(0, 3);
+
+      var labels = leadFeats.map(function (fd) { return fd.label; });
+      var featStr = labels.length === 1 ? labels[0]
+                  : labels.length === 2 ? labels[0] + ' und ' + labels[1]
+                  : labels[0] + ', ' + labels[1] + ' und ' + labels[2];
+
+      var conceptStr = concept ? ' (' + concept + ')' : '';
 
       if (isWinner) {
-        var closing = f.beach && f.aquapark ? 'das beste Gesamtpaket im Vergleich'
-          : f.beach ? 'die top Wahl für Strandurlauber'
-          : f.spa && f.kidsclub ? 'ideal für Familien mit Anspruch'
-          : f.kidsclub ? 'die Nummer 1 für Familien'
-          : f.spa ? 'perfekt für Wellnessurlauber'
-          : 'das beste Gesamtpaket im Vergleich';
-        return name + ' überzeugt mit ' + featStr + ' — ' + closing + '.';
+        var closing;
+        if (exclusive.length >= 1) {
+          closing = 'als einziges Hotel im Vergleich mit ' + exclusive.slice(0,2).map(function(fd){return fd.label;}).join(' und ');
+          return name + ' setzt sich durch ' + featStr + conceptStr + ' ab — ' + closing + '.';
+        } else if (f.beach && f.aquapark) {
+          closing = 'das perfekte Komplettpaket für Strandurlaub';
+        } else if (f.beach) {
+          closing = 'die Nummer 1 für Strandurlauber';
+        } else if (f.spa && f.kidsclub) {
+          closing = 'ideal für Familien mit Wellnessanspruch';
+        } else if (f.kidsclub) {
+          closing = 'die beste Wahl für Familien';
+        } else if (f.spa) {
+          closing = 'die top Wahl für Wellnessurlauber';
+        } else {
+          closing = 'das beste Gesamtpaket im Vergleich';
+        }
+        return name + ' überzeugt mit ' + featStr + conceptStr + ' — ' + closing + '.';
       } else {
-        var rankWord = rank === 2 ? 'starke Alternative' : rank === 3 ? 'solide Option' : 'weitere Option';
-        return name + ' punktet mit ' + featStr + ' und ist eine ' + rankWord + '.';
+        // Non-winner: vary verb + emphasis on unique features if any
+        if (exclusive.length >= 1) {
+          var excl = exclusive[0].label;
+          return name + ' ist im Vergleich das einzige Hotel mit ' + excl + (conceptStr ? ' und bietet ' + concept : '') + '.';
+        }
+        var verbs    = ['punktet', 'überzeugt', 'bietet'];
+        var verb     = verbs[Math.min(rank - 2, 2)];
+        var rankWord = rank === 2 ? 'eine starke Alternative'
+                     : rank === 3 ? 'eine solide Option'
+                     :              'eine weitere Option';
+        return name + ' ' + verb + ' mit ' + featStr + conceptStr + ' und bleibt ' + rankWord + '.';
       }
     }
 
@@ -1463,14 +1509,18 @@
 
       var scored = compared.map(function (h) {
         return { h: h, score: calcScore(h) };
-      }).sort(function (a, b) { return b.score - a.score; });
+      }).sort(function (a, b) {
+        // Primary: score desc; tiebreaker: stars desc
+        if (b.score !== a.score) return b.score - a.score;
+        return (b.h.stars || 0) - (a.h.stars || 0);
+      });
 
       var html = '<div class="hc-fazit-title"><span>🏆</span> Unser Fazit</div>';
       html += '<div class="hc-fazit-list">';
       scored.forEach(function (item, idx) {
         var isWinner = idx === 0;
         var rank = idx + 1;
-        var text = buildFazitText(item.h, isWinner, rank);
+        var text = buildFazitText(item, rank, scored);
         var rankSymbols = ['🥇', '🥈', '🥉', '4.'];
         html += '<div class="hc-fazit-card' + (isWinner ? ' hc-fazit-winner' : '') + '">';
         html += '<div class="hc-fazit-rank">' + (rankSymbols[idx] || rank + '.') + '</div>';

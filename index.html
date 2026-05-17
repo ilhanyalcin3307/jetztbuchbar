@@ -684,6 +684,20 @@
     .hc-fazit-text {
       font-size: 0.8rem; color: var(--text-muted); line-height: 1.45;
     }
+    .hc-fazit-pills {
+      display: flex; flex-wrap: wrap; gap: 0.35rem;
+      margin-top: 0.5rem;
+    }
+    .hc-fazit-pill {
+      display: inline-flex; align-items: center; gap: 0.25rem;
+      font-size: 0.7rem; font-weight: 600;
+      color: var(--accent);
+      background: rgba(0,200,150,0.08);
+      border: 1px solid rgba(0,200,150,0.35);
+      border-radius: 20px;
+      padding: 0.18rem 0.55rem;
+      white-space: nowrap;
+    }
     .hc-fazit-score {
       font-size: 0.82rem; font-weight: 700;
       color: var(--accent); white-space: nowrap;
@@ -1493,6 +1507,84 @@
       781: { s: 2, l: 'Für Paare' }
     };
 
+    // Icon-Map: label → emoji
+    var FEAT_ICONS = {
+      'Strandlage':           '🏖️',
+      'Strandbar':            '🍹',
+      'Strandkorb':           '⛱️',
+      'Infinity-Pool':        '♾️',
+      'Rooftop-Pool':         '🏙️',
+      'Swim-up Bar':          '🍹',
+      'Wasserrutsche':        '🌊',
+      'Wasserpark':           '🌊',
+      'Hallenbad':            '🏊',
+      'Außenpool':            '🏊',
+      'Pool':                 '🏊',
+      'Poolbar':              '🍹',
+      'Spa':                  '💆',
+      'Wellness-Center':      '💆',
+      'Massage':              '💆',
+      'Sauna':                '🌡️',
+      'Hamam':                '🧖',
+      'Dampfbad':             '♨️',
+      'Whirlpool':            '🛁',
+      'All Inclusive Plus':   '⭐',
+      'All Inclusive':        '🍽️',
+      'Vollpension':          '🍽️',
+      'Halbpension':          '🍳',
+      'Restaurant':           '🍽️',
+      'Bar':                  '🍷',
+      'Bar/Pub':              '🍺',
+      'Lobbybar':             '🥂',
+      'Bar/Lounge':           '🍷',
+      'Café':                 '☕',
+      'Snackbar':             '🥪',
+      'Kids Club':            '👨‍👩‍👧',
+      'Teens Club':           '🎮',
+      'Kinderbetreuung':      '👶',
+      'Miniclub':             '🎪',
+      'Kinder kostenlos':     '🎁',
+      'Kinderprogramm':       '🎨',
+      'Kinderpool':           '🏊',
+      'Spielplatz':           '🛝',
+      'Spielzimmer':          '🧸',
+      'Golf':                 '⛳',
+      'Tauchen':              '🤿',
+      'Tennisplatz':          '🎾',
+      'Fitness-Studio':       '💪',
+      'Beach-Volleyball':     '🏐',
+      'Schnorcheln':          '🤿',
+      'Wasserski':            '🎿',
+      'Windsurfen':           '🏄',
+      'Tennis':               '🎾',
+      'Tischtennis':          '🏓',
+      'Yoga':                 '🧘',
+      'Billard':              '🎱',
+      'Animationsprogramm':   '🎭',
+      'Abendunterhaltung':    '🎭',
+      'Disco':                '💃',
+      'Nachtclub':            '🌙',
+      'Casino':               '🎰',
+      'Live-Musik':           '🎵',
+      'Mini-Disco':           '🎶',
+      'Zimmerservice':        '🛎️',
+      'Shuttleservice':       '🚌',
+      'Transferservice':      '🚐',
+      'Concierge':            '🤵',
+      'WLAN':                 '📶',
+      'Einparkservice':       '🅿️',
+      'Parkplatz':            '🅿️',
+      'Meeresnähe':           '🌊',
+      'Zentrale Lage':        '📍',
+      'Ruhige Lage':          '🌿',
+      'Stadtzentrum':         '🏙️',
+      'Für Flitterwochen':    '💍',
+      'Konferenzeinrichtungen':'🏛️',
+      'Adults Only':          '🔞',
+      'Familienfreundlich':   '👨‍👩‍👧',
+      'Für Paare':            '❤️'
+    };
+
     // Sorted SCORING entries (score desc) – cached once
     var SCORING_SORTED = Object.keys(SCORING).map(function(id) {
       return { id: Number(id), s: SCORING[id].s, l: SCORING[id].l };
@@ -1640,6 +1732,15 @@
         if (isWinner) html += ' <span class="hc-fazit-badge">Empfehlung</span>';
         html += '</div>';
         html += '<div class="hc-fazit-text">' + esc(text) + '</div>';
+        var pills = topFeatures(item.h, 4);
+        if (pills.length) {
+          html += '<div class="hc-fazit-pills">';
+          pills.forEach(function(e) {
+            var icon = FEAT_ICONS[e.l] || '✦';
+            html += '<span class="hc-fazit-pill">' + icon + ' ' + esc(e.l) + '</span>';
+          });
+          html += '</div>';
+        }
         html += '</div>';
         html += '<div class="hc-fazit-score">' + item.score + ' Pkt.</div>';
         html += '</div>';

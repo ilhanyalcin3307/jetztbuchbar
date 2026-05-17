@@ -20,7 +20,7 @@ const HEADERS     = { Authorization: 'Bearer ' + API_KEY, Accept: 'application/j
 const OUTPUT      = path.join(__dirname, '..', 'api', 'giata-search-index.json');
 const BATCH_SIZE  = 20;
 const DELAY_MS    = 150;
-const SAMPLE_SIZE = 200;
+const SAMPLE_SIZE = 500;
 const COUNTRIES   = ['TR','GR','ES','EG','PT','HR','IT','MA','MT','TN','BG','CY','JO','AE','MV'];
 
 function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }

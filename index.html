@@ -634,6 +634,62 @@
     }
     .hc-slider-dot.sl-active { background: #fff; }
 
+    /* ── UNSER FAZIT ── */
+    .hc-fazit {
+      margin-top: 1.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+    }
+    .hc-fazit-title {
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--accent); margin-bottom: 1.1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .hc-fazit-list {
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .hc-fazit-card {
+      display: grid;
+      grid-template-columns: 1.4rem 1fr auto;
+      align-items: start;
+      gap: 0.6rem 0.85rem;
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      border: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .hc-fazit-card.hc-fazit-winner {
+      border-color: var(--accent);
+      background: rgba(0,200,150,0.06);
+    }
+    .hc-fazit-rank {
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--text-muted); padding-top: 2px;
+    }
+    .hc-fazit-winner .hc-fazit-rank { color: var(--accent); }
+    .hc-fazit-info { display: flex; flex-direction: column; gap: 0.28rem; }
+    .hc-fazit-name {
+      font-size: 0.9rem; font-weight: 700; color: var(--text);
+      display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+    }
+    .hc-fazit-badge {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em;
+      background: var(--accent); color: #000;
+      border-radius: 20px; padding: 0.15rem 0.55rem;
+      text-transform: uppercase;
+    }
+    .hc-fazit-text {
+      font-size: 0.8rem; color: var(--text-muted); line-height: 1.45;
+    }
+    .hc-fazit-score {
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--accent); white-space: nowrap;
+      padding-top: 2px;
+    }
+
     /* ── KARTE ── */
     #hc-map {
       width: 100%; height: 400px;
@@ -711,6 +767,7 @@
           <div class="hc-table" id="hc-table">
             <!-- wird per JS gerendert -->
           </div>
+          <div id="hc-fazit" class="hc-fazit" style="display:none"></div>
           <div id="hc-map"></div>
         </div>
       </div>
@@ -1343,6 +1400,95 @@
 
     // ── render ──
 
+    // ── Unser Fazit ──
+
+    function calcScore(h) {
+      var s = 0;
+      var f = h.facilities || {};
+      var st = h.stars || 0;
+      if (st >= 5) s += 3; else if (st >= 4) s += 2; else if (st >= 3) s += 1;
+      if (f.beach)    s += 3;
+      if (f.aquapark) s += 2;
+      if (f.spa)      s += 2;
+      if (f.kidsclub) s += 2;
+      if (f.pool)     s += 1;
+      if (f.fitness)  s += 1;
+      if (f.wifi)     s += 1;
+      return s;
+    }
+
+    function buildFazitText(h, isWinner, rank) {
+      var f = h.facilities || {};
+      var highlights = [];
+      if (f.beach)    highlights.push('Strandlage');
+      if (f.spa)      highlights.push('Spa & Wellness');
+      if (f.aquapark) highlights.push('Aquapark');
+      if (f.kidsclub) highlights.push('Kinderclub');
+      if (f.pool)     highlights.push('Außenpool');
+      if (f.fitness)  highlights.push('Fitness');
+      if (f.wifi)     highlights.push('WLAN');
+
+      var name = h.name || 'Dieses Hotel';
+      var stars = h.stars || 0;
+      var starLabel = stars >= 5 ? '5-Sterne-Luxus' : stars === 4 ? '4-Sterne-Qualität' : '3-Sterne-Komfort';
+
+      if (!highlights.length) {
+        return name + ' bietet soliden ' + starLabel + ' ohne besondere Highlights im Vergleich.';
+      }
+
+      var top = highlights.slice(0, 3);
+      var featStr;
+      if (top.length === 1) featStr = top[0];
+      else if (top.length === 2) featStr = top[0] + ' und ' + top[1];
+      else featStr = top[0] + ', ' + top[1] + ' und ' + top[2];
+
+      if (isWinner) {
+        var closing = f.beach && f.aquapark ? 'das beste Gesamtpaket im Vergleich'
+          : f.beach ? 'die top Wahl für Strandurlauber'
+          : f.spa && f.kidsclub ? 'ideal für Familien mit Anspruch'
+          : f.kidsclub ? 'die Nummer 1 für Familien'
+          : f.spa ? 'perfekt für Wellnessurlauber'
+          : 'das beste Gesamtpaket im Vergleich';
+        return name + ' überzeugt mit ' + featStr + ' — ' + closing + '.';
+      } else {
+        var rankWord = rank === 2 ? 'starke Alternative' : rank === 3 ? 'solide Option' : 'weitere Option';
+        return name + ' punktet mit ' + featStr + ' und ist eine ' + rankWord + '.';
+      }
+    }
+
+    function renderFazit() {
+      var fazitEl = document.getElementById('hc-fazit');
+      if (!fazitEl) return;
+      if (compared.length < 2) { fazitEl.style.display = 'none'; return; }
+
+      var scored = compared.map(function (h) {
+        return { h: h, score: calcScore(h) };
+      }).sort(function (a, b) { return b.score - a.score; });
+
+      var html = '<div class="hc-fazit-title"><span>🏆</span> Unser Fazit</div>';
+      html += '<div class="hc-fazit-list">';
+      scored.forEach(function (item, idx) {
+        var isWinner = idx === 0;
+        var rank = idx + 1;
+        var text = buildFazitText(item.h, isWinner, rank);
+        var rankSymbols = ['🥇', '🥈', '🥉', '4.'];
+        html += '<div class="hc-fazit-card' + (isWinner ? ' hc-fazit-winner' : '') + '">';
+        html += '<div class="hc-fazit-rank">' + (rankSymbols[idx] || rank + '.') + '</div>';
+        html += '<div class="hc-fazit-info">';
+        html += '<div class="hc-fazit-name">' + esc(item.h.name || '');
+        if (isWinner) html += ' <span class="hc-fazit-badge">Empfehlung</span>';
+        html += '</div>';
+        html += '<div class="hc-fazit-text">' + esc(text) + '</div>';
+        html += '</div>';
+        html += '<div class="hc-fazit-score">' + item.score + ' Pkt.</div>';
+        html += '</div>';
+      });
+      html += '</div>';
+
+      fazitEl.innerHTML = html;
+      fazitEl.style.display = 'block';
+    }
+
     function renderTable() {
       if (!tableEl) return;
       stopAllTimers();
@@ -1355,6 +1501,7 @@
         startSliderTimer(slId(h.giataId), imgs.length);
       });
       updateMap();
+      renderFazit();
     }
 
     function renderHotelCol(h) {

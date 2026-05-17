@@ -369,14 +369,15 @@
     var galleryImages = [], currentIdx = 0, autoTimer = null;
     var MAX_DOTS = 14;
 
-    function buildGallery(images) {
+    function buildGallery(images, hotelName) {
       galleryImages = images;
       var track = document.getElementById('hd-track');
       var dotsEl = document.getElementById('hd-dots');
+      var altBase = hotelName || 'Hotel';
 
       images.forEach(function (src, i) {
         var img = document.createElement('img');
-        img.src = src; img.alt = 'Hotelfoto ' + (i + 1);
+        img.src = src; img.alt = altBase + ' – Foto ' + (i + 1);
         img.loading = i === 0 ? 'eager' : 'lazy';
         track.appendChild(img);
       });
@@ -620,7 +621,7 @@
 
       // Galerie
       var imgs = (h.allImages && h.allImages.length) ? h.allImages : (h.images || []);
-      if (imgs.length) buildGallery(imgs);
+      if (imgs.length) buildGallery(imgs, displayName);
       else document.getElementById('hd-gallery').style.display = 'none';
 
       // Hotel-Kopf (main)

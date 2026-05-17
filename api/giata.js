@@ -101,6 +101,17 @@ module.exports = async function handler(req, res) {
       return res.status(200).json(mapProperty(data));
     }
 
+    // --- Detail: vollständige Daten für die Detailseite ---
+    if (action === 'detail' && id) {
+      const resp = await fetch(`${GIATA_BASE}/properties/${id}`, { headers });
+      if (!resp.ok) {
+        const body = await resp.text().catch(() => '');
+        throw new Error(`Giata ${resp.status}: ${body.slice(0, 200)}`);
+      }
+      const data = await resp.json();
+      return res.status(200).json(mapPropertyFull(data));
+    }
+
     // --- Raw (debug): volle Giata-Antwort ohne Mapping ---
     if (action === 'raw' && id) {
       const resp = await fetch(`${GIATA_BASE}/properties/${id}`, { headers });
@@ -179,6 +190,32 @@ function mapProperty(d) {
   try { facilities.rooms   = extractRoomCount(d); } catch (e) {}
 
   return { giataId: String(d.giataId || d.id || ''), name, city, country, stars, image, images, lat, lng, facilities, description, bookUrl: '/' };
+}
+
+// Vollständige Daten für die Detailseite (alle Bilder, alle Texte, Zimmertypen)
+function mapPropertyFull(d) {
+  const base = mapProperty(d);
+
+  // Alle Bilder: 1080px bevorzugt, sonst 800px
+  const allImages = (d.images || [])
+    .map(img => img.sizes?.['1080']?.href || img.sizes?.['800']?.href)
+    .filter(Boolean);
+
+  // Alle Beschreibungsabschnitte (keine Begrenzung)
+  const sections = d.texts?.de?.sections || d.texts?.en?.sections || [];
+  const allSections = sections
+    .filter(s => s.para)
+    .map(s => ({ title: s.title || '', text: s.para || '' }));
+
+  // Zimmertypen aus roomTypes[]
+  const rooms = (d.roomTypes || []).map(rt => ({
+    name: rt.name || '',
+    type: rt.type || '',
+    category: rt.category || '',
+    view: rt.view || '',
+  }));
+
+  return { ...base, allImages, allSections, rooms };
 }
 
 function extractConcept(d) {

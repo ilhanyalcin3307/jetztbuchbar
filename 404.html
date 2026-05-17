@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seite nicht gefunden – JetztBuchbar.de</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --bg-card: #121212;
+      --accent: #00c896; --accent-dark: #00a87e;
+      --text: #f0f0f0; --text-muted: #888; --border: #1e1e1e; --radius: 12px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+    a { color: inherit; text-decoration: none; }
+
+    header { display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1.25rem, 5vw, 3rem); height: 64px; background: rgba(10,10,10,0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
+    nav { display: flex; gap: 2rem; }
+    nav a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+
+    main {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: clamp(3rem, 10vw, 6rem) clamp(1.25rem, 5vw, 3rem);
+      text-align: center;
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,200,150,0.08) 0%, transparent 70%), var(--bg);
+    }
+    .content { max-width: 560px; }
+    .error-code {
+      font-size: clamp(6rem, 20vw, 10rem);
+      font-weight: 900; letter-spacing: -4px; line-height: 1;
+      color: var(--bg-card);
+      text-shadow:
+        0 0 0 1px var(--border),
+        2px 2px 0 rgba(0,200,150,0.15);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .error-code::after {
+      content: '404';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--accent) 0%, transparent 60%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    h1 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; margin-bottom: 0.75rem; }
+    .sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2.5rem; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--accent); color: #000;
+      font-weight: 700; font-size: 0.9rem;
+      padding: 0.7rem 1.75rem; border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: none; color: var(--text-muted);
+      border: 1px solid var(--border);
+      font-size: 0.9rem; padding: 0.7rem 1.75rem; border-radius: 8px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .quicklinks {
+      margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .quicklinks p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.85rem; }
+    .quicklinks-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+    .quicklinks-grid a {
+      font-size: 0.8rem; color: var(--text-muted);
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem; border-radius: 20px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .quicklinks-grid a:hover { border-color: var(--accent); color: var(--accent); }
+
+    footer { border-top: 1px solid var(--border); padding: 1.25rem clamp(1.25rem, 5vw, 3rem); display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; }
+    footer a, footer span { font-size: 0.82rem; color: var(--text-muted); transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="/ueber-uns.html">Über uns</a>
+      <a href="/kontakt.html">Kontakt</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="content">
+      <div class="error-code" aria-hidden="true">404</div>
+      <h1>Seite nicht gefunden</h1>
+      <p class="sub">Die gesuchte Seite existiert nicht oder wurde verschoben.<br>Kein Problem – hier geht's weiter.</p>
+
+      <div class="actions">
+        <a href="/" class="btn-primary">🏠 Zur Startseite</a>
+        <a href="javascript:history.back()" class="btn-ghost">← Zurück</a>
+      </div>
+
+      <div class="quicklinks">
+        <p>Beliebte Reiseziele</p>
+        <div class="quicklinks-grid">
+          <a href="/tuerkei/">🇹🇷 Türkei</a>
+          <a href="/griechenland/">🇬🇷 Griechenland</a>
+          <a href="/spanien/">🇪🇸 Spanien</a>
+          <a href="/dubai/">🇦🇪 Dubai</a>
+          <a href="/aegypten/">🇪🇬 Ägypten</a>
+          <a href="/portugal/">🇵🇹 Portugal</a>
+          <a href="/italien/">🇮🇹 Italien</a>
+          <a href="/marokko/">🇲🇦 Marokko</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span>© 2026 JetztBuchbar.de</span>
+    <a href="/impressum.html">Impressum</a>
+    <a href="/datenschutz.html">Datenschutz</a>
+    <a href="/kontakt.html">Kontakt</a>
+  </footer>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a088db59a5e021c33f4b6b4/1joomj3lp';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

@@ -202,5 +202,29 @@
   "dubai-vs-abu-dhabi": {
     "generatedAt": "2026-05-11T18:49:41.571Z",
     "file": "vergleiche/dubai-vs-abu-dhabi/index.html"
+  },
+  "italien": {
+    "generatedAt": "2026-05-14T12:08:59.757Z",
+    "file": "italien/index.html"
+  },
+  "frankreich": {
+    "generatedAt": "2026-05-14T12:10:40.611Z",
+    "file": "frankreich/index.html"
+  },
+  "rhodos": {
+    "generatedAt": "2026-05-14T12:10:41.226Z",
+    "file": "griechenland/rhodos/index.html"
+  },
+  "korfu": {
+    "generatedAt": "2026-05-14T12:10:42.048Z",
+    "file": "griechenland/korfu/index.html"
+  },
+  "mykonos": {
+    "generatedAt": "2026-05-14T12:10:42.740Z",
+    "file": "griechenland/mykonos/index.html"
+  },
+  "zakynthos": {
+    "generatedAt": "2026-05-14T12:10:43.068Z",
+    "file": "griechenland/zakynthos/index.html"
   }
 }

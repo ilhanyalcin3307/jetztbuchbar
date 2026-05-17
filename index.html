@@ -12,6 +12,45 @@
   <meta property="og:url" content="https://www.jetztbuchbar.de/" />
   <meta property="og:type" content="website" />
 
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.jetztbuchbar.de/#website",
+        "url": "https://www.jetztbuchbar.de/",
+        "name": "JetztBuchbar.de",
+        "description": "Flüge und Hotels direkt vergleichen und günstig buchen. Top Reiseangebote für Türkei, Spanien, Griechenland und weltweit.",
+        "inLanguage": "de",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": { "@type": "EntryPoint", "urlTemplate": "https://www.jetztbuchbar.de/?q={search_term_string}" },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "TravelAgency",
+        "@id": "https://www.jetztbuchbar.de/#organization",
+        "name": "JetztBuchbar.de",
+        "url": "https://www.jetztbuchbar.de/",
+        "logo": "https://www.jetztbuchbar.de/",
+        "sameAs": [
+          "https://www.instagram.com/jetztbuchbar.de/",
+          "https://www.facebook.com/jetztbuchbar/"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wien",
+          "addressCountry": "AT"
+        },
+        "email": "sales@jetztbuchbar.de"
+      }
+    ]
+  }
+  </script>
+
   <!-- Travelpayouts WL -->
   <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
   (function () {
@@ -604,23 +643,16 @@
       display: none;
     }
 
-    /* ── BESCHREIBUNG ── */
-    .hc-desc-toggle {
-      width: 100%; background: none;
-      border: 1px solid var(--border); border-radius: 6px;
-      color: var(--accent); font-size: 0.78rem;
-      padding: 0.38rem 0.6rem; cursor: pointer;
-      margin-top: 0.6rem; transition: background 0.2s, border-color 0.2s;
+    /* ── DETAILS-BUTTON ── */
+    .hc-details-btn {
+      display: block; width: 100%; text-align: center;
+      background: none;
+      border: 1px solid var(--accent); border-radius: 6px;
+      color: var(--accent); font-size: 0.8rem; font-weight: 600;
+      padding: 0.42rem 0.6rem;
+      margin-top: 0.6rem; transition: background 0.2s;
     }
-    .hc-desc-toggle:hover { background: rgba(0,200,150,0.07); border-color: var(--accent); }
-    .hc-desc-body {
-      display: none; margin-top: 0.6rem;
-      font-size: 0.77rem; color: var(--text-muted);
-      line-height: 1.55;
-    }
-    .hc-desc-body.hc-desc-open { display: block; }
-    .hc-desc-section { margin-bottom: 0.7rem; }
-    .hc-desc-section h4 { font-size: 0.79rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+    .hc-details-btn:hover { background: rgba(0,200,150,0.1); }
 
   </style>
 </head>
@@ -1120,10 +1152,9 @@
         tab.addEventListener('click', function () { activate(tab); });
       });
 
-      // Beim Laden Vergleich-Tab initialisieren (Hero-Text)
-      var vergleichTxt = heroTexts['vergleich'];
-      heroTitle.innerHTML = vergleichTxt.h;
-      heroSub.innerHTML   = vergleichTxt.p;
+      // Beim Laden Vergleich-Tab aktivieren (Tab + Hero + initHotelCompare)
+      var defaultTab = document.querySelector('.stab[data-panel="vergleich"]');
+      if (defaultTab) activate(defaultTab);
     })();
   </script>
 
@@ -1343,16 +1374,10 @@
           + valHtml + '</div>';
       });
 
-      var descHtml = '';
-      if (h.description && h.description.length) {
-        var dId = descId(h.giataId);
-        var gId = esc(String(h.giataId));
-        var sectHtml = h.description.map(function (s) {
-          return '<div class="hc-desc-section"><h4>' + esc(s.title) + '</h4><p>' + esc(s.text) + '</p></div>';
-        }).join('');
-        descHtml = '<button class="hc-desc-toggle" id="btn-' + dId + '" onclick="hcToggleDesc(\'' + gId + '\')">Mehr lesen ▼</button>'
-          + '<div class="hc-desc-body" id="' + dId + '">' + sectHtml + '</div>';
-      }
+      var slug = String(h.name || '').toLowerCase()
+        .replace(/[\u00e4]/g, 'ae').replace(/[\u00f6]/g, 'oe').replace(/[\u00fc]/g, 'ue').replace(/[\u00df]/g, 'ss')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      var descHtml = '<a class="hc-details-btn" href="/hotel.html?id=' + encodeURIComponent(String(h.giataId)) + '&slug=' + encodeURIComponent(slug) + '">Details ansehen →</a>';
 
       return '<div class="hc-col">'
         + '<button class="hc-col-remove" onclick="hcRemove(\'' + esc(h.giataId) + '\')" title="Entfernen">&times;</button>'
@@ -1453,16 +1478,6 @@
       }, 100);
     }
 
-    // Beschreibung Toggle
-    window.hcToggleDesc = function (giataId) {
-      var dId = 'desc-' + String(giataId).replace(/[^a-z0-9]/gi, '');
-      var bodyEl = document.getElementById(dId);
-      var btnEl  = document.getElementById('btn-' + dId);
-      if (!bodyEl) return;
-      var open = bodyEl.classList.toggle('hc-desc-open');
-      if (btnEl) btnEl.textContent = open ? 'Weniger ▲' : 'Mehr lesen ▼';
-    };
-
     window.hcRemove = function (giataId) {
       compared = compared.filter(function (h) { return h.giataId !== giataId; });
       renderTable();
@@ -1561,5 +1576,18 @@
   })();
   </script>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a088db59a5e021c33f4b6b4/1joomj3lp';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

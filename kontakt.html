@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt – JetztBuchbar.de | Wir helfen gerne</title>
+  <meta name="description" content="Kontaktiere das Team von JetztBuchbar.de – per Live-Chat, E-Mail oder über unsere Social-Media-Kanäle. Wir antworten schnell und unkompliziert." />
+  <link rel="canonical" href="https://www.jetztbuchbar.de/kontakt.html" />
+  <meta property="og:title" content="Kontakt – JetztBuchbar.de" />
+  <meta property="og:description" content="Fragen zu Reisen, Buchungen oder Kooperationen? Wir sind für euch da." />
+  <meta property="og:url" content="https://www.jetztbuchbar.de/kontakt.html" />
+  <meta property="og:type" content="website" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --bg-card: #121212; --bg-card-hover: #181818;
+      --accent: #00c896; --accent-dark: #00a87e;
+      --text: #f0f0f0; --text-muted: #888; --border: #1e1e1e; --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1.25rem, 5vw, 3rem); height: 64px; background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
+    nav { display: flex; gap: 2rem; }
+    nav a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      padding: clamp(4rem, 10vw, 7rem) clamp(1.25rem, 5vw, 3rem) clamp(3rem, 6vw, 5rem);
+      text-align: center;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,200,150,0.12) 0%, transparent 70%), var(--bg);
+    }
+    .hero-icon { font-size: 3.5rem; display: block; margin-bottom: 1rem; }
+    h1 { font-size: clamp(1.9rem, 4.5vw, 3.2rem); font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 1rem; }
+    h1 span { color: var(--accent); }
+    .hero-sub { font-size: clamp(0.95rem, 1.8vw, 1.1rem); color: var(--text-muted); max-width: 580px; margin: 0 auto; }
+
+    /* Kontakt-Kacheln */
+    .contact-section {
+      padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem);
+      max-width: 900px; margin: 0 auto;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.75rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .contact-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .contact-card.highlight { border-color: rgba(0,200,150,0.35); background: rgba(0,200,150,0.04); }
+    .card-icon { font-size: 2rem; }
+    .card-title { font-size: 1rem; font-weight: 700; }
+    .card-desc { font-size: 0.87rem; color: var(--text-muted); flex: 1; }
+    .card-action {
+      display: inline-block; margin-top: 0.5rem;
+      background: var(--accent); color: #000;
+      font-weight: 700; font-size: 0.85rem;
+      padding: 0.5rem 1.25rem; border-radius: 6px;
+      transition: background 0.2s; width: fit-content;
+    }
+    .card-action:hover { background: var(--accent-dark); }
+    .card-action.ghost {
+      background: none; color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .card-action.ghost:hover { background: rgba(0,200,150,0.08); }
+
+    /* FAQ */
+    .faq-section {
+      padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 5vw, 3rem);
+      background: #0d0d0d;
+    }
+    .faq-inner { max-width: 720px; margin: 0 auto; }
+    .faq-title { font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 800; margin-bottom: 1.75rem; }
+    .faq-title span { color: var(--accent); }
+    .faq-item { border-bottom: 1px solid var(--border); padding: 1.1rem 0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .faq-a { font-size: 0.88rem; color: var(--text-muted); }
+    .faq-a a { color: var(--accent); }
+
+    footer { border-top: 1px solid var(--border); padding: 1.75rem clamp(1.25rem, 5vw, 3rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+    .footer-left { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+    .footer-left span { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-left a { font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
+    .footer-left a:hover { color: var(--accent); }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .social-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+    .social-icon:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,200,150,0.08); }
+    @media (max-width: 600px) { nav { gap: 1.25rem; } footer { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="/ueber-uns.html">Über uns</a>
+      <a href="/kontakt.html" style="color:var(--accent)">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="hero-icon">💬</span>
+    <h1>Wie können wir <span>helfen?</span></h1>
+    <p class="hero-sub">Fragen zu Buchungen, Reiseempfehlungen oder Kooperationsanfragen – wir melden uns schnell zurück.</p>
+  </div>
+
+  <!-- Kontaktkarten -->
+  <div class="contact-section">
+    <div class="contact-grid">
+
+      <div class="contact-card highlight">
+        <div class="card-icon">💬</div>
+        <div class="card-title">Live-Chat</div>
+        <div class="card-desc">Sofortantwort über unseren Live-Chat – klicke einfach unten rechts auf das Chat-Symbol.</div>
+        <a href="#" class="card-action" onclick="Tawk_API && Tawk_API.toggle && Tawk_API.toggle(); return false;">Chat öffnen</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="card-icon">✉️</div>
+        <div class="card-title">E-Mail</div>
+        <div class="card-desc">Schreib uns eine E-Mail – wir antworten in der Regel innerhalb von 24 Stunden.</div>
+        <a href="mailto:sales@jetztbuchbar.de" class="card-action ghost">sales@jetztbuchbar.de</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="card-icon">📸</div>
+        <div class="card-title">Instagram</div>
+        <div class="card-desc">Folge uns für Reiseinspirationen und schreib uns per DM.</div>
+        <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="card-action ghost">@jetztbuchbar.de</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="card-icon">📘</div>
+        <div class="card-title">Facebook</div>
+        <div class="card-desc">Aktuelle Angebote und Community – schreib uns auch dort.</div>
+        <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="card-action ghost">jetztbuchbar</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <h2 class="faq-title">Häufige <span>Fragen</span></h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Ist die Nutzung von JetztBuchbar kostenlos?</div>
+        <div class="faq-a">Ja, vollständig. Wir finanzieren uns über Partnerprovisionen – für euch entstehen keine Zusatzkosten.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Wie aktuell sind die Preisangebote?</div>
+        <div class="faq-a">Wir verlinken direkt zu unseren Buchungspartnern – die Preise sind in Echtzeit und können schwanken.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Ich möchte eine Kooperation anfragen.</div>
+        <div class="faq-a">Super! Schreib uns an <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a> – wir freuen uns über Partneranfragen.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Wo ist JetztBuchbar ansässig?</div>
+        <div class="faq-a">Wir sind in Wien, Österreich. Unsere Angebote richten sich an den gesamten deutschsprachigen Raum (DACH).</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-left">
+      <span>© 2026 JetztBuchbar.de</span>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+      <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+      <span>Wien, Österreich</span>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">&#x1F4F7;</a>
+      <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
+    </div>
+  </footer>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a088db59a5e021c33f4b6b4/1joomj3lp';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

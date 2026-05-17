@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Hotel Details – JetztBuchbar</title>
+  <meta name="description" id="page-desc" content="" />
+  <link rel="canonical" id="page-canonical" href="https://www.jetztbuchbar.de/hotel.html" />
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #121212;
+      --accent: #00c896;
+      --accent-dark: #00a87e;
+      --text: #f0f0f0;
+      --text-muted: #888;
+      --border: #1e1e1e;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+      height: 64px;
+      background: rgba(10,10,10,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
+    nav { display: flex; gap: 2rem; }
+    nav a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+
+    /* ── LOADING / ERROR ── */
+    #hd-loading {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 60vh; font-size: 1.1rem; color: var(--text-muted);
+    }
+
+    /* ── GALERIE ── */
+    .hd-gallery {
+      position: relative; width: 100%;
+      background: #000; overflow: hidden;
+      aspect-ratio: 16 / 7;
+    }
+    @media (max-width: 640px) { .hd-gallery { aspect-ratio: 4 / 3; } }
+
+    .hd-gallery-track {
+      display: flex; height: 100%;
+      transition: transform 0.4s ease;
+    }
+    .hd-gallery-track img {
+      flex: 0 0 100%; width: 100%; height: 100%;
+      object-fit: cover; user-select: none;
+    }
+    .hd-gallery-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.55); border: none; color: #fff;
+      font-size: 1.5rem; padding: 0.6rem 1rem;
+      cursor: pointer; border-radius: 6px; transition: background 0.2s;
+      z-index: 10;
+    }
+    .hd-gallery-btn:hover { background: rgba(0,0,0,0.8); }
+    .hd-gallery-btn.prev { left: 1rem; }
+    .hd-gallery-btn.next { right: 1rem; }
+    .hd-gallery-counter {
+      position: absolute; bottom: 0.75rem; right: 1rem;
+      background: rgba(0,0,0,0.6); color: #fff;
+      font-size: 0.8rem; padding: 0.2rem 0.6rem; border-radius: 4px;
+    }
+    .hd-gallery-dots {
+      position: absolute; bottom: 0.75rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+      max-width: 70%;
+    }
+    .hd-gallery-dots span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,0.35); cursor: pointer; transition: background 0.2s;
+    }
+    .hd-gallery-dots span.active { background: var(--accent); }
+
+    /* ── HAUPTINHALT ── */
+    .hd-content {
+      max-width: 960px; margin: 0 auto;
+      padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
+    }
+
+    /* Hotel-Kopf */
+    .hd-header { margin-bottom: 2rem; }
+    .hd-name { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; line-height: 1.2; }
+    .hd-stars { color: #f5a623; font-size: 1.3rem; margin: 0.4rem 0; }
+    .hd-location { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* ── ABSCHNITTE ── */
+    .hd-section { margin-bottom: 2.5rem; }
+    .hd-section-title {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--accent); margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Karte */
+    #hd-map { height: 380px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+
+    /* Ausstattung */
+    .hd-fac-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.6rem;
+    }
+    .hd-fac-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.55rem 0.8rem;
+      font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .hd-fac-item.yes { color: var(--text); }
+    .hd-fac-item.no  { color: var(--text-muted); opacity: 0.5; text-decoration: line-through; }
+
+    /* Beschreibung */
+    .hd-desc-section { margin-bottom: 1.25rem; }
+    .hd-desc-section h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
+    .hd-desc-section p  { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* Zimmertypen */
+    .hd-room-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.75rem;
+    }
+    .hd-room-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.9rem 1rem;
+    }
+    .hd-room-card .room-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.35rem; }
+    .hd-room-card .room-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .hd-room-tag {
+      background: rgba(0,200,150,0.1);
+      color: var(--accent);
+      font-size: 0.72rem; font-weight: 600;
+      padding: 0.15rem 0.5rem; border-radius: 4px;
+    }
+
+    /* CTA */
+    .hd-cta-wrap { text-align: center; margin-top: 1rem; }
+    .hd-cta-btn {
+      display: inline-block;
+      background: var(--accent); color: #000;
+      font-weight: 800; font-size: 1.05rem;
+      padding: 0.85rem 2.5rem; border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .hd-cta-btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+    .hd-back-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--text-muted); font-size: 0.85rem;
+      margin-bottom: 1.5rem; transition: color 0.2s;
+    }
+    .hd-back-btn:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="/ueber-uns.html">Über uns</a>
+      <a href="/kontakt.html">Kontakt</a>
+    </nav>
+  </header>
+
+  <div id="hd-loading">⏳ Lade Hotel…</div>
+
+  <div id="hd-root" style="display:none">
+
+    <!-- Vollbild-Galerie -->
+    <div class="hd-gallery" id="hd-gallery">
+      <div class="hd-gallery-track" id="hd-track"></div>
+      <button class="hd-gallery-btn prev" id="hd-prev" aria-label="Vorheriges Bild">&#8249;</button>
+      <button class="hd-gallery-btn next" id="hd-next" aria-label="Nächstes Bild">&#8250;</button>
+      <div class="hd-gallery-dots" id="hd-dots"></div>
+      <div class="hd-gallery-counter" id="hd-counter"></div>
+    </div>
+
+    <!-- Hauptinhalt -->
+    <div class="hd-content">
+      <a href="/" class="hd-back-btn">&#8592; Zurück zur Übersicht</a>
+
+      <div class="hd-header">
+        <div class="hd-name" id="hd-name"></div>
+        <div class="hd-stars" id="hd-stars"></div>
+        <div class="hd-location" id="hd-location"></div>
+      </div>
+
+      <!-- Karte -->
+      <div class="hd-section" id="hd-map-section" style="display:none">
+        <div class="hd-section-title">📍 Lage</div>
+        <div id="hd-map"></div>
+      </div>
+
+      <!-- Ausstattung -->
+      <div class="hd-section" id="hd-fac-section" style="display:none">
+        <div class="hd-section-title">✅ Ausstattung</div>
+        <div class="hd-fac-grid" id="hd-fac-grid"></div>
+      </div>
+
+      <!-- Beschreibung -->
+      <div class="hd-section" id="hd-desc-section" style="display:none">
+        <div class="hd-section-title">📋 Über das Hotel</div>
+        <div id="hd-desc-body"></div>
+      </div>
+
+      <!-- Zimmertypen -->
+      <div class="hd-section" id="hd-rooms-section" style="display:none">
+        <div class="hd-section-title">🛏 Zimmertypen</div>
+        <div class="hd-room-grid" id="hd-room-grid"></div>
+      </div>
+
+      <!-- CTA -->
+      <div class="hd-cta-wrap">
+        <a id="hd-cta" href="/booking/" class="hd-cta-btn">Angebot anfordern →</a>
+      </div>
+    </div>
+
+  </div><!-- /hd-root -->
+
+  <script>
+  (function () {
+    'use strict';
+
+    var FACILITIES = [
+      { key: 'pool',       icon: '🏊', label: 'Pool'          },
+      { key: 'beach',      icon: '🏖', label: 'Strand'        },
+      { key: 'spa',        icon: '💆', label: 'Spa & Wellness'},
+      { key: 'aquapark',   icon: '🌊', label: 'Aquapark'      },
+      { key: 'fitness',    icon: '🏋', label: 'Fitness'       },
+      { key: 'restaurant', icon: '🍽', label: 'Restaurant'    },
+      { key: 'bar',        icon: '🍹', label: 'Bar'           },
+      { key: 'kidsclub',   icon: '🎠', label: 'Kinderclub'    },
+      { key: 'wifi',       icon: '📶', label: 'WLAN'          },
+      { key: 'parking',    icon: '🅿️', label: 'Parkplatz'    },
+    ];
+
+    var galleryImages = [];
+    var currentIdx = 0;
+    var autoTimer = null;
+
+    // ── Galerie ──────────────────────────────────────────────
+    function buildGallery(images) {
+      galleryImages = images;
+      var track = document.getElementById('hd-track');
+      var dotsEl = document.getElementById('hd-dots');
+
+      images.forEach(function (src, i) {
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = 'Hotelfoto ' + (i + 1);
+        img.loading = i === 0 ? 'eager' : 'lazy';
+        track.appendChild(img);
+
+        var dot = document.createElement('span');
+        dot.dataset.i = i;
+        dot.addEventListener('click', function () { goTo(+this.dataset.i); });
+        dotsEl.appendChild(dot);
+      });
+
+      goTo(0);
+      startAuto();
+
+      document.getElementById('hd-prev').addEventListener('click', function () { slide(-1); });
+      document.getElementById('hd-next').addEventListener('click', function () { slide(+1); });
+    }
+
+    function goTo(i) {
+      currentIdx = (i + galleryImages.length) % galleryImages.length;
+      document.getElementById('hd-track').style.transform = 'translateX(-' + (currentIdx * 100) + '%)';
+      document.getElementById('hd-counter').textContent = (currentIdx + 1) + ' / ' + galleryImages.length;
+      var dots = document.querySelectorAll('#hd-dots span');
+      dots.forEach(function (d, j) { d.classList.toggle('active', j === currentIdx); });
+    }
+
+    function slide(delta) { clearAuto(); goTo(currentIdx + delta); startAuto(); }
+
+    function startAuto() {
+      clearAuto();
+      if (galleryImages.length > 1) {
+        autoTimer = setInterval(function () { goTo(currentIdx + 1); }, 4000);
+      }
+    }
+
+    function clearAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+
+    // ── Leaflet-Karte ─────────────────────────────────────────
+    function buildMap(lat, lng, name) {
+      document.getElementById('hd-map-section').style.display = '';
+      var map = L.map('hd-map', { scrollWheelZoom: false }).setView([lat, lng], 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18,
+      }).addTo(map);
+      L.marker([lat, lng]).addTo(map).bindPopup(name).openPopup();      return map;    }
+
+    // ── Ausstattung ───────────────────────────────────────────
+    function buildFacilities(fac) {
+      var grid = document.getElementById('hd-fac-grid');
+      var hasAny = false;
+
+      FACILITIES.forEach(function (f) {
+        var item = document.createElement('div');
+        var has = !!fac[f.key];
+        item.className = 'hd-fac-item ' + (has ? 'yes' : 'no');
+        item.textContent = f.icon + ' ' + f.label;
+        grid.appendChild(item);
+        if (has) hasAny = true;
+      });
+
+      // Verpflegungskonzept als Badge
+      if (fac.concept) {
+        var conceptEl = document.createElement('div');
+        conceptEl.className = 'hd-fac-item yes';
+        conceptEl.textContent = '🍽 ' + fac.concept;
+        grid.insertBefore(conceptEl, grid.firstChild);
+        hasAny = true;
+      }
+
+      if (hasAny) document.getElementById('hd-fac-section').style.display = '';
+    }
+
+    // ── Beschreibung ──────────────────────────────────────────
+    function buildDesc(sections) {
+      if (!sections || !sections.length) return;
+      var body = document.getElementById('hd-desc-body');
+      sections.forEach(function (s) {
+        var wrap = document.createElement('div');
+        wrap.className = 'hd-desc-section';
+        if (s.title) {
+          var h3 = document.createElement('h3');
+          h3.textContent = s.title;
+          wrap.appendChild(h3);
+        }
+        var p = document.createElement('p');
+        p.textContent = s.text;
+        wrap.appendChild(p);
+        body.appendChild(wrap);
+      });
+      document.getElementById('hd-desc-section').style.display = '';
+    }
+
+    // ── Zimmertypen ───────────────────────────────────────────
+    function buildRooms(rooms) {
+      if (!rooms || !rooms.length) return;
+      var grid = document.getElementById('hd-room-grid');
+      rooms.forEach(function (r) {
+        if (!r.name) return;
+        var card = document.createElement('div');
+        card.className = 'hd-room-card';
+        var nameEl = document.createElement('div');
+        nameEl.className = 'room-name';
+        nameEl.textContent = r.name;
+        card.appendChild(nameEl);
+        var tags = document.createElement('div');
+        tags.className = 'room-tags';
+        [r.category, r.type, r.view].forEach(function (t) {
+          if (!t) return;
+          var span = document.createElement('span');
+          span.className = 'hd-room-tag';
+          span.textContent = t;
+          tags.appendChild(span);
+        });
+        card.appendChild(tags);
+        grid.appendChild(card);
+      });
+      document.getElementById('hd-rooms-section').style.display = '';
+    }
+
+    // ── Haupt-Render ──────────────────────────────────────────
+    function renderHotel(h) {
+      // Seiten-Titel + Meta-Description dynamisch
+      var params = new URLSearchParams(location.search);
+      var slugParam = params.get('slug');
+      var displayName = h.name || (slugParam ? slugParam.replace(/-/g, ' ') : 'Hotel');
+      document.getElementById('page-title').textContent = displayName + ' – JetztBuchbar';
+      var loc2 = [h.city, h.country].filter(Boolean).join(', ');
+      var descText = displayName + (loc2 ? ' in ' + loc2 : '') + ' – Alle Infos, Fotos, Zimmer & Ausstattung auf JetztBuchbar.';
+      document.getElementById('page-desc').setAttribute('content', descText);
+
+      // Canonical URL dynamisch setzen
+      var canonicalEl = document.getElementById('page-canonical');
+      if (canonicalEl) canonicalEl.setAttribute('href', 'https://www.jetztbuchbar.de/hotel.html?id=' + encodeURIComponent(h.giataId || hotelId));
+
+      // JSON-LD Hotel-Schema
+      var schema = {
+        '@context': 'https://schema.org',
+        '@type': 'LodgingBusiness',
+        'name': displayName,
+        'description': descText,
+        'url': 'https://www.jetztbuchbar.de/hotel.html?id=' + encodeURIComponent(h.giataId || hotelId),
+        'address': { '@type': 'PostalAddress', 'addressLocality': h.city || '', 'addressCountry': h.country || '' },
+      };
+      if (h.stars) schema['starRating'] = { '@type': 'Rating', 'ratingValue': String(h.stars), 'bestRating': '5' };
+      if (h.lat && h.lng) schema['geo'] = { '@type': 'GeoCoordinates', 'latitude': h.lat, 'longitude': h.lng };
+      if (h.images && h.images[0]) schema['image'] = h.images[0];
+      var ldEl = document.getElementById('ld-json');
+      if (!ldEl) { ldEl = document.createElement('script'); ldEl.type = 'application/ld+json'; ldEl.id = 'ld-json'; document.head.appendChild(ldEl); }
+      ldEl.textContent = JSON.stringify(schema);
+
+      // Galerie
+      var imgs = (h.allImages && h.allImages.length) ? h.allImages : (h.images || []);
+      if (imgs.length) {
+        buildGallery(imgs);
+      } else {
+        document.getElementById('hd-gallery').style.display = 'none';
+      }
+
+      // Hotel-Kopf
+      document.getElementById('hd-name').textContent = h.name || '';
+      var starsStr = h.stars ? '★'.repeat(h.stars) + '☆'.repeat(Math.max(0, 5 - h.stars)) : '';
+      document.getElementById('hd-stars').textContent = starsStr;
+      var loc = [h.city, h.country].filter(Boolean).join(', ');
+      document.getElementById('hd-location').textContent = loc ? '📍 ' + loc : '';
+
+      // Karte (map-Objekt für späteres invalidateSize speichern)
+      var leafletMap = null;
+      if (h.lat && h.lng) leafletMap = buildMap(h.lat, h.lng, h.name);
+
+      // Ausstattung
+      if (h.facilities) buildFacilities(h.facilities);
+
+      // Beschreibung (allSections bevorzugt, sonst description)
+      var secs = (h.allSections && h.allSections.length) ? h.allSections : (h.description || []);
+      buildDesc(secs);
+
+      // Zimmertypen
+      buildRooms(h.rooms || []);
+
+      // Alles anzeigen
+      document.getElementById('hd-loading').style.display = 'none';
+      document.getElementById('hd-root').style.display = '';
+
+      // Karte nach Sichtbarkeit neu berechnen (Leaflet-Tile-Bug)
+      if (leafletMap) {
+        requestAnimationFrame(function () { leafletMap.invalidateSize(); });
+      }
+    }
+
+    // ── Start ─────────────────────────────────────────────────
+    var hotelId = new URLSearchParams(location.search).get('id');
+    if (!hotelId) {
+      document.getElementById('hd-loading').textContent = '❌ Kein Hotel ausgewählt. Bitte zurück zur Übersicht.';
+    } else {
+      fetch('/api/giata?action=detail&id=' + encodeURIComponent(hotelId))
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function (h) {
+          if (h.error) throw new Error(h.error);
+          renderHotel(h);
+        })
+        .catch(function (err) {
+          document.getElementById('hd-loading').textContent = '❌ Hotel konnte nicht geladen werden. (' + err.message + ')';
+        });
+    }
+
+  })();
+  </script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a088db59a5e021c33f4b6b4/1joomj3lp';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

@@ -666,11 +666,9 @@ if (process.env.RUN_ONCE === '1') {
     .then(() => { console.log('[engine] Done.'); process.exit(0); })
     .catch(err => { console.error('[engine] Fatal:', err.message); process.exit(1); });
 } else {
-  // Railway/persistent mode: schedule cron + run on startup
-  cron.schedule('0 2 * * *', () => {
-    runContentEngine().catch(err => console.error('[cron] Unhandled error:', err.message));
-  });
-  console.log('[engine] Content engine started. Scheduled for 02:00 daily.');
-  console.log('[engine] Run immediately on startup...');
-  runContentEngine().catch(err => console.error('[engine] Startup run error:', err.message));
+  // Railway/persistent mode: cron DISABLED – manual trigger only
+  // cron.schedule('0 2 * * *', () => {
+  //   runContentEngine().catch(err => console.error('[cron] Unhandled error:', err.message));
+  // });
+  console.log('[engine] Content engine started. Auto-cron is DISABLED (manual trigger only).');
 }

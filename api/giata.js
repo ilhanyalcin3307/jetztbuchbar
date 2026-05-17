@@ -7,18 +7,18 @@ const fs   = require('fs');
 const path = require('path');
 
 // Giata Fact-IDs für relevante Einrichtungen
-// Genaue IDs via https://giatadrive.com/api/v1/i18n/facts/de prüfen
+// Verifiziert via https://giatadrive.com/api/v1/i18n/facts/de (2026-05-17)
 const FACT_IDS = {
-  pool:       [60, 61, 180],
-  spa:        [22, 23, 178],
-  beach:      [45, 46],
-  aquapark:   [62, 179],
-  fitness:    [26, 27],
-  restaurant: [15, 16],
-  bar:        [17, 18],
-  kidsclub:   [90, 91],
-  wifi:       [7, 8],
-  parking:    [10, 11],
+  pool:       [50, 58, 43, 696, 697, 614, 615], // Außenpool=50, Pool=58, Hallenbad=43, Dachpool=696, Infinity=697
+  spa:        [197, 479, 529],                  // Spa=197, Wellness-Center=479
+  beach:      [89],                             // Strand=89
+  aquapark:   [588],                            // Wasserpark=588
+  fitness:    [220],                            // Fitness-Studio=220
+  restaurant: [65, 299],                        // Restaurant
+  bar:        [14, 59, 288, 450, 575],          // Bar=14, Poolbar=59, Bar/Pub=288, Lobbybar=450, Bar/Lounge=575
+  kidsclub:   [945, 946, 1, 7],                 // Kids Club=945, Teens Club=946, Kinderbetreuung=1, Miniclub=7
+  wifi:       [88, 185, 44, 148],               // WiFi=88/185, Internetzugang=44/148
+  parking:    [22, 568],                        // Parkplatz=22, Einparkservice=568
 };
 
 // Demo-Daten für den Fall, dass noch kein API-Key konfiguriert ist
@@ -137,14 +137,6 @@ module.exports = async function handler(req, res) {
         .filter(h => (h.name + ' ' + h.city).toLowerCase().includes(ql))
         .map(({ giataId, name, city, country, stars }) => ({ giataId, name, city, country, stars }));
       return res.status(200).json({ results, indexMissing: true });
-    }
-
-    // --- i18n facts (temp debug): Giata Fact-Definitionen auf Deutsch ---
-    if (action === 'i18n') {
-      const resp = await fetch(`${GIATA_BASE}/i18n/facts/de`, { headers });
-      if (!resp.ok) throw new Error(`Giata ${resp.status}`);
-      const data = await resp.json();
-      return res.status(200).json(data);
     }
 
     return res.status(400).json({ error: 'Invalid action' });

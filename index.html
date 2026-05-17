@@ -563,18 +563,39 @@
     }
     .hc-book-btn:hover { background: var(--accent-dark); }
 
-    /* ── ANFRAGEN-TOAST ── */
-    .hc-toast {
-      position: fixed; bottom: 5.5rem; right: 1.5rem;
-      background: #1a1a1a; border: 1px solid var(--accent);
-      color: var(--text); font-size: 0.8rem; line-height: 1.4;
-      padding: 0.65rem 1rem; border-radius: 8px;
-      z-index: 9999; max-width: 300px;
-      opacity: 0; transform: translateY(8px);
-      transition: opacity 0.22s, transform 0.22s;
-      pointer-events: none;
+    /* ── ANFRAGEN-BUBBLE (neben Tawk.to Chat) ── */
+    .hc-ab {
+      position: fixed; bottom: 90px; right: 22px; width: 285px;
+      background: #161616; border: 1px solid var(--accent);
+      border-radius: 12px; padding: 0.85rem 1rem;
+      z-index: 99999; box-shadow: 0 8px 32px rgba(0,0,0,0.65);
+      font-size: 0.78rem; display: none;
     }
-    .hc-toast.hc-toast-show { opacity: 1; transform: translateY(0); }
+    .hc-ab-head {
+      display: flex; justify-content: space-between; align-items: center;
+      font-weight: 700; color: var(--accent); margin-bottom: 0.5rem;
+      font-size: 0.82rem;
+    }
+    .hc-ab-x {
+      background: none; border: none; color: var(--text-muted);
+      cursor: pointer; font-size: 1rem; padding: 0; line-height: 1;
+    }
+    .hc-ab-hotel { color: var(--text); font-size: 0.82rem; margin-bottom: 0.45rem; }
+    .hc-ab-msg {
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      border-radius: 6px; padding: 0.45rem 0.6rem;
+      color: var(--text-muted); font-size: 0.74rem; line-height: 1.45;
+      margin-bottom: 0.5rem; word-break: break-word;
+    }
+    .hc-ab-hint {
+      color: var(--accent); font-size: 0.76rem; font-weight: 700;
+      text-align: center; border-top: 1px solid var(--border);
+      padding-top: 0.45rem;
+    }
+    .hc-ab-hint kbd {
+      background: rgba(0,200,150,0.15); border: 1px solid var(--accent);
+      border-radius: 3px; padding: 0.05rem 0.3rem; font-family: monospace;
+    }
 
     .hc-empty-slot {
       background: var(--bg-card);
@@ -1992,30 +2013,41 @@
     // ── Tawk.to Anfrage: Chat öffnen + Nachricht in Zwischenablage ──
     function hcAnfragen(hotelName) {
       var msg = 'Ich interessiere mich für ' + hotelName + ' – bitte senden Sie mir ein Angebot.';
+      if (window.Tawk_API) {
+        // Agent sieht Hotel-Name im Visitor-Panel (Tawk.to Dashboard)
+        try { Tawk_API.setAttributes({ 'Hotel': hotelName }, function () {}); } catch (e) {}
+        // Event-Tracking: erscheint im Tawk.to Timeline-Tab des Besuchers
+        try { Tawk_API.addEvent('Hotel-Anfrage', { Hotel: hotelName }, function () {}); } catch (e) {}
+        // Chat öffnen
+        try { if (typeof Tawk_API.maximize === 'function') Tawk_API.maximize(); } catch (e) {}
+      }
       // Clipboard
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(msg).catch(function () {});
       }
-      // Tawk.to öffnen
-      if (window.Tawk_API && typeof Tawk_API.maximize === 'function') {
-        Tawk_API.maximize();
-      }
-      // Toast
-      showToast('💬 Chat geöffnet – Nachricht kopiert.\nEinfach einfügen (Strg+V / ⌘V) und senden.');
+      // Prominente Bubble über dem Tawk-Widget
+      showAnfragenBubble(hotelName, msg);
     }
 
-    function showToast(text) {
-      var el = document.getElementById('hc-toast');
+    function showAnfragenBubble(hotelName, msg) {
+      var el = document.getElementById('hc-ab');
       if (!el) {
         el = document.createElement('div');
-        el.id = 'hc-toast';
-        el.className = 'hc-toast';
+        el.id = 'hc-ab';
+        el.className = 'hc-ab';
         document.body.appendChild(el);
       }
-      el.textContent = text;
-      el.classList.add('hc-toast-show');
+      el.innerHTML =
+        '<div class="hc-ab-head">' +
+          '<span>✅ Anfrage bereit</span>' +
+          '<button class="hc-ab-x" onclick="document.getElementById(\'hc-ab\').style.display=\'none\'">×</button>' +
+        '</div>' +
+        '<div class="hc-ab-hotel">🏨 <strong>' + esc(hotelName) + '</strong></div>' +
+        '<div class="hc-ab-msg">' + esc(msg) + '</div>' +
+        '<div class="hc-ab-hint">📋 Kopiert — im Chat <kbd>Ctrl+V</kbd> einfügen &amp; Enter drücken</div>';
+      el.style.display = 'block';
       clearTimeout(el._t);
-      el._t = setTimeout(function () { el.classList.remove('hc-toast-show'); }, 4500);
+      el._t = setTimeout(function () { el.style.display = 'none'; }, 12000);
     }
 
     // Direkt beim Seitenstart aufrufen (Vergleich ist der Default-Tab)

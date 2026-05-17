@@ -219,24 +219,25 @@ function mapPropertyFull(d) {
 }
 
 function extractConcept(d) {
-  const sections = d.texts?.de?.sections || d.texts?.en?.sections || [];
-  for (const s of sections) {
-    const t = (s.title || '').toLowerCase();
-    if (t.includes('verpflegung') || t.includes('konzept') || t.includes('board')) {
-      return s.para?.split(/[.\n]/)[0]?.trim() || null;
-    }
-  }
+  // Konzept aus Mahlzeiten-Facts ableiten:
+  // 96=Frühstück, 100=Abendessen, 105=Mittagessen, 324=Getränke inklusive
+  const facts = d.facts || {};
+  const has = id => !!facts[String(id)];
+  if (has(96) && has(100) && has(105) && has(324)) return 'All Inclusive';
+  if (has(96) && has(100) && has(105))              return 'Vollpension';
+  if (has(96) && has(100))                          return 'Halbpension';
+  if (has(96))                                      return 'Nur Frühstück';
   return null;
 }
 
 function extractRoomCount(d) {
-  for (const instances of Object.values(d.facts || {})) {
-    const arr = Array.isArray(instances) ? instances : (instances ? [instances] : []);
-    for (const inst of arr) {
-      for (const attr of (inst.attributes || [])) {
-        const v = parseInt(attr.value, 10);
-        if (!isNaN(v) && v >= 20 && v <= 5000) return v;
-      }
+  // Fact 316 = "Anzahl der Zimmer (gesamt)", Attribute 49 = numerischer Wert
+  const fact316 = (d.facts || {})['316'];
+  if (fact316 && fact316[0] && fact316[0].attributes) {
+    const attr49 = fact316[0].attributes['49'];
+    if (attr49 && attr49.value) {
+      const n = parseInt(attr49.value, 10);
+      if (!isNaN(n) && n > 0) return n;
     }
   }
   return null;

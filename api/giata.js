@@ -139,6 +139,14 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ results, indexMissing: true });
     }
 
+    // --- i18n: Giata Fact-Labels (de) ---
+    if (action === 'i18n') {
+      const resp = await fetch(`${GIATA_BASE}/i18n/facts/de`, { headers });
+      if (!resp.ok) throw new Error(`Giata i18n ${resp.status}`);
+      const data = await resp.json();
+      return res.status(200).json(data);
+    }
+
     return res.status(400).json({ error: 'Invalid action' });
   } catch (err) {
     console.error('[giata proxy]', err.message);

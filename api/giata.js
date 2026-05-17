@@ -189,7 +189,10 @@ function mapProperty(d) {
   try { facilities.concept = extractConcept(d); } catch (e) {}
   try { facilities.rooms   = extractRoomCount(d); } catch (e) {}
 
-  return { giataId: String(d.giataId || d.id || ''), name, city, country, stars, image, images, lat, lng, facilities, description, bookUrl: '/' };
+  // Alle vorhandenen Fact-IDs für granulares Frontend-Scoring
+  const factIds = Object.keys(d.facts || {}).map(Number).filter(n => !isNaN(n));
+
+  return { giataId: String(d.giataId || d.id || ''), name, city, country, stars, image, images, lat, lng, facilities, factIds, description, bookUrl: '/' };
 }
 
 // Vollständige Daten für die Detailseite (alle Bilder, alle Texte, Zimmertypen)

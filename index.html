@@ -112,7 +112,7 @@
     }
     .logo svg { flex-shrink: 0; }
 
-    nav { display: flex; gap: 2rem; }
+    nav { display: flex; align-items: center; gap: 2rem; }
 
     nav a {
       font-size: 0.9rem;
@@ -123,6 +123,148 @@
 
     nav a:hover { color: var(--accent); }
     nav a svg { width: 16px; height: 16px; display: block; }
+
+    /* ── MEGA-MENU ── */
+    .nav-dropdown { position: relative; }
+
+    .nav-dropdown > button {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0;
+      transition: color 0.2s;
+      font-family: inherit;
+    }
+
+    .nav-dropdown > button:hover,
+    .nav-dropdown.open > button { color: var(--accent); }
+
+    .nav-dropdown > button .dd-chevron { transition: transform 0.2s; }
+    .nav-dropdown.open > button .dd-chevron { transform: rotate(180deg); }
+
+    .mega-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 20px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      gap: 1.75rem;
+      min-width: 700px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.7);
+      z-index: 300;
+    }
+
+    .nav-dropdown.open .mega-menu {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .mega-col h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mega-col h4.mt { margin-top: 1.1rem; }
+
+    .mega-col a {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 0.28rem 0;
+      transition: color 0.2s;
+    }
+
+    .mega-col a:hover { color: var(--accent); }
+
+    .mega-col a.country-link {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.15rem;
+    }
+
+    .mega-col a.sub-link {
+      padding-left: 0.65rem;
+      font-size: 0.82rem;
+    }
+
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.3rem;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-muted);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── MOBILE NAV OVERLAY ── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 64px 0 0 0;
+      background: var(--bg-card);
+      z-index: 199;
+      overflow-y: auto;
+      padding: 1.5rem clamp(1.25rem, 5vw, 2rem) 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .mobile-nav.open { display: block; }
+
+    .mobile-nav-section { margin-bottom: 1.75rem; }
+
+    .mobile-nav-section h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .mobile-nav-section a {
+      display: block;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+
+    .mobile-nav-section a:last-child { border-bottom: none; }
+    .mobile-nav-section a:hover { color: var(--accent); }
+    .mobile-nav-section a.country-link { font-weight: 600; color: var(--text); }
+    .mobile-nav-section a.sub-link { padding-left: 1rem; font-size: 0.85rem; color: #777; }
 
     /* ── HERO ── */
     .hero {
@@ -270,8 +412,12 @@
     .footer-left a:hover { color: var(--accent); }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-desktop { display: none !important; }
+      .nav-hamburger { display: flex; }
+    }
+
     @media (max-width: 600px) {
-      nav { gap: 1.25rem; }
       .hero h1 { letter-spacing: -0.75px; }
       footer { flex-direction: column; align-items: flex-start; }
     }
@@ -633,12 +779,152 @@
   <header>
     <a href="/" class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>JetztBuchbar</a>
     <nav>
-      <a href="/ueber-uns.html">Über uns</a>
-      <a href="/kontakt.html">Kontakt</a>
-      <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-      <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <!-- Desktop -->
+      <div class="nav-desktop" style="display:flex;align-items:center;gap:2rem">
+
+        <!-- Reiseziele Dropdown -->
+        <div class="nav-dropdown">
+          <button aria-haspopup="true" aria-expanded="false">
+            Reiseziele
+            <svg class="dd-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="mega-menu" role="region" aria-label="Reiseziele">
+
+            <div class="mega-col">
+              <h4>Türkei</h4>
+              <a href="/tuerkei/" class="country-link">Alle Türkei-Reisen</a>
+              <a href="/tuerkei/istanbul/" class="sub-link">Istanbul</a>
+              <a href="/tuerkei/antalya/" class="sub-link">Antalya</a>
+              <a href="/tuerkei/bodrum/" class="sub-link">Bodrum</a>
+              <a href="/tuerkei/alanya/" class="sub-link">Alanya</a>
+              <a href="/tuerkei/side/" class="sub-link">Side</a>
+              <a href="/tuerkei/marmaris/" class="sub-link">Marmaris</a>
+              <a href="/tuerkei/fethiye/" class="sub-link">Fethiye</a>
+              <a href="/tuerkei/kusadasi/" class="sub-link">Kusadası</a>
+              <a href="/tuerkei/kappadokien/" class="sub-link">Kappadokien</a>
+              <a href="/tuerkei/pamukkale/" class="sub-link">Pamukkale</a>
+            </div>
+
+            <div class="mega-col">
+              <h4>Griechenland</h4>
+              <a href="/griechenland/" class="country-link">Alle Griechenland-Reisen</a>
+              <a href="/griechenland/kreta/" class="sub-link">Kreta</a>
+              <a href="/griechenland/rhodos/" class="sub-link">Rhodos</a>
+              <a href="/griechenland/mykonos/" class="sub-link">Mykonos</a>
+              <a href="/griechenland/santorini/" class="sub-link">Santorini</a>
+              <a href="/griechenland/korfu/" class="sub-link">Korfu</a>
+              <a href="/griechenland/zakynthos/" class="sub-link">Zakynthos</a>
+            </div>
+
+            <div class="mega-col">
+              <h4>Spanien</h4>
+              <a href="/spanien/" class="country-link">Alle Spanien-Reisen</a>
+              <a href="/spanien/mallorca/" class="sub-link">Mallorca</a>
+              <a href="/spanien/barcelona/" class="sub-link">Barcelona</a>
+              <a href="/spanien/ibiza/" class="sub-link">Ibiza</a>
+              <a href="/spanien/teneriffa/" class="sub-link">Teneriffa</a>
+              <a href="/spanien/costa-brava/" class="sub-link">Costa Brava</a>
+              <h4 class="mt">Dubai</h4>
+              <a href="/dubai/" class="country-link">Dubai</a>
+              <a href="/dubai/wuestensafari/" class="sub-link">Wüstensafari</a>
+              <h4 class="mt">Portugal</h4>
+              <a href="/portugal/" class="country-link">Portugal</a>
+              <a href="/portugal/algarve/" class="sub-link">Algarve</a>
+            </div>
+
+            <div class="mega-col">
+              <h4>Weitere Ziele</h4>
+              <a href="/aegypten/">Ägypten</a>
+              <a href="/italien/">Italien</a>
+              <a href="/kroatien/">Kroatien</a>
+              <a href="/malta/">Malta</a>
+              <a href="/marokko/">Marokko</a>
+              <a href="/tunesien/">Tunesien</a>
+              <a href="/bulgarien/">Bulgarien</a>
+              <a href="/kap-verde/">Kap Verde</a>
+              <a href="/jordanien/">Jordanien</a>
+              <a href="/zypern/">Zypern</a>
+              <a href="/frankreich/">Frankreich</a>
+            </div>
+
+          </div>
+        </div>
+
+        <a href="/ueber-uns.html">Über uns</a>
+        <a href="/kontakt.html">Kontakt</a>
+        <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      </div>
+
+      <!-- Hamburger (Mobile) -->
+      <button class="nav-hamburger" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </header>
+
+  <!-- ── MOBILE NAV OVERLAY ── -->
+  <div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Navigation">
+    <div class="mobile-nav-section">
+      <h4>Türkei</h4>
+      <a href="/tuerkei/" class="country-link">Alle Türkei-Reisen</a>
+      <a href="/tuerkei/istanbul/" class="sub-link">Istanbul</a>
+      <a href="/tuerkei/antalya/" class="sub-link">Antalya</a>
+      <a href="/tuerkei/bodrum/" class="sub-link">Bodrum</a>
+      <a href="/tuerkei/alanya/" class="sub-link">Alanya</a>
+      <a href="/tuerkei/side/" class="sub-link">Side</a>
+      <a href="/tuerkei/marmaris/" class="sub-link">Marmaris</a>
+      <a href="/tuerkei/fethiye/" class="sub-link">Fethiye</a>
+      <a href="/tuerkei/kusadasi/" class="sub-link">Kusadası</a>
+      <a href="/tuerkei/kappadokien/" class="sub-link">Kappadokien</a>
+      <a href="/tuerkei/pamukkale/" class="sub-link">Pamukkale</a>
+    </div>
+    <div class="mobile-nav-section">
+      <h4>Griechenland</h4>
+      <a href="/griechenland/" class="country-link">Alle Griechenland-Reisen</a>
+      <a href="/griechenland/kreta/" class="sub-link">Kreta</a>
+      <a href="/griechenland/rhodos/" class="sub-link">Rhodos</a>
+      <a href="/griechenland/mykonos/" class="sub-link">Mykonos</a>
+      <a href="/griechenland/santorini/" class="sub-link">Santorini</a>
+      <a href="/griechenland/korfu/" class="sub-link">Korfu</a>
+      <a href="/griechenland/zakynthos/" class="sub-link">Zakynthos</a>
+    </div>
+    <div class="mobile-nav-section">
+      <h4>Spanien</h4>
+      <a href="/spanien/" class="country-link">Alle Spanien-Reisen</a>
+      <a href="/spanien/mallorca/" class="sub-link">Mallorca</a>
+      <a href="/spanien/barcelona/" class="sub-link">Barcelona</a>
+      <a href="/spanien/ibiza/" class="sub-link">Ibiza</a>
+      <a href="/spanien/teneriffa/" class="sub-link">Teneriffa</a>
+      <a href="/spanien/costa-brava/" class="sub-link">Costa Brava</a>
+    </div>
+    <div class="mobile-nav-section">
+      <h4>Dubai &amp; Portugal</h4>
+      <a href="/dubai/" class="country-link">Dubai</a>
+      <a href="/dubai/wuestensafari/" class="sub-link">Wüstensafari</a>
+      <a href="/portugal/" class="country-link">Portugal</a>
+      <a href="/portugal/algarve/" class="sub-link">Algarve</a>
+    </div>
+    <div class="mobile-nav-section">
+      <h4>Weitere Ziele</h4>
+      <a href="/aegypten/">Ägypten</a>
+      <a href="/italien/">Italien</a>
+      <a href="/kroatien/">Kroatien</a>
+      <a href="/malta/">Malta</a>
+      <a href="/marokko/">Marokko</a>
+      <a href="/tunesien/">Tunesien</a>
+      <a href="/bulgarien/">Bulgarien</a>
+      <a href="/kap-verde/">Kap Verde</a>
+      <a href="/jordanien/">Jordanien</a>
+      <a href="/zypern/">Zypern</a>
+      <a href="/frankreich/">Frankreich</a>
+    </div>
+    <div class="mobile-nav-section">
+      <h4>Seiten</h4>
+      <a href="/ueber-uns.html">Über uns</a>
+      <a href="/kontakt.html">Kontakt</a>
+    </div>
+  </div>
 
   <!-- ── HERO + SUCHMASKE ── -->
   <div class="hero">
@@ -951,6 +1237,52 @@
     document.addEventListener('DOMContentLoaded', function () {
       initHotelCompare();
     });
+  </script>
+
+  <!-- ── NAV JS ── -->
+  <script>
+    (function () {
+      var dropdown  = document.querySelector('.nav-dropdown');
+      var dropBtn   = dropdown.querySelector('button');
+      var hamburger = document.querySelector('.nav-hamburger');
+      var mobileNav = document.getElementById('mobile-nav');
+
+      // Dropdown toggle
+      dropBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = dropdown.classList.toggle('open');
+        dropBtn.setAttribute('aria-expanded', open);
+      });
+
+      // Close dropdown on outside click
+      document.addEventListener('click', function () {
+        dropdown.classList.remove('open');
+        dropBtn.setAttribute('aria-expanded', 'false');
+      });
+
+      // Prevent closing when clicking inside menu
+      dropdown.querySelector('.mega-menu').addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
+
+      // Hamburger toggle
+      hamburger.addEventListener('click', function () {
+        var open = hamburger.classList.toggle('open');
+        mobileNav.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+
+      // Close mobile nav on link click
+      mobileNav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          hamburger.classList.remove('open');
+          mobileNav.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
   </script>
 
   <!-- ─── HOTEL-VERGLEICH WIDGET ─── -->

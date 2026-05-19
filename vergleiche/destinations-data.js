@@ -24,7 +24,7 @@ var DESTINATIONS = {
     tagline: 'Sonnige Inselleben für jeden Geschmack',
     url: '/spanien/mallorca/',
     hotelUrl: '/spanien/hotels-mallorca/',
-    heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1517670660212-61ed0b4fe8f9?w=1200&q=80',
 
     bestSeason: {
       label: 'Mai – Oktober',
@@ -100,7 +100,7 @@ var DESTINATIONS = {
     tagline: 'Authentische Kultur, Natur und kristallklares Wasser',
     url: '/griechenland/kreta/',
     hotelUrl: '/griechenland/hotels-kreta/',
-    heroImage: 'https://images.unsplash.com/photo-1612820971049-5af7dc440a1c?w=1200&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1558870964-72e29d300edd?w=1200&q=80',
 
     bestSeason: {
       label: 'Mai – Oktober',
@@ -176,7 +176,7 @@ var DESTINATIONS = {
     tagline: 'All-Inclusive-Paradies mit antiker Geschichte',
     url: '/tuerkei/',
     hotelUrl: '/tuerkei/hotels-antalya/',
-    heroImage: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1648644769787-6e4f77f26703?w=1200&q=80',
 
     bestSeason: {
       label: 'April – Oktober',
@@ -252,7 +252,7 @@ var DESTINATIONS = {
     tagline: 'Rotes Meer, Korallenriffe und antike Wunder',
     url: '/aegypten/',
     hotelUrl: null,    // noch keine dedizierte Hotelseite
-    heroImage: 'https://images.unsplash.com/photo-1539768942893-daf53e448371?w=1200&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1761159948642-a08717c17560?w=1200&q=80',
 
     bestSeason: {
       label: 'Oktober – April',
@@ -323,7 +323,7 @@ var DESTINATIONS = {
     tagline: 'Weltrekorde, Luxus und Wüstenmagie',
     url: '/dubai/',
     hotelUrl: '/dubai/hotels-dubai/',
-    heroImage: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1647886056843-d2fc10e57cd4?w=1200&q=80',
 
     bestSeason: {
       label: 'Oktober – April',
@@ -504,7 +504,7 @@ var DESTINATIONS = {
     tagline: 'Atlantische Küsten, Surfer-Paradiese und Fado-Feeling',
     url: '/portugal/',
     hotelUrl: null,
-    heroImage: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1200&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1630163263856-8652d9e78194?w=1200&q=80',
     bestSeason: {
       label: 'Mai – Oktober',
       peak:  'Juli – August',
@@ -559,7 +559,7 @@ var DESTINATIONS = {
     tagline: '1001 Nacht: Medinas, Sahara und atlantische Surfwellen',
     url: '/marokko/',
     hotelUrl: null,
-    heroImage: 'https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=1200&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1663167529628-4050fc9a15f7?w=1200&q=80',
     bestSeason: {
       label: 'März – Mai & Sep – Nov',
       peak:  'April',

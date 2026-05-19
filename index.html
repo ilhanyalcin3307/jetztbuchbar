@@ -51,17 +51,6 @@
   }
   </script>
 
-  <!-- Travelpayouts WL -->
-  <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
-  (function () {
-        var script = document.createElement("script");
-        script.async = 1;
-        script.type = "module";
-        script.src = "https://tpemb.com/wl_web/main.js?wl_id=17471";
-        document.head.appendChild(script);
-      })();
-</script>
-
   <!-- Leaflet (Karte) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
@@ -166,49 +155,6 @@
       margin: 0 auto;
     }
 
-    /* ── TAB-BAR ── */
-    .stab-bar {
-      display: flex;
-      gap: 4px;
-      max-width: 1060px;
-      margin: 0 auto 0;
-      padding: 0 clamp(1.25rem, 5vw, 3rem);
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-
-    .stab-bar::-webkit-scrollbar { display: none; }
-
-    .stab {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.65rem 1.35rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #aaa;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-bottom: none;
-      border-radius: 10px 10px 0 0;
-      cursor: pointer;
-      transition: color 0.2s, background 0.2s;
-      letter-spacing: 0.01em;
-      white-space: nowrap;
-    }
-
-    .stab:hover { color: var(--text); background: rgba(255,255,255,0.10); }
-
-    .stab.active {
-      color: #0a0a0a;
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .stab .stab-icon { font-size: 1rem; }
-
     /* ── WIDGET ── */
     /*
       Kein overflow:hidden, kein festes height –
@@ -220,70 +166,8 @@
       border-top: 2px solid var(--accent);
     }
 
-    /* Tab panels */
-    .stab-panel { display: none; }
-    .stab-panel.active { display: block; }
-
-    #panel-transfer {
-      padding: 2rem 0;
-    }
-
-    .transfer-widget-wrap {
-      max-width: 1060px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 clamp(1.25rem, 5vw, 3rem);
-    }
-
-    #tpwl-search {
-      position: relative;
-      z-index: 10;
-    }
-
-    /* Ergebnisse fließen hier nahtlos nach unten */
-    .widget-results {
-      background: var(--bg);
-      padding-bottom: clamp(2rem, 5vw, 4rem);
-    }
-
-    .widget-results.hidden { display: none; }
-
-    #tpwl-tickets {
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 0 clamp(1.25rem, 5vw, 3rem);
-    }
-
-    /* ── INFO-STREIFEN ── */
-    .info-bar {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      gap: 0 2rem;
-      padding: clamp(1.5rem, 3.5vw, 2.5rem) clamp(1.25rem, 5vw, 3rem);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: #0d0d0d;
-    }
-
-    .info-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-      flex-shrink: 0;
-      padding: 0 1rem;
-      border-right: 1px solid var(--border);
-    }
-
-    .info-item:last-child { border-right: none; }
-
-    .info-item span:first-child { font-size: 1.4rem; }
-    .info-item strong { color: var(--text); }
-
     /* ── REISEZIELE CARDS ── */
+
     .destinations {
       padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 5vw, 3rem);
       max-width: 1260px;
@@ -759,32 +643,15 @@
   <!-- ── HERO + SUCHMASKE ── -->
   <div class="hero">
     <div class="hero-text">
-      <h1 id="hero-title">Flüge weltweit<br /><span>günstig buchen.</span></h1>
-      <p id="hero-sub">Hunderte Airlines vergleichen – sofort buchen.</p>
+      <h1 id="hero-title">Hotels vergleichen<br /><span>bis zu 4 auf einen Blick.</span></h1>
+      <p id="hero-sub">Ausstattung, Lage &amp; über 50 Kriterien im direkten Vergleich – mit automatischer Empfehlung.</p>
     </div>
 
-    <!-- ── TAB-BAR ── -->
-    <div class="stab-bar" role="tablist" aria-label="Suchtyp wählen">
-      <button class="stab active" role="tab" aria-selected="true"  aria-controls="panel-vergleich" data-panel="vergleich" data-type="vergleich">
-        <span class="stab-icon">🏨</span> Vergleich Hotels
-      </button>
-      <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-search"   data-panel="search"   data-type="flights">
-        <span class="stab-icon">✈</span> Flüge
-      </button>
-      <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-hotel"    data-panel="hotel"    data-type="hotels">
-        <span class="stab-icon">🏨</span> Hotels
-      </button>
-      <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-transfer" data-panel="transfer" data-type="transfer">
-        <span class="stab-icon">🚌</span> Transfer
-      </button>
-      <button class="stab"        role="tab" aria-selected="false" aria-controls="panel-radreise" data-panel="radreise" data-type="radreise">
-        <span class="stab-icon">🚲</span> Radreise
-      </button>
-    </div>
 
-    <!-- ── PANELS ── -->
+
+    <!-- ── HOTEL-VERGLEICH ── -->
     <div class="widget-wrap">
-      <div id="panel-vergleich" class="stab-panel active" role="tabpanel">
+      <div id="panel-vergleich">
         <div class="hc-wrap">
           <div class="hc-demo-banner" id="hc-demo-banner" style="display:none">
             <span>ℹ️</span>
@@ -805,49 +672,7 @@
         </div>
       </div>
 
-      <div id="panel-search" class="stab-panel" role="tabpanel">
-        <div id="tpwl-search"></div>
-      </div>
-      <div id="panel-hotel" class="stab-panel" role="tabpanel">
-        <div class="transfer-widget-wrap" id="hotel-widget-wrap">
-          <!-- Hotel-Widget wird beim ersten Klick geladen -->
-        </div>
-      </div>
-      <div id="panel-transfer" class="stab-panel" role="tabpanel">
-        <div class="transfer-widget-wrap" id="transfer-widget-wrap">
-          <!-- Transfer-Widget wird beim ersten Klick geladen -->
-        </div>
-      </div>
-      <div id="panel-radreise" class="stab-panel" role="tabpanel">
-        <div class="transfer-widget-wrap" id="radreise-widget-wrap">
-          <!-- Radreise-Widget wird beim ersten Klick geladen -->
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ── SUCHERGEBNISSE (expandieren nach unten) ── -->
-  <div class="widget-results" id="widget-results">
-    <div id="tpwl-tickets"></div>
-  </div>
-
-  <!-- ── INFO-STREIFEN ── -->
-  <div class="info-bar">
-    <div class="info-item">
-      <span>✈️</span>
-      <span><strong>Flüge vergleichen</strong> — Hunderte Airlines, ein Klick</span>
-    </div>
-    <div class="info-item">
-      <span>🏨</span>
-      <span><strong>Hotels &amp; Resorts</strong> — Weltweit zum Bestpreis</span>
-    </div>
-    <div class="info-item">
-      <span>🚌</span>
-      <span><strong>Airport-Transfer</strong> — Entspannt ins Hotel</span>
-    </div>
-    <div class="info-item">
-      <span>🚲</span>
-      <span><strong>Radreisen</strong> — Aktiv durch Europa</span>
     </div>
   </div>
 
@@ -1121,127 +946,11 @@
       <span>Wien, Österreich</span>
     </div>
   </footer>
-  <!-- ── TAB SWITCHING ── -->
+  <!-- ── INIT ── -->
   <script>
-    (function () {
-      var tabs        = document.querySelectorAll('.stab');
-      var heroTitle = document.getElementById('hero-title');
-      var heroSub   = document.getElementById('hero-sub');
-      var heroTexts = {
-        flights:   { h: 'Flüge weltweit<br><span>günstig buchen.</span>',       p: 'Hunderte Airlines vergleichen – sofort buchen.' },
-        // Default-Tab ist Vergleich Hotels
-        hotels:    { h: 'Hotels &amp; Resorts<br><span>direkt buchen.</span>',   p: 'Millionen Unterkünfte weltweit – vergleichen &amp; buchen.' },
-        transfer:  { h: 'Flughafentransfer<br><span>einfach buchen.</span>',     p: 'Zuverlässige Transfers weltweit – schnell &amp; sicher.' },
-        radreise:  { h: 'Radreisen entdecken<br><span>jetzt buchen.</span>',     p: 'Die schönsten Radrouten weltweit – günstig buchen.' },
-        vergleich: { h: 'Hotels vergleichen<br><span>bis zu 4 auf einen Blick.</span>', p: 'Ausstattung, Lage &amp; über 50 Kriterien im direkten Vergleich – mit automatischer Empfehlung.' }
-      };
-
-      var panelSearch    = document.getElementById('panel-search');
-      var panelHotel     = document.getElementById('panel-hotel');
-      var panelTrans     = document.getElementById('panel-transfer');
-      var panelRadreise  = document.getElementById('panel-radreise');
-      var panelVergleich = document.getElementById('panel-vergleich');
-      var results        = document.getElementById('widget-results');
-      var hotelLoaded    = false;
-      var transLoaded    = false;
-      var radLoaded      = false;
-      var vergleichInited = false;
-
-      function activate(tab) {
-        // Update tab state
-        tabs.forEach(function (t) {
-          t.classList.remove('active');
-          t.setAttribute('aria-selected', 'false');
-        });
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
-
-        var panel = tab.dataset.panel;
-        var type  = tab.dataset.type;
-
-        // Update hero text
-        var txt = heroTexts[type] || heroTexts.flights;
-        heroTitle.innerHTML = txt.h;
-        heroSub.innerHTML   = txt.p;
-
-        if (panel === 'vergleich') {
-          panelSearch.classList.remove('active');
-          panelHotel.classList.remove('active');
-          panelTrans.classList.remove('active');
-          panelRadreise.classList.remove('active');
-          panelVergleich.classList.add('active');
-          results.classList.add('hidden');
-          if (!vergleichInited) { vergleichInited = true; initHotelCompare(); }
-        } else if (panel === 'hotel') {
-          panelSearch.classList.remove('active');
-          panelHotel.classList.add('active');
-          panelTrans.classList.remove('active');
-          panelRadreise.classList.remove('active');
-          panelVergleich.classList.remove('active');
-          results.classList.add('hidden');
-
-          // Lazy-load Hotel widget on first click
-          if (!hotelLoaded) {
-            hotelLoaded = true;
-            var h = document.createElement('script');
-            h.async = true;
-            h.charset = 'utf-8';
-            h.src = 'https://tpemb.com/content?trs=218201&shmarker=420168&locale=en&powered_by=false&primary_override=%235392F9&color_button=%235392F9&color_icons=%235392F9&dark=%23262626&color_border=%235392F9&color_focused=%2332a8dd&border_radius=5&no_labels=true&plain=true&promo_id=8303&campaign_id=104';
-            document.getElementById('hotel-widget-wrap').appendChild(h);
-          }
-        } else if (panel === 'transfer') {
-          panelSearch.classList.remove('active');
-          panelHotel.classList.remove('active');
-          panelTrans.classList.add('active');
-          panelRadreise.classList.remove('active');
-          panelVergleich.classList.remove('active');
-          results.classList.add('hidden');
-
-          // Lazy-load Transfer widget on first click
-          if (!transLoaded) {
-            transLoaded = true;
-            var s = document.createElement('script');
-            s.async = true;
-            s.charset = 'utf-8';
-            s.src = 'https://tpemb.com/content?currency=EUR&trs=218201&shmarker=420168&locale=de&powered_by=false&transfer_options_limit=10&transfer_options=MCR&disable_currency_selector=true&hide_form_extras=true&hide_external_links=true&campaign_id=1&promo_id=3879';
-            document.getElementById('transfer-widget-wrap').appendChild(s);
-          }
-        } else if (panel === 'radreise') {
-          panelSearch.classList.remove('active');
-          panelHotel.classList.remove('active');
-          panelTrans.classList.remove('active');
-          panelRadreise.classList.add('active');
-          panelVergleich.classList.remove('active');
-          results.classList.add('hidden');
-
-          // Lazy-load Radreise widget on first click
-          if (!radLoaded) {
-            radLoaded = true;
-            var r = document.createElement('script');
-            r.async = true;
-            r.charset = 'utf-8';
-            r.src = 'https://tpemb.com/content?trs=218201&shmarker=420168&locale=de&powered_by=false&border_radius=5&plain=true&color_background=%23ffffff&color_button=%23f2685f&promo_id=5472&campaign_id=57';
-            document.getElementById('radreise-widget-wrap').appendChild(r);
-          }
-        } else {
-          // Flüge → show search panel
-          panelHotel.classList.remove('active');
-          panelTrans.classList.remove('active');
-          panelRadreise.classList.remove('active');
-          panelVergleich.classList.remove('active');
-          panelSearch.classList.add('active');
-          results.classList.remove('hidden');
-        }
-      }
-
-      tabs.forEach(function (tab) {
-        tab.addEventListener('click', function () { activate(tab); });
-      });
-
-      // Beim Laden Vergleich-Tab aktivieren (Tab + Hero + initHotelCompare)
-      var defaultTab = document.querySelector('.stab[data-panel="vergleich"]');
-      if (defaultTab) activate(defaultTab);
-    })();
+    document.addEventListener('DOMContentLoaded', function () {
+      initHotelCompare();
+    });
   </script>
 
   <!-- ─── HOTEL-VERGLEICH WIDGET ─── -->

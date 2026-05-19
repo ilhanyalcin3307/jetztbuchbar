@@ -284,31 +284,18 @@
       </div>
     </div>
 
+    <div class="section">
+      <div class="container">
+        <h2 class="section-title">🤖 KI-<span>Empfehlung</span></h2>
+        <div id="vg-travel-types"></div>
+        <div id="vg-ki-fazit" style="margin-top:1.25rem"></div>
+      </div>
+    </div>
+
     <div class="section-alt">
       <div class="container">
         <h2 class="section-title">⚖️ Der direkte <span>Vergleich</span></h2>
-        <div class="stat-grid">
-          <div class="stat-card">
-            <span class="stat-icon">✈️</span>
-            <span class="stat-label">Flugzeit</span>
-            <span class="stat-value">Türkei: kürzer</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-icon">💶</span>
-            <span class="stat-label">Preis</span>
-            <span class="stat-value">Ähnliches Niveau</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-icon">☀️</span>
-            <span class="stat-label">Klima</span>
-            <span class="stat-value">Beide sunny</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-icon">🏖️</span>
-            <span class="stat-label">Strand</span>
-            <span class="stat-value">Beide top</span>
-          </div>
-        </div>
+        <div id="vg-table"></div>
       </div>
     </div>
 
@@ -380,14 +367,10 @@
 
     
   <div class="section">
-    <div class="container-narrow">
-      <div class="cta-box">
-        <h2>Türkei oder Ägypten-Urlaub <span style="color:var(--accent)">jetzt anfragen</span></h2>
-        <p>Unser Team findet die besten Angebote für deinen Traumurlaub – kostenlos und unverbindlich.</p>
-        <a href="mailto:sales@jetztbuchbar.de?subject=Anfrage T%C3%BCrkei%20oder%20%C3%84gypten" class="btn-primary">✉️ Angebot anfragen</a>
-        <br />
-        <a href="/index.html" class="btn-secondary">← Zurück zur Startseite</a>
-      </div>
+    <div class="container">
+      <h2 class="section-title">🏨 Hotels für deinen <span>Urlaub</span></h2>
+      <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem">Klick auf eine Kachel – die Hotels öffnen sich direkt im Vergleich.</p>
+      <div id="vg-cta"></div>
     </div>
   </div>
   
@@ -578,6 +561,9 @@
     }});
   })();
   </script>
+<script src="/vergleiche/destinations-data.js"></script>
+<script src="/vergleiche/vergleich-engine.js"></script>
+<script>JB.initVergleich('tuerkei-vs-aegypten');</script>
 <!--Start of Crisp Chat-->
 <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="bd983cbc-0fb7-4b1e-9d37-4c2c02ba1f0b";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 <!--End of Crisp Chat-->

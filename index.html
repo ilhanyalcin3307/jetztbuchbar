@@ -1305,8 +1305,11 @@
       { key: 'rooms',      label: 'Zimmeranzahl',   icon: '🛏️',  type: 'number' },
     ];
 
-    // Standardmäßig geladene Hotel-IDs (echte Giata-IDs)
-    var DEFAULT_IDS = ['42194', '232017', '574183', '10958'];
+    // Standardmäßig geladene Hotel-IDs – überschreibbar per ?hotels=id1,id2,id3,id4
+    var _urlHotels = new URLSearchParams(window.location.search).get('hotels');
+    var DEFAULT_IDS = (_urlHotels
+      ? _urlHotels.split(',').map(function (s) { return s.trim(); }).filter(Boolean).slice(0, 4)
+      : null) || ['42194', '232017', '574183', '10958'];
 
     // DEMO_HOTELS wird nicht mehr benötigt – alle Hotels kommen live von der API
     var DEMO_HOTELS = [];
@@ -2000,6 +2003,11 @@
       })).then(function (hotels) {
         compared = hotels.filter(function (h) { return h && h.giataId; });
         renderTable();
+        // Bei ?hotels= URL-Param automatisch zum Widget scrollen
+        if (_urlHotels) {
+          var widgetEl = document.getElementById('panel-vergleich');
+          if (widgetEl) widgetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       });
 
       // API-Status prüfen → Banner dynamisch aktualisieren

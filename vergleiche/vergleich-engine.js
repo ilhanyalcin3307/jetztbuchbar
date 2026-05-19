@@ -1,404 +1,300 @@
 /**
- * JetztBuchbar – Vergleich Engine
- * Rendert den kompletten Reiseziel-Vergleich (Tabelle, KI-Fazit, CTAs)
- * Voraussetzung: destinations-data.js muss vorher geladen sein (window.JB)
+ * JetztBuchbar – Vergleich Engine v2 (Premium Dashboard)
+ * Renders Split-Hero, Criteria Cards, Progress Bars, Hotel Tabs, FAQ Accordion
  *
- * Aufruf im Shell-HTML:
- *   <script src="/vergleiche/destinations-data.js"></script>
- *   <script src="/vergleiche/vergleich-engine.js"></script>
- *   <script>JB.initVergleich('mallorca-vs-kreta');</script>
+ *  <script src="/vergleiche/destinations-data.js"></script>
+ *  <script src="/vergleiche/vergleich-engine.js"></script>
+ *  <script>JB.initVergleich('mallorca-vs-kreta');</script>
  */
-
 'use strict';
 
 (function (global) {
 
-  /* ── Guard ── */
   var JB = global.JB;
   if (!JB || !JB.DESTINATIONS) {
     console.error('[VergleichEngine] destinations-data.js muss zuerst geladen werden.');
     return;
   }
 
-  /* ─────────────────────────────────────────────────
+  /* ═══════════════════════════════════════════════
      CSS INJECTION
-     Nur einmal eingebunden (guard via data-Attribut)
-     ───────────────────────────────────────────────── */
+  ═══════════════════════════════════════════════ */
   function injectCSS() {
     if (document.querySelector('style[data-vg-engine]')) return;
-    var style = document.createElement('style');
-    style.setAttribute('data-vg-engine', '1');
-    style.textContent = [
-      /* ── Travel-Type Selector ── */
-      '.vg-tt-wrap{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.75rem}',
-      '.vg-tt-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.1rem;font-size:.83rem;font-weight:600;font-family:inherit;color:var(--text-muted);background:var(--bg-card);border:1px solid var(--border);border-radius:50px;cursor:pointer;transition:all .2s}',
+    var s = document.createElement('style');
+    s.setAttribute('data-vg-engine', '2');
+    s.textContent = [
+      /* Travel-Type Selector */
+      '.vg-tt-wrap{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}',
+      '.vg-tt-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.15rem;font-size:.83rem;font-weight:600;font-family:inherit;color:var(--text-muted);background:var(--bg-card);border:1px solid var(--border);border-radius:50px;cursor:pointer;transition:all .2s}',
       '.vg-tt-btn:hover{border-color:var(--accent);color:var(--accent)}',
-      '.vg-tt-btn.active{background:var(--accent);border-color:var(--accent);color:#0a0a0a}',
-
-      /* ── KI-Fazit ── */
-      '.vg-ki-fazit{background:linear-gradient(135deg,rgba(0,200,150,.09),rgba(0,200,150,.03));border-left:3px solid var(--accent);border-radius:0 var(--radius-sm,8px) var(--radius-sm,8px) 0;padding:1.25rem 1.5rem;margin-bottom:1.5rem}',
-      '.vg-ki-label{font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}',
-      '.vg-ki-text{font-size:1rem;line-height:1.75;color:var(--text-soft,#aaa)}',
-
-      /* ── Comparison Table ── */
-      '.vg-table-wrap{border:1px solid var(--border);border-radius:var(--radius,14px);overflow:hidden}',
-      '.vg-table-header{display:grid;grid-template-columns:220px 1fr 1fr;background:rgba(0,200,150,.06);border-bottom:2px solid var(--accent)}',
-      '.vg-th-criterion{padding:.85rem 1.1rem;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)}',
-      '.vg-th-dest{padding:.85rem 1.1rem;font-size:.95rem;font-weight:800;color:var(--text);border-left:1px solid var(--border);display:flex;align-items:center;gap:.45rem}',
-      '.vg-dest-flag{font-size:1.2rem}',
-      '.vg-row{display:grid;grid-template-columns:220px 1fr 1fr;border-bottom:1px solid var(--border)}',
-      '.vg-row:last-child{border-bottom:none}',
-      '.vg-row:hover{background:rgba(255,255,255,.02)}',
-      '.vg-row-label{padding:.85rem 1.1rem;font-size:.85rem;font-weight:600;color:var(--text-muted);display:flex;align-items:flex-start;gap:.5rem}',
-      '.vg-row-icon{font-size:1rem;flex-shrink:0;margin-top:.05rem}',
-      '.vg-row-cell{padding:.85rem 1.1rem;font-size:.88rem;color:var(--text-soft,#aaa);border-left:1px solid var(--border);line-height:1.6}',
-      '.vg-row-cell small{font-size:.77rem;color:var(--text-muted);display:block;margin-top:.2rem}',
-      '.vg-row-cell.vg-winner{background:rgba(0,200,150,.06)}',
-      '.vg-row-cell.vg-winner::before{content:"✓ ";color:var(--accent);font-weight:700}',
-
-      /* ── Stars & Budget ── */
-      '.vg-star,.vg-euro{color:var(--border);font-size:1rem}',
-      '.vg-star.filled{color:#fbbf24}',
-      '.vg-euro.filled{color:var(--accent)}',
-
-      /* ── Activity Tags ── */
-      '.vg-tag{display:inline-block;padding:.2rem .6rem;font-size:.75rem;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:50px;margin:.15rem .1rem;color:var(--text-muted)}',
-
-      /* ── CTA Grid ── */
-      '.vg-cta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem}',
-      '.vg-cta-card{display:flex;align-items:center;gap:.75rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius,14px);padding:1rem 1.25rem;transition:border-color .2s,background .2s;cursor:pointer}',
-      '.vg-cta-card:hover{border-color:var(--accent);background:rgba(0,200,150,.05)}',
-      '.vg-cta-flag{font-size:1.5rem;flex-shrink:0}',
-      '.vg-cta-label{flex:1;font-size:.88rem;font-weight:600;color:var(--text);line-height:1.4}',
-      '.vg-cta-arrow{color:var(--accent);font-size:1.1rem;flex-shrink:0;transition:transform .2s}',
-      '.vg-cta-card:hover .vg-cta-arrow{transform:translateX(4px)}',
-
-      /* ── Responsive ── */
-      '@media(max-width:640px){',
-        '.vg-table-header,.vg-row{grid-template-columns:120px 1fr 1fr}',
-        '.vg-row-label,.vg-th-criterion{font-size:.75rem;padding:.65rem .75rem}',
-        '.vg-row-cell,.vg-th-dest{font-size:.82rem;padding:.65rem .75rem}',
-        '.vg-cta-grid{grid-template-columns:1fr}',
-        '.vg-tt-btn{font-size:.78rem;padding:.45rem .9rem}',
-      '}'
+      '.vg-tt-btn.active{background:var(--accent);border-color:var(--accent);color:#0a0a0a;box-shadow:0 0 16px rgba(0,200,150,.35)}',
+      /* KI Fazit Glassmorphism */
+      '.vg-ki-fazit{position:relative;overflow:hidden;background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.25);border-radius:var(--radius,14px);padding:1.5rem 1.75rem;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}',
+      '.vg-ki-fazit::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 50%,rgba(0,200,150,.08),transparent);pointer-events:none}',
+      '.vg-ki-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}',
+      '.vg-ki-text{font-size:1rem;line-height:1.78;color:var(--text-soft,#aaa);position:relative}',
+      '.vg-ki-fazit.vg-fade{animation:vg-fade-in .35s ease}',
+      '@keyframes vg-fade-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}',
+      /* Criteria Pair-Cards Grid */
+      '.vg-cc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}',
+      '.vg-cc-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius,14px);overflow:hidden;transition:border-color .2s}',
+      '.vg-cc-card:hover{border-color:var(--border-soft,#252525)}',
+      '.vg-cc-label{display:flex;align-items:center;gap:.5rem;padding:.58rem 1rem;font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);background:rgba(255,255,255,.03);border-bottom:1px solid var(--border)}',
+      '.vg-cc-sides{display:grid;grid-template-columns:1fr 1fr}',
+      '.vg-cc-side{padding:.8rem 1rem;position:relative;transition:background .2s}',
+      '.vg-cc-side+.vg-cc-side{border-left:1px solid var(--border)}',
+      '.vg-cc-side.winner{background:rgba(0,200,150,.07)}',
+      '.vg-cc-dname{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin-bottom:.35rem;display:flex;align-items:center;gap:.3rem}',
+      '.vg-cc-val{font-size:.85rem;color:var(--text-soft);line-height:1.5}',
+      '.vg-cc-val small{font-size:.74rem;color:var(--text-muted);display:block;margin-top:.2rem}',
+      '.vg-cc-win{position:absolute;top:.5rem;right:.5rem;background:var(--accent);color:#000;font-size:.6rem;font-weight:800;padding:.1rem .4rem;border-radius:50px;letter-spacing:.05em}',
+      /* Score Progress Bars */
+      '.vg-sc-grid{display:flex;flex-direction:column;gap:.95rem}',
+      '.vg-sc-row{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius,14px);padding:1rem 1.25rem;transition:border-color .35s,box-shadow .35s}',
+      '.vg-sc-row.vg-sc-highlight{border-color:var(--accent);box-shadow:0 0 0 1px rgba(0,200,150,.2)}',
+      '.vg-sc-row-hd{display:flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:700;color:var(--text-muted);margin-bottom:.75rem}',
+      '.vg-sc-bars{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}',
+      '.vg-sc-bar-item{display:flex;flex-direction:column;gap:.3rem}',
+      '.vg-sc-bar-lbl{display:flex;justify-content:space-between;align-items:center;font-size:.7rem;color:var(--text-muted)}',
+      '.vg-sc-bar-lbl strong{color:var(--text);font-weight:700}',
+      '.vg-sc-track{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}',
+      '.vg-sc-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent-dark,#00a87e),var(--accent,#00c896));transition:width .6s cubic-bezier(.4,0,.2,1)}',
+      /* Hotel Tabs */
+      '.vg-htabs{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:1.25rem}',
+      '.vg-htab{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:50px;font-size:.82rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all .2s;font-family:inherit}',
+      '.vg-htab:hover,.vg-htab.active{border-color:var(--accent);color:var(--accent);background:rgba(0,200,150,.07)}',
+      '.vg-htab.active{box-shadow:0 0 12px rgba(0,200,150,.25)}',
+      /* Responsive */
+      '@media(max-width:768px){.vg-cc-grid{grid-template-columns:1fr}.vg-sc-bars{grid-template-columns:1fr}}',
+      '@media(max-width:480px){.vg-cc-sides{grid-template-columns:1fr}.vg-cc-side+.vg-cc-side{border-left:none;border-top:1px solid var(--border)}.vg-tt-btn{font-size:.78rem;padding:.45rem .9rem}}'
     ].join('');
-    document.head.appendChild(style);
+    document.head.appendChild(s);
   }
 
-  /* ─────────────────────────────────────────────────
+  /* ═══════════════════════════════════════════════
      HELPERS
-     ───────────────────────────────────────────────── */
-
+  ═══════════════════════════════════════════════ */
   function esc(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-
   function renderStars(score) {
-    var out = '';
-    for (var i = 1; i <= 5; i++) {
-      out += '<span class="vg-star' + (i <= score ? ' filled' : '') + '">★</span>';
-    }
-    return out;
+    var o=''; for(var i=1;i<=5;i++) o+='<span style="color:'+(i<=score?'#fbbf24':'rgba(255,255,255,.12)')+'">&#9733;</span>'; return o;
   }
-
   function renderBudget(score) {
-    var out = '';
-    for (var i = 1; i <= 5; i++) {
-      out += '<span class="vg-euro' + (i <= score ? ' filled' : '') + '">€</span>';
-    }
-    return out;
+    var o=''; for(var i=1;i<=5;i++) o+='<span style="color:'+(i<=score?'var(--accent)':'rgba(255,255,255,.12)')+'">&#8364;</span>'; return o;
   }
-
   function renderTags(arr) {
-    return arr.map(function (a) {
-      return '<span class="vg-tag">' + esc(a) + '</span>';
-    }).join('');
+    return arr.map(function(a){return '<span style="display:inline-block;padding:.18rem .55rem;font-size:.74rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:50px;margin:.12rem .08rem;color:var(--text-muted)">'+esc(a)+'</span>';}).join('');
   }
+  function winner(sA,sB){return sA>sB?'a':sB>sA?'b':'tie';}
 
-  /* Wer hat den höheren Score? → 'a' | 'b' | 'tie' */
-  function winner(scoreA, scoreB) {
-    return scoreA > scoreB ? 'a' : scoreB > scoreA ? 'b' : 'tie';
-  }
-
-  /* ─────────────────────────────────────────────────
-     KI-FAZIT: DYNAMISCHE TEMPLATES
-     ───────────────────────────────────────────────── */
-
-  var FAZIT = {
-    family: function (w, l) {
-      return w.name + ' ist die bessere Wahl für Familien mit Kindern – ' +
-        (w.scores.family >= 5
-          ? 'mit ausgezeichneter Kinderinfrastruktur, familienfreundlichen Stränden und vielfältiger Unterhaltung für alle Altersgruppen.'
-          : 'mit guten Familienhotels und Aktivitäten für Groß und Klein.');
-    },
-    couple: function (w, l) {
-      return w.name + ' bietet die romantischere Atmosphäre für Paare – ' +
-        (w.beach.score >= 4
-          ? 'traumhafte Sonnenuntergänge, intime Buchten und ein unvergessliches Flair.'
-          : 'elegante Hotels, exzellente Gastronomie und besondere Erlebnisse zu zweit.');
-    },
-    beach: function (w, l) {
-      return 'Als Strandparadies führt ' + w.name + ' deutlich – ' +
-        w.beach.label + ' (' + w.beach.type + ') macht jeden Strandtag perfekt.';
-    },
-    culture: function (w, l) {
-      return 'Kulturinteressierte kommen in ' + w.name + ' auf ihre Kosten – ' +
-        (w.nature.highlights && w.nature.highlights.length
-          ? 'von ' + w.nature.highlights.slice(0, 2).join(' bis ') + ' gibt es viel zu entdecken.'
-          : 'Geschichte, Architektur und lokale Traditionen sind hier besonders reichhaltig.');
-    },
-    adventure: function (w, l) {
-      return 'Abenteuerlustige sind in ' + w.name + ' besser aufgehoben – ' +
-        (w.activities && w.activities.length
-          ? w.activities.slice(0, 3).join(', ') + ' warten auf dich.'
-          : 'Outdoor-Aktivitäten und aufregende Erlebnisse erwarten dich.');
-    },
-    nature: function (w, l) {
-      return w.name + ' begeistert Naturliebhaber – ' + w.nature.label +
-        (w.nature.highlights && w.nature.highlights.length
-          ? ': ' + w.nature.highlights.slice(0, 2).join(', ') + ' sind unvergessliche Erlebnisse.'
-          : ' – landschaftlich kaum zu überbieten.');
-    },
-    party: function (w, l) {
-      return 'Für Partygänger ist ' + w.name + ' die klarere Wahl – ' +
-        (w.scores.party >= 4
-          ? 'lebhaftes Nachtleben, Clubs und Bars bis in die frühen Morgenstunden.'
-          : 'eine solide Ausgehszene für gesellige Abende und gute Musik.');
-    }
+  /* ═══════════════════════════════════════════════
+     KI-FAZIT TEMPLATES
+  ═══════════════════════════════════════════════ */
+  var FAZIT={
+    family:function(w){return w.name+' ist die bessere Wahl f\u00fcr Familien \u2013 mit ausgezeichneter Kinderinfrastruktur, familienfreundlichen Str\u00e4nden und vielf\u00e4ltiger Unterhaltung f\u00fcr alle Altersgruppen.';},
+    couple:function(w){return w.name+' bietet die romantischere Atmosph\u00e4re f\u00fcr P\u00e4rchen \u2013 traumhafte Sonnenunterg\u00e4nge, intime Buchten und unverg\u00e4ngliches Flair zu zweit.';},
+    beach:function(w){return 'Als Strandparadies f\u00fchrt '+w.name+' deutlich \u2013 '+(w.beach?w.beach.label:'erstklassige Str\u00e4nde')+' machen jeden Strandtag perfekt.';},
+    culture:function(w){return 'Kulturinteressierte kommen in '+w.name+' am meisten auf ihre Kosten \u2013 Geschichte, Architektur und lokale Traditionen sind hier besonders reichhaltig.';},
+    adventure:function(w){return 'Abenteuerlustige sind in '+w.name+' besser aufgehoben \u2013 '+(w.activities&&w.activities.length?w.activities.slice(0,3).join(', ')+' warten auf dich.':'Outdoor-Aktivit\u00e4ten und spannende Erlebnisse erwarten dich.');},
+    nature:function(w){return w.name+' begeistert Naturliebhaber \u2013 '+(w.nature?w.nature.label:'atemberaubende Landschaften')+(w.nature&&w.nature.highlights&&w.nature.highlights.length?': '+w.nature.highlights.slice(0,2).join(', ')+'.':'.');},
+    party:function(w){return 'F\u00fcr Partygänger ist '+w.name+' die klarere Wahl \u2013 lebhaftes Nachtleben, Clubs und Bars bis in die fr\u00fchen Morgenstunden.';}
   };
-
-  function generateFazit(destA, destB, travelType) {
-    var sA = destA.scores[travelType] || 0;
-    var sB = destB.scores[travelType] || 0;
-    var w  = sA >= sB ? destA : destB;
-    var l  = w === destA ? destB : destA;
-    var fn = FAZIT[travelType];
-    return fn ? fn(w, l) : null;
+  function generateFazit(destA,destB,travelType,pair){
+    var sA=destA.scores[travelType]||0,sB=destB.scores[travelType]||0,w=sA>=sB?destA:destB;
+    var fn=FAZIT[travelType]; return fn?fn(w):(pair?pair.default_ki_fazit:'');
   }
 
-  /* ─────────────────────────────────────────────────
-     RENDER: KI-FAZIT BOX
-     ───────────────────────────────────────────────── */
-
-  function renderKiFazit(text, container) {
-    container.innerHTML =
-      '<div class="vg-ki-fazit">' +
-        '<div class="vg-ki-label"><span>🤖</span> JetztBuchbar KI-Empfehlung</div>' +
-        '<p class="vg-ki-text">' + esc(text) + '</p>' +
-      '</div>';
+  /* ═══════════════════════════════════════════════
+     RENDER: KI-FAZIT
+  ═══════════════════════════════════════════════ */
+  function renderKiFazit(text,container){
+    container.innerHTML='<div class="vg-ki-fazit"><div class="vg-ki-label">&#x1F916; JetztBuchbar KI-Empfehlung</div><p class="vg-ki-text">'+esc(text)+'</p></div>';
+  }
+  function animateKiFazit(text,container){
+    var box=container.querySelector('.vg-ki-fazit');
+    if(!box){renderKiFazit(text,container);return;}
+    box.classList.remove('vg-fade'); void box.offsetWidth;
+    box.querySelector('.vg-ki-text').textContent=text;
+    box.classList.add('vg-fade');
   }
 
-  /* ─────────────────────────────────────────────────
+  /* ═══════════════════════════════════════════════
      RENDER: TRAVEL-TYPE SELECTOR
-     ───────────────────────────────────────────────── */
-
-  function renderTravelTypes(pair, destA, destB, fazitEl) {
-    var el = document.getElementById('vg-travel-types');
-    if (!el) return;
-
-    var html = '<div class="vg-tt-wrap">';
-    JB.TRAVEL_TYPES.forEach(function (tt) {
-      html += '<button class="vg-tt-btn" data-type="' + tt.key + '">' +
-        tt.icon + ' ' + esc(tt.label) + '</button>';
-    });
-    html += '</div>';
-    el.innerHTML = html;
-
-    el.querySelectorAll('.vg-tt-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        el.querySelectorAll('.vg-tt-btn').forEach(function (b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var text = generateFazit(destA, destB, btn.dataset.type) || pair.default_ki_fazit;
-        renderKiFazit(text, fazitEl);
+  ═══════════════════════════════════════════════ */
+  function renderTravelTypes(pair,destA,destB,fazitEl,scoresEl){
+    var el=document.getElementById('vg-travel-types'); if(!el)return;
+    var html='<div class="vg-tt-wrap">';
+    JB.TRAVEL_TYPES.forEach(function(tt){html+='<button class="vg-tt-btn" data-type="'+tt.key+'">'+tt.icon+' '+esc(tt.label)+'</button>';});
+    html+='</div>'; el.innerHTML=html;
+    el.querySelectorAll('.vg-tt-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        el.querySelectorAll('.vg-tt-btn').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active');
+        var type=btn.dataset.type;
+        animateKiFazit(generateFazit(destA,destB,type,pair),fazitEl);
+        if(scoresEl) scoresEl.querySelectorAll('.vg-sc-row').forEach(function(row){row.classList.toggle('vg-sc-highlight',row.dataset.scoreKey===type);});
       });
     });
   }
 
-  /* ─────────────────────────────────────────────────
-     RENDER: COMPARISON TABLE
-     ───────────────────────────────────────────────── */
-
-  function renderTable(destA, destB, container) {
-    var rows = [
-      {
-        icon: '📅', label: 'Beste Reisezeit',
-        a: esc(destA.bestSeason.label) + '<br><small>' + esc(destA.bestSeason.tip) + '</small>',
-        b: esc(destB.bestSeason.label) + '<br><small>' + esc(destB.bestSeason.tip) + '</small>',
-        win: winner(destA.bestSeason.score, destB.bestSeason.score)
-      },
-      {
-        icon: '💶', label: 'Budget-Index',
-        a: renderBudget(destA.budget.score) +
-           '<br><small>∅ ' + destA.budget.avgHotelNight + '€/Nacht · Flug ab ' + destA.budget.avgFlight + '€</small>' +
-           '<br><small>' + esc(destA.budget.note) + '</small>',
-        b: renderBudget(destB.budget.score) +
-           '<br><small>∅ ' + destB.budget.avgHotelNight + '€/Nacht · Flug ab ' + destB.budget.avgFlight + '€</small>' +
-           '<br><small>' + esc(destB.budget.note) + '</small>',
-        win: winner(6 - destA.budget.score, 6 - destB.budget.score) // niedriger Score = günstiger = besser
-      },
-      {
-        icon: '🏖️', label: 'Strandqualität',
-        a: renderStars(destA.beach.score) + '<br><small>' + esc(destA.beach.label) + '</small>',
-        b: renderStars(destB.beach.score) + '<br><small>' + esc(destB.beach.label) + '</small>',
-        win: winner(destA.beach.score, destB.beach.score)
-      },
-      {
-        icon: '🌿', label: 'Natur & Landschaft',
-        a: renderStars(destA.nature.score) + '<br><small>' + esc(destA.nature.label) + '</small>',
-        b: renderStars(destB.nature.score) + '<br><small>' + esc(destB.nature.label) + '</small>',
-        win: winner(destA.nature.score, destB.nature.score)
-      },
-      {
-        icon: '🎯', label: 'Top-Aktivitäten',
-        a: renderTags(destA.activities.slice(0, 4)),
-        b: renderTags(destB.activities.slice(0, 4)),
-        win: 'tie'
-      },
-      {
-        icon: '✈️', label: 'Flugzeit ab DE',
-        a: '<strong>' + esc(destA.flightFromDE.label) + '</strong>',
-        b: '<strong>' + esc(destB.flightFromDE.label) + '</strong>',
-        // Kürzere Flugzeit = besser → Zeiten als float vergleichen
-        win: winner(
-          parseFloat(destB.flightFromDE.duration.replace(':', '.')),
-          parseFloat(destA.flightFromDE.duration.replace(':', '.'))
-        )
-      },
-      {
-        icon: '👨‍👩‍👧', label: 'Familienfreundlichkeit',
-        a: renderStars(destA.scores.family),
-        b: renderStars(destB.scores.family),
-        win: winner(destA.scores.family, destB.scores.family)
-      },
-      {
-        icon: '💑', label: 'Für Pärchen',
-        a: renderStars(destA.scores.couple),
-        b: renderStars(destB.scores.couple),
-        win: winner(destA.scores.couple, destB.scores.couple)
-      },
-      {
-        icon: '🏛️', label: 'Kultur & Geschichte',
-        a: renderStars(destA.scores.culture),
-        b: renderStars(destB.scores.culture),
-        win: winner(destA.scores.culture, destB.scores.culture)
-      },
-      {
-        icon: '🧗', label: 'Abenteuer & Sport',
-        a: renderStars(destA.scores.adventure),
-        b: renderStars(destB.scores.adventure),
-        win: winner(destA.scores.adventure, destB.scores.adventure)
-      }
+  /* ═══════════════════════════════════════════════
+     RENDER: CRITERIA PAIR-CARDS
+  ═══════════════════════════════════════════════ */
+  function renderCriteriaCards(destA,destB,container){
+    var criteria=[
+      {icon:'&#x1F4C5;',label:'Beste Reisezeit',
+       a:esc(destA.bestSeason.label)+'<small>'+esc(destA.bestSeason.tip)+'</small>',
+       b:esc(destB.bestSeason.label)+'<small>'+esc(destB.bestSeason.tip)+'</small>',
+       win:winner(destA.bestSeason.score,destB.bestSeason.score)},
+      {icon:'&#x1F4B6;',label:'Budget',
+       a:renderBudget(destA.budget.score)+'<small>&#8709; '+destA.budget.avgHotelNight+'&#8364;/Nacht &middot; Flug ab '+destA.budget.avgFlight+'&#8364;</small>',
+       b:renderBudget(destB.budget.score)+'<small>&#8709; '+destB.budget.avgHotelNight+'&#8364;/Nacht &middot; Flug ab '+destB.budget.avgFlight+'&#8364;</small>',
+       win:winner(6-destA.budget.score,6-destB.budget.score)},
+      {icon:'&#x1F3D6;&#xFE0F;',label:'Strandqualit\u00e4t',
+       a:renderStars(destA.beach.score)+'<small>'+esc(destA.beach.label)+'</small>',
+       b:renderStars(destB.beach.score)+'<small>'+esc(destB.beach.label)+'</small>',
+       win:winner(destA.beach.score,destB.beach.score)},
+      {icon:'&#x1F333;',label:'Natur &amp; Landschaft',
+       a:renderStars(destA.nature.score)+'<small>'+esc(destA.nature.label)+'</small>',
+       b:renderStars(destB.nature.score)+'<small>'+esc(destB.nature.label)+'</small>',
+       win:winner(destA.nature.score,destB.nature.score)},
+      {icon:'&#x2708;&#xFE0F;',label:'Flugzeit ab DE',
+       a:'<strong style="color:var(--text)">'+esc(destA.flightFromDE.label)+'</strong>',
+       b:'<strong style="color:var(--text)">'+esc(destB.flightFromDE.label)+'</strong>',
+       win:winner(parseFloat(destB.flightFromDE.duration.replace(':','.')),parseFloat(destA.flightFromDE.duration.replace(':','.')))},
+      {icon:'&#x1F3AF;',label:'Top-Aktivit\u00e4ten',
+       a:renderTags(destA.activities.slice(0,3)),b:renderTags(destB.activities.slice(0,3)),win:'tie'},
+      {icon:'&#x1F468;&#x200D;&#x1F469;&#x200D;&#x1F467;',label:'Familienfreundlich',
+       a:renderStars(destA.scores.family),b:renderStars(destB.scores.family),
+       win:winner(destA.scores.family,destB.scores.family)},
+      {icon:'&#x1F491;',label:'F\u00fcr P\u00e4rchen',
+       a:renderStars(destA.scores.couple),b:renderStars(destB.scores.couple),
+       win:winner(destA.scores.couple,destB.scores.couple)}
     ];
-
-    var html = '<div class="vg-table-wrap">';
-
-    // Header
-    html += '<div class="vg-table-header">';
-    html += '<div class="vg-th-criterion">Kriterium</div>';
-    html += '<div class="vg-th-dest"><span class="vg-dest-flag">' + destA.flag + '</span> ' + esc(destA.name) + '</div>';
-    html += '<div class="vg-th-dest"><span class="vg-dest-flag">' + destB.flag + '</span> ' + esc(destB.name) + '</div>';
-    html += '</div>';
-
-    // Rows
-    rows.forEach(function (row) {
-      html += '<div class="vg-row">';
-      html += '<div class="vg-row-label"><span class="vg-row-icon">' + row.icon + '</span>' + esc(row.label) + '</div>';
-      html += '<div class="vg-row-cell' + (row.win === 'a' ? ' vg-winner' : '') + '">' + row.a + '</div>';
-      html += '<div class="vg-row-cell' + (row.win === 'b' ? ' vg-winner' : '') + '">' + row.b + '</div>';
-      html += '</div>';
+    var html='<div class="vg-cc-grid">';
+    criteria.forEach(function(crit){
+      var wA=crit.win==='a'?' winner':'',wB=crit.win==='b'?' winner':'';
+      html+='<div class="vg-cc-card">';
+      html+='<div class="vg-cc-label">'+crit.icon+' '+crit.label+'</div>';
+      html+='<div class="vg-cc-sides">';
+      html+='<div class="vg-cc-side'+wA+'"><div class="vg-cc-dname">'+esc(destA.flag)+' '+esc(destA.name)+'</div><div class="vg-cc-val">'+crit.a+'</div>'+(wA?'<span class="vg-cc-win">&#x2713;</span>':'')+'</div>';
+      html+='<div class="vg-cc-side'+wB+'"><div class="vg-cc-dname">'+esc(destB.flag)+' '+esc(destB.name)+'</div><div class="vg-cc-val">'+crit.b+'</div>'+(wB?'<span class="vg-cc-win">&#x2713;</span>':'')+'</div>';
+      html+='</div></div>';
     });
-
-    html += '</div>';
-    container.innerHTML = html;
+    html+='</div>'; container.innerHTML=html;
   }
 
-  /* ─────────────────────────────────────────────────
-     RENDER: CTA CARDS
-     ───────────────────────────────────────────────── */
+  /* ═══════════════════════════════════════════════
+     RENDER: SCORE PROGRESS BARS
+  ═══════════════════════════════════════════════ */
+  function renderScores(destA,destB,container){
+    if(!container)return;
+    var html='<div class="vg-sc-grid">';
+    JB.TRAVEL_TYPES.forEach(function(tt){
+      var sA=destA.scores[tt.key]||0,sB=destB.scores[tt.key]||0;
+      var pA=(sA/5*100).toFixed(0),pB=(sB/5*100).toFixed(0);
+      var lA=(JB.SCORE_LABELS&&JB.SCORE_LABELS[sA])||sA+'/5';
+      var lB=(JB.SCORE_LABELS&&JB.SCORE_LABELS[sB])||sB+'/5';
+      html+='<div class="vg-sc-row" data-score-key="'+tt.key+'">';
+      html+='<div class="vg-sc-row-hd">'+tt.icon+' '+esc(tt.label)+'</div>';
+      html+='<div class="vg-sc-bars">';
+      html+='<div class="vg-sc-bar-item"><div class="vg-sc-bar-lbl"><strong>'+esc(destA.flag)+' '+esc(destA.name)+'</strong><span>'+esc(lA)+'</span></div><div class="vg-sc-track"><div class="vg-sc-fill" style="width:0%" data-w="'+pA+'%"></div></div></div>';
+      html+='<div class="vg-sc-bar-item"><div class="vg-sc-bar-lbl"><strong>'+esc(destB.flag)+' '+esc(destB.name)+'</strong><span>'+esc(lB)+'</span></div><div class="vg-sc-track"><div class="vg-sc-fill" style="width:0%" data-w="'+pB+'%"></div></div></div>';
+      html+='</div></div>';
+    });
+    html+='</div>'; container.innerHTML=html;
+    // Animate bars in after paint
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      container.querySelectorAll('.vg-sc-fill').forEach(function(el){el.style.width=el.dataset.w;});
+    });});
+  }
 
-  function renderCtaCards(destA, destB, container) {
-    if (!container) return;
-
-    // Interleave A/B cards, max 4
-    var cards = [];
-    var maxLen = Math.max(destA.ctaCards.length, destB.ctaCards.length);
-    for (var i = 0; i < maxLen && cards.length < 4; i++) {
-      if (destA.ctaCards[i] && cards.length < 4) cards.push({ card: destA.ctaCards[i], dest: destA });
-      if (destB.ctaCards[i] && cards.length < 4) cards.push({ card: destB.ctaCards[i], dest: destB });
+  /* ═══════════════════════════════════════════════
+     RENDER: HOTEL TABS
+  ═══════════════════════════════════════════════ */
+  function renderHotelTabs(destA,destB,container){
+    if(!container)return;
+    var tabs=[];
+    var maxLen=Math.max(destA.ctaCards.length,destB.ctaCards.length);
+    for(var i=0;i<maxLen&&tabs.length<4;i++){
+      if(destA.ctaCards[i]&&tabs.length<4) tabs.push({card:destA.ctaCards[i],dest:destA});
+      if(destB.ctaCards[i]&&tabs.length<4) tabs.push({card:destB.ctaCards[i],dest:destB});
     }
-
-    var html = '<div class="vg-cta-grid">';
-    cards.forEach(function (item) {
-      var url = JB.buildHotelCompareUrl(item.card.giataIds);
-      html += '<a href="' + esc(url) + '" class="vg-cta-card">';
-      html += '<span class="vg-cta-flag">' + item.dest.flag + '</span>';
-      html += '<span class="vg-cta-label">' + esc(item.card.label) + '</span>';
-      html += '<span class="vg-cta-arrow">→</span>';
-      html += '</a>';
+    var html='<div class="vg-htabs">';
+    tabs.forEach(function(item,idx){
+      var ids=JSON.stringify(item.card.giataIds.filter(function(id){return id;}));
+      html+='<button class="vg-htab'+(idx===0?' active':'')+'" data-ids=\''+esc(ids)+'\' onclick="(function(btn,ids){document.querySelectorAll(\'.vg-htab\').forEach(function(b){b.classList.remove(\'active\')});btn.classList.add(\'active\');if(window.hcLoadPreset)window.hcLoadPreset(ids);})(this,'+esc(ids)+')">';
+      html+=esc(item.dest.flag)+' '+esc(item.card.label);
+      html+='</button>';
     });
-    html += '</div>';
-
-    container.innerHTML = html;
+    html+='</div>'; container.innerHTML=html;
+    if(tabs.length>0){
+      var firstIds=tabs[0].card.giataIds.filter(function(id){return id;});
+      setTimeout(function(){if(window.hcLoadPreset)window.hcLoadPreset(firstIds);},200);
+    }
   }
 
-  /* ─────────────────────────────────────────────────
+  /* ═══════════════════════════════════════════════
+     INIT: FAQ ACCORDION
+  ═══════════════════════════════════════════════ */
+  function initFaqAccordion(){
+    document.querySelectorAll('.faq-item').forEach(function(item){
+      var q=item.querySelector('.faq-q'),a=item.querySelector('.faq-a');
+      if(!q||!a)return;
+      q.addEventListener('click',function(){
+        var isOpen=item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');});
+        if(!isOpen)item.classList.add('open');
+      });
+    });
+  }
+
+  /* ═══════════════════════════════════════════════
+     INIT: HERO IMAGES
+  ═══════════════════════════════════════════════ */
+  function setHeroImages(destA,destB){
+    var imgA=document.querySelector('[data-vg-hero-a]');
+    var imgB=document.querySelector('[data-vg-hero-b]');
+    if(imgA&&destA.heroImage)imgA.src=destA.heroImage;
+    if(imgB&&destB.heroImage)imgB.src=destB.heroImage;
+  }
+
+  /* ═══════════════════════════════════════════════
      MAIN: initVergleich(pairKey)
-     ───────────────────────────────────────────────── */
-
-  function initVergleich(pairKey) {
+  ═══════════════════════════════════════════════ */
+  function initVergleich(pairKey){
     injectCSS();
+    var pair=JB.PAIRS[pairKey];
+    if(!pair){console.error('[VergleichEngine] Unbekanntes Paar:',pairKey);return;}
+    var destA=JB.DESTINATIONS[pair.destA],destB=JB.DESTINATIONS[pair.destB];
+    if(!destA||!destB){console.error('[VergleichEngine] Unbekanntes Ziel:',pair.destA,pair.destB);return;}
 
-    var pair = JB.PAIRS[pairKey];
-    if (!pair) {
-      console.error('[VergleichEngine] Unbekanntes Paar:', pairKey);
-      return;
-    }
+    setHeroImages(destA,destB);
+    document.querySelectorAll('[data-dest-a]').forEach(function(el){el.textContent=destA.name;});
+    document.querySelectorAll('[data-dest-b]').forEach(function(el){el.textContent=destB.name;});
+    document.querySelectorAll('[data-dest-a-flag]').forEach(function(el){el.textContent=destA.flag;});
+    document.querySelectorAll('[data-dest-b-flag]').forEach(function(el){el.textContent=destB.flag;});
+    document.querySelectorAll('[data-dest-a-tagline]').forEach(function(el){el.textContent=destA.tagline;});
+    document.querySelectorAll('[data-dest-b-tagline]').forEach(function(el){el.textContent=destB.tagline;});
 
-    var destA = JB.DESTINATIONS[pair.destA];
-    var destB = JB.DESTINATIONS[pair.destB];
-    if (!destA || !destB) {
-      console.error('[VergleichEngine] Unbekanntes Ziel:', pair.destA, pair.destB);
-      return;
-    }
+    var fazitEl=document.getElementById('vg-ki-fazit');
+    if(fazitEl)renderKiFazit(pair.default_ki_fazit,fazitEl);
 
-    // ── SEO (dynamisch, ergänzend zu den hardcoded Static-Tags im Shell-HTML) ──
-    if (!document.title || document.title === 'JetztBuchbar') {
-      document.title = pair.seoTitle;
-    }
-    var metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc && !metaDesc.getAttribute('content')) {
-      metaDesc.setAttribute('content', pair.seoDescription);
-    }
+    var scoresEl=document.getElementById('vg-scores');
+    if(scoresEl)renderScores(destA,destB,scoresEl);
 
-    // ── Dynamische Text-Platzhalter befüllen ──
-    document.querySelectorAll('[data-dest-a]').forEach(function (el) { el.textContent = destA.name; });
-    document.querySelectorAll('[data-dest-b]').forEach(function (el) { el.textContent = destB.name; });
-    document.querySelectorAll('[data-dest-a-flag]').forEach(function (el) { el.textContent = destA.flag; });
-    document.querySelectorAll('[data-dest-b-flag]').forEach(function (el) { el.textContent = destB.flag; });
-    document.querySelectorAll('[data-dest-a-tagline]').forEach(function (el) { el.textContent = destA.tagline; });
-    document.querySelectorAll('[data-dest-b-tagline]').forEach(function (el) { el.textContent = destB.tagline; });
+    if(fazitEl)renderTravelTypes(pair,destA,destB,fazitEl,scoresEl);
 
-    // ── KI-Fazit (Default beim Laden) ──
-    var fazitEl = document.getElementById('vg-ki-fazit');
-    if (fazitEl) renderKiFazit(pair.default_ki_fazit, fazitEl);
+    var tableEl=document.getElementById('vg-table');
+    if(tableEl)renderCriteriaCards(destA,destB,tableEl);
 
-    // ── Travel-Type Selector ──
-    if (fazitEl) renderTravelTypes(pair, destA, destB, fazitEl);
+    var ctaEl=document.getElementById('vg-cta');
+    if(ctaEl)renderHotelTabs(destA,destB,ctaEl);
 
-    // ── Comparison Table ──
-    var tableEl = document.getElementById('vg-table');
-    if (tableEl) renderTable(destA, destB, tableEl);
-
-    // ── CTA Cards ──
-    var ctaEl = document.getElementById('vg-cta');
-    if (ctaEl) renderCtaCards(destA, destB, ctaEl);
+    initFaqAccordion();
   }
 
-  /* ── Export ── */
-  JB.initVergleich = initVergleich;
+  JB.initVergleich=initVergleich;
 
 })(window);

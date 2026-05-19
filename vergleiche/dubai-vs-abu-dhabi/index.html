@@ -129,9 +129,12 @@
   .faq-list { display: flex; flex-direction: column; gap: 0.85rem; }
   .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s; }
   .faq-item:hover { border-color: var(--border-soft); }
-  .faq-q { padding: 1.1rem 1.5rem; font-size: 0.97rem; font-weight: 700; display: flex; gap: 0.85rem; align-items: flex-start; }
-  .faq-q::before { content: "?"; color: var(--accent); font-size: 1rem; font-weight: 900; flex-shrink: 0; margin-top: 0.05rem; }
-  .faq-a { padding: 0 1.5rem 1.1rem 3rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; border-top: 1px solid var(--border); padding-top: 0.85rem; margin-top: 0; }
+  .faq-q { padding: 1.1rem 1.5rem; font-size: 0.97rem; font-weight: 700; display: flex; gap: 0.85rem; align-items: center; cursor: pointer; user-select: none; }
+  .faq-q::before { content: "?"; color: var(--accent); font-size: 1rem; font-weight: 900; flex-shrink: 0; }
+  .faq-q::after { content: "+"; color: var(--accent); font-size: 1.2rem; font-weight: 700; margin-left: auto; flex-shrink: 0; transition: transform 0.25s ease; line-height: 1; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; padding: 0 1.5rem 0 3rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+  .faq-item.open .faq-a { max-height: 400px; padding: 0.75rem 1.5rem 1.15rem 3rem; border-top: 1px solid var(--border); }
 
   /* Season table */
   .season-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
@@ -230,6 +233,19 @@
   #hc-map{width:100%;height:400px;border-radius:var(--radius);margin-top:1.75rem;border:1px solid var(--border);display:none}
   .hc-details-btn{display:block;width:100%;text-align:center;background:none;border:1px solid var(--accent);border-radius:6px;color:var(--accent);font-size:.8rem;font-weight:600;padding:.42rem .6rem;margin-top:.6rem;transition:background .2s}
   .hc-details-btn:hover{background:rgba(0,200,150,.1)}
+  /* Split-Screen Hero */
+  .vg-sh{position:relative;display:flex;height:520px;overflow:hidden}
+  @media(min-height:700px){.vg-sh{height:60svh;max-height:680px}}
+  .vg-sh-half{flex:1;position:relative;overflow:hidden}
+  .vg-sh-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s ease}
+  .vg-sh-half:hover .vg-sh-img{transform:scale(1.04)}
+  .vg-sh-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.22) 55%,rgba(0,0,0,.1) 100%)}
+  .vg-sh-content{position:absolute;bottom:0;left:0;right:0;padding:1.75rem 1.5rem;text-align:center}
+  .vg-sh-name{font-size:clamp(1.5rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-1px;line-height:1;text-shadow:0 2px 16px rgba(0,0,0,.6)}
+  .vg-sh-sub{font-size:.82rem;color:rgba(255,255,255,.65);margin-top:.4rem;text-shadow:0 1px 6px rgba(0,0,0,.6);line-height:1.4}
+  .vg-vs-badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;width:68px;height:68px;display:flex;align-items:center;justify-content:center;background:#0a0a0a;border:3px solid var(--accent);border-radius:50%;font-size:1.05rem;font-weight:900;color:var(--accent);letter-spacing:1px;box-shadow:0 0 0 8px rgba(0,200,150,.12),0 0 36px rgba(0,200,150,.45)}
+  @media(max-width:600px){.vg-sh{height:240px}.vg-sh-name{font-size:1.2rem}.vg-vs-badge{width:48px;height:48px;font-size:.75rem}}
+  .vg-dash{padding:clamp(2rem,5vw,3.5rem) clamp(1.25rem,5vw,3rem);background:var(--bg)}
 </style>
 
   <script type="application/ld+json">
@@ -272,39 +288,57 @@
       <a href="/index.html#kontakt">Kontakt</a>
     </nav>
   </header>
-  <div class="hero" style="background-image:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.55)),url('https://images.unsplash.com/photo-1606138369267-ff17948d119c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NDgzMDd8MHwxfHNlYXJjaHwxfHxkdWJhaS12cy1hYnUtZGhhYmklMjB0cmF2ZWwlMjBsYW5kc2NhcGV8ZW58MHwwfHx8MTc3ODUwMTAyMHww&ixlib=rb-4.1.0&q=80&w=1080');background-size:cover;background-position:center;">
-    <h1>Dubai oder <span>Abu Dhabi?</span></h1>
-    <p class="hero-sub">Die beiden größten Emirate – aber welches ist die bessere Reisewahl? Ein ehrlicher Vergleich zu Sehenswürdigkeiten, Strände und Preisen.</p>
+  <!-- 1. SPLIT-SCREEN HERO -->
+  <section class="vg-sh">
+    <div class="vg-sh-half">
+      <img data-vg-hero-a src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80" alt="Dubai" class="vg-sh-img" loading="eager">
+      <div class="vg-sh-overlay"></div>
+      <div class="vg-sh-content">
+        <div class="vg-sh-name" data-dest-a>Dubai</div>
+        <div class="vg-sh-sub" data-dest-a-tagline></div>
+      </div>
+    </div>
+    <div class="vg-vs-badge">VS</div>
+    <div class="vg-sh-half">
+      <img data-vg-hero-b src="https://images.unsplash.com/photo-1509041322357-8a3f9757a475?w=1200&q=80" alt="Abu Dhabi" class="vg-sh-img" loading="eager">
+      <div class="vg-sh-overlay"></div>
+      <div class="vg-sh-content">
+        <div class="vg-sh-name" data-dest-b>Abu Dhabi</div>
+        <div class="vg-sh-sub" data-dest-b-tagline></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. AI DASHBOARD -->
+  <div class="vg-dash">
+    <div class="container">
+      <div id="vg-travel-types"></div>
+      <div id="vg-ki-fazit"></div>
+    </div>
   </div>
-  <p class="photo-credit">Foto: <a href="https://unsplash.com/@hamzy06?utm_source=jetztbuchbar&utm_medium=referral" target="_blank" rel="noopener noreferrer">Mohd Hammad</a> auf <a href="https://unsplash.com?utm_source=jetztbuchbar&utm_medium=referral" target="_blank" rel="noopener noreferrer">Unsplash</a></p>
-  
-    <div class="section">
-      <div class="container-narrow">
-        <div class="wiki-intro">Wir vergleichen <strong>Dubai</strong> und <strong>Abu Dhabi</strong> direkt – damit Sie die beste Entscheidung für Ihren nächsten Urlaub treffen können.</div>
-      </div>
+
+  <!-- 3. CRITERIA PAIR-CARDS -->
+  <div class="section-alt">
+    <div class="container">
+      <h2 class="section-title">&#x2696;&#xFE0F; Der direkte <span>Vergleich</span></h2>
+      <div id="vg-table"></div>
     </div>
+  </div>
 
-    <div class="section">
-      <div class="container">
-        <h2 class="section-title">🤖 KI-<span>Empfehlung</span></h2>
-        <div id="vg-travel-types"></div>
-        <div id="vg-ki-fazit" style="margin-top:1.25rem"></div>
-      </div>
+  <!-- 4. SCORE PROGRESS BARS -->
+  <div class="section">
+    <div class="container">
+      <h2 class="section-title">&#x1F4CA; Reise-<span>Profil</span></h2>
+      <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem">Wähle oben einen Reisetyp – die passende Dimension wird hervorgehoben.</p>
+      <div id="vg-scores"></div>
     </div>
+  </div>
 
-    <div class="section-alt">
-      <div class="container">
-        <h2 class="section-title">⚖️ Der direkte <span>Vergleich</span></h2>
-        <div id="vg-table"></div>
-      </div>
-    </div>
-
-    
-
-    <div class="section">
-      <div class="container-narrow">
-        <h2 class="section-title">✅ Unsere <span>Empfehlungen</span></h2>
-        <div class="tips-grid">
+  <!-- 5. TIPPS -->
+  <div class="section-alt">
+    <div class="container-narrow">
+      <h2 class="section-title">&#x2705; Unsere <span>Empfehlungen</span></h2>
+      <div class="tips-grid">
     <div class="tip-card">
       <div class="tip-num">1</div>
       <div class="tip-text">Dubai: pulsierender, mehr Nightlife, bessere Shoppingmalls, Burj Khalifa – touristisch vollentwickelt.</div>
@@ -325,13 +359,14 @@
       <div class="tip-num">5</div>
       <div class="tip-text">Formula-1-Fans: Abu Dhabi ist Heimat des Yas Marina Circuit – Grand Prix im November.</div>
     </div></div>
-      </div>
     </div>
+  </div>
 
-    <div class="section-alt">
-      <div class="container-narrow">
-        <h2 class="section-title">❓ Häufige <span>Fragen</span></h2>
-        <div class="faq-list">
+  <!-- 6. FAQ ACCORDION -->
+  <div class="section">
+    <div class="container-narrow">
+      <h2 class="section-title">&#x2753; Häufige <span>Fragen</span></h2>
+      <div class="faq-list">
     <div class="faq-item">
       <div class="faq-q">Was ist der Hauptunterschied zwischen Dubai und Abu Dhabi?</div>
       <div class="faq-a">Dubai ist kommerzieller und touristischer mit Superlativen (höchste Gebäude, größte Malls). Abu Dhabi ist die Hauptstadt der VAE, kulturreicher und ruhiger.</div>
@@ -352,36 +387,29 @@
       <div class="faq-q">Gibt es Strände in beiden Städten?</div>
       <div class="faq-a">Ja. Dubai: Jumeirah Beach, JBR. Abu Dhabi: Corniche Beach, Yas Island Beach. Abu Dhabi-Strände oft ruhiger und sauberer.</div>
     </div></div>
-      </div>
     </div>
+  </div>
 
-    <div class="section">
-      <div class="container">
-        <h2 class="section-title">🌍 Direkt zur <span>Destination</span></h2>
-        <div class="dest-tags">
+  <!-- 7. DESTINATION LINKS -->
+  <div class="section-alt">
+    <div class="container">
+      <h2 class="section-title">&#x1F30D; Direkt zur <span>Destination</span></h2>
+      <div class="dest-tags">
           <a href="/dubai/" class="dest-tag">→ Dubai entdecken</a>
           <a href="/abu-dhabi/" class="dest-tag">→ Abu Dhabi entdecken</a>
         </div>
-      </div>
-    </div>
-
-    
-  <div class="section">
-    <div class="container">
-      <h2 class="section-title">🏨 Hotels für deinen <span>Urlaub</span></h2>
-      <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem">Klick auf eine Kachel – die Hotels öffnen sich direkt im Vergleich.</p>
-      <div id="vg-cta"></div>
     </div>
   </div>
-  
-  <!-- ── Hotel-Vergleich ── -->
-  <div class="section-alt" id="hotel-vergleich" style="padding-top:clamp(3rem,7vw,5rem);padding-bottom:clamp(3rem,7vw,5rem);padding-left:clamp(1.25rem,5vw,3rem);padding-right:clamp(1.25rem,5vw,3rem)">
+
+  <!-- 8. UNIFIED HOTEL SECTION -->
+  <div class="section">
     <div class="container">
-      <h2 class="section-title">🏨 Hotels direkt <span>vergleichen</span></h2>
-      <p style="color:var(--text-muted);font-size:.92rem;margin-bottom:1.75rem;line-height:1.6">Echte Hoteldaten aus über 1.300 geprüften Unterkünften – direkt nebeneinander vergleichen. Beliebige Hotels über die Suche austauschen.</p>
+      <h2 class="section-title">&#x1F3E8; Hotels direkt <span>vergleichen</span></h2>
+      <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.25rem">Klick auf eine Kategorie – die passenden Hotels werden sofort geladen.</p>
+      <div id="vg-cta"></div>
       <div class="hc-search-row">
         <div class="hc-search-box">
-          <span class="hc-search-icon">🔍</span>
+          <span class="hc-search-icon">&#x1F50D;</span>
           <input type="text" id="hc-search-input" placeholder="Hotelname oder Ort suchen…" autocomplete="off">
           <div class="hc-autocomplete" id="hc-autocomplete"></div>
         </div>
@@ -545,6 +573,13 @@
         .catch(function(){{ hideAutocomplete(); if(searchInput) searchInput.value=''; }});
     }};
     window.hcFocusSearch=function() {{ if(searchInput) searchInput.focus(); }};
+    window.hcLoadPreset=function(ids) {{
+      compared=[];
+      if(tableEl) tableEl.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">⏳ Lade Hotels…</div>';
+      Promise.all(ids.map(function(id){{
+        return fetch('/api/giata?action=property&id='+encodeURIComponent(id)).then(function(r){{return r.json();}}).catch(function(){{return null;}});
+      }})).then(function(hotels){{ compared=hotels.filter(function(h){{return h&&h.giataId;}}); renderTable(); }});
+    }};
 
     document.addEventListener('DOMContentLoaded', function() {{
       tableEl=document.getElementById('hc-table');
@@ -552,9 +587,13 @@
       autocompleteEl=document.getElementById('hc-autocomplete');
       if(!tableEl||!searchInput||!autocompleteEl) return;
       tableEl.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">⏳ Lade Hotels…</div>';
-      Promise.all(DEFAULT_IDS.map(function(id){{
-        return fetch('/api/giata?action=property&id='+id).then(function(r){{return r.json();}}).catch(function(){{return null;}});
-      }})).then(function(hotels){{ compared=hotels.filter(function(h){{return h&&h.giataId;}}); renderTable(); }});
+      setTimeout(function() {{
+        if(compared.length===0) {{
+          Promise.all(DEFAULT_IDS.map(function(id){{
+            return fetch('/api/giata?action=property&id='+id).then(function(r){{return r.json();}}).catch(function(){{return null;}});
+          }})).then(function(hotels){{ compared=hotels.filter(function(h){{return h&&h.giataId;}}); renderTable(); }});
+        }}
+      }}, 700);
       searchInput.addEventListener('input',function(){{ clearTimeout(searchTimer); var q=searchInput.value.trim(); if(q.length<2){{hideAutocomplete();return;}} searchTimer=setTimeout(function(){{searchHotels(q);}},300); }});
       searchInput.addEventListener('blur',function(){{ setTimeout(hideAutocomplete,200); }});
       searchInput.addEventListener('focus',function(){{ if(searchInput.value.trim().length>=2){{searchHotels(searchInput.value.trim())}} }});

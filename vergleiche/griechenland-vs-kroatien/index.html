@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Griechenland oder Kroatien 2026? – Vergleich | JetztBuchbar.de</title>
+  <meta name="description" content="Griechenland vs. Kroatien 2026: Ägäis vs. Adria – Strände, Preise, Natur und Aktivitäten im Direktvergleich." />
+  <meta property="og:title" content="Griechenland oder Kroatien 2026? – Vergleich | JetztBuchbar.de" />
+  <meta property="og:description" content="Griechenland vs. Kroatien 2026: Ägäis vs. Adria – Strände, Preise, Natur und Aktivitäten im Direktvergleich." />
+  
+  <meta property="og:type" content="website" />
+  <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a0a; --bg-card: #111; --bg-card-hover: #161616; --bg-alt: #0d0d0d;
+    --accent: #00c896; --accent-dark: #00a87e; --accent-glow: rgba(0,200,150,0.15);
+    --text: #f0f0f0; --text-muted: #777; --text-soft: #aaa;
+    --border: #1e1e1e; --border-soft: #252525; --radius: 14px; --radius-sm: 8px;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1.25rem, 5vw, 3rem); height: 64px; background: rgba(10,10,10,0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
+  nav { display: flex; gap: 2rem; }
+  nav a { font-size: 0.88rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+  nav a:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero { padding: clamp(4rem, 10vw, 7rem) clamp(1.25rem, 5vw, 3rem) clamp(3rem, 6vw, 5rem); text-align: center; background: radial-gradient(ellipse 90% 60% at 50% -5%, rgba(0,200,150,0.14) 0%, transparent 65%), var(--bg); position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle 1px at 20% 40%, rgba(0,200,150,0.4) 0%, transparent 100%), radial-gradient(circle 1px at 80% 60%, rgba(0,200,150,0.3) 0%, transparent 100%); pointer-events: none; }
+  .hero-icon { font-size: 4rem; display: block; margin-bottom: 1.25rem; filter: drop-shadow(0 0 20px rgba(0,200,150,0.3)); }
+  h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 1.25rem; }
+  h1 span { color: var(--accent); }
+  .hero-sub { font-size: clamp(0.95rem, 1.8vw, 1.15rem); color: var(--text-soft); max-width: 640px; margin: 0 auto 2rem; line-height: 1.65; }
+
+  /* Container */
+  .container { max-width: 1100px; margin: 0 auto; }
+  .container-narrow { max-width: 780px; margin: 0 auto; }
+
+  /* Sections */
+  .section { padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem); }
+  .section-alt { background: var(--bg-alt); padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem); }
+  .section-title { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 2rem; }
+  .section-title span { color: var(--accent); }
+
+  /* Breadcrumb */
+  .breadcrumb { padding: 0.85rem clamp(1.25rem, 5vw, 3rem); background: var(--bg-alt); border-bottom: 1px solid var(--border); font-size: 0.83rem; color: var(--text-muted); }
+  .breadcrumb a { color: var(--text-muted); transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb span { color: var(--text-soft); }
+
+  /* Wiki intro */
+  .wiki-intro { background: linear-gradient(135deg, rgba(0,200,150,0.06), rgba(0,200,150,0.02)); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 1.5rem 1.75rem; font-size: 1.02rem; color: var(--text-soft); line-height: 1.8; margin-bottom: 2rem; }
+  /* Intro editorial text */
+  .intro-text { font-size: 1rem; color: var(--text-soft); line-height: 1.85; margin-bottom: 1.5rem; }
+  .intro-text p { margin-bottom: 1rem; }
+  .intro-text p:last-child { margin-bottom: 0; }
+  .intro-highlights { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.85rem; margin: 1.5rem 0 2rem; }
+  .intro-highlight { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem 1.1rem; font-size: 0.88rem; color: var(--text-soft); display: flex; gap: 0.65rem; align-items: flex-start; transition: border-color 0.2s; }
+  .intro-highlight:hover { border-color: var(--accent); }
+  .intro-highlight .ih-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* Country stat grid */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.3rem; transition: border-color 0.2s; }
+  .stat-card:hover { border-color: var(--accent); }
+  .stat-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .stat-value { font-size: 1.15rem; font-weight: 700; color: var(--text); }
+  .stat-icon { font-size: 1.5rem; margin-bottom: 0.25rem; }
+
+  /* Map */
+  .map-wrapper { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); margin-top: 1.5rem; position: relative; }
+  .map-wrapper iframe { display: block; width: 100%; height: 400px; border: none; pointer-events: none; }
+  .map-wrapper.active iframe { pointer-events: auto; }
+  .map-overlay { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.0); cursor: pointer; transition: background 0.2s; }
+  .map-overlay-hint { background: rgba(10,10,10,0.82); backdrop-filter: blur(6px); color: #fff; padding: 0.55rem 1.25rem; border-radius: 50px; font-size: 0.82rem; font-weight: 600; pointer-events: none; opacity: 0; transition: opacity 0.25s; border: 1px solid rgba(255,255,255,0.12); }
+  .map-wrapper:not(.active):hover .map-overlay-hint { opacity: 1; }
+  .map-wrapper.active .map-overlay { display: none; }
+
+  /* Climate chart */
+  .climate-wrap { overflow-x: auto; padding-bottom: 0.5rem; }
+  .climate-chart { display: flex; gap: 6px; align-items: flex-end; min-height: 200px; height: 200px; padding: 1rem 0 0; min-width: 600px; }
+  .climate-month { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+  .climate-bar-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; }
+  .climate-bar { width: 100%; border-radius: 4px 4px 0 0; background: linear-gradient(to top, var(--accent), rgba(0,200,150,0.4)); min-height: 4px; transition: opacity 0.2s; }
+  .climate-month:hover .climate-bar { opacity: 0.8; }
+  .climate-temp { font-size: 0.7rem; font-weight: 700; color: var(--accent); }
+  .climate-precip { font-size: 0.62rem; color: var(--text-muted); }
+  .climate-label { font-size: 0.68rem; color: var(--text-muted); font-weight: 600; }
+  .climate-legend { display: flex; gap: 1.5rem; margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted); }
+  .climate-legend span { display: flex; align-items: center; gap: 0.4rem; }
+  .climate-legend .dot { width: 10px; height: 10px; border-radius: 2px; background: var(--accent); }
+
+  /* POI cards — rich design */
+  .poi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .poi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s; display: flex; flex-direction: column; }
+  .poi-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+  .poi-visual { height: 180px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; flex-shrink: 0; }
+  .poi-visual img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .poi-card:hover .poi-visual img { transform: scale(1.06); }
+  .poi-visual-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%); pointer-events: none; }
+  .poi-visual-fallback { height: 148px; }
+  .poi-visual-fallback::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.1) 0%, transparent 65%), repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.025) 18px, rgba(255,255,255,0.025) 19px); }
+  .poi-visual-icon { font-size: 3.2rem; filter: drop-shadow(0 3px 14px rgba(0,0,0,0.45)); z-index: 1; line-height: 1; }
+  .poi-img-credit { position: absolute; bottom: 0.3rem; right: 0.5rem; font-size: 0.6rem; color: rgba(255,255,255,0.45); z-index: 2; }
+  .poi-body { padding: 1.15rem 1.35rem; flex: 1; display: flex; flex-direction: column; gap: 0.55rem; }
+  .poi-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .poi-tag { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 50px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.1); }
+  .poi-name { font-size: 1.08rem; font-weight: 800; line-height: 1.25; color: var(--text); }
+  .poi-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; flex: 1; }
+  .poi-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 0.85rem; margin-top: auto; border-top: 1px solid var(--border); }
+  .poi-dist { font-size: 0.77rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.35rem; }
+  .poi-links { display: flex; gap: 0.45rem; }
+  .poi-link { font-size: 0.73rem; font-weight: 600; padding: 0.28rem 0.7rem; border-radius: 50px; border: 1px solid var(--border-soft); color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; white-space: nowrap; }
+  .poi-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+  /* Numbered tips */
+  .tips-grid { display: flex; flex-direction: column; gap: 0.85rem; }
+  .tip-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.4rem; display: flex; gap: 1.1rem; align-items: flex-start; transition: border-color 0.2s; }
+  .tip-card:hover { border-color: var(--border-soft); }
+  .tip-num { width: 32px; height: 32px; min-width: 32px; background: var(--accent-glow); border: 1px solid rgba(0,200,150,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; color: var(--accent); }
+  .tip-text { font-size: 0.92rem; color: var(--text-soft); line-height: 1.65; padding-top: 0.15rem; }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 0.85rem; }
+  .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s; }
+  .faq-item:hover { border-color: var(--border-soft); }
+  .faq-q { padding: 1.1rem 1.5rem; font-size: 0.97rem; font-weight: 700; display: flex; gap: 0.85rem; align-items: flex-start; }
+  .faq-q::before { content: "?"; color: var(--accent); font-size: 1rem; font-weight: 900; flex-shrink: 0; margin-top: 0.05rem; }
+  .faq-a { padding: 0 1.5rem 1.1rem 3rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; border-top: 1px solid var(--border); padding-top: 0.85rem; margin-top: 0; }
+
+  /* Season table */
+  .season-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .season-table th { background: var(--bg-card); color: var(--text-muted); font-weight: 600; text-align: left; padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); }
+  .season-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-soft); }
+  .season-table .best-month td { background: rgba(0,200,150,0.06); color: var(--text); }
+  .season-table .best-month td:first-child { border-left: 3px solid var(--accent); }
+
+  /* Dest tags */
+  .dest-tags { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1rem; }
+  .dest-tag { background: var(--bg-card); border: 1px solid var(--border); border-radius: 50px; padding: 0.45rem 1.1rem; font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .dest-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+  /* CTA */
+  .cta-box { background: linear-gradient(135deg, rgba(0,200,150,0.08), rgba(0,200,150,0.03)); border: 1px solid rgba(0,200,150,0.2); border-radius: var(--radius); padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 3rem); text-align: center; }
+  .cta-box h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.85rem; }
+  .cta-box p { color: var(--text-muted); margin-bottom: 2rem; max-width: 460px; margin-left: auto; margin-right: auto; }
+  .btn-primary { display: inline-block; padding: 0.9rem 2.4rem; background: var(--accent); color: #000; font-weight: 700; font-size: 1rem; border-radius: 50px; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; box-shadow: 0 0 28px rgba(0,200,150,0.35); }
+  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,200,150,0.5); }
+  .btn-secondary { display: inline-block; padding: 0.75rem 1.75rem; margin-top: 1rem; border: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; border-radius: 50px; transition: border-color 0.2s, color 0.2s; }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Dest link */
+  .dest-link-btn { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.75rem; font-weight: 600; font-size: 0.95rem; margin-top: 1rem; transition: border-color 0.2s, background 0.2s; }
+  .dest-link-btn:hover { border-color: var(--accent); background: var(--accent-glow); color: var(--accent); }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 1.75rem clamp(1.25rem, 5vw, 3rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+  .footer-left { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+  .footer-left span, .footer-left a { font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
+  .footer-left a:hover { color: var(--accent); }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .social-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .social-icon:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+  /* Unsplash attribution */
+  .photo-credit { text-align: right; font-size: 0.72rem; color: var(--text-muted); padding: 0.3rem clamp(1.25rem, 5vw, 3rem) 0; opacity: 0.7; }
+  .photo-credit a { color: inherit; text-decoration: underline; }
+  .photo-credit a:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    nav { gap: 1.25rem; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .hero-icon { font-size: 3rem; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+  }
+  /* ── Hotel-Vergleich Widget ── */
+  .hc-search-row{display:flex;justify-content:center;align-items:center;gap:.75rem;margin-bottom:2rem}
+  .hc-search-box{position:relative;width:100%;max-width:640px}
+  .hc-search-icon{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none;font-size:.95rem}
+  #hc-search-input{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:.7rem 1rem .7rem 2.4rem;color:var(--text);font-size:.9rem;outline:none;transition:border-color .2s}
+  #hc-search-input:focus{border-color:var(--accent)}
+  #hc-search-input::placeholder{color:var(--text-muted)}
+  .hc-autocomplete{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#181818;border:1px solid var(--border);border-radius:var(--radius);z-index:300;max-height:260px;overflow-y:auto;display:none}
+  .hc-autocomplete.open{display:block}
+  .hc-ac-item{padding:.6rem 1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);transition:background .15s}
+  .hc-ac-item:last-child{border-bottom:none}
+  .hc-ac-item:hover{background:rgba(255,255,255,.06)}
+  .hc-ac-name{font-size:.88rem;font-weight:600;color:var(--text)}
+  .hc-ac-loc{font-size:.78rem;color:var(--text-muted)}
+  .hc-table{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;align-items:start}
+  .hc-col{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative}
+  .hc-col-remove{position:absolute;top:.5rem;right:.5rem;background:rgba(0,0,0,.65);border:none;border-radius:50%;width:26px;height:26px;color:#fff;font-size:.75rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .hc-col-remove:hover{background:#e53e3e}
+  .hc-col-body{padding:.9rem}
+  .hc-col-name{font-size:.93rem;font-weight:700;line-height:1.3;margin-bottom:.25rem}
+  .hc-col-location{font-size:.78rem;color:var(--text-muted);margin-bottom:.4rem}
+  .hc-stars{color:#f59e0b;font-size:.88rem;margin-bottom:.9rem;letter-spacing:1px}
+  .hc-fac-row{display:flex;justify-content:space-between;align-items:center;padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.8rem}
+  .hc-fac-row:last-child{border-bottom:none}
+  .hc-fac-label{display:flex;align-items:center;gap:.35rem;color:var(--text-muted)}
+  .hc-fac-yes{color:var(--accent);font-size:1rem;font-weight:700}
+  .hc-fac-no{color:#444;font-size:1rem}
+  .hc-fac-text{color:var(--text);font-size:.79rem;max-width:100px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hc-price{text-align:center;padding:.7rem 0 .3rem;border-top:1px solid var(--border);margin-top:.5rem;font-size:.8rem;color:var(--text-muted)}
+  .hc-price strong{display:block;font-size:1.25rem;font-weight:800;color:var(--accent)}
+  .hc-book-btn{display:block;width:100%;margin-top:.65rem;padding:.6rem;background:var(--accent);color:#0a0a0a;border:none;border-radius:8px;font-weight:700;font-size:.88rem;cursor:pointer;text-align:center;text-decoration:none;transition:background .2s}
+  .hc-book-btn:hover{background:var(--accent-dark)}
+  .hc-empty-slot{background:var(--bg-card);border:2px dashed var(--border);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;min-height:220px;cursor:pointer;transition:border-color .2s,background .2s}
+  .hc-empty-slot:hover{border-color:var(--accent);background:rgba(0,200,150,.04)}
+  .hc-add-btn{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.4rem;color:var(--text-muted);transition:color .2s;font-size:.85rem}
+  .hc-empty-slot:hover .hc-add-btn{color:var(--accent)}
+  .hc-add-icon{font-size:2rem;line-height:1}
+  @media(max-width:900px){.hc-table{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.hc-table{grid-template-columns:1fr}}
+  .hc-slider{position:relative;overflow:hidden;aspect-ratio:4/3;background:#000}
+  .hc-slider-img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;opacity:0;transition:opacity .45s ease;display:block}
+  .hc-slider-img.sl-active{opacity:1}
+  .hc-slider-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.55);border:none;color:#fff;cursor:pointer;z-index:5;width:30px;height:30px;border-radius:50%;font-size:1.1rem;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .hc-slider-btn:hover{background:rgba(0,0,0,.82)}
+  .hc-slider-btn.sl-prev{left:7px}
+  .hc-slider-btn.sl-next{right:7px}
+  .hc-slider-dots{position:absolute;bottom:7px;left:0;right:0;display:flex;justify-content:center;gap:5px;z-index:5}
+  .hc-slider-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.45);border:none;padding:0;cursor:pointer;transition:background .2s}
+  .hc-slider-dot.sl-active{background:#fff}
+  #hc-map{width:100%;height:400px;border-radius:var(--radius);margin-top:1.75rem;border:1px solid var(--border);display:none}
+  .hc-details-btn{display:block;width:100%;text-align:center;background:none;border:1px solid var(--accent);border-radius:6px;color:var(--accent);font-size:.8rem;font-weight:600;padding:.42rem .6rem;margin-top:.6rem;transition:background .2s}
+  .hc-details-btn:hover{background:rgba(0,200,150,.1)}
+</style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Griechenland oder Kroatien 2026? – Vergleich | JetztBuchbar.de",
+    "description": "Griechenland vs. Kroatien 2026: Ägäis vs. Adria – Strände, Preise, Natur und Aktivitäten im Direktvergleich.",
+    "url": "https://www.jetztbuchbar.de/vergleiche/griechenland-vs-kroatien/",
+    "inLanguage": "de",
+    "isPartOf": {
+      "@id": "https://www.jetztbuchbar.de/#website"
+    },
+    "publisher": {
+      "@id": "https://www.jetztbuchbar.de/#organization"
+    }
+  }
+  </script>
+  <!-- Leaflet (Hotelkarte) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YCDTX8ZEQ3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YCDTX8ZEQ3');
+</script>
+</head>
+<body>
+  
+  <header>
+    <a href="/index.html" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="/index.html#angebote">Angebote</a>
+      <a href="/index.html#destinationen">Destinationen</a>
+      <a href="/ueber-uns.html">Über uns</a>
+      <a href="/index.html#kontakt">Kontakt</a>
+    </nav>
+  </header>
+  <div class="hero">
+    <h1>Griechenland oder <span>Kroatien?</span></h1>
+    <p class="hero-sub">Ägäische Trauminseln vs. kristallklare Adria – welches Land liegt 2026 vorne? Der direkte Vergleich für DACH-Urlauber.</p>
+  </div>
+  
+  
+    <div class="section">
+      <div class="container-narrow">
+        <div class="wiki-intro">Wir vergleichen <strong>Griechenland</strong> und <strong>Kroatien</strong> direkt – damit Sie die beste Entscheidung für Ihren nächsten Urlaub treffen können.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <h2 class="section-title">🤖 KI-<span>Empfehlung</span></h2>
+        <div id="vg-travel-types"></div>
+        <div id="vg-ki-fazit" style="margin-top:1.25rem"></div>
+      </div>
+    </div>
+
+    <div class="section-alt">
+      <div class="container">
+        <h2 class="section-title">⚖️ Der direkte <span>Vergleich</span></h2>
+        <div id="vg-table"></div>
+      </div>
+    </div>
+
+    
+
+    <div class="section">
+      <div class="container-narrow">
+        <h2 class="section-title">✅ Unsere <span>Empfehlungen</span></h2>
+        <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-num">1</div>
+      <div class="tip-text">Kroatien liegt näher: Flug ab ~1h 50min vs. ~3h nach Griechenland – ideal für kürzere Trips.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">2</div>
+      <div class="tip-text">Griechenland: ikonische Inseln wie Santorini, Mykonos und Zakynthos – unvergleichliches Flair.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">3</div>
+      <div class="tip-text">Kroatien: Plitvicer Seen und Krka-Wasserfälle – Naturwunder, die Europa kein zweites Mal bietet.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">4</div>
+      <div class="tip-text">Griechenland: reichhaltigere antike Geschichte – Akropolis, Knossos, Delphi. Kroatien: Dubrovnik-Altstadt (UNESCO).</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-num">5</div>
+      <div class="tip-text">Preise ähnlich. Kroatien leicht günstiger abseits von Dubrovnik. Griechenland auf Luxusinseln deutlich teurer.</div>
+    </div></div>
+      </div>
+    </div>
+
+    <div class="section-alt">
+      <div class="container-narrow">
+        <h2 class="section-title">❓ Häufige <span>Fragen</span></h2>
+        <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">Was ist günstiger – Griechenland oder Kroatien?</div>
+      <div class="faq-a">Kroatien ist abseits von Dubrovnik oft günstiger. Griechenland auf Premium-Inseln (Santorini, Mykonos) deutlich teurer. Kreta und Rhodos sind preislich ähnlich wie Kroatien.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wo ist das Wasser klarer?</div>
+      <div class="faq-a">Kroatien hat das klarste Meerwasser in Europa – Sichtweiten bis 50m. Griechenland ist auch exzellent, vor allem rund um die Ägäischen Inseln.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Welches Land ist besser für Familien?</div>
+      <div class="faq-a">Beide sehr familienfreundlich. Kroatien punktet mit Nationalparks und Abenteuer; Griechenland mit ruhigeren Strandresorts (z.B. Rhodos, Kos).</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wo gibt es mehr Geschichte und Kultur?</div>
+      <div class="faq-a">Griechenland – Geburtsstätte der westlichen Zivilisation: Akropolis, Orakel von Delphi, Minoische Paläste. Kroatien: Dubrovnik, Split (Diokletianpalast, UNESCO).</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wann ist die beste Reisezeit für Griechenland und Kroatien?</div>
+      <div class="faq-a">Beide: Mai–Juni und September sind ideal – angenehme Temperaturen, weniger Touristen, günstigere Preise. Hochsaison Juli–August ist voll und teuer.</div>
+    </div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <h2 class="section-title">🌍 Direkt zur <span>Destination</span></h2>
+        <div class="dest-tags">
+          <a href="/griechenland/" class="dest-tag">→ Griechenland entdecken</a>
+          <a href="/kroatien/" class="dest-tag">→ Kroatien entdecken</a>
+        </div>
+      </div>
+    </div>
+
+    
+  <div class="section">
+    <div class="container">
+      <h2 class="section-title">🏨 Hotels für deinen <span>Urlaub</span></h2>
+      <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem">Klick auf eine Kachel – die Hotels öffnen sich direkt im Vergleich.</p>
+      <div id="vg-cta"></div>
+    </div>
+  </div>
+  
+  <!-- ── Hotel-Vergleich ── -->
+  <div class="section-alt" id="hotel-vergleich" style="padding-top:clamp(3rem,7vw,5rem);padding-bottom:clamp(3rem,7vw,5rem);padding-left:clamp(1.25rem,5vw,3rem);padding-right:clamp(1.25rem,5vw,3rem)">
+    <div class="container">
+      <h2 class="section-title">🏨 Hotels direkt <span>vergleichen</span></h2>
+      <p style="color:var(--text-muted);font-size:.92rem;margin-bottom:1.75rem;line-height:1.6">Echte Hoteldaten aus über 1.300 geprüften Unterkünften – direkt nebeneinander vergleichen. Beliebige Hotels über die Suche austauschen.</p>
+      <div class="hc-search-row">
+        <div class="hc-search-box">
+          <span class="hc-search-icon">🔍</span>
+          <input type="text" id="hc-search-input" placeholder="Hotelname oder Ort suchen…" autocomplete="off">
+          <div class="hc-autocomplete" id="hc-autocomplete"></div>
+        </div>
+      </div>
+      <div class="hc-table" id="hc-table">
+        <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">⏳ Lade Hotels…</div>
+      </div>
+      <div id="hc-map"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-left">
+      <span>© 2026 JetztBuchbar.de</span>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+      <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+      <span>Wien, Österreich</span>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">&#x1F4F7;</a>
+      <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
+    </div>
+  </footer>
+  <!-- ─── Hotel-Vergleich Widget ─── -->
+  <script>
+  (function () {
+    'use strict';
+
+    var FACILITIES = [
+      {{ key: 'pool',       label: 'Außenpool',      icon: '🏊' }},
+      {{ key: 'spa',        label: 'Spa & Wellness',  icon: '🧖' }},
+      {{ key: 'beach',      label: 'Strandlage',      icon: '🏖️' }},
+      {{ key: 'aquapark',   label: 'Aquapark',        icon: '💦' }},
+      {{ key: 'fitness',    label: 'Fitness',         icon: '💪' }},
+      {{ key: 'restaurant', label: 'Restaurant',      icon: '🍽️' }},
+      {{ key: 'bar',        label: 'Bar',             icon: '🍹' }},
+      {{ key: 'kidsclub',   label: 'Kinderclub',      icon: '👧' }},
+      {{ key: 'wifi',       label: 'WLAN',            icon: '📶' }},
+      {{ key: 'parking',    label: 'Parkplatz',       icon: '🅿️' }},
+      {{ key: 'concept',    label: 'Konzept',         icon: '🏷️', type: 'text' }},
+      {{ key: 'rooms',      label: 'Zimmeranzahl',    icon: '🛏️', type: 'number' }},
+    ];
+
+    var DEFAULT_IDS = ['96636', '41437', '10958', '69354'];
+
+    var compared = [];
+    var tableEl, searchInput, autocompleteEl;
+    var searchTimer;
+
+    function stars(n) {{ return '★'.repeat(n) + '☆'.repeat(Math.max(0, 5 - n)); }}
+
+    function esc(s) {{
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }}
+
+    var sliderTimers = {{}};
+    function slId(id) {{ return 'sl-' + String(id).replace(/[^a-z0-9]/gi,''); }}
+
+    function advanceSlider(id, dir) {{
+      var wrap = document.getElementById(id); if (!wrap) return;
+      var imgs = wrap.querySelectorAll('.hc-slider-img');
+      var dots = wrap.querySelectorAll('.hc-slider-dot');
+      if (!imgs.length) return;
+      var cur = 0;
+      for (var i=0;i<imgs.length;i++) {{ if (imgs[i].classList.contains('sl-active')) {{ cur=i; break; }} }}
+      var next = (cur+dir+imgs.length)%imgs.length;
+      imgs[cur].classList.remove('sl-active'); imgs[next].classList.add('sl-active');
+      if (dots[cur]) dots[cur].classList.remove('sl-active');
+      if (dots[next]) dots[next].classList.add('sl-active');
+    }}
+
+    window.hcSlide = function(id,delta) {{ advanceSlider(id,delta); }};
+    window.hcSlideIdx = function(id,idx) {{
+      var wrap=document.getElementById(id); if(!wrap) return;
+      var imgs=wrap.querySelectorAll('.hc-slider-img');
+      var dots=wrap.querySelectorAll('.hc-slider-dot');
+      for(var i=0;i<imgs.length;i++) {{ imgs[i].classList.toggle('sl-active',i===idx); if(dots[i]) dots[i].classList.toggle('sl-active',i===idx); }}
+    }};
+
+    function startSliderTimer(id,count) {{
+      if(sliderTimers[id]) clearInterval(sliderTimers[id]);
+      if(count>1) sliderTimers[id]=setInterval(function(){{advanceSlider(id,1);}},3000);
+    }}
+    function stopAllTimers() {{ Object.keys(sliderTimers).forEach(function(k){{clearInterval(sliderTimers[k]);}}); sliderTimers={{}}; }}
+
+    function renderSlider(h) {{
+      var imgs=(h.images&&h.images.length)?h.images:(h.image?[h.image]:[]);
+      var fb='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70';
+      if(!imgs.length) imgs=[fb];
+      var id=slId(h.giataId);
+      var imgHtml=imgs.map(function(url,i){{return '<img class="hc-slider-img'+(i===0?' sl-active':'')+'" src="'+esc(url)+'" alt="'+esc(h.name)+'" loading="lazy" onerror="this.src=''+fb+''">';}}).join('');
+      var btnHtml=imgs.length>1?'<button class="hc-slider-btn sl-prev" onclick="hcSlide(''+id+'',-1)">&#8249;</button><button class="hc-slider-btn sl-next" onclick="hcSlide(''+id+'',1)">&#8250;</button>':'';
+      var dotHtml=imgs.length>1?'<div class="hc-slider-dots">'+imgs.map(function(_,i){{return '<button class="hc-slider-dot'+(i===0?' sl-active':'')+'" onclick="hcSlideIdx(''+id+'','+i+')"></button>';}}).join('')+'</div>':'';
+      return '<div class="hc-slider" id="'+id+'">'+imgHtml+btnHtml+dotHtml+'</div>';
+    }}
+
+    function renderHotelCol(h) {{
+      var facRows='';
+      FACILITIES.forEach(function(f) {{
+        var val=h.facilities?h.facilities[f.key]:undefined; var valHtml;
+        if(f.type==='text'||f.type==='number') {{ valHtml=val?'<span class="hc-fac-text">'+esc(val)+'</span>':'<span class="hc-fac-no">&mdash;</span>'; }}
+        else {{ valHtml=val?'<span class="hc-fac-yes">✓</span>':'<span class="hc-fac-no">✕</span>'; }}
+        facRows+='<div class="hc-fac-row"><span class="hc-fac-label">'+f.icon+' '+esc(f.label)+'</span>'+valHtml+'</div>';
+      }});
+      var slug=String(h.name||'').toLowerCase().replace(/[\u00e4]/g,'ae').replace(/[\u00f6]/g,'oe').replace(/[\u00fc]/g,'ue').replace(/[\u00df]/g,'ss').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+      var detailBtn='<a class="hc-details-btn" href="/hotel.html?id='+encodeURIComponent(String(h.giataId))+'&slug='+encodeURIComponent(slug)+'">Details ansehen →</a>';
+      return '<div class="hc-col"><button class="hc-col-remove" onclick="hcRemove(''+esc(h.giataId)+'')" title="Entfernen">&times;</button>'+renderSlider(h)+'<div class="hc-col-body"><div class="hc-col-name">'+esc(h.name)+'</div><div class="hc-col-location">📍 '+esc(h.city)+', '+esc(h.country)+'</div><div class="hc-stars">'+stars(h.stars)+'</div>'+facRows+detailBtn+'<div class="hc-price"><strong>Auf Anfrage</strong>pro Nacht</div><a class="hc-book-btn" href="'+esc(h.bookUrl||'/')+'">Jetzt buchen</a></div></div>';
+    }}
+
+    function renderEmptySlot() {{
+      return '<div class="hc-empty-slot" onclick="hcFocusSearch()" title="Hotel hinzufügen"><button class="hc-add-btn"><span class="hc-add-icon">＋</span><span>Hotel hinzufügen</span></button></div>';
+    }}
+
+    function renderTable() {{
+      if(!tableEl) return; stopAllTimers();
+      var html=''; compared.forEach(function(h){{html+=renderHotelCol(h);}});
+      for(var i=compared.length;i<4;i++) {{html+=renderEmptySlot();}}
+      tableEl.innerHTML=html;
+      compared.forEach(function(h){{var imgs=(h.images&&h.images.length)?h.images:(h.image?[h.image]:[]);startSliderTimer(slId(h.giataId),imgs.length);}});
+      updateMap();
+    }}
+
+    function showAutocomplete(results) {{
+      if(!autocompleteEl) return;
+      if(!results||!results.length) {{ autocompleteEl.innerHTML='<div class="hc-ac-item"><span class="hc-ac-name" style="color:var(--text-muted)">Keine Ergebnisse</span></div>'; autocompleteEl.classList.add('open'); return; }}
+      var html=''; results.forEach(function(r){{ html+='<div class="hc-ac-item" onclick="hcPickHotel(''+esc(r.giataId)+'')"><span class="hc-ac-name">'+esc(r.name)+'</span><span class="hc-ac-loc">'+esc(r.city)+', '+esc(r.country)+'</span></div>'; }});
+      autocompleteEl.innerHTML=html; autocompleteEl.classList.add('open');
+    }}
+
+    function hideAutocomplete() {{ if(autocompleteEl) autocompleteEl.classList.remove('open'); }}
+
+    function searchHotels(q) {{
+      fetch('/api/giata?action=search&q='+encodeURIComponent(q))
+        .then(function(r){{return r.json();}})
+        .then(function(data){{var res=(data.results||[]).filter(function(r){{return !compared.some(function(c){{return c.giataId===r.giataId;}});}});showAutocomplete(res);}})
+        .catch(function(){{showAutocomplete([])}});
+    }}
+
+    var hcMap=null, hcMarkers=[];
+    function updateMap() {{
+      var mapEl=document.getElementById('hc-map');
+      if(!mapEl||typeof L==='undefined') return;
+      var withCoords=compared.filter(function(h){{return h.lat!=null&&h.lng!=null;}});
+      if(!withCoords.length) {{mapEl.style.display='none'; return;}}
+      mapEl.style.display='block';
+      if(!hcMap) {{ hcMap=L.map('hc-map',{{scrollWheelZoom:false}}); L.tileLayer('https://{{s}}.tile.openstreetmap.org/{{z}}/{{x}}/{{y}}.png',{{attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom:18}}).addTo(hcMap); }}
+      else {{ hcMarkers.forEach(function(m){{hcMap.removeLayer(m)}}); hcMarkers=[]; }}
+      var bounds=[];
+      withCoords.forEach(function(h){{var m=L.marker([h.lat,h.lng]).addTo(hcMap);m.bindTooltip('<strong>'+h.name+'</strong><br><small>'+h.city+', '+h.country+'</small>',{{permanent:true,direction:'top',offset:[0,-12]}});m.bindPopup('<strong>'+h.name+'</strong><br>'+h.city+', '+h.country+'<br>&#9733; '+h.stars);hcMarkers.push(m);bounds.push([h.lat,h.lng]);}});
+      setTimeout(function(){{if(bounds.length===1){{hcMap.setView(bounds[0],13)}}else{{hcMap.fitBounds(bounds,{{padding:[50,50]}})}}hcMap.invalidateSize();}},100);
+    }}
+
+    window.hcRemove=function(giataId) {{ compared=compared.filter(function(h){{return h.giataId!==giataId;}}); renderTable(); }};
+    window.hcPickHotel=function(giataId) {{
+      if(compared.length>=4) {{ alert('Maximal 4 Hotels können gleichzeitig verglichen werden.'); return; }}
+      if(compared.some(function(h){{return h.giataId===giataId;}})) {{ hideAutocomplete(); return; }}
+      fetch('/api/giata?action=property&id='+encodeURIComponent(giataId))
+        .then(function(r){{return r.json();}})
+        .then(function(hotel){{ if(hotel&&hotel.giataId){{compared.push(hotel);renderTable();}} hideAutocomplete(); if(searchInput) searchInput.value=''; }})
+        .catch(function(){{ hideAutocomplete(); if(searchInput) searchInput.value=''; }});
+    }};
+    window.hcFocusSearch=function() {{ if(searchInput) searchInput.focus(); }};
+
+    document.addEventListener('DOMContentLoaded', function() {{
+      tableEl=document.getElementById('hc-table');
+      searchInput=document.getElementById('hc-search-input');
+      autocompleteEl=document.getElementById('hc-autocomplete');
+      if(!tableEl||!searchInput||!autocompleteEl) return;
+      tableEl.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">⏳ Lade Hotels…</div>';
+      Promise.all(DEFAULT_IDS.map(function(id){{
+        return fetch('/api/giata?action=property&id='+id).then(function(r){{return r.json();}}).catch(function(){{return null;}});
+      }})).then(function(hotels){{ compared=hotels.filter(function(h){{return h&&h.giataId;}}); renderTable(); }});
+      searchInput.addEventListener('input',function(){{ clearTimeout(searchTimer); var q=searchInput.value.trim(); if(q.length<2){{hideAutocomplete();return;}} searchTimer=setTimeout(function(){{searchHotels(q);}},300); }});
+      searchInput.addEventListener('blur',function(){{ setTimeout(hideAutocomplete,200); }});
+      searchInput.addEventListener('focus',function(){{ if(searchInput.value.trim().length>=2){{searchHotels(searchInput.value.trim())}} }});
+    }});
+  })();
+  </script>
+<script src="/vergleiche/destinations-data.js"></script>
+<script src="/vergleiche/vergleich-engine.js"></script>
+<script>JB.initVergleich('griechenland-vs-kroatien');</script>
+<!--Start of Crisp Chat-->
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="bd983cbc-0fb7-4b1e-9d37-4c2c02ba1f0b";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<!--End of Crisp Chat-->
+</body>
+</html>

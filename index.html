@@ -1026,10 +1026,14 @@
     /* ── Each Half ── */
     .rb-side {
       position: absolute;
-      inset: 0;
+      top: 0; bottom: 0;
+      width: 62%;        /* breiter als 50% – überlappt in der Mitte, Clip kaschiert die Lücke */
       overflow: hidden;
       transition: filter .35s ease;
     }
+    .rb-left  { left: 0;  clip-path: polygon(0 0, 87% 0, 77% 100%, 0 100%); }
+    .rb-right { right: 0; clip-path: polygon(23% 0, 100% 0, 100% 100%, 13% 100%); }
+
     .rb-side img {
       width: 100%;
       height: 100%;
@@ -1038,10 +1042,6 @@
       transition: transform .45s ease;
     }
     .rb-card:hover .rb-side img { transform: scale(1.06); }
-
-    /* Diagonal clip */
-    .rb-left  { clip-path: polygon(0 0, 90% 0, 78% 100%, 0 100%); }
-    .rb-right { clip-path: polygon(22% 0, 100% 0, 100% 100%, 10% 100%); }
 
     /* Hover brightness: beide abdunkeln, hoverte Seite bleibt hell */
     .rb-card:hover .rb-left,
@@ -1085,35 +1085,41 @@
     .rb-badge {
       position: absolute;
       z-index: 15;
-      top: 12px;
-      background: rgba(10,10,10,.62);
+      background: rgba(10,10,10,.65);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.15);
       border-radius: 8px;
-      padding: 4px 10px;
+      padding: 5px 11px;
       font-size: .72rem;
       font-weight: 700;
       color: #fff;
       line-height: 1.5;
       white-space: nowrap;
+      max-width: 44%;            /* Taşmayı önle */
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .rb-badge-tl { left: 12px; }
-    .rb-badge-tr { right: 12px; }
+    .rb-badge-tl { left: 16px;  top: 16px; }
+    .rb-badge-tr { right: 16px; top: 16px; }
 
     /* ── Destination Name Labels ── */
     .rb-dest-name {
       position: absolute;
       z-index: 15;
-      bottom: 38px;
-      font-size: clamp(.85rem, 1.3vw, 1rem);
+      bottom: 46px;
+      font-size: clamp(.82rem, 1.15vw, .98rem);
       font-weight: 800;
       color: #fff;
-      text-shadow: 0 1px 10px rgba(0,0,0,.85);
+      text-shadow: 0 1px 12px rgba(0,0,0,.9);
       letter-spacing: .02em;
+      max-width: 44%;            /* nie in die Mitte ragen */
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
-    .rb-left .rb-dest-name  { left: 14px; }
-    .rb-right .rb-dest-name { right: 14px; text-align: right; }
+    .rb-left .rb-dest-name  { left: 20px; }
+    .rb-right .rb-dest-name { right: 20px; text-align: right; }
 
     /* ── Bottom Tagline Bar ── */
     .rb-tagline {

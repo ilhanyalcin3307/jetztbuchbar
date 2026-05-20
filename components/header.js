@@ -60,7 +60,7 @@
     '<span style="display:flex;align-items:center;gap:6px;flex-shrink:0;">' +
     '<span style="border-left:1px solid rgba(255,255,255,.15);height:16px;margin:0 4px;display:inline-block;"></span>' +
     '<span style="width:7px;height:7px;border-radius:50%;background:#00c896;flex-shrink:0;animation:jb-pulse 2s ease-in-out infinite;"></span>' +
-    '<span style="font-size:13px;font-weight:500;color:rgba(255,255,255,.7);white-space:nowrap;">● GIATA® Verifizierte Daten</span>' +
+    '<span style="font-size:13px;font-weight:500;color:rgba(255,255,255,.7);white-space:nowrap;">GIATA® Verifizierte Daten</span>' +
     '</span></div>' +
     '<nav>' +
     '<div class="nav-desktop" style="display:flex;align-items:center;gap:2rem">' +

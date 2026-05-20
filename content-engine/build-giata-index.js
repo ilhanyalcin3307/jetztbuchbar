@@ -21,7 +21,7 @@ const OUTPUT      = path.join(__dirname, '..', 'api', 'giata-search-index.json')
 const BATCH_SIZE  = 20;
 const DELAY_MS    = 150;
 const SAMPLE_SIZE = 500;
-const COUNTRIES   = ['TR','GR','ES','EG','PT','HR','IT','MA','MT','TN','BG','CY','JO','AE','MV'];
+const COUNTRIES   = ['TR','GR','ES','EG','PT','HR','IT','FR','MA','MT','TN','BG','CY','JO','AE','MV'];
 
 function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
@@ -55,17 +55,19 @@ function sample(arr, n) {
   return Array.from({ length: n }, function(_, i) { return arr[Math.floor(i * step)]; });
 }
 
-function extractInfo(d) {
+function extractInfo(d, cc) {
   var names   = d.names || [];
   var name    = (names.find(function(n) { return n.isDefault; }) || names[0] || {}).value || '';
   var cityNm  = d.city && d.city.names || [];
   var city    = (cityNm.find(function(n) { return n.locale === 'de'; }) || cityNm[0] || {}).value || (d.city && d.city.name) || '';
+  var cityEn  = (cityNm.find(function(n) { return n.locale === 'en'; }) || {}).value || city;
   var ctryNm  = d.country && d.country.names || [];
   var country = (ctryNm.find(function(n) { return n.locale === 'de'; }) || ctryNm[0] || {}).value || (d.country && d.country.name) || '';
   var ratings = d.ratings || [];
   var stars   = Math.round(parseFloat((ratings.find(function(r) { return r.isDefault; }) || ratings[0] || {}).value || 0));
+  var factIds = Object.keys(d.facts || {}).map(Number).filter(function(n) { return !isNaN(n) && n > 0; });
   if (!name) return null;
-  return { giataId: String(d.giataId || d.id), name: name, city: city, country: country, stars: stars };
+  return { giataId: String(d.giataId || d.id), name: name, city: city, cityEn: cityEn, cc: cc || '', country: country, stars: stars, factIds: factIds };
 }
 
 async function main() {
@@ -92,7 +94,7 @@ async function main() {
       await Promise.all(batch.map(async function(gId) {
         try {
           var d    = await fetchJson(BASE + '/properties/' + gId);
-          var info = extractInfo(d);
+          var info = extractInfo(d, cc);
           if (info) index.push(info);
         } catch(e) { /* ignore */ }
       }));

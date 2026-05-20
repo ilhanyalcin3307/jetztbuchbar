@@ -2,6 +2,6 @@
   "name": "jetztbuchbar",
   "version": "1.0.0",
   "scripts": {
-    "build": "node content-engine/build-giata-index.js"
+    "build": "node content-engine/build-giata-index.js && node content-engine/patch-hotel-ranking.js"
   }
 }

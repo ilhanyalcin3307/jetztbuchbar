@@ -76,17 +76,17 @@ var DESTINATIONS = {
       {
         label:    'Die 4 besten Familienhotels auf Mallorca vergleichen',
         type:     'family',
-        giataIds: ['574183', null, null, null]  // Hipotels Gran Playa de Palma + 3 via API
+        giataIds: ['96636', '41437', '574183', '574182']  // Zoëtry, Zafiro, Hipotels Gran Playa, Hipotels Palace
       },
       {
         label:    'Top Strandhotels auf Mallorca – direkt vergleichen',
         type:     'beach',
-        giataIds: ['574183', null, null, null]
+        giataIds: ['96636', '41437', '574183', '574182']
       },
       {
         label:    'Luxushotels auf Mallorca im Vergleich',
         type:     'luxury',
-        giataIds: [null, null, null, null]       // via GIATA API zu befüllen
+        giataIds: ['96636', '41437', '574183', '574182']
       }
     ]
   },
@@ -152,17 +152,17 @@ var DESTINATIONS = {
       {
         label:    'Die 4 besten Familienhotels auf Kreta vergleichen',
         type:     'family',
-        giataIds: ['10958', null, null, null]   // Georgioupolis Resort + 3 via API
+        giataIds: ['10958', '69354', '1370666', '90067']  // Georgioupolis, Cook's Club, Chania Hotel, Grecotel
       },
       {
         label:    'Top All-Inclusive Hotels auf Kreta im Vergleich',
         type:     'allinclusive',
-        giataIds: ['10958', null, null, null]
+        giataIds: ['10958', '69354', '1370666', '90067']
       },
       {
         label:    'Strandhotels auf Kreta – 4 auf einen Blick vergleichen',
         type:     'beach',
-        giataIds: [null, null, null, null]
+        giataIds: ['10958', '69354', '1370666', '90067']
       }
     ]
   },
@@ -228,17 +228,17 @@ var DESTINATIONS = {
       {
         label:    'Die 4 besten All-Inclusive Hotels in der Türkei vergleichen',
         type:     'allinclusive',
-        giataIds: ['42194', '232017', null, null]  // Rixos + Maxx Royal + 2 via API
+        giataIds: ['42194', '232017', '78826', '247666']  // Rixos, Maxx Royal, Adam & Eve, Armas Life Belek
       },
       {
         label:    'Luxus-Resorts Türkei – direkt nebeneinander vergleichen',
         type:     'luxury',
-        giataIds: ['42194', '232017', null, null]
+        giataIds: ['42194', '232017', '78826', '247666']
       },
       {
         label:    'Familienhotels Türkei – Top 4 im Direktvergleich',
         type:     'family',
-        giataIds: ['42194', null, null, null]
+        giataIds: ['42194', '232017', '78826', '247666']
       }
     ]
   },

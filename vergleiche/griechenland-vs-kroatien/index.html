@@ -459,18 +459,18 @@
     'use strict';
 
     var FACILITIES = [
-      {{ key: 'pool',       label: 'Außenpool',      icon: '🏊' }},
-      {{ key: 'spa',        label: 'Spa & Wellness',  icon: '🧖' }},
-      {{ key: 'beach',      label: 'Strandlage',      icon: '🏖️' }},
-      {{ key: 'aquapark',   label: 'Aquapark',        icon: '💦' }},
-      {{ key: 'fitness',    label: 'Fitness',         icon: '💪' }},
-      {{ key: 'restaurant', label: 'Restaurant',      icon: '🍽️' }},
-      {{ key: 'bar',        label: 'Bar',             icon: '🍹' }},
-      {{ key: 'kidsclub',   label: 'Kinderclub',      icon: '👧' }},
-      {{ key: 'wifi',       label: 'WLAN',            icon: '📶' }},
-      {{ key: 'parking',    label: 'Parkplatz',       icon: '🅿️' }},
-      {{ key: 'concept',    label: 'Konzept',         icon: '🏷️', type: 'text' }},
-      {{ key: 'rooms',      label: 'Zimmeranzahl',    icon: '🛏️', type: 'number' }},
+      { key: 'pool',       label: 'Außenpool',      icon: '🏊' },
+      { key: 'spa',        label: 'Spa & Wellness',  icon: '🧖' },
+      { key: 'beach',      label: 'Strandlage',      icon: '🏖️' },
+      { key: 'aquapark',   label: 'Aquapark',        icon: '💦' },
+      { key: 'fitness',    label: 'Fitness',         icon: '💪' },
+      { key: 'restaurant', label: 'Restaurant',      icon: '🍽️' },
+      { key: 'bar',        label: 'Bar',             icon: '🍹' },
+      { key: 'kidsclub',   label: 'Kinderclub',      icon: '👧' },
+      { key: 'wifi',       label: 'WLAN',            icon: '📶' },
+      { key: 'parking',    label: 'Parkplatz',       icon: '🅿️' },
+      { key: 'concept',    label: 'Konzept',         icon: '🏷️', type: 'text' },
+      { key: 'rooms',      label: 'Zimmeranzahl',    icon: '🛏️', type: 'number' },
     ];
 
     var DEFAULT_IDS = ['96636', '41437', '10958', '69354'];
@@ -479,144 +479,144 @@
     var tableEl, searchInput, autocompleteEl;
     var searchTimer;
 
-    function stars(n) {{ return '★'.repeat(n) + '☆'.repeat(Math.max(0, 5 - n)); }}
+    function stars(n) { return '★'.repeat(n) + '☆'.repeat(Math.max(0, 5 - n)); }
 
-    function esc(s) {{
+    function esc(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }}
+    }
 
-    var sliderTimers = {{}};
-    function slId(id) {{ return 'sl-' + String(id).replace(/[^a-z0-9]/gi,''); }}
+    var sliderTimers = {};
+    function slId(id) { return 'sl-' + String(id).replace(/[^a-z0-9]/gi,''); }
 
-    function advanceSlider(id, dir) {{
+    function advanceSlider(id, dir) {
       var wrap = document.getElementById(id); if (!wrap) return;
       var imgs = wrap.querySelectorAll('.hc-slider-img');
       var dots = wrap.querySelectorAll('.hc-slider-dot');
       if (!imgs.length) return;
       var cur = 0;
-      for (var i=0;i<imgs.length;i++) {{ if (imgs[i].classList.contains('sl-active')) {{ cur=i; break; }} }}
+      for (var i=0;i<imgs.length;i++) { if (imgs[i].classList.contains('sl-active')) { cur=i; break; } }
       var next = (cur+dir+imgs.length)%imgs.length;
       imgs[cur].classList.remove('sl-active'); imgs[next].classList.add('sl-active');
       if (dots[cur]) dots[cur].classList.remove('sl-active');
       if (dots[next]) dots[next].classList.add('sl-active');
-    }}
+    }
 
-    window.hcSlide = function(id,delta) {{ advanceSlider(id,delta); }};
-    window.hcSlideIdx = function(id,idx) {{
+    window.hcSlide = function(id,delta) { advanceSlider(id,delta); };
+    window.hcSlideIdx = function(id,idx) {
       var wrap=document.getElementById(id); if(!wrap) return;
       var imgs=wrap.querySelectorAll('.hc-slider-img');
       var dots=wrap.querySelectorAll('.hc-slider-dot');
-      for(var i=0;i<imgs.length;i++) {{ imgs[i].classList.toggle('sl-active',i===idx); if(dots[i]) dots[i].classList.toggle('sl-active',i===idx); }}
-    }};
+      for(var i=0;i<imgs.length;i++) { imgs[i].classList.toggle('sl-active',i===idx); if(dots[i]) dots[i].classList.toggle('sl-active',i===idx); }
+    };
 
-    function startSliderTimer(id,count) {{
+    function startSliderTimer(id,count) {
       if(sliderTimers[id]) clearInterval(sliderTimers[id]);
-      if(count>1) sliderTimers[id]=setInterval(function(){{advanceSlider(id,1);}},3000);
-    }}
-    function stopAllTimers() {{ Object.keys(sliderTimers).forEach(function(k){{clearInterval(sliderTimers[k]);}}); sliderTimers={{}}; }}
+      if(count>1) sliderTimers[id]=setInterval(function(){advanceSlider(id,1);},3000);
+    }
+    function stopAllTimers() { Object.keys(sliderTimers).forEach(function(k){clearInterval(sliderTimers[k]);}); sliderTimers={}; }
 
-    function renderSlider(h) {{
+    function renderSlider(h) {
       var imgs=(h.images&&h.images.length)?h.images:(h.image?[h.image]:[]);
       var fb='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70';
       if(!imgs.length) imgs=[fb];
       var id=slId(h.giataId);
-      var imgHtml=imgs.map(function(url,i){{return '<img class="hc-slider-img'+(i===0?' sl-active':'')+'" src="'+esc(url)+'" alt="'+esc(h.name)+'" loading="lazy" onerror="this.src=''+fb+''">';}}).join('');
+      var imgHtml=imgs.map(function(url,i){return '<img class="hc-slider-img'+(i===0?' sl-active':'')+'" src="'+esc(url)+'" alt="'+esc(h.name)+'" loading="lazy" onerror="this.src=''+fb+''">';}).join('');
       var btnHtml=imgs.length>1?'<button class="hc-slider-btn sl-prev" onclick="hcSlide(''+id+'',-1)">&#8249;</button><button class="hc-slider-btn sl-next" onclick="hcSlide(''+id+'',1)">&#8250;</button>':'';
-      var dotHtml=imgs.length>1?'<div class="hc-slider-dots">'+imgs.map(function(_,i){{return '<button class="hc-slider-dot'+(i===0?' sl-active':'')+'" onclick="hcSlideIdx(''+id+'','+i+')"></button>';}}).join('')+'</div>':'';
+      var dotHtml=imgs.length>1?'<div class="hc-slider-dots">'+imgs.map(function(_,i){return '<button class="hc-slider-dot'+(i===0?' sl-active':'')+'" onclick="hcSlideIdx(''+id+'','+i+')"></button>';}).join('')+'</div>':'';
       return '<div class="hc-slider" id="'+id+'">'+imgHtml+btnHtml+dotHtml+'</div>';
-    }}
+    }
 
-    function renderHotelCol(h) {{
+    function renderHotelCol(h) {
       var facRows='';
-      FACILITIES.forEach(function(f) {{
+      FACILITIES.forEach(function(f) {
         var val=h.facilities?h.facilities[f.key]:undefined; var valHtml;
-        if(f.type==='text'||f.type==='number') {{ valHtml=val?'<span class="hc-fac-text">'+esc(val)+'</span>':'<span class="hc-fac-no">&mdash;</span>'; }}
-        else {{ valHtml=val?'<span class="hc-fac-yes">✓</span>':'<span class="hc-fac-no">✕</span>'; }}
+        if(f.type==='text'||f.type==='number') { valHtml=val?'<span class="hc-fac-text">'+esc(val)+'</span>':'<span class="hc-fac-no">&mdash;</span>'; }
+        else { valHtml=val?'<span class="hc-fac-yes">✓</span>':'<span class="hc-fac-no">✕</span>'; }
         facRows+='<div class="hc-fac-row"><span class="hc-fac-label">'+f.icon+' '+esc(f.label)+'</span>'+valHtml+'</div>';
-      }});
+      });
       var slug=String(h.name||'').toLowerCase().replace(/[\u00e4]/g,'ae').replace(/[\u00f6]/g,'oe').replace(/[\u00fc]/g,'ue').replace(/[\u00df]/g,'ss').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
       var detailBtn='<a class="hc-details-btn" href="/hotel.html?id='+encodeURIComponent(String(h.giataId))+'&slug='+encodeURIComponent(slug)+'">Details ansehen →</a>';
       return '<div class="hc-col"><button class="hc-col-remove" onclick="hcRemove(''+esc(h.giataId)+'')" title="Entfernen">&times;</button>'+renderSlider(h)+'<div class="hc-col-body"><div class="hc-col-name">'+esc(h.name)+'</div><div class="hc-col-location">📍 '+esc(h.city)+', '+esc(h.country)+'</div><div class="hc-stars">'+stars(h.stars)+'</div>'+facRows+detailBtn+'<div class="hc-price"><strong>Auf Anfrage</strong>pro Nacht</div><a class="hc-book-btn" href="'+esc(h.bookUrl||'/')+'">Jetzt buchen</a></div></div>';
-    }}
+    }
 
-    function renderEmptySlot() {{
+    function renderEmptySlot() {
       return '<div class="hc-empty-slot" onclick="hcFocusSearch()" title="Hotel hinzufügen"><button class="hc-add-btn"><span class="hc-add-icon">＋</span><span>Hotel hinzufügen</span></button></div>';
-    }}
+    }
 
-    function renderTable() {{
+    function renderTable() {
       if(!tableEl) return; stopAllTimers();
-      var html=''; compared.forEach(function(h){{html+=renderHotelCol(h);}});
-      for(var i=compared.length;i<4;i++) {{html+=renderEmptySlot();}}
+      var html=''; compared.forEach(function(h){html+=renderHotelCol(h);});
+      for(var i=compared.length;i<4;i++) {html+=renderEmptySlot();}
       tableEl.innerHTML=html;
-      compared.forEach(function(h){{var imgs=(h.images&&h.images.length)?h.images:(h.image?[h.image]:[]);startSliderTimer(slId(h.giataId),imgs.length);}});
+      compared.forEach(function(h){var imgs=(h.images&&h.images.length)?h.images:(h.image?[h.image]:[]);startSliderTimer(slId(h.giataId),imgs.length);});
       updateMap();
-    }}
+    }
 
-    function showAutocomplete(results) {{
+    function showAutocomplete(results) {
       if(!autocompleteEl) return;
-      if(!results||!results.length) {{ autocompleteEl.innerHTML='<div class="hc-ac-item"><span class="hc-ac-name" style="color:var(--text-muted)">Keine Ergebnisse</span></div>'; autocompleteEl.classList.add('open'); return; }}
-      var html=''; results.forEach(function(r){{ html+='<div class="hc-ac-item" onclick="hcPickHotel(''+esc(r.giataId)+'')"><span class="hc-ac-name">'+esc(r.name)+'</span><span class="hc-ac-loc">'+esc(r.city)+', '+esc(r.country)+'</span></div>'; }});
+      if(!results||!results.length) { autocompleteEl.innerHTML='<div class="hc-ac-item"><span class="hc-ac-name" style="color:var(--text-muted)">Keine Ergebnisse</span></div>'; autocompleteEl.classList.add('open'); return; }
+      var html=''; results.forEach(function(r){ html+='<div class="hc-ac-item" onclick="hcPickHotel(''+esc(r.giataId)+'')"><span class="hc-ac-name">'+esc(r.name)+'</span><span class="hc-ac-loc">'+esc(r.city)+', '+esc(r.country)+'</span></div>'; });
       autocompleteEl.innerHTML=html; autocompleteEl.classList.add('open');
-    }}
+    }
 
-    function hideAutocomplete() {{ if(autocompleteEl) autocompleteEl.classList.remove('open'); }}
+    function hideAutocomplete() { if(autocompleteEl) autocompleteEl.classList.remove('open'); }
 
-    function searchHotels(q) {{
+    function searchHotels(q) {
       fetch('/api/giata?action=search&q='+encodeURIComponent(q))
-        .then(function(r){{return r.json();}})
-        .then(function(data){{var res=(data.results||[]).filter(function(r){{return !compared.some(function(c){{return c.giataId===r.giataId;}});}});showAutocomplete(res);}})
-        .catch(function(){{showAutocomplete([])}});
-    }}
+        .then(function(r){return r.json();})
+        .then(function(data){var res=(data.results||[]).filter(function(r){return !compared.some(function(c){return c.giataId===r.giataId;});});showAutocomplete(res);})
+        .catch(function(){showAutocomplete([])});
+    }
 
     var hcMap=null, hcMarkers=[];
-    function updateMap() {{
+    function updateMap() {
       var mapEl=document.getElementById('hc-map');
       if(!mapEl||typeof L==='undefined') return;
-      var withCoords=compared.filter(function(h){{return h.lat!=null&&h.lng!=null;}});
-      if(!withCoords.length) {{mapEl.style.display='none'; return;}}
+      var withCoords=compared.filter(function(h){return h.lat!=null&&h.lng!=null;});
+      if(!withCoords.length) {mapEl.style.display='none'; return;}
       mapEl.style.display='block';
-      if(!hcMap) {{ hcMap=L.map('hc-map',{{scrollWheelZoom:false}}); L.tileLayer('https://{{s}}.tile.openstreetmap.org/{{z}}/{{x}}/{{y}}.png',{{attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom:18}}).addTo(hcMap); }}
-      else {{ hcMarkers.forEach(function(m){{hcMap.removeLayer(m)}}); hcMarkers=[]; }}
+      if(!hcMap) { hcMap=L.map('hc-map',{scrollWheelZoom:false}); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom:18}).addTo(hcMap); }
+      else { hcMarkers.forEach(function(m){hcMap.removeLayer(m)}); hcMarkers=[]; }
       var bounds=[];
-      withCoords.forEach(function(h){{var m=L.marker([h.lat,h.lng]).addTo(hcMap);m.bindTooltip('<strong>'+h.name+'</strong><br><small>'+h.city+', '+h.country+'</small>',{{permanent:true,direction:'top',offset:[0,-12]}});m.bindPopup('<strong>'+h.name+'</strong><br>'+h.city+', '+h.country+'<br>&#9733; '+h.stars);hcMarkers.push(m);bounds.push([h.lat,h.lng]);}});
-      setTimeout(function(){{if(bounds.length===1){{hcMap.setView(bounds[0],13)}}else{{hcMap.fitBounds(bounds,{{padding:[50,50]}})}}hcMap.invalidateSize();}},100);
-    }}
+      withCoords.forEach(function(h){var m=L.marker([h.lat,h.lng]).addTo(hcMap);m.bindTooltip('<strong>'+h.name+'</strong><br><small>'+h.city+', '+h.country+'</small>',{permanent:true,direction:'top',offset:[0,-12]});m.bindPopup('<strong>'+h.name+'</strong><br>'+h.city+', '+h.country+'<br>&#9733; '+h.stars);hcMarkers.push(m);bounds.push([h.lat,h.lng]);});
+      setTimeout(function(){if(bounds.length===1){hcMap.setView(bounds[0],13)}else{hcMap.fitBounds(bounds,{padding:[50,50]})}hcMap.invalidateSize();},100);
+    }
 
-    window.hcRemove=function(giataId) {{ compared=compared.filter(function(h){{return h.giataId!==giataId;}}); renderTable(); }};
-    window.hcPickHotel=function(giataId) {{
-      if(compared.length>=4) {{ alert('Maximal 4 Hotels können gleichzeitig verglichen werden.'); return; }}
-      if(compared.some(function(h){{return h.giataId===giataId;}})) {{ hideAutocomplete(); return; }}
+    window.hcRemove=function(giataId) { compared=compared.filter(function(h){return h.giataId!==giataId;}); renderTable(); };
+    window.hcPickHotel=function(giataId) {
+      if(compared.length>=4) { alert('Maximal 4 Hotels können gleichzeitig verglichen werden.'); return; }
+      if(compared.some(function(h){return h.giataId===giataId;})) { hideAutocomplete(); return; }
       fetch('/api/giata?action=property&id='+encodeURIComponent(giataId))
-        .then(function(r){{return r.json();}})
-        .then(function(hotel){{ if(hotel&&hotel.giataId){{compared.push(hotel);renderTable();}} hideAutocomplete(); if(searchInput) searchInput.value=''; }})
-        .catch(function(){{ hideAutocomplete(); if(searchInput) searchInput.value=''; }});
-    }};
-    window.hcFocusSearch=function() {{ if(searchInput) searchInput.focus(); }};
-    window.hcLoadPreset=function(ids) {{
+        .then(function(r){return r.json();})
+        .then(function(hotel){ if(hotel&&hotel.giataId){compared.push(hotel);renderTable();} hideAutocomplete(); if(searchInput) searchInput.value=''; })
+        .catch(function(){ hideAutocomplete(); if(searchInput) searchInput.value=''; });
+    };
+    window.hcFocusSearch=function() { if(searchInput) searchInput.focus(); };
+    window.hcLoadPreset=function(ids) {
       compared=[];
       if(tableEl) tableEl.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">⏳ Lade Hotels…</div>';
-      Promise.all(ids.map(function(id){{
-        return fetch('/api/giata?action=property&id='+encodeURIComponent(id)).then(function(r){{return r.json();}}).catch(function(){{return null;}});
-      }})).then(function(hotels){{ compared=hotels.filter(function(h){{return h&&h.giataId;}}); renderTable(); }});
-    }};
+      Promise.all(ids.map(function(id){
+        return fetch('/api/giata?action=property&id='+encodeURIComponent(id)).then(function(r){return r.json();}).catch(function(){return null;});
+      })).then(function(hotels){ compared=hotels.filter(function(h){return h&&h.giataId;}); renderTable(); });
+    };
 
-    document.addEventListener('DOMContentLoaded', function() {{
+    document.addEventListener('DOMContentLoaded', function() {
       tableEl=document.getElementById('hc-table');
       searchInput=document.getElementById('hc-search-input');
       autocompleteEl=document.getElementById('hc-autocomplete');
       if(!tableEl||!searchInput||!autocompleteEl) return;
       tableEl.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">⏳ Lade Hotels…</div>';
-      setTimeout(function() {{
-        if(compared.length===0) {{
-          Promise.all(DEFAULT_IDS.map(function(id){{
-            return fetch('/api/giata?action=property&id='+id).then(function(r){{return r.json();}}).catch(function(){{return null;}});
-          }})).then(function(hotels){{ compared=hotels.filter(function(h){{return h&&h.giataId;}}); renderTable(); }});
-        }}
-      }}, 700);
-      searchInput.addEventListener('input',function(){{ clearTimeout(searchTimer); var q=searchInput.value.trim(); if(q.length<2){{hideAutocomplete();return;}} searchTimer=setTimeout(function(){{searchHotels(q);}},300); }});
-      searchInput.addEventListener('blur',function(){{ setTimeout(hideAutocomplete,200); }});
-      searchInput.addEventListener('focus',function(){{ if(searchInput.value.trim().length>=2){{searchHotels(searchInput.value.trim())}} }});
-    }});
+      setTimeout(function() {
+        if(compared.length===0) {
+          Promise.all(DEFAULT_IDS.map(function(id){
+            return fetch('/api/giata?action=property&id='+id).then(function(r){return r.json();}).catch(function(){return null;});
+          })).then(function(hotels){ compared=hotels.filter(function(h){return h&&h.giataId;}); renderTable(); });
+        }
+      }, 700);
+      searchInput.addEventListener('input',function(){ clearTimeout(searchTimer); var q=searchInput.value.trim(); if(q.length<2){hideAutocomplete();return;} searchTimer=setTimeout(function(){searchHotels(q);},300); });
+      searchInput.addEventListener('blur',function(){ setTimeout(hideAutocomplete,200); });
+      searchInput.addEventListener('focus',function(){ if(searchInput.value.trim().length>=2){searchHotels(searchInput.value.trim())} });
+    });
   })();
   </script>
 <script src="/vergleiche/destinations-data.js"></script>

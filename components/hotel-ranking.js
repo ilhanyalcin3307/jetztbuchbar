@@ -9,18 +9,32 @@
 
   // ── Scoring-System – kategorisiert (L=Lage, P=Pool/Wellness, F=Verpflegung, A=Familie/Aktiv) ──
   var SCORING = {
-    // LAGE (L) – max 25
-    89:{s:20,cat:'L',l:'Strandlage'}, 301:{s:12,cat:'L',l:'Meeresnähe'}, 90:{s:8,cat:'L',l:'Zentrale Lage'},
-    91:{s:5,cat:'L',l:'Ruhige Lage'}, 291:{s:5,cat:'L',l:'Stadtzentrum'},
+    // LAGE (L) – max 35
+    89:{s:20,cat:'L',l:'Strandlage'}, 301:{s:12,cat:'L',l:'Meeresnähe'}, 374:{s:7,cat:'L',l:'Strandblick'},
+    90:{s:8,cat:'L',l:'Zentrale Lage'}, 91:{s:5,cat:'L',l:'Ruhige Lage'}, 291:{s:5,cat:'L',l:'Stadtzentrum'},
+    295:{s:6,cat:'L',l:'Seelage'}, 562:{s:5,cat:'L',l:'Jachthafen'}, 350:{s:5,cat:'L',l:'Altstadt'},
+    294:{s:4,cat:'L',l:'Golfplatznähe'}, 691:{s:4,cat:'L',l:'Kurort'},
+    354:{s:4,cat:'L',l:'Buchtblick'}, 364:{s:4,cat:'L',l:'Seeblick'},
+    349:{s:3,cat:'L',l:'Autofreie Lage'}, 293:{s:3,cat:'L',l:'Waldlage'}, 300:{s:3,cat:'L',l:'Flusslage'},
+    365:{s:3,cat:'L',l:'Bergblick'}, 348:{s:2,cat:'L',l:'Belebte Lage'},
     22:{s:1,cat:'L',l:'Parkplatz'}, 568:{s:1,cat:'L',l:'Einparkservice'},
-    // POOL & WELLNESS (P) – max 25
-    588:{s:18,cat:'P',l:'Wasserpark'}, 697:{s:14,cat:'P',l:'Infinity-Pool'}, 696:{s:14,cat:'P',l:'Rooftop-Pool'},
-    86:{s:12,cat:'P',l:'Wasserrutsche'}, 197:{s:12,cat:'P',l:'Spa'}, 479:{s:10,cat:'P',l:'Wellness-Center'},
-    192:{s:8,cat:'P',l:'Hamam'}, 195:{s:8,cat:'P',l:'Massage'}, 196:{s:6,cat:'P',l:'Sauna'},
-    660:{s:6,cat:'P',l:'Sauna'}, 43:{s:6,cat:'P',l:'Hallenbad'}, 698:{s:6,cat:'P',l:'Swim-up Bar'},
-    201:{s:5,cat:'P',l:'Whirlpool'}, 58:{s:5,cat:'P',l:'Pool'}, 50:{s:5,cat:'P',l:'Außenpool'},
+    // POOL & WELLNESS (P) – max 35
+    614:{s:18,cat:'P',l:'Privater Pool'}, 588:{s:18,cat:'P',l:'Wasserpark'}, 697:{s:14,cat:'P',l:'Infinity-Pool'},
+    696:{s:14,cat:'P',l:'Rooftop-Pool'}, 86:{s:12,cat:'P',l:'Wasserrutsche'}, 197:{s:12,cat:'P',l:'Spa'},
+    479:{s:10,cat:'P',l:'Wellness-Center'}, 822:{s:10,cat:'P',l:'Thermalbecken'},
+    529:{s:6,cat:'P',l:'Privater Wellnessbereich'}, 192:{s:8,cat:'P',l:'Hamam'}, 195:{s:8,cat:'P',l:'Massage'},
+    199:{s:6,cat:'P',l:'Thalasso'}, 869:{s:6,cat:'P',l:'Tauchbecken'},
+    196:{s:6,cat:'P',l:'Sauna'}, 660:{s:6,cat:'P',l:'Sauna'}, 43:{s:6,cat:'P',l:'Hallenbad'},
+    698:{s:6,cat:'P',l:'Swim-up Bar'}, 189:{s:5,cat:'P',l:'Ayurveda'},
+    794:{s:5,cat:'P',l:'Wasserspielbereich'}, 201:{s:5,cat:'P',l:'Whirlpool'},
+    58:{s:5,cat:'P',l:'Pool'}, 50:{s:5,cat:'P',l:'Außenpool'},
+    190:{s:4,cat:'P',l:'Beautyfarm'}, 793:{s:4,cat:'P',l:'Bali Bett'},
     59:{s:4,cat:'P',l:'Poolbar'}, 198:{s:4,cat:'P',l:'Dampfbad'}, 336:{s:4,cat:'P',l:'Strandbar'},
+    191:{s:3,cat:'P',l:'Schönheitssalon'}, 187:{s:3,cat:'P',l:'Akupunktur'},
+    909:{s:3,cat:'P',l:'Ruheraum'}, 664:{s:3,cat:'P',l:'Personal Trainer'},
+    74:{s:3,cat:'P',l:'Solarium'}, 76:{s:3,cat:'P',l:'Sonnenterrasse'},
     66:{s:3,cat:'P',l:'Zimmerservice'}, 567:{s:3,cat:'P',l:'Concierge'},
+    820:{s:2,cat:'P',l:'Gesichtsbehandlung'},
     71:{s:2,cat:'P',l:'Shuttleservice'}, 81:{s:2,cat:'P',l:'Transferservice'},
     88:{s:1,cat:'P',l:'WLAN'}, 185:{s:1,cat:'P',l:'WLAN'},
     // VERPFLEGUNG (F) – max 20
@@ -67,7 +81,15 @@
     'Casino':'🎰','Live-Musik':'🎵','Mini-Disco':'🎶',
     'Zimmerservice':'🛎️','Shuttleservice':'🚌','Transferservice':'🚐','Concierge':'🤵',
     'WLAN':'📶','Einparkservice':'🅿️','Parkplatz':'🅿️',
-    'Meeresnähe':'🌊','Zentrale Lage':'📍','Ruhige Lage':'🌿','Stadtzentrum':'🏙️',
+    'Meeresnähe':'🌊','Strandblick':'🌅','Zentrale Lage':'📍','Ruhige Lage':'🌿','Stadtzentrum':'🏙️',
+    'Seelage':'🏞️','Jachthafen':'⛵','Altstadt':'🏛️','Golfplatznähe':'⛳','Kurort':'💧',
+    'Buchtblick':'🌊','Seeblick':'🏞️','Autofreie Lage':'🚶','Waldlage':'🌲','Flusslage':'🏞️',
+    'Bergblick':'⛰️','Belebte Lage':'🏙️',
+    'Privater Pool':'🏊','Thermalbecken':'♨️','Thalasso':'💧','Tauchbecken':'🔵',
+    'Privater Wellnessbereich':'🔒','Ayurveda':'🌿','Wasserspielbereich':'💦',
+    'Beautyfarm':'💅','Bali Bett':'🛏️','Schönheitssalon':'💇','Akupunktur':'🪡',
+    'Ruheraum':'😌','Personal Trainer':'💪','Solarium':'☀️','Sonnenterrasse':'🌞',
+    'Gesichtsbehandlung':'✨',
     'Für Flitterwochen':'💍','Konferenzeinrichtungen':'🏛️',
     'Adults Only':'🔞','Familienfreundlich':'👨‍👩‍👧','Für Paare':'❤️'
   };
@@ -76,7 +98,8 @@
     return { id: Number(id), s: SCORING[id].s, l: SCORING[id].l, cat: SCORING[id].cat };
   }).sort(function (a, b) { return b.s - a.s; });
 
-  var CAT_CAP = { L: 25, P: 25, F: 20, A: 15 };
+  // Kategorien-Caps: L≤35, P≤35, F≤20, A≤15, Stars≤15 → Gesamt max ~120
+  var CAT_CAP = { L: 35, P: 35, F: 20, A: 15 };
 
   // ── Scoring helpers ────────────────────────────────────────────────────
   function calcScore(h) {

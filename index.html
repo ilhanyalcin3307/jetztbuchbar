@@ -1730,95 +1730,119 @@
 
     // ── Unser Fazit ──
 
-    // ── Granulares Bewertungssystem (factDefId → {score, label}) ──
+    // ── Bewertungssystem (identisch mit hotel-ranking.js) ──
+    // Kategorien: L=Lage(max35) P=Pool/Wellness(max35) F=Verpflegung(max20) A=Familie/Aktivitäten(max15) Stars(max15) → Gesamt max ~120 → normalisiert auf 0-100
     var SCORING = {
-      // STRAND & MEER
-      89:  { s: 5, l: 'Strandlage' },
-      336: { s: 2, l: 'Strandbar' },
-      439: { s: 1, l: 'Strandkorb' },
-      // POOL
-      697: { s: 4, l: 'Infinity-Pool' },
-      696: { s: 4, l: 'Rooftop-Pool' },
-      698: { s: 3, l: 'Swim-up Bar' },
-      86:  { s: 3, l: 'Wasserrutsche' },
-      588: { s: 4, l: 'Wasserpark' },
-      43:  { s: 3, l: 'Hallenbad' },
-      50:  { s: 2, l: 'Außenpool' },
-      58:  { s: 2, l: 'Pool' },
-      59:  { s: 2, l: 'Poolbar' },
-      // SPA & WELLNESS
-      197: { s: 4, l: 'Spa' },
-      479: { s: 3, l: 'Wellness-Center' },
-      195: { s: 3, l: 'Massage' },
-      196: { s: 3, l: 'Sauna' },
-      192: { s: 3, l: 'Hamam' },
-      198: { s: 2, l: 'Dampfbad' },
-      660: { s: 2, l: 'Sauna' },
-      201: { s: 2, l: 'Whirlpool' },
-      // VERPFLEGUNG
-      94:  { s: 5, l: 'All Inclusive Plus' },
-      92:  { s: 4, l: 'All Inclusive' },
-      101: { s: 3, l: 'Vollpension' },
-      103: { s: 2, l: 'Halbpension' },
-      65:  { s: 2, l: 'Restaurant' },
-      299: { s: 2, l: 'Restaurant' },
-      14:  { s: 2, l: 'Bar' },
-      288: { s: 2, l: 'Bar/Pub' },
-      450: { s: 2, l: 'Lobbybar' },
-      575: { s: 2, l: 'Bar/Lounge' },
-      20:  { s: 1, l: 'Café' },
-      73:  { s: 1, l: 'Snackbar' },
-      // KINDER
-      945: { s: 4, l: 'Kids Club' },
-      946: { s: 3, l: 'Teens Club' },
-      1:   { s: 3, l: 'Kinderbetreuung' },
-      7:   { s: 3, l: 'Miniclub' },
-      707: { s: 3, l: 'Kinder kostenlos' },
-      4:   { s: 2, l: 'Kinderprogramm' },
-      26:  { s: 2, l: 'Kinderpool' },
-      56:  { s: 2, l: 'Spielplatz' },
-      57:  { s: 2, l: 'Spielzimmer' },
-      // SPORT & AKTIVITÄT
-      219: { s: 3, l: 'Golf' },
-      236: { s: 3, l: 'Tauchen' },
-      593: { s: 3, l: 'Tennisplatz' },
-      220: { s: 2, l: 'Fitness-Studio' },
-      209: { s: 2, l: 'Beach-Volleyball' },
-      240: { s: 2, l: 'Schnorcheln' },
-      247: { s: 2, l: 'Wasserski' },
-      249: { s: 2, l: 'Windsurfen' },
-      245: { s: 2, l: 'Tennis' },
-      244: { s: 1, l: 'Tischtennis' },
-      250: { s: 1, l: 'Yoga' },
-      211: { s: 1, l: 'Billard' },
-      // UNTERHALTUNG
-      2:   { s: 2, l: 'Animationsprogramm' },
-      3:   { s: 2, l: 'Abendunterhaltung' },
-      31:  { s: 2, l: 'Disco' },
-      49:  { s: 2, l: 'Nachtclub' },
-      24:  { s: 2, l: 'Casino' },
-      5:   { s: 1, l: 'Live-Musik' },
-      6:   { s: 1, l: 'Mini-Disco' },
-      // SERVICE
-      66:  { s: 2, l: 'Zimmerservice' },
-      71:  { s: 2, l: 'Shuttleservice' },
-      81:  { s: 2, l: 'Transferservice' },
-      567: { s: 2, l: 'Concierge' },
-      88:  { s: 1, l: 'WLAN' },
-      185: { s: 1, l: 'WLAN' },
-      568: { s: 1, l: 'Einparkservice' },
-      22:  { s: 1, l: 'Parkplatz' },
-      // LAGE
-      301: { s: 3, l: 'Meeresnähe' },
-      90:  { s: 2, l: 'Zentrale Lage' },
-      91:  { s: 2, l: 'Ruhige Lage' },
-      291: { s: 1, l: 'Stadtzentrum' },
-      // ZIELGRUPPE
-      393: { s: 3, l: 'Für Flitterwochen' },
-      401: { s: 3, l: 'Konferenzeinrichtungen' },
-      385: { s: 2, l: 'Adults Only' },
-      389: { s: 2, l: 'Familienfreundlich' },
-      781: { s: 2, l: 'Für Paare' }
+      // LAGE (L) – max 35
+      89:  { s: 20, l: 'Strandlage',              cat: 'L' },
+      301: { s: 12, l: 'Meeresnähe',              cat: 'L' },
+      374: { s:  7, l: 'Strandblick',             cat: 'L' },
+      90:  { s:  8, l: 'Zentrale Lage',           cat: 'L' },
+      91:  { s:  5, l: 'Ruhige Lage',             cat: 'L' },
+      291: { s:  5, l: 'Stadtzentrum',            cat: 'L' },
+      295: { s:  6, l: 'Seelage',                 cat: 'L' },
+      562: { s:  5, l: 'Jachthafen',              cat: 'L' },
+      350: { s:  5, l: 'Altstadt',                cat: 'L' },
+      294: { s:  4, l: 'Golfplatznähe',           cat: 'L' },
+      691: { s:  4, l: 'Kurort',                  cat: 'L' },
+      354: { s:  4, l: 'Buchtblick',              cat: 'L' },
+      364: { s:  4, l: 'Seeblick',                cat: 'L' },
+      349: { s:  3, l: 'Autofreie Lage',          cat: 'L' },
+      293: { s:  3, l: 'Waldlage',                cat: 'L' },
+      300: { s:  3, l: 'Flusslage',               cat: 'L' },
+      365: { s:  3, l: 'Bergblick',               cat: 'L' },
+      348: { s:  2, l: 'Belebte Lage',            cat: 'L' },
+      22:  { s:  1, l: 'Parkplatz',               cat: 'L' },
+      568: { s:  1, l: 'Einparkservice',          cat: 'L' },
+      // POOL & WELLNESS (P) – max 35
+      614: { s: 18, l: 'Privater Pool',           cat: 'P' },
+      588: { s: 18, l: 'Wasserpark',              cat: 'P' },
+      697: { s: 14, l: 'Infinity-Pool',           cat: 'P' },
+      696: { s: 14, l: 'Rooftop-Pool',            cat: 'P' },
+      86:  { s: 12, l: 'Wasserrutsche',           cat: 'P' },
+      197: { s: 12, l: 'Spa',                     cat: 'P' },
+      479: { s: 10, l: 'Wellness-Center',         cat: 'P' },
+      822: { s: 10, l: 'Thermalbecken',           cat: 'P' },
+      529: { s:  6, l: 'Privater Wellnessbereich',cat: 'P' },
+      192: { s:  8, l: 'Hamam',                   cat: 'P' },
+      195: { s:  8, l: 'Massage',                 cat: 'P' },
+      199: { s:  6, l: 'Thalasso',                cat: 'P' },
+      869: { s:  6, l: 'Tauchbecken',             cat: 'P' },
+      196: { s:  6, l: 'Sauna',                   cat: 'P' },
+      660: { s:  6, l: 'Sauna',                   cat: 'P' },
+      43:  { s:  6, l: 'Hallenbad',               cat: 'P' },
+      698: { s:  6, l: 'Swim-up Bar',             cat: 'P' },
+      189: { s:  5, l: 'Ayurveda',                cat: 'P' },
+      794: { s:  5, l: 'Wasserspielbereich',      cat: 'P' },
+      201: { s:  5, l: 'Whirlpool',               cat: 'P' },
+      58:  { s:  5, l: 'Pool',                    cat: 'P' },
+      50:  { s:  5, l: 'Außenpool',               cat: 'P' },
+      190: { s:  4, l: 'Beautyfarm',              cat: 'P' },
+      793: { s:  4, l: 'Bali Bett',               cat: 'P' },
+      59:  { s:  4, l: 'Poolbar',                 cat: 'P' },
+      198: { s:  4, l: 'Dampfbad',                cat: 'P' },
+      336: { s:  4, l: 'Strandbar',               cat: 'P' },
+      191: { s:  3, l: 'Schönheitssalon',         cat: 'P' },
+      187: { s:  3, l: 'Akupunktur',              cat: 'P' },
+      909: { s:  3, l: 'Ruheraum',                cat: 'P' },
+      664: { s:  3, l: 'Personal Trainer',        cat: 'P' },
+      74:  { s:  3, l: 'Solarium',                cat: 'P' },
+      76:  { s:  3, l: 'Sonnenterrasse',          cat: 'P' },
+      66:  { s:  3, l: 'Zimmerservice',           cat: 'P' },
+      567: { s:  3, l: 'Concierge',               cat: 'P' },
+      820: { s:  2, l: 'Gesichtsbehandlung',      cat: 'P' },
+      71:  { s:  2, l: 'Shuttleservice',          cat: 'P' },
+      81:  { s:  2, l: 'Transferservice',         cat: 'P' },
+      88:  { s:  1, l: 'WLAN',                    cat: 'P' },
+      185: { s:  1, l: 'WLAN',                    cat: 'P' },
+      // VERPFLEGUNG (F) – max 20
+      94:  { s: 20, l: 'All Inclusive Plus',      cat: 'F' },
+      92:  { s: 16, l: 'All Inclusive',           cat: 'F' },
+      101: { s: 12, l: 'Vollpension',             cat: 'F' },
+      103: { s:  8, l: 'Halbpension',             cat: 'F' },
+      65:  { s:  5, l: 'Restaurant',              cat: 'F' },
+      299: { s:  5, l: 'Restaurant',              cat: 'F' },
+      14:  { s:  3, l: 'Bar',                     cat: 'F' },
+      288: { s:  3, l: 'Bar/Pub',                 cat: 'F' },
+      450: { s:  3, l: 'Lobbybar',                cat: 'F' },
+      575: { s:  3, l: 'Bar/Lounge',              cat: 'F' },
+      20:  { s:  2, l: 'Café',                    cat: 'F' },
+      73:  { s:  2, l: 'Snackbar',                cat: 'F' },
+      439: { s:  1, l: 'Strandkorb',              cat: 'F' },
+      // FAMILIE & AKTIVITÄTEN (A) – max 15
+      945: { s: 12, l: 'Kids Club',               cat: 'A' },
+      219: { s: 10, l: 'Golf',                    cat: 'A' },
+      236: { s: 10, l: 'Tauchen',                 cat: 'A' },
+      946: { s:  8, l: 'Teens Club',              cat: 'A' },
+      1:   { s:  8, l: 'Kinderbetreuung',         cat: 'A' },
+      7:   { s:  8, l: 'Miniclub',                cat: 'A' },
+      393: { s:  7, l: 'Für Flitterwochen',       cat: 'A' },
+      593: { s:  7, l: 'Tennisplatz',             cat: 'A' },
+      707: { s:  6, l: 'Kinder kostenlos',        cat: 'A' },
+      220: { s:  6, l: 'Fitness-Studio',          cat: 'A' },
+      4:   { s:  5, l: 'Kinderprogramm',          cat: 'A' },
+      26:  { s:  5, l: 'Kinderpool',              cat: 'A' },
+      240: { s:  5, l: 'Schnorcheln',             cat: 'A' },
+      249: { s:  5, l: 'Windsurfen',              cat: 'A' },
+      247: { s:  5, l: 'Wasserski',               cat: 'A' },
+      2:   { s:  5, l: 'Animationsprogramm',      cat: 'A' },
+      389: { s:  4, l: 'Familienfreundlich',      cat: 'A' },
+      781: { s:  4, l: 'Für Paare',               cat: 'A' },
+      385: { s:  4, l: 'Adults Only',             cat: 'A' },
+      245: { s:  4, l: 'Tennis',                  cat: 'A' },
+      250: { s:  3, l: 'Yoga',                    cat: 'A' },
+      209: { s:  3, l: 'Beach-Volleyball',        cat: 'A' },
+      401: { s:  3, l: 'Konferenzeinrichtungen',  cat: 'A' },
+      3:   { s:  3, l: 'Abendunterhaltung',       cat: 'A' },
+      31:  { s:  3, l: 'Disco',                   cat: 'A' },
+      56:  { s:  2, l: 'Spielplatz',              cat: 'A' },
+      57:  { s:  2, l: 'Spielzimmer',             cat: 'A' },
+      244: { s:  2, l: 'Tischtennis',             cat: 'A' },
+      211: { s:  2, l: 'Billard',                 cat: 'A' },
+      49:  { s:  2, l: 'Nachtclub',               cat: 'A' },
+      24:  { s:  2, l: 'Casino',                  cat: 'A' },
+      5:   { s:  1, l: 'Live-Musik',              cat: 'A' },
+      6:   { s:  1, l: 'Mini-Disco',              cat: 'A' }
     };
 
     // Icon-Map: label → emoji
@@ -1889,9 +1913,38 @@
       'Einparkservice':       '🅿️',
       'Parkplatz':            '🅿️',
       'Meeresnähe':           '🌊',
+      'Strandblick':          '🌅',
       'Zentrale Lage':        '📍',
       'Ruhige Lage':          '🌿',
       'Stadtzentrum':         '🏙️',
+      'Seelage':              '🏞️',
+      'Jachthafen':           '⛵',
+      'Altstadt':             '🏛️',
+      'Golfplatznähe':        '⛳',
+      'Kurort':               '💧',
+      'Buchtblick':           '🌊',
+      'Seeblick':             '🏞️',
+      'Autofreie Lage':       '🚶',
+      'Waldlage':             '🌲',
+      'Flusslage':            '🏞️',
+      'Bergblick':            '⛰️',
+      'Belebte Lage':         '🏙️',
+      'Privater Pool':        '🏊',
+      'Thermalbecken':        '♨️',
+      'Thalasso':             '💧',
+      'Tauchbecken':          '🔵',
+      'Privater Wellnessbereich': '🔒',
+      'Ayurveda':             '🌿',
+      'Wasserspielbereich':   '💦',
+      'Beautyfarm':           '💅',
+      'Bali Bett':            '🛏️',
+      'Schönheitssalon':      '💇',
+      'Akupunktur':           '🪡',
+      'Ruheraum':             '😌',
+      'Personal Trainer':     '💪',
+      'Solarium':             '☀️',
+      'Sonnenterrasse':       '🌞',
+      'Gesichtsbehandlung':   '✨',
       'Für Flitterwochen':    '💍',
       'Konferenzeinrichtungen':'🏛️',
       'Adults Only':          '🔞',
@@ -1901,20 +1954,27 @@
 
     // Sorted SCORING entries (score desc) – cached once
     var SCORING_SORTED = Object.keys(SCORING).map(function(id) {
-      return { id: Number(id), s: SCORING[id].s, l: SCORING[id].l };
+      return { id: Number(id), s: SCORING[id].s, l: SCORING[id].l, cat: SCORING[id].cat };
     }).sort(function(a, b) { return b.s - a.s; });
 
+    var CAT_CAP = { L: 35, P: 35, F: 20, A: 15 };
+
     function calcScore(h) {
-      var total = 0;
       var st = h.stars || 0;
-      if (st >= 5) total += 10; else if (st >= 4) total += 6; else if (st >= 3) total += 3;
-      var ids = h.factIds || [];
+      var stars = st >= 5 ? 15 : st >= 4 ? 12 : st >= 3 ? 8 : st >= 2 ? 4 : st >= 1 ? 1 : 0;
+      var cats = { L: 0, P: 0, F: 0, A: 0 };
       var idSet = {};
-      ids.forEach(function(id) { idSet[id] = true; });
+      (h.factIds || []).forEach(function(id) { idSet[id] = true; });
       for (var i = 0; i < SCORING_SORTED.length; i++) {
-        if (idSet[SCORING_SORTED[i].id]) total += SCORING_SORTED[i].s;
+        var e = SCORING_SORTED[i];
+        if (idSet[e.id]) cats[e.cat] = (cats[e.cat] || 0) + e.s;
       }
-      return total;
+      var raw = stars
+        + Math.min(cats.L, CAT_CAP.L)
+        + Math.min(cats.P, CAT_CAP.P)
+        + Math.min(cats.F, CAT_CAP.F)
+        + Math.min(cats.A, CAT_CAP.A);
+      return Math.round(raw / 120 * 100);
     }
 
     // Returns top N scoring features (deduplicated by label) for a hotel

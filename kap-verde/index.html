@@ -80,10 +80,15 @@
   .stat-card:nth-child(2) { border-left-color: #f59e0b; background: linear-gradient(135deg, rgba(245,158,11,0.08) 0%, var(--bg-card) 65%); }
   .stat-card:nth-child(3) { border-left-color: #a78bfa; background: linear-gradient(135deg, rgba(167,139,250,0.08) 0%, var(--bg-card) 65%); }
   .stat-card:nth-child(4) { border-left-color: #38bdf8; background: linear-gradient(135deg, rgba(56,189,248,0.08) 0%, var(--bg-card) 65%); }
+  .stat-card:nth-child(5) { border-left-color: #fb923c; background: linear-gradient(135deg, rgba(251,146,60,0.08) 0%, var(--bg-card) 65%); }
+  .stat-card:nth-child(6) { border-left-color: #34d399; background: linear-gradient(135deg, rgba(52,211,153,0.08) 0%, var(--bg-card) 65%); }
+  .stat-card:nth-child(7) { border-left-color: #f472b6; background: linear-gradient(135deg, rgba(244,114,182,0.08) 0%, var(--bg-card) 65%); }
+  .stat-card:nth-child(8) { border-left-color: #6b7280; background: linear-gradient(135deg, rgba(107,114,128,0.06) 0%, var(--bg-card) 65%); }
   .stat-icon { font-size: 1.5rem; flex-shrink: 0; }
   .stat-info { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
   .stat-label { font-size: 0.67rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
   .stat-value { font-size: 0.97rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .stat-sub { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 0.05rem; }
 
   /* Map */
   .map-wrapper { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); margin-top: 1.5rem; position: relative; }
@@ -282,7 +287,55 @@
         <span class="stat-label">Einwohner</span>
         <span class="stat-value">0.5 Mio.</span>
       </div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">🔌</span>
+      <div class="stat-info">
+        <span class="stat-label">Steckdose</span>
+        <span class="stat-value">Typ C/F · 220V/50Hz</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">💸</span>
+      <div class="stat-info">
+        <span class="stat-label">Trinkgeld</span>
+        <span class="stat-value">5–10 %</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">📅</span>
+      <div class="stat-info">
+        <span class="stat-label">Beste Reisezeit</span>
+        <span class="stat-value">November–Juli</span>
+      </div>
+    </div>
+    <div class="stat-card" id="kpi-travel-warning">
+      <span class="stat-icon" id="kpi-tw-icon">🛡️</span>
+      <div class="stat-info">
+        <span class="stat-label">Auswärt. Amt</span>
+        <span class="stat-value" id="kpi-tw-text">Prüfe …</span>
+      </div>
     </div></div>
+<script>
+(function(){
+  fetch('/api/travel-warning?country=CV')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var card=document.getElementById('kpi-travel-warning');
+      var icon=document.getElementById('kpi-tw-icon');
+      var text=document.getElementById('kpi-tw-text');
+      if(!card)return;
+      text.textContent=d.text;
+      icon.textContent=d.icon;
+      card.style.borderLeftColor=d.color;
+      card.style.background='linear-gradient(135deg,'+d.bg+' 0%,var(--bg-card) 65%)';
+    })
+    .catch(function(){
+      var text=document.getElementById('kpi-tw-text');
+      if(text)text.textContent='Nicht verfügbar';
+    });
+})();
+</script>
       </div>
     </div>
 

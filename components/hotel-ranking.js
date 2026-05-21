@@ -7,34 +7,45 @@
 (function () {
   'use strict';
 
-  // ── Scoring-System (identisch mit index.html) ────────────────────────────────
+  // ── Scoring-System – kategorisiert (L=Lage, P=Pool/Wellness, F=Verpflegung, A=Familie/Aktiv) ──
   var SCORING = {
-    89:{s:5,l:'Strandlage'}, 336:{s:2,l:'Strandbar'}, 439:{s:1,l:'Strandkorb'},
-    697:{s:4,l:'Infinity-Pool'}, 696:{s:4,l:'Rooftop-Pool'}, 698:{s:3,l:'Swim-up Bar'},
-    86:{s:3,l:'Wasserrutsche'}, 588:{s:4,l:'Wasserpark'}, 43:{s:3,l:'Hallenbad'},
-    50:{s:2,l:'Außenpool'}, 58:{s:2,l:'Pool'}, 59:{s:2,l:'Poolbar'},
-    197:{s:4,l:'Spa'}, 479:{s:3,l:'Wellness-Center'}, 195:{s:3,l:'Massage'},
-    196:{s:3,l:'Sauna'}, 192:{s:3,l:'Hamam'}, 198:{s:2,l:'Dampfbad'},
-    660:{s:2,l:'Sauna'}, 201:{s:2,l:'Whirlpool'},
-    94:{s:5,l:'All Inclusive Plus'}, 92:{s:4,l:'All Inclusive'}, 101:{s:3,l:'Vollpension'},
-    103:{s:2,l:'Halbpension'}, 65:{s:2,l:'Restaurant'}, 299:{s:2,l:'Restaurant'},
-    14:{s:2,l:'Bar'}, 288:{s:2,l:'Bar/Pub'}, 450:{s:2,l:'Lobbybar'}, 575:{s:2,l:'Bar/Lounge'},
-    20:{s:1,l:'Café'}, 73:{s:1,l:'Snackbar'},
-    945:{s:4,l:'Kids Club'}, 946:{s:3,l:'Teens Club'}, 1:{s:3,l:'Kinderbetreuung'},
-    7:{s:3,l:'Miniclub'}, 707:{s:3,l:'Kinder kostenlos'}, 4:{s:2,l:'Kinderprogramm'},
-    26:{s:2,l:'Kinderpool'}, 56:{s:2,l:'Spielplatz'}, 57:{s:2,l:'Spielzimmer'},
-    219:{s:3,l:'Golf'}, 236:{s:3,l:'Tauchen'}, 593:{s:3,l:'Tennisplatz'},
-    220:{s:2,l:'Fitness-Studio'}, 209:{s:2,l:'Beach-Volleyball'}, 240:{s:2,l:'Schnorcheln'},
-    247:{s:2,l:'Wasserski'}, 249:{s:2,l:'Windsurfen'}, 245:{s:2,l:'Tennis'},
-    244:{s:1,l:'Tischtennis'}, 250:{s:1,l:'Yoga'}, 211:{s:1,l:'Billard'},
-    2:{s:2,l:'Animationsprogramm'}, 3:{s:2,l:'Abendunterhaltung'}, 31:{s:2,l:'Disco'},
-    49:{s:2,l:'Nachtclub'}, 24:{s:2,l:'Casino'}, 5:{s:1,l:'Live-Musik'}, 6:{s:1,l:'Mini-Disco'},
-    66:{s:2,l:'Zimmerservice'}, 71:{s:2,l:'Shuttleservice'}, 81:{s:2,l:'Transferservice'},
-    567:{s:2,l:'Concierge'}, 88:{s:1,l:'WLAN'}, 185:{s:1,l:'WLAN'},
-    568:{s:1,l:'Einparkservice'}, 22:{s:1,l:'Parkplatz'},
-    301:{s:3,l:'Meeresnähe'}, 90:{s:2,l:'Zentrale Lage'}, 91:{s:2,l:'Ruhige Lage'}, 291:{s:1,l:'Stadtzentrum'},
-    393:{s:3,l:'Für Flitterwochen'}, 401:{s:3,l:'Konferenzeinrichtungen'},
-    385:{s:2,l:'Adults Only'}, 389:{s:2,l:'Familienfreundlich'}, 781:{s:2,l:'Für Paare'}
+    // LAGE (L) – max 25
+    89:{s:20,cat:'L',l:'Strandlage'}, 301:{s:12,cat:'L',l:'Meeresnähe'}, 90:{s:8,cat:'L',l:'Zentrale Lage'},
+    91:{s:5,cat:'L',l:'Ruhige Lage'}, 291:{s:5,cat:'L',l:'Stadtzentrum'},
+    22:{s:1,cat:'L',l:'Parkplatz'}, 568:{s:1,cat:'L',l:'Einparkservice'},
+    // POOL & WELLNESS (P) – max 25
+    588:{s:18,cat:'P',l:'Wasserpark'}, 697:{s:14,cat:'P',l:'Infinity-Pool'}, 696:{s:14,cat:'P',l:'Rooftop-Pool'},
+    86:{s:12,cat:'P',l:'Wasserrutsche'}, 197:{s:12,cat:'P',l:'Spa'}, 479:{s:10,cat:'P',l:'Wellness-Center'},
+    192:{s:8,cat:'P',l:'Hamam'}, 195:{s:8,cat:'P',l:'Massage'}, 196:{s:6,cat:'P',l:'Sauna'},
+    660:{s:6,cat:'P',l:'Sauna'}, 43:{s:6,cat:'P',l:'Hallenbad'}, 698:{s:6,cat:'P',l:'Swim-up Bar'},
+    201:{s:5,cat:'P',l:'Whirlpool'}, 58:{s:5,cat:'P',l:'Pool'}, 50:{s:5,cat:'P',l:'Außenpool'},
+    59:{s:4,cat:'P',l:'Poolbar'}, 198:{s:4,cat:'P',l:'Dampfbad'}, 336:{s:4,cat:'P',l:'Strandbar'},
+    66:{s:3,cat:'P',l:'Zimmerservice'}, 567:{s:3,cat:'P',l:'Concierge'},
+    71:{s:2,cat:'P',l:'Shuttleservice'}, 81:{s:2,cat:'P',l:'Transferservice'},
+    88:{s:1,cat:'P',l:'WLAN'}, 185:{s:1,cat:'P',l:'WLAN'},
+    // VERPFLEGUNG (F) – max 20
+    94:{s:20,cat:'F',l:'All Inclusive Plus'}, 92:{s:16,cat:'F',l:'All Inclusive'},
+    101:{s:12,cat:'F',l:'Vollpension'}, 103:{s:8,cat:'F',l:'Halbpension'},
+    65:{s:5,cat:'F',l:'Restaurant'}, 299:{s:5,cat:'F',l:'Restaurant'},
+    14:{s:3,cat:'F',l:'Bar'}, 288:{s:3,cat:'F',l:'Bar/Pub'}, 450:{s:3,cat:'F',l:'Lobbybar'},
+    575:{s:3,cat:'F',l:'Bar/Lounge'}, 20:{s:2,cat:'F',l:'Café'}, 73:{s:2,cat:'F',l:'Snackbar'},
+    439:{s:1,cat:'F',l:'Strandkorb'},
+    // FAMILIE & AKTIVITÄTEN (A) – max 15
+    945:{s:12,cat:'A',l:'Kids Club'}, 219:{s:10,cat:'A',l:'Golf'}, 236:{s:10,cat:'A',l:'Tauchen'},
+    946:{s:8,cat:'A',l:'Teens Club'}, 1:{s:8,cat:'A',l:'Kinderbetreuung'}, 7:{s:8,cat:'A',l:'Miniclub'},
+    393:{s:7,cat:'A',l:'Für Flitterwochen'}, 593:{s:7,cat:'A',l:'Tennisplatz'},
+    707:{s:6,cat:'A',l:'Kinder kostenlos'}, 220:{s:6,cat:'A',l:'Fitness-Studio'},
+    4:{s:5,cat:'A',l:'Kinderprogramm'}, 26:{s:5,cat:'A',l:'Kinderpool'},
+    240:{s:5,cat:'A',l:'Schnorcheln'}, 249:{s:5,cat:'A',l:'Windsurfen'},
+    247:{s:5,cat:'A',l:'Wasserski'}, 2:{s:5,cat:'A',l:'Animationsprogramm'},
+    389:{s:4,cat:'A',l:'Familienfreundlich'}, 781:{s:4,cat:'A',l:'Für Paare'},
+    385:{s:4,cat:'A',l:'Adults Only'}, 245:{s:4,cat:'A',l:'Tennis'},
+    250:{s:3,cat:'A',l:'Yoga'}, 209:{s:3,cat:'A',l:'Beach-Volleyball'},
+    401:{s:3,cat:'A',l:'Konferenzeinrichtungen'}, 3:{s:3,cat:'A',l:'Abendunterhaltung'},
+    31:{s:3,cat:'A',l:'Disco'}, 56:{s:2,cat:'A',l:'Spielplatz'}, 57:{s:2,cat:'A',l:'Spielzimmer'},
+    244:{s:2,cat:'A',l:'Tischtennis'}, 211:{s:2,cat:'A',l:'Billard'},
+    49:{s:2,cat:'A',l:'Nachtclub'}, 24:{s:2,cat:'A',l:'Casino'},
+    5:{s:1,cat:'A',l:'Live-Musik'}, 6:{s:1,cat:'A',l:'Mini-Disco'}
   };
 
   var FEAT_ICONS = {
@@ -187,7 +198,6 @@
         + '<span class="hr-score-label" style="color:' + lbl.color + '">' + h._score + ' <span style="font-weight:500;font-size:.72rem;opacity:.85">' + lbl.text + '</span></span>'
         + '</div>'
         + '</div></div>';
-    });
     });
 
     html += '</div>';

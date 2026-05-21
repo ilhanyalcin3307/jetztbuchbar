@@ -55,6 +55,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.jetztbuchbar.de/deutschland/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.jetztbuchbar.de/deutschland/bodensee/</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -463,6 +469,12 @@
 
   <!-- ── THEMEN ── -->
   <url>
+    <loc>https://www.jetztbuchbar.de/themen/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.jetztbuchbar.de/themen/all-inclusive/</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -495,6 +507,12 @@
 
   <!-- ── TIPPS ── -->
   <url>
+    <loc>https://www.jetztbuchbar.de/tipps/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.jetztbuchbar.de/tipps/guenstig-fliegen/</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -520,6 +538,12 @@
   </url>
 
   <!-- ── VERGLEICHE ── -->
+  <url>
+    <loc>https://www.jetztbuchbar.de/vergleiche/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://www.jetztbuchbar.de/vergleiche/dubai-vs-abu-dhabi/</loc>
     <lastmod>2026-05-20</lastmod>

@@ -272,6 +272,7 @@
       <div class="stat-info">
         <span class="stat-label">Währung</span>
         <span class="stat-value">Türk. Lira (₺)</span>
+        <span class="stat-sub" id="kpi-currency-rate">Kurs wird geladen …</span>
       </div>
     </div>
     <div class="stat-card">
@@ -333,6 +334,19 @@
     .catch(function(){
       var text=document.getElementById('kpi-tw-text');
       if(text)text.textContent='Nicht verfügbar';
+    });
+})();
+(function(){
+  fetch('/api/currency?currency=TRY')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var el=document.getElementById('kpi-currency-rate');
+      if(el&&d.text)el.textContent=d.text;
+      else if(el)el.style.display='none';
+    })
+    .catch(function(){
+      var el=document.getElementById('kpi-currency-rate');
+      if(el)el.style.display='none';
     });
 })();
 </script>

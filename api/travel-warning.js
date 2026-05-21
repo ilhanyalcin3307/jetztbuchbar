@@ -79,7 +79,7 @@ module.exports = async (req, res) => {
     } else {
       level = 0;
       icon = '🟢';
-      text = 'Kein Hinweis';
+      text = 'Keine Reisewarnung';
       color = '#00c896';
       bg = 'rgba(0,200,150,0.08)';
     }

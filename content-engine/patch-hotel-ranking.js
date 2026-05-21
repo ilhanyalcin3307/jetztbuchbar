@@ -70,11 +70,12 @@ function calcScore(h) {
       cats[e.cat] = (cats[e.cat] || 0) + e.s;
     }
   }
-  return stars
+  var raw = stars
     + Math.min(cats.L, CAT_CAP.L)
     + Math.min(cats.P, CAT_CAP.P)
     + Math.min(cats.F, CAT_CAP.F)
     + Math.min(cats.A, CAT_CAP.A);
+  return Math.round(raw / 120 * 100);
 }
 
 // Normalisierung für unscharfen Stadtnamens-Vergleich

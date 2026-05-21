@@ -16,30 +16,53 @@ const ROOT       = path.join(__dirname, '..');
 const INDEX_FILE = path.join(ROOT, 'api', 'giata-search-index.json');
 
 // ── Scoring-Tabelle (identisch mit components/hotel-ranking.js) ──────────────
+// Kategorien: L=Lage(max25) P=Pool/Wellness(max25) F=Verpflegung(max20) A=Familie/Aktivitäten(max15) Stars(max15) → Gesamt max 100
 const SCORING = {
-  89:5, 336:2, 439:1,
-  697:4, 696:4, 698:3, 86:3, 588:4, 43:3, 50:2, 58:2, 59:2,
-  197:4, 479:3, 195:3, 196:3, 192:3, 198:2, 660:2, 201:2,
-  94:5, 92:4, 101:3, 103:2, 65:2, 299:2,
-  14:2, 288:2, 450:2, 575:2, 20:1, 73:1,
-  945:4, 946:3, 1:3, 7:3, 707:3, 4:2, 26:2, 56:2, 57:2,
-  219:3, 236:3, 593:3, 220:2, 209:2, 240:2, 247:2, 249:2, 245:2, 244:1, 250:1, 211:1,
-  2:2, 3:2, 31:2, 49:2, 24:2, 5:1, 6:1,
-  66:2, 71:2, 81:2, 567:2, 88:1, 185:1, 568:1, 22:1,
-  301:3, 90:2, 91:2, 291:1,
-  393:3, 401:3, 385:2, 389:2, 781:2
+  // LAGE (L) – max 25
+  89:{s:20,cat:'L'}, 301:{s:12,cat:'L'}, 90:{s:8,cat:'L'}, 91:{s:5,cat:'L'}, 291:{s:5,cat:'L'},
+  22:{s:1,cat:'L'}, 568:{s:1,cat:'L'},
+  // POOL & WELLNESS (P) – max 25
+  588:{s:18,cat:'P'}, 697:{s:14,cat:'P'}, 696:{s:14,cat:'P'}, 86:{s:12,cat:'P'},
+  197:{s:12,cat:'P'}, 479:{s:10,cat:'P'}, 192:{s:8,cat:'P'}, 195:{s:8,cat:'P'},
+  196:{s:6,cat:'P'}, 660:{s:6,cat:'P'}, 43:{s:6,cat:'P'}, 698:{s:6,cat:'P'},
+  201:{s:5,cat:'P'}, 58:{s:5,cat:'P'}, 50:{s:5,cat:'P'}, 59:{s:4,cat:'P'},
+  198:{s:4,cat:'P'}, 336:{s:4,cat:'P'}, 66:{s:3,cat:'P'}, 567:{s:3,cat:'P'},
+  71:{s:2,cat:'P'}, 81:{s:2,cat:'P'}, 88:{s:1,cat:'P'}, 185:{s:1,cat:'P'},
+  // VERPFLEGUNG (F) – max 20
+  94:{s:20,cat:'F'}, 92:{s:16,cat:'F'}, 101:{s:12,cat:'F'}, 103:{s:8,cat:'F'},
+  65:{s:5,cat:'F'}, 299:{s:5,cat:'F'}, 14:{s:3,cat:'F'}, 288:{s:3,cat:'F'},
+  450:{s:3,cat:'F'}, 575:{s:3,cat:'F'}, 20:{s:2,cat:'F'}, 73:{s:2,cat:'F'}, 439:{s:1,cat:'F'},
+  // FAMILIE & AKTIVITÄTEN (A) – max 15
+  945:{s:12,cat:'A'}, 219:{s:10,cat:'A'}, 236:{s:10,cat:'A'}, 946:{s:8,cat:'A'},
+  1:{s:8,cat:'A'}, 7:{s:8,cat:'A'}, 393:{s:7,cat:'A'}, 593:{s:7,cat:'A'},
+  707:{s:6,cat:'A'}, 220:{s:6,cat:'A'}, 4:{s:5,cat:'A'}, 26:{s:5,cat:'A'},
+  240:{s:5,cat:'A'}, 249:{s:5,cat:'A'}, 247:{s:5,cat:'A'}, 2:{s:5,cat:'A'},
+  389:{s:4,cat:'A'}, 781:{s:4,cat:'A'}, 385:{s:4,cat:'A'}, 245:{s:4,cat:'A'},
+  250:{s:3,cat:'A'}, 209:{s:3,cat:'A'}, 401:{s:3,cat:'A'}, 3:{s:3,cat:'A'},
+  31:{s:3,cat:'A'}, 56:{s:2,cat:'A'}, 57:{s:2,cat:'A'}, 244:{s:2,cat:'A'},
+  211:{s:2,cat:'A'}, 49:{s:2,cat:'A'}, 24:{s:2,cat:'A'}, 5:{s:1,cat:'A'}, 6:{s:1,cat:'A'}
 };
 
+// Kategorien-Caps: L≤25, P≤25, F≤20, A≤15, Stars≤15 → max 100
+const CAT_CAP = { L: 25, P: 25, F: 20, A: 15 };
+
 function calcScore(h) {
-  var total = 0;
   var st = h.stars || 0;
-  if (st >= 5) total += 10; else if (st >= 4) total += 6; else if (st >= 3) total += 3;
+  var stars = st >= 5 ? 15 : st >= 4 ? 12 : st >= 3 ? 8 : st >= 2 ? 4 : st >= 1 ? 1 : 0;
+  var cats = { L: 0, P: 0, F: 0, A: 0 };
   var idSet = {};
   (h.factIds || []).forEach(function(id) { idSet[String(id)] = true; });
   for (var id in SCORING) {
-    if (idSet[id]) total += SCORING[id];
+    if (idSet[id]) {
+      var e = SCORING[id];
+      cats[e.cat] = (cats[e.cat] || 0) + e.s;
+    }
   }
-  return total;
+  return stars
+    + Math.min(cats.L, CAT_CAP.L)
+    + Math.min(cats.P, CAT_CAP.P)
+    + Math.min(cats.F, CAT_CAP.F)
+    + Math.min(cats.A, CAT_CAP.A);
 }
 
 // Normalisierung für unscharfen Stadtnamens-Vergleich

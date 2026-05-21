@@ -62,20 +62,35 @@
   };
 
   var SCORING_SORTED = Object.keys(SCORING).map(function (id) {
-    return { id: Number(id), s: SCORING[id].s, l: SCORING[id].l };
+    return { id: Number(id), s: SCORING[id].s, l: SCORING[id].l, cat: SCORING[id].cat };
   }).sort(function (a, b) { return b.s - a.s; });
 
-  // ── Scoring helpers ──────────────────────────────────────────────────────────
+  var CAT_CAP = { L: 25, P: 25, F: 20, A: 15 };
+
+  // ── Scoring helpers ────────────────────────────────────────────────────
   function calcScore(h) {
-    var total = 0;
     var st = h.stars || 0;
-    if (st >= 5) total += 10; else if (st >= 4) total += 6; else if (st >= 3) total += 3;
+    var stars = st >= 5 ? 15 : st >= 4 ? 12 : st >= 3 ? 8 : st >= 2 ? 4 : st >= 1 ? 1 : 0;
+    var cats = { L: 0, P: 0, F: 0, A: 0 };
     var idSet = {};
     (h.factIds || []).forEach(function (id) { idSet[id] = true; });
     for (var i = 0; i < SCORING_SORTED.length; i++) {
-      if (idSet[SCORING_SORTED[i].id]) total += SCORING_SORTED[i].s;
+      var e = SCORING_SORTED[i];
+      if (idSet[e.id]) cats[e.cat] = (cats[e.cat] || 0) + e.s;
     }
-    return total;
+    return stars
+      + Math.min(cats.L, CAT_CAP.L)
+      + Math.min(cats.P, CAT_CAP.P)
+      + Math.min(cats.F, CAT_CAP.F)
+      + Math.min(cats.A, CAT_CAP.A);
+  }
+
+  function scoreLabel(score) {
+    if (score >= 90) return { text: 'Herausragend', color: '#00c896' };
+    if (score >= 80) return { text: 'Sehr gut',     color: '#00c896' };
+    if (score >= 70) return { text: 'Empfehlenswert', color: '#7dd3b0' };
+    if (score >= 60) return { text: 'Gut',          color: '#7dd3b0' };
+    return                  { text: 'Solide',        color: '#777' };
   }
 
   function topFeatures(h, n) {
@@ -154,7 +169,7 @@
       var badges = feats.map(function (f) {
         return '<span class="hr-badge">' + (FEAT_ICONS[f.l] || '') + ' ' + esc(f.l) + '</span>';
       }).join('');
-      var pct = maxScore > 0 ? Math.round((h._score / maxScore) * 100) : 0;
+      var lbl = scoreLabel(h._score);
       var img = h.image
         ? '<img src="' + esc(h.image) + '" alt="' + esc(h.name) + '" loading="lazy" />'
         : '<div class="hr-img-placeholder">🏨</div>';
@@ -168,10 +183,11 @@
         + '<span class="hr-loc">📍 ' + esc(h.city) + ' · ' + esc(h.country) + '</span></div>'
         + (badges ? '<div class="hr-badges">' + badges + '</div>' : '')
         + '<div class="hr-score-row">'
-        + '<div class="hr-score-bar-outer"><div class="hr-score-bar-inner" data-pct="' + pct + '"></div></div>'
-        + '<span class="hr-score-label">' + h._score + ' Pkt.</span>'
+        + '<div class="hr-score-bar-outer"><div class="hr-score-bar-inner" data-pct="' + h._score + '"></div></div>'
+        + '<span class="hr-score-label" style="color:' + lbl.color + '">' + h._score + ' <span style="font-weight:500;font-size:.72rem;opacity:.85">' + lbl.text + '</span></span>'
         + '</div>'
         + '</div></div>';
+    });
     });
 
     html += '</div>';
@@ -207,6 +223,7 @@
       })).then(function (results) {
         var valid = results.filter(function (h) { return h && h.giataId && !h.error; });
         valid.forEach(function (h) { h._score = calcScore(h); });
+        valid = valid.filter(function (h) { return h._score >= 50; });
         valid.sort(function (a, b) {
           if (b._score !== a._score) return b._score - a._score;
           return (b.stars || 0) - (a.stars || 0);

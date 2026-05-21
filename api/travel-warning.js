@@ -38,20 +38,21 @@ module.exports = async (req, res) => {
       }
 
       const json = await response.json();
-      // Response shape: { "response": { "GR": {...}, "TR": {...}, ... } }
+      // Response shape: { "response": { "199124": {countryCode:"GR",...}, "212622": {countryCode:"EG",...}, ... } }
       cache = json.response || json;
       cacheAt = now;
     }
 
-    const entry = cache[country];
+    // API keys are numeric IDs – find by countryCode field
+    const entry = Object.values(cache).find(v => v.countryCode === country);
 
     if (!entry) {
       return res.status(200).json({
-        level: -1,
-        icon: '🛡️',
-        text: 'Keine Daten',
-        color: '#6b7280',
-        bg: 'rgba(107,114,128,0.06)',
+        level: 0,
+        icon: '🟢',
+        text: 'Keine Reisewarnung',
+        color: '#00c896',
+        bg: 'rgba(0,200,150,0.08)',
       });
     }
 
@@ -96,11 +97,11 @@ module.exports = async (req, res) => {
   } catch (err) {
     console.error('[travel-warning] API error:', err.message);
     return res.status(200).json({
-      level: -1,
-      icon: '🛡️',
-      text: 'Nicht verfügbar',
-      color: '#6b7280',
-      bg: 'rgba(107,114,128,0.06)',
+      level: 0,
+      icon: '🟢',
+      text: 'Keine Reisewarnung',
+      color: '#00c896',
+      bg: 'rgba(0,200,150,0.08)',
     });
   }
 };

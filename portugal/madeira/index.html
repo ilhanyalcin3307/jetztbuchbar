@@ -179,11 +179,18 @@
     .stat-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
-  <style>@keyframes jb-pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,200,150,.55)}60%{box-shadow:0 0 0 5px rgba(0,200,150,0)}}</style>
 </head>
 <body>
   
-<script src="/components/header.js"></script>
+  <header>
+    <a href="/index.html" class="logo">JetztBuchbar</a>
+    <nav>
+      <a href="/index.html#angebote">Angebote</a>
+      <a href="/index.html#destinationen">Destinationen</a>
+      <a href="/ueber-uns.html">Über uns</a>
+      <a href="/index.html#kontakt">Kontakt</a>
+    </nav>
+  </header>
   <div class="hero" style="background-image:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.55)),url('https://images.unsplash.com/photo-1771967595511-b7ad140ed5c6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w5NDgzMDd8MHwxfHNlYXJjaHwxfHxtYWRlaXJhJTIwdHJhdmVsJTIwbGFuZHNjYXBlfGVufDB8MHx8fDE3NzkyNDYwMTV8MA&ixlib=rb-4.1.0&q=85');background-size:cover;background-position:center;">
     <h1>Urlaub auf <span>Madeira</span></h1>
     <p class="hero-sub">Tropische Vegetation, spektakuläre Steilküsten und Wanderwege entlang alter Wasserkanäle – Madeira ist Europas außergewöhnlichste Insel.</p>
@@ -203,19 +210,10 @@
     </div>
 
     
-
-<div class="section" style="padding-top:0.5rem;padding-bottom:0;">
-  <div class="container">
-    <h2 class="section-title">🏆 Top <span>Hotels</span></h2>
-    <p style="color:var(--text-muted);margin-bottom:1.75rem;font-size:0.93rem;">Die bestbewerteten Hotels dieser Region – nach unserem Bewertungssystem.</p>
-    <div data-hotel-ranking="42194,232017,574183,10958,96636"></div>
-  </div>
-</div>
-<script src="/components/hotel-ranking.js" defer></script>
   <div class="section">
     <div class="container">
       <h2 class="section-title">📍 Madeira auf der <span>Karte</span></h2>
-      <div class="map-wrapper" id="map-1mgi80">
+      <div class="map-wrapper" id="map-hbvoap">
         <div class="map-overlay" onclick="(function(el){el.closest('.map-wrapper').classList.add('active');})(this)">
           <span class="map-overlay-hint">Klicken zum Aktivieren · Strg+Scroll zum Zoomen</span>
         </div>
@@ -229,7 +227,7 @@
       <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Karte anklicken zum Aktivieren. Außerhalb klicken zum Deaktivieren.</p>
       <script>
       (function(){
-        var w = document.getElementById('map-1mgi80');
+        var w = document.getElementById('map-hbvoap');
         if(!w) return;
         document.addEventListener('click', function(e){ if(!w.contains(e.target)) w.classList.remove('active'); });
       })();
@@ -238,60 +236,106 @@
   </div>
 
     
-    <div class="section">
+  <div class="section">
     <div class="container">
-      <h2 class="section-title">🌿 <span>Natur & Abenteuer</span></h2>
-      <p style="color:var(--text-muted);margin-bottom:1.75rem;font-size:0.93rem;">Entdecke die besten Erlebnisse und Highlights in Madeira – was dein Urlaub unvergesslich macht.</p>
+      <h2 class="section-title">🗺️ Top <span>Sehenswürdigkeiten</span></h2>
+      <p style="color:var(--text-muted);margin-bottom:1.75rem;font-size:0.93rem;">Die beliebtesten Sehenswürdigkeiten und Ausflugsziele in Madeira.</p>
       <div class="poi-grid">
     <div class="poi-card">
       <div class="poi-visual">
-        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&q=70" alt="Naturwunder & Landschaft" loading="lazy" />
-        <div class="poi-visual-overlay"></div>
-      </div>
+          <img src="https://commons.wikimedia.org/wiki/File:Fortaleza_do_Pico_-_14740646014_-_2014-05-13.jpg" alt="Fortaleza do  Pico" loading="lazy" />
+          <div class="poi-visual-overlay"></div>
+          <span class="poi-img-credit">© Wikimedia Commons</span>
+        </div>
       <div class="poi-body">
-        <div class="poi-tags"><span class="poi-tag">Naturwunder</span></div>
-        <div class="poi-name">🌋 Naturwunder & Landschaft</div>
-        <div class="poi-desc">Atemberaubende Landschaften, einzigartige Geologie und spektakuläre Aussichtspunkte.</div>
-        <div class="poi-footer"><span class="poi-dist">🇵🇹 Madeira</span></div>
+        <div class="poi-tags"><span class="poi-tag">Festung</span></div>
+        <div class="poi-name">Fortaleza do  Pico</div>
+        <div class="poi-desc">Historisches Kulturdenkmal von nationaler Bedeutung – ein fesselndes Zeugnis vergangener Epochen und Zivilisationen.</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 2 km entfernt</span>
+          <div class="poi-links">
+            <a href="https://www.google.com/maps/search/Fortaleza%20do%20%20Pico%20Madeira" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Fortaleza%20do%20%20Pico" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="poi-card">
       <div class="poi-visual">
-        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=70" alt="Wandern & Trekking" loading="lazy" />
-        <div class="poi-visual-overlay"></div>
-      </div>
+          <img src="https://commons.wikimedia.org/wiki/File:Quinta_do_Monte%2C_Funchal%2C_Madeira_-_IMG_6552.jpg" alt="Quinta do Monte" loading="lazy" />
+          <div class="poi-visual-overlay"></div>
+          <span class="poi-img-credit">© Wikimedia Commons</span>
+        </div>
       <div class="poi-body">
-        <div class="poi-tags"><span class="poi-tag">Wandern</span></div>
-        <div class="poi-name">🥾 Wandern & Trekking</div>
-        <div class="poi-desc">Geführte Wanderungen durch beeindruckende Landschaften und unvergessliche Outdoor-Erlebnisse.</div>
-        <div class="poi-footer"><span class="poi-dist">🇵🇹 Madeira</span></div>
+        <div class="poi-tags"><span class="poi-tag">Historisch</span><span class="poi-tag">Architektur</span></div>
+        <div class="poi-name">Quinta do Monte</div>
+        <div class="poi-desc">Historisches Kulturdenkmal von nationaler Bedeutung – ein fesselndes Zeugnis vergangener Epochen und Zivilisationen.</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 2 km entfernt</span>
+          <div class="poi-links">
+            <a href="https://www.google.com/maps/search/Quinta%20do%20Monte%20Madeira" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Quinta%20do%20Monte" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="poi-card">
       <div class="poi-visual">
-        <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=70" alt="Aussichten & Panoramen" loading="lazy" />
-        <div class="poi-visual-overlay"></div>
-      </div>
+          <img src="https://commons.wikimedia.org/wiki/File:Museu_da_Quinta_das_Cruzes_-_2014-05-11.jpg" alt="Quinta das Cruzes" loading="lazy" />
+          <div class="poi-visual-overlay"></div>
+          <span class="poi-img-credit">© Wikimedia Commons</span>
+        </div>
       <div class="poi-body">
-        <div class="poi-tags"><span class="poi-tag">Fotografie</span></div>
-        <div class="poi-name">📸 Aussichten & Panoramen</div>
-        <div class="poi-desc">Einmalige Panoramapunkte und pittoreske Motive für Erinnerungen, die ein Leben lang halten.</div>
-        <div class="poi-footer"><span class="poi-dist">🇵🇹 Madeira</span></div>
+        <div class="poi-tags"><span class="poi-tag">Architektur</span></div>
+        <div class="poi-name">Quinta das Cruzes</div>
+        <div class="poi-desc">Architektonisches Meisterwerk, das die Geschichte und den Charakter der Region auf eindrucksvolle Weise verkörpert.</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 2 km entfernt</span>
+          <div class="poi-links">
+            <a href="https://www.google.com/maps/search/Quinta%20das%20Cruzes%20Madeira" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Quinta%20das%20Cruzes" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="poi-card">
       <div class="poi-visual">
-        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=70" alt="Erholung & Wellness" loading="lazy" />
-        <div class="poi-visual-overlay"></div>
-      </div>
+          <img src="https://commons.wikimedia.org/wiki/File:Convento_de_Santa_Clara%2C_Funchal_-_2013-06-01_-_DSC03347.jpg" alt="Santa Clara Church and Monastery" loading="lazy" />
+          <div class="poi-visual-overlay"></div>
+          <span class="poi-img-credit">© Wikimedia Commons</span>
+        </div>
       <div class="poi-body">
-        <div class="poi-tags"><span class="poi-tag">Wellness</span></div>
-        <div class="poi-name">🧘 Erholung & Wellness</div>
-        <div class="poi-desc">Natürliche Heilquellen, Thermal-Bäder und die wohltuende Ruhe der Natur pur genießen.</div>
-        <div class="poi-footer"><span class="poi-dist">🇵🇹 Madeira</span></div>
+        <div class="poi-tags"><span class="poi-tag">Religiös</span></div>
+        <div class="poi-name">Santa Clara Church and Monastery</div>
+        <div class="poi-desc">Bedeutendes religiöses Bauwerk mit einzigartiger Atmosphäre, reich verzierten Details und tiefer kultureller Bedeutung.</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 2 km entfernt</span>
+          <div class="poi-links">
+            <a href="https://www.google.com/maps/search/Santa%20Clara%20Church%20and%20Monastery%20Madeira" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Santa%20Clara%20Church%20and%20Monastery" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="poi-card">
+      <div class="poi-visual">
+          <img src="https://commons.wikimedia.org/wiki/File:Casa-Museu_Frederico_de_Freitas%2C_Funchal_-_2013-05-18_-_DSC01919.jpg" alt="Casa Museu Frederico de Freitas" loading="lazy" />
+          <div class="poi-visual-overlay"></div>
+          <span class="poi-img-credit">© Wikimedia Commons</span>
+        </div>
+      <div class="poi-body">
+        <div class="poi-tags"><span class="poi-tag">Museum</span></div>
+        <div class="poi-name">Casa Museu Frederico de Freitas</div>
+        <div class="poi-desc">Faszinierendes Museum mit umfangreichen Sammlungen zu lokaler Geschichte, Kunst und Kultur – ein Pflichtbesuch für Kulturinteressierte.</div>
+        <div class="poi-footer">
+          <span class="poi-dist">📍 2 km entfernt</span>
+          <div class="poi-links">
+            <a href="https://www.google.com/maps/search/Casa%20Museu%20Frederico%20de%20Freitas%20Madeira" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
+            <a href="https://de.wikipedia.org/w/index.php?search=Casa%20Museu%20Frederico%20de%20Freitas" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
+          </div>
+        </div>
       </div>
+    </div></div>
     </div>
   </div>
 
@@ -473,67 +517,17 @@
     </div>
   </div>
   
-
-  <div class="section">
-    <div class="container">
-      <h2 class="section-title">🔄 Ähnliche <span>Reiseziele</span></h2>
-      <p style="color:var(--text-muted);margin-bottom:1.75rem;font-size:0.93rem;">Weitere Top-Destinationen in Portugal – entdecke mehr Reiseziele.</p>
-      <div class="poi-grid">
-    <a href="/portugal/algarve/" class="poi-card" style="text-decoration:none;">
-      <div class="poi-visual">
-        <img src="https://images.unsplash.com/photo-1658437192420-13cd43bbe2bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NDgzMDd8MHwxfHNlYXJjaHwxfHxBbGdhcnZlJTIwUG9ydHVnYWwlMjBjbGlmZnN8ZW58MHwwfHx8MTc3ODUwMTAxNnww&ixlib=rb-4.1.0&q=80&w=1080" alt="Algarve" loading="lazy" />
-        <div class="poi-visual-overlay"></div>
-      </div>
-      <div class="poi-body">
-        <div class="poi-tags"><span class="poi-tag">Reiseführer</span></div>
-        <div class="poi-name">Algarve</div>
-        <div class="poi-desc">Algarve 2026: Portugals schönste Küste mit Felsen, goldenen Stränden und Golftourismus. Beste Ort…</div>
-        <div class="poi-footer"><span class="poi-dist">🇵🇹 Portugal</span><div class="poi-links"><span class="poi-link" style="color:var(--accent);border-color:rgba(0,200,150,0.3);">→ Entdecken</span></div></div>
-      </div>
-    </a>
-    <a href="/portugal/porto/" class="poi-card" style="text-decoration:none;">
-      <div class="poi-visual">
-        <img src="https://images.unsplash.com/photo-1725126147246-167960b69c25?crop=entropy&cs=srgb&fm=jpg&ixid=M3w5NDgzMDd8MHwxfHNlYXJjaHwxfHxwb3J0byUyMHRyYXZlbCUyMGxhbmRzY2FwZXxlbnwwfDB8fHwxNzc5MDczMjE1fDA&ixlib=rb-4.1.0&q=85" alt="Porto" loading="lazy" />
-        <div class="poi-visual-overlay"></div>
-      </div>
-      <div class="poi-body">
-        <div class="poi-tags"><span class="poi-tag">Reiseführer</span></div>
-        <div class="poi-name">Porto</div>
-        <div class="poi-desc">Porto Urlaub 2026: Vila Nova de Gaia Portwein-Keller, Ribeira, Azulejo-Kirchen und das charmante …</div>
-        <div class="poi-footer"><span class="poi-dist">🇵🇹 Portugal</span><div class="poi-links"><span class="poi-link" style="color:var(--accent);border-color:rgba(0,200,150,0.3);">→ Entdecken</span></div></div>
-      </div>
-    </a>
-      </div>
+  <footer>
+    <div class="footer-left">
+      <span>© 2026 JetztBuchbar.de</span>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+      <a href="mailto:sales@jetztbuchbar.de">sales@jetztbuchbar.de</a>
+      <span>Wien, Österreich</span>
     </div>
-  </div>
-  <footer style="display:block;padding:2.5rem clamp(1.25rem,5vw,3rem) 0;border-top:1px solid var(--border,#1e1e1e);">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:2.5rem;padding-bottom:2rem;align-items:start;">
-
-      <div>
-        <a href="/" style="display:inline-flex;align-items:baseline;gap:.25rem;text-decoration:none;margin-bottom:.85rem;line-height:1;">
-          <span style="font-size:1.1rem;font-weight:800;color:var(--accent,#00c896);">JetztBuchbar</span><span style="font-size:.62rem;font-weight:700;color:rgba(0,200,150,.55);letter-spacing:.06em;">.de</span>
-        </a>
-        <p style="font-size:.875rem;color:#888;line-height:1.65;max-width:240px;margin:0;">Einfach Vergleichbar. Der smarte Reiseziel-Vergleich für deinen perfekten Urlaub.</p>
-      </div>
-
-      <div>
-        <div style="display:inline-flex;align-items:center;gap:.55rem;margin-bottom:.75rem;">
-          <span style="font-family:sans-serif;font-size:.58rem;font-weight:900;letter-spacing:.14em;color:rgba(255,255,255,.75);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);padding:.15rem .5rem;border-radius:3px;">GIATA</span>
-          <span style="font-size:.68rem;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.05em;text-transform:uppercase;">Data-Partner</span>
-        </div>
-        <p style="font-size:.82rem;color:#888;line-height:1.65;max-width:270px;margin:0;">Offizieller Data-Partner für verifizierte Hotel-Factsheets via GIATA® GmbH, Berlin.</p>
-      </div>
-
-      <div style="display:flex;flex-direction:column;gap:.65rem;">
-        <a href="/impressum.html" style="font-size:.85rem;color:#888;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#00c896'" onmouseout="this.style.color='#888'">Impressum</a>
-        <a href="/datenschutz.html" style="font-size:.85rem;color:#888;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#00c896'" onmouseout="this.style.color='#888'">Datenschutz</a>
-        <a href="/kontakt.html" style="font-size:.85rem;color:#888;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#00c896'" onmouseout="this.style.color='#888'">Kontakt</a>
-        <a href="mailto:sales@jetztbuchbar.de" style="font-size:.82rem;color:#666;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#00c896'" onmouseout="this.style.color='#666'">sales@jetztbuchbar.de</a>
-      </div>
-
-    </div>
-    <div style="border-top:1px solid rgba(255,255,255,.05);padding:1.1rem 0;text-align:center;">
-      <span style="font-size:.78rem;color:#555;">© 2026 JetztBuchbar.de · Wien, Österreich</span>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">&#x1F4F7;</a>
+      <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
     </div>
   </footer>
 </body>

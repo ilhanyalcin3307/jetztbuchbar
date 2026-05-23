@@ -1,14 +1,27 @@
 /**
  * jb-score.js — JetztBuchbar JB-Score Engine (Single Source of Truth)
- * v2.0: Aquapark A-boost · Uçuş süresi bonus · Reisewarnung penalty
+ * v3.0: Çarpanlı yıldız · Verpflegung hiyerarşisi · Adults Only mutex · Uyarı UI-only
+ *
+ * Değişiklikler v2→v3:
+ *  1. Yıldız çarpanı: Ham puan eklemek yerine multiplicative (×0.88–1.08)
+ *     4★ = baseline×1.00 | 5★ = ×1.08 | 3★ = ×0.97 | ≤2★ = ×0.88–0.93
+ *  2. Verpflegung hiyerarşisi: Pansiyon tipi "winner takes all" (AI Plus 20 pt VEYA
+ *     AI 16 pt, asla her ikisi). Restoran/bar ayrıca additive.
+ *  3. Adults Only mutex (id:385): Kids Club, Kinderpool vb. fact'ler sıfırlanır
+ *     (GIATA veri hatası guardrail — yetişkin oteli çocuk puanı alamaz).
+ *  4. Reisewarnung skordan çıkarıldı → fetchWarningLevel() ile UI badge olarak kullanın.
+ *     fetchWarningPenalty() geriye dönük uyum için korundu, artık 0 döndürür.
+ *  5. Yeni cap'ler: L=30, P=25, F=20, A=15 → toplam max 90 → /90*100 normalize
  *
  * Exposes: window.JBScore
  * Usage:   <script src="/components/jb-score.js"></script>
  *
- * calcScore(h, opts)          → number 0-100  (sync, includes flight bonus)
- * fetchWarningPenalty(country) → Promise<number>  (async, cached 1 session)
- * topFeatures(h, n)           → [{id, s, cat, l}]
- * scoreLabel(score)           → {text, color}
+ * calcScore(h [,opts])         → number 1-100  (sync, opts artık yoksayılır)
+ * calcScoreDetail(h [,opts])   → { score, L, P, F, A, starMult, flightBonus, ... }
+ * fetchWarningLevel(country)   → Promise<{level,icon,text,color,bg}>  (UI only)
+ * fetchWarningPenalty(country) → Promise<0>  (backward compat, her zaman 0)
+ * topFeatures(h, n)            → [{id, s, cat, l}]
+ * scoreLabel(score)            → {text, color}
  */
 (function (global) {
   'use strict';
@@ -16,7 +29,7 @@
   // ── Scoring table ─────────────────────────────────────────────────────────
   // Categories: L=Lage, P=Pool/Wellness, F=Verpflegung, A=Familie/Aktivitäten
   var SCORING = {
-    // LAGE (L) – cap 35
+    // LAGE (L) – cap 30
     89:{s:20,cat:'L',l:'Strandlage'}, 301:{s:12,cat:'L',l:'Meeresnähe'}, 374:{s:7,cat:'L',l:'Strandblick'},
     90:{s:8,cat:'L',l:'Zentrale Lage'}, 91:{s:5,cat:'L',l:'Ruhige Lage'}, 291:{s:5,cat:'L',l:'Stadtzentrum'},
     295:{s:6,cat:'L',l:'Seelage'}, 562:{s:5,cat:'L',l:'Jachthafen'}, 350:{s:5,cat:'L',l:'Altstadt'},
@@ -25,7 +38,7 @@
     349:{s:3,cat:'L',l:'Autofreie Lage'}, 293:{s:3,cat:'L',l:'Waldlage'}, 300:{s:3,cat:'L',l:'Flusslage'},
     365:{s:3,cat:'L',l:'Bergblick'}, 348:{s:2,cat:'L',l:'Belebte Lage'},
     22:{s:1,cat:'L',l:'Parkplatz'}, 568:{s:1,cat:'L',l:'Einparkservice'},
-    // POOL & WELLNESS (P) – cap 35
+    // POOL & WELLNESS (P) – cap 25
     614:{s:18,cat:'P',l:'Privater Pool'}, 588:{s:18,cat:'P',l:'Wasserpark'}, 697:{s:14,cat:'P',l:'Infinity-Pool'},
     696:{s:14,cat:'P',l:'Rooftop-Pool'}, 86:{s:12,cat:'P',l:'Wasserrutsche'}, 197:{s:12,cat:'P',l:'Spa'},
     479:{s:10,cat:'P',l:'Wellness-Center'}, 822:{s:10,cat:'P',l:'Thermalbecken'},
@@ -45,13 +58,15 @@
     71:{s:2,cat:'P',l:'Shuttleservice'}, 81:{s:2,cat:'P',l:'Transferservice'},
     88:{s:1,cat:'P',l:'WLAN'}, 185:{s:1,cat:'P',l:'WLAN'},
     // VERPFLEGUNG (F) – cap 20
-    94:{s:20,cat:'F',l:'All Inclusive Plus'}, 92:{s:16,cat:'F',l:'All Inclusive'},
-    101:{s:12,cat:'F',l:'Vollpension'}, 103:{s:8,cat:'F',l:'Halbpension'},
+    // fPension:true → bu 4 tip mutually exclusive; _calcCats() sadece en yükseği alır
+    94:{s:20,cat:'F',l:'All Inclusive Plus',fP:true}, 92:{s:16,cat:'F',l:'All Inclusive',fP:true},
+    101:{s:12,cat:'F',l:'Vollpension',fP:true}, 103:{s:8,cat:'F',l:'Halbpension',fP:true},
     65:{s:5,cat:'F',l:'Restaurant'}, 299:{s:5,cat:'F',l:'Restaurant'},
     14:{s:3,cat:'F',l:'Bar'}, 288:{s:3,cat:'F',l:'Bar/Pub'}, 450:{s:3,cat:'F',l:'Lobbybar'},
     575:{s:3,cat:'F',l:'Bar/Lounge'}, 20:{s:2,cat:'F',l:'Café'}, 73:{s:2,cat:'F',l:'Snackbar'},
     439:{s:1,cat:'F',l:'Strandkorb'},
-    // FAMILIE & AKTIVITÄTEN (A) – cap 20 (vorher 15; erhöht für Aquapark-Dual-Boost)
+    // FAMILIE & AKTIVITÄTEN (A) – cap 15
+    // Adults Only (385): s=0, sadece mutex trigger — kendi puanı yok
     945:{s:12,cat:'A',l:'Kids Club'}, 219:{s:10,cat:'A',l:'Golf'}, 236:{s:10,cat:'A',l:'Tauchen'},
     946:{s:8,cat:'A',l:'Teens Club'}, 1:{s:8,cat:'A',l:'Kinderbetreuung'}, 7:{s:8,cat:'A',l:'Miniclub'},
     393:{s:7,cat:'A',l:'Für Flitterwochen'}, 593:{s:7,cat:'A',l:'Tennisplatz'},
@@ -60,7 +75,7 @@
     240:{s:5,cat:'A',l:'Schnorcheln'}, 249:{s:5,cat:'A',l:'Windsurfen'},
     247:{s:5,cat:'A',l:'Wasserski'}, 2:{s:5,cat:'A',l:'Animationsprogramm'},
     389:{s:4,cat:'A',l:'Familienfreundlich'}, 781:{s:4,cat:'A',l:'Für Paare'},
-    385:{s:4,cat:'A',l:'Adults Only'}, 245:{s:4,cat:'A',l:'Tennis'},
+    385:{s:0,cat:'A',l:'Adults Only'}, 245:{s:4,cat:'A',l:'Tennis'},
     250:{s:3,cat:'A',l:'Yoga'}, 209:{s:3,cat:'A',l:'Beach-Volleyball'},
     401:{s:3,cat:'A',l:'Konferenzeinrichtungen'}, 3:{s:3,cat:'A',l:'Abendunterhaltung'},
     31:{s:3,cat:'A',l:'Disco'}, 56:{s:2,cat:'A',l:'Spielplatz'}, 57:{s:2,cat:'A',l:'Spielzimmer'},
@@ -69,11 +84,22 @@
     5:{s:1,cat:'A',l:'Live-Musik'}, 6:{s:1,cat:'A',l:'Mini-Disco'}
   };
 
-  // Aquapark/Wasserpark (588) zählt ZUSÄTZLICH im A-Bereich (family-hotel boost).
-  // Ist schon in P (s:18). Hier separat verarbeitet → kein Objekt-Key-Konflikt.
+  // Aquapark/Wasserpark (588) → P'de s:18 zaten var; A'ya ek dual-boost
   var SCORING_DUAL = [
-    { id: 588, s: 12, cat: 'A', l: 'Aquapark' }
+    { id: 588, s: 8, cat: 'A', l: 'Aquapark' }
   ];
+
+  // ── v3 Sabitler ───────────────────────────────────────────────────────────
+  // Verpflegung: pansiyon tipi — mutually exclusive (winner takes all)
+  var PENSION_IDS = { 94: 1, 92: 1, 101: 1, 103: 1 };
+
+  // Adults Only mutex: bu ID varsa aşağıdaki çocuk fact'leri sıfırlanır
+  var ADULTS_ONLY_ID = 385;
+  var KIDS_FACT_IDS  = { 945: 1, 946: 1, 1: 1, 7: 1, 707: 1, 4: 1, 26: 1, 56: 1, 57: 1 };
+
+  // Yıldız çarpanı — 4★ baseline (×1.00), 5★ hafif artı, ≤3★ hafif eksi
+  // index = yıldız sayısı (0–5)
+  var STAR_MULT = [0.88, 0.90, 0.93, 0.97, 1.00, 1.08];
 
   var FEAT_ICONS = {
     'Strandlage':'🏖️','Strandbar':'🍹','Strandkorb':'⛱️',
@@ -110,9 +136,9 @@
     return { id: Number(id), s: SCORING[id].s, l: SCORING[id].l, cat: SCORING[id].cat };
   }).sort(function (a, b) { return b.s - a.s; });
 
-  // Caps: Stars=15, L=35, P=35, F=20, A=20  →  MAX_RAW=125
-  var CAT_CAP = { L: 35, P: 35, F: 20, A: 20 };
-  var MAX_RAW = 125;
+  // Caps v3: L=30, P=25, F=20, A=15  →  MAX_CAT=90 (yıldız çarpanı separate)
+  var CAT_CAP = { L: 30, P: 25, F: 20, A: 15 };
+  var MAX_CAT = 90;
 
   // ── Country → ISO2 ────────────────────────────────────────────────────────
   var COUNTRY_ISO = {
@@ -142,89 +168,113 @@
     return h <= 4 ? 3 : h <= 7 ? 0 : -2;
   }
 
-  // ── Core Score (sync) ─────────────────────────────────────────────────────
-  // opts.warningPenalty: 0 | 5 | 10 | 15  (vom fetchWarningPenalty Promise)
-  function calcScore(h, opts) {
-    opts = opts || {};
-    var warningPenalty = opts.warningPenalty || 0;
-    var st = h.stars || 0;
-    var stars = st >= 5 ? 15 : st >= 4 ? 12 : st >= 3 ? 8 : st >= 2 ? 4 : st >= 1 ? 1 : 0;
-    var cats = { L: 0, P: 0, F: 0, A: 0 };
+  // ── Kategori hesabı (internal helper) ───────────────────────────────────
+  // Pension hiyerarşisi + Adults Only mutex burada uygulanır.
+  function _calcCats(h) {
     var idSet = {};
     (h.factIds || []).forEach(function (id) { idSet[id] = true; });
-    // Main scoring loop
-    for (var i = 0; i < SCORING_SORTED.length; i++) {
-      var e = SCORING_SORTED[i];
-      if (idSet[e.id]) cats[e.cat] = (cats[e.cat] || 0) + e.s;
-    }
-    // Dual-category facts (Aquapark: contributes to both P and A)
-    for (var j = 0; j < SCORING_DUAL.length; j++) {
-      var d = SCORING_DUAL[j];
-      if (idSet[d.id]) cats[d.cat] = (cats[d.cat] || 0) + d.s;
-    }
-    var raw = stars
-      + Math.min(cats.L, CAT_CAP.L)
-      + Math.min(cats.P, CAT_CAP.P)
-      + Math.min(cats.F, CAT_CAP.F)
-      + Math.min(cats.A, CAT_CAP.A);
-    var iso = countryToIso(h.country || '');
-    var base = Math.round(raw / MAX_RAW * 100);
-    return Math.max(1, Math.min(100, base + _flightBonus(iso) - warningPenalty));
-  }
 
-  // ── Score Detail (sync) – returns raw category breakdown ─────────────────
-  function calcScoreDetail(h, opts) {
-    opts = opts || {};
-    var warningPenalty = opts.warningPenalty || 0;
-    var st = h.stars || 0;
-    var stars = st >= 5 ? 15 : st >= 4 ? 12 : st >= 3 ? 8 : st >= 2 ? 4 : st >= 1 ? 1 : 0;
-    var cats = { L: 0, P: 0, F: 0, A: 0 };
-    var idSet = {};
-    (h.factIds || []).forEach(function (id) { idSet[id] = true; });
-    for (var i = 0; i < SCORING_SORTED.length; i++) {
-      var e = SCORING_SORTED[i];
-      if (idSet[e.id]) cats[e.cat] = (cats[e.cat] || 0) + e.s;
+    // Adults Only mutex: ID 385 varsa çocuk fact'leri idSet'ten çıkar
+    var adultsOnly = !!idSet[ADULTS_ONLY_ID];
+    if (adultsOnly) {
+      var kIds = Object.keys(KIDS_FACT_IDS);
+      for (var k = 0; k < kIds.length; k++) { delete idSet[Number(kIds[k])]; }
     }
+
+    var raw = { L: 0, P: 0, A: 0 };
+    var pensionBest = 0; // F: sadece en yüksek pansiyon tipi
+    var fAdditive   = 0; // F: restoran/bar additive
+
+    var ids = Object.keys(SCORING);
+    for (var i = 0; i < ids.length; i++) {
+      var id  = Number(ids[i]);
+      if (!idSet[id]) continue;
+      var ent = SCORING[id];
+      if (ent.cat === 'F') {
+        if (PENSION_IDS[id]) {
+          if (ent.s > pensionBest) pensionBest = ent.s; // winner takes all
+        } else {
+          fAdditive += ent.s;
+        }
+      } else {
+        raw[ent.cat] = (raw[ent.cat] || 0) + ent.s;
+      }
+    }
+
+    // Aquapark dual-boost: A kategorisine ek katkı
     for (var j = 0; j < SCORING_DUAL.length; j++) {
       var d = SCORING_DUAL[j];
-      if (idSet[d.id]) cats[d.cat] = (cats[d.cat] || 0) + d.s;
+      if (idSet[d.id]) raw[d.cat] = (raw[d.cat] || 0) + d.s;
     }
-    var L = Math.min(cats.L, CAT_CAP.L);
-    var P = Math.min(cats.P, CAT_CAP.P);
-    var F = Math.min(cats.F, CAT_CAP.F);
-    var A = Math.min(cats.A, CAT_CAP.A);
-    var raw = stars + L + P + F + A;
-    var iso = countryToIso(h.country || '');
-    var flightBonus = _flightBonus(iso);
-    var base = Math.round(raw / MAX_RAW * 100);
-    var score = Math.max(1, Math.min(100, base + flightBonus - warningPenalty));
+
     return {
-      score: score,
-      stars: stars, starsMax: 15,
-      L: L, Lmax: CAT_CAP.L,
-      P: P, Pmax: CAT_CAP.P,
-      F: F, Fmax: CAT_CAP.F,
-      A: A, Amax: CAT_CAP.A,
-      flightBonus: flightBonus,
-      warningPenalty: warningPenalty
+      L:          Math.min(raw.L,                   CAT_CAP.L),
+      P:          Math.min(raw.P,                   CAT_CAP.P),
+      F:          Math.min(pensionBest + fAdditive, CAT_CAP.F),
+      A:          Math.min(raw.A,                   CAT_CAP.A),
+      adultsOnly: adultsOnly
     };
   }
 
-  // ── Async: Reisewarnung penalty ───────────────────────────────────────────
-  // Gibt penalty-Punkte zurück: level 0→0, 1→5, 2→10, 3→15
-  // Session-gecacht: gleiche ISO → kein zweiter API-Call
+  // ── Core Score (sync) ─────────────────────────────────────────────────────
+  // opts yoksayılır (backward compat) — warningPenalty artık skora dahil değil
+  function calcScore(h /*, opts */) {
+    var cats = _calcCats(h);
+    var raw  = cats.L + cats.P + cats.F + cats.A;
+    var st   = Math.max(0, Math.min(5, Math.round(h.stars || 0)));
+    var mult = STAR_MULT[st];
+    var iso  = countryToIso(h.country || '');
+    var base = Math.round(raw / MAX_CAT * 100 * mult);
+    return Math.max(1, Math.min(100, base + _flightBonus(iso)));
+  }
+
+  // ── Score Detail (sync) – kategori bazında kırılım ───────────────────────
+  // opts yoksayılır; warningPenalty: 0 döndürülür (backward compat)
+  function calcScoreDetail(h /*, opts */) {
+    var cats = _calcCats(h);
+    var raw  = cats.L + cats.P + cats.F + cats.A;
+    var st   = Math.max(0, Math.min(5, Math.round(h.stars || 0)));
+    var mult = STAR_MULT[st];
+    var iso  = countryToIso(h.country || '');
+    var fb   = _flightBonus(iso);
+    var base = Math.round(raw / MAX_CAT * 100 * mult);
+    var score = Math.max(1, Math.min(100, base + fb));
+    return {
+      score:         score,
+      L: cats.L,    Lmax: CAT_CAP.L,
+      P: cats.P,    Pmax: CAT_CAP.P,
+      F: cats.F,    Fmax: CAT_CAP.F,
+      A: cats.A,    Amax: CAT_CAP.A,
+      starMult:      mult,
+      starCount:     st,
+      flightBonus:   fb,
+      adultsOnly:    cats.adultsOnly,
+      warningPenalty: 0   // artık skorda yok — UI'da fetchWarningLevel() kullanın
+    };
+  }
+
+  // ── Reisewarnung (UI only — v3'te skora dahil değil) ─────────────────────
+  // Döndürdüğü nesne: { level, icon, text, color, bg }
   var _warnCache = {};
-  function fetchWarningPenalty(countryName) {
+  function fetchWarningLevel(countryName) {
     var iso = countryToIso(countryName) || String(countryName || '').toUpperCase().slice(0, 2);
+    if (!iso) return Promise.resolve(null);
     if (_warnCache[iso] !== undefined) return Promise.resolve(_warnCache[iso]);
     return fetch('/api/travel-warning?country=' + encodeURIComponent(iso))
       .then(function (r) { return r.json(); })
-      .then(function (d) {
-        var p = (d.level || 0) * 5;
-        _warnCache[iso] = p;
-        return p;
-      })
-      .catch(function () { _warnCache[iso] = 0; return 0; });
+      .then(function (d) { _warnCache[iso] = d; return d; })
+      .catch(function () {
+        var fb = { level: 0, icon: '🟢', text: 'Keine Reisewarnung', color: '#00c896', bg: 'rgba(0,200,150,0.08)' };
+        _warnCache[iso] = fb;
+        return fb;
+      });
+  }
+
+  // Backward compat: alter Code ruft fetchWarningPenalty auf → gibt immer 0 zurück
+  // Neu: fetchWarningLevel(country) für UI-Badge verwenden
+  function fetchWarningPenalty(countryName) {
+    fetchWarningLevel(countryName); // Cache wärmen, aber Ergebnis ignorieren
+    return Promise.resolve(0);
   }
 
   // ── Helpers ───────────────────────────────────────────────────────────────
@@ -234,7 +284,7 @@
     var seen = {}, out = [];
     for (var i = 0; i < SCORING_SORTED.length && out.length < n; i++) {
       var e = SCORING_SORTED[i];
-      if (idSet[e.id] && !seen[e.l]) { seen[e.l] = true; out.push(e); }
+      if (e.s > 0 && idSet[e.id] && !seen[e.l]) { seen[e.l] = true; out.push(e); }
     }
     return out;
   }
@@ -253,10 +303,12 @@
     SCORING_SORTED:      SCORING_SORTED,
     CAT_CAP:             CAT_CAP,
     FEAT_ICONS:          FEAT_ICONS,
+    STAR_MULT:           STAR_MULT,
     countryToIso:        countryToIso,
     calcScore:           calcScore,
     calcScoreDetail:     calcScoreDetail,
-    fetchWarningPenalty: fetchWarningPenalty,
+    fetchWarningLevel:   fetchWarningLevel,
+    fetchWarningPenalty: fetchWarningPenalty, // backward compat, returns 0
     topFeatures:         topFeatures,
     scoreLabel:          scoreLabel
   };

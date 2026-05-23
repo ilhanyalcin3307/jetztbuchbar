@@ -966,24 +966,44 @@
       color: var(--text-muted);
     }
 
-    .rb-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-      max-width: 1200px;
-      margin: 0 auto;
+    .rb-scroll-wrap {
+      position: relative;
+      max-width: 100%;
     }
+    .rb-scroll-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 80px;
+      background: linear-gradient(to right, transparent, var(--bg) 90%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .rb-grid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 1.25rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .rb-grid::-webkit-scrollbar { display: none; }
 
     /* ── Card ── */
     .rb-card {
       position: relative;
       display: block;
+      flex: 0 0 clamp(280px, 34vw, 420px);
       height: 440px;
       border-radius: 16px;
       overflow: hidden;
       text-decoration: none;
       border: 1px solid var(--border);
       box-shadow: 0 6px 24px rgba(0,0,0,.45);
+      scroll-snap-align: start;
       transition: transform .35s cubic-bezier(.22,.68,0,1.2),
                   box-shadow .35s ease,
                   border-color .3s ease;
@@ -1178,12 +1198,9 @@
     .rb-card:hover .rb-hover-cta { transform: translateY(0); }
 
     /* ── Responsive ── */
-    @media (max-width: 1023px) {
-      .rb-grid { grid-template-columns: repeat(2, 1fr); }
-    }
     @media (max-width: 639px) {
-      .rb-grid { grid-template-columns: 1fr; }
-      .rb-card { height: 320px; }
+      .rb-card { flex: 0 0 clamp(260px, 82vw, 320px); height: 340px; }
+      .rb-scroll-wrap::after { width: 40px; }
       .rb-dest-name { font-size: .88rem; }
       .rb-badge { font-size: .65rem; padding: 4px 9px; top: 12px; }
       .rb-badge-tl { left: 12px; }
@@ -1198,6 +1215,7 @@
       <h2>Reiseziel-<span>Battle</span> 2026</h2>
       <p>Zwei Destinationen. Direkter Vergleich. Finde dein perfektes Ziel.</p>
     </div>
+    <div class="rb-scroll-wrap">
     <div class="rb-grid">
 
       <!-- ── Karte 1: Mallorca vs. Kreta ── -->
@@ -1387,6 +1405,7 @@
       </a>
 
     </div>
+    </div><!-- /.rb-scroll-wrap -->
   </section>
 
   <!-- ── REISEZIELE ── -->

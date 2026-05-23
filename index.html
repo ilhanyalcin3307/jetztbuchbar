@@ -393,6 +393,124 @@
       .dest-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+    /* ── STORY GRID (Länderkarten 9:16, Instagram-Story-Format) ── */
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.7rem;
+    }
+    .story-card {
+      aspect-ratio: 9/16;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      display: block;
+      text-decoration: none;
+      background: var(--bg-card);
+      cursor: pointer;
+    }
+    .story-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .story-card:hover .story-img { transform: scale(1.06); }
+    .story-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 42%, transparent 72%);
+    }
+    .story-top {
+      position: absolute;
+      top: 0.65rem;
+      left: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      z-index: 2;
+    }
+    .story-flag {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: rgba(0,0,0,0.22);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .story-name {
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.85);
+      white-space: nowrap;
+    }
+    .story-bottom {
+      position: absolute;
+      bottom: 0.7rem;
+      left: 0.65rem;
+      right: 0.65rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 0.3rem;
+      z-index: 2;
+    }
+    .story-count {
+      color: rgba(255,255,255,0.78);
+      font-size: 0.61rem;
+      font-weight: 600;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.85);
+      line-height: 1;
+    }
+    .story-btn {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 99px;
+      padding: 0.22rem 0.6rem;
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s;
+      line-height: 1.4;
+    }
+    .story-card:hover .story-btn {
+      background: rgba(255,255,255,0.26);
+      border-color: rgba(255,255,255,0.6);
+    }
+    @media (max-width: 1100px) {
+      .story-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 720px) {
+      .story-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.6rem;
+        padding-bottom: 0.5rem;
+        scrollbar-width: none;
+      }
+      .story-grid::-webkit-scrollbar { display: none; }
+      .story-card {
+        flex: 0 0 clamp(130px, 40vw, 200px);
+        scroll-snap-align: start;
+        border-radius: 14px;
+      }
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -1276,75 +1394,216 @@
   <section class="destinations">
     <h2>Beliebte <span>Reiseziele</span></h2>
     <p class="destinations-sub">Günstige Urlaubsreisen nach Türkei, Griechenland, Spanien und in über 15 weitere Länder – mit aktuellen Reiseangeboten, Klimatipps und hilfreichen Infos für 2026.</p>
-    <div class="dest-grid">
-      <a href="/tuerkei/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=600&q=70&auto=format&fit=crop" alt="Türkei" loading="lazy">
-        <div class="dest-card-label"><span>Türkei</span></div>
+    <div class="story-grid" id="story-grid-laender">
+      <a href="/tuerkei/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=600&q=75&auto=format&fit=crop" alt="Türkei" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇹🇷</div>
+          <span class="story-name">Türkei</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="TR"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/griechenland/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&q=70&auto=format&fit=crop" alt="Griechenland" loading="lazy">
-        <div class="dest-card-label"><span>Griechenland</span></div>
+      <a href="/griechenland/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&q=75&auto=format&fit=crop" alt="Griechenland" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇬🇷</div>
+          <span class="story-name">Griechenland</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="GR"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/spanien/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=600&q=70&auto=format&fit=crop" alt="Spanien" loading="lazy">
-        <div class="dest-card-label"><span>Spanien</span></div>
+      <a href="/spanien/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=600&q=75&auto=format&fit=crop" alt="Spanien" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇪🇸</div>
+          <span class="story-name">Spanien</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="ES"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/dubai/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=70&auto=format&fit=crop" alt="Dubai" loading="lazy">
-        <div class="dest-card-label"><span>Dubai</span></div>
+      <a href="/dubai/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=75&auto=format&fit=crop" alt="Dubai" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇦🇪</div>
+          <span class="story-name">Dubai</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="AE"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/portugal/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&q=70&auto=format&fit=crop" alt="Portugal" loading="lazy">
-        <div class="dest-card-label"><span>Portugal</span></div>
+      <a href="/portugal/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&q=75&auto=format&fit=crop" alt="Portugal" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇵🇹</div>
+          <span class="story-name">Portugal</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="PT"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/italien/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=600&q=70&auto=format&fit=crop" alt="Italien" loading="lazy">
-        <div class="dest-card-label"><span>Italien</span></div>
+      <a href="/italien/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=600&q=75&auto=format&fit=crop" alt="Italien" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇮🇹</div>
+          <span class="story-name">Italien</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="IT"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/kroatien/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1612621450155-a574ebb71f9e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Kroatien" loading="lazy">
-        <div class="dest-card-label"><span>Kroatien</span></div>
+      <a href="/kroatien/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1612621450155-a574ebb71f9e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Kroatien" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇭🇷</div>
+          <span class="story-name">Kroatien</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="HR"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/malta/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1730190206154-66bf41958e62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Malta" loading="lazy">
-        <div class="dest-card-label"><span>Malta</span></div>
+      <a href="/malta/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1730190206154-66bf41958e62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Malta" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇲🇹</div>
+          <span class="story-name">Malta</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="MT"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/marokko/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=600&q=70&auto=format&fit=crop" alt="Marokko" loading="lazy">
-        <div class="dest-card-label"><span>Marokko</span></div>
+      <a href="/marokko/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=600&q=75&auto=format&fit=crop" alt="Marokko" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇲🇦</div>
+          <span class="story-name">Marokko</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="MA"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/aegypten/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1539768942893-daf53e448371?w=600&q=70&auto=format&fit=crop" alt="Ägypten" loading="lazy">
-        <div class="dest-card-label"><span>Ägypten</span></div>
+      <a href="/aegypten/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1539768942893-daf53e448371?w=600&q=75&auto=format&fit=crop" alt="Ägypten" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇪🇬</div>
+          <span class="story-name">Ägypten</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="EG"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/zypern/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1664993118495-6647529d58d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Zypern" loading="lazy">
-        <div class="dest-card-label"><span>Zypern</span></div>
+      <a href="/zypern/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1664993118495-6647529d58d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Zypern" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇨🇾</div>
+          <span class="story-name">Zypern</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="CY"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/frankreich/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Frankreich" loading="lazy">
-        <div class="dest-card-label"><span>Frankreich</span></div>
+      <a href="/frankreich/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Frankreich" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇫🇷</div>
+          <span class="story-name">Frankreich</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="FR"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/jordanien/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=600&q=70&auto=format&fit=crop" alt="Jordanien" loading="lazy">
-        <div class="dest-card-label"><span>Jordanien</span></div>
+      <a href="/jordanien/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=600&q=75&auto=format&fit=crop" alt="Jordanien" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇯🇴</div>
+          <span class="story-name">Jordanien</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="JO"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/tunesien/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?w=600&q=70&auto=format&fit=crop" alt="Tunesien" loading="lazy">
-        <div class="dest-card-label"><span>Tunesien</span></div>
+      <a href="/tunesien/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?w=600&q=75&auto=format&fit=crop" alt="Tunesien" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇹🇳</div>
+          <span class="story-name">Tunesien</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="TN"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/kap-verde/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1560969184-10fe8719e047?w=600&q=70&auto=format&fit=crop" alt="Kap Verde" loading="lazy">
-        <div class="dest-card-label"><span>Kap Verde</span></div>
+      <a href="/kap-verde/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1560969184-10fe8719e047?w=600&q=75&auto=format&fit=crop" alt="Kap Verde" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇨🇻</div>
+          <span class="story-name">Kap Verde</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="CV"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
-      <a href="/bulgarien/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1683653417446-0c7009151621?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Bulgarien" loading="lazy">
-        <div class="dest-card-label"><span>Bulgarien</span></div>
+      <a href="/bulgarien/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1683653417446-0c7009151621?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Bulgarien" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇧🇬</div>
+          <span class="story-name">Bulgarien</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="BG"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
       </a>
     </div>
+    <script>
+      (function(){
+        fetch('/api/giata?action=counts')
+          .then(function(r){ return r.ok ? r.json() : null; })
+          .then(function(d){
+            if (!d || !d.counts) return;
+            document.querySelectorAll('[data-count-cc]').forEach(function(el){
+              var n = d.counts[el.getAttribute('data-count-cc')];
+              if (n) el.textContent = n + ' Hotels';
+            });
+          }).catch(function(){});
+      })();
+    </script>
   </section>
 
-  <!-- ── HOTEL CAROUSELS: GLOBAL FAMILY & LUXURY ── -->
+    <!-- ── HOTEL CAROUSELS: GLOBAL FAMILY & LUXURY ── -->
   <section class="destinations" style="padding-top:0;" id="hotel-carousel-family-global">
     <h2>👨‍👩‍👧‍👦 Top-Bewertete <span>Familienhotels</span> weltweit</h2>
     <p class="destinations-sub">Die bestbewerteten familienfreundlichen Hotels – Kids Club, Kinderpool, Wasserpark &amp; Animation. Aus 16 Ländern ausgewählt.</p>

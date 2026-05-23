@@ -68,6 +68,17 @@ module.exports = async function handler(req, res) {
     });
   }
 
+  // --- Hotel-Anzahl pro Land (für Story-Grid Kartenbadges) ---
+  // GET /api/giata?action=counts
+  if (action === 'counts') {
+    const index = loadSearchIndex();
+    if (!index) return res.status(200).json({ counts: {} });
+    const counts = {};
+    index.forEach(h => { if (h.cc) counts[h.cc] = (counts[h.cc] || 0) + 1; });
+    res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
+    return res.status(200).json({ counts });
+  }
+
   // Demo-Modus wenn kein API-Key gesetzt
   if (!apiKey) {
     if (action === 'search' && q) {

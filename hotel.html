@@ -472,6 +472,7 @@
     </div>
   </div><!-- /hd-root -->
 
+  <script src="/components/jb-score.js"></script>
   <script>
   (function () {
     'use strict';
@@ -791,16 +792,8 @@
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
-    // ── JB Experten-Score berechnen ─────────────────────────────────
-    function computeJbScore(h) {
-      var s = 52;
-      s += Math.round((h.stars || 0) / 5 * 24);          // 0–24 Pkt (Sterne)
-      var fac = (h.factIds || []).length;
-      s += Math.min(Math.round(fac * 0.55), 18);          // 0–18 Pkt (Ausstattung)
-      if ((h.allImages || h.images || []).length >= 5) s += 4;  // Fotomaterial
-      if ((h.allSections || h.description || []).length >= 2) s += 2; // Beschreibung
-      return Math.min(s, 100);
-    }
+    // ── JB Experten-Score berechnen (via JBScore Engine) ───────────
+    // Berechnung erfolgt in renderHotel mit JBScore.calcScore(h, {warningPenalty})
 
     // ── Haupt-Render ─────────────────────────────────────────────────
     function renderHotel(h) {
@@ -838,7 +831,8 @@
       document.getElementById('hd-location').textContent = loc ? '📍 ' + loc : '';
 
       // ── JB Experten-Score Siegel befüllen ─────────────────────────
-      var jbScore = computeJbScore(h);
+      var JBS = window.JBScore || {};
+      var jbScore = JBS.calcScore ? JBS.calcScore(h, { warningPenalty: h._warningPenalty || 0 }) : 60;
       var mainSvgEl = document.getElementById('jb-score-svg-main');
       if (mainSvgEl) mainSvgEl.textContent = jbScore;
       var sidebarSvgEl = document.getElementById('jb-score-svg-sidebar');
@@ -890,7 +884,15 @@
     } else {
       fetch('/api/giata?action=detail&id=' + encodeURIComponent(hotelId))
         .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-        .then(function (h) { if (h.error) throw new Error(h.error); renderHotel(h); })
+        .then(function (h) {
+          if (h.error) throw new Error(h.error);
+          var JBS = window.JBScore;
+          var warn = JBS ? JBS.fetchWarningPenalty(h.country || '') : Promise.resolve(0);
+          return warn.then(function (penalty) {
+            h._warningPenalty = penalty;
+            renderHotel(h);
+          });
+        })
         .catch(function (err) {
           document.getElementById('hd-loading').textContent = '❌ Hotel konnte nicht geladen werden. (' + err.message + ')';
         });

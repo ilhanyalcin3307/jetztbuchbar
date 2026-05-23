@@ -424,13 +424,15 @@
 
   // ── Build Fazit Text ──────────────────────────────────────────────────────
   function buildFazitText(h, isWinner, allHotels) {
-    var feats = topFeatures(h, 6);
+    var JBS = window.JBScore || {};
+    var feats = JBS.topFeatures ? JBS.topFeatures(h, 6) : [];
+    var jbSS  = JBS.SCORING_SORTED || [];
     var otherSets = allHotels.filter(function(o){return o.giataId!==h.giataId;}).map(function(o){
       var s={};(o.factIds||[]).forEach(function(id){s[id]=true;});return s;
     });
     var exclusive = feats.filter(function(e){
       return otherSets.every(function(os){
-        return !SCORING_SORTED.some(function(se){return se.l===e.l&&os[se.id];});
+      return !jbSS.some(function(se){return se.l===e.l&&os[se.id];});
       });
     });
     var lead = exclusive.length ? exclusive.slice(0,2) : feats.slice(0,3);
@@ -468,7 +470,9 @@
   }
 
   function renderCol(h, isWinner, allHotels) {
-    var score = calcScore(h);
+    var JBS = window.JBScore || {};
+    var _SCORING_SORTED = JBS.SCORING_SORTED || [];
+    var score = JBS.calcScore ? JBS.calcScore(h, {warningPenalty: h._warningPenalty||0}) : 0;
     var feats = topShowcase(h, 4);
     var img   = (h.images && h.images.length) ? h.images[0] : (h.image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70');
 
@@ -517,8 +521,19 @@
       return;
     }
 
+    var JBS = window.JBScore || {};
+    var _fetchWarn = JBS.fetchWarningPenalty || function() { return Promise.resolve(0); };
+    var _calcScore = JBS.calcScore || function() { return 60; };
+    var _topFeats  = JBS.topFeatures  || function() { return []; };
+    var _icons     = JBS.FEAT_ICONS   || {};
+
+    // Reisewarnungen für alle Hotels laden, dann rendern
+    Promise.all(hotels.map(function(h) {
+      return _fetchWarn(h.country || '').then(function(p) { h._warningPenalty = p; });
+    })).then(function() {
+
     // Score all hotels, sort desc
-    var scored = hotels.map(function(h){ return {h:h, score:calcScore(h)}; })
+    var scored = hotels.map(function(h){ return {h:h, score:_calcScore(h, {warningPenalty: h._warningPenalty||0})}; })
       .sort(function(a,b){ return b.score!==a.score?b.score-a.score:(b.h.stars||0)-(a.h.stars||0); });
 
     var winner = scored[0].h;
@@ -554,7 +569,7 @@
     // Winner box
     if (winnerEl) {
       winnerEl.style.display = '';
-      var winnerFeats = topFeatures(winner, 3).map(function(f){return (FEAT_ICONS[f.l]||'')+' '+f.l;}).join(' · ');
+      var winnerFeats = _topFeats(winner, 3).map(function(f){return (_icons[f.l]||'')+' '+f.l;}).join(' · ');
       winnerEl.innerHTML = '<div class="vg-fazit-icon">🏆</div>'
         +'<div><h3>Unsere Empfehlung: '+esc(winner.name)+'</h3>'
         +'<p>Mit einem JB Experten-Score von <strong>'+scored[0].score+'/100</strong> und Top-Features wie <strong>'+esc(winnerFeats)+'</strong> '
@@ -576,7 +591,8 @@
         }
       });
     }
-  }
+    }); // end Promise.all
+  } // end render
 
   // ── Add-hotel search ──────────────────────────────────────────────────────
   var currentHotels = [];

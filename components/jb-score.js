@@ -172,6 +172,44 @@
     return Math.max(1, Math.min(100, base + _flightBonus(iso) - warningPenalty));
   }
 
+  // ── Score Detail (sync) – returns raw category breakdown ─────────────────
+  function calcScoreDetail(h, opts) {
+    opts = opts || {};
+    var warningPenalty = opts.warningPenalty || 0;
+    var st = h.stars || 0;
+    var stars = st >= 5 ? 15 : st >= 4 ? 12 : st >= 3 ? 8 : st >= 2 ? 4 : st >= 1 ? 1 : 0;
+    var cats = { L: 0, P: 0, F: 0, A: 0 };
+    var idSet = {};
+    (h.factIds || []).forEach(function (id) { idSet[id] = true; });
+    for (var i = 0; i < SCORING_SORTED.length; i++) {
+      var e = SCORING_SORTED[i];
+      if (idSet[e.id]) cats[e.cat] = (cats[e.cat] || 0) + e.s;
+    }
+    for (var j = 0; j < SCORING_DUAL.length; j++) {
+      var d = SCORING_DUAL[j];
+      if (idSet[d.id]) cats[d.cat] = (cats[d.cat] || 0) + d.s;
+    }
+    var L = Math.min(cats.L, CAT_CAP.L);
+    var P = Math.min(cats.P, CAT_CAP.P);
+    var F = Math.min(cats.F, CAT_CAP.F);
+    var A = Math.min(cats.A, CAT_CAP.A);
+    var raw = stars + L + P + F + A;
+    var iso = countryToIso(h.country || '');
+    var flightBonus = _flightBonus(iso);
+    var base = Math.round(raw / MAX_RAW * 100);
+    var score = Math.max(1, Math.min(100, base + flightBonus - warningPenalty));
+    return {
+      score: score,
+      stars: stars, starsMax: 15,
+      L: L, Lmax: CAT_CAP.L,
+      P: P, Pmax: CAT_CAP.P,
+      F: F, Fmax: CAT_CAP.F,
+      A: A, Amax: CAT_CAP.A,
+      flightBonus: flightBonus,
+      warningPenalty: warningPenalty
+    };
+  }
+
   // ── Async: Reisewarnung penalty ───────────────────────────────────────────
   // Gibt penalty-Punkte zurück: level 0→0, 1→5, 2→10, 3→15
   // Session-gecacht: gleiche ISO → kein zweiter API-Call
@@ -217,6 +255,7 @@
     FEAT_ICONS:          FEAT_ICONS,
     countryToIso:        countryToIso,
     calcScore:           calcScore,
+    calcScoreDetail:     calcScoreDetail,
     fetchWarningPenalty: fetchWarningPenalty,
     topFeatures:         topFeatures,
     scoreLabel:          scoreLabel

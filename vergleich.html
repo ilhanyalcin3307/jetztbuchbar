@@ -148,18 +148,33 @@
     .vg-col.vg-winner .vg-score-circle .jb-num { fill: var(--accent); }
     .vg-score-circle .jb-sub { fill:rgba(255,255,255,.28); font-size:8px; font-family:system-ui,-apple-system,sans-serif; }
 
-    /* ── TOP FEATURES (row 5) ── */
-    .vg-features { padding: 0 1.15rem; display:flex; flex-direction:column; gap:.3rem; }
-    .vg-feat-item {
-      display: flex; align-items: center; gap:.5rem;
-      font-size: .8rem; color: var(--text);
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: 8px;
-      padding: .38rem .65rem;
+    /* ── SCORE BREAKDOWN (row 5) ── */
+    .vg-breakdown { padding: .5rem 1.15rem .2rem; display:flex; flex-direction:column; gap:.42rem; }
+    .vg-bar-row {
+      display: grid;
+      grid-template-columns: 16px auto 1fr 28px;
+      align-items: center;
+      gap: 5px;
     }
-    .vg-feat-check { color: var(--accent); font-weight:900; font-size:.85rem; flex-shrink:0; }
-    .vg-feat-icon { flex-shrink:0; }
+    .vg-bar-icon  { font-size: 12px; text-align:center; line-height:1; }
+    .vg-bar-label { font-size: 10.5px; color: #888; white-space: nowrap; }
+    .vg-bar-track { height: 5px; background: rgba(255,255,255,.07); border-radius: 3px; overflow:hidden; }
+    .vg-bar-fill  {
+      height: 100%; border-radius: 3px;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .95s cubic-bezier(.22,.68,0,1.2);
+    }
+    .vg-bar-val { font-size: 9.5px; color: #555; text-align:right; font-variant-numeric:tabular-nums; }
+    .vg-bar-stars .vg-bar-fill { background: linear-gradient(90deg,#d97706,#fbbf24); }
+    .vg-bar-L     .vg-bar-fill { background: linear-gradient(90deg,#1d4ed8,#60a5fa); }
+    .vg-bar-P     .vg-bar-fill { background: linear-gradient(90deg,#047857,#00c896); }
+    .vg-bar-F     .vg-bar-fill { background: linear-gradient(90deg,#c2410c,#fb923c); }
+    .vg-bar-A     .vg-bar-fill { background: linear-gradient(90deg,#6d28d9,#c084fc); }
+    .vg-breakdown-pills { display:flex; gap:5px; margin-top:3px; flex-wrap:wrap; }
+    .vg-pill { font-size:10px; padding:2px 8px; border-radius:10px; font-weight:700; line-height:1.7; }
+    .vg-pill-green { background:rgba(0,200,150,.13); color:#00c896; }
+    .vg-pill-gray  { background:rgba(255,255,255,.06); color:#666; }
+    .vg-pill-red   { background:rgba(239,68,68,.13); color:#ef4444; }
 
     /* ── CTA BUTTONS (row 6) ── */
     .vg-cta { display:flex; gap:.45rem; padding:.85rem 1.15rem 1.15rem; }
@@ -469,24 +484,44 @@
     }).slice(0,n);
   }
 
+  function renderBreakdown(h) {
+    var JBS = window.JBScore || {};
+    if (!JBS.calcScoreDetail) return '';
+    var d = JBS.calcScoreDetail(h, { warningPenalty: h._warningPenalty || 0 });
+
+    function barRow(cat, icon, label, val, max, idx) {
+      var pct = max > 0 ? (val / max).toFixed(3) : '0';
+      return '<div class="vg-bar-row vg-bar-' + cat + '">'
+        + '<span class="vg-bar-icon">' + icon + '</span>'
+        + '<span class="vg-bar-label">' + label + '</span>'
+        + '<div class="vg-bar-track"><div class="vg-bar-fill" data-pct="' + pct + '" style="transition-delay:' + (idx * 85) + 'ms"></div></div>'
+        + '<span class="vg-bar-val">' + val + '</span>'
+        + '</div>';
+    }
+
+    var html = '<div class="vg-breakdown">';
+    html += barRow('stars', '⭐', 'Sterne',       d.stars, d.starsMax, 0);
+    html += barRow('L',     '📍', 'Lage',         d.L,     d.Lmax,     1);
+    html += barRow('P',     '🏊', 'Pool & Spa',   d.P,     d.Pmax,     2);
+    html += barRow('F',     '🍽️', 'Verpflegung',  d.F,     d.Fmax,     3);
+    html += barRow('A',     '🎯', 'Aktivitäten',  d.A,     d.Amax,     4);
+    var fc = d.flightBonus > 0 ? 'green' : d.flightBonus < 0 ? 'red' : 'gray';
+    var ft = d.flightBonus > 0 ? '✈️ +' + d.flightBonus + ' Flug'
+           : d.flightBonus < 0 ? '✈️ ' + d.flightBonus + ' Flug'
+           : '✈️ ±0 Flug';
+    html += '<div class="vg-breakdown-pills">'
+      + '<span class="vg-pill vg-pill-' + fc + '">' + ft + '</span>';
+    if (d.warningPenalty > 0) {
+      html += '<span class="vg-pill vg-pill-red">🔴 −' + d.warningPenalty + ' Warnung</span>';
+    }
+    html += '</div></div>';
+    return html;
+  }
+
   function renderCol(h, isWinner, allHotels) {
     var JBS = window.JBScore || {};
-    var _SCORING_SORTED = JBS.SCORING_SORTED || [];
     var score = JBS.calcScore ? JBS.calcScore(h, {warningPenalty: h._warningPenalty||0}) : 0;
-    var feats = topShowcase(h, 4);
     var img   = (h.images && h.images.length) ? h.images[0] : (h.image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70');
-
-    var featHtml = feats.map(function(f){
-      return '<div class="vg-feat-item">'
-        +'<span class="vg-feat-check">✅</span>'
-        +'<span class="vg-feat-icon">'+f.icon+'</span>'
-        +esc(f.label)
-        +'</div>';
-    }).join('');
-    // Pad to always 4 rows → consistent height alignment
-    for (var i = feats.length; i < 4; i++) {
-      featHtml += '<div class="vg-feat-item" style="visibility:hidden"><span>—</span></div>';
-    }
 
     // Flat children (no vg-body wrapper) → subgrid can align rows across cards
     return '<div class="vg-ribbon'+(isWinner?'':' vg-ribbon-empty')+'">'+(isWinner?'🏆 Unsere Empfehlung':'')+'</div>'
@@ -499,7 +534,7 @@
       +'<div class="vg-loc">📍 '+esc(h.city||'')+((h.country)?' · '+esc(h.country):'')+'</div>'
       +'</div>'
       +'<div class="vg-score-wrap">'+scoreCircleSVG(score)+'</div>'
-      +'<div class="vg-features">'+featHtml+'</div>'
+      +renderBreakdown(h)
       +'<div class="vg-cta">'
       +'<a class="vg-btn vg-btn-details" href="/hotel.html?id='+esc(h.giataId)+'&slug='+toSlug(h.name)+'">Mehr Details</a>'
       +'<button class="vg-btn vg-btn-anfragen" data-anfragen="'+esc(h.name||'')+'">Anfragen</button>'
@@ -562,6 +597,9 @@
           var s = parseInt(svg.getAttribute('data-score'), 10) || 0;
           var ring = svg.querySelector('.jb-progress');
           if (ring) ring.style.strokeDashoffset = (251.33 * (1 - s / 100));
+        });
+        gridEl.querySelectorAll('.vg-bar-fill[data-pct]').forEach(function(fill) {
+          fill.style.transform = 'scaleX(' + fill.getAttribute('data-pct') + ')';
         });
       }, 80);
     }

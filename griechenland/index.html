@@ -197,6 +197,22 @@
     .stat-grid { grid-template-columns: 1fr 1fr; }
     .stat-card { padding: 0.65rem 0.75rem; gap: 0.55rem; }
   }
+
+/* City Story-Grid */
+.story-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.7rem}
+.story-card{aspect-ratio:9/16;border-radius:18px;overflow:hidden;position:relative;display:block;text-decoration:none;background:var(--bg-card)}
+.story-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
+.story-card:hover .story-img{transform:scale(1.06)}
+.story-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.35) 42%,transparent 72%)}
+.story-top{position:absolute;top:.65rem;left:.65rem;display:flex;align-items:center;gap:.4rem;z-index:2}
+.story-flag{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;font-size:1rem;background:rgba(0,0,0,.22);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);flex-shrink:0;line-height:1}
+.story-name{color:#fff;font-size:.68rem;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.85);white-space:nowrap}
+.story-bottom{position:absolute;bottom:.7rem;left:.65rem;right:.65rem;display:flex;align-items:flex-end;justify-content:space-between;gap:.3rem;z-index:2}
+.story-count{color:rgba(255,255,255,.78);font-size:.61rem;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.85)}
+.story-btn{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:.22rem .6rem;color:#fff;font-size:.6rem;font-weight:700;white-space:nowrap;transition:background .2s,border-color .2s;line-height:1.4}
+.story-card:hover .story-btn{background:rgba(255,255,255,.26);border-color:rgba(255,255,255,.6)}
+@media(max-width:1100px){.story-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:720px){.story-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:.6rem;padding-bottom:.5rem;scrollbar-width:none}.story-grid::-webkit-scrollbar{display:none}.story-card{flex:0 0 clamp(130px,40vw,200px);scroll-snap-align:start;border-radius:14px}}
 </style>
 
   <script type="application/ld+json">
@@ -513,6 +529,90 @@
       <div class="climate-legend">
         <span><span class="dot"></span> Temperatur (°C)</span>
         <span style="color:var(--text-muted);font-size:0.77rem;">Niederschlag (mm) unter den Balken</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STÄDTE & REGIONEN ── -->
+  <div class="section" id="city-story-grid">
+    <div class="container">
+      <h2 class="section-title">📍 Inseln &amp; Regionen in <span>Griechenland</span></h2>
+      <p style="color:var(--text-muted);margin-bottom:1.75rem;font-size:0.93rem;">
+        Traumhafte Inseln, azurblaues Meer und antike Geschichte – die besten Reiseziele in Griechenland.
+      </p>
+      <div class="story-grid">
+      <a href="/griechenland/santorini/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1664112115778-0ed2f2da97e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Santorini" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🌅</div>
+          <span class="story-name">Santorini</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count"></span>
+          <span class="story-btn">Entdecken →</span>
+        </div>
+      </a>
+      <a href="/griechenland/mykonos/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Mykonos" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🏛️</div>
+          <span class="story-name">Mykonos</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count"></span>
+          <span class="story-btn">Entdecken →</span>
+        </div>
+      </a>
+      <a href="/griechenland/kreta/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1558870964-72e29d300edd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Kreta" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🫒</div>
+          <span class="story-name">Kreta</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count"></span>
+          <span class="story-btn">Entdecken →</span>
+        </div>
+      </a>
+      <a href="/griechenland/rhodos/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1651313442275-ba7418be7471?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Rhodos" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🌺</div>
+          <span class="story-name">Rhodos</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count"></span>
+          <span class="story-btn">Entdecken →</span>
+        </div>
+      </a>
+      <a href="/griechenland/korfu/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1567884896242-9f2f2d535341?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Korfu" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🌿</div>
+          <span class="story-name">Korfu</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count"></span>
+          <span class="story-btn">Entdecken →</span>
+        </div>
+      </a>
+      <a href="/griechenland/zakynthos/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1563789031959-4c02bcb41319?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=75" alt="Zakynthos" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🐢</div>
+          <span class="story-name">Zakynthos</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count"></span>
+          <span class="story-btn">Entdecken →</span>
+        </div>
+      </a>
       </div>
     </div>
   </div>

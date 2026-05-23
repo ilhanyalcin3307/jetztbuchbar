@@ -152,7 +152,7 @@
     .vg-breakdown { padding: .5rem 1.15rem .2rem; display:flex; flex-direction:column; gap:.42rem; }
     .vg-bar-row {
       display: grid;
-      grid-template-columns: 16px auto 1fr 28px;
+      grid-template-columns: 16px auto 1fr 34px;
       align-items: center;
       gap: 5px;
     }
@@ -491,11 +491,12 @@
 
     function barRow(cat, icon, label, val, max, idx) {
       var pct = max > 0 ? (val / max).toFixed(3) : '0';
+      var pctDisplay = max > 0 ? Math.round(val / max * 100) + '%' : '0%';
       return '<div class="vg-bar-row vg-bar-' + cat + '">'
         + '<span class="vg-bar-icon">' + icon + '</span>'
         + '<span class="vg-bar-label">' + label + '</span>'
         + '<div class="vg-bar-track"><div class="vg-bar-fill" data-pct="' + pct + '" style="transition-delay:' + (idx * 85) + 'ms"></div></div>'
-        + '<span class="vg-bar-val">' + val + '</span>'
+        + '<span class="vg-bar-val">' + pctDisplay + '</span>'
         + '</div>';
     }
 

@@ -206,13 +206,32 @@
     .hd-sb-stars { color: #f5a623; font-size: 1.1rem; }
     .hd-sb-location { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 0.25rem; }
     .hd-sb-divider { border: none; border-top: 1px solid var(--border); margin: 0.25rem 0; }
-    .hd-sb-meta { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.25rem; }
-    .hd-sb-meta-row {
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 0.82rem;
+    .hd-sb-meta { padding: .3rem 0 .1rem; display:flex; flex-direction:column; gap:.4rem; margin-bottom: 0.25rem; }
+    .hd-sb-bar-row {
+      display: grid;
+      grid-template-columns: 16px auto 1fr 34px;
+      align-items: center;
+      gap: 5px;
     }
-    .hd-sb-meta-row .lbl { color: var(--text-muted); }
-    .hd-sb-meta-row .val { font-weight: 600; color: var(--text); }
+    .hd-sb-bar-icon  { font-size: 12px; text-align:center; line-height:1; }
+    .hd-sb-bar-label { font-size: 10.5px; color: #888; white-space: nowrap; }
+    .hd-sb-bar-track { height: 5px; background: rgba(255,255,255,.07); border-radius: 3px; overflow:hidden; }
+    .hd-sb-bar-fill  {
+      height: 100%; border-radius: 3px;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .95s cubic-bezier(.22,.68,0,1.2);
+    }
+    .hd-sb-bar-val { font-size: 9.5px; color: #555; text-align:right; font-variant-numeric:tabular-nums; }
+    .hd-sb-bar-stars .hd-sb-bar-fill { background: linear-gradient(90deg,#d97706,#fbbf24); }
+    .hd-sb-bar-L     .hd-sb-bar-fill { background: linear-gradient(90deg,#1d4ed8,#60a5fa); }
+    .hd-sb-bar-P     .hd-sb-bar-fill { background: linear-gradient(90deg,#047857,#00c896); }
+    .hd-sb-bar-F     .hd-sb-bar-fill { background: linear-gradient(90deg,#c2410c,#fb923c); }
+    .hd-sb-bar-A     .hd-sb-bar-fill { background: linear-gradient(90deg,#6d28d9,#c084fc); }
+    .hd-sb-breakdown-pills { display:flex; gap:5px; margin-top:3px; flex-wrap:wrap; }
+    .hd-sb-pill { font-size:10px; padding:2px 8px; border-radius:10px; font-weight:700; line-height:1.7; }
+    .hd-sb-pill-green { background:rgba(0,200,150,.13); color:#00c896; }
+    .hd-sb-pill-gray  { background:rgba(255,255,255,.06); color:#666; }
+    .hd-sb-pill-red   { background:rgba(239,68,68,.13); color:#ef4444; }
 
     .hd-anfragen-btn {
       width: 100%; padding: 0.85rem;
@@ -684,17 +703,48 @@
 
       var meta = document.getElementById('hd-sb-meta');
       var fac = h.facilities || {};
-      if (fac.concept) {
-        var row1 = document.createElement('div');
-        row1.className = 'hd-sb-meta-row';
-        row1.innerHTML = '<span class="lbl">Verpflegung</span><span class="val">' + esc(fac.concept) + '</span>';
-        meta.appendChild(row1);
-      }
-      if (fac.rooms) {
-        var row2 = document.createElement('div');
-        row2.className = 'hd-sb-meta-row';
-        row2.innerHTML = '<span class="lbl">Zimmer</span><span class="val">' + fac.rooms + '</span>';
-        meta.appendChild(row2);
+      var JBSb = window.JBScore || {};
+      if (JBSb.calcScoreDetail) {
+        var d = JBSb.calcScoreDetail(h, { warningPenalty: h._warningPenalty || 0 });
+        function sbBarRow(cat, icon, label, val, max, idx) {
+          var pct = max > 0 ? (val / max).toFixed(3) : '0';
+          var pctDisplay = max > 0 ? Math.round(val / max * 100) + '%' : '0%';
+          return '<div class="hd-sb-bar-row hd-sb-bar-' + cat + '">'
+            + '<span class="hd-sb-bar-icon">' + icon + '</span>'
+            + '<span class="hd-sb-bar-label">' + label + '</span>'
+            + '<div class="hd-sb-bar-track"><div class="hd-sb-bar-fill" data-pct="' + pct + '" style="transition-delay:' + (idx * 85) + 'ms"></div></div>'
+            + '<span class="hd-sb-bar-val">' + pctDisplay + '</span>'
+            + '</div>';
+        }
+        var barsHtml = sbBarRow('stars', '⭐', 'Sterne',       d.stars, d.starsMax, 0)
+                     + sbBarRow('L',     '📍', 'Lage',         d.L,     d.Lmax,     1)
+                     + sbBarRow('P',     '🏊', 'Pool & Spa',   d.P,     d.Pmax,     2)
+                     + sbBarRow('F',     '🍽️', 'Verpflegung',  d.F,     d.Fmax,     3)
+                     + sbBarRow('A',     '🎯', 'Aktivitäten',  d.A,     d.Amax,     4);
+        var fc = d.flightBonus > 0 ? 'green' : d.flightBonus < 0 ? 'red' : 'gray';
+        var ft = d.flightBonus > 0 ? '✈️ +' + d.flightBonus + ' Flug'
+               : d.flightBonus < 0 ? '✈️ ' + d.flightBonus + ' Flug'
+               : '✈️ ±0 Flug';
+        barsHtml += '<div class="hd-sb-breakdown-pills">'
+          + '<span class="hd-sb-pill hd-sb-pill-' + fc + '">' + ft + '</span>';
+        if (d.warningPenalty > 0) {
+          barsHtml += '<span class="hd-sb-pill hd-sb-pill-red">🔴 −' + d.warningPenalty + ' Warnung</span>';
+        }
+        barsHtml += '</div>';
+        meta.innerHTML = barsHtml;
+      } else {
+        if (fac.concept) {
+          var row1 = document.createElement('div');
+          row1.className = 'hd-sb-meta-row';
+          row1.innerHTML = '<span class="lbl">Verpflegung</span><span class="val">' + esc(fac.concept) + '</span>';
+          meta.appendChild(row1);
+        }
+        if (fac.rooms) {
+          var row2 = document.createElement('div');
+          row2.className = 'hd-sb-meta-row';
+          row2.innerHTML = '<span class="lbl">Zimmer</span><span class="val">' + fac.rooms + '</span>';
+          meta.appendChild(row2);
+        }
       }
 
       document.getElementById('hd-anfragen-btn').addEventListener('click', function () {
@@ -839,13 +889,16 @@
       if (sidebarSvgEl) sidebarSvgEl.textContent = jbScore;
       var sidebarLblEl = document.getElementById('jb-score-sidebar-label');
       if (sidebarLblEl) sidebarLblEl.textContent = jbScore + '/100 Experten-Score';
-      // Animate circular progress rings
+      // Animate circular progress rings + breakdown bars
       setTimeout(function() {
         var ringOffset = (150.8 * (1 - jbScore / 100));
         var mainRing = document.getElementById('jb-score-ring-main');
         if (mainRing) mainRing.style.strokeDashoffset = ringOffset;
         var sidebarRing = document.getElementById('jb-score-ring-sidebar');
         if (sidebarRing) sidebarRing.style.strokeDashoffset = ringOffset;
+        document.querySelectorAll('.hd-sb-bar-fill[data-pct]').forEach(function(fill) {
+          fill.style.transform = 'scaleX(' + fill.getAttribute('data-pct') + ')';
+        });
       }, 80);
 
       // Sidebar

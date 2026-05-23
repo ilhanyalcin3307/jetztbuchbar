@@ -2003,10 +2003,28 @@
     }
     function updateChips() {
       if (!chipsEl) return;
-      if (!compareList.length) { chipsEl.style.display='none'; if(btnCompare){btnCompare.textContent='⇄ Vergleichen';btnCompare.classList.remove('ready');} return; }
+      if (!compareList.length) {
+        chipsEl.style.display='none';
+        if(btnCompare){btnCompare.textContent='⇄ Vergleichen';btnCompare.classList.remove('ready','active');}
+        if(hintEl) hintEl.style.display='none';
+        return;
+      }
       chipsEl.style.display='';
       chipsEl.innerHTML=compareList.map(function(h){ return '<span class="hs-chip">'+esc2(h.name)+'<button class="hs-chip-rm" data-rm="'+esc2(h.id)+'">×</button></span>'; }).join('');
-      if (btnCompare) { if(compareList.length>=2){btnCompare.textContent='Jetzt Vergleichen';btnCompare.classList.add('ready');}else{btnCompare.textContent='⇄ Vergleichen';btnCompare.classList.remove('ready');} }
+      var rem = 3 - compareList.length;
+      if (hintEl) {
+        if (compareList.length >= 3) {
+          hintEl.textContent = 'Maximal 3 Hotels erreichbar – jetzt vergleichen!';
+        } else if (compareList.length >= 2) {
+          hintEl.textContent = 'Noch ' + rem + ' Hotel hinzufügen oder jetzt vergleichen.';
+        } else {
+          hintEl.textContent = 'Noch ' + rem + ' Hotels hinzufügen (mind. 2 zum Vergleichen).';
+        }
+        hintEl.style.display='';
+      }
+      if (btnCompare) {
+        if(compareList.length>=2){btnCompare.textContent='Jetzt Vergleichen';btnCompare.classList.add('ready');}else{btnCompare.textContent='⇄ Vergleichen';btnCompare.classList.remove('ready');}
+      }
     }
     if (inp) {
       inp.addEventListener('input', function(){
@@ -2023,17 +2041,17 @@
         if(!item) return;
         var id=item.getAttribute('data-id'); var name=item.getAttribute('data-name');
         if(!id||!name) return;
-        if(compareMode){
-          if(compareList.length<3&&!compareList.some(function(x){return x.id===id;})){
-            compareList.push({id:id,name:name});
-            updateChips();
-            if(window.JB_COMPARE) window.JB_COMPARE.add(id,name,'');
-          }
-          if(inp) inp.value=''; hideAC();
-        } else {
-          selectedHotel={id:id,name:name};
-          if(inp) inp.value=name; hideAC();
+        // Her iki modda da: listeye ekle, input'u temizle
+        if(compareList.length<3&&!compareList.some(function(x){return x.id===id;})){
+          compareList.push({id:id,name:name});
+          if(window.JB_COMPARE) window.JB_COMPARE.add(id,name,'');
+          updateChips();
+          if(!compareMode) setCompareMode(true);
         }
+        selectedHotel=null;
+        if(inp) inp.value='';
+        hideAC();
+        if(inp) inp.focus();
       });
     }
     if (btnSearch) {
@@ -2052,12 +2070,28 @@
     }
     if (btnCompare) {
       btnCompare.addEventListener('click', function(){
+        // Seçili otel varsa önce listeye ekle, input'u temizle
+        if(selectedHotel){
+          if(compareList.length<3&&!compareList.some(function(x){return x.id===selectedHotel.id;})){
+            compareList.push({id:selectedHotel.id,name:selectedHotel.name});
+            if(window.JB_COMPARE) window.JB_COMPARE.add(selectedHotel.id,selectedHotel.name,'');
+          }
+          selectedHotel=null;
+          if(inp) inp.value='';
+          hideAC();
+          updateChips();
+          if(!compareMode) setCompareMode(true);
+          if(compareList.length<3&&inp) inp.focus();
+          return;
+        }
+        // 2+ otel varsa vergleich sayfasına git
         if(compareList.length>=2){
           window.location.href='/vergleich.html?hotels='+compareList.map(function(x){return encodeURIComponent(x.id);}).join(',');
-        } else {
-          setCompareMode(!compareMode);
-          if(compareMode&&inp) inp.focus();
+          return;
         }
+        // Aksi halde modu aç/kapat
+        setCompareMode(!compareMode);
+        if(compareMode&&inp) inp.focus();
       });
     }
     if (chipsEl) {

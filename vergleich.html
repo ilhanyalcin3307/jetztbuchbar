@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel-Vergleich – JB Experten-Score | JetztBuchbar</title>
+  <meta name="description" content="Vergleiche bis zu 3 Hotels direkt nebeneinander – JB Experten-Score, Ausstattung und Lage auf einen Blick." />
+  <meta name="robots" content="noindex" />
+
+  <!-- Google tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCDTX8ZEQ3"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-YCDTX8ZEQ3');</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --bg-card: #121212; --accent: #00c896;
+      --accent-dark: #00a87e; --text: #f0f0f0; --text-muted: #888;
+      --border: #1e1e1e; --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ── */
+    header { position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.25rem,5vw,3rem);height:64px;background:rgba(10,10,10,0.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border); }
+    .logo { font-size:1.35rem;font-weight:800;letter-spacing:-.5px;color:var(--accent); }
+
+    /* ── HERO ── */
+    .vg-hero {
+      padding: clamp(2.5rem,5vw,4rem) clamp(1.25rem,5vw,3rem) clamp(2rem,4vw,3rem);
+      text-align: center;
+      background: linear-gradient(to bottom, rgba(0,200,150,.04) 0%, transparent 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .vg-breadcrumb { font-size:.78rem;color:var(--text-muted);margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:.4rem; }
+    .vg-breadcrumb a { color:var(--accent);transition:opacity .2s; }
+    .vg-breadcrumb a:hover { opacity:.75; }
+    .vg-hero h1 { font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-.5px;line-height:1.1;margin-bottom:.6rem; }
+    .vg-hero h1 span { color:var(--accent); }
+    .vg-hero p { font-size:.95rem;color:var(--text-muted);max-width:480px;margin:0 auto; }
+
+    /* ── MAIN WRAP ── */
+    .vg-wrap { max-width:1280px;margin:0 auto;padding:clamp(1.5rem,4vw,3rem) clamp(1.25rem,5vw,2.5rem) 4rem; }
+
+    /* ── LOADING ── */
+    .vg-loading { text-align:center;padding:4rem 0;color:var(--text-muted); }
+    .vg-loading svg { animation:vg-spin 1s linear infinite;margin-bottom:.75rem;display:block;margin:0 auto .75rem; }
+    @keyframes vg-spin { to { transform:rotate(360deg); } }
+
+    /* ── COMPARISON GRID ── */
+    .vg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      align-items: start;
+      margin-bottom: 2.5rem;
+    }
+    @media(min-width:900px) {
+      .vg-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+      .vg-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ── HOTEL COLUMN ── */
+    .vg-col {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color .25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .vg-col.vg-winner {
+      border-color: rgba(0,200,150,.5);
+      box-shadow: 0 0 0 2px rgba(0,200,150,.12), 0 16px 48px rgba(0,0,0,.55);
+    }
+
+    /* ── WINNER BADGE ── */
+    .vg-winner-ribbon {
+      background: linear-gradient(90deg,#00c896,#00e5ab);
+      color: #000;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .32rem 1rem;
+      text-align: center;
+    }
+
+    /* ── IMAGE WRAP ── */
+    .vg-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: #0d0d0d;
+    }
+    .vg-img-wrap img { width:100%;height:100%;object-fit:cover;display:block; }
+
+    /* ── JB SCORE SEAL (on image) ── */
+    .vg-seal {
+      position: absolute;
+      top: 10px; right: 10px;
+      z-index: 3;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,.7)) drop-shadow(0 0 8px rgba(0,200,150,.4));
+    }
+
+    /* ── BODY ── */
+    .vg-body { padding: 1.1rem 1.15rem 1.15rem; display:flex;flex-direction:column;gap:.55rem;flex:1; }
+    .vg-stars { color:#f59e0b;font-size:.8rem;letter-spacing:1.5px; }
+    .vg-name { font-size:1rem;font-weight:800;line-height:1.25;color:var(--text); }
+    .vg-loc { font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:.3rem; }
+
+    /* ── SCORE BAR ── */
+    .vg-score-row { margin-top:.25rem; }
+    .vg-score-label { font-size:.72rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;display:flex;align-items:center;justify-content:space-between; }
+    .vg-score-label span { font-size:1.05rem;font-weight:900; }
+    .vg-score-track { height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden; }
+    .vg-score-fill { height:100%;background:linear-gradient(90deg,#00c896,#00e5ab);border-radius:3px;transition:width .8s cubic-bezier(.22,.68,0,1.2); }
+
+    /* ── COMPARISON TABLE ── */
+    .vg-table { margin-top:.65rem;border-top:1px solid var(--border);padding-top:.65rem; }
+    .vg-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .28rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      font-size: .79rem;
+    }
+    .vg-row:last-child { border-bottom: none; }
+    .vg-row-label { display:flex;align-items:center;gap:.35rem;color:var(--text-muted); }
+    .vg-yes { color:var(--accent);font-weight:800;font-size:.9rem; }
+    .vg-no  { color:#2e2e2e;font-size:.9rem; }
+    .vg-txt { color:var(--text);font-size:.78rem;text-align:right;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+
+    /* ── BADGES ── */
+    .vg-badges { display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.35rem; }
+    .vg-badge { background:rgba(0,200,150,.07);border:1px solid rgba(0,200,150,.18);border-radius:7px;padding:.14rem .42rem;font-size:.69rem;color:var(--accent); }
+
+    /* ── FAZIT TEXT ── */
+    .vg-fazit-text { font-size:.8rem;color:var(--text-muted);line-height:1.5;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border); }
+
+    /* ── CTA BUTTONS ── */
+    .vg-cta { display:flex;gap:.45rem;margin-top:auto;padding-top:.85rem; }
+    .vg-btn { flex:1;padding:.46rem .4rem;border-radius:8px;font-size:.73rem;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;line-height:1.3;transition:all .18s;display:flex;align-items:center;justify-content:center;border:none; }
+    .vg-btn-details { background:transparent;border:1px solid rgba(255,255,255,.16);color:var(--text); }
+    .vg-btn-details:hover { border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.05); }
+    .vg-btn-anfragen { background:var(--accent);color:#000;font-weight:800; }
+    .vg-btn-anfragen:hover { background:#00e0ab; }
+
+    /* ── WINNER BOX ── */
+    .vg-fazit-box {
+      background: var(--bg-card);
+      border: 1px solid rgba(0,200,150,.3);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .vg-fazit-icon { font-size:2.2rem;flex-shrink:0;line-height:1; }
+    .vg-fazit-box h3 { font-size:1rem;font-weight:800;margin-bottom:.35rem;color:var(--accent); }
+    .vg-fazit-box p { font-size:.85rem;color:var(--text-muted);line-height:1.55; }
+    .vg-fazit-box strong { color:var(--text); }
+
+    /* ── ADD MORE BUTTON ── */
+    .vg-add-wrap { text-align:center;margin-bottom:2rem; }
+    .vg-add-btn {
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:transparent;border:1px solid rgba(255,255,255,.14);
+      color:var(--text-muted);border-radius:10px;padding:.6rem 1.25rem;
+      font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;
+    }
+    .vg-add-btn:hover { border-color:rgba(0,200,150,.4);color:var(--accent); }
+    .vg-add-search {
+      display:none;max-width:520px;margin:.8rem auto 0;position:relative;
+    }
+    .vg-add-search.open { display:block; }
+    .vg-add-search input {
+      width:100%;background:var(--bg-card);border:1px solid var(--border);
+      border-radius:10px;padding:.65rem 1rem .65rem 2.4rem;
+      color:var(--text);font-size:.88rem;outline:none;font-family:inherit;
+    }
+    .vg-add-search input:focus { border-color:var(--accent); }
+    .vg-add-search-icon { position:absolute;left:.8rem;top:50%;transform:translateY(-50%);pointer-events:none; }
+    .vg-add-ac {
+      position:absolute;top:calc(100% + 4px);left:0;right:0;
+      background:#181818;border:1px solid var(--border);border-radius:10px;
+      z-index:200;display:none;max-height:240px;overflow-y:auto;
+      box-shadow:0 8px 32px rgba(0,0,0,.7);scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+    }
+    .vg-add-ac.open { display:block; }
+    .vg-add-ac-item { padding:.55rem .9rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.04);transition:background .15s;font-size:.84rem; }
+    .vg-add-ac-item:last-child { border-bottom:none; }
+    .vg-add-ac-item:hover { background:rgba(255,255,255,.07); }
+    .vg-add-ac-name { font-weight:600;color:var(--text); }
+    .vg-add-ac-loc { font-size:.75rem;color:var(--text-muted); }
+
+    /* ── EMPTY STATE ── */
+    .vg-empty { text-align:center;padding:5rem 2rem;color:var(--text-muted); }
+    .vg-empty h2 { font-size:1.4rem;font-weight:700;margin-bottom:.6rem;color:var(--text); }
+
+    /* ── FOOTER ── */
+    footer { border-top:1px solid var(--border);padding:1.75rem clamp(1.25rem,5vw,3rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem; }
+    .footer-left { display:flex;flex-wrap:wrap;align-items:center;gap:1.25rem; }
+    .footer-left span,.footer-left a { font-size:.85rem;color:var(--text-muted); }
+    .footer-left a:hover { color:var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <script src="/components/header.js"></script>
+
+  <!-- HERO -->
+  <section class="vg-hero">
+    <div class="vg-breadcrumb">
+      <a href="/">Startseite</a>
+      <span>›</span>
+      <span>Hotel-Vergleich</span>
+    </div>
+    <h1>Hotel-<span>Vergleich</span></h1>
+    <p>Direktvergleich auf über 50 Kriterien &mdash; mit JB Experten-Score &amp; automatischer Empfehlung.</p>
+  </section>
+
+  <!-- MAIN -->
+  <div class="vg-wrap">
+    <!-- Loading state -->
+    <div class="vg-loading" id="vg-loading">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="rgba(0,200,150,.25)" stroke-width="3"/><path d="M16 3a13 13 0 0 1 13 13" stroke="#00c896" stroke-width="3" stroke-linecap="round"/></svg>
+      <p>Hotels werden geladen&hellip;</p>
+    </div>
+
+    <!-- Winner box -->
+    <div class="vg-fazit-box" id="vg-winner-box" style="display:none"></div>
+
+    <!-- Comparison columns -->
+    <div class="vg-grid" id="vg-grid" style="display:none"></div>
+
+    <!-- Add more -->
+    <div class="vg-add-wrap" id="vg-add-wrap" style="display:none">
+      <button class="vg-add-btn" id="vg-add-btn">+ Hotel hinzufügen</button>
+      <div class="vg-add-search" id="vg-add-search">
+        <span class="vg-add-search-icon">🔍</span>
+        <input type="text" id="vg-add-input" placeholder="Hotelname suchen…" autocomplete="off" />
+        <div class="vg-add-ac" id="vg-add-ac"></div>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="vg-empty" id="vg-empty" style="display:none">
+      <h2>Keine Hotels zum Vergleichen</h2>
+      <p>Wähle auf der <a href="/" style="color:var(--accent)">Startseite</a> oder einer Hotelseite Hotels aus, um sie hier zu vergleichen.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <span>© 2026 JetztBuchbar.de</span>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+      <a href="/kontakt.html">Kontakt</a>
+    </div>
+  </footer>
+
+<!--Start of Crisp Chat-->
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="bd983cbc-0fb7-4b1e-9d37-4c2c02ba1f0b";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<!--End of Crisp Chat-->
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Scoring (identisch mit hotel-carousel.js) ────────────────────────────
+  var SCORING = {
+    89:{s:20,cat:'L',l:'Strandlage'},301:{s:12,cat:'L',l:'Meeresnähe'},374:{s:7,cat:'L',l:'Strandblick'},
+    90:{s:8,cat:'L',l:'Zentrale Lage'},91:{s:5,cat:'L',l:'Ruhige Lage'},291:{s:5,cat:'L',l:'Stadtzentrum'},
+    295:{s:6,cat:'L',l:'Seelage'},562:{s:5,cat:'L',l:'Jachthafen'},350:{s:5,cat:'L',l:'Altstadt'},
+    294:{s:4,cat:'L',l:'Golfplatznähe'},691:{s:4,cat:'L',l:'Kurort'},354:{s:4,cat:'L',l:'Buchtblick'},
+    364:{s:4,cat:'L',l:'Seeblick'},349:{s:3,cat:'L',l:'Autofreie Lage'},293:{s:3,cat:'L',l:'Waldlage'},
+    300:{s:3,cat:'L',l:'Flusslage'},365:{s:3,cat:'L',l:'Bergblick'},348:{s:2,cat:'L',l:'Belebte Lage'},
+    22:{s:1,cat:'L',l:'Parkplatz'},568:{s:1,cat:'L',l:'Einparkservice'},
+    614:{s:18,cat:'P',l:'Privater Pool'},588:{s:18,cat:'P',l:'Wasserpark'},697:{s:14,cat:'P',l:'Infinity-Pool'},
+    696:{s:14,cat:'P',l:'Rooftop-Pool'},86:{s:12,cat:'P',l:'Wasserrutsche'},197:{s:12,cat:'P',l:'Spa'},
+    479:{s:10,cat:'P',l:'Wellness-Center'},822:{s:10,cat:'P',l:'Thermalbecken'},
+    529:{s:6,cat:'P',l:'Priv. Wellnessber.'},192:{s:8,cat:'P',l:'Hamam'},195:{s:8,cat:'P',l:'Massage'},
+    199:{s:6,cat:'P',l:'Thalasso'},869:{s:6,cat:'P',l:'Tauchbecken'},196:{s:6,cat:'P',l:'Sauna'},
+    660:{s:6,cat:'P',l:'Sauna'},43:{s:6,cat:'P',l:'Hallenbad'},698:{s:6,cat:'P',l:'Swim-up Bar'},
+    189:{s:5,cat:'P',l:'Ayurveda'},794:{s:5,cat:'P',l:'Wasserspielber.'},201:{s:5,cat:'P',l:'Whirlpool'},
+    58:{s:5,cat:'P',l:'Pool'},50:{s:5,cat:'P',l:'Außenpool'},190:{s:4,cat:'P',l:'Beautyfarm'},
+    793:{s:4,cat:'P',l:'Bali Bett'},59:{s:4,cat:'P',l:'Poolbar'},198:{s:4,cat:'P',l:'Dampfbad'},
+    336:{s:4,cat:'P',l:'Strandbar'},191:{s:3,cat:'P',l:'Schönheitssalon'},187:{s:3,cat:'P',l:'Akupunktur'},
+    909:{s:3,cat:'P',l:'Ruheraum'},664:{s:3,cat:'P',l:'Personal Trainer'},74:{s:3,cat:'P',l:'Solarium'},
+    76:{s:3,cat:'P',l:'Sonnenterrasse'},66:{s:3,cat:'P',l:'Zimmerservice'},567:{s:3,cat:'P',l:'Concierge'},
+    820:{s:2,cat:'P',l:'Gesichtsbehandlung'},71:{s:2,cat:'P',l:'Shuttleservice'},81:{s:2,cat:'P',l:'Transferservice'},
+    88:{s:1,cat:'P',l:'WLAN'},185:{s:1,cat:'P',l:'WLAN'},
+    94:{s:20,cat:'F',l:'All Inclusive Plus'},92:{s:16,cat:'F',l:'All Inclusive'},
+    101:{s:12,cat:'F',l:'Vollpension'},103:{s:8,cat:'F',l:'Halbpension'},
+    65:{s:5,cat:'F',l:'Restaurant'},299:{s:5,cat:'F',l:'Restaurant'},14:{s:3,cat:'F',l:'Bar'},
+    288:{s:3,cat:'F',l:'Bar/Pub'},450:{s:3,cat:'F',l:'Lobbybar'},575:{s:3,cat:'F',l:'Bar/Lounge'},
+    20:{s:2,cat:'F',l:'Café'},73:{s:2,cat:'F',l:'Snackbar'},439:{s:1,cat:'F',l:'Strandkorb'},
+    945:{s:12,cat:'A',l:'Kids Club'},219:{s:10,cat:'A',l:'Golf'},236:{s:10,cat:'A',l:'Tauchen'},
+    946:{s:8,cat:'A',l:'Teens Club'},1:{s:8,cat:'A',l:'Kinderbetreuung'},7:{s:8,cat:'A',l:'Miniclub'},
+    393:{s:7,cat:'A',l:'Flitterwochen'},593:{s:7,cat:'A',l:'Tennisplatz'},707:{s:6,cat:'A',l:'Kinder kostenlos'},
+    220:{s:6,cat:'A',l:'Fitness-Studio'},4:{s:5,cat:'A',l:'Kinderprogramm'},26:{s:5,cat:'A',l:'Kinderpool'},
+    240:{s:5,cat:'A',l:'Schnorcheln'},249:{s:5,cat:'A',l:'Windsurfen'},247:{s:5,cat:'A',l:'Wasserski'},
+    2:{s:5,cat:'A',l:'Animation'},389:{s:4,cat:'A',l:'Familienfreundlich'},781:{s:4,cat:'A',l:'Für Paare'},
+    385:{s:4,cat:'A',l:'Adults Only'},245:{s:4,cat:'A',l:'Tennis'},250:{s:3,cat:'A',l:'Yoga'},
+    209:{s:3,cat:'A',l:'Beach-Volleyball'},401:{s:3,cat:'A',l:'Konferenzen'},3:{s:3,cat:'A',l:'Abendshows'},
+    31:{s:3,cat:'A',l:'Disco'},56:{s:2,cat:'A',l:'Spielplatz'},57:{s:2,cat:'A',l:'Spielzimmer'},
+    244:{s:2,cat:'A',l:'Tischtennis'},211:{s:2,cat:'A',l:'Billard'},49:{s:2,cat:'A',l:'Nachtclub'},
+    24:{s:2,cat:'A',l:'Casino'},5:{s:1,cat:'A',l:'Live-Musik'},6:{s:1,cat:'A',l:'Mini-Disco'}
+  };
+  var FEAT_ICONS = {
+    'Strandlage':'🏖️','Meeresnähe':'🌊','Strandblick':'🌅','Zentrale Lage':'📍','Ruhige Lage':'🌿',
+    'Infinity-Pool':'♾️','Rooftop-Pool':'🏙️','Swim-up Bar':'🍹','Wasserrutsche':'🌊','Wasserpark':'💦',
+    'Hallenbad':'🏊','Außenpool':'🏊','Pool':'🏊','Poolbar':'🍹','Privater Pool':'🏊',
+    'Spa':'💆','Wellness-Center':'💆','Massage':'💆','Sauna':'🌡️','Hamam':'🧖',
+    'Dampfbad':'♨️','Whirlpool':'🛁','All Inclusive Plus':'⭐','All Inclusive':'🍽️',
+    'Vollpension':'🍽️','Halbpension':'🍳','Restaurant':'🍽️','Bar':'🍷','Lobbybar':'🥂',
+    'Kids Club':'👨‍👩‍👧','Kinderbetreuung':'👶','Miniclub':'🎪','Kinder kostenlos':'🎁',
+    'Kinderprogramm':'🎨','Kinderpool':'🏊','Spielplatz':'🛝','Golf':'⛳','Tauchen':'🤿',
+    'Tennisplatz':'🎾','Fitness-Studio':'💪','Schnorcheln':'🤿','Yoga':'🧘',
+    'Animation':'🎭','Disco':'💃','Flitterwochen':'💍','Adults Only':'🔞',
+    'Familienfreundlich':'👨‍👩‍👧','Für Paare':'❤️','WLAN':'📶','Parkplatz':'🅿️'
+  };
+  var SCORING_SORTED = Object.keys(SCORING).map(function(id){
+    return {id:Number(id),s:SCORING[id].s,l:SCORING[id].l,cat:SCORING[id].cat};
+  }).sort(function(a,b){return b.s-a.s;});
+  var CAT_CAP = {L:35,P:35,F:20,A:15};
+
+  function calcScore(h) {
+    var st=h.stars||0;
+    var stars=st>=5?15:st>=4?12:st>=3?8:st>=2?4:st>=1?1:0;
+    var cats={L:0,P:0,F:0,A:0};
+    var idSet={};
+    (h.factIds||[]).forEach(function(id){idSet[id]=true;});
+    for(var i=0;i<SCORING_SORTED.length;i++){
+      var e=SCORING_SORTED[i];
+      if(idSet[e.id]) cats[e.cat]=(cats[e.cat]||0)+e.s;
+    }
+    return Math.round((stars+Math.min(cats.L,CAT_CAP.L)+Math.min(cats.P,CAT_CAP.P)+Math.min(cats.F,CAT_CAP.F)+Math.min(cats.A,CAT_CAP.A))/120*100);
+  }
+
+  function topFeatures(h, n) {
+    var idSet={};
+    (h.factIds||[]).forEach(function(id){idSet[id]=true;});
+    var seen={},out=[];
+    for(var i=0;i<SCORING_SORTED.length&&out.length<n;i++){
+      var e=SCORING_SORTED[i];
+      if(idSet[e.id]&&!seen[e.l]){seen[e.l]=true;out.push(e);}
+    }
+    return out;
+  }
+
+  function esc(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function toSlug(n) {
+    return String(n||'').toLowerCase()
+      .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  }
+  function starsHtml(n) { var s='';for(var i=0;i<5;i++) s+=i<n?'★':'☆';return s; }
+
+  // ── Comparison criteria rows ──────────────────────────────────────────────
+  var COMPARE_ROWS = [
+    { label:'Strandlage',    icon:'🏖️', ids:[89]          },
+    { label:'Pool',          icon:'🏊', ids:[50,58,614,697,696] },
+    { label:'Wasserpark',    icon:'💦', ids:[588,86]       },
+    { label:'Spa & Wellness',icon:'💆', ids:[197,479]      },
+    { label:'All Inclusive', icon:'🍽️', ids:[92,94]        },
+    { label:'Kids Club',     icon:'👨‍👩‍👧', ids:[945,946,1,7] },
+    { label:'Fitness',       icon:'💪', ids:[220]          },
+    { label:'Restaurant',    icon:'🍽️', ids:[65,299]       },
+    { label:'Bar',           icon:'🍹', ids:[14,59,288,450,575] },
+    { label:'Hamam / Sauna', icon:'🧖', ids:[192,196,660]  },
+    { label:'Golf',          icon:'⛳', ids:[219]          },
+    { label:'WLAN',          icon:'📶', ids:[88,185]       },
+    { label:'Parkplatz',     icon:'🅿️', ids:[22,568]       },
+  ];
+
+  function hasAny(h, ids) {
+    var idSet={};
+    (h.factIds||[]).forEach(function(id){idSet[id]=true;});
+    return ids.some(function(id){return idSet[id];});
+  }
+
+  // ── Score SVG Seal ────────────────────────────────────────────────────────
+  function scoreSealSVG(score) {
+    return '<svg class="vg-seal" viewBox="0 0 56 56" width="54" height="54" aria-label="JB Score '+score+'">'
+      +'<circle cx="28" cy="28" r="25.5" fill="none" stroke="#00c896" stroke-width="1.2" stroke-dasharray="3.5 2.5" opacity="0.65"/>'
+      +'<circle cx="28" cy="28" r="20.5" fill="rgba(0,0,0,.72)" stroke="#00c896" stroke-width="0.7" opacity="0.5"/>'
+      +'<text x="28" y="20" text-anchor="middle" font-size="9" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif" letter-spacing="1">JB</text>'
+      +'<line x1="14" y1="23" x2="42" y2="23" stroke="#00c896" stroke-width="0.5" opacity="0.35"/>'
+      +'<text x="28" y="35" text-anchor="middle" font-size="13" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif">'+score+'</text>'
+      +'<text x="28" y="44" text-anchor="middle" font-size="6" fill="rgba(0,200,150,.7)" font-family="system-ui,-apple-system,sans-serif">/100</text>'
+      +'</svg>';
+  }
+
+  // ── Build Fazit Text ──────────────────────────────────────────────────────
+  function buildFazitText(h, isWinner, allHotels) {
+    var feats = topFeatures(h, 6);
+    var otherSets = allHotels.filter(function(o){return o.giataId!==h.giataId;}).map(function(o){
+      var s={};(o.factIds||[]).forEach(function(id){s[id]=true;});return s;
+    });
+    var exclusive = feats.filter(function(e){
+      return otherSets.every(function(os){
+        return !SCORING_SORTED.some(function(se){return se.l===e.l&&os[se.id];});
+      });
+    });
+    var lead = exclusive.length ? exclusive.slice(0,2) : feats.slice(0,3);
+    var labels = lead.map(function(e){return e.l;});
+    var featStr = labels.length===1?labels[0]:labels.length===2?labels[0]+' und '+labels[1]:labels[0]+', '+labels[1]+' und '+labels[2];
+    if (isWinner) {
+      if (exclusive.length) return h.name+' setzt sich ab — als einziges Hotel im Vergleich mit '+exclusive.slice(0,2).map(function(e){return e.l;}).join(' und ')+'.';
+      return h.name+' überzeugt mit '+featStr+' und erzielt den höchsten JB Experten-Score.';
+    }
+    return h.name+' punktet mit '+featStr+'.';
+  }
+
+  // ── Render hotel column ───────────────────────────────────────────────────
+  function renderCol(h, isWinner, allHotels) {
+    var score = calcScore(h);
+    var feats = topFeatures(h, 4);
+    var img   = (h.images && h.images.length) ? h.images[0] : (h.image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70');
+    var badges = feats.map(function(f){ return '<span class="vg-badge">'+(FEAT_ICONS[f.l]||'')+' '+esc(f.l)+'</span>'; }).join('');
+    var tableRows = COMPARE_ROWS.map(function(r){
+      var yes = hasAny(h, r.ids);
+      return '<div class="vg-row"><span class="vg-row-label">'+r.icon+' '+esc(r.label)+'</span>'
+        +(yes?'<span class="vg-yes">✓</span>':'<span class="vg-no">—</span>')
+        +'</div>';
+    }).join('');
+    var fazitTxt = buildFazitText(h, isWinner, allHotels);
+
+    return (isWinner ? '<div class="vg-winner-ribbon">🏆 Unsere Empfehlung</div>' : '')
+      +'<div class="vg-img-wrap">'
+      +'<img src="'+esc(img)+'" alt="'+esc(h.name)+'" onerror="this.src=\'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70\'" loading="eager">'
+      +(score>=50?scoreSealSVG(score):'')
+      +'</div>'
+      +'<div class="vg-body">'
+      +'<div class="vg-stars">'+starsHtml(h.stars||0)+'</div>'
+      +'<div class="vg-name">'+esc(h.name)+'</div>'
+      +'<div class="vg-loc">📍 '+esc(h.city||'')+((h.country)?' · '+esc(h.country):'')+'</div>'
+      +'<div class="vg-score-row">'
+      +'<div class="vg-score-label">JB Experten-Score <span>'+score+'</span>/100</div>'
+      +'<div class="vg-score-track"><div class="vg-score-fill" style="width:'+score+'%"></div></div>'
+      +'</div>'
+      +(badges?'<div class="vg-badges">'+badges+'</div>':'')
+      +'<div class="vg-table">'+tableRows+'</div>'
+      +'<div class="vg-fazit-text">'+esc(fazitTxt)+'</div>'
+      +'<div class="vg-cta">'
+      +'<a class="vg-btn vg-btn-details" href="/hotel.html?id='+esc(h.giataId)+'&slug='+toSlug(h.name)+'">Mehr Details</a>'
+      +'<button class="vg-btn vg-btn-anfragen" data-anfragen="'+esc(h.name||'')+'">Anfragen</button>'
+      +'</div>'
+      +'</div>';
+  }
+
+  // ── Main render ───────────────────────────────────────────────────────────
+  function render(hotels) {
+    var loadEl   = document.getElementById('vg-loading');
+    var gridEl   = document.getElementById('vg-grid');
+    var winnerEl = document.getElementById('vg-winner-box');
+    var addWrap  = document.getElementById('vg-add-wrap');
+    var emptyEl  = document.getElementById('vg-empty');
+
+    if (loadEl) loadEl.style.display = 'none';
+
+    if (!hotels.length) {
+      if (emptyEl) emptyEl.style.display = '';
+      return;
+    }
+
+    // Score all hotels, sort desc
+    var scored = hotels.map(function(h){ return {h:h, score:calcScore(h)}; })
+      .sort(function(a,b){ return b.score!==a.score?b.score-a.score:(b.h.stars||0)-(a.h.stars||0); });
+
+    var winner = scored[0].h;
+
+    // Render columns
+    if (gridEl) {
+      gridEl.className = 'vg-grid cols-'+Math.min(scored.length,3);
+      gridEl.style.display = '';
+      gridEl.innerHTML = scored.map(function(item, idx){
+        var isWinner = idx===0;
+        var col = document.createElement('div');
+        col.className = 'vg-col' + (isWinner?' vg-winner':'');
+        col.innerHTML = renderCol(item.h, isWinner, hotels);
+        return col.outerHTML;
+      }).join('');
+    }
+
+    // Winner box
+    if (winnerEl) {
+      winnerEl.style.display = '';
+      var winnerFeats = topFeatures(winner, 3).map(function(f){return (FEAT_ICONS[f.l]||'')+' '+f.l;}).join(' · ');
+      winnerEl.innerHTML = '<div class="vg-fazit-icon">🏆</div>'
+        +'<div><h3>Unsere Empfehlung: '+esc(winner.name)+'</h3>'
+        +'<p>Mit einem JB Experten-Score von <strong>'+scored[0].score+'/100</strong> und Top-Features wie <strong>'+esc(winnerFeats)+'</strong> '
+        +'liegt <strong>'+esc(winner.name)+'</strong> klar vorne. Ideal für anspruchsvolle Reisende, die keine Kompromisse eingehen möchten.</p></div>';
+    }
+
+    // Add-more button (if <3 hotels shown)
+    if (addWrap && hotels.length < 3) addWrap.style.display = '';
+
+    // Anfragen delegation
+    if (gridEl) {
+      gridEl.addEventListener('click', function(e){
+        var btn = e.target.closest ? e.target.closest('[data-anfragen]') : null;
+        if (!btn) return;
+        var name = btn.getAttribute('data-anfragen');
+        if (window.$crisp) {
+          try { $crisp.push(['set','session:data',[[['Hotel',name]]]]); } catch(_){}
+          try { $crisp.push(['do','chat:open']); } catch(_){}
+        }
+      });
+    }
+  }
+
+  // ── Add-hotel search ──────────────────────────────────────────────────────
+  var currentHotels = [];
+  var addTimer;
+
+  function initAddSearch() {
+    var addBtn = document.getElementById('vg-add-btn');
+    var addSearch = document.getElementById('vg-add-search');
+    var addInput = document.getElementById('vg-add-input');
+    var addAc = document.getElementById('vg-add-ac');
+    if (!addBtn) return;
+
+    addBtn.addEventListener('click', function(){
+      if (addSearch) { addSearch.classList.toggle('open'); if (addSearch.classList.contains('open') && addInput) addInput.focus(); }
+    });
+    if (addInput) {
+      addInput.addEventListener('input', function(){
+        clearTimeout(addTimer);
+        var q = addInput.value.trim();
+        if (q.length < 2) { if(addAc) addAc.classList.remove('open'); return; }
+        addTimer = setTimeout(function(){
+          fetch('/api/giata?action=search&q='+encodeURIComponent(q))
+            .then(function(r){return r.json();})
+            .then(function(d){
+              var res = (d.results||[]).filter(function(r){
+                return !currentHotels.some(function(h){return h.giataId===r.giataId;});
+              });
+              if (!res.length || !addAc) { if(addAc) addAc.classList.remove('open'); return; }
+              addAc.innerHTML = res.slice(0,8).map(function(r){
+                return '<div class="vg-add-ac-item" data-id="'+esc(r.giataId)+'" data-name="'+esc(r.name)+'">'
+                  +'<span class="vg-add-ac-name">'+esc(r.name)+'</span>'
+                  +'<span class="vg-add-ac-loc">'+esc(r.city)+', '+esc(r.country)+'</span>'
+                  +'</div>';
+              }).join('');
+              addAc.classList.add('open');
+            }).catch(function(){});
+        }, 280);
+      });
+      addInput.addEventListener('blur', function(){ setTimeout(function(){ if(addAc) addAc.classList.remove('open'); }, 180); });
+    }
+    if (addAc) {
+      addAc.addEventListener('click', function(e){
+        var item = e.target.closest ? e.target.closest('.vg-add-ac-item') : null;
+        if (!item) return;
+        var id = item.getAttribute('data-id');
+        if (!id) return;
+        fetch('/api/giata?action=property&id='+encodeURIComponent(id))
+          .then(function(r){return r.json();})
+          .then(function(h){
+            if (h && h.giataId) {
+              currentHotels.push(h);
+              // Update URL
+              var newIds = currentHotels.map(function(x){return x.giataId;}).join(',');
+              history.replaceState(null,'','/vergleich.html?hotels='+encodeURIComponent(newIds));
+              render(currentHotels);
+            }
+          }).catch(function(){});
+        if (addSearch) addSearch.classList.remove('open');
+        if (addInput) addInput.value = '';
+      });
+    }
+  }
+
+  // ── Boot ──────────────────────────────────────────────────────────────────
+  function boot() {
+    var params = new URLSearchParams(window.location.search);
+    var hotelParam = params.get('hotels') || '';
+    var ids = hotelParam.split(',').map(function(s){return s.trim();}).filter(Boolean).slice(0,3);
+
+    if (!ids.length) {
+      var loadEl = document.getElementById('vg-loading');
+      var emptyEl = document.getElementById('vg-empty');
+      if (loadEl) loadEl.style.display = 'none';
+      if (emptyEl) emptyEl.style.display = '';
+      return;
+    }
+
+    Promise.all(ids.map(function(id){
+      return fetch('/api/giata?action=property&id='+encodeURIComponent(id))
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .catch(function(){ return null; });
+    })).then(function(results){
+      currentHotels = results.filter(function(h){ return h && h.giataId && !h.error; });
+      render(currentHotels);
+      initAddSearch();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+</body>
+</html>

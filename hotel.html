@@ -225,6 +225,42 @@
     .hd-anfragen-btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
     .hd-sb-hint { text-align: center; font-size: 0.73rem; color: var(--text-dim); }
 
+    /* ── COMPARE BUTTON ── */
+    .hd-compare-btn {
+      width: 100%; padding: 0.65rem;
+      background: transparent; color: var(--accent);
+      border: 1px solid rgba(0,200,150,.35); border-radius: 8px;
+      font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s; margin-top: 0.55rem;
+      font-family: inherit;
+    }
+    .hd-compare-btn:hover { background: rgba(0,200,150,.08); border-color: var(--accent); }
+    .hd-compare-picker { margin-top: 0.55rem; position: relative; }
+    .hd-compare-picker input {
+      width: 100%; background: rgba(255,255,255,.05); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.58rem 0.75rem 0.58rem 2.1rem;
+      color: var(--text); font-size: 0.82rem; outline: none; font-family: inherit;
+    }
+    .hd-compare-picker input:focus { border-color: var(--accent); }
+    .hdc-icon { position: absolute; left: .7rem; top: .62rem; pointer-events: none; font-size: .8rem; }
+    .hdc-ac {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: #181818; border: 1px solid var(--border); border-radius: 10px;
+      z-index: 500; display: none; max-height: 200px; overflow-y: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,.7); scrollbar-width: thin;
+    }
+    .hdc-ac.open { display: block; }
+    .hdc-ac-item {
+      padding: .48rem .75rem; cursor: pointer; font-size: .78rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,.04); transition: background .15s;
+    }
+    .hdc-ac-item:last-child { border-bottom: none; }
+    .hdc-ac-item:hover { background: rgba(255,255,255,.07); }
+    .hdc-ac-name { font-weight: 600; color: var(--text); }
+    .hdc-ac-loc { font-size: .72rem; color: var(--text-dim, #666); }
+    .hdc-hint { font-size: .72rem; color: var(--text-dim, #666); text-align: center; margin-top: .3rem; }
+
     /* ── ANFRAGEN BUBBLE ── */
     .hd-ab {
       position: fixed; bottom: 90px; right: 22px; width: 285px;
@@ -423,6 +459,15 @@
           <div class="hd-sb-meta" id="hd-sb-meta"></div>
           <button class="hd-anfragen-btn" id="hd-anfragen-btn">💬 Sofort anfragen</button>
           <div class="hd-sb-hint">Kostenlos &amp; unverbindlich</div>
+
+          <!-- Compare Button -->
+          <button class="hd-compare-btn" id="hd-compare-btn">⇄ Mit anderem Hotel vergleichen</button>
+          <div class="hd-compare-picker" id="hd-compare-picker" style="display:none">
+            <span class="hdc-icon">🔍</span>
+            <input type="text" id="hdc-input" placeholder="Hotel suchen…" autocomplete="off" />
+            <div class="hdc-ac" id="hdc-ac"></div>
+            <p class="hdc-hint">Tippe den Namen eines Hotels ein</p>
+          </div>
         </div>
       </aside>
 
@@ -656,6 +701,57 @@
       document.getElementById('hd-anfragen-btn').addEventListener('click', function () {
         hdAnfragen(h.name || '');
       });
+
+      // ── Compare-Button Logik ───────────────────────────────────────
+      (function initCompareBtn() {
+        var btn     = document.getElementById('hd-compare-btn');
+        var picker  = document.getElementById('hd-compare-picker');
+        var inp     = document.getElementById('hdc-input');
+        var ac      = document.getElementById('hdc-ac');
+        var timer;
+        var currentId = String(h.giataId || '');
+
+        if (!btn || !picker || !inp || !ac) return;
+
+        btn.addEventListener('click', function () {
+          picker.style.display = picker.style.display === 'none' ? '' : 'none';
+          if (picker.style.display !== 'none') inp.focus();
+        });
+
+        inp.addEventListener('input', function () {
+          clearTimeout(timer);
+          var q = inp.value.trim();
+          if (q.length < 2) { ac.classList.remove('open'); return; }
+          timer = setTimeout(function () {
+            fetch('/api/giata?action=search&q=' + encodeURIComponent(q))
+              .then(function (r) { return r.json(); })
+              .then(function (d) {
+                var res = (d.results || []).filter(function (r) { return String(r.giataId) !== currentId; });
+                if (!res.length) { ac.classList.remove('open'); return; }
+                ac.innerHTML = res.slice(0, 8).map(function (r) {
+                  return '<div class="hdc-ac-item" data-id="' + esc(r.giataId) + '">'
+                    + '<span class="hdc-ac-name">' + esc(r.name) + '</span>'
+                    + '<span class="hdc-ac-loc">' + esc(r.city) + ', ' + esc(r.country) + '</span>'
+                    + '</div>';
+                }).join('');
+                ac.classList.add('open');
+              }).catch(function () {});
+          }, 280);
+        });
+
+        inp.addEventListener('blur', function () {
+          setTimeout(function () { ac.classList.remove('open'); }, 180);
+        });
+
+        ac.addEventListener('click', function (e) {
+          var item = e.target.closest ? e.target.closest('.hdc-ac-item') : null;
+          if (!item) return;
+          var selId = item.getAttribute('data-id');
+          if (selId) {
+            window.location.href = '/vergleich.html?hotels=' + encodeURIComponent(currentId) + ',' + encodeURIComponent(selId);
+          }
+        });
+      })();
     }
 
     // ── Crisp Anfrage ──────────────────────────────────────────────

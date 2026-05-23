@@ -706,21 +706,18 @@
             + '<span class="hd-sb-bar-val">' + pctDisplay + '</span>'
             + '</div>';
         }
-        var barsHtml = sbBarRow('stars', '⭐', 'Sterne',       d.stars, d.starsMax, 0)
-                     + sbBarRow('L',     '📍', 'Lage',         d.L,     d.Lmax,     1)
-                     + sbBarRow('P',     '🏊', 'Pool & Spa',   d.P,     d.Pmax,     2)
-                     + sbBarRow('F',     '🍽️', 'Verpflegung',  d.F,     d.Fmax,     3)
-                     + sbBarRow('A',     '🎯', 'Aktivitäten',  d.A,     d.Amax,     4);
+        var barsHtml = sbBarRow('stars', '⭐', 'Sterne',       d.starCount, 5,       0)
+                     + sbBarRow('L',     '📍', 'Lage',         d.L,         d.Lmax,  1)
+                     + sbBarRow('P',     '🏊', 'Pool & Spa',   d.P,         d.Pmax,  2)
+                     + sbBarRow('F',     '🍽️', 'Verpflegung',  d.F,         d.Fmax,  3)
+                     + sbBarRow('A',     '🎯', 'Aktivitäten',  d.A,         d.Amax,  4);
         var fc = d.flightBonus > 0 ? 'green' : d.flightBonus < 0 ? 'red' : 'gray';
         var ft = d.flightBonus > 0 ? '✈️ +' + d.flightBonus + ' Flug'
                : d.flightBonus < 0 ? '✈️ ' + d.flightBonus + ' Flug'
                : '✈️ ±0 Flug';
         barsHtml += '<div class="hd-sb-breakdown-pills">'
-          + '<span class="hd-sb-pill hd-sb-pill-' + fc + '">' + ft + '</span>';
-        if (d.warningPenalty > 0) {
-          barsHtml += '<span class="hd-sb-pill hd-sb-pill-red">🔴 −' + d.warningPenalty + ' Warnung</span>';
-        }
-        barsHtml += '</div>';
+          + '<span class="hd-sb-pill hd-sb-pill-' + fc + '">' + ft + '</span>'
+          + '</div>';
         meta.innerHTML = barsHtml;
       } else {
         if (fac.concept) {

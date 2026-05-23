@@ -501,21 +501,18 @@
     }
 
     var html = '<div class="vg-breakdown">';
-    html += barRow('stars', '⭐', 'Sterne',       d.stars, d.starsMax, 0);
-    html += barRow('L',     '📍', 'Lage',         d.L,     d.Lmax,     1);
-    html += barRow('P',     '🏊', 'Pool & Spa',   d.P,     d.Pmax,     2);
-    html += barRow('F',     '🍽️', 'Verpflegung',  d.F,     d.Fmax,     3);
-    html += barRow('A',     '🎯', 'Aktivitäten',  d.A,     d.Amax,     4);
+    html += barRow('stars', '⭐', 'Sterne',       d.starCount, 5,        0);
+    html += barRow('L',     '📍', 'Lage',         d.L,         d.Lmax,   1);
+    html += barRow('P',     '🏊', 'Pool & Spa',   d.P,         d.Pmax,   2);
+    html += barRow('F',     '🍽️', 'Verpflegung',  d.F,         d.Fmax,   3);
+    html += barRow('A',     '🎯', 'Aktivitäten',  d.A,         d.Amax,   4);
     var fc = d.flightBonus > 0 ? 'green' : d.flightBonus < 0 ? 'red' : 'gray';
     var ft = d.flightBonus > 0 ? '✈️ +' + d.flightBonus + ' Flug'
            : d.flightBonus < 0 ? '✈️ ' + d.flightBonus + ' Flug'
            : '✈️ ±0 Flug';
     html += '<div class="vg-breakdown-pills">'
-      + '<span class="vg-pill vg-pill-' + fc + '">' + ft + '</span>';
-    if (d.warningPenalty > 0) {
-      html += '<span class="vg-pill vg-pill-red">🔴 −' + d.warningPenalty + ' Warnung</span>';
-    }
-    html += '</div></div>';
+      + '<span class="vg-pill vg-pill-' + fc + '">' + ft + '</span>'
+      + '</div></div>';
     return html;
   }
 

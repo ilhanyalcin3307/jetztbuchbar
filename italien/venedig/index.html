@@ -271,35 +271,23 @@
   </div>
 
     
-  <div class="section">
+    <!-- ① Familienurlaub Carousel -->
+  <div class="section" id="hotel-carousel-family">
     <div class="container">
-      <h2 class="section-title">🗺️ Top <span>Sehenswürdigkeiten</span></h2>
-      <p style="color:var(--text-muted);margin-bottom:1.75rem;font-size:0.93rem;">Die beliebtesten Sehenswürdigkeiten und Ausflugsziele in Venedig.</p>
-      <div class="poi-grid">
-    <div class="poi-card">
-      <div class="poi-visual">
-          <img src="https://commons.wikimedia.org/wiki/File:Cristo_Roto.jpg" alt="Cristo Roto" loading="lazy" />
-          <div class="poi-visual-overlay"></div>
-          <span class="poi-img-credit">© Wikimedia Commons</span>
-        </div>
-      <div class="poi-body">
-        <div class="poi-tags"><span class="poi-tag">Historisch</span></div>
-        <div class="poi-name">Cristo Roto</div>
-        <div class="poi-desc">Historisches Kulturdenkmal von nationaler Bedeutung – ein fesselndes Zeugnis vergangener Epochen und Zivilisationen.</div>
-        <div class="poi-footer">
-          <span class="poi-dist">📍 9 km entfernt</span>
-          <div class="poi-links">
-            <a href="https://www.google.com/maps/search/Cristo%20Roto%20Venedig" target="_blank" rel="noopener noreferrer" class="poi-link">🗺 Maps</a>
-            <a href="https://de.wikipedia.org/w/index.php?search=Cristo%20Roto" target="_blank" rel="noopener noreferrer" class="poi-link">📖 Wiki</a>
-          </div>
-        </div>
-      </div>
-    </div></div>
+      <h2 class="section-title">👨‍👩‍👧‍👦 Top-Bewertete Hotels für <span>Familienurlaub</span> in Venedig</h2>
+      <p style="color:var(--text-muted);margin-bottom:1.25rem;font-size:0.93rem;">Die bestbewerteten familienfreundlichen Hotels in Venedig – Kids Club, Kinderpool und mehr.</p>
+      <div data-hotel-carousel="IT" data-carousel-city="Venedig" data-hotel-carousel-type="family"></div>
     </div>
   </div>
-
-    
-  <div class="section-alt">
+  <!-- ② Luxusurlaub Carousel -->
+  <div class="section" id="hotel-carousel-luxury" style="padding-top:2rem;">
+    <div class="container">
+      <h2 class="section-title">💎 Exklusive Highlights für <span>Luxusurlaub</span> in Venedig</h2>
+      <p style="color:var(--text-muted);margin-bottom:1.25rem;font-size:0.93rem;">Fünf-Sterne-Hotels und Luxusresorts in Venedig – für unvergesslichen Luxus.</p>
+      <div data-hotel-carousel="IT" data-carousel-city="Venedig" data-hotel-carousel-type="luxury"></div>
+    </div>
+  </div>
+<div class="section-alt">
     <div class="container">
       <h2 class="section-title">☀️ Klima &amp; <span>Beste Reisezeit</span></h2>
       <p style="color:var(--text-muted);margin-bottom:1.5rem;font-size:0.93rem;">Monatliche Durchschnittstemperaturen in Venedig (Ø 2018–2022)</p>
@@ -489,5 +477,6 @@
       <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">&#x1F310;</a>
     </div>
   </footer>
+  <script src="/components/hotel-carousel.js" defer></script>
 </body>
 </html>

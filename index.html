@@ -379,12 +379,33 @@
     }
 
     /* ── STORY GRID (Länderkarten 9:16, Instagram-Story-Format) ── */
-    .story-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 0.7rem;
+    .story-scroll-wrap {
+      position: relative;
     }
+    .story-scroll-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 80px;
+      background: linear-gradient(to right, transparent, var(--bg) 90%);
+      pointer-events: none;
+      border-radius: 0 18px 18px 0;
+      z-index: 2;
+    }
+    .story-grid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 0.7rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .story-grid::-webkit-scrollbar { display: none; }
     .story-card {
+      flex: 0 0 clamp(120px, 13vw, 175px);
       aspect-ratio: 9/16;
       border-radius: 18px;
       overflow: hidden;
@@ -393,6 +414,8 @@
       text-decoration: none;
       background: var(--bg-card);
       cursor: pointer;
+      scroll-snap-align: start;
+      flex-shrink: 0;
     }
     .story-img {
       position: absolute;
@@ -475,25 +498,12 @@
       background: rgba(255,255,255,0.26);
       border-color: rgba(255,255,255,0.6);
     }
-    @media (max-width: 1100px) {
-      .story-grid { grid-template-columns: repeat(4, 1fr); }
-    }
     @media (max-width: 720px) {
-      .story-grid {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        gap: 0.6rem;
-        padding-bottom: 0.5rem;
-        scrollbar-width: none;
-      }
-      .story-grid::-webkit-scrollbar { display: none; }
       .story-card {
-        flex: 0 0 clamp(130px, 40vw, 200px);
-        scroll-snap-align: start;
+        flex: 0 0 clamp(120px, 38vw, 155px);
         border-radius: 14px;
       }
+      .story-scroll-wrap::after { width: 48px; }
     }
 
     /* ── FOOTER ── */
@@ -1384,6 +1394,7 @@
   <section class="destinations">
     <h2>Beliebte <span>Reiseziele</span></h2>
     <p class="destinations-sub">Günstige Urlaubsreisen nach Türkei, Griechenland, Spanien und in über 15 weitere Länder – mit aktuellen Reiseangeboten, Klimatipps und hilfreichen Infos für 2026.</p>
+    <div class="story-scroll-wrap">
     <div class="story-grid" id="story-grid-laender">
       <a href="/tuerkei/" class="story-card">
         <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=600&q=75&auto=format&fit=crop" alt="Türkei" loading="lazy" class="story-img">
@@ -1578,6 +1589,7 @@
         </div>
       </a>
     </div>
+    </div><!-- /.story-scroll-wrap -->
     <script>
       (function(){
         fetch('/api/giata?action=counts')

@@ -119,6 +119,14 @@
     return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  function toSlug(name) {
+    return String(name||'')
+      .toLowerCase()
+      .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')
+      .replace(/[^a-z0-9]+/g,'-')
+      .replace(/^-+|-+$/g,'');
+  }
+
   // ── CSS ─────────────────────────────────────────────────────────────────────
   function injectCSS() {
     if(document.getElementById('hc-styles')) return;
@@ -220,7 +228,7 @@
         +'<div class="hc-loc">📍 '+esc(h.city||'')+(h.country?' · '+esc(h.country):'')+'</div>'
         +(badges?'<div class="hc-badges">'+badges+'</div>':'')
         +'<div class="hc-btn-row">'
-        +'<a href="/booking/?hotel='+esc(h.giataId)+'" class="hc-btn hc-btn-details">Mehr Details</a>'
+        +'<a href="/hotel.html?id='+esc(h.giataId)+'&slug='+toSlug(h.name)+'" class="hc-btn hc-btn-details">Mehr Details</a>'
         +'<a href="/booking/?hotel='+esc(h.giataId)+'&anfrage=1&name='+encodeURIComponent(h.name||'')+'" class="hc-btn hc-btn-request">Sofort Anfragen</a>'
         +'</div>'
         +'</div>'

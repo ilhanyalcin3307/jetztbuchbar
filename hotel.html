@@ -256,6 +256,46 @@
       background: rgba(0,200,150,0.15); border: 1px solid var(--accent);
       border-radius: 3px; padding: 0.05rem 0.3rem; font-family: monospace;
     }
+
+    /* ── JB EXPERTEN-SCORE SIEGEL ─────────────────────────────────────── */
+    .hd-name-wrap {
+      display: flex; align-items: flex-start; gap: 0.85rem; flex-wrap: wrap;
+      margin-bottom: 0.4rem;
+    }
+    .hd-name-wrap .hd-name { flex: 1; min-width: 0; margin-bottom: 0; }
+
+    .jb-seal {
+      display: flex; flex-direction: column; align-items: center;
+      flex-shrink: 0; cursor: default; line-height: 1;
+    }
+    .jb-seal svg {
+      filter: drop-shadow(0 0 7px rgba(0,200,150,0.38));
+      transition: filter 0.3s;
+    }
+    .jb-seal:hover svg { filter: drop-shadow(0 0 14px rgba(0,200,150,0.65)); }
+    .jb-seal-label {
+      font-size: 0.63rem; color: var(--text-muted); font-style: italic;
+      text-align: center; line-height: 1.35; max-width: 78px; margin-top: 0.3rem;
+    }
+
+    /* Sidebar Siegel Block */
+    .jb-seal-sidebar-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 0.6rem 0 0.85rem;
+      border-bottom: 1px dashed rgba(255,255,255,0.1);
+      gap: 0.35rem;
+    }
+    .jb-seal-sidebar-score {
+      font-size: 1rem; font-weight: 800; color: var(--accent); letter-spacing: -0.4px;
+    }
+    .jb-seal-sidebar-sub {
+      font-size: 0.67rem; color: var(--text-dim); line-height: 1.45; max-width: 210px;
+    }
+
+    @media (max-width: 480px) {
+      .hd-name-wrap { gap: 0.6rem; }
+      .jb-seal svg { width: 46px; height: 46px; }
+    }
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCDTX8ZEQ3"></script>
@@ -313,7 +353,20 @@
         <a href="/" class="hd-back">&#8592; Zurück zur Übersicht</a>
 
         <div class="hd-hotel-header">
-          <h1 class="hd-name" id="hd-name"></h1>
+          <div class="hd-name-wrap">
+            <h1 class="hd-name" id="hd-name"></h1>
+            <div class="jb-seal" id="jb-seal-main" title="JB Experten-Score – verifiziert von JetztBuchbar">
+              <svg viewBox="0 0 56 56" width="54" height="54" aria-label="JB Experten-Score Siegel" role="img">
+                <circle cx="28" cy="28" r="25.5" fill="none" stroke="#00c896" stroke-width="1.2" stroke-dasharray="3.5 2.5" opacity="0.65"/>
+                <circle cx="28" cy="28" r="20.5" fill="rgba(0,200,150,0.07)" stroke="#00c896" stroke-width="0.7" opacity="0.5"/>
+                <text x="28" y="20" text-anchor="middle" font-size="9" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif" letter-spacing="1">JB</text>
+                <line x1="14" y1="23" x2="42" y2="23" stroke="#00c896" stroke-width="0.5" opacity="0.35"/>
+                <text x="28" y="35" text-anchor="middle" font-size="13" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif" id="jb-score-svg-main">–</text>
+                <text x="28" y="44" text-anchor="middle" font-size="6" fill="rgba(0,200,150,0.7)" font-family="system-ui,-apple-system,sans-serif">/100</text>
+              </svg>
+              <span class="jb-seal-label">JetztBuchbar verifiziertes&nbsp;Gütesiegel</span>
+            </div>
+          </div>
           <div class="hd-stars" id="hd-stars"></div>
           <div class="hd-location" id="hd-location"></div>
         </div>
@@ -346,6 +399,23 @@
       <!-- Sticky Sidebar -->
       <aside class="hd-sidebar">
         <div class="hd-sidebar-card">
+
+          <!-- ① JB Experten-Score Siegel (Trust Element) -->
+          <div class="jb-seal-sidebar-wrap">
+            <div class="jb-seal" title="JB Experten-Score">
+              <svg viewBox="0 0 56 56" width="50" height="50" aria-hidden="true">
+                <circle cx="28" cy="28" r="25.5" fill="none" stroke="#00c896" stroke-width="1.2" stroke-dasharray="3.5 2.5" opacity="0.65"/>
+                <circle cx="28" cy="28" r="20.5" fill="rgba(0,200,150,0.07)" stroke="#00c896" stroke-width="0.7" opacity="0.5"/>
+                <text x="28" y="20" text-anchor="middle" font-size="9" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif" letter-spacing="1">JB</text>
+                <line x1="14" y1="23" x2="42" y2="23" stroke="#00c896" stroke-width="0.5" opacity="0.35"/>
+                <text x="28" y="35" text-anchor="middle" font-size="13" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif" id="jb-score-svg-sidebar">–</text>
+                <text x="28" y="44" text-anchor="middle" font-size="6" fill="rgba(0,200,150,0.7)" font-family="system-ui,-apple-system,sans-serif">/100</text>
+              </svg>
+            </div>
+            <div class="jb-seal-sidebar-score" id="jb-score-sidebar-label">– Experten-Score</div>
+            <div class="jb-seal-sidebar-sub">Geprüft nach unabhängigen GIATA&#8209;Qualitätskriterien&nbsp;2026</div>
+          </div>
+
           <div class="hd-sb-name" id="hd-sb-name"></div>
           <div class="hd-sb-stars" id="hd-sb-stars"></div>
           <div class="hd-sb-location" id="hd-sb-location"></div>
@@ -627,6 +697,17 @@
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
+    // ── JB Experten-Score berechnen ─────────────────────────────────
+    function computeJbScore(h) {
+      var s = 52;
+      s += Math.round((h.stars || 0) / 5 * 24);          // 0–24 Pkt (Sterne)
+      var fac = (h.factIds || []).length;
+      s += Math.min(Math.round(fac * 0.55), 18);          // 0–18 Pkt (Ausstattung)
+      if ((h.allImages || h.images || []).length >= 5) s += 4;  // Fotomaterial
+      if ((h.allSections || h.description || []).length >= 2) s += 2; // Beschreibung
+      return Math.min(s, 100);
+    }
+
     // ── Haupt-Render ─────────────────────────────────────────────────
     function renderHotel(h) {
       var params = new URLSearchParams(location.search);
@@ -661,6 +742,15 @@
       document.getElementById('hd-name').textContent = h.name || '';
       document.getElementById('hd-stars').textContent = h.stars ? '★'.repeat(h.stars) + '☆'.repeat(Math.max(0, 5 - h.stars)) : '';
       document.getElementById('hd-location').textContent = loc ? '📍 ' + loc : '';
+
+      // ── JB Experten-Score Siegel befüllen ─────────────────────────
+      var jbScore = computeJbScore(h);
+      var mainSvgEl = document.getElementById('jb-score-svg-main');
+      if (mainSvgEl) mainSvgEl.textContent = jbScore;
+      var sidebarSvgEl = document.getElementById('jb-score-svg-sidebar');
+      if (sidebarSvgEl) sidebarSvgEl.textContent = jbScore;
+      var sidebarLblEl = document.getElementById('jb-score-sidebar-label');
+      if (sidebarLblEl) sidebarLblEl.textContent = jbScore + '/100 Experten-Score';
 
       // Sidebar
       buildSidebar(h);

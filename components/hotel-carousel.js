@@ -161,6 +161,13 @@
       '.hc-skel{flex:0 0 calc((100% - 4.4rem)/4.18);aspect-ratio:3/4;background:rgba(255,255,255,.04);border-radius:var(--radius,12px);animation:hc-pulse 1.4s ease-in-out infinite}',
       '.hc-skel:nth-child(2){animation-delay:.15s}.hc-skel:nth-child(3){animation-delay:.3s}.hc-skel:nth-child(4){animation-delay:.45s}',
       '@keyframes hc-pulse{0%,100%{opacity:.3}50%{opacity:.65}}',
+      /* Buttons */
+      '.hc-btn-row{display:flex;gap:.45rem;margin-top:auto;padding-top:.65rem}',
+      '.hc-btn{flex:1;padding:.42rem .35rem;border-radius:8px;font-size:.71rem;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;line-height:1.3;transition:background .18s,border-color .18s,opacity .18s;display:flex;align-items:center;justify-content:center;white-space:nowrap;min-width:0}',
+      '.hc-btn-details{background:transparent;border:1px solid rgba(255,255,255,.16);color:var(--text,#f0f0f0)}',
+      '.hc-btn-details:hover{border-color:rgba(255,255,255,.44);background:rgba(255,255,255,.05)}',
+      '.hc-btn-request{background:var(--accent,#00c896);border:1px solid var(--accent,#00c896);color:#000;font-weight:800}',
+      '.hc-btn-request:hover{background:#00e0ab;border-color:#00e0ab}',
       /* Responsive */
       '@media(max-width:1024px){.hc-card,.hc-skel{flex-basis:calc((100% - 2.2rem)/2.8)}.hc-arrow{display:none}}',
       '@media(max-width:600px){.hc-card,.hc-skel{flex-basis:calc((100% - .55rem)/1.5)}.hc-arrow{display:none}}'
@@ -212,6 +219,10 @@
         +'<div class="hc-name">'+esc(h.name)+'</div>'
         +'<div class="hc-loc">📍 '+esc(h.city||'')+(h.country?' · '+esc(h.country):'')+'</div>'
         +(badges?'<div class="hc-badges">'+badges+'</div>':'')
+        +'<div class="hc-btn-row">'
+        +'<a href="/booking/?hotel='+esc(h.giataId)+'" class="hc-btn hc-btn-details">Mehr Details</a>'
+        +'<a href="/booking/?hotel='+esc(h.giataId)+'&anfrage=1&name='+encodeURIComponent(h.name||'')+'" class="hc-btn hc-btn-request">Sofort Anfragen</a>'
+        +'</div>'
         +'</div>'
         +'</div>';
     });
@@ -301,6 +312,7 @@
     containers.forEach(function(container){
       var val  = (container.getAttribute('data-hotel-carousel')||'').trim();
       var city = (container.getAttribute('data-carousel-city')||'').trim();
+      var type = (container.getAttribute('data-hotel-carousel-type')||'').trim();
       if(!val) return;
 
       var isCountryCode = /^[A-Z]{2}$/.test(val);
@@ -310,6 +322,7 @@
         // Fetch top hotels for country
         var url = '/api/giata?action=top&country='+encodeURIComponent(val)+'&limit=8';
         if(city) url+='&city='+encodeURIComponent(city);
+        if(type) url+='&category='+encodeURIComponent(type);
 
         fetch(url)
           .then(function(r){ return r.ok?r.json():null; })

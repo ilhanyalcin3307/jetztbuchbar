@@ -121,11 +121,12 @@ module.exports = async function handler(req, res) {
     }
 
     // --- Top N Hotels für ein Land (für Carousel) ---
-    // GET /api/giata?action=top&country=GR&limit=8&city=Antalya (city optional)
+    // GET /api/giata?action=top&country=GR&limit=8&city=Antalya&category=family|luxury
     if (action === 'top') {
-      const cc    = (req.query.country || '').toUpperCase().trim();
-      const limit = Math.min(parseInt(req.query.limit, 10) || 8, 20);
-      const city  = (req.query.city || '').trim().toLowerCase();
+      const cc       = (req.query.country  || '').toUpperCase().trim();
+      const limit    = Math.min(parseInt(req.query.limit, 10) || 8, 20);
+      const city     = (req.query.city     || '').trim().toLowerCase();
+      const category = (req.query.category || '').trim().toLowerCase(); // 'family' | 'luxury' | ''
 
       if (!cc) return res.status(400).json({ error: 'country param required' });
 
@@ -145,7 +146,7 @@ module.exports = async function handler(req, res) {
         );
       }
 
-      // Inline-Scoring (same weights as hotel-ranking.js)
+      // ── Basis-Scoring (alle Kategorien) ──────────────────────────────────────
       const SCORING_TOP = {
         89:20,301:12,374:7,90:8,91:5,291:5,295:6,562:5,350:5,294:4,691:4,354:4,364:4,349:3,293:3,300:3,365:3,348:2,22:1,568:1,
         614:18,588:18,697:14,696:14,86:12,197:12,479:10,822:10,529:6,192:8,195:8,199:6,869:6,196:6,660:6,43:6,698:6,189:5,794:5,201:5,58:5,50:5,190:4,793:4,59:4,198:4,336:4,191:3,187:3,909:3,664:3,74:3,76:3,66:3,567:3,820:2,71:2,81:2,88:1,185:1,
@@ -168,14 +169,54 @@ module.exports = async function handler(req, res) {
         h._score = Math.round((starPts + Math.min(cats.L,CAP.L) + Math.min(cats.P,CAP.P) + Math.min(cats.F,CAP.F) + Math.min(cats.A,CAP.A)) / 120 * 100);
       });
 
-      candidates.sort((a,b) => b._score!==a._score ? b._score-a._score : (b.stars||0)-(a.stars||0));
+      // ── Kategorie-spezifisches Scoring & Filtering ────────────────────────────
+
+      if (category === 'family') {
+        // Familien-Scoring: Kinder- & Animations-Features werden stark gewichtet
+        const FAM = {945:24,946:20,1:18,7:16,707:14,4:12,26:12,389:8,56:6,57:6,2:10,3:6,588:10,86:8,89:6,50:4,58:4};
+        const FAM_REQUIRE = new Set([945,946,1,7,707,4,26,389,56,57]);
+        // Nur Hotels mit mindestens einem Familien-Feature
+        candidates = candidates.filter(h => {
+          const ids = new Set((h.factIds||[]).map(Number));
+          return [...FAM_REQUIRE].some(id => ids.has(id));
+        });
+        // Familien-Score berechnen
+        candidates.forEach(h => {
+          const ids = new Set((h.factIds||[]).map(Number));
+          let fam = 0;
+          for(const [id, pts] of Object.entries(FAM)) if(ids.has(Number(id))) fam += pts;
+          h._catScore = fam + h._score * 0.4; // 40% Basisgewicht + Familien-Boost
+        });
+        candidates.sort((a,b) => b._catScore - a._catScore);
+
+      } else if (category === 'luxury') {
+        // Luxury-Scoring: 5★, Spa, Pool-Suiten, Strand, Adults-Only
+        const LUX = {614:24,697:22,696:22,197:20,479:18,822:18,89:14,529:14,192:12,195:12,86:10,393:10,781:10,94:8,385:8,199:8,869:6,660:6,196:6,92:6};
+        // Nur 4★+ Hotels
+        candidates = candidates.filter(h => (h.stars||0) >= 4);
+        // Luxury-Score berechnen
+        candidates.forEach(h => {
+          const st = h.stars||0;
+          const ids = new Set((h.factIds||[]).map(Number));
+          let lux = (st>=5?30:st>=4?18:0);
+          for(const [id, pts] of Object.entries(LUX)) if(ids.has(Number(id))) lux += pts;
+          h._catScore = lux + h._score * 0.35;
+        });
+        candidates.sort((a,b) => b._catScore - a._catScore);
+
+      } else {
+        // Standard: Basis-Score
+        candidates.sort((a,b) => b._score!==a._score ? b._score-a._score : (b.stars||0)-(a.stars||0));
+      }
+
       const top = candidates.slice(0, limit);
 
       // Return basic data (id + score) — frontend fetches images separately
-      res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
+      res.setHeader('Cache-Control', 'public, max-age=43200, s-maxage=43200'); // 12h
       return res.status(200).json({
         hotels: top.map(h => ({ giataId: h.giataId, name: h.name, city: h.city, country: h.country, stars: h.stars, score: h._score })),
         total: candidates.length,
+        category: category || 'default',
       });
     }
 

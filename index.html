@@ -2085,17 +2085,12 @@
         if(!item) return;
         var id=item.getAttribute('data-id'); var name=item.getAttribute('data-name');
         if(!id||!name) return;
-        // Her iki modda da: listeye ekle, input'u temizle
-        if(compareList.length<3&&!compareList.some(function(x){return x.id===id;})){
-          compareList.push({id:id,name:name});
-          if(window.JB_COMPARE) window.JB_COMPARE.add(id,name,'');
-          updateChips();
-          if(!compareMode) setCompareMode(true);
-        }
-        selectedHotel=null;
-        if(inp) inp.value='';
+        // Seçimi kaydet, input'a adı yaz — henüz listeye ekleme
+        selectedHotel = {id: id, name: name};
+        if(inp) inp.value = name;
         hideAC();
-        if(inp) inp.focus();
+        // Suchen butonuna focus → kullanıcıya yönlendirme ipucu
+        if(btnSearch) btnSearch.focus();
       });
     }
     if (btnSearch) {

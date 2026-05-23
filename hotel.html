@@ -410,16 +410,6 @@
         <div class="hd-hotel-header">
           <div class="hd-name-wrap">
             <h1 class="hd-name" id="hd-name"></h1>
-            <div class="jb-seal" id="jb-seal-main" title="JB Experten-Score – verifiziert von JetztBuchbar">
-              <svg viewBox="0 0 56 56" width="54" height="54" aria-label="JB Experten-Score Siegel" role="img">
-                <circle cx="28" cy="28" r="24" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="5"/>
-                <circle id="jb-score-ring-main" cx="28" cy="28" r="24" fill="none" stroke="#00c896" stroke-width="5" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8" transform="rotate(-90 28 28)" style="transition:stroke-dashoffset 1.3s cubic-bezier(.22,.68,0,1.2)"/>
-                <text x="28" y="23" text-anchor="middle" font-size="7" font-weight="900" fill="rgba(255,255,255,.5)" font-family="system-ui,-apple-system,sans-serif" letter-spacing="1">JB</text>
-                <text x="28" y="36" text-anchor="middle" font-size="13" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif" id="jb-score-svg-main">–</text>
-                <text x="28" y="44" text-anchor="middle" font-size="6" fill="rgba(0,200,150,0.7)" font-family="system-ui,-apple-system,sans-serif">/100</text>
-              </svg>
-              <span class="jb-seal-label">JetztBuchbar verifiziertes&nbsp;Gütesiegel</span>
-            </div>
           </div>
           <div class="hd-stars" id="hd-stars"></div>
           <div class="hd-location" id="hd-location"></div>
@@ -883,8 +873,6 @@
       // ── JB Experten-Score Siegel befüllen ─────────────────────────
       var JBS = window.JBScore || {};
       var jbScore = JBS.calcScore ? JBS.calcScore(h, { warningPenalty: h._warningPenalty || 0 }) : 60;
-      var mainSvgEl = document.getElementById('jb-score-svg-main');
-      if (mainSvgEl) mainSvgEl.textContent = jbScore;
       var sidebarSvgEl = document.getElementById('jb-score-svg-sidebar');
       if (sidebarSvgEl) sidebarSvgEl.textContent = jbScore;
       var sidebarLblEl = document.getElementById('jb-score-sidebar-label');
@@ -892,8 +880,6 @@
       // Animate circular progress rings + breakdown bars
       setTimeout(function() {
         var ringOffset = (150.8 * (1 - jbScore / 100));
-        var mainRing = document.getElementById('jb-score-ring-main');
-        if (mainRing) mainRing.style.strokeDashoffset = ringOffset;
         var sidebarRing = document.getElementById('jb-score-ring-sidebar');
         if (sidebarRing) sidebarRing.style.strokeDashoffset = ringOffset;
         document.querySelectorAll('.hd-sb-bar-fill[data-pct]').forEach(function(fill) {

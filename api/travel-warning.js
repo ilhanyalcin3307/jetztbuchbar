@@ -16,7 +16,11 @@ const MANUAL_OVERRIDES = {
   // JORDANIEN: AA-Website sagt "Von Reisen nach Jordanien wird dringend abgeraten"
   // (Aktuelles-Sektion, Stand 30.04.2026 wegen regionaler Volatilität nach US/Israel-Iran-Konflikt)
   // API-Flags sind jedoch alle false – bekannter Lag im OpenData-System des AA.
-  JO: { level: 1, icon: '🟠', text: 'Sicherheitshinweis', color: '#f97316', bg: 'rgba(249,115,22,0.08)' },
+  JO: { level: 3, icon: '🔴', text: 'Reisewarnung', color: '#ef4444', bg: 'rgba(239,68,68,0.08)' },
+  // VAE/DUBAI: AA-Website sagt "Von Reisen in die Vereinigten Arabischen Emirate wird dringend abgeraten"
+  // (Stand 23.05.2026 – US/Israel-Iran-Konflikt, Drohnenangriffe auf VAE, volatile Sicherheitslage)
+  // OpenData-API gibt weiterhin warning:false zurück – bekannter Lag.
+  AE: { level: 3, icon: '🔴', text: 'Reisewarnung', color: '#ef4444', bg: 'rgba(239,68,68,0.08)' },
 };
 
 // ---------------------------------------------------------------------------

@@ -120,6 +120,65 @@ module.exports = async function handler(req, res) {
       return res.status(200).json(data);
     }
 
+    // --- Top N Hotels für ein Land (für Carousel) ---
+    // GET /api/giata?action=top&country=GR&limit=8&city=Antalya (city optional)
+    if (action === 'top') {
+      const cc    = (req.query.country || '').toUpperCase().trim();
+      const limit = Math.min(parseInt(req.query.limit, 10) || 8, 20);
+      const city  = (req.query.city || '').trim().toLowerCase();
+
+      if (!cc) return res.status(400).json({ error: 'country param required' });
+
+      const index = loadSearchIndex();
+      if (!index) {
+        return res.status(200).json({ hotels: [], indexMissing: true });
+      }
+
+      // Filter by country code
+      let candidates = index.filter(h => h.cc === cc);
+
+      // Optional city filter (fuzzy)
+      if (city) {
+        candidates = candidates.filter(h =>
+          (h.city || '').toLowerCase().includes(city) ||
+          (h.cityEn || '').toLowerCase().includes(city)
+        );
+      }
+
+      // Inline-Scoring (same weights as hotel-ranking.js)
+      const SCORING_TOP = {
+        89:20,301:12,374:7,90:8,91:5,291:5,295:6,562:5,350:5,294:4,691:4,354:4,364:4,349:3,293:3,300:3,365:3,348:2,22:1,568:1,
+        614:18,588:18,697:14,696:14,86:12,197:12,479:10,822:10,529:6,192:8,195:8,199:6,869:6,196:6,660:6,43:6,698:6,189:5,794:5,201:5,58:5,50:5,190:4,793:4,59:4,198:4,336:4,191:3,187:3,909:3,664:3,74:3,76:3,66:3,567:3,820:2,71:2,81:2,88:1,185:1,
+        94:20,92:16,101:12,103:8,65:5,299:5,14:3,288:3,450:3,575:3,20:2,73:2,439:1,
+        945:12,219:10,236:10,946:8,1:8,7:8,393:7,593:7,707:6,220:6,4:5,26:5,240:5,249:5,247:5,2:5,389:4,781:4,385:4,245:4,250:3,209:3,401:3,3:3,31:3,56:2,57:2,244:2,211:2,49:2,24:2,5:1,6:1
+      };
+      const CAT_SCORE_TOP = {L:[89,301,374,90,91,291,295,562,350,294,691,354,364,349,293,300,365,348,22,568],P:[614,588,697,696,86,197,479,822,529,192,195,199,869,196,660,43,698,189,794,201,58,50,190,793,59,198,336,191,187,909,664,74,76,66,567,820,71,81,88,185],F:[94,92,101,103,65,299,14,288,450,575,20,73,439],A:[945,219,236,946,1,7,393,593,707,220,4,26,240,249,247,2,389,781,385,245,250,209,401,3,31,56,57,244,211,49,24,5,6]};
+      const CAP = {L:35,P:35,F:20,A:15};
+
+      candidates.forEach(h => {
+        const st = h.stars || 0;
+        const starPts = st>=5?15:st>=4?12:st>=3?8:st>=2?4:st>=1?1:0;
+        const ids = new Set((h.factIds||[]).map(Number));
+        const cats = {L:0,P:0,F:0,A:0};
+        for(const [cat, catIds] of Object.entries(CAT_SCORE_TOP)){
+          for(const id of catIds){
+            if(ids.has(id)) cats[cat] = (cats[cat]||0) + (SCORING_TOP[id]||0);
+          }
+        }
+        h._score = Math.round((starPts + Math.min(cats.L,CAP.L) + Math.min(cats.P,CAP.P) + Math.min(cats.F,CAP.F) + Math.min(cats.A,CAP.A)) / 120 * 100);
+      });
+
+      candidates.sort((a,b) => b._score!==a._score ? b._score-a._score : (b.stars||0)-(a.stars||0));
+      const top = candidates.slice(0, limit);
+
+      // Return basic data (id + score) — frontend fetches images separately
+      res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
+      return res.status(200).json({
+        hotels: top.map(h => ({ giataId: h.giataId, name: h.name, city: h.city, country: h.country, stars: h.stars, score: h._score })),
+        total: candidates.length,
+      });
+    }
+
     // --- Suche: Search-Index verwenden wenn vorhanden ---
     if (action === 'search' && q) {
       const index = loadSearchIndex();

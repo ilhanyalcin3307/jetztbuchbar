@@ -119,6 +119,17 @@
     return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  function scoreSealSVG(score) {
+    return '<svg class="hc-score-seal" viewBox="0 0 44 44" width="42" height="42" aria-label="JB Score '+score+'">'
+      +'<circle cx="22" cy="22" r="20.5" fill="none" stroke="#00c896" stroke-width="1.1" stroke-dasharray="3 2" opacity="0.7"/>'
+      +'<circle cx="22" cy="22" r="16.5" fill="rgba(0,0,0,.72)" stroke="#00c896" stroke-width="0.6" opacity="0.5"/>'
+      +'<text x="22" y="17" text-anchor="middle" font-size="7" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif" letter-spacing="0.5">JB</text>'
+      +'<line x1="11" y1="19.5" x2="33" y2="19.5" stroke="#00c896" stroke-width="0.4" opacity="0.35"/>'
+      +'<text x="22" y="28.5" text-anchor="middle" font-size="10" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif">'+score+'</text>'
+      +'<text x="22" y="36" text-anchor="middle" font-size="5" fill="rgba(0,200,150,.7)" font-family="system-ui,-apple-system,sans-serif">/100</text>'
+      +'</svg>';
+  }
+
   function toSlug(name) {
     return String(name||'')
       .toLowerCase()
@@ -156,9 +167,9 @@
       '.hc-img-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:2}',
       '.hc-img-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.35);transition:background .25s,transform .25s}',
       '.hc-img-dot.active{background:#fff;transform:scale(1.3)}',
-      /* Score badge */
-      '.hc-score-badge{position:absolute;top:10px;right:10px;background:rgba(0,200,150,.92);backdrop-filter:blur(4px);color:#000;font-weight:900;font-size:.78rem;line-height:1;padding:.28rem .48rem;border-radius:8px;z-index:3;letter-spacing:.3px}',
-      '.hc-score-badge span{font-weight:500;font-size:.65rem;opacity:.7}',
+      /* Score seal (SVG) */
+      '.hc-score-seal{position:absolute;top:8px;right:8px;z-index:3;filter:drop-shadow(0 2px 8px rgba(0,0,0,.65)) drop-shadow(0 0 6px rgba(0,200,150,.32));transition:filter .25s}',
+      '.hc-card:hover .hc-score-seal{filter:drop-shadow(0 2px 8px rgba(0,0,0,.65)) drop-shadow(0 0 13px rgba(0,200,150,.6))}',
       /* Body */
       '.hc-body{padding:.85rem 1rem .95rem;display:flex;flex-direction:column;gap:.4rem;flex:1}',
       '.hc-name{font-size:.92rem;font-weight:800;color:var(--text,#f0f0f0);line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}',
@@ -226,7 +237,7 @@
       html+='<div class="hc-card">'
         +'<div class="hc-img-wrap">'
         +imgHtml
-        +(score>=50?'<div class="hc-score-badge">'+score+'<span>/100</span></div>':'')
+        +(score>=50?scoreSealSVG(score):'')
         +dots
         +'</div>'
         +'<div class="hc-body">'

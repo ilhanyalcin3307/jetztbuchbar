@@ -51,14 +51,35 @@
     /* ── COMPARISON GRID ── */
     .vg-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
+      gap: 0;
       align-items: start;
       margin-bottom: 2.5rem;
     }
-    @media(min-width:900px) {
-      .vg-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-      .vg-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .vg-grid.cols-2 { grid-template-columns: 1fr 80px 1fr; }
+    .vg-grid.cols-3 { grid-template-columns: 1fr 80px 1fr 80px 1fr; }
+    @media(max-width:780px) {
+      .vg-grid.cols-2, .vg-grid.cols-3 {
+        grid-template-columns: 1fr;
+      }
+      .vg-vs-sep { flex-direction: row; padding: .75rem 0; }
+    }
+
+    /* ── VS SEPARATOR ── */
+    .vg-vs-sep {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      min-height: 200px;
+    }
+    .vg-vs-sep img {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 24px rgba(0,0,0,.7);
+      flex-shrink: 0;
     }
 
     /* ── HOTEL COLUMN ── */
@@ -98,53 +119,60 @@
     }
     .vg-img-wrap img { width:100%;height:100%;object-fit:cover;display:block; }
 
-    /* ── JB SCORE SEAL (on image) ── */
-    .vg-seal {
-      position: absolute;
-      top: 10px; right: 10px;
-      z-index: 3;
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,.7)) drop-shadow(0 0 8px rgba(0,200,150,.4));
-    }
-
     /* ── BODY ── */
     .vg-body { padding: 1.1rem 1.15rem 1.15rem; display:flex;flex-direction:column;gap:.55rem;flex:1; }
-    .vg-stars { color:#f59e0b;font-size:.8rem;letter-spacing:1.5px; }
-    .vg-name { font-size:1rem;font-weight:800;line-height:1.25;color:var(--text); }
+    .vg-stars { color:#f59e0b;font-size:.88rem;letter-spacing:2px; }
+    .vg-name { font-size:1.05rem;font-weight:800;line-height:1.25;color:var(--text); }
     .vg-loc { font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:.3rem; }
 
-    /* ── SCORE BAR ── */
-    .vg-score-row { margin-top:.25rem; }
-    .vg-score-label { font-size:.72rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;display:flex;align-items:center;justify-content:space-between; }
-    .vg-score-label span { font-size:1.05rem;font-weight:900; }
-    .vg-score-track { height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden; }
-    .vg-score-fill { height:100%;background:linear-gradient(90deg,#00c896,#00e5ab);border-radius:3px;transition:width .8s cubic-bezier(.22,.68,0,1.2); }
-
-    /* ── COMPARISON TABLE ── */
-    .vg-table { margin-top:.65rem;border-top:1px solid var(--border);padding-top:.65rem; }
-    .vg-row {
+    /* ── SCORE BLOCK ── */
+    .vg-score-block {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: .28rem 0;
-      border-bottom: 1px solid rgba(255,255,255,.04);
-      font-size: .79rem;
+      gap: .9rem;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      padding: .75rem 1rem;
+      margin: .25rem 0;
     }
-    .vg-row:last-child { border-bottom: none; }
-    .vg-row-label { display:flex;align-items:center;gap:.35rem;color:var(--text-muted); }
-    .vg-yes { color:var(--accent);font-weight:800;font-size:.9rem; }
-    .vg-no  { color:#2e2e2e;font-size:.9rem; }
-    .vg-txt { color:var(--text);font-size:.78rem;text-align:right;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+    .vg-score-block.vg-score-winner {
+      background: rgba(0,200,150,.07);
+      border-color: rgba(0,200,150,.28);
+    }
+    .vg-score-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1;
+      color: rgba(255,255,255,.25);
+      min-width: 3.2rem;
+    }
+    .vg-score-block.vg-score-winner .vg-score-num { color: var(--accent); }
+    .vg-score-info { flex: 1; min-width: 0; }
+    .vg-score-title { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); margin-bottom: .3rem; }
+    .vg-score-track { height: 5px; background: rgba(255,255,255,.07); border-radius: 3px; overflow: hidden; }
+    .vg-score-fill { height: 100%; background: linear-gradient(90deg,#00c896,#00e5ab); border-radius: 3px; transition: width .8s cubic-bezier(.22,.68,0,1.2); }
+    .vg-score-block:not(.vg-score-winner) .vg-score-fill { background: rgba(255,255,255,.2); }
 
-    /* ── BADGES ── */
-    .vg-badges { display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.35rem; }
-    .vg-badge { background:rgba(0,200,150,.07);border:1px solid rgba(0,200,150,.18);border-radius:7px;padding:.14rem .42rem;font-size:.69rem;color:var(--accent); }
-
-    /* ── FAZIT TEXT ── */
-    .vg-fazit-text { font-size:.8rem;color:var(--text-muted);line-height:1.5;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border); }
+    /* ── FEATURES ── */
+    .vg-features { display: flex; flex-direction: column; gap: .32rem; }
+    .vg-feat-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .8rem;
+      color: var(--text);
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 8px;
+      padding: .38rem .65rem;
+    }
+    .vg-feat-check { color: var(--accent); font-weight: 900; font-size: .85rem; flex-shrink: 0; }
+    .vg-feat-icon { flex-shrink: 0; }
 
     /* ── CTA BUTTONS ── */
     .vg-cta { display:flex;gap:.45rem;margin-top:auto;padding-top:.85rem; }
-    .vg-btn { flex:1;padding:.46rem .4rem;border-radius:8px;font-size:.73rem;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;line-height:1.3;transition:all .18s;display:flex;align-items:center;justify-content:center;border:none; }
+    .vg-btn { flex:1;padding:.5rem .4rem;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;line-height:1.3;transition:all .18s;display:flex;align-items:center;justify-content:center;border:none;font-family:inherit; }
     .vg-btn-details { background:transparent;border:1px solid rgba(255,255,255,.16);color:var(--text); }
     .vg-btn-details:hover { border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.05); }
     .vg-btn-anfragen { background:var(--accent);color:#000;font-weight:800; }
@@ -424,35 +452,62 @@
   }
 
   // ── Render hotel column ───────────────────────────────────────────────────
+  // Top 4 showcase features: pick the highest-scored ones the hotel actually has
+  var SHOWCASE = [
+    { label:'Strandlage',     icon:'🏖️', ids:[89] },
+    { label:'Wasserpark',     icon:'💦', ids:[588,86] },
+    { label:'All Inclusive',  icon:'🍽️', ids:[92,94] },
+    { label:'Kids Club',      icon:'👧', ids:[945,946,1,7] },
+    { label:'Pool',           icon:'🏊', ids:[50,58,614,697,696] },
+    { label:'Spa & Wellness', icon:'💆', ids:[197,479] },
+    { label:'Golf',           icon:'⛳', ids:[219] },
+    { label:'Fitness',        icon:'💪', ids:[220] },
+    { label:'Restaurant',     icon:'🍴', ids:[65,299] },
+    { label:'Bar',            icon:'🍹', ids:[14,59,288,450] },
+    { label:'Hamam / Sauna',  icon:'🧖', ids:[192,196,660] },
+    { label:'WLAN',           icon:'📶', ids:[88,185] },
+  ];
+  function topShowcase(h, n) {
+    var idSet={};
+    (h.factIds||[]).forEach(function(id){idSet[id]=true;});
+    return SHOWCASE.filter(function(f){
+      return f.ids.some(function(id){return idSet[id];});
+    }).slice(0,n);
+  }
+
   function renderCol(h, isWinner, allHotels) {
     var score = calcScore(h);
-    var feats = topFeatures(h, 4);
+    var feats = topShowcase(h, 4);
     var img   = (h.images && h.images.length) ? h.images[0] : (h.image || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70');
-    var badges = feats.map(function(f){ return '<span class="vg-badge">'+(FEAT_ICONS[f.l]||'')+' '+esc(f.l)+'</span>'; }).join('');
-    var tableRows = COMPARE_ROWS.map(function(r){
-      var yes = hasAny(h, r.ids);
-      return '<div class="vg-row"><span class="vg-row-label">'+r.icon+' '+esc(r.label)+'</span>'
-        +(yes?'<span class="vg-yes">✓</span>':'<span class="vg-no">—</span>')
+
+    var featHtml = feats.map(function(f){
+      return '<div class="vg-feat-item">'
+        +'<span class="vg-feat-check">✅</span>'
+        +'<span class="vg-feat-icon">'+f.icon+'</span>'
+        +esc(f.label)
         +'</div>';
     }).join('');
-    var fazitTxt = buildFazitText(h, isWinner, allHotels);
+    // If no features found add a placeholder
+    if (!featHtml) featHtml = '<div class="vg-feat-item"><span class="vg-feat-check">ℹ️</span>Daten werden geladen</div>';
+
+    var scoreWinnerClass = isWinner ? ' vg-score-winner' : '';
 
     return (isWinner ? '<div class="vg-winner-ribbon">🏆 Unsere Empfehlung</div>' : '')
       +'<div class="vg-img-wrap">'
       +'<img src="'+esc(img)+'" alt="'+esc(h.name)+'" onerror="this.src=\'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70\'" loading="eager">'
-      +(score>=50?scoreSealSVG(score):'')
       +'</div>'
       +'<div class="vg-body">'
       +'<div class="vg-stars">'+starsHtml(h.stars||0)+'</div>'
       +'<div class="vg-name">'+esc(h.name)+'</div>'
       +'<div class="vg-loc">📍 '+esc(h.city||'')+((h.country)?' · '+esc(h.country):'')+'</div>'
-      +'<div class="vg-score-row">'
-      +'<div class="vg-score-label">JB Experten-Score <span>'+score+'</span>/100</div>'
+      +'<div class="vg-score-block'+scoreWinnerClass+'">'
+      +'<div class="vg-score-num">'+score+'</div>'
+      +'<div class="vg-score-info">'
+      +'<div class="vg-score-title">JB Experten-Score</div>'
       +'<div class="vg-score-track"><div class="vg-score-fill" style="width:'+score+'%"></div></div>'
       +'</div>'
-      +(badges?'<div class="vg-badges">'+badges+'</div>':'')
-      +'<div class="vg-table">'+tableRows+'</div>'
-      +'<div class="vg-fazit-text">'+esc(fazitTxt)+'</div>'
+      +'</div>'
+      +'<div class="vg-features">'+featHtml+'</div>'
       +'<div class="vg-cta">'
       +'<a class="vg-btn vg-btn-details" href="/hotel.html?id='+esc(h.giataId)+'&slug='+toSlug(h.name)+'">Mehr Details</a>'
       +'<button class="vg-btn vg-btn-anfragen" data-anfragen="'+esc(h.name||'')+'">Anfragen</button>'
@@ -481,17 +536,24 @@
 
     var winner = scored[0].h;
 
-    // Render columns
+    // Render columns with VS separators between them
     if (gridEl) {
-      gridEl.className = 'vg-grid cols-'+Math.min(scored.length,3);
+      var n = Math.min(scored.length, 3);
+      gridEl.className = 'vg-grid cols-' + n;
       gridEl.style.display = '';
-      gridEl.innerHTML = scored.map(function(item, idx){
-        var isWinner = idx===0;
+      var html = '';
+      for (var i = 0; i < n; i++) {
+        var item = scored[i];
+        var isWinner = (i === 0);
         var col = document.createElement('div');
-        col.className = 'vg-col' + (isWinner?' vg-winner':'');
+        col.className = 'vg-col' + (isWinner ? ' vg-winner' : '');
         col.innerHTML = renderCol(item.h, isWinner, hotels);
-        return col.outerHTML;
-      }).join('');
+        html += col.outerHTML;
+        if (i < n - 1) {
+          html += '<div class="vg-vs-sep"><img src="/images/vs-badge.png" alt="VS" loading="lazy"></div>';
+        }
+      }
+      gridEl.innerHTML = html;
     }
 
     // Winner box

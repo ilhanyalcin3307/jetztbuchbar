@@ -149,13 +149,15 @@ if (!window.JB_COMPARE) {
   }
 
   function scoreSealSVG(score) {
-    return '<svg class="hc-score-seal" viewBox="0 0 44 44" width="42" height="42" aria-label="JB Score '+score+'">'
-      +'<circle cx="22" cy="22" r="20.5" fill="none" stroke="#00c896" stroke-width="1.1" stroke-dasharray="3 2" opacity="0.7"/>'
-      +'<circle cx="22" cy="22" r="16.5" fill="rgba(0,0,0,.72)" stroke="#00c896" stroke-width="0.6" opacity="0.5"/>'
-      +'<text x="22" y="17" text-anchor="middle" font-size="7" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif" letter-spacing="0.5">JB</text>'
-      +'<line x1="11" y1="19.5" x2="33" y2="19.5" stroke="#00c896" stroke-width="0.4" opacity="0.35"/>'
-      +'<text x="22" y="28.5" text-anchor="middle" font-size="10" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif">'+score+'</text>'
-      +'<text x="22" y="36" text-anchor="middle" font-size="5" fill="rgba(0,200,150,.7)" font-family="system-ui,-apple-system,sans-serif">/100</text>'
+    var r = 24, c = 150.8;
+    var offset = parseFloat((c * (1 - score / 100)).toFixed(2));
+    return '<svg class="hc-score-seal" viewBox="0 0 56 56" width="44" height="44" aria-label="JB Score '+score+'/100" style="--jb-offset:'+offset+'">'
+      +'<circle cx="28" cy="28" r="'+r+'" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="5"/>'
+      +'<circle cx="28" cy="28" r="'+r+'" fill="none" stroke="#00c896" stroke-width="5" stroke-linecap="round"'
+      +' stroke-dasharray="'+c+'" stroke-dashoffset="'+c+'" transform="rotate(-90 28 28)" class="jb-ring-anim"/>'
+      +'<text x="28" y="23" text-anchor="middle" font-size="7" font-weight="900" fill="rgba(255,255,255,.5)" font-family="system-ui,-apple-system,sans-serif" letter-spacing="1">JB</text>'
+      +'<text x="28" y="36" text-anchor="middle" font-size="12" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif">'+score+'</text>'
+      +'<text x="28" y="44" text-anchor="middle" font-size="5.5" fill="rgba(0,200,150,.7)" font-family="system-ui,-apple-system,sans-serif">/100</text>'
       +'</svg>';
   }
 
@@ -242,6 +244,8 @@ if (!window.JB_COMPARE) {
       '.hc-skel{flex:0 0 calc((100% - 4.4rem)/4.18);aspect-ratio:3/4;background:rgba(255,255,255,.04);border-radius:var(--radius,12px);animation:hc-pulse 1.4s ease-in-out infinite}',
       '.hc-skel:nth-child(2){animation-delay:.15s}.hc-skel:nth-child(3){animation-delay:.3s}.hc-skel:nth-child(4){animation-delay:.45s}',
       '@keyframes hc-pulse{0%,100%{opacity:.3}50%{opacity:.65}}',
+      '@keyframes jb-ring-fill{to{stroke-dashoffset:var(--jb-offset,0)}}',
+      '.jb-ring-anim{animation:jb-ring-fill 1.3s cubic-bezier(.22,.68,0,1.2) forwards}',
       /* Buttons */
       '.hc-btn-row{display:flex;gap:.45rem;margin-top:auto;padding-top:.65rem}',
       '.hc-btn{flex:1;padding:.42rem .35rem;border-radius:8px;font-size:.71rem;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;line-height:1.3;transition:background .18s,border-color .18s,opacity .18s;display:flex;align-items:center;justify-content:center;white-space:nowrap;min-width:0}',

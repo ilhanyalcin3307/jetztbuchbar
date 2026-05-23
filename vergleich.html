@@ -48,30 +48,26 @@
     .vg-loading svg { animation:vg-spin 1s linear infinite;margin-bottom:.75rem;display:block;margin:0 auto .75rem; }
     @keyframes vg-spin { to { transform:rotate(360deg); } }
 
-    /* ── COMPARISON GRID ── */
+    /* ── COMPARISON GRID (subgrid: 6 shared rows per col) ── */
     .vg-grid {
       display: grid;
       gap: 0;
-      align-items: start;
       margin-bottom: 2.5rem;
+      grid-template-rows: auto auto 1fr auto auto auto;
     }
     .vg-grid.cols-2 { grid-template-columns: 1fr 80px 1fr; }
     .vg-grid.cols-3 { grid-template-columns: 1fr 80px 1fr 80px 1fr; }
     @media(max-width:780px) {
-      .vg-grid.cols-2, .vg-grid.cols-3 {
-        grid-template-columns: 1fr;
-      }
-      .vg-vs-sep { flex-direction: row; padding: .75rem 0; }
+      .vg-grid.cols-2, .vg-grid.cols-3 { grid-template-columns: 1fr; grid-template-rows: unset; }
+      .vg-vs-sep { min-height: auto; padding: .75rem 0; }
     }
 
     /* ── VS SEPARATOR ── */
     .vg-vs-sep {
+      grid-row: span 6;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 0;
-      min-height: 200px;
     }
     .vg-vs-sep img {
       width: 72px;
@@ -84,21 +80,22 @@
 
     /* ── HOTEL COLUMN ── */
     .vg-col {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 6;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
       overflow: hidden;
       transition: border-color .25s;
-      display: flex;
-      flex-direction: column;
     }
     .vg-col.vg-winner {
       border-color: rgba(0,200,150,.5);
       box-shadow: 0 0 0 2px rgba(0,200,150,.12), 0 16px 48px rgba(0,0,0,.55);
     }
 
-    /* ── WINNER BADGE ── */
-    .vg-winner-ribbon {
+    /* ── WINNER RIBBON (row 1) ── */
+    .vg-ribbon {
       background: linear-gradient(90deg,#00c896,#00e5ab);
       color: #000;
       font-size: .7rem;
@@ -108,8 +105,9 @@
       padding: .32rem 1rem;
       text-align: center;
     }
+    .vg-ribbon.vg-ribbon-empty { background: transparent; visibility: hidden; padding: 0; }
 
-    /* ── IMAGE WRAP ── */
+    /* ── IMAGE (row 2) ── */
     .vg-img-wrap {
       position: relative;
       width: 100%;
@@ -119,59 +117,52 @@
     }
     .vg-img-wrap img { width:100%;height:100%;object-fit:cover;display:block; }
 
-    /* ── BODY ── */
-    .vg-body { padding: 1.1rem 1.15rem 1.15rem; display:flex;flex-direction:column;gap:.55rem;flex:1; }
-    .vg-stars { color:#f59e0b;font-size:.88rem;letter-spacing:2px; }
-    .vg-name { font-size:1.05rem;font-weight:800;line-height:1.25;color:var(--text); }
-    .vg-loc { font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:.3rem; }
+    /* ── INFO SECTION (row 3) ── */
+    .vg-info { padding: 1.1rem 1.15rem .65rem; display:flex; flex-direction:column; gap:.42rem; }
+    .vg-stars { color:#f59e0b; font-size:.88rem; letter-spacing:2px; }
+    .vg-name { font-size:1.05rem; font-weight:800; line-height:1.25; color:var(--text); }
+    .vg-loc { font-size:.78rem; color:var(--text-muted); }
 
-    /* ── SCORE BLOCK ── */
-    .vg-score-block {
+    /* ── CIRCULAR JB SCORE (row 4) ── */
+    .vg-score-wrap {
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: .9rem;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 12px;
-      padding: .75rem 1rem;
-      margin: .25rem 0;
+      padding: .55rem 1rem .3rem;
+      background: rgba(0,0,0,.18);
     }
-    .vg-score-block.vg-score-winner {
-      background: rgba(0,200,150,.07);
-      border-color: rgba(0,200,150,.28);
+    .vg-score-circle { display:block; overflow:visible; }
+    .vg-score-circle .jb-bg { fill:none; stroke:rgba(255,255,255,.07); stroke-width:8; }
+    .vg-score-circle .jb-progress {
+      fill: none;
+      stroke: rgba(255,255,255,.13);
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 251.33;
+      stroke-dashoffset: 251.33;
+      transition: stroke-dashoffset 1.3s cubic-bezier(.22,.68,0,1.2);
     }
-    .vg-score-num {
-      font-size: 2.4rem;
-      font-weight: 900;
-      line-height: 1;
-      color: rgba(255,255,255,.25);
-      min-width: 3.2rem;
-    }
-    .vg-score-block.vg-score-winner .vg-score-num { color: var(--accent); }
-    .vg-score-info { flex: 1; min-width: 0; }
-    .vg-score-title { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); margin-bottom: .3rem; }
-    .vg-score-track { height: 5px; background: rgba(255,255,255,.07); border-radius: 3px; overflow: hidden; }
-    .vg-score-fill { height: 100%; background: linear-gradient(90deg,#00c896,#00e5ab); border-radius: 3px; transition: width .8s cubic-bezier(.22,.68,0,1.2); }
-    .vg-score-block:not(.vg-score-winner) .vg-score-fill { background: rgba(255,255,255,.2); }
+    .vg-col.vg-winner .vg-score-circle .jb-progress { stroke: var(--accent); }
+    .vg-score-circle .jb-label { fill:rgba(255,255,255,.4); font-size:9px; font-weight:700; font-family:system-ui,-apple-system,sans-serif; text-transform:uppercase; letter-spacing:1.5px; }
+    .vg-score-circle .jb-num { fill:rgba(255,255,255,.18); font-size:24px; font-weight:900; font-family:system-ui,-apple-system,sans-serif; }
+    .vg-col.vg-winner .vg-score-circle .jb-num { fill: var(--accent); }
+    .vg-score-circle .jb-sub { fill:rgba(255,255,255,.28); font-size:8px; font-family:system-ui,-apple-system,sans-serif; }
 
-    /* ── FEATURES ── */
-    .vg-features { display: flex; flex-direction: column; gap: .32rem; }
+    /* ── TOP FEATURES (row 5) ── */
+    .vg-features { padding: 0 1.15rem; display:flex; flex-direction:column; gap:.3rem; }
     .vg-feat-item {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .8rem;
-      color: var(--text);
+      display: flex; align-items: center; gap:.5rem;
+      font-size: .8rem; color: var(--text);
       background: rgba(255,255,255,.03);
       border: 1px solid rgba(255,255,255,.06);
       border-radius: 8px;
       padding: .38rem .65rem;
     }
-    .vg-feat-check { color: var(--accent); font-weight: 900; font-size: .85rem; flex-shrink: 0; }
-    .vg-feat-icon { flex-shrink: 0; }
+    .vg-feat-check { color: var(--accent); font-weight:900; font-size:.85rem; flex-shrink:0; }
+    .vg-feat-icon { flex-shrink:0; }
 
-    /* ── CTA BUTTONS ── */
-    .vg-cta { display:flex;gap:.45rem;margin-top:auto;padding-top:.85rem; }
+    /* ── CTA BUTTONS (row 6) ── */
+    .vg-cta { display:flex; gap:.45rem; padding:.85rem 1.15rem 1.15rem; }
     .vg-btn { flex:1;padding:.5rem .4rem;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;line-height:1.3;transition:all .18s;display:flex;align-items:center;justify-content:center;border:none;font-family:inherit; }
     .vg-btn-details { background:transparent;border:1px solid rgba(255,255,255,.16);color:var(--text); }
     .vg-btn-details:hover { border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.05); }
@@ -418,15 +409,16 @@
     return ids.some(function(id){return idSet[id];});
   }
 
-  // ── Score SVG Seal ────────────────────────────────────────────────────────
-  function scoreSealSVG(score) {
-    return '<svg class="vg-seal" viewBox="0 0 56 56" width="54" height="54" aria-label="JB Score '+score+'">'
-      +'<circle cx="28" cy="28" r="25.5" fill="none" stroke="#00c896" stroke-width="1.2" stroke-dasharray="3.5 2.5" opacity="0.65"/>'
-      +'<circle cx="28" cy="28" r="20.5" fill="rgba(0,0,0,.72)" stroke="#00c896" stroke-width="0.7" opacity="0.5"/>'
-      +'<text x="28" y="20" text-anchor="middle" font-size="9" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif" letter-spacing="1">JB</text>'
-      +'<line x1="14" y1="23" x2="42" y2="23" stroke="#00c896" stroke-width="0.5" opacity="0.35"/>'
-      +'<text x="28" y="35" text-anchor="middle" font-size="13" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif">'+score+'</text>'
-      +'<text x="28" y="44" text-anchor="middle" font-size="6" fill="rgba(0,200,150,.7)" font-family="system-ui,-apple-system,sans-serif">/100</text>'
+  // ── Circular JB Score SVG (animated via JS) ─────────────────────────────
+  // r=40, circumference = 2*π*40 ≈ 251.33
+  function scoreCircleSVG(score) {
+    var c = 251.33;
+    return '<svg class="vg-score-circle" viewBox="0 0 100 100" width="96" height="96" data-score="'+score+'" aria-label="JB Score '+score+'/100">'
+      +'<circle class="jb-bg" cx="50" cy="50" r="40"/>'
+      +'<circle class="jb-progress" cx="50" cy="50" r="40" transform="rotate(-90 50 50)" stroke-dasharray="'+c+'" stroke-dashoffset="'+c+'"/>'
+      +'<text class="jb-label" x="50" y="38" text-anchor="middle">JB</text>'
+      +'<text class="jb-num" x="50" y="62" text-anchor="middle">'+score+'</text>'
+      +'<text class="jb-sub" x="50" y="74" text-anchor="middle">/100</text>'
       +'</svg>';
   }
 
@@ -487,31 +479,26 @@
         +esc(f.label)
         +'</div>';
     }).join('');
-    // If no features found add a placeholder
-    if (!featHtml) featHtml = '<div class="vg-feat-item"><span class="vg-feat-check">ℹ️</span>Daten werden geladen</div>';
+    // Pad to always 4 rows → consistent height alignment
+    for (var i = feats.length; i < 4; i++) {
+      featHtml += '<div class="vg-feat-item" style="visibility:hidden"><span>—</span></div>';
+    }
 
-    var scoreWinnerClass = isWinner ? ' vg-score-winner' : '';
-
-    return (isWinner ? '<div class="vg-winner-ribbon">🏆 Unsere Empfehlung</div>' : '')
+    // Flat children (no vg-body wrapper) → subgrid can align rows across cards
+    return '<div class="vg-ribbon'+(isWinner?'':' vg-ribbon-empty')+'">'+(isWinner?'🏆 Unsere Empfehlung':'')+'</div>'
       +'<div class="vg-img-wrap">'
       +'<img src="'+esc(img)+'" alt="'+esc(h.name)+'" onerror="this.src=\'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=70\'" loading="eager">'
       +'</div>'
-      +'<div class="vg-body">'
+      +'<div class="vg-info">'
       +'<div class="vg-stars">'+starsHtml(h.stars||0)+'</div>'
       +'<div class="vg-name">'+esc(h.name)+'</div>'
       +'<div class="vg-loc">📍 '+esc(h.city||'')+((h.country)?' · '+esc(h.country):'')+'</div>'
-      +'<div class="vg-score-block'+scoreWinnerClass+'">'
-      +'<div class="vg-score-num">'+score+'</div>'
-      +'<div class="vg-score-info">'
-      +'<div class="vg-score-title">JB Experten-Score</div>'
-      +'<div class="vg-score-track"><div class="vg-score-fill" style="width:'+score+'%"></div></div>'
       +'</div>'
-      +'</div>'
+      +'<div class="vg-score-wrap">'+scoreCircleSVG(score)+'</div>'
       +'<div class="vg-features">'+featHtml+'</div>'
       +'<div class="vg-cta">'
       +'<a class="vg-btn vg-btn-details" href="/hotel.html?id='+esc(h.giataId)+'&slug='+toSlug(h.name)+'">Mehr Details</a>'
       +'<button class="vg-btn vg-btn-anfragen" data-anfragen="'+esc(h.name||'')+'">Anfragen</button>'
-      +'</div>'
       +'</div>';
   }
 
@@ -554,6 +541,14 @@
         }
       }
       gridEl.innerHTML = html;
+      // Animate score circles after paint
+      setTimeout(function() {
+        gridEl.querySelectorAll('.vg-score-circle[data-score]').forEach(function(svg) {
+          var s = parseInt(svg.getAttribute('data-score'), 10) || 0;
+          var ring = svg.querySelector('.jb-progress');
+          if (ring) ring.style.strokeDashoffset = (251.33 * (1 - s / 100));
+        });
+      }, 80);
     }
 
     // Winner box

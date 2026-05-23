@@ -236,7 +236,7 @@
         +(badges?'<div class="hc-badges">'+badges+'</div>':'')
         +'<div class="hc-btn-row">'
         +'<a href="/hotel.html?id='+esc(h.giataId)+'&slug='+toSlug(h.name)+'" class="hc-btn hc-btn-details">Mehr Details</a>'
-        +'<a href="/booking/?hotel='+esc(h.giataId)+'&anfrage=1&name='+encodeURIComponent(h.name||'')+'" class="hc-btn hc-btn-request">Sofort Anfragen</a>'
+        +'<a href="#" class="hc-btn hc-btn-request" data-hotel-name="'+esc(h.name||'')+'">Sofort Anfragen</a>'
         +'</div>'
         +'</div>'
         +'</div>';
@@ -391,4 +391,16 @@
   } else {
     init();
   }
+
+  // Crisp-Chat öffnen wenn "Sofort Anfragen" geklickt wird
+  document.addEventListener('click', function(e) {
+    var btn = e.target && e.target.closest ? e.target.closest('.hc-btn-request') : null;
+    if (!btn) return;
+    e.preventDefault();
+    var name = btn.getAttribute('data-hotel-name') || '';
+    if (window.$crisp) {
+      try { if (name) window.$crisp.push(['set', 'session:data', [[['Hotel', name]]]]); } catch(_) {}
+      try { window.$crisp.push(['do', 'chat:open']); } catch(_) {}
+    }
+  });
 })();

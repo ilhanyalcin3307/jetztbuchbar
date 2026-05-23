@@ -127,6 +127,13 @@
       .replace(/^-+|-+$/g,'');
   }
 
+  // Länderkürzel → Deutscher Ländername (für globale Carousels)
+  var CC_NAMES = {
+    TR:'Türkei',GR:'Griechenland',ES:'Spanien',IT:'Italien',PT:'Portugal',
+    HR:'Kroatien',FR:'Frankreich',EG:'Ägypten',AE:'Dubai',BG:'Bulgarien',
+    MA:'Marokko',TN:'Tunesien',JO:'Jordanien',MT:'Malta',CY:'Zypern',CV:'Kap Verde'
+  };
+
   // ── CSS ─────────────────────────────────────────────────────────────────────
   function injectCSS() {
     if(document.getElementById('hc-styles')) return;
@@ -225,7 +232,7 @@
         +'<div class="hc-body">'
         +'<div class="hc-stars">'+starsHtml(h.stars||0)+'</div>'
         +'<div class="hc-name">'+esc(h.name)+'</div>'
-        +'<div class="hc-loc">📍 '+esc(h.city||'')+(h.country?' · '+esc(h.country):'')+'</div>'
+        +'<div class="hc-loc">📍 '+esc(h.city||'')+((h.country||CC_NAMES[h.cc])?' · '+esc(h.country||CC_NAMES[h.cc]||''):'')+'</div>'
         +(badges?'<div class="hc-badges">'+badges+'</div>':'')
         +'<div class="hc-btn-row">'
         +'<a href="/hotel.html?id='+esc(h.giataId)+'&slug='+toSlug(h.name)+'" class="hc-btn hc-btn-details">Mehr Details</a>'
@@ -323,12 +330,14 @@
       var type = (container.getAttribute('data-hotel-carousel-type')||'').trim();
       if(!val) return;
 
+      var isGlobal = (val === '*');
       var isCountryCode = /^[A-Z]{2}$/.test(val);
       renderSkeleton(container, 8);
 
-      if(isCountryCode) {
-        // Fetch top hotels for country
-        var url = '/api/giata?action=top&country='+encodeURIComponent(val)+'&limit=8';
+      if(isCountryCode || isGlobal) {
+        // Fetch top hotels — mit Ländercode (Länder-Carousel) oder global (*)
+        var url = '/api/giata?action=top&limit=8';
+        if(isCountryCode) url+='&country='+encodeURIComponent(val);
         if(city) url+='&city='+encodeURIComponent(city);
         if(type) url+='&category='+encodeURIComponent(type);
 
@@ -348,6 +357,8 @@
               var hotels = details.map(function(d,i){
                 if(!d||d.error) return null;
                 d._score = data.hotels[i].score != null ? data.hotels[i].score : calcScore(d);
+                // cc aus Top-API übernehmen falls im Property-Objekt nicht vorhanden
+                if(!d.cc && data.hotels[i].cc) d.cc = data.hotels[i].cc;
                 return d;
               }).filter(Boolean);
               if(hotels.length) renderHotels(container,hotels);

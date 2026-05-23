@@ -120,23 +120,22 @@ module.exports = async function handler(req, res) {
       return res.status(200).json(data);
     }
 
-    // --- Top N Hotels für ein Land (für Carousel) ---
+    // --- Top N Hotels (für Carousel) ---
     // GET /api/giata?action=top&country=GR&limit=8&city=Antalya&category=family|luxury
+    // country ist optional: ohne country → globaler Mix aus allen Ländern
     if (action === 'top') {
       const cc       = (req.query.country  || '').toUpperCase().trim();
       const limit    = Math.min(parseInt(req.query.limit, 10) || 8, 20);
       const city     = (req.query.city     || '').trim().toLowerCase();
       const category = (req.query.category || '').trim().toLowerCase(); // 'family' | 'luxury' | ''
 
-      if (!cc) return res.status(400).json({ error: 'country param required' });
-
       const index = loadSearchIndex();
       if (!index) {
         return res.status(200).json({ hotels: [], indexMissing: true });
       }
 
-      // Filter by country code
-      let candidates = index.filter(h => h.cc === cc);
+      // Filter by country code — wenn leer: globaler Mix aus allen Ländern
+      let candidates = cc ? index.filter(h => h.cc === cc) : [...index];
 
       // Optional city filter (fuzzy)
       if (city) {
@@ -214,7 +213,7 @@ module.exports = async function handler(req, res) {
       // Return basic data (id + score) — frontend fetches images separately
       res.setHeader('Cache-Control', 'public, max-age=43200, s-maxage=43200'); // 12h
       return res.status(200).json({
-        hotels: top.map(h => ({ giataId: h.giataId, name: h.name, city: h.city, country: h.country, stars: h.stars, score: h._score })),
+        hotels: top.map(h => ({ giataId: h.giataId, name: h.name, city: h.city, cc: h.cc, country: h.country, stars: h.stars, score: h._score })),
         total: candidates.length,
         category: category || 'default',
       });

@@ -1323,8 +1323,14 @@
             + '<span class="hd-sb-bar-val">' + pctDisplay + '</span>'
             + '</div>';
         }
-        var bd = d.breakdown;
-        var gRating = d.meta && d.meta.googleRating ? d.meta.googleRating : null;
+        // Backward-compatible guard: older/newer score payloads may not expose d.breakdown.
+        var bd = (d && d.breakdown) ? d.breakdown : {
+          tesis: Number(d && d.tesis) || 0,
+          ulke: Number(d && d.ulke) || 0,
+          deneyim: (d && d.deneyim !== undefined) ? d.deneyim : null,
+          kategori: Number(d && d.kategori) || 0
+        };
+        var gRating = d && d.meta && d.meta.googleRating ? d.meta.googleRating : null;
         var deneyimVisual = bd.deneyim === null ? 0 : (gRating ? Math.round(gRating / 5 * 100) : bd.deneyim);
         var deneyimDisp   = bd.deneyim === null ? '—' : undefined;
         var barsHtml = sbBarRow('tesis',    '🟢', 'Ausstattung & Einrichtung', bd.tesis,       100, 0)

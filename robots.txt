@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /changelog.html
 Disallow: /content-engine/
+Disallow: /admin/
 
 Sitemap: https://www.jetztbuchbar.de/sitemap.xml

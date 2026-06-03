@@ -4,9 +4,40 @@
   <!-- ── STARTSEITE ── -->
   <url>
     <loc>https://www.jetztbuchbar.de/</loc>
-    <lastmod>2026-05-20</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://www.jetztbuchbar.de/kreuzfahrten/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/kreuzfahrten/flusskreuzfahrt-donau/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/kreuzfahrten/rhein-kreuzfahrt/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/kreuzfahrten/mini-kreuzfahrt-oslo/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/kurzurlaub-gutscheine/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- ── STATISCHE SEITEN ── -->
@@ -33,12 +64,6 @@
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://www.jetztbuchbar.de/fluege/</loc>
-    <lastmod>2026-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- ── LÄNDERHAUPT-SEITEN ── -->
@@ -93,6 +118,12 @@
   <url>
     <loc>https://www.jetztbuchbar.de/jordanien/</loc>
     <lastmod>2026-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.jetztbuchbar.de/malediven/</loc>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -482,7 +513,7 @@
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/themen/flitterwochen/</loc>
-    <lastmod>2026-05-20</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -546,7 +577,7 @@
   </url>
   <url>
     <loc>https://www.jetztbuchbar.de/vergleiche/dubai-vs-abu-dhabi/</loc>
-    <lastmod>2026-05-20</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -4,20 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title id="page-title">Hotel Details – JetztBuchbar</title>
-  <meta name="description" id="page-desc" content="" />
+  <meta name="description" id="page-desc" content="Hotelprofil mit Lage, Ausstattung, Zimmern, Bewertungen und Buchungsoptionen. JetztBuchbar.de zeigt verifizierte Hotel-Details für deine Reiseplanung." />
+  <meta name="robots" content="noindex,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <link rel="canonical" id="page-canonical" href="https://www.jetztbuchbar.de/hotel.html" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@jetztbuchbar" />
-  <meta name="twitter:title" content="Hotel Details – JetztBuchbar.de" />
-  <meta name="twitter:description" content="Hotel-Details auf einen Blick: Lage, Ausstattung, Bewertung und direkt buchen. JetztBuchbar.de" />
+  <meta name="twitter:title" id="page-twitter-title" content="Hotel Details – JetztBuchbar.de" />
+  <meta name="twitter:description" id="page-twitter-desc" content="Hotel-Details auf einen Blick: Lage, Ausstattung, Bewertung und direkt buchen. JetztBuchbar.de" />
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80" />
-  <meta property="og:title" content="Hotel Details – JetztBuchbar.de" />
-  <meta property="og:description" content="Hotel-Details auf einen Blick: Lage, Ausstattung, Bewertung und direkt buchen." />
+  <meta property="og:title" id="page-og-title" content="Hotel Details – JetztBuchbar.de" />
+  <meta property="og:description" id="page-og-desc" content="Hotel-Details auf einen Blick: Lage, Ausstattung, Bewertung und direkt buchen." />
+  <meta property="og:url" id="page-og-url" content="https://www.jetztbuchbar.de/hotel.html" />
   <meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80" />
   <meta property="og:type" content="website" />
 
+  <script>
+    (function () {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var slug = (params.get('slug') || '').trim();
+        var hid = (params.get('id') || '').trim();
+        var label = slug ? slug.replace(/-/g, ' ').replace(/\s+/g, ' ').trim() : 'Hotel';
+        label = label ? label.charAt(0).toUpperCase() + label.slice(1) : 'Hotel';
+
+        var titleTxt = label + ' – Hotelprofil, Ausstattung & Lage | JetztBuchbar';
+        var descTxt = label + ' als Hotelprofil: Lage, Zimmer, Ausstattung, Kartenansicht und Buchungsoptionen für deine Reiseplanung.';
+        var canon = 'https://www.jetztbuchbar.de/hotel.html' + (hid ? ('?id=' + encodeURIComponent(hid)) : '');
+
+        var titleEl = document.getElementById('page-title');
+        if (titleEl) titleEl.textContent = titleTxt;
+
+        var descEl = document.getElementById('page-desc');
+        if (descEl) descEl.setAttribute('content', descTxt);
+
+        var canonicalEl = document.getElementById('page-canonical');
+        if (canonicalEl) canonicalEl.setAttribute('href', canon);
+
+        var twTitle = document.getElementById('page-twitter-title');
+        if (twTitle) twTitle.setAttribute('content', titleTxt);
+        var twDesc = document.getElementById('page-twitter-desc');
+        if (twDesc) twDesc.setAttribute('content', descTxt);
+
+        var ogTitle = document.getElementById('page-og-title');
+        if (ogTitle) ogTitle.setAttribute('content', titleTxt);
+        var ogDesc = document.getElementById('page-og-desc');
+        if (ogDesc) ogDesc.setAttribute('content', descTxt);
+        var ogUrl = document.getElementById('page-og-url');
+        if (ogUrl) ogUrl.setAttribute('content', canon);
+      } catch (_) {}
+    })();
+  </script>
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -52,6 +92,43 @@
     #hd-loading {
       display: flex; align-items: center; justify-content: center;
       min-height: 60vh; font-size: 1.1rem; color: var(--text-muted);
+      padding: 1.2rem; text-align: center;
+    }
+
+    .hd-seo-fallback {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 1.25rem clamp(1rem, 3vw, 2rem) 2rem;
+      color: var(--text-muted);
+    }
+    .hd-seo-fallback-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      padding: 1rem 1.05rem;
+    }
+    .hd-seo-fallback h2 {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    .hd-seo-fallback p {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+    .hd-seo-fallback ul {
+      margin: 0.3rem 0 0.7rem 1.15rem;
+    }
+    .hd-seo-fallback li {
+      margin-bottom: 0.35rem;
+      font-size: 0.9rem;
+    }
+    .hd-seo-fallback a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(0, 200, 150, 0.45);
+      text-underline-offset: 2px;
     }
 
     /* ── HERO GALLERY ── */
@@ -112,8 +189,35 @@
     }
     @media (max-width: 900px) {
       .hd-wrapper { grid-template-columns: 1fr; }
-      .hd-sidebar { order: -1; }
+      .hd-sidebar { position: static; }
+      .hd-mobile-cta { display: flex !important; }
+      .hd-anfragen-btn, .hd-sb-hint { display: none; }
     }
+
+    /* ── MOBILE STICKY CTA BAR ── */
+    .hd-mobile-cta {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      background: var(--bg-card, #121212);
+      border-top: 1px solid var(--border, #1e1e1e);
+      padding: .75rem 1rem calc(.75rem + env(safe-area-inset-bottom));
+      gap: .6rem;
+    }
+    .hd-mobile-cta-btn {
+      flex: 1; padding: .78rem;
+      background: var(--accent); color: #000;
+      border: none; border-radius: 8px;
+      font-size: .9rem; font-weight: 800; cursor: pointer;
+      font-family: inherit;
+    }
+    .hd-mobile-cta-score {
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1px; flex-shrink: 0;
+      background: rgba(0,200,150,.1); border: 1px solid rgba(0,200,150,.25);
+      border-radius: 8px; padding: .4rem .7rem; min-width: 56px;
+    }
+    .hd-mobile-cta-score-val { font-size: .95rem; font-weight: 900; color: var(--accent); line-height: 1; }
+    .hd-mobile-cta-score-lbl { font-size: .55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
 
     /* ── MAIN ── */
     .hd-back {
@@ -175,7 +279,7 @@
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 1rem 1.1rem;
       display: flex; flex-direction: column; gap: 0.6rem;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s; overflow: hidden;
     }
     .hd-room-card:hover { border-color: rgba(0,200,150,0.35); }
     .hd-room-name { font-weight: 700; font-size: 0.9rem; line-height: 1.3; }
@@ -193,6 +297,61 @@
       align-self: flex-start;
     }
     .hd-room-anfragen:hover { background: rgba(0,200,150,0.12); }
+    /* Room image slider */
+    .hd-room-imgs-wrap {
+      position: relative; margin: -1rem -1.1rem 0.85rem;
+      aspect-ratio: 4/3; background: #1a1a1a; flex-shrink: 0;
+    }
+    .hd-room-imgs {
+      display: flex; height: 100%;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    }
+    .hd-room-imgs::-webkit-scrollbar { display: none; }
+    .hd-room-imgs img {
+      flex: 0 0 100%; width: 100%; height: 100%;
+      object-fit: cover; scroll-snap-align: start; pointer-events: none;
+    }
+    .hd-room-img-badge {
+      position: absolute; bottom: 0.4rem; right: 0.5rem;
+      background: rgba(0,0,0,0.6); color: #e0e0e0;
+      font-size: 0.62rem; padding: 0.1rem 0.38rem;
+      border-radius: 4px; pointer-events: none; user-select: none;
+    }
+    .hd-room-imgs-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 24px; height: 24px; background: rgba(0,0,0,0.5);
+      border: none; color: #fff; font-size: 0.9rem; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.2s; z-index: 2;
+    }
+    .hd-room-card:hover .hd-room-imgs-nav { opacity: 1; }
+    .hd-room-imgs-nav.prev { left: 0.35rem; }
+    .hd-room-imgs-nav.next { right: 0.35rem; }
+    /* sqm + per-room features */
+    .hd-room-sqm {
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--accent); line-height: 1.2;
+    }
+    .hd-room-tag.hd-room-feature {
+      background: rgba(0,200,150,0.07);
+      color: rgba(0,200,150,0.85);
+      border: 1px solid rgba(0,200,150,0.2);
+    }
+    /* hotel-wide room amenities strip */
+    #hd-room-amenities {
+      display: none; flex-wrap: wrap; gap: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+    .hd-room-amenity-chip {
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      color: var(--text-muted); font-size: 0.72rem;
+      padding: 0.2rem 0.55rem; border-radius: 20px; white-space: nowrap;
+    }
+    .hd-room-amenity-label {
+      font-size: 0.7rem; color: var(--text-muted);
+      opacity: 0.7; width: 100%; display: none; margin-bottom: 0.15rem;
+    }
 
     /* ── STICKY SIDEBAR ── */
     .hd-sidebar { position: sticky; top: 80px; }
@@ -207,6 +366,101 @@
     .hd-sb-location { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 0.25rem; }
     .hd-sb-divider { border: none; border-top: 1px solid var(--border); margin: 0.25rem 0; }
     .hd-sb-meta { padding: .3rem 0 .1rem; display:flex; flex-direction:column; gap:.4rem; margin-bottom: 0.25rem; }
+    .hd-sb-offer {
+      margin-top: .5rem;
+      padding: .9rem;
+      border: 1px solid rgba(0,200,150,.18);
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(0,200,150,.08), rgba(0,200,150,.03));
+      min-height: 148px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hd-sb-offer--fallback {
+      border-color: rgba(255,255,255,.1);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    }
+    .hd-sb-offer-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: .67rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hd-sb-offer-price {
+      margin-top: .25rem;
+      font-size: 1.56rem;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.1;
+      letter-spacing: -.01em;
+    }
+    .hd-sb-offer-price em {
+      font-style: normal;
+      font-size: .76em;
+      font-weight: 800;
+      opacity: .86;
+      text-transform: lowercase;
+    }
+    .hd-sb-offer-subline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      margin-top: .22rem;
+      font-size: .74rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .hd-sb-offer-meta {
+      margin-top: .28rem;
+      font-size: .78rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .hd-sb-offer-date {
+      margin-top: .3rem;
+      font-size: .79rem;
+      color: #b8efe0;
+      line-height: 1.42;
+    }
+    .hd-sb-offer-stack {
+      display: flex;
+      flex-direction: column;
+      gap: .65rem;
+      margin-top: .5rem;
+    }
+    .hd-sb-offer--secondary {
+      min-height: 0;
+      padding: .82rem;
+      border-color: rgba(255,255,255,.1);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+    }
+    .hd-sb-offer--secondary .hd-sb-offer-kicker {
+      color: #d6e7e2;
+    }
+    .hd-sb-offer--secondary .hd-sb-offer-price {
+      font-size: 1.2rem;
+    }
+    .hd-book-btn {
+      display: block;
+      width: 100%;
+      padding: 0.85rem;
+      background: #fff;
+      color: #0d0d0d;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.15s, opacity 0.2s;
+      margin-top: 0.55rem;
+    }
+    .hd-book-btn:hover { transform: translateY(-1px); opacity: .95; }
     .hd-sb-bar-row {
       display: grid;
       grid-template-columns: 16px auto 1fr 34px;
@@ -222,11 +476,10 @@
       transition: transform .95s cubic-bezier(.22,.68,0,1.2);
     }
     .hd-sb-bar-val { font-size: 9.5px; color: #555; text-align:right; font-variant-numeric:tabular-nums; }
-    .hd-sb-bar-stars .hd-sb-bar-fill { background: linear-gradient(90deg,#d97706,#fbbf24); }
-    .hd-sb-bar-L     .hd-sb-bar-fill { background: linear-gradient(90deg,#1d4ed8,#60a5fa); }
-    .hd-sb-bar-P     .hd-sb-bar-fill { background: linear-gradient(90deg,#047857,#00c896); }
-    .hd-sb-bar-F     .hd-sb-bar-fill { background: linear-gradient(90deg,#c2410c,#fb923c); }
-    .hd-sb-bar-A     .hd-sb-bar-fill { background: linear-gradient(90deg,#6d28d9,#c084fc); }
+    .hd-sb-bar-tesis    .hd-sb-bar-fill { background: linear-gradient(90deg,#047857,#00c896); }
+    .hd-sb-bar-ulke     .hd-sb-bar-fill { background: linear-gradient(90deg,#1d4ed8,#60a5fa); }
+    .hd-sb-bar-deneyim  .hd-sb-bar-fill { background: linear-gradient(90deg,#b45309,#fbbf24); }
+    .hd-sb-bar-kategori .hd-sb-bar-fill { background: linear-gradient(90deg,#6d28d9,#c084fc); }
     .hd-sb-breakdown-pills { display:flex; gap:5px; margin-top:3px; flex-wrap:wrap; }
     .hd-sb-pill { font-size:10px; padding:2px 8px; border-radius:10px; font-weight:700; line-height:1.7; }
     .hd-sb-pill-green { background:rgba(0,200,150,.13); color:#00c896; }
@@ -254,6 +507,15 @@
       font-family: inherit;
     }
     .hd-compare-btn:hover { background: rgba(0,200,150,.08); border-color: var(--accent); }
+    .hd-share-btn {
+      width: 100%; padding: 0.6rem;
+      background: transparent; color: var(--text-muted);
+      border: 1px solid var(--border); border-radius: 8px;
+      font-size: 0.85rem; font-weight: 600; font-family: inherit;
+      cursor: pointer; transition: all 0.2s; margin-top: 0.55rem;
+    }
+    .hd-share-btn:hover { background: rgba(255,255,255,0.05); color: var(--text); border-color: rgba(255,255,255,0.3); }
+    .hd-share-btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .hd-compare-picker { margin-top: 0.55rem; position: relative; }
     .hd-compare-picker input {
       width: 100%; background: rgba(255,255,255,.05); border: 1px solid var(--border);
@@ -280,37 +542,87 @@
     .hdc-ac-loc { font-size: .72rem; color: var(--text-dim, #666); }
     .hdc-hint { font-size: .72rem; color: var(--text-dim, #666); text-align: center; margin-top: .3rem; }
 
-    /* ── ANFRAGEN BUBBLE ── */
-    .hd-ab {
-      position: fixed; bottom: 90px; right: 22px; width: 285px;
-      background: #161616; border: 1px solid var(--accent);
-      border-radius: 12px; padding: 0.85rem 1rem;
-      z-index: 99999; box-shadow: 0 8px 32px rgba(0,0,0,0.65);
-      font-size: 0.78rem; display: none;
+    /* ── ANFRAGE MODAL ── */
+    .hdam-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.78);
+      z-index: 99999; display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
     }
-    .hd-ab-head {
-      display: flex; justify-content: space-between; align-items: center;
-      font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; font-size: 0.82rem;
+    .hdam-box {
+      background: #1a1a1a; border: 1px solid var(--accent);
+      border-radius: 16px; padding: 1.75rem 1.5rem;
+      width: 100%; max-width: 440px; max-height: 92vh; overflow-y: auto;
+      position: relative;
     }
-    .hd-ab-x {
+    .hdam-close {
+      position: absolute; top: 1rem; right: 1rem;
       background: none; border: none; color: var(--text-muted);
-      cursor: pointer; font-size: 1rem; padding: 0; line-height: 1;
+      font-size: 1.5rem; cursor: pointer; line-height: 1; padding: 0.1rem 0.4rem;
     }
-    .hd-ab-hotel { color: var(--text); font-size: 0.82rem; margin-bottom: 0.45rem; }
-    .hd-ab-msg {
-      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-      border-radius: 6px; padding: 0.45rem 0.6rem;
-      color: var(--text-muted); font-size: 0.74rem; line-height: 1.45;
-      margin-bottom: 0.5rem; word-break: break-word;
+    .hdam-close:hover { color: var(--text); }
+    .hdam-title { font-size: 1.15rem; font-weight: 800; color: var(--accent); margin-bottom: 0.3rem; }
+    .hdam-hotel-lbl {
+      font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.2rem;
+      padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .hd-ab-hint {
-      color: var(--accent); font-size: 0.76rem; font-weight: 700;
-      text-align: center; border-top: 1px solid var(--border); padding-top: 0.45rem;
+    .hdam-row { margin-bottom: 0.9rem; }
+    .hdam-row label {
+      display: block; font-size: 0.72rem; color: var(--text-muted);
+      margin-bottom: 0.3rem; font-weight: 600; letter-spacing: 0.3px;
     }
-    .hd-ab-hint kbd {
-      background: rgba(0,200,150,0.15); border: 1px solid var(--accent);
-      border-radius: 3px; padding: 0.05rem 0.3rem; font-family: monospace;
+    .hdam-row input, .hdam-row select {
+      width: 100%; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 0.6rem 0.8rem;
+      color: var(--text); font-size: 0.88rem;
+      transition: border-color 0.2s; box-sizing: border-box;
     }
+    .hdam-row input:focus, .hdam-row select:focus { outline: none; border-color: var(--accent); }
+    .hdam-row select option { background: #1a1a1a; }
+    .hdam-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .hdam-row-2 > div input { width: 100%; }
+    .hdam-submit {
+      width: 100%; background: var(--accent); color: #0a0a0a;
+      border: none; border-radius: 10px; padding: 0.85rem;
+      font-weight: 800; font-size: 0.95rem; cursor: pointer;
+      transition: opacity 0.2s; margin-top: 0.4rem;
+    }
+    .hdam-submit:hover { opacity: 0.88; }
+    .hdam-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .hdam-success { text-align: center; padding: 1.5rem 0; }
+    .hdam-success-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .hdam-success h4 { font-size: 1.1rem; color: var(--accent); margin-bottom: 0.5rem; }
+    .hdam-success p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+    .hdam-error {
+      background: rgba(255,80,80,0.1); border: 1px solid rgba(255,80,80,0.3);
+      border-radius: 8px; padding: 0.7rem; font-size: 0.78rem;
+      color: #ff8888; margin-top: 0.5rem;
+    }
+    .hdam-section-lbl {
+      font-size: 0.68rem; font-weight: 700; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.9px;
+      margin: 1.1rem 0 0.65rem; padding-top: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .hdam-section-lbl:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+    .hdam-ages-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .hdam-ages-grid input {
+      width: 68px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 0.55rem 0.5rem;
+      color: var(--text); font-size: 0.88rem; text-align: center; box-sizing: border-box;
+    }
+    .hdam-ages-grid input:focus { outline: none; border-color: var(--accent); }
+    .hdam-ages-hint { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.7rem; }
+    .hdam-radio-row { display: flex; gap: 1rem; margin-top: 0.25rem; flex-wrap: wrap; }
+    .hdam-radio-lbl {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-size: 0.88rem; color: var(--text); cursor: pointer;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 0.5rem 0.85rem; transition: border-color 0.2s;
+    }
+    .hdam-radio-lbl:has(input:checked) { border-color: var(--accent); color: var(--accent); }
+    .hdam-radio-lbl input[type="radio"] { accent-color: var(--accent); }
 
     /* ── JB EXPERTEN-SCORE SIEGEL ─────────────────────────────────────── */
     .hd-name-wrap {
@@ -351,6 +663,9 @@
       .hd-name-wrap { gap: 0.6rem; }
       .jb-seal svg { width: 46px; height: 46px; }
     }
+    @media (max-width: 900px) {
+      .hd-root { padding-bottom: 80px; }
+    }
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCDTX8ZEQ3"></script>
@@ -378,17 +693,38 @@
       "@type": "ListItem",
       "position": 2,
       "name": "Hotel",
-      "item": "https://jetztbuchbar.de/hotel/"
+      "item": "https://www.jetztbuchbar.de/hotel.html"
     }
   ]
 }
   </script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wzrhhc1m1p");
+</script>
 </head>
 <body>
 
 <script src="/components/header.js"></script>
 
   <div id="hd-loading">⏳ Lade Hotel…</div>
+  <section id="hd-seo-fallback" class="hd-seo-fallback" aria-live="polite">
+    <div class="hd-seo-fallback-card">
+      <h2 id="hd-fallback-title">Hotelprofil wird geladen</h2>
+      <p id="hd-fallback-copy">Wir laden aktuell die verifizierten Hoteldaten inklusive Lage, Ausstattungsmerkmale, Zimmertypen, Fotos und Angebotsinformationen.</p>
+      <ul>
+        <li>Standortdaten mit Kartenansicht zur Reiseplanung.</li>
+        <li>Ausstattung, Zimmerdetails und Service-Merkmale im Überblick.</li>
+        <li>Aktuelle Angebots- und Buchungsinformationen, sofern verfügbar.</li>
+      </ul>
+      <p>Falls die Detaildaten nicht sofort geladen werden, kannst du über unsere Hauptseiten passende Alternativen finden:</p>
+      <p><a href="/">Startseite</a> · <a href="/vergleich.html">Hotelvergleich</a> · <a href="/kontakt.html">Kontakt</a></p>
+    </div>
+  </section>
 
   <div id="hd-root" style="display:none">
 
@@ -436,6 +772,8 @@
         <!-- Zimmertypen -->
         <section class="hd-section" id="hd-rooms-section" style="display:none">
           <div class="hd-section-title">🛏 Zimmertypen</div>
+          <div class="hd-room-amenity-label" id="hd-room-amenity-label">Alle Zimmer beinhalten:</div>
+          <div id="hd-room-amenities"></div>
           <div class="hd-room-grid" id="hd-room-grid"></div>
         </section>
       </main>
@@ -446,15 +784,7 @@
 
           <!-- ① JB Experten-Score Siegel (Trust Element) -->
           <div class="jb-seal-sidebar-wrap">
-            <div class="jb-seal" title="JB Experten-Score">
-              <svg viewBox="0 0 56 56" width="50" height="50" aria-hidden="true">
-                <circle cx="28" cy="28" r="24" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="5"/>
-                <circle id="jb-score-ring-sidebar" cx="28" cy="28" r="24" fill="none" stroke="#00c896" stroke-width="5" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8" transform="rotate(-90 28 28)" style="transition:stroke-dashoffset 1.3s cubic-bezier(.22,.68,0,1.2)"/>
-                <text x="28" y="23" text-anchor="middle" font-size="7" font-weight="900" fill="rgba(255,255,255,.5)" font-family="system-ui,-apple-system,sans-serif" letter-spacing="1">JB</text>
-                <text x="28" y="36" text-anchor="middle" font-size="13" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif" id="jb-score-svg-sidebar">–</text>
-                <text x="28" y="44" text-anchor="middle" font-size="6" fill="rgba(0,200,150,0.7)" font-family="system-ui,-apple-system,sans-serif">/100</text>
-              </svg>
-            </div>
+            <div class="jb-seal" id="jb-seal-container" title="JB Experten-Score"></div>
             <div class="jb-seal-sidebar-score" id="jb-score-sidebar-label">– Experten-Score</div>
             <div class="jb-seal-sidebar-sub">Verifizierte Ausstattungsdaten, aktuelle Sicherheitslage, Gesundheitsrisiken, Reisewarnungen – alles in einem Score.</div>
           </div>
@@ -464,8 +794,10 @@
           <div class="hd-sb-location" id="hd-sb-location"></div>
           <hr class="hd-sb-divider">
           <div class="hd-sb-meta" id="hd-sb-meta"></div>
+          <div id="hd-sb-offer-slot"></div>
           <button class="hd-anfragen-btn" id="hd-anfragen-btn">💬 Sofort anfragen</button>
           <div class="hd-sb-hint">Kostenlos &amp; unverbindlich</div>
+          <button class="hd-share-btn" id="hd-share-btn">📤 Teilen</button>
 
           <!-- Compare Button -->
           <button class="hd-compare-btn" id="hd-compare-btn">⇄ Mit anderem Hotel vergleichen</button>
@@ -481,10 +813,54 @@
     </div>
   </div><!-- /hd-root -->
 
+  <!-- ── MOBILE STICKY CTA ── -->
+  <div class="hd-mobile-cta" id="hd-mobile-cta">
+    <div class="hd-mobile-cta-score">
+      <span class="hd-mobile-cta-score-val" id="hd-mobile-score-val">–</span>
+      <span class="hd-mobile-cta-score-lbl">Score</span>
+    </div>
+    <button class="hd-mobile-cta-btn" id="hd-mobile-anfragen-btn">💬 Sofort anfragen</button>
+  </div>
+
   <script src="/components/jb-score.js"></script>
   <script>
   (function () {
     'use strict';
+
+    var _hdHotelStars = '';
+
+    // ── JB Score Seal SVG ─────────────────────────────────────────────────
+    var _hdUid = 0;
+    function hdSealSVG(score) {
+      var u = ++_hdUid;
+      return '<svg width="72" height="72" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" aria-label="JB Score '+score+'/100" style="filter:drop-shadow(0 2px 10px rgba(0,0,0,.7)) drop-shadow(0 0 8px rgba(0,200,150,.35));">'
+        +'<defs>'
+        +'<radialGradient id="hdGR'+u+'" cx="50%" cy="40%" r="55%">'
+        +'<stop offset="0%" stop-color="#00E0A8"/>'
+        +'<stop offset="50%" stop-color="#00C896"/>'
+        +'<stop offset="100%" stop-color="#00956E"/>'
+        +'</radialGradient>'
+        +'<radialGradient id="hdDB'+u+'" cx="50%" cy="35%" r="60%">'
+        +'<stop offset="0%" stop-color="#1a1a1a"/>'
+        +'<stop offset="100%" stop-color="#0a0a0a"/>'
+        +'</radialGradient>'
+        +'<radialGradient id="hdCB'+u+'" cx="50%" cy="40%" r="60%">'
+        +'<stop offset="0%" stop-color="#FF7A5A"/>'
+        +'<stop offset="100%" stop-color="#E85535"/>'
+        +'</radialGradient>'
+        +'</defs>'
+        +'<circle cx="340" cy="265" r="195" fill="url(#hdGR'+u+')"/>'
+        +'<circle cx="340" cy="265" r="178" fill="url(#hdDB'+u+')"/>'
+        +'<text x="340" y="318" text-anchor="middle" font-size="148" font-weight="700" font-family="Georgia,serif" fill="#00C896">'+score+'</text>'
+        +'<path d="M205,365 L475,365 L458,415 L380,438 L340,448 L300,438 L222,415 Z" fill="url(#hdCB'+u+')"/>'
+        +'<rect x="205" y="363" width="270" height="46" fill="url(#hdCB'+u+')"/>'
+        +'<text x="340" y="393" text-anchor="middle" font-size="19" font-weight="700" font-family="Georgia,serif" fill="#fff" letter-spacing="5">SCORE</text>'
+        +'<text x="340" y="430" text-anchor="middle" font-size="16" fill="#fff">&#9733; &#9733; &#9733; &#9733; &#9733;</text>'
+        +'<circle cx="340" cy="80" r="36" fill="url(#hdGR'+u+')"/>'
+        +'<circle cx="340" cy="80" r="30" fill="url(#hdDB'+u+')"/>'
+        +'<text x="340" y="87" text-anchor="middle" font-size="17" font-weight="700" font-family="Georgia,serif" fill="#00C896">JB</text>'
+        +'</svg>';
+    }
 
     // ── Fact-Labels für kategorisierte Ausstattung ──────────────────
     var FAC_LABELS = {
@@ -657,6 +1033,49 @@
         var card = document.createElement('div');
         card.className = 'hd-room-card';
 
+        // Bildslider
+        if (r.images && r.images.length) {
+          var wrap = document.createElement('div');
+          wrap.className = 'hd-room-imgs-wrap';
+          var track = document.createElement('div');
+          track.className = 'hd-room-imgs';
+          r.images.forEach(function (url) {
+            var img = document.createElement('img');
+            img.src = url; img.alt = r.name; img.loading = 'lazy';
+            track.appendChild(img);
+          });
+          wrap.appendChild(track);
+          if (r.images.length > 1) {
+            var badge = document.createElement('span');
+            badge.className = 'hd-room-img-badge';
+            badge.textContent = '1 / ' + r.images.length;
+            wrap.appendChild(badge);
+            var prevBtn = document.createElement('button');
+            prevBtn.className = 'hd-room-imgs-nav prev';
+            prevBtn.innerHTML = '&#8249;';
+            prevBtn.addEventListener('click', function (e) {
+              e.stopPropagation();
+              var idx = Math.round(track.scrollLeft / track.offsetWidth);
+              track.scrollTo({ left: Math.max(0, idx - 1) * track.offsetWidth, behavior: 'smooth' });
+            });
+            var nextBtn = document.createElement('button');
+            nextBtn.className = 'hd-room-imgs-nav next';
+            nextBtn.innerHTML = '&#8250;';
+            nextBtn.addEventListener('click', function (e) {
+              e.stopPropagation();
+              var idx = Math.round(track.scrollLeft / track.offsetWidth);
+              track.scrollTo({ left: Math.min(r.images.length - 1, idx + 1) * track.offsetWidth, behavior: 'smooth' });
+            });
+            wrap.appendChild(prevBtn);
+            wrap.appendChild(nextBtn);
+            track.addEventListener('scroll', function () {
+              var idx = Math.round(track.scrollLeft / track.offsetWidth);
+              badge.textContent = (idx + 1) + ' / ' + r.images.length;
+            });
+          }
+          card.appendChild(wrap);
+        }
+
         var name = document.createElement('div');
         name.className = 'hd-room-name'; name.textContent = r.name;
         card.appendChild(name);
@@ -673,6 +1092,24 @@
           card.appendChild(tags);
         }
 
+        if (r.sqm) {
+          var sqmEl = document.createElement('div');
+          sqmEl.className = 'hd-room-sqm';
+          sqmEl.textContent = r.sqm + ' m²';
+          card.appendChild(sqmEl);
+        }
+
+        if (r.features && r.features.length) {
+          var feats = document.createElement('div');
+          feats.className = 'hd-room-tags';
+          r.features.forEach(function (f) {
+            var sp = document.createElement('span');
+            sp.className = 'hd-room-tag hd-room-feature'; sp.textContent = f;
+            feats.appendChild(sp);
+          });
+          card.appendChild(feats);
+        }
+
         var btn = document.createElement('button');
         btn.className = 'hd-room-anfragen';
         btn.textContent = 'Anfragen';
@@ -681,6 +1118,182 @@
         grid.appendChild(card);
       });
       document.getElementById('hd-rooms-section').style.display = '';
+    }
+
+    // ── Hotel-weite Zimmerausstattung ────────────────────────────────
+    function buildRoomAmenities(amenities) {
+      if (!amenities || !amenities.length) return;
+      var wrap = document.getElementById('hd-room-amenities');
+      var lbl  = document.getElementById('hd-room-amenity-label');
+      if (!wrap) return;
+      amenities.forEach(function (a) {
+        var chip = document.createElement('span');
+        chip.className = 'hd-room-amenity-chip';
+        chip.textContent = a.icon + ' ' + a.label;
+        wrap.appendChild(chip);
+      });
+      wrap.style.display = 'flex';
+      if (lbl) lbl.style.display = '';
+    }
+
+    // ── Social Share: Canvas-Karte + Web Share API ─────────────────
+    function buildShare(h, score) {
+      var btn = document.getElementById('hd-share-btn');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        btn.disabled = true;
+        btn.textContent = '⏳ Karte wird erstellt…';
+        var imgUrl = (galleryImages && galleryImages.length) ? galleryImages[currentIdx] : '';
+        generateShareCard(h, score, imgUrl, function (blob) {
+          btn.disabled = false;
+          btn.textContent = '📤 Teilen';
+          if (!blob) return;
+          var safe = (h.name || 'hotel').toLowerCase().replace(/[^\w]/g, '-').replace(/-+/g, '-');
+          var fname = 'jetztbuchbar-' + safe + '.png';
+          var file = new File([blob], fname, { type: 'image/png' });
+          if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({
+              title: h.name || 'Hotel',
+              text: (h.name || 'Hotel') + ' – Jetzt anfragen auf jetztbuchbar.de',
+              files: [file]
+            }).catch(function () {});
+          } else {
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url; a.download = fname; a.click();
+            setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+          }
+        });
+      });
+    }
+
+    function generateShareCard(h, score, imgUrl, cb) {
+      var W = 1080, H = 1080;
+
+      function rr(ctx, x, y, w, ht, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        ctx.lineTo(x + w, y + ht - r);
+        ctx.quadraticCurveTo(x + w, y + ht, x + w - r, y + ht);
+        ctx.lineTo(x + r, y + ht);
+        ctx.quadraticCurveTo(x, y + ht, x, y + ht - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+      }
+
+      function drawCard(ctx, bgImg) {
+        var pad = 52;
+        ctx.textBaseline = 'middle';
+        // Background
+        if (bgImg) {
+          var sc = Math.max(W / bgImg.naturalWidth, H / bgImg.naturalHeight);
+          ctx.drawImage(bgImg,
+            (W - bgImg.naturalWidth * sc) / 2, (H - bgImg.naturalHeight * sc) / 2,
+            bgImg.naturalWidth * sc, bgImg.naturalHeight * sc);
+        } else {
+          var grd = ctx.createLinearGradient(0, 0, 0, H);
+          grd.addColorStop(0, '#0d2035'); grd.addColorStop(0.5, '#0a1e2a'); grd.addColorStop(1, '#071814');
+          ctx.fillStyle = grd; ctx.fillRect(0, 0, W, H);
+        }
+        // Gradient overlay (full height, fades image from top)
+        var ov = ctx.createLinearGradient(0, 0, 0, H);
+        ov.addColorStop(0, 'rgba(0,0,0,0.12)');
+        ov.addColorStop(0.38, 'rgba(0,0,0,0.22)');
+        ov.addColorStop(0.60, 'rgba(0,0,0,0.78)');
+        ov.addColorStop(1, 'rgba(0,0,0,0.97)');
+        ctx.fillStyle = ov; ctx.fillRect(0, 0, W, H);
+        // Top bar: jetztbuchbar logo (y=110 → safe zone for 4:5 crop)
+        ctx.fillStyle = 'rgba(0,0,0,0.45)'; ctx.fillRect(0, 110, W, 94);
+        ctx.font = 'bold 44px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#00c896'; ctx.fillText('jetzt', pad, 157);
+        var jW = ctx.measureText('jetzt').width;
+        ctx.fillStyle = '#fff'; ctx.fillText('buchbar', pad + jW, 157);
+        ctx.font = '27px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.55)';
+        ctx.textAlign = 'right'; ctx.fillText('jetztbuchbar.de', W - pad, 157);
+        // Compute name word-wrap
+        ctx.font = 'bold 74px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.textAlign = 'left';
+        var words = (h.name || '').split(' '), line = '', lines = [];
+        words.forEach(function (w) {
+          var t = line + (line ? ' ' : '') + w;
+          if (ctx.measureText(t).width > W - pad * 2 && line) { lines.push(line); line = w; }
+          else { line = t; }
+        });
+        if (line) lines.push(line);
+        lines = lines.slice(0, 2);
+        // Layout bottom-up (cY=H-120 → safe zone for 4:5 crop)
+        var cY = H - 120;
+        // CTA button
+        var ctaH = 68, ctaW = W - pad * 2, ctaY = cY - ctaH;
+        ctx.fillStyle = '#00c896';
+        rr(ctx, pad, ctaY, ctaW, ctaH, 14); ctx.fill();
+        ctx.font = 'bold 30px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillStyle = '#fff'; ctx.textAlign = 'center';
+        ctx.fillText('Sofort Anfragen \u2013 kostenlos & unverbindlich', pad + ctaW / 2, ctaY + ctaH / 2);
+        cY = ctaY - 30;
+        // JB Score pill
+        if (score) {
+          var pillTxt = '\uD83C\uDFC6 ' + score + '/100 Experten-Score';
+          ctx.font = 'bold 30px -apple-system, BlinkMacSystemFont, sans-serif';
+          var pillH = 56, pillW = ctx.measureText(pillTxt).width + 64, pillY = cY - pillH;
+          ctx.fillStyle = '#00c896';
+          rr(ctx, pad, pillY, pillW, pillH, pillH / 2); ctx.fill();
+          ctx.fillStyle = '#fff'; ctx.textAlign = 'left';
+          ctx.fillText(pillTxt, pad + 30, pillY + pillH / 2);
+          cY = pillY - 26;
+        }
+        // Location
+        var loc = [h.city, h.country].filter(Boolean).join(', ');
+        if (loc) {
+          ctx.font = '38px -apple-system, BlinkMacSystemFont, sans-serif';
+          ctx.fillStyle = 'rgba(255,255,255,0.82)'; ctx.textAlign = 'left';
+          ctx.fillText('\uD83D\uDCCD ' + loc, pad, cY - 18);
+          cY -= 66;
+        }
+        // Hotel name lines (bottom-up)
+        ctx.font = 'bold 74px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillStyle = '#fff'; ctx.textAlign = 'left';
+        for (var i = lines.length - 1; i >= 0; i--) {
+          ctx.fillText(lines[i], pad, cY - 12);
+          cY -= 94;
+        }
+        // Stars
+        if (h.stars) {
+          ctx.font = 'bold 48px -apple-system, BlinkMacSystemFont, sans-serif';
+          ctx.fillStyle = '#f5c518';
+          ctx.fillText('\u2605'.repeat(h.stars), pad, cY - 10);
+        }
+      }
+
+      function exportCanvas(bgImg) {
+        var c = document.createElement('canvas');
+        c.width = W; c.height = H;
+        drawCard(c.getContext('2d'), bgImg);
+        try {
+          c.toDataURL();
+          c.toBlob(cb, 'image/png');
+        } catch (e) {
+          // CORS-blockiert: Fallback ohne Hero-Bild
+          var c2 = document.createElement('canvas');
+          c2.width = W; c2.height = H;
+          drawCard(c2.getContext('2d'), null);
+          c2.toBlob(cb, 'image/png');
+        }
+      }
+
+      if (imgUrl) {
+        var img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = function () { exportCanvas(img); };
+        img.onerror = function () { exportCanvas(null); };
+        img.src = '/api/image-proxy?url=' + encodeURIComponent(imgUrl);
+      } else {
+        exportCanvas(null);
+      }
     }
 
     // ── Sidebar befüllen ─────────────────────────────────────────────
@@ -692,13 +1305,17 @@
       document.getElementById('hd-sb-location').textContent = loc ? '📍 ' + loc : '';
 
       var meta = document.getElementById('hd-sb-meta');
+      var offerSlot = document.getElementById('hd-sb-offer-slot');
       var fac = h.facilities || {};
       var JBSb = window.JBScore || {};
+      meta.innerHTML = '';
+      if (offerSlot) offerSlot.innerHTML = '';
       if (JBSb.calcScoreDetail) {
         var d = JBSb.calcScoreDetail(h, { warningPenalty: h._warningPenalty || 0 });
-        function sbBarRow(cat, icon, label, val, max, idx) {
-          var pct = max > 0 ? (val / max).toFixed(3) : '0';
-          var pctDisplay = max > 0 ? Math.round(val / max * 100) + '%' : '0%';
+        function sbBarRow(cat, icon, label, val, max, idx, dispOverride) {
+          var pct        = (val > 0 && max > 0) ? (val / max).toFixed(3) : '0';
+          var pctDisplay = dispOverride !== undefined ? dispOverride
+                         : (max > 0 ? Math.round(val / max * 100) + '%' : '0%');
           return '<div class="hd-sb-bar-row hd-sb-bar-' + cat + '">'
             + '<span class="hd-sb-bar-icon">' + icon + '</span>'
             + '<span class="hd-sb-bar-label">' + label + '</span>'
@@ -706,18 +1323,14 @@
             + '<span class="hd-sb-bar-val">' + pctDisplay + '</span>'
             + '</div>';
         }
-        var barsHtml = sbBarRow('stars', '⭐', 'Sterne',       d.starCount, 5,       0)
-                     + sbBarRow('L',     '📍', 'Lage',         d.L,         d.Lmax,  1)
-                     + sbBarRow('P',     '🏊', 'Pool & Spa',   d.P,         d.Pmax,  2)
-                     + sbBarRow('F',     '🍽️', 'Verpflegung',  d.F,         d.Fmax,  3)
-                     + sbBarRow('A',     '🎯', 'Aktivitäten',  d.A,         d.Amax,  4);
-        var fc = d.flightBonus > 0 ? 'green' : d.flightBonus < 0 ? 'red' : 'gray';
-        var ft = d.flightBonus > 0 ? '✈️ +' + d.flightBonus + ' Flug'
-               : d.flightBonus < 0 ? '✈️ ' + d.flightBonus + ' Flug'
-               : '✈️ ±0 Flug';
-        barsHtml += '<div class="hd-sb-breakdown-pills">'
-          + '<span class="hd-sb-pill hd-sb-pill-' + fc + '">' + ft + '</span>'
-          + '</div>';
+        var bd = d.breakdown;
+        var gRating = d.meta && d.meta.googleRating ? d.meta.googleRating : null;
+        var deneyimVisual = bd.deneyim === null ? 0 : (gRating ? Math.round(gRating / 5 * 100) : bd.deneyim);
+        var deneyimDisp   = bd.deneyim === null ? '—' : undefined;
+        var barsHtml = sbBarRow('tesis',    '🟢', 'Ausstattung & Einrichtung', bd.tesis,       100, 0)
+                     + sbBarRow('ulke',     '🔵', 'Land & Sicherheit',         bd.ulke,        100, 1)
+                     + sbBarRow('deneyim',  '🟡', 'Gästeerfahrung',            deneyimVisual,  100, 2, deneyimDisp)
+                     + sbBarRow('kategori', '🟣', 'Kategorie & Zugang',        bd.kategori,    100, 3);
         meta.innerHTML = barsHtml;
       } else {
         if (fac.concept) {
@@ -734,7 +1347,86 @@
         }
       }
 
+      if (offerSlot) {
+        function parseOfferDate(value) {
+          var raw = String(value || '').trim();
+          if (!raw) return null;
+          var iso = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+          if (iso) return { y: Number(iso[1]), m: Number(iso[2]), d: Number(iso[3]) };
+          var dmy = raw.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/);
+          if (dmy) {
+            var year = Number(dmy[3]);
+            if (year < 100) year += 2000;
+            return { y: year, m: Number(dmy[2]), d: Number(dmy[1]) };
+          }
+          var dt = new Date(raw);
+          if (!isNaN(dt.getTime())) {
+            return { y: dt.getUTCFullYear(), m: dt.getUTCMonth() + 1, d: dt.getUTCDate() };
+          }
+          return null;
+        }
+
+        function formatDateDE(parts) {
+          if (!parts) return '';
+          var dd = String(parts.d).padStart(2, '0');
+          var mm = String(parts.m).padStart(2, '0');
+          return dd + '.' + mm + '.' + parts.y;
+        }
+
+        function formatPriceDE(value) {
+          if (!Number.isFinite(value)) return '';
+          return Number(value).toLocaleString('de-DE');
+        }
+
+        function getTravelWindowLabel(validFrom, validTo) {
+          var from = parseOfferDate(validFrom);
+          var to = parseOfferDate(validTo);
+          if (from && to) return formatDateDE(from) + ' - ' + formatDateDE(to);
+          if (from) return formatDateDE(from);
+          if (to) return formatDateDE(to);
+          return 'Reisezeitraum wird im Buchungsschritt ausgewaehlt';
+        }
+
+        var offers = Array.isArray(h.affiliateOffers) ? h.affiliateOffers.filter(function(item) {
+          return item && item.deeplink && item.price;
+        }) : [];
+        if (!offers.length && h.affiliateOffer && h.affiliateOffer.deeplink && h.affiliateOffer.price) {
+          offers = [h.affiliateOffer];
+        }
+
+        function renderOfferCard(offer, kicker, extraClass) {
+          var nightlyAmount = displayPriceValue(offer);
+          var dateLabel = getTravelWindowLabel(offer.validFrom, offer.validTo);
+          return '<div class="hd-sb-offer' + (extraClass ? ' ' + extraClass : '') + '">'
+            + '<div class="hd-sb-offer-kicker">' + kicker + '</div>'
+            + '<a class="hd-sb-offer-price" href="' + esc(offer.deeplink) + '" target="_blank" rel="nofollow sponsored noopener">ab ' + (nightlyAmount != null ? formatPriceDE(nightlyAmount) + ' €' : 'Preis') + '</a>'
+            + '<div class="hd-sb-offer-subline">' + providerLogoHtml(offer.provider || 'Alltours') + '</div>'
+            + '<div class="hd-sb-offer-date">' + esc(dateLabel) + '</div>'
+            + '</div>';
+        }
+
+        if (offers.length) {
+          var primaryOffer = offers[0];
+          var secondaryOffer = offers.length > 1 ? offers[1] : null;
+          offerSlot.innerHTML = '<div class="hd-sb-offer-stack">'
+            + renderOfferCard(primaryOffer, 'Live Preis', '')
+            + (secondaryOffer ? renderOfferCard(secondaryOffer, 'Weitere Option', 'hd-sb-offer--secondary') : '')
+            + '</div>';
+        } else {
+          offerSlot.innerHTML = '<div class="hd-sb-offer hd-sb-offer--fallback">'
+            + '<div class="hd-sb-offer-kicker">Preisstatus</div>'
+            + '<div class="hd-sb-offer-price">Auf Anfrage</div>'
+            + '<div class="hd-sb-offer-subline"><span>Kein Live-Preis</span><span>von alltours verfuegbar</span></div>'
+            + '<div class="hd-sb-offer-meta">Wir pruefen das passende Angebot gern manuell fuer dich.</div>'
+            + '</div>';
+        }
+      }
+
       document.getElementById('hd-anfragen-btn').addEventListener('click', function () {
+        hdAnfragen(h.name || '');
+      });
+      var mobileAnfragenBtn = document.getElementById('hd-mobile-anfragen-btn');
+      if (mobileAnfragenBtn) mobileAnfragenBtn.addEventListener('click', function () {
         hdAnfragen(h.name || '');
       });
 
@@ -790,43 +1482,38 @@
       })();
     }
 
-    // ── Crisp Anfrage ──────────────────────────────────────────────
-    function hdAnfragen(hotelName, roomName) {
-      var msg = roomName
-        ? 'Ich interessiere mich für ' + hotelName + ' (' + roomName + ') – bitte senden Sie mir ein Angebot.'
-        : 'Ich interessiere mich für ' + hotelName + ' – bitte senden Sie mir ein Angebot.';
-      if (window.$crisp) {
-        try { $crisp.push(['set', 'session:data', [[['Hotel', hotelName], ['Zimmer', roomName || '']]]]); } catch (e) {}
-        try { $crisp.push(['do', 'chat:open']); } catch (e) {}
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(msg).catch(function () {});
-      }
-      showAnfragenBubble(hotelName, msg);
-    }
-
-    function showAnfragenBubble(hotelName, msg) {
-      var el = document.getElementById('hd-ab');
-      if (!el) {
-        el = document.createElement('div');
-        el.id = 'hd-ab'; el.className = 'hd-ab';
-        document.body.appendChild(el);
-      }
-      el.innerHTML =
-        '<div class="hd-ab-head">' +
-          '<span>✅ Anfrage bereit</span>' +
-          '<button class="hd-ab-x" onclick="document.getElementById(\'hd-ab\').style.display=\'none\'">×</button>' +
-        '</div>' +
-        '<div class="hd-ab-hotel">🏨 <strong>' + esc(hotelName) + '</strong></div>' +
-        '<div class="hd-ab-msg">' + esc(msg) + '</div>' +
-        '<div class="hd-ab-hint">📋 Kopiert — im Chat <kbd>Ctrl+V</kbd> einfügen &amp; Enter drücken</div>';
-      el.style.display = 'block';
-      clearTimeout(el._t);
-      el._t = setTimeout(function () { el.style.display = 'none'; }, 12000);
+    // ── EmailJS Anfrage-Modal ───────────────────────────────────────
+    function hdAnfragen(hotelName) {
+      var modal = document.getElementById('hd-anfrage-modal');
+      document.getElementById('hdam-hotel-name').textContent = '🏨 ' + hotelName;
+      document.getElementById('hdam-form').style.display = '';
+      document.getElementById('hdam-success').style.display = 'none';
+      document.getElementById('hdam-err-msg').style.display = 'none';
+      document.getElementById('hdam-submit').disabled = false;
+      document.getElementById('hdam-submit').textContent = 'Angebot anfordern →';
+      modal._hotelName  = hotelName;
+      modal._hotelStars = _hdHotelStars;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
     }
 
     function esc(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function providerLogoHtml(provider) {
+      var value = String(provider || '').toLowerCase();
+      var src = value.indexOf('lidl') !== -1 ? '/images/lidlreisenlogo.png' : '/images/alltourslogo.png';
+      var alt = value.indexOf('lidl') !== -1 ? 'Lidl Reisen' : 'Alltours';
+      return '<span style="display:inline-flex;align-items:center;justify-content:center;width:72px;height:18px;flex:0 0 auto"><img src="' + esc(src) + '" alt="' + esc(alt) + '" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block" /></span>';
+    }
+
+    function displayPriceValue(offer) {
+      var price = Number(offer && offer.price);
+      if (!Number.isFinite(price) || price <= 0) return null;
+      var duration = Number(offer && offer.duration);
+      if (Number.isFinite(duration) && duration > 0) return Math.round(price / duration);
+      return Math.round(price);
     }
 
     // ── JB Experten-Score berechnen (via JBScore Engine) ───────────
@@ -836,12 +1523,24 @@
     function renderHotel(h) {
       var params = new URLSearchParams(location.search);
       var displayName = h.name || (params.get('slug') || '').replace(/-/g, ' ') || 'Hotel';
-      document.getElementById('page-title').textContent = displayName + ' – Details & Anfrage | JetztBuchbar';
+      var pageTitle = displayName + ' – Details & Anfrage | JetztBuchbar';
+      document.getElementById('page-title').textContent = pageTitle;
       var loc = [h.city, h.country].filter(Boolean).join(', ');
       var descText = displayName + (loc ? ' in ' + loc : '') + ' – Ausstattung, Zimmer, Fotos und Angebot auf JetztBuchbar.';
       document.getElementById('page-desc').setAttribute('content', descText);
+      var ogTitleEl = document.getElementById('page-og-title');
+      if (ogTitleEl) ogTitleEl.setAttribute('content', pageTitle);
+      var ogDescEl = document.getElementById('page-og-desc');
+      if (ogDescEl) ogDescEl.setAttribute('content', descText);
+      var twTitleEl = document.getElementById('page-twitter-title');
+      if (twTitleEl) twTitleEl.setAttribute('content', pageTitle);
+      var twDescEl = document.getElementById('page-twitter-desc');
+      if (twDescEl) twDescEl.setAttribute('content', descText);
       var canonicalEl = document.getElementById('page-canonical');
-      if (canonicalEl) canonicalEl.setAttribute('href', 'https://www.jetztbuchbar.de/hotel.html?id=' + encodeURIComponent(h.giataId || hotelId));
+      var canonicalValue = 'https://www.jetztbuchbar.de/hotel.html?id=' + encodeURIComponent(h.giataId || hotelId);
+      if (canonicalEl) canonicalEl.setAttribute('href', canonicalValue);
+      var ogUrlEl = document.getElementById('page-og-url');
+      if (ogUrlEl) ogUrlEl.setAttribute('content', canonicalValue);
 
       // JSON-LD
       var schema = {
@@ -870,15 +1569,15 @@
       // ── JB Experten-Score Siegel befüllen ─────────────────────────
       var JBS = window.JBScore || {};
       var jbScore = JBS.calcScore ? JBS.calcScore(h, { warningPenalty: h._warningPenalty || 0 }) : 60;
-      var sidebarSvgEl = document.getElementById('jb-score-svg-sidebar');
-      if (sidebarSvgEl) sidebarSvgEl.textContent = jbScore;
+      _hdHotelStars = h.stars ? h.stars + ' ★' : '–';
       var sidebarLblEl = document.getElementById('jb-score-sidebar-label');
       if (sidebarLblEl) sidebarLblEl.textContent = jbScore + '/100 Experten-Score';
-      // Animate circular progress rings + breakdown bars
+      var mobileScoreVal = document.getElementById('hd-mobile-score-val');
+      if (mobileScoreVal) mobileScoreVal.textContent = jbScore;
+      var sealContainer = document.getElementById('jb-seal-container');
+      if (sealContainer) sealContainer.innerHTML = hdSealSVG(jbScore);
+      // Animate breakdown bars
       setTimeout(function() {
-        var ringOffset = (150.8 * (1 - jbScore / 100));
-        var sidebarRing = document.getElementById('jb-score-ring-sidebar');
-        if (sidebarRing) sidebarRing.style.strokeDashoffset = ringOffset;
         document.querySelectorAll('.hd-sb-bar-fill[data-pct]').forEach(function(fill) {
           fill.style.transform = 'scaleX(' + fill.getAttribute('data-pct') + ')';
         });
@@ -905,9 +1604,13 @@
 
       // Zimmertypen
       buildRooms(h.rooms || [], h.name || '');
+      buildRoomAmenities(h.roomAmenities || []);
+      buildShare(h, jbScore);
 
       // Anzeigen
       document.getElementById('hd-loading').style.display = 'none';
+      var fallbackEl = document.getElementById('hd-seo-fallback');
+      if (fallbackEl) fallbackEl.style.display = 'none';
       document.getElementById('hd-root').style.display = '';
 
       if (leafletMap) requestAnimationFrame(function () { leafletMap.invalidateSize(); });
@@ -926,7 +1629,17 @@
     var hotelId = new URLSearchParams(location.search).get('id');
     if (!hotelId) {
       document.getElementById('hd-loading').textContent = '❌ Kein Hotel ausgewählt. Bitte zurück zur Übersicht.';
+      var ft = document.getElementById('hd-fallback-title');
+      if (ft) ft.textContent = 'Kein Hotel ausgewählt';
+      var fc = document.getElementById('hd-fallback-copy');
+      if (fc) fc.textContent = 'Bitte öffne ein Hotel über die Such- oder Vergleichsseite, damit wir die vollständigen verifizierten Detaildaten anzeigen können.';
     } else {
+      var params0 = new URLSearchParams(location.search);
+      var slug0 = (params0.get('slug') || '').replace(/-/g, ' ').trim();
+      if (slug0) {
+        var ft2 = document.getElementById('hd-fallback-title');
+        if (ft2) ft2.textContent = slug0 + ' – Hotelprofil wird geladen';
+      }
       withJBScore(function() {
         fetch('/api/giata?action=detail&id=' + encodeURIComponent(hotelId))
           .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
@@ -941,6 +1654,10 @@
           })
           .catch(function (err) {
             document.getElementById('hd-loading').textContent = '❌ Hotel konnte nicht geladen werden. (' + err.message + ')';
+            var ft3 = document.getElementById('hd-fallback-title');
+            if (ft3) ft3.textContent = 'Hotelprofil derzeit nicht vollständig verfügbar';
+            var fc3 = document.getElementById('hd-fallback-copy');
+            if (fc3) fc3.textContent = 'Die Detaildaten konnten gerade nicht geladen werden. Wir aktualisieren dieses Profil automatisiert und stellen die vollständigen Inhalte schnellstmöglich bereit.';
           });
       });
     }
@@ -948,8 +1665,224 @@
   })();
   </script>
 
-<!--Start of Crisp Chat-->
-<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="bd983cbc-0fb7-4b1e-9d37-4c2c02ba1f0b";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
-<!--End of Crisp Chat-->
+  <!-- ── ANFRAGE MODAL ── -->
+  <div id="hd-anfrage-modal" class="hdam-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="hdam-title-el">
+    <div class="hdam-box">
+      <button class="hdam-close" id="hdam-close" aria-label="Schließen">×</button>
+      <h3 class="hdam-title" id="hdam-title-el">Kostenloses Angebot anfordern</h3>
+      <p class="hdam-hotel-lbl" id="hdam-hotel-name"></p>
+      <form id="hdam-form" novalidate>
+
+        <div class="hdam-section-lbl">📅 Reisedaten</div>
+        <div class="hdam-row hdam-row-2">
+          <div>
+            <label for="hdam-checkin">Check-in *</label>
+            <input type="date" id="hdam-checkin" required>
+          </div>
+          <div>
+            <label for="hdam-checkout">Check-out *</label>
+            <input type="date" id="hdam-checkout" required>
+          </div>
+        </div>
+
+        <div class="hdam-section-lbl">👥 Reisende</div>
+        <div class="hdam-row hdam-row-2">
+          <div>
+            <label for="hdam-adults">Erwachsene *</label>
+            <select id="hdam-adults" required>
+              <option value="1">1 Erwachsener</option>
+              <option value="2" selected>2 Erwachsene</option>
+              <option value="3">3 Erwachsene</option>
+              <option value="4">4 Erwachsene</option>
+              <option value="5">5 Erwachsene</option>
+              <option value="6">6 Erwachsene</option>
+            </select>
+          </div>
+          <div>
+            <label for="hdam-children">Kinder (unter 18)</label>
+            <select id="hdam-children">
+              <option value="0" selected>Keine</option>
+              <option value="1">1 Kind</option>
+              <option value="2">2 Kinder</option>
+              <option value="3">3 Kinder</option>
+              <option value="4">4 Kinder</option>
+            </select>
+          </div>
+        </div>
+        <div id="hdam-ages-wrap" style="display:none">
+          <p class="hdam-ages-hint">Alter der Kinder bei Reiseantritt (0–17 Jahre)</p>
+          <div class="hdam-ages-grid" id="hdam-ages-grid"></div>
+        </div>
+
+        <div class="hdam-section-lbl">✈️ Flug</div>
+        <div class="hdam-row">
+          <label>Flug gewünscht?</label>
+          <div class="hdam-radio-row">
+            <label class="hdam-radio-lbl"><input type="radio" name="hdam-flight" value="nein" checked> Nur Hotel</label>
+            <label class="hdam-radio-lbl"><input type="radio" name="hdam-flight" value="ja"> Mit Flug</label>
+          </div>
+        </div>
+        <div id="hdam-airport-wrap" class="hdam-row" style="display:none">
+          <label for="hdam-airport">Abflughafen</label>
+          <input type="text" id="hdam-airport" placeholder="z. B. Frankfurt, München, Wien …">
+        </div>
+
+        <div class="hdam-section-lbl">📧 Kontaktdaten</div>
+        <div class="hdam-row">
+          <label for="hdam-name">Name *</label>
+          <input type="text" id="hdam-name" required placeholder="Ihr Name" autocomplete="name">
+        </div>
+        <div class="hdam-row">
+          <label for="hdam-email">E-Mail *</label>
+          <input type="email" id="hdam-email" required placeholder="ihre@email.de" autocomplete="email">
+        </div>
+
+        <div id="hdam-err-msg" class="hdam-error" style="display:none"></div>
+        <button type="submit" class="hdam-submit" id="hdam-submit">Angebot anfordern →</button>
+      </form>
+      <div id="hdam-success" style="display:none" class="hdam-success">
+        <div class="hdam-success-icon">✅</div>
+        <h4>Anfrage gesendet!</h4>
+        <p>Wir melden uns innerhalb von 24 Stunden mit einem persönlichen Angebot bei Ihnen.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    emailjs.init('rJZMY5EEUvbFNQH6t');
+    var EJS_SVC    = 'service_s34phfh';
+    var EJS_NOTIFY = 'template_nfdnxi4';
+    var EJS_REPLY  = 'template_69aohml';
+
+    var modal    = document.getElementById('hd-anfrage-modal');
+    var form     = document.getElementById('hdam-form');
+    var btnClose = document.getElementById('hdam-close');
+    var btnSub   = document.getElementById('hdam-submit');
+    var errMsg   = document.getElementById('hdam-err-msg');
+    var success  = document.getElementById('hdam-success');
+
+    // Min-Datum: heute
+    var todayStr = new Date().toISOString().split('T')[0];
+    document.getElementById('hdam-checkin').min  = todayStr;
+    document.getElementById('hdam-checkout').min = todayStr;
+
+    // Checkout min = checkin
+    document.getElementById('hdam-checkin').addEventListener('change', function () {
+      document.getElementById('hdam-checkout').min = this.value || todayStr;
+    });
+
+    // Kinder-Alter dynamisch
+    document.getElementById('hdam-children').addEventListener('change', function () {
+      var n    = parseInt(this.value, 10);
+      var wrap = document.getElementById('hdam-ages-wrap');
+      var grid = document.getElementById('hdam-ages-grid');
+      grid.innerHTML = '';
+      if (n > 0) {
+        for (var i = 1; i <= n; i++) {
+          var inp = document.createElement('input');
+          inp.type = 'number'; inp.min = '0'; inp.max = '17';
+          inp.placeholder = 'Kind ' + i;
+          inp.id = 'hdam-age-' + i;
+          inp.setAttribute('aria-label', 'Alter Kind ' + i);
+          grid.appendChild(inp);
+        }
+        wrap.style.display = '';
+      } else {
+        wrap.style.display = 'none';
+      }
+    });
+
+    // Flug-Toggle
+    document.querySelectorAll('input[name="hdam-flight"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        document.getElementById('hdam-airport-wrap').style.display =
+          this.value === 'ja' ? '' : 'none';
+      });
+    });
+
+    function closeModal() {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    btnClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name     = document.getElementById('hdam-name').value.trim();
+      var email    = document.getElementById('hdam-email').value.trim();
+      var checkin  = document.getElementById('hdam-checkin').value;
+      var checkout = document.getElementById('hdam-checkout').value;
+      var adults   = document.getElementById('hdam-adults').value;
+      var childN   = parseInt(document.getElementById('hdam-children').value, 10);
+
+      if (!name || !email || !checkin || !checkout) {
+        errMsg.textContent = 'Bitte alle Pflichtfelder (*) ausfüllen.';
+        errMsg.style.display = '';
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errMsg.textContent = 'Bitte eine gültige E-Mail-Adresse eingeben.';
+        errMsg.style.display = '';
+        return;
+      }
+      errMsg.style.display = 'none';
+
+      // Personen-String zusammenbauen
+      var personsStr = adults + (adults === '1' ? ' Erwachsener' : ' Erwachsene');
+      if (childN > 0) {
+        var ages = [];
+        for (var i = 1; i <= childN; i++) {
+          var ageEl = document.getElementById('hdam-age-' + i);
+          if (ageEl && ageEl.value !== '') ages.push(ageEl.value + ' J.');
+        }
+        personsStr += ', ' + childN + (childN === 1 ? ' Kind' : ' Kinder');
+        if (ages.length) personsStr += ' (Alter: ' + ages.join(', ') + ')';
+      }
+
+      // Flug-String
+      var flightVal = document.querySelector('input[name="hdam-flight"]:checked').value;
+      var flightStr = flightVal === 'ja'
+        ? '✈ Ja, ab ' + (document.getElementById('hdam-airport').value.trim() || '–')
+        : 'Kein Flug gewünscht';
+
+      var params = {
+        hotel_name:  modal._hotelName  || '',
+        hotel_stars: modal._hotelStars || '–',
+        hotel_url:   window.location.href,
+        user_name:   name,
+        user_email:  email,
+        user_phone:  flightStr,
+        checkin:     checkin,
+        checkout:    checkout,
+        persons:     personsStr
+      };
+
+      btnSub.disabled = true;
+      btnSub.textContent = 'Wird gesendet …';
+
+      Promise.all([
+        emailjs.send(EJS_SVC, EJS_NOTIFY, params),
+        emailjs.send(EJS_SVC, EJS_REPLY,  params)
+      ]).then(function () {
+        form.style.display = 'none';
+        success.style.display = '';
+        setTimeout(closeModal, 6000);
+      }).catch(function () {
+        errMsg.textContent = 'Fehler beim Senden. Bitte schreib uns direkt: sales@jetztbuchbar.de';
+        errMsg.style.display = '';
+        btnSub.disabled = false;
+        btnSub.textContent = 'Angebot anfordern →';
+      });
+    });
+  })();
+  </script>
 </body>
 </html>

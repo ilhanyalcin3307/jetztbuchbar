@@ -6,6 +6,83 @@ const GIATA_BASE = 'https://giatadrive.com/api/v1';
 const fs   = require('fs');
 const path = require('path');
 
+// Google Places ratings (statik önbellek — content-engine/update-google-ratings.js ile güncellenir)
+function loadGoogleRatings() {
+  try {
+    const p = path.join(__dirname, '..', 'data', 'google-ratings.json');
+    return JSON.parse(fs.readFileSync(p, 'utf-8'));
+  } catch (e) { return {}; }
+}
+
+function loadAlltoursOffers() {
+  try {
+    const p = path.join(__dirname, '..', 'data', 'alltours-offers.json');
+    const raw = JSON.parse(fs.readFileSync(p, 'utf-8'));
+    const hotels = Array.isArray(raw) ? raw : (raw.hotels || []);
+    return hotels.reduce(function(map, hotel) {
+      const gid = String(hotel.giataId || '');
+      if (gid) map[gid] = hotel;
+      return map;
+    }, {});
+  } catch (e) { return {}; }
+}
+
+function loadLidlOffers() {
+  try {
+    const p = path.join(__dirname, '..', 'data', 'lidlreisen-offers.json');
+    const raw = JSON.parse(fs.readFileSync(p, 'utf-8'));
+    const hotels = Array.isArray(raw) ? raw : (raw.hotels || []);
+    return hotels.reduce(function(map, hotel) {
+      const gid = String(hotel.giataId || '');
+      if (gid) map[gid] = hotel;
+      return map;
+    }, {});
+  } catch (e) { return {}; }
+}
+
+const GOOGLE_RATINGS = loadGoogleRatings();
+const ALLTOURS_OFFERS = loadAlltoursOffers();
+const LIDL_OFFERS = loadLidlOffers();
+
+function getAffiliateProviderEntries(giataId) {
+  const gid = String(giataId || '');
+  return [
+    { provider: 'Alltours', entry: ALLTOURS_OFFERS[gid] || null },
+    { provider: 'Lidl Reisen', entry: LIDL_OFFERS[gid] || null }
+  ].filter(function(item) {
+    return item.entry && item.entry.bestOffer;
+  });
+}
+
+function getBestProviderOffer(giataId) {
+  const candidates = getAffiliateProviderEntries(giataId)
+    .map(function(item) {
+      const best = item.entry.bestOffer;
+      const deeplink = best.awDeepLink || best.merchantDeepLink || '';
+      if (!deeplink) return null;
+      return {
+        provider: item.provider,
+        entry: item.entry,
+        bestOffer: best,
+        deeplink: deeplink
+      };
+    })
+    .filter(Boolean);
+
+  if (!candidates.length) return null;
+
+  candidates.sort(function(a, b) {
+    const priceA = Number.isFinite(a.bestOffer.price) ? a.bestOffer.price : Number.MAX_SAFE_INTEGER;
+    const priceB = Number.isFinite(b.bestOffer.price) ? b.bestOffer.price : Number.MAX_SAFE_INTEGER;
+    if (priceA !== priceB) return priceA - priceB;
+    return String(a.provider).localeCompare(String(b.provider));
+  });
+
+  return candidates[0];
+}
+// ── Single Source of Truth: jb-score.js ───────────────────────────────────────────
+// Node.js'de jb-score.js, module.exports.JBScore olarak export eder (this fallback)
+const JBScore = require('../components/jb-score.js').JBScore;
 // Giata Fact-IDs für relevante Einrichtungen
 // Verifiziert via https://giatadrive.com/api/v1/i18n/facts/de (2026-05-17)
 const FACT_IDS = {
@@ -65,6 +142,8 @@ module.exports = async function handler(req, res) {
       apiKey:      !!apiKey,
       searchIndex: !!index,
       indexSize:   index ? index.length : 0,
+      alltoursOffers: Object.keys(ALLTOURS_OFFERS).length,
+      lidlOffers: Object.keys(LIDL_OFFERS).length,
     });
   }
 
@@ -77,6 +156,38 @@ module.exports = async function handler(req, res) {
     index.forEach(h => { if (h.cc) counts[h.cc] = (counts[h.cc] || 0) + 1; });
     res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
     return res.status(200).json({ counts });
+  }
+
+  // --- Min-Preise pro Land/Stadt (für Story-Grid Preisbadges) ---
+  // GET /api/giata?action=price-mins
+  if (action === 'price-mins') {
+    const byCountry = {};
+    const byCity = {};
+
+    const seen = new Set();
+
+    getAffiliateOfferHotels().forEach(function(hotel) {
+      const gid = String(hotel.giataId || '');
+      if (!gid || seen.has(gid)) return;
+      seen.add(gid);
+
+      const best = hotel && hotel.bestOffer ? hotel.bestOffer : null;
+      if (!best || !Number.isFinite(best.price) || best.price <= 0) return;
+
+      const country = String(hotel.giataCountry || '').trim();
+      const city = String(hotel.giataCity || '').trim();
+      const price = Number(best.price);
+
+      if (country && (!byCountry[country] || price < byCountry[country])) {
+        byCountry[country] = price;
+      }
+      if (city && (!byCity[city] || price < byCity[city])) {
+        byCity[city] = price;
+      }
+    });
+
+    res.setHeader('Cache-Control', 'public, max-age=21600, s-maxage=21600'); // 6h
+    return res.status(200).json({ byCountry, byCity });
   }
 
   // Demo-Modus wenn kein API-Key gesetzt
@@ -148,36 +259,23 @@ module.exports = async function handler(req, res) {
       // Filter by country code — wenn leer: globaler Mix aus allen Ländern
       let candidates = cc ? index.filter(h => h.cc === cc) : [...index];
 
-      // Optional city filter (fuzzy)
-      if (city) {
+      // Optional city filter — 'cities' (kommagetrennt) überschreibt 'city'
+      const citiesList = (req.query.cities || '').trim().toLowerCase().split(',').map(c => c.trim()).filter(Boolean);
+      if (citiesList.length) {
+        candidates = candidates.filter(h => {
+          const hc = (h.city || '').toLowerCase();
+          const he = (h.cityEn || '').toLowerCase();
+          return citiesList.some(c => hc.includes(c) || he.includes(c));
+        });
+      } else if (city) {
         candidates = candidates.filter(h =>
           (h.city || '').toLowerCase().includes(city) ||
           (h.cityEn || '').toLowerCase().includes(city)
         );
       }
 
-      // ── Basis-Scoring (alle Kategorien) ──────────────────────────────────────
-      const SCORING_TOP = {
-        89:20,301:12,374:7,90:8,91:5,291:5,295:6,562:5,350:5,294:4,691:4,354:4,364:4,349:3,293:3,300:3,365:3,348:2,22:1,568:1,
-        614:18,588:18,697:14,696:14,86:12,197:12,479:10,822:10,529:6,192:8,195:8,199:6,869:6,196:6,660:6,43:6,698:6,189:5,794:5,201:5,58:5,50:5,190:4,793:4,59:4,198:4,336:4,191:3,187:3,909:3,664:3,74:3,76:3,66:3,567:3,820:2,71:2,81:2,88:1,185:1,
-        94:20,92:16,101:12,103:8,65:5,299:5,14:3,288:3,450:3,575:3,20:2,73:2,439:1,
-        945:12,219:10,236:10,946:8,1:8,7:8,393:7,593:7,707:6,220:6,4:5,26:5,240:5,249:5,247:5,2:5,389:4,781:4,385:4,245:4,250:3,209:3,401:3,3:3,31:3,56:2,57:2,244:2,211:2,49:2,24:2,5:1,6:1
-      };
-      const CAT_SCORE_TOP = {L:[89,301,374,90,91,291,295,562,350,294,691,354,364,349,293,300,365,348,22,568],P:[614,588,697,696,86,197,479,822,529,192,195,199,869,196,660,43,698,189,794,201,58,50,190,793,59,198,336,191,187,909,664,74,76,66,567,820,71,81,88,185],F:[94,92,101,103,65,299,14,288,450,575,20,73,439],A:[945,219,236,946,1,7,393,593,707,220,4,26,240,249,247,2,389,781,385,245,250,209,401,3,31,56,57,244,211,49,24,5,6]};
-      const CAP = {L:35,P:35,F:20,A:15};
-
-      candidates.forEach(h => {
-        const st = h.stars || 0;
-        const starPts = st>=5?15:st>=4?12:st>=3?8:st>=2?4:st>=1?1:0;
-        const ids = new Set((h.factIds||[]).map(Number));
-        const cats = {L:0,P:0,F:0,A:0};
-        for(const [cat, catIds] of Object.entries(CAT_SCORE_TOP)){
-          for(const id of catIds){
-            if(ids.has(id)) cats[cat] = (cats[cat]||0) + (SCORING_TOP[id]||0);
-          }
-        }
-        h._score = Math.round((starPts + Math.min(cats.L,CAP.L) + Math.min(cats.P,CAP.P) + Math.min(cats.F,CAP.F) + Math.min(cats.A,CAP.A)) / 120 * 100);
-      });
+      // ── Basis-Scoring: Single Source of Truth → /components/jb-score.js ────────
+      candidates.forEach(h => { h._score = JBScore.calcScore(h); });
 
       // ── Kategorie-spezifisches Scoring & Filtering ────────────────────────────
 
@@ -230,6 +328,88 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    // --- Quiz: Personalisierte Hotel-Empfehlungen ---
+    // GET /api/giata?action=quiz&countries=TR,GR&travel=couple&prio=beach&style=luxury&limit=3
+    if (action === 'quiz') {
+      const ccList = (req.query.countries||'').toUpperCase().split(',').map(s=>s.trim()).filter(Boolean);
+      const travel = (req.query.travel||'solo').toLowerCase();
+      const prio   = (req.query.prio||'beach').toLowerCase();
+      const style  = (req.query.style||'relax').toLowerCase();
+      const limit  = Math.min(parseInt(req.query.limit,10)||3, 8);
+
+      const index = loadSearchIndex();
+      if (!index) return res.status(200).json({ hotels:[], indexMissing:true });
+
+      let cands = ccList.length ? index.filter(h => ccList.includes(h.cc)) : [...index];
+
+      // Quiz-Scoring weights per answer
+      const TW = {
+        couple:  {393:25,781:20,385:15,197:12,479:10,614:8,697:6},
+        family:  {945:25,946:20,1:18,7:15,707:12,4:10,26:10,389:8,588:8},
+        friends: {31:20,49:15,24:12,588:15,86:12,94:10,2:10,3:8},
+        solo:    {}
+      };
+      const PW = {
+        beach:    {89:30,301:20,374:15,336:10,698:8,50:4,58:4},
+        wellness: {197:30,479:25,529:20,192:15,195:12,822:12,660:8,196:8},
+        food:     {94:25,92:20,65:15,299:15,101:12,14:8,450:6,575:6},
+        activity: {236:20,240:15,219:15,593:12,249:10,220:8,250:8,209:6}
+      };
+      const SW = {
+        luxury:  {614:20,697:18,197:12,385:12,393:10,529:8},
+        active:  {219:20,236:18,593:15,240:12,249:10,220:10,250:8},
+        relax:   {197:20,479:18,529:15,192:12,660:10,250:8,201:6},
+        culture: {350:20,291:15,90:10,401:8,567:6}
+      };
+
+      function qSub(fids, W) {
+        if (!W || !Object.keys(W).length) return 50;
+        const ids = new Set(fids.map(Number));
+        let pts=0, max=0;
+        for (const [k,v] of Object.entries(W)) { max+=v; if(ids.has(+k)) pts+=v; }
+        return max>0 ? Math.min(pts/max,1)*100 : 50;
+      }
+
+      // Simplified JB score for display
+      const JB_W = {89:20,301:12,614:18,588:18,697:14,197:12,479:10,94:20,92:16,945:12,219:10,236:10,393:7,385:8};
+      function qJb(fids, stars) {
+        const ids = new Set(fids.map(Number));
+        const st = stars||0;
+        let pts = (st>=5?15:st>=4?12:st>=3?8:st>=2?4:1);
+        let fac = 0;
+        for (const [k,v] of Object.entries(JB_W)) { if(ids.has(+k)) fac+=v; }
+        return Math.round(Math.min((pts + Math.min(fac,85))/100*100, 100));
+      }
+
+      const tw = TW[travel]||{}, pw = PW[prio]||{}, sw = SW[style]||{};
+      cands.forEach(h => {
+        const fids = h.factIds||[];
+        let t = qSub(fids,tw), p = qSub(fids,pw), s = qSub(fids,sw);
+        if (style==='luxury') { const sb=(h.stars||0)>=5?30:(h.stars||0)>=4?15:0; s=Math.min(s+sb,100); }
+        h._qRaw = 0.30*t + 0.40*p + 0.30*s;
+        h._qJb  = qJb(fids, h.stars);
+      });
+
+      cands.sort((a,b) => b._qRaw!==a._qRaw ? b._qRaw-a._qRaw : (b.stars||0)-(a.stars||0));
+      const top = cands.slice(0, limit);
+
+      res.setHeader('Cache-Control','public,max-age=1800,s-maxage=1800');
+      return res.status(200).json({
+        hotels: top.map((h,i) => ({
+          giataId:  h.giataId,
+          name:     h.name,
+          city:     h.city,
+          cc:       h.cc,
+          country:  h.country,
+          stars:    h.stars,
+          matchPct: Math.round(65 + h._qRaw*0.35),
+          jbScore:  h._qJb,
+          factIds:  (h.factIds||[]).slice(0,40),
+          rank:     i
+        }))
+      });
+    }
+
     // --- Suche: Search-Index verwenden wenn vorhanden ---
     if (action === 'search' && q) {
       const index = loadSearchIndex();
@@ -267,11 +447,11 @@ function mapProperty(d) {
   const heroImg = (d.images || []).find(i => i.heroImage) || d.images?.[0];
   const image   = heroImg?.sizes?.['800']?.href || heroImg?.sizes?.[800]?.href || '';
 
-  // Galerie: bis zu 8 Bilder à 800px
+  // Galerie: bis zu 30 Bilder à 800px
   const images = (d.images || [])
     .map(img => img.sizes?.['800']?.href || img.sizes?.[800]?.href)
     .filter(Boolean)
-    .slice(0, 8);
+    .slice(0, 30);
 
   // GPS-Koordinaten
   const geo = (d.geoCodes || [])[0];
@@ -302,7 +482,103 @@ function mapProperty(d) {
   // Alle vorhandenen Fact-IDs für granulares Frontend-Scoring
   const factIds = Object.keys(d.facts || {}).map(Number).filter(n => !isNaN(n));
 
-  return { giataId: String(d.giataId || d.id || ''), name, city, country, stars, image, images, lat, lng, facilities, factIds, description, bookUrl: '/' };
+  // Google Places Rating (aus statischem Cache)
+  const gid = String(d.giataId || d.id || '');
+  const gr  = GOOGLE_RATINGS[gid] || {};
+  const googleRating  = gr.rating      || null;
+  const googleReviews = gr.reviewCount || 0;
+
+  const affiliateOffers = buildAffiliateOffers(gid);
+  const affiliateOffer = affiliateOffers[0] || null;
+
+  return {
+    giataId: gid,
+    name,
+    city,
+    country,
+    stars,
+    image,
+    images,
+    lat,
+    lng,
+    facilities,
+    factIds,
+    description,
+    bookUrl: affiliateOffer ? affiliateOffer.deeplink : '/',
+    affiliateOffer,
+    affiliateOffers,
+    googleRating,
+    googleReviews
+  };
+}
+
+function parseDateRangeFromDeeplink(deeplink) {
+  const url = String(deeplink || '').trim();
+  if (!url) return { validFrom: '', validTo: '' };
+
+  function isIsoDate(value) {
+    return /^\d{4}-\d{2}-\d{2}$/.test(String(value || ''));
+  }
+
+  try {
+    const u = new URL(url);
+    const dd = String(u.searchParams.get('dd') || '').trim();
+    const rd = String(u.searchParams.get('rd') || '').trim();
+    return {
+      validFrom: isIsoDate(dd) ? dd : '',
+      validTo: isIsoDate(rd) ? rd : ''
+    };
+  } catch (_) {
+    const ddMatch = url.match(/[?&]dd=(\d{4}-\d{2}-\d{2})/);
+    const rdMatch = url.match(/[?&]rd=(\d{4}-\d{2}-\d{2})/);
+    return {
+      validFrom: ddMatch ? ddMatch[1] : '',
+      validTo: rdMatch ? rdMatch[1] : ''
+    };
+  }
+}
+
+function buildAffiliateOffers(giataId) {
+  return getAffiliateProviderEntries(giataId)
+    .map(function(item) {
+      const entry = item.entry;
+      const best = entry.bestOffer;
+      const deeplink = best.awDeepLink || best.merchantDeepLink || '';
+      if (!deeplink || !Number.isFinite(best.price) || best.price <= 0) return null;
+      const awDates = parseDateRangeFromDeeplink(best.awDeepLink || '');
+      const merchantDates = parseDateRangeFromDeeplink(best.merchantDeepLink || '');
+
+      return {
+        provider: item.provider,
+        deeplink,
+        merchantProductId: best.merchantProductId || '',
+        awProductId: best.awProductId || '',
+        price: Number.isFinite(best.price) ? best.price : null,
+        currency: best.currency || 'EUR',
+        displayPrice: best.displayPrice || '',
+        boardBasis: best.boardBasis || '',
+        validFrom: best.validFrom || awDates.validFrom || merchantDates.validFrom || '',
+        validTo: best.validTo || awDates.validTo || merchantDates.validTo || '',
+        offerCount: entry.offerCount || (entry.offers ? entry.offers.length : 1),
+        matchType: best.matchType || 'exact',
+        matchScore: best.matchScore || null
+      };
+    })
+    .filter(Boolean)
+    .sort(function(a, b) {
+      const priceA = Number.isFinite(a.price) ? a.price : Number.MAX_SAFE_INTEGER;
+      const priceB = Number.isFinite(b.price) ? b.price : Number.MAX_SAFE_INTEGER;
+      if (priceA !== priceB) return priceA - priceB;
+      return String(a.provider).localeCompare(String(b.provider));
+    });
+}
+
+function buildAffiliateOffer(giataId) {
+  return buildAffiliateOffers(giataId)[0] || null;
+}
+
+function getAffiliateOfferHotels() {
+  return Object.values(ALLTOURS_OFFERS || {}).concat(Object.values(LIDL_OFFERS || {}));
 }
 
 // Vollständige Daten für die Detailseite (alle Bilder, alle Texte, Zimmertypen)
@@ -320,15 +596,78 @@ function mapPropertyFull(d) {
     .filter(s => s.para)
     .map(s => ({ title: s.title || '', text: s.para || '' }));
 
+  // Bild-Map für schnellen Lookup (id → sizes)
+  const imgMap = {};
+  (d.images || []).forEach(img => { if (img && img.id) imgMap[img.id] = img; });
+
+  // ── Per-Zimmer Daten aus facts[].appliesTo ────────────────────────
+  const PER_ROOM_LABELS = {
+    '124':'Bademantel','168':'Hausschuhe','163':'Safe',
+    '663':'Espressomaschine','816':'Badewanne & Dusche',
+    '126':'Badewanne','166':'Dusche','552':'Bodengl. Dusche',
+    '123':'Balkon','173':'Terrasse','341':'Balkon/Terrasse',
+    '120':'Klimaanlage','156':'Minibar','172':'Kaffee/Tee',
+    '185':'WiFi','80':'Badetücher','182':'Rollstuhlgerecht',
+  };
+  const variantSqm = {};
+  const variantFeatures = {};
+  Object.entries(d.facts || {}).forEach(([fid, entries]) => {
+    if (!Array.isArray(entries)) return;
+    entries.forEach(entry => {
+      const targets = entry.appliesTo;
+      if (!targets || !targets.length) return;
+      if (fid === '167') {
+        const v = entry.attributes?.['44']?.value || entry.attributes?.['64']?.value;
+        if (v) targets.forEach(vid => { variantSqm[vid] = parseInt(v, 10) || null; });
+      } else if (PER_ROOM_LABELS[fid]) {
+        targets.forEach(vid => {
+          if (!variantFeatures[vid]) variantFeatures[vid] = [];
+          const lbl = PER_ROOM_LABELS[fid];
+          if (!variantFeatures[vid].includes(lbl)) variantFeatures[vid].push(lbl);
+        });
+      }
+    });
+  });
+
+  // ── Hotel-weite Zimmerausstattung (facts ohne appliesTo) ──────────
+  const HOTEL_AMENITY_MAP = [
+    [149,'🛏','Kingsize-Bett'],[161,'🛏','Queensize-Bett'],[137,'🛏','Doppelbett'],
+    [611,'🛏','Twin-Betten'],[700,'🛏','Einzelbett'],[131,'👶','Kinderbett'],
+    [793,'🛏','Bali-Bett'],[816,'🛁','Badewanne & Dusche'],[126,'🛁','Badewanne'],
+    [552,'🚿','Bodengl. Dusche'],[166,'🚿','Dusche'],[341,'🌅','Balkon/Terrasse'],
+    [123,'🌅','Balkon'],[173,'🌅','Terrasse'],[120,'❄️','Klimaanlage'],
+    [185,'📶','WiFi'],[172,'☕','Kaffee/Tee'],[156,'🍾','Minibar'],
+    [163,'🔒','Safe'],[124,'🩺','Bademantel'],[80,'🛁','Badetücher'],
+    [168,'🩴','Hausschuhe'],[183,'♿','Barrierefrei'],
+  ];
+  const factsObj = d.facts || {};
+  const roomAmenities = HOTEL_AMENITY_MAP
+    .filter(([id]) => {
+      const entries = factsObj[String(id)];
+      if (!entries) return false;
+      if (!Array.isArray(entries)) return true;
+      return entries.some(e => !e.appliesTo || !e.appliesTo.length);
+    })
+    .map(([, icon, label]) => ({ icon, label }));
+
   // Zimmertypen aus roomTypes[]
   const rooms = (d.roomTypes || []).map(rt => ({
     name: rt.name || '',
     type: rt.type || '',
     category: rt.category || '',
     view: rt.view || '',
+    sqm: variantSqm[rt.variantId] || null,
+    features: variantFeatures[rt.variantId] || [],
+    images: (rt.imageRelations || [])
+      .map(iid => {
+        const img = imgMap[iid];
+        if (!img) return '';
+        return img.sizes?.['800']?.href || img.sizes?.['320']?.href || '';
+      })
+      .filter(Boolean),
   }));
 
-  return { ...base, allImages, allSections, rooms };
+  return { ...base, allImages, allSections, rooms, roomAmenities };
 }
 
 function extractConcept(d) {
@@ -357,10 +696,16 @@ function extractRoomCount(d) {
 }
 
 // Search-Index aus dem /api-Verzeichnis laden (wird beim Build generiert)
+// Unterstützt altes Array-Format und neues { _generatedAt, hotels } Format
 function loadSearchIndex() {
   try {
     const indexPath = path.join(__dirname, 'giata-search-index.json');
-    return JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+    const parsed = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+    // Neues Format: { _generatedAt: '...', hotels: [...] }
+    if (parsed && parsed.hotels && Array.isArray(parsed.hotels)) return parsed.hotels;
+    // Altes Format: direkt ein Array
+    if (Array.isArray(parsed)) return parsed;
+    return null;
   } catch (e) {
     return null;
   }

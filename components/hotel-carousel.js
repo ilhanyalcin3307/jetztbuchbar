@@ -41,103 +41,25 @@ if (!window.JB_COMPARE) {
 (function () {
   'use strict';
 
-  // ── Scoring (identisch mit hotel-ranking.js) ────────────────────────────────
-  var SCORING = {
-    89:{s:20,cat:'L',l:'Strandlage'},301:{s:12,cat:'L',l:'Meeresnähe'},374:{s:7,cat:'L',l:'Strandblick'},
-    90:{s:8,cat:'L',l:'Zentrale Lage'},91:{s:5,cat:'L',l:'Ruhige Lage'},291:{s:5,cat:'L',l:'Stadtzentrum'},
-    295:{s:6,cat:'L',l:'Seelage'},562:{s:5,cat:'L',l:'Jachthafen'},350:{s:5,cat:'L',l:'Altstadt'},
-    294:{s:4,cat:'L',l:'Golfplatznähe'},691:{s:4,cat:'L',l:'Kurort'},354:{s:4,cat:'L',l:'Buchtblick'},
-    364:{s:4,cat:'L',l:'Seeblick'},349:{s:3,cat:'L',l:'Autofreie Lage'},293:{s:3,cat:'L',l:'Waldlage'},
-    300:{s:3,cat:'L',l:'Flusslage'},365:{s:3,cat:'L',l:'Bergblick'},348:{s:2,cat:'L',l:'Belebte Lage'},
-    22:{s:1,cat:'L',l:'Parkplatz'},568:{s:1,cat:'L',l:'Einparkservice'},
-    614:{s:18,cat:'P',l:'Privater Pool'},588:{s:18,cat:'P',l:'Wasserpark'},697:{s:14,cat:'P',l:'Infinity-Pool'},
-    696:{s:14,cat:'P',l:'Rooftop-Pool'},86:{s:12,cat:'P',l:'Wasserrutsche'},197:{s:12,cat:'P',l:'Spa'},
-    479:{s:10,cat:'P',l:'Wellness-Center'},822:{s:10,cat:'P',l:'Thermalbecken'},
-    529:{s:6,cat:'P',l:'Priv. Wellnessber.'},192:{s:8,cat:'P',l:'Hamam'},195:{s:8,cat:'P',l:'Massage'},
-    199:{s:6,cat:'P',l:'Thalasso'},869:{s:6,cat:'P',l:'Tauchbecken'},196:{s:6,cat:'P',l:'Sauna'},
-    660:{s:6,cat:'P',l:'Sauna'},43:{s:6,cat:'P',l:'Hallenbad'},698:{s:6,cat:'P',l:'Swim-up Bar'},
-    189:{s:5,cat:'P',l:'Ayurveda'},794:{s:5,cat:'P',l:'Wasserspielber.'},201:{s:5,cat:'P',l:'Whirlpool'},
-    58:{s:5,cat:'P',l:'Pool'},50:{s:5,cat:'P',l:'Außenpool'},190:{s:4,cat:'P',l:'Beautyfarm'},
-    793:{s:4,cat:'P',l:'Bali Bett'},59:{s:4,cat:'P',l:'Poolbar'},198:{s:4,cat:'P',l:'Dampfbad'},
-    336:{s:4,cat:'P',l:'Strandbar'},191:{s:3,cat:'P',l:'Schönheitssalon'},187:{s:3,cat:'P',l:'Akupunktur'},
-    909:{s:3,cat:'P',l:'Ruheraum'},664:{s:3,cat:'P',l:'Personal Trainer'},74:{s:3,cat:'P',l:'Solarium'},
-    76:{s:3,cat:'P',l:'Sonnenterrasse'},66:{s:3,cat:'P',l:'Zimmerservice'},567:{s:3,cat:'P',l:'Concierge'},
-    820:{s:2,cat:'P',l:'Gesichtsbehandlung'},71:{s:2,cat:'P',l:'Shuttleservice'},81:{s:2,cat:'P',l:'Transferservice'},
-    88:{s:1,cat:'P',l:'WLAN'},185:{s:1,cat:'P',l:'WLAN'},
-    94:{s:20,cat:'F',l:'All Inclusive Plus'},92:{s:16,cat:'F',l:'All Inclusive'},
-    101:{s:12,cat:'F',l:'Vollpension'},103:{s:8,cat:'F',l:'Halbpension'},
-    65:{s:5,cat:'F',l:'Restaurant'},299:{s:5,cat:'F',l:'Restaurant'},14:{s:3,cat:'F',l:'Bar'},
-    288:{s:3,cat:'F',l:'Bar/Pub'},450:{s:3,cat:'F',l:'Lobbybar'},575:{s:3,cat:'F',l:'Bar/Lounge'},
-    20:{s:2,cat:'F',l:'Café'},73:{s:2,cat:'F',l:'Snackbar'},439:{s:1,cat:'F',l:'Strandkorb'},
-    945:{s:12,cat:'A',l:'Kids Club'},219:{s:10,cat:'A',l:'Golf'},236:{s:10,cat:'A',l:'Tauchen'},
-    946:{s:8,cat:'A',l:'Teens Club'},1:{s:8,cat:'A',l:'Kinderbetreuung'},7:{s:8,cat:'A',l:'Miniclub'},
-    393:{s:7,cat:'A',l:'Flitterwochen'},593:{s:7,cat:'A',l:'Tennisplatz'},707:{s:6,cat:'A',l:'Kinder kostenlos'},
-    220:{s:6,cat:'A',l:'Fitness-Studio'},4:{s:5,cat:'A',l:'Kinderprogramm'},26:{s:5,cat:'A',l:'Kinderpool'},
-    240:{s:5,cat:'A',l:'Schnorcheln'},249:{s:5,cat:'A',l:'Windsurfen'},247:{s:5,cat:'A',l:'Wasserski'},
-    2:{s:5,cat:'A',l:'Animation'},389:{s:4,cat:'A',l:'Familienfreundlich'},781:{s:4,cat:'A',l:'Für Paare'},
-    385:{s:4,cat:'A',l:'Adults Only'},245:{s:4,cat:'A',l:'Tennis'},250:{s:3,cat:'A',l:'Yoga'},
-    209:{s:3,cat:'A',l:'Beach-Volleyball'},401:{s:3,cat:'A',l:'Konferenzen'},3:{s:3,cat:'A',l:'Abendshows'},
-    31:{s:3,cat:'A',l:'Disco'},56:{s:2,cat:'A',l:'Spielplatz'},57:{s:2,cat:'A',l:'Spielzimmer'},
-    244:{s:2,cat:'A',l:'Tischtennis'},211:{s:2,cat:'A',l:'Billard'},49:{s:2,cat:'A',l:'Nachtclub'},
-    24:{s:2,cat:'A',l:'Casino'},5:{s:1,cat:'A',l:'Live-Musik'},6:{s:1,cat:'A',l:'Mini-Disco'}
-  };
-
-  var FEAT_ICONS = {
-    'Strandlage':'🏖️','Strandbar':'🍹','Strandkorb':'⛱️','Meeresnähe':'🌊','Strandblick':'🌅',
-    'Infinity-Pool':'♾️','Rooftop-Pool':'🏙️','Swim-up Bar':'🍹','Wasserrutsche':'🌊',
-    'Wasserpark':'🌊','Hallenbad':'🏊','Außenpool':'🏊','Pool':'🏊','Poolbar':'🍹',
-    'Privater Pool':'🏊','Thermalbecken':'♨️','Thalasso':'💧','Tauchbecken':'🔵',
-    'Spa':'💆','Wellness-Center':'💆','Massage':'💆','Sauna':'🌡️','Hamam':'🧖',
-    'Dampfbad':'♨️','Whirlpool':'🛁','Priv. Wellnessber.':'🔒','Ayurveda':'🌿',
-    'Wasserspielber.':'💦','Beautyfarm':'💅','Bali Bett':'🛏️','Schönheitssalon':'💇',
-    'Akupunktur':'🪡','Ruheraum':'😌','Personal Trainer':'💪','Solarium':'☀️',
-    'Sonnenterrasse':'🌞','Gesichtsbehandlung':'✨',
-    'All Inclusive Plus':'⭐','All Inclusive':'🍽️','Vollpension':'🍽️','Halbpension':'🍳',
-    'Restaurant':'🍽️','Bar':'🍷','Bar/Pub':'🍺','Lobbybar':'🥂','Bar/Lounge':'🍷',
-    'Café':'☕','Snackbar':'🥪',
-    'Kids Club':'👨‍👩‍👧','Teens Club':'🎮','Kinderbetreuung':'👶','Miniclub':'🎪',
-    'Kinder kostenlos':'🎁','Kinderprogramm':'🎨','Kinderpool':'🏊','Spielplatz':'🛝','Spielzimmer':'🧸',
-    'Golf':'⛳','Tauchen':'🤿','Tennisplatz':'🎾','Fitness-Studio':'💪',
-    'Beach-Volleyball':'🏐','Schnorcheln':'🤿','Wasserski':'🎿','Windsurfen':'🏄',
-    'Tennis':'🎾','Tischtennis':'🏓','Yoga':'🧘','Billard':'🎱',
-    'Animation':'🎭','Abendshows':'🎭','Disco':'💃','Nachtclub':'🌙','Casino':'🎰',
-    'Live-Musik':'🎵','Mini-Disco':'🎶','Flitterwochen':'💍','Adults Only':'🔞',
-    'Familienfreundlich':'👨‍👩‍👧','Für Paare':'❤️','Zentrale Lage':'📍','Ruhige Lage':'🌿',
-    'Stadtzentrum':'🏙️','Seelage':'🏞️','Jachthafen':'⛵','Altstadt':'🏛️',
-    'Golfplatznähe':'⛳','Kurort':'💧','Buchtblick':'🌊','Seeblick':'🏞️',
-    'Waldlage':'🌲','Bergblick':'⛰️','Zimmerservice':'🛎️','Concierge':'🤵',
-    'WLAN':'📶','Parkplatz':'🅿️','Shuttleservice':'🚌','Transferservice':'🚐',
-    'Konferenzen':'🏛️'
-  };
-
-  var SCORING_SORTED = Object.keys(SCORING).map(function(id) {
-    return { id: Number(id), s: SCORING[id].s, l: SCORING[id].l, cat: SCORING[id].cat };
-  }).sort(function(a,b){ return b.s - a.s; });
-
-  var CAT_CAP = { L:35, P:35, F:20, A:15 };
-
-  function calcScore(h) {
-    var st = h.stars || 0;
-    var stars = st>=5?15:st>=4?12:st>=3?8:st>=2?4:st>=1?1:0;
-    var cats = {L:0,P:0,F:0,A:0};
-    var idSet = {};
-    (h.factIds||[]).forEach(function(id){ idSet[id]=true; });
-    for(var i=0;i<SCORING_SORTED.length;i++){
-      var e=SCORING_SORTED[i];
-      if(idSet[e.id]) cats[e.cat]=(cats[e.cat]||0)+e.s;
-    }
-    return Math.round((stars+Math.min(cats.L,CAT_CAP.L)+Math.min(cats.P,CAT_CAP.P)+Math.min(cats.F,CAT_CAP.F)+Math.min(cats.A,CAT_CAP.A))/120*100);
+  // ── JB Score: Single Source of Truth → /components/jb-score.js ─────────────
+  // Auto-load jb-score.js wenn noch nicht vorhanden, dann Callback aufrufen
+  function withJBScore(cb) {
+    if (window.JBScore) return cb();
+    var s = document.createElement('script');
+    s.src = '/components/jb-score.js';
+    s.onload = cb;
+    s.onerror = cb; // Graceful: render ohne Scoring wenn Skript nicht lädt
+    document.head.appendChild(s);
   }
 
+  function calcScore(h) {
+    return window.JBScore ? window.JBScore.calcScore(h) : 60;
+  }
   function topFeatures(h, n) {
-    var idSet = {};
-    (h.factIds||[]).forEach(function(id){ idSet[id]=true; });
-    var seen={}, out=[];
-    for(var i=0;i<SCORING_SORTED.length && out.length<n;i++){
-      var e=SCORING_SORTED[i];
-      if(idSet[e.id] && !seen[e.l]){ seen[e.l]=true; out.push(e); }
-    }
-    return out;
+    return window.JBScore ? window.JBScore.topFeatures(h, n) : [];
+  }
+  function getFeatIcons() {
+    return (window.JBScore && window.JBScore.FEAT_ICONS) || {};
   }
 
   function starsHtml(n) {
@@ -148,16 +70,229 @@ if (!window.JB_COMPARE) {
     return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  function formatPriceDE(value) {
+    if (!Number.isFinite(value)) return '';
+    return Number(value).toLocaleString('de-DE');
+  }
+
+  function providerLogoHtml(provider) {
+    var value = String(provider || '').toLowerCase();
+    var src = value.indexOf('lidl') !== -1 ? '/images/lidlreisenlogo.png' : '/images/alltourslogo.png';
+    var alt = value.indexOf('lidl') !== -1 ? 'Lidl Reisen' : 'Alltours';
+    return '<span class="hc-price-provider"><img src="' + esc(src) + '" alt="' + esc(alt) + '" loading="lazy" /></span>';
+  }
+
+  function badgeLabel(label) {
+    var map = {
+      'Strandlage': 'Strand',
+      'All Inclusive Plus': 'AI Plus',
+      'All Inclusive': 'AI',
+      'Wasserpark': 'Aqua',
+      'Wasserrutsche': 'Rutsche',
+      'Privater Pool': 'Priv. Pool',
+      'Privater Strand': 'Priv. Strand',
+      'Familienfreundlich': 'Familie',
+      'Kinderclub': 'Kids',
+      'Wellness': 'Spa',
+      'Direkte Strandlage': 'Strand'
+    };
+    return map[label] || label;
+  }
+
+  function displayPriceValue(offer) {
+    var price = Number(offer && offer.price);
+    if (!Number.isFinite(price) || price <= 0) return null;
+    var duration = Number(offer && offer.duration);
+    if (Number.isFinite(duration) && duration > 0) return Math.round(price / duration);
+    return Math.round(price);
+  }
+
+  function getLiveAffiliateOffers(hotel) {
+    var offers = Array.isArray(hotel && hotel.affiliateOffers) ? hotel.affiliateOffers : [];
+    offers = offers.filter(function(offer) {
+      return offer && offer.deeplink && Number.isFinite(Number(offer.price)) && Number(offer.price) > 0;
+    });
+
+    if (!offers.length && hotel && hotel.affiliateOffer && hotel.affiliateOffer.deeplink && Number.isFinite(Number(hotel.affiliateOffer.price)) && Number(hotel.affiliateOffer.price) > 0) {
+      offers = [hotel.affiliateOffer];
+    }
+
+    var seen = {};
+    return offers.filter(function(offer) {
+      var key = String(offer.provider || '').toLowerCase();
+      if (!key) key = 'unknown';
+      if (seen[key]) return false;
+      seen[key] = true;
+      return true;
+    }).sort(function(a, b) {
+      var priceA = Number.isFinite(Number(a.price)) ? Number(a.price) : Number.MAX_SAFE_INTEGER;
+      var priceB = Number.isFinite(Number(b.price)) ? Number(b.price) : Number.MAX_SAFE_INTEGER;
+      if (priceA !== priceB) return priceA - priceB;
+      return String(a.provider || '').localeCompare(String(b.provider || ''));
+    }).slice(0, 2);
+  }
+
+  function hasBothLiveAffiliatePrices(hotel) {
+    var offers = getLiveAffiliateOffers(hotel);
+    var hasAlltours = offers.some(function(offer) {
+      return String(offer.provider || '').toLowerCase().indexOf('alltours') !== -1;
+    });
+    var hasLidl = offers.some(function(offer) {
+      return String(offer.provider || '').toLowerCase().indexOf('lidl') !== -1;
+    });
+    return hasAlltours && hasLidl;
+  }
+
+  function normalizeThemeText(value) {
+    return String(value || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/ß/g, 'ss')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function toFactSet(hotel) {
+    return new Set((hotel && hotel.factIds ? hotel.factIds : []).map(Number));
+  }
+
+  function includeByTheme(hotel, themeType) {
+    var t = normalizeThemeText(themeType);
+    var fac = (hotel && hotel.facilities) || {};
+    var facts = toFactSet(hotel);
+    var concept = normalizeThemeText(fac.concept || '');
+
+    if (t === 'allinclusive' || t === 'all inclusive') {
+      return concept.indexOf('all inclusive') !== -1 || concept.indexOf('inklusive') !== -1 || facts.has(86) || facts.has(94);
+    }
+
+    if (t === 'honeymoon' || t === 'flitterwochen') {
+      var isAdults = facts.has(393) || facts.has(781);
+      var luxuryCore = fac.spa || facts.has(197) || facts.has(479) || facts.has(529);
+      var romanticSpot = fac.beach || facts.has(89) || facts.has(385) || facts.has(192) || facts.has(195);
+      var stars = Number(hotel.stars || 0);
+      return (stars >= 4 && luxuryCore && romanticSpot) || (isAdults && (luxuryCore || romanticSpot));
+    }
+
+    if (t === 'family' || t === 'kinder' || t === 'urlaub mit kindern') {
+      return !!fac.kidsclub || facts.has(945) || facts.has(946) || facts.has(1) || facts.has(7) || facts.has(707) || facts.has(588);
+    }
+
+    return true;
+  }
+
+  function themeScore(hotel, themeType) {
+    var t = normalizeThemeText(themeType);
+    var fac = (hotel && hotel.facilities) || {};
+    var facts = toFactSet(hotel);
+    var stars = Number(hotel.stars || 0);
+    var score = Number(hotel._score || 0) * 0.35 + stars * 8;
+
+    if (t === 'allinclusive' || t === 'all inclusive') {
+      var concept = normalizeThemeText(fac.concept || '');
+      if (concept.indexOf('ultra all inclusive') !== -1) score += 34;
+      else if (concept.indexOf('all inclusive') !== -1 || concept.indexOf('inklusive') !== -1) score += 24;
+      if (facts.has(86) || facts.has(94)) score += 12;
+      if (fac.beach) score += 6;
+      if (fac.aquapark) score += 8;
+      if (fac.kidsclub) score += 8;
+    } else if (t === 'honeymoon' || t === 'flitterwochen') {
+      if (facts.has(393) || facts.has(781)) score += 26;
+      if (fac.spa || facts.has(197) || facts.has(479) || facts.has(529)) score += 18;
+      if (fac.beach || facts.has(89)) score += 10;
+      if (facts.has(385) || facts.has(192) || facts.has(195)) score += 8;
+      if (fac.kidsclub) score -= 8;
+    } else if (t === 'family' || t === 'kinder' || t === 'urlaub mit kindern') {
+      if (fac.kidsclub || facts.has(945) || facts.has(946) || facts.has(1) || facts.has(7)) score += 24;
+      if (fac.aquapark || facts.has(588)) score += 16;
+      if (fac.beach || facts.has(89)) score += 6;
+      if (fac.pool) score += 6;
+    }
+
+    return score;
+  }
+
+  function applyThemeSelection(hotels, themeType) {
+    var t = normalizeThemeText(themeType);
+    if (!t) return hotels;
+
+    var filtered = hotels.filter(function(h) { return includeByTheme(h, t); });
+    if (!filtered.length) return hotels;
+
+    filtered.forEach(function(h) { h._themeScore = themeScore(h, t); });
+    filtered.sort(function(a, b) { return (b._themeScore || 0) - (a._themeScore || 0); });
+    return filtered;
+  }
+
+  function parseOfferDate(value) {
+    var raw = String(value || '').trim();
+    if (!raw) return null;
+
+    var iso = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (iso) return { y: Number(iso[1]), m: Number(iso[2]), d: Number(iso[3]) };
+
+    var dmy = raw.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})$/);
+    if (dmy) {
+      var year = Number(dmy[3]);
+      if (year < 100) year += 2000;
+      return { y: year, m: Number(dmy[2]), d: Number(dmy[1]) };
+    }
+
+    var dt = new Date(raw);
+    if (!isNaN(dt.getTime())) {
+      return { y: dt.getUTCFullYear(), m: dt.getUTCMonth() + 1, d: dt.getUTCDate() };
+    }
+
+    return null;
+  }
+
+  function formatDateDE(parts) {
+    if (!parts) return '';
+    var dd = String(parts.d).padStart(2, '0');
+    var mm = String(parts.m).padStart(2, '0');
+    return dd + '.' + mm + '.' + parts.y;
+  }
+
+  function getTravelWindowLabel(validFrom, validTo) {
+    var from = parseOfferDate(validFrom);
+    var to = parseOfferDate(validTo);
+    if (from && to) return formatDateDE(from) + ' - ' + formatDateDE(to);
+    if (from) return formatDateDE(from);
+    if (to) return formatDateDE(to);
+    return 'Reisezeitraum im Partnerangebot waehlbar';
+  }
+
+  var _jbUid = 0;
   function scoreSealSVG(score) {
-    var r = 24, c = 150.8;
-    var offset = parseFloat((c * (1 - score / 100)).toFixed(2));
-    return '<svg class="hc-score-seal" viewBox="0 0 56 56" width="44" height="44" aria-label="JB Score '+score+'/100" style="--jb-offset:'+offset+'">'
-      +'<circle cx="28" cy="28" r="'+r+'" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="5"/>'
-      +'<circle cx="28" cy="28" r="'+r+'" fill="none" stroke="#00c896" stroke-width="5" stroke-linecap="round"'
-      +' stroke-dasharray="'+c+'" stroke-dashoffset="'+c+'" transform="rotate(-90 28 28)" class="jb-ring-anim"/>'
-      +'<text x="28" y="23" text-anchor="middle" font-size="7" font-weight="900" fill="rgba(255,255,255,.5)" font-family="system-ui,-apple-system,sans-serif" letter-spacing="1">JB</text>'
-      +'<text x="28" y="36" text-anchor="middle" font-size="12" font-weight="900" fill="#00c896" font-family="system-ui,-apple-system,sans-serif">'+score+'</text>'
-      +'<text x="28" y="44" text-anchor="middle" font-size="5.5" fill="rgba(0,200,150,.7)" font-family="system-ui,-apple-system,sans-serif">/100</text>'
+    var u = ++_jbUid;
+    return '<svg class="hc-score-seal" width="52" height="52" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" aria-label="JB Score '+score+'/100">'
+      +'<defs>'
+      +'<radialGradient id="jbGR'+u+'" cx="50%" cy="40%" r="55%">'
+      +'<stop offset="0%" stop-color="#00E0A8"/>'
+      +'<stop offset="50%" stop-color="#00C896"/>'
+      +'<stop offset="100%" stop-color="#00956E"/>'
+      +'</radialGradient>'
+      +'<radialGradient id="jbDB'+u+'" cx="50%" cy="35%" r="60%">'
+      +'<stop offset="0%" stop-color="#1a1a1a"/>'
+      +'<stop offset="100%" stop-color="#0a0a0a"/>'
+      +'</radialGradient>'
+      +'<radialGradient id="jbCB'+u+'" cx="50%" cy="40%" r="60%">'
+      +'<stop offset="0%" stop-color="#FF7A5A"/>'
+      +'<stop offset="100%" stop-color="#E85535"/>'
+      +'</radialGradient>'
+      +'</defs>'
+      +'<circle cx="340" cy="265" r="195" fill="url(#jbGR'+u+')"/>'
+      +'<circle cx="340" cy="265" r="178" fill="url(#jbDB'+u+')"/>'
+      +'<text x="340" y="318" text-anchor="middle" font-size="148" font-weight="700" font-family="Georgia,serif" fill="#00C896">'+score+'</text>'
+      +'<path d="M205,365 L475,365 L458,415 L380,438 L340,448 L300,438 L222,415 Z" fill="url(#jbCB'+u+')"/>'
+      +'<rect x="205" y="363" width="270" height="46" fill="url(#jbCB'+u+')"/>'
+      +'<text x="340" y="393" text-anchor="middle" font-size="19" font-weight="700" font-family="Georgia,serif" fill="#fff" letter-spacing="5">SCORE</text>'
+      +'<text x="340" y="430" text-anchor="middle" font-size="16" fill="#fff">&#9733; &#9733; &#9733; &#9733; &#9733;</text>'
+      +'<circle cx="340" cy="80" r="36" fill="url(#jbGR'+u+')"/>'
+      +'<circle cx="340" cy="80" r="30" fill="url(#jbDB'+u+')"/>'
+      +'<text x="340" y="87" text-anchor="middle" font-size="17" font-weight="700" font-family="Georgia,serif" fill="#00C896">JB</text>'
       +'</svg>';
   }
 
@@ -199,15 +334,27 @@ if (!window.JB_COMPARE) {
       '.hc-img-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.35);transition:background .25s,transform .25s}',
       '.hc-img-dot.active{background:#fff;transform:scale(1.3)}',
       /* Score seal (SVG) */
-      '.hc-score-seal{position:absolute;top:8px;right:8px;z-index:3;filter:drop-shadow(0 2px 8px rgba(0,0,0,.65)) drop-shadow(0 0 6px rgba(0,200,150,.32));transition:filter .25s}',
-      '.hc-card:hover .hc-score-seal{filter:drop-shadow(0 2px 8px rgba(0,0,0,.65)) drop-shadow(0 0 13px rgba(0,200,150,.6))}',
+      '.hc-score-seal{position:absolute;top:12px;right:12px;z-index:3;filter:drop-shadow(0 2px 10px rgba(0,0,0,.7)) drop-shadow(0 0 8px rgba(0,200,150,.35));transition:filter .25s}',
+      '.hc-card:hover .hc-score-seal{filter:drop-shadow(0 2px 10px rgba(0,0,0,.7)) drop-shadow(0 0 16px rgba(0,200,150,.65))}',
+      '.hc-img-wrap{position:relative}',  /* ensure position:relative on container */
       /* Body */
-      '.hc-body{padding:.85rem 1rem .95rem;display:flex;flex-direction:column;gap:.4rem;flex:1}',
-      '.hc-name{font-size:.92rem;font-weight:800;color:var(--text,#f0f0f0);line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}',
-      '.hc-loc{font-size:.75rem;color:var(--text-muted,#888);display:flex;align-items:center;gap:.3rem;margin-top:.05rem}',
-      '.hc-stars{color:#f59e0b;font-size:.75rem;letter-spacing:1.5px;margin-top:.1rem}',
-      '.hc-badges{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:auto;padding-top:.55rem}',
-      '.hc-badge{background:rgba(0,200,150,.07);border:1px solid rgba(0,200,150,.16);border-radius:7px;padding:.15rem .42rem;font-size:.7rem;color:var(--accent,#00c896);white-space:nowrap;line-height:1.4}',
+      '.hc-body{padding:.75rem .9rem .8rem;display:flex;flex-direction:column;gap:.28rem;flex:1}',
+      '.hc-name{font-size:.88rem;font-weight:800;color:var(--text,#f0f0f0);line-height:1.18;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;min-height:2.35em;letter-spacing:-.01em}',
+      '.hc-loc{font-size:.72rem;color:var(--text-muted,#888);line-height:1.2;margin-top:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;min-height:2.2em}',
+      '.hc-stars{color:#f59e0b;font-size:.7rem;letter-spacing:1.2px;margin-top:0}',
+      '.hc-price-stack{display:flex;flex-direction:column;gap:.34rem;margin-top:.18rem}',
+      '.hc-price{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.62rem .7rem;border:1px solid rgba(0,200,150,.24);border-radius:11px;background:linear-gradient(180deg,rgba(0,200,150,.13),rgba(0,200,150,.05));box-shadow:inset 0 1px 0 rgba(255,255,255,.04);text-decoration:none;transition:border-color .2s ease,transform .2s ease,background .2s ease;min-height:42px}',
+      '.hc-price:hover{border-color:rgba(0,200,150,.48);transform:translateY(-1px);background:linear-gradient(180deg,rgba(0,200,150,.17),rgba(0,200,150,.07))}',
+      '.hc-price--fallback{border-color:rgba(255,255,255,.09);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02))}',
+      '.hc-price-info{display:flex;flex-direction:column;align-items:flex-start;gap:.12rem;min-width:0;flex:1}',
+      '.hc-price-copy{display:flex;align-items:baseline;gap:.28rem;min-width:0}',
+      '.hc-price strong{display:block;font-size:1.08rem;line-height:1.05;color:var(--text,#f0f0f0);font-weight:900;white-space:nowrap}',
+      '.hc-price-prefix{font-size:.78rem;font-weight:800;opacity:.92;color:var(--text,#f0f0f0);white-space:nowrap}',
+      '.hc-price-date{display:block;font-size:.64rem;line-height:1.25;color:var(--text-muted,#888);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}',
+      '.hc-price-provider{display:inline-flex;align-items:center;justify-content:center;width:58px;height:16px;flex:0 0 auto}',
+      '.hc-price-provider img{display:block;width:100%;height:100%;object-fit:contain}',
+      '.hc-badges{display:flex;flex-wrap:nowrap;gap:.18rem;margin-top:auto;padding-top:.32rem;min-height:28px;align-items:center;overflow:hidden}',
+      '.hc-badge{background:rgba(0,200,150,.07);border:1px solid rgba(0,200,150,.16);border-radius:999px;padding:.08rem .28rem;font-size:.53rem;color:var(--accent,#00c896);white-space:nowrap;line-height:1.1;max-width:none;overflow:hidden;text-overflow:clip;flex:0 0 auto;letter-spacing:-.01em}',
       /* Arrows */
       '.hc-arrow{position:absolute;top:calc(50% - 1.5rem);z-index:10;width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(18,18,18,.9);border:1px solid var(--border,#1e1e1e);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background .2s,border-color .2s;user-select:none}',
       '.hc-arrow:hover{background:rgba(0,200,150,.2);border-color:rgba(0,200,150,.5)}',
@@ -247,15 +394,21 @@ if (!window.JB_COMPARE) {
       '@keyframes jb-ring-fill{to{stroke-dashoffset:var(--jb-offset,0)}}',
       '.jb-ring-anim{animation:jb-ring-fill 1.3s cubic-bezier(.22,.68,0,1.2) forwards}',
       /* Buttons */
-      '.hc-btn-row{display:flex;gap:.45rem;margin-top:auto;padding-top:.65rem}',
-      '.hc-btn{flex:1;padding:.42rem .35rem;border-radius:8px;font-size:.71rem;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;line-height:1.3;transition:background .18s,border-color .18s,opacity .18s;display:flex;align-items:center;justify-content:center;white-space:nowrap;min-width:0}',
-      '.hc-btn-details{background:transparent;border:1px solid rgba(255,255,255,.16);color:var(--text,#f0f0f0)}',
-      '.hc-btn-details:hover{border-color:rgba(255,255,255,.44);background:rgba(255,255,255,.05)}',
-      '.hc-btn-request{background:var(--accent,#00c896);border:1px solid var(--accent,#00c896);color:#000;font-weight:800}',
-      '.hc-btn-request:hover{background:#00e0ab;border-color:#00e0ab}',
+      '.hc-btn-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.28rem;margin-top:auto;padding-top:.42rem}',
+      '.hc-btn{padding:.35rem .38rem;border-radius:10px;font-size:.66rem;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;line-height:1.1;letter-spacing:.01em;transition:background .18s,border-color .18s,color .18s,transform .16s,box-shadow .2s;display:flex;align-items:center;justify-content:center;white-space:normal;text-wrap:balance;min-width:0;min-height:31px}',
+      '.hc-btn--details{grid-column:1 / -1}',
+      '.hc-btn-row--no-book .hc-btn-request{grid-column:1 / -1}',
+      '.hc-btn:active{transform:translateY(1px)}',
+      '.hc-btn-details{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.92)}',
+      '.hc-btn-details:hover{border-color:rgba(255,255,255,.46);background:rgba(255,255,255,.07)}',
+      '.hc-btn-book{background:#f7f7f7;border:1px solid #f7f7f7;color:#0d0d0d;font-weight:800;box-shadow:0 1px 0 rgba(255,255,255,.25) inset}',
+      '.hc-btn-book:hover{background:#fff;border-color:#fff}',
+      '.hc-btn-request{background:linear-gradient(180deg,#13d4a2,#0fb98f);border:1px solid #16d3a3;color:#04271f;font-weight:800;box-shadow:0 1px 0 rgba(255,255,255,.25) inset}',
+      '.hc-btn-request:hover{background:linear-gradient(180deg,#23dfaf,#14c398);border-color:#23dfaf}',
       /* Responsive */
       '@media(max-width:1024px){.hc-card,.hc-skel{flex-basis:calc((100% - 2.2rem)/2.8)}.hc-arrow{display:none}}',
-      '@media(max-width:600px){.hc-card,.hc-skel{flex-basis:calc((100% - .55rem)/1.5)}.hc-arrow{display:none}}'
+      '@media(max-width:600px){.hc-card,.hc-skel{flex-basis:calc((100% - .55rem)/1.5)}.hc-arrow{display:none}.hc-body{padding:.68rem .78rem .74rem}.hc-name{font-size:.84rem}.hc-loc{font-size:.7rem}.hc-badge{font-size:.5rem}.hc-price strong{font-size:1.02rem}.hc-price-provider{width:52px;height:14px}}',
+      '.jb-views{font-size:.67rem;color:var(--text-muted,#888);margin-top:.1rem;min-height:.82rem;line-height:1.3}'
     ].join('');
     document.head.appendChild(s);
   }
@@ -277,8 +430,9 @@ if (!window.JB_COMPARE) {
     hotels.forEach(function(h) {
       var score = h._score != null ? h._score : calcScore(h);
       var feats = topFeatures(h, 3);
+      var FEAT_ICONS = getFeatIcons();
       var badges = feats.map(function(f){
-        return '<span class="hc-badge">'+(FEAT_ICONS[f.l]||'')+' '+esc(f.l)+'</span>';
+        return '<span class="hc-badge">'+(FEAT_ICONS[f.l]||'')+' '+esc(badgeLabel(f.l))+'</span>';
       }).join('');
 
       var imgs = (h.images && h.images.length) ? h.images.slice(0,5) : (h.image ? [h.image] : []);
@@ -294,6 +448,23 @@ if (!window.JB_COMPARE) {
       }
       var firstImg = imgs.length ? imgs[0] : '';
       var inCmp = window.JB_COMPARE && window.JB_COMPARE.has(h.giataId);
+      var offers = getLiveAffiliateOffers(h);
+      var priceHtml = '';
+      if (offers.length) {
+        var offerCards = offers.map(function(offer) {
+          var nightlyAmount = displayPriceValue(offer);
+          var dateLabel = getTravelWindowLabel(offer.validFrom, offer.validTo);
+          return '<a href="' + esc(offer.deeplink) + '" class="hc-price" target="_blank" rel="nofollow sponsored noopener">'
+            + '<span class="hc-price-info"><span class="hc-price-copy"><span class="hc-price-prefix">ab p.P.</span><strong>' + (nightlyAmount != null ? formatPriceDE(nightlyAmount) + ' €' : 'Preis') + '</strong></span><span class="hc-price-date">' + esc(dateLabel) + '</span></span>'
+            + providerLogoHtml(offer.provider || 'Anbieter')
+            + '</a>';
+        }).join('');
+        priceHtml = '<div class="hc-price-stack">' + offerCards + '</div>';
+      } else {
+        priceHtml = '<div class="hc-price-stack"><div class="hc-price hc-price--fallback"><span class="hc-price-copy"><strong>Auf Anfrage</strong></span></div></div>';
+      }
+
+      var btnRowClass = 'hc-btn-row hc-btn-row--no-book';
 
       html+='<div class="hc-card'+(inCmp?' hc-card--in-cmp':'')+'" data-hotel-id="'+esc(h.giataId)+'">'
         +'<div class="hc-img-wrap">'
@@ -309,10 +480,11 @@ if (!window.JB_COMPARE) {
         +'<div class="hc-stars">'+starsHtml(h.stars||0)+'</div>'
         +'<div class="hc-name">'+esc(h.name)+'</div>'
         +'<div class="hc-loc">📍 '+esc(h.city||'')+((h.country||CC_NAMES[h.cc])?' · '+esc(h.country||CC_NAMES[h.cc]||''):'')+'</div>'
+        +'<div class="jb-views">👁 …</div>'
+        +priceHtml
         +(badges?'<div class="hc-badges">'+badges+'</div>':'')
-        +'<div class="hc-btn-row">'
-        +'<a href="/hotel.html?id='+esc(h.giataId)+'&slug='+toSlug(h.name)+'" class="hc-btn hc-btn-details">Mehr Details</a>'
-        +'<a href="#" class="hc-btn hc-btn-request" data-hotel-name="'+esc(h.name||'')+'">Sofort Anfragen</a>'
+        +'<div class="'+btnRowClass+'">'
+        +'<a href="/hotel.html?id='+esc(h.giataId)+'&slug='+toSlug(h.name)+'" class="hc-btn hc-btn-details hc-btn--details">Mehr Details</a>'
         +'</div>'
         +'</div>'
         +'</div>';
@@ -459,7 +631,33 @@ if (!window.JB_COMPARE) {
       }
     });
   }
+  // ── View Counter ────────────────────────────────────────────────────────────────────────
+  function jbFmtViews(n) {
+    return Number(n).toLocaleString('de-DE');
+  }
 
+  function jbLoadViews(container) {
+    container.querySelectorAll('[data-hotel-id]').forEach(function(card) {
+      var id    = card.getAttribute('data-hotel-id');
+      var badge = card.querySelector('.jb-views');
+      if (!id || !badge) return;
+      var sk = 'jb_v_' + id;
+      var cached = null;
+      try { cached = sessionStorage.getItem(sk); } catch(e) {}
+      if (cached !== null) {
+        badge.textContent = '👁 ' + jbFmtViews(Number(cached)) + ' Mal angesehen';
+        return;
+      }
+      fetch('/api/views?id=' + encodeURIComponent(id), { method: 'POST' })
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(d) {
+          var c = d && d.count != null ? d.count : 0;
+          try { sessionStorage.setItem(sk, String(c)); } catch(e) {}
+          badge.textContent = '👁 ' + jbFmtViews(c) + ' Mal angesehen';
+        })
+        .catch(function() { badge.textContent = ''; });
+    });
+  }
   // ── Bootstrap ────────────────────────────────────────────────────────────────
   function init() {
     var containers = document.querySelectorAll('[data-hotel-carousel]');
@@ -469,8 +667,10 @@ if (!window.JB_COMPARE) {
 
     containers.forEach(function(container){
       var val  = (container.getAttribute('data-hotel-carousel')||'').trim();
-      var city = (container.getAttribute('data-carousel-city')||'').trim();
+      var city  = (container.getAttribute('data-carousel-city') ||'').trim();
+      var cities = (container.getAttribute('data-carousel-cities')||'').trim();
       var type = (container.getAttribute('data-hotel-carousel-type')||'').trim();
+      var priceOnly = true;
       if(!val) return;
 
       var isGlobal = (val === '*');
@@ -479,9 +679,11 @@ if (!window.JB_COMPARE) {
 
       if(isCountryCode || isGlobal) {
         // Fetch top hotels — mit Ländercode (Länder-Carousel) oder global (*)
-        var url = '/api/giata?action=top&limit=8';
+        var fetchLimit = priceOnly ? 24 : 8;
+        var url = '/api/giata?action=top&limit=' + fetchLimit;
         if(isCountryCode) url+='&country='+encodeURIComponent(val);
-        if(city) url+='&city='+encodeURIComponent(city);
+        if(cities) url+='&cities='+encodeURIComponent(cities);
+        else if(city) url+='&city='+encodeURIComponent(city);
         if(type) url+='&category='+encodeURIComponent(type);
 
         fetch(url)
@@ -499,12 +701,23 @@ if (!window.JB_COMPARE) {
             })).then(function(details){
               var hotels = details.map(function(d,i){
                 if(!d||d.error) return null;
-                d._score = data.hotels[i].score != null ? data.hotels[i].score : calcScore(d);
+                d._score = calcScore(d); // Immer aus Property-Daten neu berechnen (wie hotel.html)
                 // cc aus Top-API übernehmen falls im Property-Objekt nicht vorhanden
                 if(!d.cc && data.hotels[i].cc) d.cc = data.hotels[i].cc;
                 return d;
               }).filter(Boolean);
-              if(hotels.length) { renderHotels(container,hotels); updateStickyBar(); }
+
+              hotels = applyThemeSelection(hotels, type);
+
+              if (priceOnly) {
+                hotels = hotels.filter(hasBothLiveAffiliatePrices).slice(0, 8);
+                if (!hotels.length) {
+                  container.innerHTML='<p style="color:var(--text-muted,#777);padding:2rem 0;text-align:center">Derzeit keine Hotels mit Alltours- und Lidl-Reisen-Preisen verfuegbar. Wir aktualisieren diese Auswahl laufend.</p>';
+                  return;
+                }
+              }
+
+              if(hotels.length) { renderHotels(container,hotels); updateStickyBar(); jbLoadViews(container); }
               else container.innerHTML='<p style="color:var(--text-muted,#777);padding:2rem 0;text-align:center">Keine Hotel-Daten verfügbar.</p>';
             });
           })
@@ -521,27 +734,39 @@ if (!window.JB_COMPARE) {
         })).then(function(results){
           var valid = results.filter(function(h){ return h&&h.giataId&&!h.error; });
           valid.forEach(function(h){ h._score=calcScore(h); });
+          valid = applyThemeSelection(valid, type);
           valid.sort(function(a,b){ return b._score-a._score; });
-          if(valid.length) { renderHotels(container,valid); updateStickyBar(); }
+          if (priceOnly) {
+            valid = valid.filter(hasBothLiveAffiliatePrices).slice(0, 8);
+            if (!valid.length) {
+              container.innerHTML='<p style="color:var(--text-muted,#777);padding:2rem 0;text-align:center">Derzeit keine Hotels mit Alltours- und Lidl-Reisen-Preisen verfuegbar. Wir aktualisieren diese Auswahl laufend.</p>';
+              return;
+            }
+          }
+          if(valid.length) { renderHotels(container,valid); updateStickyBar(); jbLoadViews(container); }
           else container.innerHTML='<p style="color:var(--text-muted,#777);padding:2rem 0;text-align:center">Keine Hotel-Daten verfügbar.</p>';
         });
       }
     });
   }
 
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',init);
-  } else {
-    init();
-  }
+  withJBScore(function() {
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded',init);
+    } else {
+      init();
+    }
+  });
 
-  // Crisp-Chat öffnen wenn "Sofort Anfragen" geklickt wird
+  // Anfrage-Modal öffnen wenn "Sofort Anfragen" geklickt wird
   document.addEventListener('click', function(e) {
     var btn = e.target && e.target.closest ? e.target.closest('.hc-btn-request') : null;
     if (!btn) return;
     e.preventDefault();
     var name = btn.getAttribute('data-hotel-name') || '';
-    if (window.$crisp) {
+    if (window.openAnfrageModal) {
+      window.openAnfrageModal(name);
+    } else if (window.$crisp) {
       try { if (name) window.$crisp.push(['set', 'session:data', [[['Hotel', name]]]]); } catch(_) {}
       try { window.$crisp.push(['do', 'chat:open']); } catch(_) {}
     }

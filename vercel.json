@@ -1,12 +1,51 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": ".",
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/404.html", "status": 404 }
+  "headers": [
+    {
+      "source": "/booking/index.html",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, follow" }
+      ]
+    },
+    {
+      "source": "/deals",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, follow" }
+      ]
+    },
+    {
+      "source": "/deals/",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, follow" }
+      ]
+    },
+    {
+      "source": "/deals/index.html",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, follow" }
+      ]
+    },
+    {
+      "source": "/vergleich.html",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, follow" }
+      ]
+    },
+    {
+      "source": "/changelog.html",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    }
   ],
   "redirects": [
     { "source": "/booking",                            "destination": "/",                                  "permanent": true },
+    { "source": "/booking/index.html",                 "destination": "/",                                  "permanent": true },
+    { "source": "/hotel",                              "destination": "/hotel.html",                         "permanent": true },
+    { "source": "/hotel/",                             "destination": "/hotel.html",                         "permanent": true },
+    { "source": "/santorini/",                         "destination": "/griechenland/santorini/",            "permanent": true },
+    { "source": "/abu-dhabi/",                         "destination": "/dubai/",                             "permanent": true },
     { "source": "/tuerkei.html",                      "destination": "/tuerkei/",                          "permanent": true },
     { "source": "/spanien.html",                       "destination": "/spanien/",                           "permanent": true },
     { "source": "/griechenland.html",                  "destination": "/griechenland/",                      "permanent": true },

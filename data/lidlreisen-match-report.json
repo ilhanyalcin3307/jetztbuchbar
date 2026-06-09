@@ -1,0 +1,2026 @@
+{
+  "generatedAt": "2026-06-03T08:05:38.096Z",
+  "source": "lidlreisen-feed.csv",
+  "provider": "Lidl Reisen",
+  "stats": {
+    "totalOffers": 233932,
+    "prefixPatternOffers": 231278,
+    "validGiataIdOffers": 7977,
+    "liveEligibleOffers": 7977,
+    "unmatchedOffers": 225955,
+    "invalidGiataIdOffers": 223301,
+    "skippedWithoutLink": 0,
+    "skippedWithoutPrice": 0,
+    "matchedHotels": 2049,
+    "validGiataRate": 3.41,
+    "liveMatchRate": 3.41
+  },
+  "notes": [
+    "Primaeres Match-Signal ist merchant_product_id im Format AC-<giataId> oder PA-<giataId>.",
+    "Travel:-Felder sind im gelieferten Feed weitgehend leer und werden nicht fuer das Live-Matching benoetigt.",
+    "Live-Output uebernimmt nur Angebote, deren merchant_product_id-Suffix als GIATA-ID im lokalen Index existiert.",
+    "aw_deep_link wird spaeter im API-Layer als bevorzugter Deeplink genutzt."
+  ],
+  "unmatchedSamples": [
+    {
+      "productName": "Hotel Ludwig Royal",
+      "merchantProductId": "616",
+      "awProductId": "43841463542",
+      "price": 135,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Welcome Hotel Meschede",
+      "merchantProductId": "696",
+      "awProductId": "43841463552",
+      "price": 69,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "BollAnts Spa im Park",
+      "merchantProductId": "900",
+      "awProductId": "44697308564",
+      "price": 89,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Nordperd & Villen Göhren",
+      "merchantProductId": "903",
+      "awProductId": "44635711854",
+      "price": 89,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Victor's Residenz-Hotel Teistungenburg",
+      "merchantProductId": "841",
+      "awProductId": "43841463438",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Alpenhof Murnau",
+      "merchantProductId": "795",
+      "awProductId": "43841463439",
+      "price": 214.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Schloss Montabaur",
+      "merchantProductId": "796",
+      "awProductId": "43841463440",
+      "price": 199,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "The Hague Marriott Hotel",
+      "merchantProductId": "828",
+      "awProductId": "43841463435",
+      "price": 62.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Musicalsommer Fulda 2026 inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1371",
+      "awProductId": "43841463616",
+      "price": 118.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Musicalreisen"
+    },
+    {
+      "productName": "Seehotel Niedernberg – Das Dorf am See",
+      "merchantProductId": "1298",
+      "awProductId": "43841463622",
+      "price": 116,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "SEETELHOTEL Ahlbecker Hof",
+      "merchantProductId": "1302",
+      "awProductId": "44360346579",
+      "price": 135,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Zoologischer Garten Berlin inkl. Übernachtung und Frühstück",
+      "merchantProductId": "1321",
+      "awProductId": "43841463635",
+      "price": 65,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Tierischer Ausflug zum berühmtesten Geißbock der Welt",
+      "merchantProductId": "1322",
+      "awProductId": "43841463636",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Wellings Parkhotel",
+      "merchantProductId": "1366",
+      "awProductId": "43841463615",
+      "price": 149,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Sonnenhotel Hoher Hahn",
+      "merchantProductId": "1316",
+      "awProductId": "44560645299",
+      "price": 175,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Schlosshotel Klink",
+      "merchantProductId": "1331",
+      "awProductId": "43841463638",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Welcome Hotel Wesel",
+      "merchantProductId": "1046",
+      "awProductId": "43955105062",
+      "price": 169,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Al Posta Hotel 1899",
+      "merchantProductId": "1055",
+      "awProductId": "43841463460",
+      "price": 59.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Therme Bad Wörishofen inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1076",
+      "awProductId": "43841463459",
+      "price": 129,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Park's Velden",
+      "merchantProductId": "1033",
+      "awProductId": "44429026723",
+      "price": 68,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "BEST WESTERN PLUS BierKulturHotel Schwanen",
+      "merchantProductId": "1112",
+      "awProductId": "43841463461",
+      "price": 179,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel mein inselglück",
+      "merchantProductId": "262",
+      "awProductId": "43841463541",
+      "price": 104.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Erlebnis Zoo Hannover inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1257",
+      "awProductId": "44367303205",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "DomStufen-Festspiele: Jesus Christ Superstar inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1235",
+      "awProductId": "43841463612",
+      "price": 150.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Arena di Verona inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1241",
+      "awProductId": "43841463609",
+      "price": 88.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "NIDUM Casual Luxury Hotel",
+      "merchantProductId": "1223",
+      "awProductId": "43841463620",
+      "price": 149.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Posthotel Rotenburg an der Fulda",
+      "merchantProductId": "1227",
+      "awProductId": "44475860446",
+      "price": 69.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Märchenschloss Neuschwanstein und Schloss Hohenschwangau inkl. Übernachtung",
+      "merchantProductId": "1208",
+      "awProductId": "44253026575",
+      "price": 109,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Louvre Museum Paris inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1212",
+      "awProductId": "43841463613",
+      "price": 59,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Miniatur und Yullbe Wunderland Hamburg inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1213",
+      "awProductId": "43841463619",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Yachthotel Chiemsee",
+      "merchantProductId": "1243",
+      "awProductId": "43841463610",
+      "price": 91,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Autostadt Erlebniswelt inkl. Übernachtung im Hotel",
+      "merchantProductId": "1248",
+      "awProductId": "43841463611",
+      "price": 76,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "SEETELHOTEL Kaiserstrand Beachhotel",
+      "merchantProductId": "1004",
+      "awProductId": "43841463449",
+      "price": 79.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "SEETELHOTEL Strandhotel Atlantic",
+      "merchantProductId": "1260",
+      "awProductId": "43841463621",
+      "price": 119,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Saliter Hof",
+      "merchantProductId": "1478",
+      "awProductId": "43841463641",
+      "price": 89,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Festspielhaus Neuschwanstein in Füssen mit Übernachtung im Premium Hotel",
+      "merchantProductId": "1479",
+      "awProductId": "43841463642",
+      "price": 144.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Musicalreisen"
+    },
+    {
+      "productName": "Hotel Freund",
+      "merchantProductId": "1480",
+      "awProductId": "43841463643",
+      "price": 59.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Therme Euskirchen bei Bonn inkl. Übernachtung",
+      "merchantProductId": "1497",
+      "awProductId": "43841463647",
+      "price": 89,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Thermen Bussloo",
+      "merchantProductId": "1490",
+      "awProductId": "44182764625",
+      "price": 179,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Romantisches Hotel Menzhausen",
+      "merchantProductId": "1492",
+      "awProductId": "43841463646",
+      "price": 118,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Sportresort Alpenblick",
+      "merchantProductId": "1565",
+      "awProductId": "43841463700",
+      "price": 165,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Heide Kröpke inkl. Serengeti-Park",
+      "merchantProductId": "1569",
+      "awProductId": "43841463701",
+      "price": 139,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Hotel FederWERK in St. Georgen",
+      "merchantProductId": "1571",
+      "awProductId": "44248405778",
+      "price": 101,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Loev Hotel Rügen",
+      "merchantProductId": "1532",
+      "awProductId": "43841463736",
+      "price": 121,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Landhaus Wachtelhof",
+      "merchantProductId": "128",
+      "awProductId": "43841463543",
+      "price": 115,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "VILA VITA Burghotel",
+      "merchantProductId": "138",
+      "awProductId": "43841463529",
+      "price": 139,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Königshof Hotel Resort",
+      "merchantProductId": "107",
+      "awProductId": "43841463531",
+      "price": 199,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "centrovital Berlin",
+      "merchantProductId": "162",
+      "awProductId": "43841463530",
+      "price": 54,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Taunus Therme mit Übernachtung im Premium Hotel",
+      "merchantProductId": "313",
+      "awProductId": "43841463534",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Seehotel Adler",
+      "merchantProductId": "332",
+      "awProductId": "43841463535",
+      "price": 149,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Konsumhotel Dorotheenhof Weimar",
+      "merchantProductId": "349",
+      "awProductId": "43841463536",
+      "price": 107,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "AQUA DOME Hotel & Thermenresort",
+      "merchantProductId": "410",
+      "awProductId": "44801220832",
+      "price": 226.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel TAUERN SPA",
+      "merchantProductId": "423",
+      "awProductId": "43841463433",
+      "price": 169,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "DAS LUDWIG Sports Resort",
+      "merchantProductId": "452",
+      "awProductId": "43989168236",
+      "price": 174,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Phantasialand in Köln-Brühl inkl. Premium Hotel",
+      "merchantProductId": "283",
+      "awProductId": "43841463538",
+      "price": 119,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Biohotel Leutascherhof",
+      "merchantProductId": "721",
+      "awProductId": "44176204097",
+      "price": 145,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Welcome Hotel Bad Arolsen",
+      "merchantProductId": "724",
+      "awProductId": "43841463545",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Seehotel Leoni",
+      "merchantProductId": "740",
+      "awProductId": "43841463547",
+      "price": 133.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Walliserhof in Vorarlberg",
+      "merchantProductId": "502",
+      "awProductId": "43841463434",
+      "price": 79.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Wende in Neusiedl am See",
+      "merchantProductId": "624",
+      "awProductId": "44494280842",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Dorint Resort Baltic Hills Usedom",
+      "merchantProductId": "661",
+      "awProductId": "43841463442",
+      "price": 105,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Tropical Islands mit Übernachtung direkt im Resort",
+      "merchantProductId": "747",
+      "awProductId": "43841463678",
+      "price": 48.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Anthony's Life & Style Hotel",
+      "merchantProductId": "224",
+      "awProductId": "43841463533",
+      "price": 240,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "4 Schlosshotel Blankenburg",
+      "merchantProductId": "227",
+      "awProductId": "44285833978",
+      "price": 140.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "The Lakeside Burghotel Strausberg",
+      "merchantProductId": "199",
+      "awProductId": "43841463540",
+      "price": 69,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Zum Löwen Designhotel Resort & Spa in Duderstadt",
+      "merchantProductId": "1141",
+      "awProductId": "43841463629",
+      "price": 129,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Wiener Prater mit Ticket für das Riesenrad inkl. Übernachtung",
+      "merchantProductId": "1002",
+      "awProductId": "44003999986",
+      "price": 69,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Hamburger Hafenrundfahrt inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1005",
+      "awProductId": "43841463450",
+      "price": 47.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Eden Boutique Hotel",
+      "merchantProductId": "1158",
+      "awProductId": "44504643275",
+      "price": 229,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Semperoper Dresden Tickets inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1162",
+      "awProductId": "43841463632",
+      "price": 153,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Zoo Leipzig mit Übernachtung im Hotel",
+      "merchantProductId": "1194",
+      "awProductId": "43841463631",
+      "price": 74,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Holiday Inn Hamburg – City Nord",
+      "merchantProductId": "1131",
+      "awProductId": "43841463633",
+      "price": 58,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Best Western Plus Hotel Ostertor",
+      "merchantProductId": "934",
+      "awProductId": "43841463453",
+      "price": 68.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Wellness Resort Rimske Terme",
+      "merchantProductId": "945",
+      "awProductId": "44808239715",
+      "price": 149,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Vier Jahreszeiten Starnberg",
+      "merchantProductId": "1026",
+      "awProductId": "43841463458",
+      "price": 159,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "STARLIGHT EXPRESS Musical Tickets mit Hotelübernachtung",
+      "merchantProductId": "976",
+      "awProductId": "44176204098",
+      "price": 104,
+      "categoryName": "Holidays",
+      "merchantCategory": "Musicalreisen"
+    },
+    {
+      "productName": "Kneipp- & Wellvitalhotel Edelweiss",
+      "merchantProductId": "704",
+      "awProductId": "43841463550",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Parkhotel Rügen",
+      "merchantProductId": "708",
+      "awProductId": "44689075237",
+      "price": 64,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Alpenlove – Adult SPA Hotel",
+      "merchantProductId": "812",
+      "awProductId": "43841463437",
+      "price": 195,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Schlosshotel Bad Wilhelmshöhe",
+      "merchantProductId": "952",
+      "awProductId": "43841463456",
+      "price": 169,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Claudius Therme mit Übernachtung im Premium Hotel",
+      "merchantProductId": "989",
+      "awProductId": "43841463446",
+      "price": 85,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Thermen & Badewelt Sinsheim inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "990",
+      "awProductId": "43841463447",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Therme Erding inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "991",
+      "awProductId": "44003999999",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Torfhaus HARZRESORT",
+      "merchantProductId": "1417",
+      "awProductId": "43841463617",
+      "price": 109,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Alpine Hideaway ZILLERTALHOF",
+      "merchantProductId": "1421",
+      "awProductId": "43871778861",
+      "price": 259,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Adlernest",
+      "merchantProductId": "1451",
+      "awProductId": "43841463628",
+      "price": 199,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Erlebnispark Tripsdrill & Wildparadies inkl. Übernachtung",
+      "merchantProductId": "1437",
+      "awProductId": "43841463625",
+      "price": 90.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Magisches Winterspecial November 2026 & Januar 2027",
+      "merchantProductId": "1442",
+      "awProductId": "44182764624",
+      "price": 179,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Gräflicher Park Health & Balance Resort",
+      "merchantProductId": "1387",
+      "awProductId": "43841463618",
+      "price": 199,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Gut Voigtländer",
+      "merchantProductId": "1594",
+      "awProductId": "43841463680",
+      "price": 119,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Käppelehof",
+      "merchantProductId": "1581",
+      "awProductId": "44642647582",
+      "price": 152,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Carlton Oasis Hotel",
+      "merchantProductId": "1724",
+      "awProductId": "43841463670",
+      "price": 139,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Technikmuseum Speyer",
+      "merchantProductId": "2136",
+      "awProductId": "44781231851",
+      "price": 59,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "4* Hotel Lufthansa Seeheim",
+      "merchantProductId": "2137",
+      "awProductId": "43841463709",
+      "price": 49,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Fletcher Wellnesshotel Sittard",
+      "merchantProductId": "2140",
+      "awProductId": "44858298897",
+      "price": 97,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Maraias Luxury Suites & Apartments",
+      "merchantProductId": "2163",
+      "awProductId": "44808239711",
+      "price": 190,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Berg & Spa Hotel Urslauerhof",
+      "merchantProductId": "2091",
+      "awProductId": "44721063956",
+      "price": 259,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Mauritius Hotel & Therme",
+      "merchantProductId": "2092",
+      "awProductId": "43841463730",
+      "price": 64.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "LA SOA Chalets",
+      "merchantProductId": "1833",
+      "awProductId": "43841463652",
+      "price": 963.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Victor's Residenz-Hotel München",
+      "merchantProductId": "1834",
+      "awProductId": "43841463653",
+      "price": 48,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "BLU APARTMENTS",
+      "merchantProductId": "1926",
+      "awProductId": "43841463717",
+      "price": 109,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "RupertusTherme Bad Reichenhall inkl. Übernachtung",
+      "merchantProductId": "1909",
+      "awProductId": "43841463716",
+      "price": 129,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Four Elements Amsterdam",
+      "merchantProductId": "1922",
+      "awProductId": "43841463721",
+      "price": 58.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Blumenpark Keukenhof inkl. Übernachtung im Premium Hotel in Amsterdam",
+      "merchantProductId": "1940",
+      "awProductId": "43841463719",
+      "price": 89,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "OZEANEUM, NATUREUM oder MEERESMUSEUM inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1983",
+      "awProductId": "44532361196",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Mercedes-Benz Museum mit Hotelübernachtung in Stuttgart",
+      "merchantProductId": "1809",
+      "awProductId": "43841463672",
+      "price": 55,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Hotel Cella Central",
+      "merchantProductId": "1846",
+      "awProductId": "44734058803",
+      "price": 57,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "De Bonte Wever",
+      "merchantProductId": "1855",
+      "awProductId": "43841463655",
+      "price": 169,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Frankenland in Bad Kissingen",
+      "merchantProductId": "1692",
+      "awProductId": "43841463649",
+      "price": 143,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "LEGOLAND® Deutschland Resort inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1695",
+      "awProductId": "43841463705",
+      "price": 108,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Holzhotel Forsthofalm",
+      "merchantProductId": "1795",
+      "awProductId": "44785986882",
+      "price": 238,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Victor’s Residenz-Hotel Leipzig",
+      "merchantProductId": "1615",
+      "awProductId": "44282804912",
+      "price": 48,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Hotel Schwarzbrunn",
+      "merchantProductId": "1606",
+      "awProductId": "43841463691",
+      "price": 289,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Post am See",
+      "merchantProductId": "1610",
+      "awProductId": "43841463690",
+      "price": 305,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Movie Park Germany inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1613",
+      "awProductId": "43841463689",
+      "price": 77,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Europa-Park mit Übernachtung im Premium Hotel in der Region",
+      "merchantProductId": "1676",
+      "awProductId": "43841463683",
+      "price": 133.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Hotel Halfenstube & Villa Spa 1894",
+      "merchantProductId": "1678",
+      "awProductId": "43841463684",
+      "price": 199,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Freizeitpark Slagharen mit Übernachtung im Park",
+      "merchantProductId": "1682",
+      "awProductId": "44377934651",
+      "price": 70,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Hotel Rocket Rooms in Velden",
+      "merchantProductId": "1684",
+      "awProductId": "43841463707",
+      "price": 49.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Penck Hotel Dresden",
+      "merchantProductId": "1658",
+      "awProductId": "43841463685",
+      "price": 44.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Parc Astérix bei Paris inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1660",
+      "awProductId": "43841463682",
+      "price": 97.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Romantik Hotel Fuchsbau",
+      "merchantProductId": "172",
+      "awProductId": "43841463712",
+      "price": 74.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Kreuzer",
+      "merchantProductId": "1634",
+      "awProductId": "43841463686",
+      "price": 42,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "BELANTIS Leipzig inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1600",
+      "awProductId": "43841463681",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Bilderberg Hotel de Bovenste Molen",
+      "merchantProductId": "2338",
+      "awProductId": "43841463753",
+      "price": 66.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Serengeti-Park mit Übernachtung im Premium Hotel",
+      "merchantProductId": "2342",
+      "awProductId": "43841463752",
+      "price": 119,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Scandic Palace Hotel Copenhagen",
+      "merchantProductId": "2378",
+      "awProductId": "43841463756",
+      "price": 93.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Hotel Azenberg",
+      "merchantProductId": "1860",
+      "awProductId": "43841463654",
+      "price": 44,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Das Schierke – Harzresort",
+      "merchantProductId": "1868",
+      "awProductId": "43841463650",
+      "price": 129,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "PLAYMOBIL FUNPARK GUTSCHEIN",
+      "merchantProductId": "2186",
+      "awProductId": "43841463740",
+      "price": 59,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Harry Potter Theater Gutschein",
+      "merchantProductId": "2188",
+      "awProductId": "43841463741",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "MOXY Düsseldorf South",
+      "merchantProductId": "2194",
+      "awProductId": "43841463744",
+      "price": 58,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "JUFA Alpenhotel Saalbach",
+      "merchantProductId": "2225",
+      "awProductId": "44468004956",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "HUP Hotel",
+      "merchantProductId": "2226",
+      "awProductId": "43841463728",
+      "price": 119,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Verwöhnhotel Wildspitze",
+      "merchantProductId": "2227",
+      "awProductId": "44475860447",
+      "price": 289,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Amelie Hotel & Appartements Landau (Pfalz)",
+      "merchantProductId": "2229",
+      "awProductId": "44477866977",
+      "price": 71.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Rupertihof",
+      "merchantProductId": "2218",
+      "awProductId": "43841463739",
+      "price": 189,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel-Gasthaus Krone",
+      "merchantProductId": "2219",
+      "awProductId": "43841463726",
+      "price": 55,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Victor's Residenz-Hotel Erfurt",
+      "merchantProductId": "2220",
+      "awProductId": "43841463727",
+      "price": 59.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Essential by Dorint Stuttgart Airport",
+      "merchantProductId": "2207",
+      "awProductId": "43995976183",
+      "price": 45,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Warner Bros. Studio Tour London Gutschein",
+      "merchantProductId": "2208",
+      "awProductId": "43841463748",
+      "price": 149,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "STARLIGHT EXPRESS Gutschein",
+      "merchantProductId": "2211",
+      "awProductId": "43841463737",
+      "price": 109,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Vital- und Wellnesshotel Albblick",
+      "merchantProductId": "2175",
+      "awProductId": "43920620395",
+      "price": 144,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Thermengutschein",
+      "merchantProductId": "2182",
+      "awProductId": "43841463746",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Therme Erding Gutschein",
+      "merchantProductId": "2183",
+      "awProductId": "43841463747",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Ravensburger Spieleland inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "2245",
+      "awProductId": "44735645441",
+      "price": 69,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Badeparadies Schwarzwald inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "2249",
+      "awProductId": "43841463724",
+      "price": 89,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Skyline Park inkl. Übernachtung im Hotel",
+      "merchantProductId": "2519",
+      "awProductId": "43841462970",
+      "price": 150,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "UNAHOTELS Century Milano",
+      "merchantProductId": "2576",
+      "awProductId": "43841463021",
+      "price": 108.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Sunday Resort Schwielowsee",
+      "merchantProductId": "2242",
+      "awProductId": "43841463722",
+      "price": 139,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Montara",
+      "merchantProductId": "2311",
+      "awProductId": "43841463674",
+      "price": 159,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Sopot",
+      "merchantProductId": "2274",
+      "awProductId": "43841463679",
+      "price": 56,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "XO Hotels Park West",
+      "merchantProductId": "2316",
+      "awProductId": "43841463675",
+      "price": 51,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Super 8 by Wyndham Oberhausen",
+      "merchantProductId": "2317",
+      "awProductId": "44557284152",
+      "price": 45,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Best Western Plus Hotel Bremerhaven",
+      "merchantProductId": "2319",
+      "awProductId": "43841463676",
+      "price": 104,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "IBB Hotel Długi Targ",
+      "merchantProductId": "2323",
+      "awProductId": "43841463677",
+      "price": 56,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Heide Park Soltau inklusive Übernachtung im Resort",
+      "merchantProductId": "2422",
+      "awProductId": "43841463758",
+      "price": 115,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "GINN City & Lounge Ravensburg",
+      "merchantProductId": "2429",
+      "awProductId": "43841463757",
+      "price": 52.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "NH Amersfoort",
+      "merchantProductId": "2406",
+      "awProductId": "43841463754",
+      "price": 71,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "NH Collection Antwerp Centre",
+      "merchantProductId": "2419",
+      "awProductId": "43841463759",
+      "price": 111.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Seevilla Freiberg",
+      "merchantProductId": "2701",
+      "awProductId": "43841463012",
+      "price": 219,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Hotel Zeitgeist Vienna Hauptbahnhof",
+      "merchantProductId": "2755",
+      "awProductId": "43841463017",
+      "price": 118.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Starhotels Grand Milan",
+      "merchantProductId": "2722",
+      "awProductId": "43841463009",
+      "price": 65.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "President Hotel Bonn",
+      "merchantProductId": "2726",
+      "awProductId": "43841463010",
+      "price": 45.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Waldhotel Tannenhäuschen",
+      "merchantProductId": "2668",
+      "awProductId": "43841463718",
+      "price": 69,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Arcotel Donauzentrum Vienna",
+      "merchantProductId": "2732",
+      "awProductId": "43841463024",
+      "price": 93,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Scandic Falkoner",
+      "merchantProductId": "2680",
+      "awProductId": "43841463026",
+      "price": 78,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Inntel Hotels Utrecht Centre",
+      "merchantProductId": "2683",
+      "awProductId": "43841463027",
+      "price": 57.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Hotel Panorama Royal",
+      "merchantProductId": "2741",
+      "awProductId": "43841463025",
+      "price": 185,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Parkhotel Oberhausen",
+      "merchantProductId": "3152",
+      "awProductId": "43841463020",
+      "price": 42,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Ringhotel Sonnenhof",
+      "merchantProductId": "1570",
+      "awProductId": "43841463702",
+      "price": 53,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "SchwabenQuellen inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1979",
+      "awProductId": "43841463669",
+      "price": 89,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Mountains Hotel Seefeld",
+      "merchantProductId": "2027",
+      "awProductId": "43841463696",
+      "price": 217,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "elaya hotel steinplatte (ehemals Kuhotel by Rilano)",
+      "merchantProductId": "2072",
+      "awProductId": "43841463732",
+      "price": 189,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Heidehof",
+      "merchantProductId": "2034",
+      "awProductId": "43841463697",
+      "price": 64,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Hotel Schweizer Hof Kassel",
+      "merchantProductId": "2008",
+      "awProductId": "43841463694",
+      "price": 66.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Hotel Post Krimml",
+      "merchantProductId": "2077",
+      "awProductId": "43841463733",
+      "price": 114,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Hotel Die Alpbacherin",
+      "merchantProductId": "2082",
+      "awProductId": "43841463734",
+      "price": 239,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Thermen Bad Nieuweschans",
+      "merchantProductId": "1984",
+      "awProductId": "44003999987",
+      "price": 149,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Rasti-Land inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "1990",
+      "awProductId": "43841463667",
+      "price": 69,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Hotel Amadeus Salzburg",
+      "merchantProductId": "2623",
+      "awProductId": "43841463023",
+      "price": 104.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Das VIER – Sport- und Wellnesshotel",
+      "merchantProductId": "2639",
+      "awProductId": "43950285835",
+      "price": 285,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Vogelpark Walsrode inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "2643",
+      "awProductId": "43841462978",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Palmenwald Schwarzwaldhof",
+      "merchantProductId": "2660",
+      "awProductId": "43841463526",
+      "price": 119,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Familypark inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "2515",
+      "awProductId": "43841462969",
+      "price": 143,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "relexa hotel Bad Steben",
+      "merchantProductId": "2581",
+      "awProductId": "43841463022",
+      "price": 88,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Best Western Plus Quartier Latin Pantheon",
+      "merchantProductId": "2589",
+      "awProductId": "43841462976",
+      "price": 101,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Monsieur Cadet Hôtel & Spa",
+      "merchantProductId": "2570",
+      "awProductId": "43841462979",
+      "price": 137,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Sporthotel Silvretta Montafon",
+      "merchantProductId": "2929",
+      "awProductId": "44907873096",
+      "price": 189,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Leonardo Hotel Völklingen-Saarbrücken",
+      "merchantProductId": "2938",
+      "awProductId": "43841462985",
+      "price": 54.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Leonardo Hotel Amsterdam Rembrandtpark",
+      "merchantProductId": "2950",
+      "awProductId": "43841462980",
+      "price": 86,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "nhow Amsterdam Rai",
+      "merchantProductId": "2951",
+      "awProductId": "43841462981",
+      "price": 109.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Wellnesshotel-Gutschein",
+      "merchantProductId": "3225",
+      "awProductId": "43841463000",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Allwetterzoo Münster mit Übernachtung im Premium Hotel",
+      "merchantProductId": "3219",
+      "awProductId": "43841462998",
+      "price": 79,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Freizeitpark-Gutschein",
+      "merchantProductId": "3234",
+      "awProductId": "43841462999",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Struck Landhotel & SPA",
+      "merchantProductId": "3369",
+      "awProductId": "43841463092",
+      "price": 179,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Moulin Rouge! Das Musical mit Übernachtung",
+      "merchantProductId": "3372",
+      "awProductId": "43841463093",
+      "price": 109,
+      "categoryName": "Holidays",
+      "merchantCategory": "Musicalreisen"
+    },
+    {
+      "productName": "Hotel Victory Therme Erding",
+      "merchantProductId": "2769",
+      "awProductId": "43841463013",
+      "price": 192.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Olangerhof",
+      "merchantProductId": "3559",
+      "awProductId": "44723421702",
+      "price": 279,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Königsleiten",
+      "merchantProductId": "3566",
+      "awProductId": "43841463096",
+      "price": 238.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Tom Jones 2026 live in Köln inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "3533",
+      "awProductId": "43877999982",
+      "price": 221,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Game Of Thrones Studio Tour inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "3548",
+      "awProductId": "43841463094",
+      "price": 73.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Hotel Seelaus",
+      "merchantProductId": "3550",
+      "awProductId": "43841463095",
+      "price": 205,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Rulantica inkl. Übernachtung",
+      "merchantProductId": "3529",
+      "awProductId": "43841463106",
+      "price": 89,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Europa-Park Gutschein",
+      "merchantProductId": "4147",
+      "awProductId": "43841463125",
+      "price": 149,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Grand Hotel Continental",
+      "merchantProductId": "4161",
+      "awProductId": "43841463126",
+      "price": 125,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "THE WEEKND: After Hours Til Dawn Tour Warschau 2026 inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "4164",
+      "awProductId": "43841463127",
+      "price": 333,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Hotel Excelsior Marienbad",
+      "merchantProductId": "4141",
+      "awProductId": "43841463124",
+      "price": 155,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "T62 Hotel Budapest",
+      "merchantProductId": "4132",
+      "awProductId": "43841463130",
+      "price": 43,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Fletcher Wellness-Hotel Brabant-Mill",
+      "merchantProductId": "4271",
+      "awProductId": "44858298898",
+      "price": 94.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Ostseehotel Villen im Park – ein Rovell Hotel",
+      "merchantProductId": "228",
+      "awProductId": "44047669781",
+      "price": 72.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Maritim Hotel Bad Homburg",
+      "merchantProductId": "4299",
+      "awProductId": "43841463532",
+      "price": 74.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "GOP Varieté-Theater in Bonn inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "4285",
+      "awProductId": "43867707631",
+      "price": 97,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Freizeitpark Puy du Fou",
+      "merchantProductId": "4292",
+      "awProductId": "44178038057",
+      "price": 199,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Autoerlebnis Stuttgart Wertgutschein",
+      "merchantProductId": "4353",
+      "awProductId": "43841463109",
+      "price": 69,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Zillertal Suites Fügen by ALPS RESORTS",
+      "merchantProductId": "4339",
+      "awProductId": "43841463110",
+      "price": 179,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Moulin Rouge in Paris inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "4343",
+      "awProductId": "43841463111",
+      "price": 259.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "SS Rotterdam",
+      "merchantProductId": "4309",
+      "awProductId": "43841463116",
+      "price": 71.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "The Aquincum Hotel Budapest",
+      "merchantProductId": "4315",
+      "awProductId": "43841463112",
+      "price": 97,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Bali Therme Gutschein",
+      "merchantProductId": "4319",
+      "awProductId": "43841463113",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Formel 1 in Budapest inkl. 2 Übernachtungen im Premium Hotel",
+      "merchantProductId": "4369",
+      "awProductId": "43841463115",
+      "price": 697,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Lohningerhof",
+      "merchantProductId": "3621",
+      "awProductId": "44414941100",
+      "price": 279,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Phantasialand Gutschein",
+      "merchantProductId": "3627",
+      "awProductId": "43841463046",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Movie Park Gutschein",
+      "merchantProductId": "3628",
+      "awProductId": "43841463047",
+      "price": 69,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Plopsaland Deutschland Gutschein",
+      "merchantProductId": "3630",
+      "awProductId": "43841463048",
+      "price": 89,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Hotel Rudolf",
+      "merchantProductId": "1349",
+      "awProductId": "44794247759",
+      "price": 295,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "BergBaur Hotel",
+      "merchantProductId": "3934",
+      "awProductId": "43841463097",
+      "price": 172,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Störtebeker Festspiele inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "3652",
+      "awProductId": "43841463049",
+      "price": 96,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Hotel Bero",
+      "merchantProductId": "3673",
+      "awProductId": "43841463052",
+      "price": 77.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Futuroscope inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "3699",
+      "awProductId": "43841463041",
+      "price": 89,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Landhotel Lewitz Mühle",
+      "merchantProductId": "3667",
+      "awProductId": "43841463051",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "Moulin Rouge! Das Musical Gutschein",
+      "merchantProductId": "4017",
+      "awProductId": "43841463053",
+      "price": 109,
+      "categoryName": "Holidays",
+      "merchantCategory": "Gutschein"
+    },
+    {
+      "productName": "Alpine Resort Sportalm Pitztal",
+      "merchantProductId": "3351",
+      "awProductId": "43991983067",
+      "price": 134.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Mariandl im Oberwirt",
+      "merchantProductId": "3929",
+      "awProductId": "43942116540",
+      "price": 54.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Aktivurlaub"
+    },
+    {
+      "productName": "The Beatles Story Museum in Liverpool inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "4440",
+      "awProductId": "43841463101",
+      "price": 61.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Swarovski Kristallwelten inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "4441",
+      "awProductId": "43841463102",
+      "price": 109,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Friedrichstadt-Palast Berlin – BLINDED by DELIGHT inkl. Ticket und Übernachtung im Premium Hotel",
+      "merchantProductId": "4446",
+      "awProductId": "43841463103",
+      "price": 89,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Efteling Park inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "4447",
+      "awProductId": "43841463104",
+      "price": 136,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Valserhof",
+      "merchantProductId": "2771",
+      "awProductId": "44022181876",
+      "price": 248,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel Rogen",
+      "merchantProductId": "2777",
+      "awProductId": "43841462986",
+      "price": 209,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Hotel The Match Eindhoven",
+      "merchantProductId": "2651",
+      "awProductId": "44262942547",
+      "price": 42,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Hotel Villa Glori",
+      "merchantProductId": "2822",
+      "awProductId": "43841462987",
+      "price": 52.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Tierpark Hagenbeck mit Übernachtung im Premium Hotel",
+      "merchantProductId": "2826",
+      "awProductId": "43841462988",
+      "price": 61.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Reise-Specials"
+    },
+    {
+      "productName": "Medi Therme Bochum inkl. Übernachtung im Premium Hotel",
+      "merchantProductId": "2830",
+      "awProductId": "44003999988",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Room Mate Aitana",
+      "merchantProductId": "2833",
+      "awProductId": "43841462991",
+      "price": 113.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Weisses Lamm",
+      "merchantProductId": "2768",
+      "awProductId": "44422443733",
+      "price": 269,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Best Western Plus Hotel Steinsgarten",
+      "merchantProductId": "2793",
+      "awProductId": "43841463016",
+      "price": 129,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Tauernhof Kaprun",
+      "merchantProductId": "2785",
+      "awProductId": "43841463014",
+      "price": 99,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    },
+    {
+      "productName": "Leonardo Hotel Frankfurt City South",
+      "merchantProductId": "2805",
+      "awProductId": "43841463015",
+      "price": 52.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Städtereisen"
+    },
+    {
+      "productName": "Parkhotel Nümbrecht",
+      "merchantProductId": "2800",
+      "awProductId": "43841463018",
+      "price": 114.5,
+      "categoryName": "Holidays",
+      "merchantCategory": "Wellness"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "matchByMerchantProductId": {
+    "RHO112": "1439450",
+    "HER818": "17534",
+    "PMI482": "461571"
+  },
+  "matchByAwProductId": {},
+  "excludeMerchantProductIds": [],
+  "excludeAwProductIds": []
+}

@@ -1,0 +1,2755 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IG Generator · Admin · JetztBuchbar</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#0a0a0a; --bg-card:#111; --bg-card2:#161616;
+      --accent:#00c896; --accent-dark:#00a87e;
+      --text:#f0f0f0; --text-muted:#777; --border:#1e1e1e; --radius:10px;
+    }
+    html, body { height: 100%; }
+    body { background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+
+    /* ── Password Gate ── */
+    #pw-gate { position:fixed; inset:0; background:var(--bg); z-index:9999; display:flex; align-items:center; justify-content:center; }
+    .pw-box { background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:2.5rem 2rem; width:360px; text-align:center; }
+    .pw-logo { font-size:1.4rem; font-weight:800; margin-bottom:.2rem; }
+    .pw-logo span { color:var(--accent); }
+    .pw-sub { font-size:.82rem; color:var(--text-muted); margin-bottom:1.75rem; }
+    .pw-input { width:100%; padding:.75rem 1rem; background:rgba(255,255,255,.05); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:1.1rem; text-align:center; letter-spacing:.2em; margin-bottom:1rem; }
+    .pw-input:focus { outline:none; border-color:var(--accent); }
+    .pw-btn { width:100%; padding:.75rem; background:var(--accent); color:#000; border:none; border-radius:8px; font-weight:800; font-size:.95rem; cursor:pointer; transition:opacity .2s; }
+    .pw-btn:hover { opacity:.88; }
+    .pw-err { font-size:.8rem; color:#ff8888; margin-top:.65rem; min-height:1.1em; }
+
+    /* ── Layout ── */
+    #main { display:none; }
+    .top-bar { position:sticky; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 1.5rem; height:50px; background:rgba(10,10,10,.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+    .top-bar-logo { font-size:.95rem; font-weight:800; }
+    .top-bar-logo span { color:var(--accent); }
+    .top-bar-badge { font-size:.68rem; font-weight:700; letter-spacing:.05em; background:rgba(0,200,150,.1); border:1px solid rgba(0,200,150,.25); color:var(--accent); padding:.2rem .75rem; border-radius:20px; }
+    .mode-tabs { display:flex; gap:.5rem; padding:.75rem 1.5rem 0; max-width:1300px; margin:0 auto; }
+    .mode-tab { padding:.42rem .9rem; border-radius:8px; border:1px solid var(--border); background:rgba(255,255,255,.03); color:var(--text-muted); font-size:.78rem; font-weight:700; letter-spacing:.02em; cursor:pointer; transition:all .14s; }
+    .mode-tab.active { color:var(--accent); border-color:var(--accent); background:rgba(0,200,150,.12); }
+    .mode-panel { display:none; }
+    .mode-panel.active { display:block; }
+    .page { display:grid; grid-template-columns:420px 1fr; gap:1.5rem; padding:1.25rem 1.5rem; max-width:1300px; margin:0 auto; align-items:start; }
+
+    /* ── Reels tab ── */
+    .reels-grid { display:grid; grid-template-columns:420px 1fr; gap:1.5rem; padding:1.25rem 1.5rem; max-width:1300px; margin:0 auto; align-items:start; }
+    .reels-preview { display:flex; flex-direction:column; gap:1rem; position:sticky; top:62px; }
+    .reels-stage { display:grid; grid-template-columns:280px 1fr; gap:1rem; align-items:start; }
+    .reels-canvas-wrap { background:#000; border-radius:10px; overflow:hidden; line-height:0; box-shadow:0 4px 32px rgba(0,0,0,.6); }
+    #reels-cv { width:100%; height:auto; display:block; }
+    .reels-video-wrap { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:.75rem; }
+    .reels-video-wrap video { width:100%; border-radius:8px; background:#000; }
+    .reels-meta { font-size:.76rem; color:var(--text-muted); line-height:1.5; }
+    .btn-row { display:flex; gap:.5rem; }
+    .btn-row .btn-dl { flex:1; }
+    .reels-status { font-size:.76rem; color:var(--text-muted); min-height:1.1em; margin-top:.45rem; }
+
+    /* ── Controls ── */
+    .controls { display:flex; flex-direction:column; gap:1rem; }
+    .card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:1.1rem 1.25rem; }
+    .card-title { font-size:.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.08em; margin-bottom:.85rem; }
+    .field { margin-bottom:.7rem; }
+    .field:last-child { margin-bottom:0; }
+    .field label { display:block; font-size:.72rem; color:var(--text-muted); margin-bottom:.28rem; font-weight:600; }
+    .field input, .field select, .field textarea { width:100%; padding:.5rem .75rem; background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:7px; color:var(--text); font-size:.85rem; transition:border-color .2s; font-family:inherit; }
+    .field input:focus, .field select:focus, .field textarea:focus { outline:none; border-color:var(--accent); }
+    .field select option { background:#1a1a1a; }
+    .field textarea { resize:vertical; min-height:54px; }
+    .field-2 { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+    .field-2 .field { margin:0; }
+
+    /* ── Search ── */
+    .search-wrap { position:relative; }
+    .s-icon { position:absolute; left:.7rem; top:50%; transform:translateY(-50%); color:var(--text-muted); pointer-events:none; }
+    .search-input { width:100%; padding:.55rem .75rem .55rem 2.2rem; background:rgba(255,255,255,.05); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:.9rem; transition:border-color .2s; }
+    .search-input:focus { outline:none; border-color:var(--accent); }
+    .sdrop { position:absolute; top:calc(100% + 6px); left:0; right:0; z-index:300; background:var(--bg-card2); border:1px solid var(--border); border-radius:8px; max-height:260px; overflow-y:auto; display:none; box-shadow:0 8px 24px rgba(0,0,0,.7); }
+    .sdrop.open { display:block; }
+    .si { padding:.52rem .85rem; font-size:.84rem; cursor:pointer; border-bottom:1px solid var(--border); transition:background .12s; }
+    .si:last-child { border-bottom:none; }
+    .si:hover, .si.cur { background:rgba(0,200,150,.08); }
+    .si-name { font-weight:600; color:var(--text); }
+    .si-sub { font-size:.74rem; color:var(--text-muted); margin-top:.08rem; }
+    .si-msg { padding:.6rem .85rem; font-size:.82rem; color:var(--text-muted); }
+    #hotel-status { font-size:.74rem; color:var(--text-muted); margin-top:.45rem; min-height:1em; }
+
+    /* ── Tags ── */
+    .tag-row { display:flex; flex-wrap:wrap; gap:6px; }
+    .tag { padding:4px 11px; border-radius:20px; font-size:.78rem; cursor:pointer; background:rgba(255,255,255,.04); border:1px solid var(--border); color:var(--text-muted); transition:all .14s; user-select:none; }
+    .tag.on { background:rgba(0,200,150,.12); border-color:var(--accent); color:var(--accent); font-weight:700; }
+    .tag-note { font-size:.68rem; color:var(--text-muted); margin-top:.4rem; }
+
+    /* ── Preview col ── */
+    .preview-col { display:flex; flex-direction:column; gap:1rem; position:sticky; top:62px; }
+    .fmt-bar { display:flex; gap:.5rem; }
+    .fmt-btn { padding:.38rem .9rem; border-radius:6px; font-size:.78rem; font-weight:700; cursor:pointer; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text-muted); transition:all .14s; }
+    .fmt-btn.active { background:rgba(0,200,150,.12); border-color:var(--accent); color:var(--accent); }
+    .fmt-btn:disabled { opacity:.3; cursor:not-allowed; }
+    .canvas-wrap { background:#000; border-radius:10px; overflow:hidden; line-height:0; box-shadow:0 4px 32px rgba(0,0,0,.6); }
+    canvas { width:100%; display:block; }
+    .caption-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.25rem; display:flex; flex-direction:column; gap:.6rem; }
+    .caption-lbl { font-size:.68rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.08em; }
+    .caption-ta { width:100%; min-height:130px; padding:.7rem .85rem; background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:7px; color:var(--text); font-size:.8rem; line-height:1.55; resize:vertical; font-family:inherit; }
+    .caption-ta:focus { outline:none; border-color:var(--accent); }
+    .caption-actions { display:flex; gap:.5rem; }
+    .btn-copy { padding:.52rem 1rem; border-radius:7px; font-size:.82rem; font-weight:700; cursor:pointer; background:rgba(255,255,255,.07); color:var(--text); border:1px solid var(--border); transition:all .14s; white-space:nowrap; }
+    .btn-copy:hover { border-color:var(--accent); color:var(--accent); }
+    .btn-dl { flex:1; padding:.52rem 1rem; border-radius:7px; font-size:.85rem; font-weight:800; cursor:pointer; background:var(--accent); color:#000; border:none; transition:opacity .2s; }
+    .btn-dl:hover { opacity:.88; }
+
+    /* ── Spinner ── */
+    .spin { display:inline-block; width:13px; height:13px; border:2px solid rgba(0,200,150,.3); border-top-color:var(--accent); border-radius:50%; animation:sp .6s linear infinite; vertical-align:middle; margin-right:.3rem; }
+    @keyframes sp { to { transform:rotate(360deg); } }
+
+    .canvases-row { display:grid; grid-template-columns:1fr 230px; gap:1rem; align-items:start; }
+    .canvas-item { display:flex; flex-direction:column; gap:.35rem; }
+    .canvas-lbl { font-size:.68rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.07em; text-align:center; }
+    @media (max-width:960px) { .page { grid-template-columns:1fr; } .preview-col { position:static; } .canvases-row { grid-template-columns:1fr 180px; } }
+
+    /* ── Photo strip ── */
+    #photo-strip { display:none; gap:.45rem; overflow-x:auto; padding:.35rem 0 .5rem; scrollbar-width:thin; scrollbar-color:var(--border) transparent; }
+    #photo-strip::-webkit-scrollbar { height:5px; }
+    #photo-strip::-webkit-scrollbar-track { background:transparent; }
+    #photo-strip::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+    .ph-thumb { flex:0 0 72px; height:52px; border-radius:5px; object-fit:cover; cursor:pointer; border:2px solid transparent; opacity:.7; transition:opacity .14s, border-color .14s; }
+    .ph-thumb:hover { opacity:1; }
+    .ph-thumb.sel { border-color:var(--accent); opacity:1; }
+
+    /* ── Compare tab ── */
+    .cmp-picked { display:flex; flex-direction:column; gap:.45rem; }
+    .cmp-picked.empty { color:var(--text-muted); font-size:.8rem; }
+    .cmp-item { display:flex; align-items:center; justify-content:space-between; gap:.5rem; padding:.45rem .55rem; border:1px solid var(--border); border-radius:8px; background:rgba(255,255,255,.03); }
+    .cmp-item-main { min-width:0; }
+    .cmp-item-name { font-size:.82rem; color:var(--text); font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .cmp-item-sub { font-size:.72rem; color:var(--text-muted); }
+    .cmp-item-score { font-size:.72rem; color:var(--accent); font-weight:700; }
+    .cmp-item-actions { display:flex; align-items:center; gap:.4rem; }
+    .cmp-chip { border:1px solid rgba(0,200,150,.3); color:var(--accent); background:rgba(0,200,150,.08); padding:.16rem .42rem; border-radius:999px; font-size:.67rem; font-weight:700; }
+    .cmp-remove { border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text-muted); border-radius:6px; font-size:.68rem; font-weight:700; padding:.25rem .42rem; cursor:pointer; }
+    .cmp-remove:hover { color:#ff8f8f; border-color:#783; }
+    .cmp-help { font-size:.72rem; color:var(--text-muted); margin-top:.45rem; }
+    .cmp-auto-row { display:grid; grid-template-columns:120px 1fr; gap:.5rem; margin-top:.55rem; }
+    .cmp-country { width:100%; padding:.45rem .55rem; border:1px solid var(--border); border-radius:8px; background:rgba(255,255,255,.04); color:var(--text); font-size:.75rem; }
+    .cmp-country:focus { outline:none; border-color:var(--accent); }
+    .cmp-actions { display:flex; gap:.5rem; margin-top:.55rem; }
+    .cmp-btn { flex:1; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text); border-radius:8px; font-size:.75rem; font-weight:700; padding:.45rem .62rem; cursor:pointer; transition:all .14s; }
+    .cmp-btn:hover { border-color:var(--accent); color:var(--accent); }
+    .cmp-btn.primary { background:rgba(0,200,150,.12); border-color:rgba(0,200,150,.35); color:var(--accent); }
+    .cmp-btn:disabled { opacity:.45; cursor:not-allowed; }
+
+    .cmp-legend { display:grid; grid-template-columns:repeat(3,1fr); gap:.45rem; margin-top:.5rem; }
+    .cmp-legend-item { border:1px solid var(--border); border-radius:8px; padding:.4rem .5rem; background:rgba(255,255,255,.03); }
+    .cmp-legend-rank { font-size:.66rem; color:var(--accent); font-weight:700; text-transform:uppercase; letter-spacing:.05em; }
+    .cmp-legend-name { font-size:.75rem; color:var(--text); font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    @media (max-width:960px) {
+      .mode-tabs { padding: .75rem 1rem 0; }
+      .cmp-legend { grid-template-columns:1fr; }
+      .reels-grid { grid-template-columns:1fr; }
+      .reels-preview { position:static; }
+      .reels-stage { grid-template-columns:1fr; }
+    }
+  </style>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wzrhhc1m1p");
+</script>
+</head>
+<body>
+
+<!-- ── Password Gate ── -->
+<div id="pw-gate">
+  <div class="pw-box">
+    <div class="pw-logo"><span>Jetzt</span>Buchbar</div>
+    <div class="pw-sub">Admin · Instagram Generator</div>
+    <input type="password" class="pw-input" id="pw-input" placeholder="Passwort" autocomplete="current-password">
+    <button class="pw-btn" id="pw-btn">Einloggen</button>
+    <div class="pw-err" id="pw-err"></div>
+  </div>
+</div>
+
+<!-- ── Main App ── -->
+<div id="main">
+  <div class="top-bar">
+    <span class="top-bar-logo"><span>Jetzt</span>Buchbar</span>
+    <span class="top-bar-badge" id="mode-badge">IG Generator · Admin</span>
+  </div>
+
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="mode-tab-ig" data-mode-btn="ig">IG Visual</button>
+    <button class="mode-tab" id="mode-tab-compare" data-mode-btn="compare">Vergleich</button>
+    <button class="mode-tab" id="mode-tab-reels" data-mode-btn="reels">Reels Video</button>
+  </div>
+
+  <div class="mode-panel active" id="panel-ig">
+  <div class="page">
+
+    <!-- ── Left: Controls ── -->
+    <div class="controls">
+
+      <!-- Hotel Search -->
+      <div class="card">
+        <div class="card-title">🔍 Otel Ara</div>
+        <div class="search-wrap">
+          <svg class="s-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="search-input" id="search-input" placeholder="Otel adı veya şehir…" autocomplete="off">
+          <div class="sdrop" id="sdrop"></div>
+        </div>
+        <div id="hotel-status"></div>
+      </div>
+
+      <!-- Otel Bilgileri -->
+      <div class="card">
+        <div class="card-title">🏨 Otel Bilgileri</div>
+        <div class="field">
+          <label>Otel Adı</label>
+          <input type="text" id="f-name" oninput="schedDraw()">
+        </div>
+        <div class="field-2">
+          <div class="field">
+            <label>Şehir</label>
+            <input type="text" id="f-city" oninput="schedDraw()">
+          </div>
+          <div class="field">
+            <label>Ülke</label>
+            <input type="text" id="f-country" oninput="schedDraw()">
+          </div>
+        </div>
+        <div class="field-2">
+          <div class="field">
+            <label>Yıldız</label>
+            <select id="f-stars" onchange="schedDraw()">
+              <option value="5">5 ★★★★★</option>
+              <option value="4">4 ★★★★</option>
+              <option value="3">3 ★★★</option>
+              <option value="2">2 ★★</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>JB Score (auto)</label>
+            <input type="number" id="f-score" min="1" max="100" oninput="schedDraw()">
+          </div>
+        </div>
+        <div class="field">
+          <label>Fotoğraf URL (otomatik)</label>
+          <input type="hidden" id="f-img">
+          <div id="photo-strip" style="display:none"></div>
+        </div>
+      </div>
+
+      <!-- Branding -->
+      <div class="card">
+        <div class="card-title">🎨 Branding</div>
+        <div class="field-2">
+          <div class="field">
+            <label>Logo Teil 1 (farbig)</label>
+            <input type="text" id="b-logo1" value="Jetzt" oninput="schedDraw()">
+          </div>
+          <div class="field">
+            <label>Logo Teil 2 (weiß)</label>
+            <input type="text" id="b-logo2" value="Buchbar" oninput="schedDraw()">
+          </div>
+        </div>
+        <div class="field">
+          <label>Slogan</label>
+          <input type="text" id="b-tagline" value="Ein Score. Nur Fakten." oninput="schedDraw()">
+        </div>
+        <div class="field-2">
+          <div class="field">
+            <label>Akzentfarbe</label>
+            <div class="color-row">
+              <input type="color" id="b-accent-picker" value="#00c896" oninput="syncAccent(this,'b-accent')">
+              <input type="text" id="b-accent" value="#00c896" oninput="syncAccentText(this,'b-accent-picker')">
+            </div>
+          </div>
+          <div class="field">
+            <label>Website URL</label>
+            <input type="text" id="b-url" value="jetztbuchbar.de" oninput="schedDraw()">
+          </div>
+        </div>
+        <div class="field">
+          <label>Footer Text</label>
+          <input type="text" id="b-footer" value="jetztbuchbar.de  ·  Unabhängig &amp; datenbasiert  ·  GIATA® verifiziert" oninput="schedDraw()">
+        </div>
+        <div class="field">
+          <label>CTA Text</label>
+          <input type="text" id="b-cta" value="✉  Jetzt unverbindlich anfragen  →" oninput="schedDraw()">
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="card">
+        <div class="card-title">🏷️ Özellikler (max 3)</div>
+        <div class="tag-row" id="tag-row">
+          <!-- JS tarafından doldurulur -->
+        </div>
+        <div class="tag-note" id="tag-note">Otel seçince GIATA'dan otomatik önerilir</div>
+      </div>
+
+      <!-- Manuel Bilgiler -->
+      <div class="card">
+        <div class="card-title">✏️ Ekstra Bilgiler</div>
+        <div class="field-2">
+          <div class="field">
+            <label>Fiyat (ab €)</label>
+            <input type="number" id="f-price" placeholder="699" oninput="schedDraw()">
+          </div>
+          <div class="field">
+            <label>Geceleme</label>
+            <input type="number" id="f-nights" placeholder="7" oninput="schedDraw()">
+          </div>
+        </div>
+        <div class="field-2">
+          <div class="field">
+            <label>Uçuş Süresi (sa)</label>
+            <input type="number" id="f-flight" placeholder="3.5" step="0.5" oninput="schedDraw()">
+          </div>
+          <div class="field">
+            <label>Kalkış</label>
+            <input type="text" id="f-dep" placeholder="Frankfurt" oninput="schedDraw()">
+          </div>
+        </div>
+        <div class="field">
+          <label>Seyahat Dönemi</label>
+          <input type="text" id="f-period" placeholder="Juni – August 2026" oninput="schedDraw()">
+        </div>
+        <div class="field">
+          <label>Kısa Yorum (opsiyonel)</label>
+          <textarea id="f-comment" placeholder='z.B. "Bester Pool der Türkei 2026"' oninput="schedDraw()"></textarea>
+        </div>
+      </div>
+
+    </div><!-- /controls -->
+
+    <!-- ── Right: Preview ── -->
+    <div class="preview-col">
+
+      <div class="canvases-row">
+        <div class="canvas-item">
+          <div class="canvas-lbl">Beitrag 1:1</div>
+          <div class="canvas-wrap">
+            <canvas id="cv" width="1080" height="1080"></canvas>
+          </div>
+        </div>
+        <div class="canvas-item">
+          <div class="canvas-lbl">Story 9:16</div>
+          <div class="canvas-wrap">
+            <canvas id="cv2" width="1080" height="1920"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="caption-card">
+        <div class="caption-lbl">📝 Caption &amp; Hashtags (otomatik)</div>
+        <textarea class="caption-ta" id="caption-ta" spellcheck="false"></textarea>
+        <div class="caption-actions">
+          <button class="btn-copy" id="btn-copy-ig" onclick="copyCaption()">Kopyala</button>
+          <button class="btn-dl" onclick="downloadPNG()">⬇ Beitrag (1080×1080)</button>
+          <button class="btn-dl" onclick="downloadStory()">⬇ Story (1080×1920)</button>
+        </div>
+      </div>
+
+    </div><!-- /preview-col -->
+  </div><!-- /page -->
+  </div><!-- /panel-ig -->
+
+  <div class="mode-panel" id="panel-compare">
+    <div class="page">
+
+      <div class="controls">
+        <div class="card">
+          <div class="card-title">🔎 Hotels für Vergleich</div>
+          <div class="search-wrap">
+            <svg class="s-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" id="cmp-search-input" placeholder="Hotel suchen und hinzufügen…" autocomplete="off">
+            <div class="sdrop" id="cmp-sdrop"></div>
+          </div>
+          <div class="cmp-auto-row">
+            <select id="cmp-auto-country" class="cmp-country">
+              <option value="MIX">Mix (Karışık)</option>
+            </select>
+            <div class="cmp-actions" style="margin-top:0">
+              <button class="cmp-btn primary" id="cmp-auto-btn" type="button">🎲 Otomatik 3 Seç</button>
+              <button class="cmp-btn" id="cmp-clear-btn" type="button">🧹 Listeyi Temizle</button>
+            </div>
+          </div>
+          <div id="cmp-status"></div>
+          <div class="cmp-help">Tipp: Ülke seçip otomatik 3 çekebilir veya Mix ile ülkeler karışık getirebilirsin.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📌 Ausgewählte Hotels</div>
+          <div id="cmp-picked" class="cmp-picked empty">Noch keine Hotels ausgewählt.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🎨 Vergleich Branding</div>
+          <div class="field">
+            <label>Titel</label>
+            <input type="text" id="cmp-title" value="Hotel Vergleich" oninput="schedCmpDraw()">
+          </div>
+          <div class="field">
+            <label>Untertitel</label>
+            <input type="text" id="cmp-subtitle" value="Datenbasiert. Transparent. JetztBuchbar." oninput="schedCmpDraw()">
+          </div>
+          <div class="field-2">
+            <div class="field">
+              <label>Akzentfarbe</label>
+              <div class="color-row">
+                <input type="color" id="cmp-accent-picker" value="#00c896" oninput="syncAccent(this,'cmp-accent')">
+                <input type="text" id="cmp-accent" value="#00c896" oninput="syncAccentText(this,'cmp-accent-picker')">
+              </div>
+            </div>
+            <div class="field">
+              <label>CTA</label>
+              <input type="text" id="cmp-cta" value="Jetzt auf jetztbuchbar.de vergleichen" oninput="schedCmpDraw()">
+            </div>
+          </div>
+          <div class="field">
+            <label>Footer</label>
+            <input type="text" id="cmp-footer" value="JetztBuchbar · Ein Score. Nur Fakten." oninput="schedCmpDraw()">
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-col">
+        <div class="canvases-row">
+          <div class="canvas-item">
+            <div class="canvas-lbl">Vergleich Beitrag 1:1</div>
+            <div class="canvas-wrap">
+              <canvas id="cmp-cv" width="1080" height="1080"></canvas>
+            </div>
+          </div>
+          <div class="canvas-item">
+            <div class="canvas-lbl">Vergleich Story 9:16</div>
+            <div class="canvas-wrap">
+              <canvas id="cmp-cv2" width="1080" height="1920"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="cmp-legend-card" style="display:none">
+          <div class="card-title">🏁 Ranking</div>
+          <div class="cmp-legend" id="cmp-legend"></div>
+        </div>
+
+        <div class="caption-card">
+          <div class="caption-lbl">📝 Vergleich Caption (automatisch)</div>
+          <textarea class="caption-ta" id="cmp-caption-ta" spellcheck="false"></textarea>
+          <div class="caption-actions">
+            <button class="btn-copy" id="btn-copy-cmp" onclick="copyCmpCaption()">Kopyala</button>
+            <button class="btn-dl" onclick="downloadCmpPNG()">⬇ Vergleich Beitrag</button>
+            <button class="btn-dl" onclick="downloadCmpStory()">⬇ Vergleich Story</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mode-panel" id="panel-reels">
+    <div class="reels-grid">
+      <div class="controls">
+        <div class="card">
+          <div class="card-title">🎬 Reels Generator</div>
+          <div class="reels-meta">Hotel direkt hier suchen und auswählen. Danach Reels rendern.</div>
+          <div class="search-wrap" style="margin-top:.6rem;">
+            <svg class="s-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" id="reels-search-input" placeholder="Hotel suchen…" autocomplete="off">
+            <div class="sdrop" id="reels-sdrop"></div>
+          </div>
+          <div class="reels-status" id="reels-hotel-info">Kein Hotel geladen.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⚙️ Video Einstellungen</div>
+          <div class="field-2">
+            <div class="field">
+              <label>Dauer</label>
+              <select id="reels-duration" onchange="drawReelsPoster()">
+                <option value="10">10 Sekunden</option>
+                <option value="14">14 Sekunden</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>FPS</label>
+              <select id="reels-fps">
+                <option value="24">24 FPS</option>
+                <option value="30" selected>30 FPS</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>CTA Endscreen</label>
+            <input type="text" id="reels-cta" value="Jetzt auf jetztbuchbar.de vergleichen" oninput="drawReelsPoster()">
+          </div>
+          <div class="field">
+            <label>Untertitel Endscreen</label>
+            <input type="text" id="reels-sub" value="Hoteldetails & direkter Vergleich" oninput="drawReelsPoster()">
+          </div>
+          <div class="btn-row">
+            <button class="btn-dl" id="btn-render-reels" type="button" onclick="renderReelsVideo()">▶ Reels rendern</button>
+            <button class="btn-dl" id="btn-download-reels" type="button" onclick="downloadReelsVideo()" disabled>⬇ Video laden</button>
+          </div>
+          <div class="reels-status" id="reels-status"></div>
+        </div>
+      </div>
+
+      <div class="reels-preview">
+        <div class="reels-stage">
+          <div class="reels-canvas-wrap">
+            <canvas id="reels-cv" width="1080" height="1920"></canvas>
+          </div>
+          <div class="reels-video-wrap">
+            <div class="canvas-lbl" style="text-align:left; margin-bottom:.45rem;">Video Vorschau</div>
+            <video id="reels-video" controls playsinline preload="metadata"></video>
+            <div class="reels-meta" id="reels-video-meta" style="margin-top:.45rem;">Noch kein Video gerendert.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /main -->
+
+<!-- JB Score Engine -->
+<script src="/components/jb-score.js"></script>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════════════════
+     CONFIG — şifreyi buradan değiştir
+  ═══════════════════════════════════════════════════════════════ */
+  var ADMIN_PW = 'jb2026';
+
+  /* ═══════════════════════════════════════════════════════════════
+     PASSWORD GATE
+  ═══════════════════════════════════════════════════════════════ */
+  var gate  = document.getElementById('pw-gate');
+  var main  = document.getElementById('main');
+  var pwIn  = document.getElementById('pw-input');
+  var pwBtn = document.getElementById('pw-btn');
+  var pwErr = document.getElementById('pw-err');
+
+  if (sessionStorage.getItem('jb_admin_ok') === '1') {
+    gate.style.display = 'none';
+    main.style.display = 'block';
+    init();
+  }
+
+  function checkPw() {
+    if (pwIn.value === ADMIN_PW) {
+      sessionStorage.setItem('jb_admin_ok', '1');
+      gate.style.display = 'none';
+      main.style.display = 'block';
+      init();
+    } else {
+      pwErr.textContent = 'Falsches Passwort.';
+      pwIn.value = '';
+      pwIn.focus();
+      setTimeout(function () { pwErr.textContent = ''; }, 2500);
+    }
+  }
+  pwBtn.addEventListener('click', checkPw);
+  pwIn.addEventListener('keydown', function (e) { if (e.key === 'Enter') checkPw(); });
+
+  /* ═══════════════════════════════════════════════════════════════
+     STATE
+  ═══════════════════════════════════════════════════════════════ */
+  var currentHotel = null;
+  var currentImg   = null;   // loaded Image object
+  var activeTags   = [];
+  var drawTimer    = null;
+  var cmpHotels    = [];
+  var cmpDrawTimer = null;
+  var cmpSearchTimer = null;
+  var cmpLastQ = '';
+  var appInited = false;
+  var reelsBlob = null;
+  var reelsBlobUrl = '';
+  var reelsMime = '';
+  var reelsRendering = false;
+
+  function schedDraw() {
+    clearTimeout(drawTimer);
+    drawTimer = setTimeout(function () { draw(); drawStory(); buildCaption(); }, 90);
+  }
+  function schedCmpDraw() {
+    clearTimeout(cmpDrawTimer);
+    cmpDrawTimer = setTimeout(function () { drawCompare(); drawCompareStory(); buildCompareCaption(); renderCompareLegend(); }, 90);
+  }
+
+  function updateReelsHotelInfo() {
+    var info = document.getElementById('reels-hotel-info');
+    if (!info) return;
+    if (!currentHotel) {
+      info.textContent = 'Kein Hotel geladen.';
+      return;
+    }
+    var score = gi('f-score') || 75;
+    var loc = [gv('f-city'), gv('f-country')].filter(Boolean).join(' · ');
+    info.innerHTML = '✅ ' + esc(currentHotel.name || 'Hotel') + (loc ? ' · ' + esc(loc) : '') + ' · JB Score <strong style="color:var(--accent)">' + score + '</strong>';
+  }
+
+  window.schedDraw = schedDraw;
+  window.schedCmpDraw = schedCmpDraw;
+  window.drawReelsPoster = drawReelsPoster;
+  window.renderReelsVideo = renderReelsVideo;
+  window.downloadReelsVideo = downloadReelsVideo;
+
+  /* ═══════════════════════════════════════════════════════════════
+     ALL TAGS (sorted by importance)
+  ═══════════════════════════════════════════════════════════════ */
+  var ALL_TAGS = [
+    'Strandlage','All Inclusive Plus','Wasserpark','Infinity-Pool','All Inclusive',
+    'Spa','Kids Club','Adults Only','Wellness-Center','Rooftop-Pool',
+    'Privater Pool','Strandbar','Swim-up Bar','Halbpension','Vollpension',
+    'Hamam','Tauchen','Golf','Yoga','Fitness-Studio','Familienfreundlich',
+    'Meeresnähe','Zentrale Lage','Für Flitterwochen','Aquapark'
+  ];
+
+  /* ═══════════════════════════════════════════════════════════════
+     SEARCH
+  ═══════════════════════════════════════════════════════════════ */
+  var searchInput = document.getElementById('search-input');
+  var sdrop       = document.getElementById('sdrop');
+  var reelsSearchInput = document.getElementById('reels-search-input');
+  var reelsSdrop       = document.getElementById('reels-sdrop');
+  var hotelStatus = document.getElementById('hotel-status');
+  var sTimer = null, lastQ = '';
+  var reelsTimer = null, reelsLastQ = '';
+
+  searchInput.addEventListener('input', function () {
+    var q = this.value.trim();
+    if (q.length < 2) { closeDrop(); return; }
+    if (q === lastQ) return;
+    lastQ = q;
+    clearTimeout(sTimer);
+    sTimer = setTimeout(function () { doSearch(q); }, 300);
+  });
+
+  searchInput.addEventListener('keydown', function (e) {
+    var items = sdrop.querySelectorAll('.si');
+    var cur   = sdrop.querySelector('.si.cur');
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (!cur) { if (items[0]) items[0].classList.add('cur'); }
+      else { cur.classList.remove('cur'); var nxt = cur.nextElementSibling; (nxt || items[0]).classList.add('cur'); }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (!cur) { if (items[items.length-1]) items[items.length-1].classList.add('cur'); }
+      else { cur.classList.remove('cur'); var prv = cur.previousElementSibling; (prv || items[items.length-1]).classList.add('cur'); }
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (cur) cur.click();
+    } else if (e.key === 'Escape') { closeDrop(); }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!searchInput.contains(e.target) && !sdrop.contains(e.target)) closeDrop();
+  });
+
+  function closeDrop() { sdrop.classList.remove('open'); sdrop.innerHTML = ''; }
+
+  function doSearch(q) {
+    sdrop.innerHTML = '<div class="si-msg"><span class="spin"></span>Aranıyor…</div>';
+    sdrop.classList.add('open');
+    fetch('/api/giata?action=search&q=' + encodeURIComponent(q))
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var results = data.results || [];
+        if (!results.length) { sdrop.innerHTML = '<div class="si-msg">Sonuç bulunamadı.</div>'; return; }
+        sdrop.innerHTML = results.slice(0, 14).map(function (h) {
+          return '<div class="si" data-id="' + h.giataId + '">' +
+            '<div class="si-name">' + esc(h.name) + '</div>' +
+            '<div class="si-sub">' + esc(h.city) + ' · ' + esc(h.country) + ' · ' + '★'.repeat(h.stars || 0) + '</div>' +
+            '</div>';
+        }).join('');
+        sdrop.querySelectorAll('.si').forEach(function (el) {
+          el.addEventListener('click', function () {
+            closeDrop();
+            searchInput.value = el.querySelector('.si-name').textContent;
+            loadHotel(el.dataset.id);
+          });
+        });
+      })
+      .catch(function () { sdrop.innerHTML = '<div class="si-msg">API hatası — tekrar dene.</div>'; });
+  }
+
+  function setupReelsSearch() {
+    if (!reelsSearchInput || !reelsSdrop) return;
+
+    reelsSearchInput.addEventListener('input', function () {
+      var q = this.value.trim();
+      if (q.length < 2) { closeReelsDrop(); return; }
+      if (q === reelsLastQ) return;
+      reelsLastQ = q;
+      clearTimeout(reelsTimer);
+      reelsTimer = setTimeout(function () { doReelsSearch(q); }, 280);
+    });
+
+    reelsSearchInput.addEventListener('keydown', function (e) {
+      var items = reelsSdrop.querySelectorAll('.si');
+      var cur = reelsSdrop.querySelector('.si.cur');
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!cur) { if (items[0]) items[0].classList.add('cur'); }
+        else { cur.classList.remove('cur'); (cur.nextElementSibling || items[0]).classList.add('cur'); }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (!cur) { if (items[items.length - 1]) items[items.length - 1].classList.add('cur'); }
+        else { cur.classList.remove('cur'); (cur.previousElementSibling || items[items.length - 1]).classList.add('cur'); }
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (cur) cur.click();
+      } else if (e.key === 'Escape') {
+        closeReelsDrop();
+      }
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!reelsSearchInput.contains(e.target) && !reelsSdrop.contains(e.target)) closeReelsDrop();
+    });
+  }
+
+  function closeReelsDrop() {
+    if (!reelsSdrop) return;
+    reelsSdrop.classList.remove('open');
+    reelsSdrop.innerHTML = '';
+  }
+
+  function doReelsSearch(q) {
+    if (!reelsSdrop) return;
+    reelsSdrop.innerHTML = '<div class="si-msg"><span class="spin"></span>Aranıyor…</div>';
+    reelsSdrop.classList.add('open');
+
+    fetch('/api/giata?action=search&q=' + encodeURIComponent(q))
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var results = data.results || [];
+        if (!results.length) {
+          reelsSdrop.innerHTML = '<div class="si-msg">Sonuç bulunamadı.</div>';
+          return;
+        }
+        reelsSdrop.innerHTML = results.slice(0, 14).map(function (h) {
+          return '<div class="si" data-id="' + h.giataId + '">'
+            + '<div class="si-name">' + esc(h.name) + '</div>'
+            + '<div class="si-sub">' + esc(h.city) + ' · ' + esc(h.country) + ' · ' + '★'.repeat(h.stars || 0) + '</div>'
+            + '</div>';
+        }).join('');
+
+        reelsSdrop.querySelectorAll('.si').forEach(function (el) {
+          el.addEventListener('click', function () {
+            closeReelsDrop();
+            if (reelsSearchInput) reelsSearchInput.value = el.querySelector('.si-name').textContent;
+            loadHotel(el.dataset.id);
+            setMode('reels');
+          });
+        });
+      })
+      .catch(function () {
+        reelsSdrop.innerHTML = '<div class="si-msg">API hatası — tekrar dene.</div>';
+      });
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     LOAD HOTEL
+  ═══════════════════════════════════════════════════════════════ */
+  function loadHotel(id) {
+    hotelStatus.innerHTML = '<span class="spin"></span>Yükleniyor…';
+    currentImg = null;
+
+    fetch('/api/giata?action=property&id=' + encodeURIComponent(id))
+      .then(function (r) { return r.json(); })
+      .then(function (h) {
+        currentHotel = h;
+
+        // Fill form fields
+        setVal('f-name',    h.name    || '');
+        setVal('f-city',    h.city    || '');
+        setVal('f-country', h.country || '');
+        setVal('f-stars',   String(h.stars || 5));
+
+        // JB Score (auto)
+        var score = 75;
+        if (window.JBScore && h.factIds && h.factIds.length) {
+          score = window.JBScore.calcScore(h);
+        }
+        setVal('f-score', String(score));
+
+        // GIATA top features
+        var suggested = [];
+        if (window.JBScore && h.factIds && h.factIds.length) {
+          suggested = window.JBScore.topFeatures(h, 8).map(function (f) { return f.l; });
+        }
+        buildTagUI(suggested);
+
+        // Load hotel image + build photo strip
+        var allImgs = [];
+        if (h.images && h.images.length) allImgs = h.images;
+        else if (h.image) allImgs = [h.image];
+        var imgUrl = allImgs[0] || '';
+        setVal('f-img', imgUrl);
+        buildPhotoStrip(allImgs, imgUrl);
+        if (imgUrl) loadHotelImage(imgUrl);
+
+        hotelStatus.innerHTML = '✅ ' + esc(h.name) + ' yüklendi · JB Score: <strong style="color:var(--accent)">' + score + '</strong>';
+        updateReelsHotelInfo();
+        schedDraw();
+      })
+      .catch(function (err) {
+        hotelStatus.innerHTML = '❌ Hata: ' + esc(err.message);
+      });
+  }
+
+  function buildPhotoStrip(imgs, activeUrl) {
+    var strip = document.getElementById('photo-strip');
+    strip.innerHTML = '';
+    if (!imgs || imgs.length <= 1) { strip.style.display = 'none'; return; }
+    strip.style.display = 'flex';
+    imgs.forEach(function (src) {
+      var proxy = '/api/image-proxy?url=' + encodeURIComponent(src);
+      var img = document.createElement('img');
+      img.className = 'ph-thumb' + (src === activeUrl ? ' sel' : '');
+      img.src = proxy;
+      img.title = src;
+      img.addEventListener('click', function () {
+        document.querySelectorAll('.ph-thumb').forEach(function (t) { t.classList.remove('sel'); });
+        img.classList.add('sel');
+        setVal('f-img', src);
+        loadHotelImage(src);
+      });
+      strip.appendChild(img);
+    });
+  }
+
+  function loadHotelImage(url) {
+    var proxy = '/api/image-proxy?url=' + encodeURIComponent(url);
+    var img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload  = function () { currentImg = img; draw(); drawStory(); drawReelsPoster(); };
+    img.onerror = function () { currentImg = null; draw(); drawStory(); drawReelsPoster(); };
+    img.src = proxy;
+  }
+
+  function onImgChange() {
+    var url = document.getElementById('f-img').value.trim();
+    if (url) loadHotelImage(url);
+    else { currentImg = null; schedDraw(); }
+  }
+  window.onImgChange = onImgChange;
+
+  /* ═══════════════════════════════════════════════════════════════
+     TAGS
+  ═══════════════════════════════════════════════════════════════ */
+  function buildTagUI(suggested) {
+    activeTags = suggested.slice(0, 3);
+    // Put suggested first, rest after
+    var rest = ALL_TAGS.filter(function (t) { return suggested.indexOf(t) === -1; });
+    var ordered = suggested.concat(rest).slice(0, 22);
+
+    var row = document.getElementById('tag-row');
+    row.innerHTML = ordered.map(function (t) {
+      var on = activeTags.indexOf(t) !== -1 ? ' on' : '';
+      return '<span class="tag' + on + '" data-tag="' + esc(t) + '">' + esc(t) + '</span>';
+    }).join('');
+
+    row.querySelectorAll('.tag').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var tag = el.dataset.tag;
+        if (el.classList.contains('on')) {
+          el.classList.remove('on');
+          activeTags = activeTags.filter(function (t) { return t !== tag; });
+        } else {
+          if (activeTags.length >= 3) return;
+          el.classList.add('on');
+          activeTags.push(tag);
+        }
+        schedDraw();
+      });
+    });
+
+    document.getElementById('tag-note').textContent =
+      suggested.length ? 'GIATA\'dan önerildi · tıklayarak değiştir (max 3)' : 'Max 3 seçebilirsin';
+  }
+
+  // Init tags empty
+  buildTagUI([]);
+
+  /* ═══════════════════════════════════════════════════════════════
+     CANVAS
+  ═══════════════════════════════════════════════════════════════ */
+  var cv  = document.getElementById('cv');
+  var ctx = cv.getContext('2d');
+  var W   = 1080, H = 1080;
+  var cv2  = document.getElementById('cv2');
+  var ctx2 = cv2.getContext('2d');
+  var cmpCv = document.getElementById('cmp-cv');
+  var cmpCtx = cmpCv.getContext('2d');
+  var cmpCv2 = document.getElementById('cmp-cv2');
+  var cmpCtx2 = cmpCv2.getContext('2d');
+  var reelsCv = document.getElementById('reels-cv');
+  var reelsCtx = reelsCv.getContext('2d');
+
+  var ICONS = {
+    'Strandlage':'🏖️','Wasserpark':'💦','Aquapark':'💦',
+    'All Inclusive Plus':'⭐','All Inclusive':'🍽️',
+    'Vollpension':'🍽️','Halbpension':'🍳',
+    'Infinity-Pool':'♾️','Rooftop-Pool':'🏙️',
+    'Swim-up Bar':'🍹','Strandbar':'🍹',
+    'Privater Pool':'🏊','Spa':'💆','Wellness-Center':'💆',
+    'Hamam':'🧖','Massage':'💆','Sauna':'🌡️','Whirlpool':'🛁',
+    'Kids Club':'👨‍👩‍👧','Teens Club':'🎮','Miniclub':'🎪',
+    'Familienfreundlich':'👨‍👩‍👧','Adults Only':'🔞',
+    'Golf':'⛳','Tauchen':'🤿','Schnorcheln':'🤿',
+    'Fitness-Studio':'💪','Yoga':'🧘','Tennis':'🎾',
+    'Meeresnähe':'🌊','Zentrale Lage':'📍','Ruhige Lage':'🌿',
+    'Restaurant':'🍽️','Bar':'🍷','Café':'☕',
+    'Für Flitterwochen':'💍','Für Paare':'❤️',
+  };
+
+  function hexToRgba(hex, a) {
+    var h = (hex||'#00c896').replace('#','');
+    if (h.length === 3) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    var r = parseInt(h.slice(0,2),16)||0, g = parseInt(h.slice(2,4),16)||0, b = parseInt(h.slice(4,6),16)||0;
+    return 'rgba('+r+','+g+','+b+','+a+')';
+  }
+  function getBranding() {
+    var el = function(id){ return (document.getElementById(id)||{}).value||''; };
+    return {
+      logo1:   el('b-logo1')   || 'Jetzt',
+      logo2:   el('b-logo2')   || 'Buchbar',
+      tagline: el('b-tagline') || 'Ein Score. Nur Fakten.',
+      accent:  el('b-accent')  || '#00c896',
+      footer:  el('b-footer')  || 'jetztbuchbar.de  ·  Unabhängig & datenbasiert  ·  GIATA® verifiziert',
+      cta:     el('b-cta')     || '✉  Jetzt unverbindlich anfragen  →',
+      url:     el('b-url')     || 'jetztbuchbar.de',
+    };
+  }
+  function syncAccent(src, targetId) {
+    document.getElementById(targetId).value = src.value;
+    schedDraw();
+    schedCmpDraw();
+  }
+  function syncAccentText(src, targetId) {
+    var v = src.value.trim();
+    if (/^#[0-9a-fA-F]{6}$/.test(v)) {
+      document.getElementById(targetId).value = v;
+      schedDraw();
+      schedCmpDraw();
+    }
+  }
+  window.syncAccent = syncAccent;
+  window.syncAccentText = syncAccentText;
+
+  function gv(id) { return (document.getElementById(id) || {}).value || ''; }
+  function gi(id) { return parseInt(gv(id), 10) || 0; }
+  function gf(id) { return parseFloat(gv(id)) || 0; }
+
+  function ctxText(text, x, y, font, fill, align) {
+    ctx.font = font; ctx.fillStyle = fill; ctx.textAlign = align || 'center';
+    ctx.fillText(text, x, y);
+  }
+
+  function wrapFill(text, cx, y, maxW, lh, font, fill) {
+    ctx.font = font; ctx.fillStyle = fill; ctx.textAlign = 'center';
+    var words = text.split(' '), line = '', curY = y;
+    for (var i = 0; i < words.length; i++) {
+      var test = line ? line + ' ' + words[i] : words[i];
+      if (ctx.measureText(test).width > maxW && line) {
+        ctx.fillText(line, cx, curY); line = words[i]; curY += lh;
+      } else { line = test; }
+    }
+    ctx.fillText(line, cx, curY);
+    return curY;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    var name    = gv('f-name')    || 'Hotel Name';
+    var city    = gv('f-city')    || '';
+    var country = gv('f-country') || '';
+    var stars   = Math.max(1, Math.min(5, gi('f-stars') || 5));
+    var score   = Math.max(1, Math.min(100, gi('f-score') || 75));
+    var price   = gf('f-price');
+    var nights  = gi('f-nights');
+    var flight  = gf('f-flight');
+    var dep     = gv('f-dep');
+    var period  = gv('f-period');
+    var comment = gv('f-comment');
+    var loc     = [city, country].filter(Boolean).join(' · ') || 'Stadt · Land';
+
+    var br = getBranding(); var AC = br.accent;
+    var sc = score >= 90 ? AC : score >= 75 ? '#4ec9b0' : score >= 60 ? '#f0c040' : '#e05050';
+
+    /* ── Background ── */
+    if (currentImg) {
+      ctx.save();
+      // Draw image covering canvas (object-fit: cover)
+      var iw = currentImg.naturalWidth, ih = currentImg.naturalHeight;
+      var scale = Math.max(W / iw, H / ih);
+      var dw = iw * scale, dh = ih * scale;
+      ctx.drawImage(currentImg, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      // Gradient overlay
+      var g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0,    'rgba(10,10,10,0.78)');
+      g.addColorStop(0.38, 'rgba(10,10,10,0.52)');
+      g.addColorStop(0.68, 'rgba(10,10,10,0.80)');
+      g.addColorStop(1,    'rgba(10,10,10,0.97)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.restore();
+    } else {
+      // Fallback dark gradient
+      ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, W, H);
+      var g2 = ctx.createRadialGradient(W/2, H*0.3, 0, W/2, H*0.3, W*0.65);
+      g2.addColorStop(0, 'rgba(0,50,35,0.55)');
+      g2.addColorStop(1, 'rgba(10,10,10,0)');
+      ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H);
+    }
+
+    /* ── Border frame ── */
+    ctx.strokeStyle = hexToRgba(AC,0.42); ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.roundRect(22, 22, W-44, H-44, 20); ctx.stroke();
+
+    /* ── Top header bar ── */
+    ctx.fillStyle = 'rgba(8,8,8,0.80)';
+    ctx.beginPath(); ctx.roundRect(22, 22, W-44, 88, [20, 20, 0, 0]); ctx.fill();
+    ctx.strokeStyle = hexToRgba(AC,0.18); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(22, 110); ctx.lineTo(W-22, 110); ctx.stroke();
+
+    // Logo (ortalı)
+    ctx.font = 'bold 34px "Arial Black",Arial';
+    var jw = ctx.measureText(br.logo1).width;
+    var bw = ctx.measureText(br.logo2).width;
+    var logoX = W/2 - (jw + bw)/2;
+    ctx.textAlign = 'left';
+    ctx.fillStyle = AC; ctx.fillText(br.logo1, logoX, 78);
+    ctx.fillStyle = '#ffffff'; ctx.fillText(br.logo2, logoX + jw, 78);
+    ctx.fillStyle = 'rgba(255,255,255,0.32)';
+    ctx.font = '14px Arial'; ctx.textAlign = 'center';
+    ctx.fillText(br.tagline, W/2, 98);
+
+
+
+    /* ── Score circle ── */
+    var cx = W/2, cy = 330, r = 138;
+    ctx.shadowColor = sc; ctx.shadowBlur = 38;
+    ctx.strokeStyle = sc; ctx.lineWidth = 11;
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.stroke();
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(cx, cy, r - 11, 0, Math.PI*2); ctx.stroke();
+
+    ctx.fillStyle = sc;
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 132px "Arial Black",Arial';
+    ctx.fillText(String(score), cx, cy + 46);
+    ctx.fillStyle = 'rgba(255,255,255,0.38)';
+    ctx.font = 'bold 17px Arial';
+    ctx.fillText('JB SCORE', cx, cy + 70);
+
+    /* ── Stars ── */
+    ctx.fillStyle = '#f0c040';
+    ctx.font = '40px Arial';
+    ctx.fillText('★'.repeat(stars) + '☆'.repeat(5-stars), cx, 502);
+
+    /* ── Hotel name ── */
+    ctx.fillStyle = '#ffffff';
+    var nFont = 'bold 54px "Arial Black",Arial';
+    ctx.font = nFont;
+    if (ctx.measureText(name).width > 900) { nFont = 'bold 40px "Arial Black",Arial'; ctx.font = nFont; }
+    ctx.fillText(name, cx, 570);
+
+    /* ── Location ── */
+    ctx.fillStyle = AC; ctx.font = '26px Arial'; ctx.fillText(loc, cx, 610);
+
+    /* ── Tags ── */
+    if (activeTags.length) {
+      ctx.font = 'bold 18px Arial';
+      var tagH = 34, tagPX = 16, gap = 9;
+      var totW = activeTags.reduce(function (s, t) { return s + ctx.measureText(t).width + tagPX*2; }, 0) + (activeTags.length-1)*gap;
+      var tx = cx - totW/2, ty = 648;
+      activeTags.forEach(function (tag) {
+        var tw = ctx.measureText(tag).width + tagPX*2;
+        ctx.fillStyle = hexToRgba(AC,0.14);
+        ctx.beginPath(); ctx.roundRect(tx, ty, tw, tagH, 17); ctx.fill();
+        ctx.strokeStyle = AC; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.roundRect(tx, ty, tw, tagH, 17); ctx.stroke();
+        ctx.fillStyle = AC; ctx.textAlign = 'center';
+        ctx.fillText(tag, tx + tw/2, ty + 22);
+        tx += tw + gap;
+      });
+    }
+
+    /* ── Comment ── */
+    if (comment) {
+      wrapFill('"' + comment + '"', cx, 710, 880, 30, 'italic 22px Arial', 'rgba(255,255,255,0.52)');
+    }
+
+    /* ── Price / info row ── */
+    var parts = [];
+    if (price)           parts.push('💰 Ab ' + price + ' €');
+    if (nights)          parts.push('🌙 ' + nights + ' Nächte');
+    if (flight && dep)   parts.push('✈️ ' + flight + 'h ab ' + dep);
+    if (period)          parts.push('📅 ' + period);
+
+    var priceBoxY = 762, priceBoxH = 52;
+    if (parts.length) {
+      ctx.font = '20px Arial'; ctx.textAlign = 'center';
+      var sep = '  ·  ';
+      var row1 = '', row2 = '';
+      var maxW = W - 188;
+      // split into 2 rows if needed
+      if (parts.length > 2 && ctx.measureText(parts.join(sep)).width > maxW) {
+        var mid = Math.ceil(parts.length / 2);
+        row1 = parts.slice(0, mid).join(sep);
+        row2 = parts.slice(mid).join(sep);
+        priceBoxH = 76;
+      } else {
+        row1 = parts.join(sep);
+      }
+      ctx.fillStyle = 'rgba(255,255,255,0.07)';
+      ctx.beginPath(); ctx.roundRect(74, priceBoxY, W-148, priceBoxH, 12); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.72)';
+      if (row2) {
+        ctx.fillText(row1, cx, priceBoxY + 28);
+        ctx.fillText(row2, cx, priceBoxY + 56);
+      } else {
+        ctx.fillText(row1, cx, priceBoxY + 32);
+      }
+    }
+
+    /* ── CTA ── */
+    var ctaY = priceBoxY + priceBoxH + 20;
+    var ctaW = 440, ctaH = 52, ctaX = cx - ctaW/2;
+    ctx.fillStyle = hexToRgba(AC,0.14);
+    ctx.beginPath(); ctx.roundRect(ctaX, ctaY, ctaW, ctaH, 26); ctx.fill();
+    ctx.strokeStyle = AC; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.roundRect(ctaX, ctaY, ctaW, ctaH, 26); ctx.stroke();
+    ctx.fillStyle = AC; ctx.font = 'bold 21px Arial'; ctx.textAlign = 'center';
+    ctx.fillText(br.cta, cx, ctaY + 33);
+
+    /* ── Footer ── */
+    var fy = H - 94;
+    ctx.strokeStyle = hexToRgba(AC,0.22); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(72, fy); ctx.lineTo(W-72, fy); ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,0.32)'; ctx.font = '17px Arial'; ctx.textAlign = 'center';
+    ctx.fillText(br.footer, cx, fy + 26);
+    var ct = city.replace(/[\s\-\.]/g, ''), cc = country.replace(/[\s\-\.]/g, '');
+    ctx.fillStyle = hexToRgba(AC,0.52); ctx.font = '14px Arial';
+    var htag = br.url.split('.')[0];
+    ctx.fillText('#JBScore #Hotelbewertung #Urlaub #Reise' + (ct ? ' #'+ct : '') + (cc ? ' #'+cc : '') + ' #' + htag, cx, fy + 48);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     STORY CANVAS (1080 × 1920)
+  ═══════════════════════════════════════════════════════════════ */
+  function drawStory() {
+    var WS = 1080, HS = 1920;
+    ctx2.clearRect(0, 0, WS, HS);
+
+    var name    = gv('f-name')    || 'Hotel Name';
+    var city    = gv('f-city')    || '';
+    var country = gv('f-country') || '';
+    var stars   = Math.max(1, Math.min(5, gi('f-stars') || 5));
+    var score   = Math.max(1, Math.min(100, gi('f-score') || 75));
+    var price   = gf('f-price');
+    var nights  = gi('f-nights');
+    var flight  = gf('f-flight');
+    var dep     = gv('f-dep');
+    var period  = gv('f-period');
+    var comment = gv('f-comment');
+    var loc     = [city, country].filter(Boolean).join(' · ') || 'Stadt · Land';
+    var br = getBranding(); var AC = br.accent;
+    var sc = score >= 90 ? AC : score >= 75 ? '#4ec9b0' : score >= 60 ? '#f0c040' : '#e05050';
+
+    /* Background */
+    if (currentImg) {
+      ctx2.save();
+      var iw = currentImg.naturalWidth, ih = currentImg.naturalHeight;
+      var sc2 = Math.max(WS / iw, HS / ih);
+      ctx2.drawImage(currentImg, (WS - iw*sc2)/2, (HS - ih*sc2)/2, iw*sc2, ih*sc2);
+      var g = ctx2.createLinearGradient(0, 0, 0, HS);
+      g.addColorStop(0,    'rgba(10,10,10,0.78)');
+      g.addColorStop(0.25, 'rgba(10,10,10,0.42)');
+      g.addColorStop(0.62, 'rgba(10,10,10,0.72)');
+      g.addColorStop(1,    'rgba(10,10,10,0.97)');
+      ctx2.fillStyle = g; ctx2.fillRect(0, 0, WS, HS);
+      ctx2.restore();
+    } else {
+      ctx2.fillStyle = '#0a0a0a'; ctx2.fillRect(0, 0, WS, HS);
+      var g2 = ctx2.createRadialGradient(WS/2, HS*0.28, 0, WS/2, HS*0.28, WS*0.7);
+      g2.addColorStop(0, 'rgba(0,50,35,0.55)');
+      g2.addColorStop(1, 'rgba(10,10,10,0)');
+      ctx2.fillStyle = g2; ctx2.fillRect(0, 0, WS, HS);
+    }
+
+    /* Border */
+    ctx2.strokeStyle = hexToRgba(AC,0.42); ctx2.lineWidth = 3;
+    ctx2.beginPath(); ctx2.roundRect(22, 22, WS-44, HS-44, 20); ctx2.stroke();
+
+    /* Header */
+    ctx2.fillStyle = 'rgba(8,8,8,0.80)';
+    ctx2.beginPath(); ctx2.roundRect(22, 22, WS-44, 88, [20,20,0,0]); ctx2.fill();
+    ctx2.strokeStyle = hexToRgba(AC,0.18); ctx2.lineWidth = 1;
+    ctx2.beginPath(); ctx2.moveTo(22, 110); ctx2.lineTo(WS-22, 110); ctx2.stroke();
+    ctx2.font = 'bold 34px "Arial Black",Arial';
+    var jw2 = ctx2.measureText(br.logo1).width;
+    var bw2 = ctx2.measureText(br.logo2).width;
+    var logoX2 = WS/2 - (jw2 + bw2)/2;
+    ctx2.textAlign = 'left';
+    ctx2.fillStyle = AC; ctx2.fillText(br.logo1, logoX2, 78);
+    ctx2.fillStyle = '#ffffff'; ctx2.fillText(br.logo2, logoX2 + jw2, 78);
+    ctx2.fillStyle = 'rgba(255,255,255,0.32)';
+    ctx2.font = '14px Arial'; ctx2.textAlign = 'center';
+    ctx2.fillText(br.tagline, WS/2, 98);
+
+    /* Score circle */
+    var cxS = WS/2, cyS = 590, rS = 168;
+    ctx2.shadowColor = sc; ctx2.shadowBlur = 38;
+    ctx2.strokeStyle = sc; ctx2.lineWidth = 11;
+    ctx2.beginPath(); ctx2.arc(cxS, cyS, rS, 0, Math.PI*2); ctx2.stroke();
+    ctx2.shadowBlur = 0;
+    ctx2.strokeStyle = 'rgba(255,255,255,0.05)'; ctx2.lineWidth = 1;
+    ctx2.beginPath(); ctx2.arc(cxS, cyS, rS-11, 0, Math.PI*2); ctx2.stroke();
+    ctx2.fillStyle = sc; ctx2.textAlign = 'center';
+    ctx2.font = 'bold 138px "Arial Black",Arial';
+    ctx2.fillText(String(score), cxS, cyS + 48);
+    ctx2.fillStyle = 'rgba(255,255,255,0.38)';
+    ctx2.font = 'bold 17px Arial'; ctx2.fillText('JB SCORE', cxS, cyS + 74);
+
+    /* Stars */
+    ctx2.fillStyle = '#f0c040'; ctx2.font = '44px Arial';
+    ctx2.fillText('★'.repeat(stars) + '☆'.repeat(5-stars), cxS, 822);
+
+    /* Hotel name */
+    ctx2.fillStyle = '#ffffff';
+    var nf2 = 'bold 60px "Arial Black",Arial'; ctx2.font = nf2;
+    if (ctx2.measureText(name).width > 920) { nf2 = 'bold 44px "Arial Black",Arial'; ctx2.font = nf2; }
+    ctx2.fillText(name, cxS, 910);
+
+    /* Location */
+    ctx2.fillStyle = AC; ctx2.font = '28px Arial'; ctx2.fillText(loc, cxS, 962);
+
+    /* Tags */
+    if (activeTags.length) {
+      ctx2.font = 'bold 20px Arial';
+      var th2 = 38, tp2 = 18, tg2 = 10;
+      var tw2tot = activeTags.reduce(function(s,t){ return s + ctx2.measureText(t).width + tp2*2; }, 0) + (activeTags.length-1)*tg2;
+      var ttx = cxS - tw2tot/2, tty = 1022;
+      activeTags.forEach(function(tag){
+        var tww = ctx2.measureText(tag).width + tp2*2;
+        ctx2.fillStyle = hexToRgba(AC,0.14);
+        ctx2.beginPath(); ctx2.roundRect(ttx, tty, tww, th2, 19); ctx2.fill();
+        ctx2.strokeStyle = AC; ctx2.lineWidth = 1;
+        ctx2.beginPath(); ctx2.roundRect(ttx, tty, tww, th2, 19); ctx2.stroke();
+        ctx2.fillStyle = AC; ctx2.textAlign = 'center';
+        ctx2.fillText(tag, ttx + tww/2, tty + 25);
+        ttx += tww + tg2;
+      });
+    }
+
+    /* Comment */
+    if (comment) {
+      var cmt = '"' + comment + '"';
+      ctx2.font = 'italic 24px Arial'; ctx2.fillStyle = 'rgba(255,255,255,0.52)'; ctx2.textAlign = 'center';
+      var cwords = cmt.split(' '), cline = '', curY = 1108;
+      for (var ci = 0; ci < cwords.length; ci++) {
+        var ctest = cline ? cline + ' ' + cwords[ci] : cwords[ci];
+        if (ctx2.measureText(ctest).width > 920 && cline) {
+          ctx2.fillText(cline, cxS, curY); cline = cwords[ci]; curY += 32;
+        } else { cline = ctest; }
+      }
+      ctx2.fillText(cline, cxS, curY);
+    }
+
+    /* Price row */
+    var pts2 = [];
+    if (price)          pts2.push('💰 Ab ' + price + ' €');
+    if (nights)         pts2.push('🌙 ' + nights + ' Nächte');
+    if (flight && dep)  pts2.push('✈️ ' + flight + 'h ab ' + dep);
+    if (period)         pts2.push('📅 ' + period);
+    var pboxY2 = 1200, pboxH2 = 56;
+    if (pts2.length) {
+      ctx2.font = '22px Arial'; ctx2.textAlign = 'center';
+      var sep2 = '  ·  ', maxW2 = WS - 188;
+      var r1s = '', r2s = '';
+      if (pts2.length > 2 && ctx2.measureText(pts2.join(sep2)).width > maxW2) {
+        var mid2 = Math.ceil(pts2.length / 2);
+        r1s = pts2.slice(0, mid2).join(sep2);
+        r2s = pts2.slice(mid2).join(sep2);
+        pboxH2 = 82;
+      } else {
+        r1s = pts2.join(sep2);
+      }
+      ctx2.fillStyle = 'rgba(255,255,255,0.07)';
+      ctx2.beginPath(); ctx2.roundRect(74, pboxY2, WS-148, pboxH2, 12); ctx2.fill();
+      ctx2.fillStyle = 'rgba(255,255,255,0.72)';
+      if (r2s) {
+        ctx2.fillText(r1s, cxS, pboxY2 + 32);
+        ctx2.fillText(r2s, cxS, pboxY2 + 64);
+      } else {
+        ctx2.fillText(r1s, cxS, pboxY2 + 36);
+      }
+    }
+
+    /* CTA */
+    var ctaY2 = pboxY2 + pboxH2 + 28;
+    var ctaW2 = 500, ctaH2 = 64, ctaX2 = cxS - ctaW2/2;
+    ctx2.fillStyle = hexToRgba(AC,0.14);
+    ctx2.beginPath(); ctx2.roundRect(ctaX2, ctaY2, ctaW2, ctaH2, 32); ctx2.fill();
+    ctx2.strokeStyle = AC; ctx2.lineWidth = 2;
+    ctx2.beginPath(); ctx2.roundRect(ctaX2, ctaY2, ctaW2, ctaH2, 32); ctx2.stroke();
+    ctx2.fillStyle = AC; ctx2.font = 'bold 24px Arial'; ctx2.textAlign = 'center';
+    ctx2.fillText(br.cta, cxS, ctaY2 + 41);
+
+    /* Footer */
+    var fyS = HS - 112;
+    ctx2.strokeStyle = hexToRgba(AC,0.22); ctx2.lineWidth = 1;
+    ctx2.beginPath(); ctx2.moveTo(72, fyS); ctx2.lineTo(WS-72, fyS); ctx2.stroke();
+    ctx2.fillStyle = 'rgba(255,255,255,0.32)'; ctx2.font = '18px Arial'; ctx2.textAlign = 'center';
+    ctx2.fillText(br.footer, cxS, fyS + 32);
+    var ct2 = city.replace(/[\s\-\.]/g,''), cc2 = country.replace(/[\s\-\.]/g,'');
+    ctx2.fillStyle = hexToRgba(AC,0.52); ctx2.font = '15px Arial';
+    var htag2 = br.url.split('.')[0];
+    ctx2.fillText('#JBScore #Hotelbewertung #Urlaub #Reise' + (ct2?' #'+ct2:'') + (cc2?' #'+cc2:'') + ' #' + htag2, cxS, fyS + 56);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     REELS VIDEO (1080 × 1920)
+  ═══════════════════════════════════════════════════════════════ */
+  function getReelsImages() {
+    if (currentHotel && currentHotel.images && currentHotel.images.length) return currentHotel.images.slice(0, 10);
+    if (currentHotel && currentHotel.image) return [currentHotel.image];
+    var manual = gv('f-img').trim();
+    return manual ? [manual] : [];
+  }
+
+  function getBestReelsSources() {
+    var fallback = getReelsImages();
+    if (!currentHotel || !currentHotel.giataId) return Promise.resolve(fallback);
+
+    return fetch('/api/giata?action=detail&id=' + encodeURIComponent(currentHotel.giataId))
+      .then(function (r) { return r.json(); })
+      .then(function (h) {
+        if (h && h.allImages && h.allImages.length) return h.allImages.slice(0, 24);
+        if (h && h.images && h.images.length) return h.images.slice(0, 24);
+        return fallback;
+      })
+      .catch(function () {
+        return fallback;
+      });
+  }
+
+  function pickReelsSequence(sources, durationSec) {
+    var arr = (sources || []).filter(Boolean);
+    if (!arr.length) return [];
+
+    // Keep scenes longer on screen: target ~2.4s per image.
+    var targetScenes = Math.floor(Math.max(1, durationSec) / 2.4);
+    targetScenes = Math.max(3, Math.min(6, targetScenes));
+    targetScenes = Math.min(targetScenes, arr.length);
+
+    if (arr.length <= targetScenes) return arr;
+
+    var picked = [];
+    for (var i = 0; i < targetScenes; i++) {
+      var idx = Math.round(i * (arr.length - 1) / (targetScenes - 1));
+      picked.push(arr[idx]);
+    }
+    return picked;
+  }
+
+  function setReelsStatus(msg, isError) {
+    var el = document.getElementById('reels-status');
+    if (!el) return;
+    el.style.color = isError ? '#ff8888' : 'var(--text-muted)';
+    el.textContent = msg || '';
+  }
+
+  function pickRecorderMime() {
+    var options = [
+      'video/mp4;codecs=avc1.42E01E,mp4a.40.2',
+      'video/webm;codecs=vp9',
+      'video/webm;codecs=vp8',
+      'video/webm'
+    ];
+    for (var i = 0; i < options.length; i++) {
+      if (window.MediaRecorder && MediaRecorder.isTypeSupported(options[i])) return options[i];
+    }
+    return '';
+  }
+
+  function loadReelsImage(src) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function () { resolve(img); };
+      img.onerror = function () { reject(new Error('Bild konnte nicht geladen werden')); };
+      img.src = '/api/image-proxy?url=' + encodeURIComponent(src);
+    });
+  }
+
+  function drawCoverImage(c, img, w, h, scale, panX, panY) {
+    c.imageSmoothingEnabled = true;
+    c.imageSmoothingQuality = 'high';
+    var iw = img.naturalWidth || 1;
+    var ih = img.naturalHeight || 1;
+    var base = Math.max(w / iw, h / ih);
+    var s = base * scale;
+    var dw = iw * s;
+    var dh = ih * s;
+    var ox = (w - dw) / 2 + panX;
+    var oy = (h - dh) / 2 + panY;
+    c.drawImage(img, ox, oy, dw, dh);
+  }
+
+  function drawReelsFrame(timeSec, durationSec, loadedImages) {
+    var WR = 1080, HR = 1920;
+    var AC = (gv('b-accent') || '#00c896');
+    var hotelName = gv('f-name') || 'Hotel Highlight';
+    var city = gv('f-city') || '';
+    var country = gv('f-country') || '';
+    var stars = Math.max(1, Math.min(5, gi('f-stars') || 5));
+    var score = Math.max(1, Math.min(100, gi('f-score') || 75));
+    var loc = [city, country].filter(Boolean).join(' · ');
+    var totalDuration = Math.max(1, durationSec);
+
+    reelsCtx.clearRect(0, 0, WR, HR);
+
+    if (!loadedImages.length) {
+      reelsCtx.fillStyle = '#0a0a0a';
+      reelsCtx.fillRect(0, 0, WR, HR);
+      reelsCtx.fillStyle = AC;
+      reelsCtx.font = 'bold 56px Arial';
+      reelsCtx.textAlign = 'center';
+      reelsCtx.fillText('Kein Bildmaterial', WR / 2, HR / 2);
+      return;
+    }
+
+    var segCount = loadedImages.length;
+    var segLen = totalDuration / segCount;
+    var safeTop = 180;
+    var safeTime = Math.max(0, Math.min(totalDuration - 0.0001, timeSec));
+    var idx = Math.min(segCount - 1, Math.floor(safeTime / segLen));
+    var local = (safeTime - idx * segLen) / segLen;
+    if (!isFinite(local) || local < 0) local = 0;
+    if (local > 1) local = 1;
+
+    // Stable framing: no zoom in/out jumps, only very slight drift.
+    var seed = ((idx * 37) % 100) / 100;
+    var ease = local < 0.5 ? 4 * local * local * local : 1 - Math.pow(-2 * local + 2, 3) / 2;
+    var mainScale = 1.028;
+    var mainX = (-4 + seed * 8) * ease;
+    var mainY = (-3 + seed * 6) * ease;
+    drawCoverImage(reelsCtx, loadedImages[idx], WR, HR, mainScale, mainX, mainY);
+
+    // Clean dissolve in the last part of each scene.
+    var dissolveStart = 0.80;
+    if (idx < segCount - 1 && local > dissolveStart) {
+      var mix = (local - dissolveStart) / (1 - dissolveStart);
+      var m = mix < 0.5 ? 4 * mix * mix * mix : 1 - Math.pow(-2 * mix + 2, 3) / 2;
+      var nextSeed = (((idx + 1) * 37) % 100) / 100;
+      var nextX = -4 + nextSeed * 8;
+      var nextY = -3 + nextSeed * 6;
+      reelsCtx.globalAlpha = Math.max(0, Math.min(1, 0.92 * m));
+      drawCoverImage(reelsCtx, loadedImages[idx + 1], WR, HR, 1.028, nextX, nextY);
+      reelsCtx.globalAlpha = 1;
+    }
+
+    var og = reelsCtx.createLinearGradient(0, 0, 0, HR);
+    og.addColorStop(0, 'rgba(0,0,0,0.24)');
+    og.addColorStop(0.55, 'rgba(0,0,0,0.14)');
+    og.addColorStop(1, 'rgba(0,0,0,0.78)');
+    reelsCtx.fillStyle = og;
+    reelsCtx.fillRect(0, 0, WR, HR);
+
+    reelsCtx.strokeStyle = hexToRgba(AC, 0.38);
+    reelsCtx.lineWidth = 2;
+    reelsCtx.beginPath();
+    reelsCtx.roundRect(22, 22, WR - 44, HR - 44, 20);
+    reelsCtx.stroke();
+
+    reelsCtx.fillStyle = 'rgba(0,0,0,0.34)';
+    reelsCtx.beginPath();
+    reelsCtx.roundRect(48, safeTop, WR - 96, 132, 22);
+    reelsCtx.fill();
+
+    reelsCtx.fillStyle = '#fff';
+    reelsCtx.textAlign = 'left';
+    reelsCtx.font = 'bold 46px Arial';
+    reelsCtx.fillText('JetztBuchbar', 180, safeTop + 54);
+
+    if (reelsScoreImage && reelsScoreImage.naturalWidth) {
+      reelsCtx.save();
+      reelsCtx.beginPath();
+      reelsCtx.arc(96, safeTop + 92, 44, 0, Math.PI * 2);
+      reelsCtx.clip();
+      reelsCtx.drawImage(reelsScoreImage, 52, safeTop + 48, 88, 88);
+      reelsCtx.restore();
+      reelsCtx.strokeStyle = AC;
+      reelsCtx.lineWidth = 2;
+      reelsCtx.beginPath();
+      reelsCtx.arc(96, safeTop + 92, 45, 0, Math.PI * 2);
+      reelsCtx.stroke();
+    } else {
+      reelsCtx.fillStyle = hexToRgba(AC, 0.22);
+      reelsCtx.beginPath();
+      reelsCtx.roundRect(54, safeTop + 56, 92, 72, 34);
+      reelsCtx.fill();
+      reelsCtx.strokeStyle = AC;
+      reelsCtx.lineWidth = 1.2;
+      reelsCtx.beginPath();
+      reelsCtx.roundRect(54, safeTop + 56, 92, 72, 34);
+      reelsCtx.stroke();
+      reelsCtx.fillStyle = AC;
+      reelsCtx.textAlign = 'center';
+      reelsCtx.font = 'bold 24px Arial';
+      reelsCtx.fillText(String(score), 100, safeTop + 102);
+    }
+
+    reelsCtx.fillStyle = 'rgba(255,255,255,0.94)';
+    reelsCtx.textAlign = 'right';
+    reelsCtx.font = 'bold 31px Arial';
+    reelsCtx.fillText('★'.repeat(stars) + '☆'.repeat(5 - stars), WR - 70, safeTop + 58);
+
+    reelsCtx.textAlign = 'left';
+    reelsCtx.fillStyle = 'rgba(255,255,255,0.9)';
+    reelsCtx.font = 'bold 22px Arial';
+    reelsCtx.fillText('Hotelauswahl · verifiziert', 180, safeTop + 100);
+
+    reelsCtx.textAlign = 'center';
+    reelsCtx.fillStyle = '#fff';
+    reelsCtx.font = 'bold 70px "Arial Black", Arial';
+    var title = hotelName;
+    if (reelsCtx.measureText(title).width > 920) reelsCtx.font = 'bold 54px "Arial Black", Arial';
+    reelsCtx.fillText(title, WR / 2, HR - 300);
+    reelsCtx.fillStyle = AC;
+    reelsCtx.font = 'bold 34px Arial';
+    reelsCtx.fillText(loc || 'Top Destination', WR / 2, HR - 252);
+
+    reelsCtx.fillStyle = 'rgba(0,0,0,0.36)';
+    reelsCtx.beginPath();
+    reelsCtx.roundRect(56, HR - 124, WR - 112, 54, 27);
+    reelsCtx.fill();
+    reelsCtx.strokeStyle = hexToRgba(AC, 0.48);
+    reelsCtx.lineWidth = 1.2;
+    reelsCtx.beginPath();
+    reelsCtx.roundRect(56, HR - 124, WR - 112, 54, 27);
+    reelsCtx.stroke();
+    reelsCtx.fillStyle = '#fff';
+    reelsCtx.font = 'bold 23px Arial';
+    reelsCtx.fillText('jetztbuchbar.de', WR / 2, HR - 89);
+
+    // Thin cinematic letterbox bars for a less "template" look
+    reelsCtx.fillStyle = 'rgba(0,0,0,0.26)';
+    reelsCtx.fillRect(0, 0, WR, 26);
+    reelsCtx.fillRect(0, HR - 26, WR, 26);
+  }
+
+  function drawReelsPoster() {
+    var duration = Math.max(10, parseInt(gv('reels-duration'), 10) || 10);
+    var imgs = currentImg ? [currentImg] : [];
+    drawReelsFrame(0, duration, imgs);
+  }
+
+  function resetReelsBlob() {
+    reelsBlob = null;
+    reelsMime = '';
+    var dlBtn = document.getElementById('btn-download-reels');
+    if (dlBtn) dlBtn.disabled = true;
+    var video = document.getElementById('reels-video');
+    if (video && reelsBlobUrl) {
+      video.removeAttribute('src');
+      video.load();
+      URL.revokeObjectURL(reelsBlobUrl);
+    }
+    reelsBlobUrl = '';
+    var meta = document.getElementById('reels-video-meta');
+    if (meta) meta.textContent = 'Noch kein Video gerendert.';
+  }
+
+  function renderReelsVideo() {
+    if (reelsRendering) return;
+    var duration = parseInt(gv('reels-duration'), 10) || 10;
+    var fps = parseInt(gv('reels-fps'), 10) || 30;
+    var mime = pickRecorderMime();
+    if (!mime) {
+      setReelsStatus('Tarayıcı MediaRecorder desteklemiyor.', true);
+      return;
+    }
+
+    reelsRendering = true;
+    resetReelsBlob();
+    setReelsStatus('Hochaufloesende Bilder werden geladen…');
+    var renderBtn = document.getElementById('btn-render-reels');
+    if (renderBtn) renderBtn.disabled = true;
+
+    getBestReelsSources()
+      .then(function (sources) {
+        if (!sources.length) throw new Error('Önce bir otel seç ve görsel yükle.');
+        var sequence = pickReelsSequence(sources, duration);
+        setReelsStatus('Szenen vorbereitet: ' + sequence.length + ' (ruhiger Übergang)…');
+        return Promise.all(sequence.map(loadReelsImage));
+      })
+      .then(function (imgs) {
+        setReelsStatus('Video wird gerendert…');
+        var stream = reelsCv.captureStream(fps);
+        var rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 22000000 });
+        var chunks = [];
+        rec.ondataavailable = function (e) {
+          if (e.data && e.data.size > 0) chunks.push(e.data);
+        };
+        rec.onstop = function () {
+          reelsBlob = new Blob(chunks, { type: mime.split(';')[0] || mime });
+          reelsMime = mime;
+          reelsBlobUrl = URL.createObjectURL(reelsBlob);
+          var video = document.getElementById('reels-video');
+          var dlBtn = document.getElementById('btn-download-reels');
+          var meta = document.getElementById('reels-video-meta');
+          if (video) {
+            video.src = reelsBlobUrl;
+            video.load();
+          }
+          if (dlBtn) dlBtn.disabled = false;
+          if (meta) {
+            var mb = (reelsBlob.size / (1024 * 1024)).toFixed(2);
+            meta.textContent = 'Format: ' + (mime.indexOf('mp4') !== -1 ? 'MP4' : 'WEBM') + ' · Größe: ' + mb + ' MB · Dauer: ' + duration + 's';
+          }
+          setReelsStatus('✅ Reels fertig. Önizleyip indirebilirsin.');
+          reelsRendering = false;
+          if (renderBtn) renderBtn.disabled = false;
+          stream.getTracks().forEach(function (t) { t.stop(); });
+        };
+
+        var start = performance.now();
+        rec.start(120);
+
+        function tick(now) {
+          var t = Math.min(duration, (now - start) / 1000);
+          drawReelsFrame(t, duration, imgs);
+          setReelsStatus('Video wird gerendert… ' + Math.round((t / duration) * 100) + '%');
+          if (t < duration) {
+            requestAnimationFrame(tick);
+          } else {
+            setTimeout(function () {
+              if (rec.state !== 'inactive') rec.stop();
+            }, 120);
+          }
+        }
+        requestAnimationFrame(tick);
+      })
+      .catch(function (err) {
+        setReelsStatus('❌ Render fehlgeschlagen: ' + (err && err.message ? err.message : 'Unbekannter Fehler'), true);
+        reelsRendering = false;
+        if (renderBtn) renderBtn.disabled = false;
+      });
+  }
+
+  function downloadReelsVideo() {
+    if (!reelsBlob) return;
+    var a = document.createElement('a');
+    var slug = gv('f-name').toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/, '') || 'hotel';
+    var date = new Date().toISOString().slice(0, 10);
+    var ext = reelsMime.indexOf('mp4') !== -1 ? 'mp4' : 'webm';
+    a.download = 'jb-reels-' + slug + '-' + date + '.' + ext;
+    a.href = reelsBlobUrl;
+    a.click();
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     CAPTION GENERATOR
+  ═══════════════════════════════════════════════════════════════ */
+  function buildCaption() {
+    var name    = gv('f-name');
+    var city    = gv('f-city');
+    var country = gv('f-country');
+    var stars   = gi('f-stars') || 5;
+    var score   = gi('f-score') || 75;
+    var price   = gf('f-price');
+    var nights  = gi('f-nights');
+    var flight  = gf('f-flight');
+    var dep     = gv('f-dep');
+    var period  = gv('f-period');
+    var comment = gv('f-comment');
+
+    if (!name) { document.getElementById('caption-ta').value = ''; return; }
+
+    var brc = getBranding();
+    var emoji = score >= 90 ? '🏆' : score >= 75 ? '✅' : '⭐';
+
+    /* ── Beschreibungstext aus GIATA ── */
+    var descText = '';
+    if (currentHotel && currentHotel.description && currentHotel.description.length) {
+      // Längsten/ersten sinnvollen Abschnitt nehmen
+      var best = currentHotel.description.find(function(s){ return s.text && s.text.length > 80; })
+                 || currentHotel.description[0];
+      if (best && best.text) {
+        var raw = best.text.replace(/\s+/g, ' ').trim();
+        descText = raw.length > 280 ? raw.slice(0, raw.lastIndexOf(' ', 280)) + '…' : raw;
+      }
+    }
+
+    /* ── Highlights aus Facilities ── */
+    var facilityMap = [
+      ['concept',    function(v){ return v ? '🍹 ' + v : ''; }],
+      ['beach',      function(v){ return v ? '🏖 Strandlage' : ''; }],
+      ['pool',       function(v){ return v ? '🏊 Pool' : ''; }],
+      ['aquapark',   function(v){ return v ? '🌊 Aquapark' : ''; }],
+      ['spa',        function(v){ return v ? '💆 Spa & Wellness' : ''; }],
+      ['kidsclub',   function(v){ return v ? '👶 Kids Club' : ''; }],
+      ['fitness',    function(v){ return v ? '🏋 Fitness' : ''; }],
+      ['restaurant', function(v){ return v ? '🍽 Restaurant' : ''; }],
+      ['wifi',       function(v){ return v ? '📶 WLAN' : ''; }],
+      ['rooms',      function(v){ return v ? '🛏 ' + v + ' Zimmer' : ''; }]
+    ];
+    var facHighlights = [];
+    if (currentHotel && currentHotel.facilities) {
+      var fac = currentHotel.facilities;
+      facilityMap.forEach(function(pair) {
+        var val = fac[pair[0]];
+        if (val) { var s = pair[1](val); if (s) facHighlights.push(s); }
+      });
+    }
+    // Aktive Tags nicht doppeln
+    var tagLabels = activeTags.slice();
+    var extraFac = facHighlights.filter(function(f) {
+      return !tagLabels.some(function(t) { return f.toLowerCase().indexOf(t.toLowerCase()) !== -1; });
+    }).slice(0, 5);
+
+    var c = '';
+    // Titel
+    c += '🏨 ' + name + ' – ' + '⭐'.repeat(stars) + '\n';
+    c += '📍 ' + [city, country].filter(Boolean).join(', ') + '\n\n';
+
+    // Beschreibungstext
+    if (descText) c += descText + '\n\n';
+
+    // JB Score
+    c += 'JB Score: ' + score + '/100 ' + emoji + '\n';
+
+    // Ausgewählte Top-Tags
+    if (tagLabels.length) {
+      c += tagLabels.map(function(t){ return (ICONS[t]||'✅') + ' ' + t; }).join(' · ') + '\n';
+    }
+
+    // Weitere Highlights aus GIATA-Facilities
+    if (extraFac.length) {
+      c += '\n✨ Highlights:\n';
+      extraFac.forEach(function(f){ c += '  ' + f + '\n'; });
+    }
+
+    if (comment) c += '\n💬 "' + comment + '"\n';
+    c += '\n';
+
+    // Reiseinfos
+    var infoLine = [];
+    if (price)          infoLine.push('💰 Ab ' + price + ' €');
+    if (nights)         infoLine.push('🌙 ' + nights + ' Nächte');
+    if (flight && dep)  infoLine.push('✈️ ' + flight + 'h ab ' + dep);
+    if (infoLine.length) c += infoLine.join(' · ') + '\n';
+    if (period) c += '📅 ' + period + '\n';
+
+    c += '\n✉️ Jetzt unverbindlich anfragen ➡️ ' + brc.url + '\n\n';
+
+    // Hashtags
+    var ht  = name.replace(/[^a-zA-ZäöüÄÖÜß0-9]/g, '');
+    var hc  = city.replace(/[\s\-\.]/g, '');
+    var hcc = country.replace(/[\s\-\.]/g, '');
+    c += '#JBScore #Hotelbewertung';
+    if (ht)  c += ' #' + ht;
+    if (hc)  c += ' #' + hc;
+    if (hcc) c += ' #' + hcc;
+    c += ' #Urlaub #Reise #Hotel #' + brc.url.split('.')[0];
+    document.getElementById('caption-ta').value = c;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     VERGLEICH MODE
+  ═══════════════════════════════════════════════════════════════ */
+  function cmpVal(id, fallback) {
+    var v = (document.getElementById(id) || {}).value || '';
+    return v || (fallback || '');
+  }
+
+  function getCmpAccent() {
+    return cmpVal('cmp-accent', '#00c896');
+  }
+
+  function setupModeTabs() {
+    document.querySelectorAll('[data-mode-btn]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setMode(btn.getAttribute('data-mode-btn'));
+      });
+    });
+  }
+
+  function setMode(mode) {
+    var isIg = mode === 'ig';
+    var isCompare = mode === 'compare';
+    var isReels = mode === 'reels';
+    var igTab = document.getElementById('mode-tab-ig');
+    var cmpTab = document.getElementById('mode-tab-compare');
+    var reelsTab = document.getElementById('mode-tab-reels');
+    var igPanel = document.getElementById('panel-ig');
+    var cmpPanel = document.getElementById('panel-compare');
+    var reelsPanel = document.getElementById('panel-reels');
+    var badge = document.getElementById('mode-badge');
+
+    if (igTab) igTab.classList.toggle('active', isIg);
+    if (cmpTab) cmpTab.classList.toggle('active', isCompare);
+    if (reelsTab) reelsTab.classList.toggle('active', isReels);
+    if (igPanel) igPanel.classList.toggle('active', isIg);
+    if (cmpPanel) cmpPanel.classList.toggle('active', isCompare);
+    if (reelsPanel) reelsPanel.classList.toggle('active', isReels);
+    if (badge) {
+      if (isIg) badge.textContent = 'IG Generator · Admin';
+      else if (isCompare) badge.textContent = 'Vergleich Generator · Admin';
+      else badge.textContent = 'Reels Generator · Admin';
+    }
+
+    if (isCompare) schedCmpDraw();
+    if (isReels) { updateReelsHotelInfo(); drawReelsPoster(); }
+  }
+
+  function setupCompareSearch() {
+    var input = document.getElementById('cmp-search-input');
+    var drop  = document.getElementById('cmp-sdrop');
+    if (!input || !drop) return;
+
+    input.addEventListener('input', function () {
+      var q = this.value.trim();
+      if (q.length < 2) { closeCmpDrop(); return; }
+      if (q === cmpLastQ) return;
+      cmpLastQ = q;
+      clearTimeout(cmpSearchTimer);
+      cmpSearchTimer = setTimeout(function () { doCmpSearch(q); }, 280);
+    });
+
+    input.addEventListener('keydown', function (e) {
+      var items = drop.querySelectorAll('.si');
+      var cur = drop.querySelector('.si.cur');
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!cur) { if (items[0]) items[0].classList.add('cur'); }
+        else { cur.classList.remove('cur'); (cur.nextElementSibling || items[0]).classList.add('cur'); }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (!cur) { if (items[items.length - 1]) items[items.length - 1].classList.add('cur'); }
+        else { cur.classList.remove('cur'); (cur.previousElementSibling || items[items.length - 1]).classList.add('cur'); }
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (cur) cur.click();
+      } else if (e.key === 'Escape') {
+        closeCmpDrop();
+      }
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!input.contains(e.target) && !drop.contains(e.target)) closeCmpDrop();
+    });
+  }
+
+  function closeCmpDrop() {
+    var drop = document.getElementById('cmp-sdrop');
+    if (!drop) return;
+    drop.classList.remove('open');
+    drop.innerHTML = '';
+  }
+
+  function doCmpSearch(q) {
+    var drop = document.getElementById('cmp-sdrop');
+    if (!drop) return;
+    drop.innerHTML = '<div class="si-msg"><span class="spin"></span>Aranıyor…</div>';
+    drop.classList.add('open');
+
+    fetch('/api/giata?action=search&q=' + encodeURIComponent(q))
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var results = data.results || [];
+        if (!results.length) {
+          drop.innerHTML = '<div class="si-msg">Sonuç bulunamadı.</div>';
+          return;
+        }
+        drop.innerHTML = results.slice(0, 14).map(function (h) {
+          return '<div class="si" data-id="' + h.giataId + '">'
+            + '<div class="si-name">' + esc(h.name) + '</div>'
+            + '<div class="si-sub">' + esc(h.city) + ' · ' + esc(h.country) + ' · ' + '★'.repeat(h.stars || 0) + '</div>'
+            + '</div>';
+        }).join('');
+
+        drop.querySelectorAll('.si').forEach(function (el) {
+          var picked = false;
+          var pickFn = function (ev) {
+            if (ev) ev.preventDefault();
+            if (picked) return;
+            picked = true;
+            closeCmpDrop();
+            var input = document.getElementById('cmp-search-input');
+            if (input) input.value = '';
+            cmpLastQ = '';
+            addCmpHotel(el.getAttribute('data-id'));
+          };
+          el.addEventListener('mousedown', pickFn);
+          el.addEventListener('click', pickFn);
+        });
+      })
+      .catch(function () {
+        drop.innerHTML = '<div class="si-msg">API hatası — tekrar dene.</div>';
+      });
+  }
+
+  function setupCompareActions() {
+    var autoBtn = document.getElementById('cmp-auto-btn');
+    var clearBtn = document.getElementById('cmp-clear-btn');
+
+    loadCmpAutoCountries();
+
+    if (autoBtn) {
+      autoBtn.addEventListener('click', function () {
+        autoPickCmpHotels();
+      });
+    }
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function () {
+        cmpHotels = [];
+        renderCmpPicked();
+        schedCmpDraw();
+        var status = document.getElementById('cmp-status');
+        if (status) status.textContent = 'Liste geleert.';
+      });
+    }
+  }
+
+  function enrichCmpHotel(h) {
+    var score = 75;
+    if (window.JBScore && h.factIds && h.factIds.length) {
+      score = window.JBScore.calcScore(h);
+    }
+    h._cmpScore = score;
+    h._cmpTags = (window.JBScore && h.factIds && h.factIds.length)
+      ? window.JBScore.topFeatures(h, 3).map(function (f) { return f.l; })
+      : [];
+    h._cmpRoomSamples = (h.rooms || []).map(function (rm) {
+      return rm && rm.name ? rm.name : '';
+    }).filter(Boolean).slice(0, 3);
+    return h;
+  }
+
+  function cmpCountryName(cc) {
+    var map = {
+      TR: 'Türkei', GR: 'Griechenland', ES: 'Spanien', EG: 'Aegypten', PT: 'Portugal',
+      HR: 'Kroatien', IT: 'Italien', FR: 'Frankreich', MA: 'Marokko', MT: 'Malta',
+      TN: 'Tunesien', BG: 'Bulgarien', CY: 'Zypern', JO: 'Jordanien', AE: 'VAE', MV: 'Malediven'
+    };
+    return map[cc] || cc;
+  }
+
+  function loadCmpAutoCountries() {
+    var sel = document.getElementById('cmp-auto-country');
+    if (!sel) return;
+
+    fetch('/api/giata?action=counts')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var counts = (data && data.counts) ? data.counts : {};
+        var codes = Object.keys(counts).sort();
+        if (!codes.length) return;
+        sel.innerHTML = '<option value="MIX">Mix (Karışık)</option>' + codes.map(function (cc) {
+          return '<option value="' + cc + '">' + cmpCountryName(cc) + ' (' + cc + ')</option>';
+        }).join('');
+      })
+      .catch(function () {
+        // Silent fallback: keep MIX only
+      });
+  }
+
+  function shuffleArray(arr) {
+    var out = arr.slice();
+    for (var i = out.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = out[i];
+      out[i] = out[j];
+      out[j] = tmp;
+    }
+    return out;
+  }
+
+  function fetchTopIdsForCountry(cc, limit) {
+    var url = '/api/giata?action=top&limit=' + (limit || 20) + (cc ? '&country=' + encodeURIComponent(cc) : '');
+    return fetch(url)
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var hotels = (data && data.hotels) ? data.hotels : [];
+        return hotels.map(function (h) { return h.giataId; }).filter(Boolean);
+      });
+  }
+
+  function fetchMixedAutoIds() {
+    return fetch('/api/giata?action=counts')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var counts = (data && data.counts) ? data.counts : {};
+        var codes = shuffleArray(Object.keys(counts));
+        if (!codes.length) return fetchTopIdsForCountry('', 20);
+        var takeCodes = codes.slice(0, 6);
+        return Promise.all(takeCodes.map(function (cc) { return fetchTopIdsForCountry(cc, 10); }))
+          .then(function (chunks) {
+            var seen = {};
+            var all = [];
+            chunks.forEach(function (ids) {
+              ids.forEach(function (id) {
+                if (!seen[id]) { seen[id] = true; all.push(id); }
+              });
+            });
+            return all.length ? all : fetchTopIdsForCountry('', 20);
+          });
+      });
+  }
+
+  function fetchCmpHotel(id) {
+    return fetch('/api/giata?action=detail&id=' + encodeURIComponent(id))
+      .then(function (r) { return r.json(); })
+      .then(function (h) {
+        if (!h || !h.giataId) throw new Error('Hotel konnte nicht geladen werden.');
+        return enrichCmpHotel(h);
+      });
+  }
+
+  function autoPickCmpHotels() {
+    var status = document.getElementById('cmp-status');
+    var autoBtn = document.getElementById('cmp-auto-btn');
+    var sel = document.getElementById('cmp-auto-country');
+    var selectedCC = sel ? sel.value : 'MIX';
+    var selectedText = sel && sel.selectedOptions && sel.selectedOptions[0] ? sel.selectedOptions[0].textContent : 'Mix (Karışık)';
+    if (autoBtn) autoBtn.disabled = true;
+    if (status) status.innerHTML = '<span class="spin"></span>Automatik: 3 Hotels werden geladen (' + selectedText + ')…';
+
+    closeCmpDrop();
+    cmpHotels = [];
+    renderCmpPicked();
+    schedCmpDraw();
+
+    var idsPromise = selectedCC === 'MIX' ? fetchMixedAutoIds() : fetchTopIdsForCountry(selectedCC, 20);
+
+    idsPromise
+      .then(function (ids) {
+        if (ids.length < 3) throw new Error('Zu wenig Hotels für Auto-Auswahl.');
+
+        var picked = shuffleArray(ids).slice(0, 3);
+        return Promise.all(picked.map(function (id) { return fetchCmpHotel(id); }));
+      })
+      .then(function (hotels) {
+        cmpHotels = hotels;
+        cmpHotels.forEach(preloadCmpImage);
+        renderCmpPicked();
+        schedCmpDraw();
+        if (status) status.textContent = '✅ Automatik fertig (' + selectedText + '): 3 Hotels ausgewählt. Tekrar basarsan yeni kombinasyon gelir.';
+      })
+      .catch(function (err) {
+        if (status) status.textContent = '❌ Automatik fehlgeschlagen: ' + (err && err.message ? err.message : 'Unbekannter Fehler');
+      })
+      .finally(function () {
+        if (autoBtn) autoBtn.disabled = false;
+      });
+  }
+
+  function addCmpHotel(id) {
+    var status = document.getElementById('cmp-status');
+    if (cmpHotels.length >= 3) {
+      if (status) status.textContent = 'Max 3 Hotel möglich.';
+      return;
+    }
+    if (cmpHotels.some(function (h) { return String(h.giataId) === String(id); })) {
+      if (status) status.textContent = 'Hotel schon in der Liste.';
+      return;
+    }
+    if (status) status.innerHTML = '<span class="spin"></span>Hotel wird geladen…';
+
+    fetchCmpHotel(id)
+      .then(function (h) {
+        cmpHotels.push(h);
+        preloadCmpImage(h);
+        renderCmpPicked();
+        schedCmpDraw();
+        if (status) status.innerHTML = '✅ Hinzugefügt: ' + esc(h.name) + ' · JB Score <strong style="color:var(--accent)">' + (h._cmpScore || 0) + '</strong>';
+      })
+      .catch(function (err) {
+        if (status) status.textContent = '❌ ' + (err && err.message ? err.message : 'Fehler');
+      });
+  }
+
+  function removeCmpHotel(id) {
+    cmpHotels = cmpHotels.filter(function (h) { return String(h.giataId) !== String(id); });
+    renderCmpPicked();
+    schedCmpDraw();
+  }
+
+  function preloadCmpImage(hotel) {
+    var src = (hotel.images && hotel.images.length) ? hotel.images[0] : hotel.image;
+    if (!src) return;
+    var img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = function () { hotel._cmpImage = img; schedCmpDraw(); };
+    img.onerror = function () { hotel._cmpImage = null; schedCmpDraw(); };
+    img.src = '/api/image-proxy?url=' + encodeURIComponent(src);
+  }
+
+  function renderCmpPicked() {
+    var box = document.getElementById('cmp-picked');
+    if (!box) return;
+
+    if (!cmpHotels.length) {
+      box.classList.add('empty');
+      box.innerHTML = 'Noch keine Hotels ausgewählt.';
+      return;
+    }
+
+    box.classList.remove('empty');
+    box.innerHTML = cmpHotels.map(function (h) {
+      return '<div class="cmp-item">'
+        + '<div class="cmp-item-main">'
+        + '<div class="cmp-item-name">' + esc(h.name) + '</div>'
+        + '<div class="cmp-item-sub">' + esc(h.city || '') + (h.country ? ' · ' + esc(h.country) : '') + '</div>'
+        + '</div>'
+        + '<div class="cmp-item-actions">'
+        + '<span class="cmp-chip">' + (h._cmpScore || 0) + '/100</span>'
+        + '<button class="cmp-remove" data-cmp-remove="' + esc(h.giataId) + '">Sil</button>'
+        + '</div>'
+        + '</div>';
+    }).join('');
+
+    box.querySelectorAll('[data-cmp-remove]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        removeCmpHotel(btn.getAttribute('data-cmp-remove'));
+      });
+    });
+  }
+
+  function sortedCmpHotels() {
+    return cmpHotels.slice().sort(function (a, b) {
+      var as = a._cmpScore || 0;
+      var bs = b._cmpScore || 0;
+      if (bs !== as) return bs - as;
+      return (b.stars || 0) - (a.stars || 0);
+    });
+  }
+
+  var cmpVsImage = null;
+  (function preloadCmpVs() {
+    var img = new Image();
+    img.onload = function () { cmpVsImage = img; schedCmpDraw(); };
+    img.onerror = function () { cmpVsImage = null; };
+    img.src = '/images/vs-badge.png';
+  })();
+
+  var reelsScoreImage = null;
+  (function preloadReelsScoreImage() {
+    var img = new Image();
+    img.onload = function () { reelsScoreImage = img; drawReelsPoster(); };
+    img.onerror = function () { reelsScoreImage = null; };
+    img.src = '/images/jbscore.png';
+  })();
+
+  function clipText(c, text, maxW) {
+    if (!text) return '';
+    var t = String(text);
+    if (c.measureText(t).width <= maxW) return t;
+    while (t.length > 2 && c.measureText(t + '…').width > maxW) t = t.slice(0, -1);
+    return t + '…';
+  }
+
+  function getCmpDescription(h) {
+    if (!h) return '';
+    if (h._cmpDesc) return h._cmpDesc;
+    var desc = '';
+    if (h.description && h.description.length) {
+      var best = h.description.find(function (d) { return d && d.text && d.text.length > 90; }) || h.description[0];
+      if (best && best.text) desc = best.text;
+    }
+    desc = String(desc || '').replace(/\s+/g, ' ').trim();
+    if (!desc) {
+      var loc = [h.city || '', h.country || ''].filter(Boolean).join(', ');
+      desc = (h.name || 'Dieses Hotel') + ' in ' + (loc || 'Top-Lage') + ' bietet ein ausgewogenes Gesamtpaket fuer Urlauber.';
+    }
+    if (desc.length > 210) {
+      var cut = desc.slice(0, 210);
+      desc = cut.slice(0, cut.lastIndexOf(' ')) + '…';
+    }
+    h._cmpDesc = desc;
+    return desc;
+  }
+
+  function drawWrapped(c, text, x, y, maxW, lineH, maxLines) {
+    var words = String(text || '').split(' ');
+    var line = '';
+    var outY = y;
+    var lines = 0;
+    for (var i = 0; i < words.length; i++) {
+      var test = line ? line + ' ' + words[i] : words[i];
+      if (c.measureText(test).width > maxW && line) {
+        lines++;
+        if (lines >= maxLines) {
+          c.fillText(clipText(c, line, maxW), x, outY);
+          return outY;
+        }
+        c.fillText(line, x, outY);
+        line = words[i];
+        outY += lineH;
+      } else {
+        line = test;
+      }
+    }
+    c.fillText(clipText(c, line, maxW), x, outY);
+    return outY;
+  }
+
+  function wrapLinesForWidth(c, text, maxW) {
+    var words = String(text || '').split(' ');
+    var lines = [];
+    var line = '';
+    for (var i = 0; i < words.length; i++) {
+      var test = line ? line + ' ' + words[i] : words[i];
+      if (c.measureText(test).width > maxW && line) {
+        lines.push(line);
+        line = words[i];
+      } else {
+        line = test;
+      }
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  function drawTitleFit(c, text, cx, y, maxW, isStory) {
+    var fontSize = isStory ? 30 : 28;
+    var minSize = 18;
+    var lines = [];
+    while (fontSize >= minSize) {
+      c.font = 'bold ' + fontSize + 'px Arial';
+      lines = wrapLinesForWidth(c, text, maxW);
+      if (lines.length <= 2) break;
+      fontSize -= 1;
+    }
+    lines = lines.slice(0, 2);
+    if (lines.length === 2) {
+      lines[1] = clipText(c, lines[1], maxW);
+      c.fillText(lines[0], cx, y);
+      c.fillText(lines[1], cx, y + (isStory ? 32 : 30));
+      return y + (isStory ? 32 : 30);
+    }
+    c.fillText(lines[0] || '', cx, y);
+    return y;
+  }
+
+  function cmpFlightHint(country) {
+    var c = String(country || '').toLowerCase();
+    var map = {
+      'tuerkei': '~3.5h ab DE', 'türkei': '~3.5h ab DE', 'turkey': '~3.5h ab DE',
+      'spanien': '~2.8h ab DE', 'spain': '~2.8h ab DE',
+      'griechenland': '~2.7h ab DE', 'greece': '~2.7h ab DE',
+      'aegypten': '~4.2h ab DE', 'ägypten': '~4.2h ab DE', 'egypt': '~4.2h ab DE',
+      'portugal': '~3.2h ab DE',
+      'kroatien': '~1.8h ab DE', 'croatia': '~1.8h ab DE',
+      'italien': '~1.7h ab DE', 'italy': '~1.7h ab DE',
+      'frankreich': '~1.8h ab DE', 'france': '~1.8h ab DE',
+      'vereinigte arabische emirate': '~6.2h ab DE', 'uae': '~6.2h ab DE',
+      'malediven': '~9.5h ab DE', 'maldives': '~9.5h ab DE'
+    };
+    return map[c] || '~2-5h ab DE';
+  }
+
+  function drawScoreSeal(c, score, cx, cy, accent) {
+    var r = 36;
+    var g = c.createRadialGradient(cx - 8, cy - 10, 4, cx, cy, r);
+    g.addColorStop(0, 'rgba(0,220,165,.95)');
+    g.addColorStop(1, 'rgba(0,130,95,.95)');
+    c.fillStyle = g;
+    c.beginPath();
+    c.arc(cx, cy, r, 0, Math.PI * 2);
+    c.fill();
+
+    c.fillStyle = 'rgba(10,10,10,.92)';
+    c.beginPath();
+    c.arc(cx, cy, r - 6, 0, Math.PI * 2);
+    c.fill();
+
+    c.strokeStyle = accent;
+    c.lineWidth = 2;
+    c.beginPath();
+    c.arc(cx, cy, r, 0, Math.PI * 2);
+    c.stroke();
+
+    c.fillStyle = accent;
+    c.textAlign = 'center';
+    c.font = 'bold 22px Arial';
+    c.fillText(String(score || 0), cx, cy + 7);
+    c.fillStyle = 'rgba(255,255,255,.65)';
+    c.font = 'bold 10px Arial';
+    c.fillText('/100', cx, cy + 20);
+  }
+
+  function drawCmpCard(c, h, x, y, w, hgt, rank, accent, isStory) {
+    c.save();
+    c.beginPath();
+    c.roundRect(x, y, w, hgt, 18);
+    c.clip();
+
+    if (h._cmpImage) {
+      var ih = h._cmpImage.naturalHeight || 1;
+      var iw = h._cmpImage.naturalWidth || 1;
+      var topH = Math.round(hgt * (isStory ? 0.36 : 0.4));
+      var scale = Math.max(w / iw, topH / ih);
+      var dw = iw * scale, dh = ih * scale;
+      c.drawImage(h._cmpImage, x + (w - dw) / 2, y + (topH - dh) / 2, dw, dh);
+      var g = c.createLinearGradient(0, y, 0, y + topH + 90);
+      g.addColorStop(0, 'rgba(10,10,10,0.08)');
+      g.addColorStop(1, 'rgba(10,10,10,0.82)');
+      c.fillStyle = g;
+      c.fillRect(x, y, w, topH + 90);
+      c.fillStyle = 'rgba(0,0,0,.58)';
+      c.fillRect(x, y + topH, w, hgt - topH);
+    } else {
+      var bg = c.createLinearGradient(x, y, x, y + hgt);
+      bg.addColorStop(0, 'rgba(22,70,56,.45)');
+      bg.addColorStop(1, 'rgba(12,12,12,.96)');
+      c.fillStyle = bg;
+      c.fillRect(x, y, w, hgt);
+    }
+
+    c.restore();
+
+  c.strokeStyle = 'rgba(255,255,255,.18)';
+  c.lineWidth = 1.4;
+    c.beginPath();
+    c.roundRect(x, y, w, hgt, 18);
+    c.stroke();
+
+    drawScoreSeal(c, h._cmpScore || 0, x + w / 2, y + 56, accent);
+
+    c.fillStyle = 'rgba(255,255,255,.72)';
+    c.font = 'bold 14px Arial';
+    c.fillText('#' + rank, x + w / 2, y + 103);
+
+    var topHCard = Math.round(hgt * (isStory ? 0.36 : 0.4));
+    var nameY = y + topHCard - (isStory ? 116 : 92);
+    c.fillStyle = '#fff';
+    var nameLastY = drawTitleFit(c, h.name || 'Hotel', x + w / 2, nameY, w - 30, isStory);
+
+    c.fillStyle = 'rgba(255,255,255,.8)';
+    c.font = '17px Arial';
+    var loc = [h.city || '', h.country || ''].filter(Boolean).join(' · ');
+    c.fillText(clipText(c, loc, w - 36), x + w / 2, nameLastY + 30);
+
+    c.fillStyle = '#f0c040';
+    c.font = '22px Arial';
+    var st = Math.max(1, Math.min(5, h.stars || 0));
+    c.fillText('★'.repeat(st) + '☆'.repeat(5 - st), x + w / 2, nameLastY + 63);
+
+    var tags = (h._cmpTags || []).slice(0, 2);
+    if (tags.length) {
+      c.fillStyle = 'rgba(255,255,255,.92)';
+      c.font = 'bold 14px Arial';
+      c.fillText(clipText(c, tags.join(' · '), w - 28), x + w / 2, nameLastY + 92);
+    }
+
+    var descTop = y + topHCard + 54;
+    c.strokeStyle = 'rgba(255,255,255,.1)';
+    c.lineWidth = 1;
+    c.beginPath();
+    c.moveTo(x + 14, descTop - 14);
+    c.lineTo(x + w - 14, descTop - 14);
+    c.stroke();
+
+    c.textAlign = 'left';
+    c.fillStyle = accent;
+    c.font = 'bold 14px Arial';
+    c.fillText('Beschreibung', x + 16, descTop);
+
+    c.fillStyle = 'rgba(255,255,255,.86)';
+    c.font = isStory ? '15px Arial' : '14px Arial';
+    var descEnd = drawWrapped(c, getCmpDescription(h), x + 16, descTop + 24, w - 32, isStory ? 21 : 19, isStory ? 6 : 4);
+
+    var roomTop = descEnd + 30;
+    c.fillStyle = accent;
+    c.font = 'bold 14px Arial';
+    c.fillText('Zimmerbeispiele', x + 16, roomTop);
+    c.fillStyle = 'rgba(255,255,255,.86)';
+    c.font = isStory ? '14px Arial' : '13px Arial';
+    var roomLine = (h._cmpRoomSamples && h._cmpRoomSamples.length)
+      ? h._cmpRoomSamples.slice(0, 2).join(' · ')
+      : 'Zimmerdetails laut GIATA vorhanden';
+    c.fillText(clipText(c, roomLine, w - 32), x + 16, roomTop + 22);
+
+    var flightTop = roomTop + 46;
+    c.fillStyle = accent;
+    c.font = 'bold 14px Arial';
+    c.fillText('Anreise', x + 16, flightTop);
+    c.fillStyle = 'rgba(255,255,255,.9)';
+    c.font = 'bold 13px Arial';
+    c.fillText('✈ ' + cmpFlightHint(h.country), x + 16, flightTop + 20);
+
+    c.textAlign = 'left';
+    c.fillStyle = accent;
+    c.font = 'bold 14px Arial';
+    c.fillText('Highlights', x + 16, y + hgt - 42);
+    c.fillStyle = 'rgba(255,255,255,.95)';
+    c.font = 'bold 14px Arial';
+    var tagText = tags.length ? tags.join(' · ') : 'Ausstattung laut GIATA';
+    c.fillText(clipText(c, tagText, w - 32), x + 16, y + hgt - 20);
+    c.textAlign = 'center';
+  }
+
+  function drawCompare() {
+    var Wc = 1080, Hc = 1080;
+    cmpCtx.clearRect(0, 0, Wc, Hc);
+
+    var accent = getCmpAccent();
+    var title = cmpVal('cmp-title', 'Hotel Vergleich');
+    var subtitle = cmpVal('cmp-subtitle', 'Datenbasiert. Transparent. JetztBuchbar.');
+    var footer = cmpVal('cmp-footer', 'JetztBuchbar · Ein Score. Nur Fakten.');
+    var cta = cmpVal('cmp-cta', 'Jetzt auf jetztbuchbar.de vergleichen');
+
+    cmpCtx.fillStyle = '#0a0a0a';
+    cmpCtx.fillRect(0, 0, Wc, Hc);
+    var gr = cmpCtx.createRadialGradient(Wc / 2, 160, 20, Wc / 2, 160, 740);
+    gr.addColorStop(0, 'rgba(0,130,95,.34)');
+    gr.addColorStop(1, 'rgba(10,10,10,0)');
+    cmpCtx.fillStyle = gr;
+    cmpCtx.fillRect(0, 0, Wc, Hc);
+
+    cmpCtx.strokeStyle = hexToRgba(accent, 0.45);
+    cmpCtx.lineWidth = 3;
+    cmpCtx.beginPath();
+    cmpCtx.roundRect(22, 22, Wc - 44, Hc - 44, 20);
+    cmpCtx.stroke();
+
+    cmpCtx.fillStyle = '#fff';
+    cmpCtx.textAlign = 'center';
+    cmpCtx.font = 'bold 54px "Arial Black", Arial';
+    cmpCtx.fillText(title, Wc / 2, 104);
+    cmpCtx.fillStyle = accent;
+    cmpCtx.font = '20px Arial';
+    cmpCtx.fillText(subtitle, Wc / 2, 136);
+
+    var list = sortedCmpHotels();
+    if (!list.length) {
+      cmpCtx.fillStyle = 'rgba(255,255,255,.58)';
+      cmpCtx.font = 'bold 30px Arial';
+      cmpCtx.fillText('Vergleich starten: links Hotels hinzufügen', Wc / 2, 530);
+      cmpCtx.font = '20px Arial';
+      cmpCtx.fillText('Bis zu 3 Hotels werden automatisch gerankt.', Wc / 2, 568);
+    } else {
+      var n = list.length;
+      var gap = 22;
+      var pad = 70;
+      var cardW = (Wc - pad * 2 - gap * (n - 1)) / n;
+      var cardH = 640;
+      var y = 186;
+      list.forEach(function (h, idx) {
+        var x = pad + idx * (cardW + gap);
+        drawCmpCard(cmpCtx, h, x, y, cardW, cardH, idx + 1, accent, false);
+      });
+
+      if (n === 2 && cmpVsImage) {
+        var vsSize = 92;
+        var vx = Wc / 2 - vsSize / 2;
+        var vy = y + 180;
+        cmpCtx.fillStyle = 'rgba(8,8,8,.82)';
+        cmpCtx.beginPath();
+        cmpCtx.arc(Wc / 2, vy + vsSize / 2, vsSize / 2 + 10, 0, Math.PI * 2);
+        cmpCtx.fill();
+        cmpCtx.strokeStyle = accent;
+        cmpCtx.lineWidth = 1.5;
+        cmpCtx.beginPath();
+        cmpCtx.arc(Wc / 2, vy + vsSize / 2, vsSize / 2 + 10, 0, Math.PI * 2);
+        cmpCtx.stroke();
+        cmpCtx.drawImage(cmpVsImage, vx, vy, vsSize, vsSize);
+      }
+    }
+
+    cmpCtx.fillStyle = hexToRgba(accent, 0.14);
+    cmpCtx.beginPath();
+    cmpCtx.roundRect(218, 872, 644, 58, 29);
+    cmpCtx.fill();
+    cmpCtx.strokeStyle = accent;
+    cmpCtx.lineWidth = 1.5;
+    cmpCtx.beginPath();
+    cmpCtx.roundRect(218, 872, 644, 58, 29);
+    cmpCtx.stroke();
+    cmpCtx.fillStyle = accent;
+    cmpCtx.font = 'bold 24px Arial';
+    cmpCtx.fillText(clipText(cmpCtx, cta, 610), Wc / 2, 910);
+
+    cmpCtx.strokeStyle = hexToRgba(accent, 0.2);
+    cmpCtx.lineWidth = 1;
+    cmpCtx.beginPath();
+    cmpCtx.moveTo(72, Hc - 108);
+    cmpCtx.lineTo(Wc - 72, Hc - 108);
+    cmpCtx.stroke();
+    cmpCtx.fillStyle = 'rgba(255,255,255,.36)';
+    cmpCtx.font = '18px Arial';
+    cmpCtx.fillText(footer, Wc / 2, Hc - 76);
+  }
+
+  function drawCompareStory() {
+    var Ws = 1080, Hs = 1920;
+    cmpCtx2.clearRect(0, 0, Ws, Hs);
+
+    var accent = getCmpAccent();
+    var title = cmpVal('cmp-title', 'Hotel Vergleich');
+    var subtitle = cmpVal('cmp-subtitle', 'Datenbasiert. Transparent. JetztBuchbar.');
+    var footer = cmpVal('cmp-footer', 'JetztBuchbar · Ein Score. Nur Fakten.');
+    var cta = cmpVal('cmp-cta', 'Jetzt auf jetztbuchbar.de vergleichen');
+
+    cmpCtx2.fillStyle = '#0a0a0a';
+    cmpCtx2.fillRect(0, 0, Ws, Hs);
+    var grs = cmpCtx2.createRadialGradient(Ws / 2, 220, 20, Ws / 2, 220, 950);
+    grs.addColorStop(0, 'rgba(0,130,95,.34)');
+    grs.addColorStop(1, 'rgba(10,10,10,0)');
+    cmpCtx2.fillStyle = grs;
+    cmpCtx2.fillRect(0, 0, Ws, Hs);
+
+    cmpCtx2.strokeStyle = hexToRgba(accent, 0.45);
+    cmpCtx2.lineWidth = 3;
+    cmpCtx2.beginPath();
+    cmpCtx2.roundRect(22, 22, Ws - 44, Hs - 44, 20);
+    cmpCtx2.stroke();
+
+    cmpCtx2.fillStyle = '#fff';
+    cmpCtx2.textAlign = 'center';
+    cmpCtx2.font = 'bold 64px "Arial Black", Arial';
+    cmpCtx2.fillText(title, Ws / 2, 120);
+    cmpCtx2.fillStyle = accent;
+    cmpCtx2.font = '22px Arial';
+    cmpCtx2.fillText(subtitle, Ws / 2, 158);
+
+    var list = sortedCmpHotels();
+    if (!list.length) {
+      cmpCtx2.fillStyle = 'rgba(255,255,255,.58)';
+      cmpCtx2.font = 'bold 34px Arial';
+      cmpCtx2.fillText('Hotels hinzufügen, um Story zu generieren', Ws / 2, 930);
+    } else {
+      var n = list.length;
+      var gap = 24;
+      var pad = 58;
+      var cardW = (Ws - pad * 2 - gap * (n - 1)) / n;
+      var cardH = 920;
+      var y = 240;
+      list.forEach(function (h, idx) {
+        var x = pad + idx * (cardW + gap);
+        drawCmpCard(cmpCtx2, h, x, y, cardW, cardH, idx + 1, accent, true);
+      });
+
+      if (n === 2 && cmpVsImage) {
+        var vsSize2 = 120;
+        var vx2 = Ws / 2 - vsSize2 / 2;
+        var vy2 = y + 290;
+        cmpCtx2.fillStyle = 'rgba(8,8,8,.82)';
+        cmpCtx2.beginPath();
+        cmpCtx2.arc(Ws / 2, vy2 + vsSize2 / 2, vsSize2 / 2 + 12, 0, Math.PI * 2);
+        cmpCtx2.fill();
+        cmpCtx2.strokeStyle = accent;
+        cmpCtx2.lineWidth = 2;
+        cmpCtx2.beginPath();
+        cmpCtx2.arc(Ws / 2, vy2 + vsSize2 / 2, vsSize2 / 2 + 12, 0, Math.PI * 2);
+        cmpCtx2.stroke();
+        cmpCtx2.drawImage(cmpVsImage, vx2, vy2, vsSize2, vsSize2);
+      }
+    }
+
+    cmpCtx2.fillStyle = hexToRgba(accent, 0.14);
+    cmpCtx2.beginPath();
+    cmpCtx2.roundRect(168, 1432, 744, 76, 38);
+    cmpCtx2.fill();
+    cmpCtx2.strokeStyle = accent;
+    cmpCtx2.lineWidth = 2;
+    cmpCtx2.beginPath();
+    cmpCtx2.roundRect(168, 1432, 744, 76, 38);
+    cmpCtx2.stroke();
+    cmpCtx2.fillStyle = accent;
+    cmpCtx2.font = 'bold 30px Arial';
+    cmpCtx2.fillText(clipText(cmpCtx2, cta, 700), Ws / 2, 1479);
+
+    cmpCtx2.strokeStyle = hexToRgba(accent, 0.2);
+    cmpCtx2.lineWidth = 1;
+    cmpCtx2.beginPath();
+    cmpCtx2.moveTo(72, Hs - 122);
+    cmpCtx2.lineTo(Ws - 72, Hs - 122);
+    cmpCtx2.stroke();
+    cmpCtx2.fillStyle = 'rgba(255,255,255,.36)';
+    cmpCtx2.font = '20px Arial';
+    cmpCtx2.fillText(footer, Ws / 2, Hs - 84);
+  }
+
+  function renderCompareLegend() {
+    var card = document.getElementById('cmp-legend-card');
+    var row = document.getElementById('cmp-legend');
+    if (!card || !row) return;
+
+    var sorted = sortedCmpHotels();
+    if (!sorted.length) {
+      card.style.display = 'none';
+      row.innerHTML = '';
+      return;
+    }
+
+    card.style.display = '';
+    row.innerHTML = sorted.map(function (h, i) {
+      return '<div class="cmp-legend-item">'
+        + '<div class="cmp-legend-rank">#' + (i + 1) + '</div>'
+        + '<div class="cmp-legend-name">' + esc(h.name || '') + '</div>'
+        + '<div class="cmp-item-score">JB Score: ' + (h._cmpScore || 0) + '/100</div>'
+        + '</div>';
+    }).join('');
+  }
+
+  function buildCompareCaption() {
+    var ta = document.getElementById('cmp-caption-ta');
+    if (!ta) return;
+    var sorted = sortedCmpHotels();
+    if (!sorted.length) {
+      ta.value = '';
+      return;
+    }
+
+    var title = cmpVal('cmp-title', 'Hotel Vergleich');
+    var c = '';
+    c += '🏁 ' + title + '\n\n';
+    c += sorted.map(function (h, i) {
+      return (i + 1) + '. ' + h.name + ' (' + (h._cmpScore || 0) + '/100)';
+    }).join('\n');
+
+    c += '\n\n🧾 Kurzbeschreibung & Highlights:';
+    sorted.forEach(function (h) {
+      var tags = (h._cmpTags || []).slice(0, 2).join(' · ');
+      c += '\n- ' + h.name + ': ' + getCmpDescription(h);
+      if (tags) c += ' (' + tags + ')';
+    });
+
+    c += '\n\n🔍 Alle Details & direkter Vergleich auf jetztbuchbar.de';
+    c += '\n\n#JBScore #Hotelvergleich #Urlaub #Reise #JetztBuchbar';
+
+    sorted.forEach(function (h) {
+      var hc = String(h.city || '').replace(/[\s\-.]/g, '');
+      if (hc) c += ' #' + hc;
+    });
+
+    ta.value = c;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     ACTIONS
+  ═══════════════════════════════════════════════════════════════ */
+  window.copyCaption = function () {
+    var ta = document.getElementById('caption-ta');
+    navigator.clipboard.writeText(ta.value).then(function () {
+      var btn = document.getElementById('btn-copy-ig');
+      if (!btn) return;
+      btn.textContent = '✓ Kopyalandı';
+      setTimeout(function () { btn.textContent = 'Kopyala'; }, 1800);
+    });
+  };
+
+  window.downloadPNG = function () {
+    var slug = gv('f-name').toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/, '');
+    var date = new Date().toISOString().slice(0, 10);
+    var a = document.createElement('a');
+    a.download = 'jbscore-' + (slug || 'post') + '-' + date + '.png';
+    a.href = cv.toDataURL('image/png');
+    a.click();
+  };
+
+  window.downloadStory = function () {
+    var slug = gv('f-name').toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/, '');
+    var date = new Date().toISOString().slice(0, 10);
+    var a = document.createElement('a');
+    a.download = 'jbscore-story-' + (slug || 'post') + '-' + date + '.png';
+    a.href = cv2.toDataURL('image/png');
+    a.click();
+  };
+
+  window.copyCmpCaption = function () {
+    var ta = document.getElementById('cmp-caption-ta');
+    if (!ta) return;
+    navigator.clipboard.writeText(ta.value).then(function () {
+      var btn = document.getElementById('btn-copy-cmp');
+      if (!btn) return;
+      btn.textContent = '✓ Kopyalandı';
+      setTimeout(function () { btn.textContent = 'Kopyala'; }, 1800);
+    });
+  };
+
+  window.downloadCmpPNG = function () {
+    var date = new Date().toISOString().slice(0, 10);
+    var a = document.createElement('a');
+    a.download = 'jb-vergleich-post-' + date + '.png';
+    a.href = cmpCv.toDataURL('image/png');
+    a.click();
+  };
+
+  window.downloadCmpStory = function () {
+    var date = new Date().toISOString().slice(0, 10);
+    var a = document.createElement('a');
+    a.download = 'jb-vergleich-story-' + date + '.png';
+    a.href = cmpCv2.toDataURL('image/png');
+    a.click();
+  };
+
+  /* ═══════════════════════════════════════════════════════════════
+     HELPERS
+  ═══════════════════════════════════════════════════════════════ */
+  function setVal(id, val) {
+    var el = document.getElementById(id);
+    if (el) el.value = val;
+  }
+  function esc(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     INIT
+  ═══════════════════════════════════════════════════════════════ */
+  function init() {
+    if (appInited) return;
+    appInited = true;
+
+    setupModeTabs();
+    setupReelsSearch();
+    setupCompareSearch();
+    setupCompareActions();
+    renderCmpPicked();
+    setMode('ig');
+
+    draw();
+    drawStory();
+    drawReelsPoster();
+    updateReelsHotelInfo();
+    buildCaption();
+    drawCompare();
+    drawCompareStory();
+    buildCompareCaption();
+  }
+
+  if (sessionStorage.getItem('jb_admin_ok') !== '1') {
+    // Henüz login olmadı — draw başlatılmayacak
+  }
+
+})();
+</script>
+</body>
+</html>

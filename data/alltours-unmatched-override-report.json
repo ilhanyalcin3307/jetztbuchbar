@@ -1,0 +1,721 @@
+{
+  "generatedAt": "2026-05-29T13:34:49.265Z",
+  "targetPages": [
+    "frankreich/index.html",
+    "tuerkei/istanbul/index.html",
+    "italien/rom/index.html",
+    "portugal/hotels-lissabon/index.html"
+  ],
+  "stats": {
+    "totalFeedRows": 21181,
+    "targetGiataHotelIds": 94,
+    "unmatchedRowsWithDeepLink": 16727,
+    "targetEligibleUnmatchedRows": 0,
+    "uniqueNewOverrideMappings": 0,
+    "overridesBefore": 3,
+    "overridesAfter": 3
+  },
+  "newMappings": [],
+  "unmatchedSample": [
+    {
+      "merchantProductId": "HRG121",
+      "awProductId": "44184167299",
+      "productName": "Hotel Utopia Beach",
+      "deepLinkHotelId": "54",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "RMF242",
+      "awProductId": "43031037944",
+      "productName": "Mövenpick Resort El Quseir",
+      "deepLinkHotelId": "84",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "POP106",
+      "awProductId": "41962648040",
+      "productName": "Hotel Villa Taina",
+      "deepLinkHotelId": "310",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "POP08",
+      "awProductId": "41962648041",
+      "productName": "Gran Ventana Beach Resort",
+      "deepLinkHotelId": "343",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "SDQ126",
+      "awProductId": "38343243055",
+      "productName": "Bahia Principe Escape Samaná",
+      "deepLinkHotelId": "367",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "HER467",
+      "awProductId": "36165732999",
+      "productName": "Anissa Beach & Village Hotel",
+      "deepLinkHotelId": "791",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "HER370",
+      "awProductId": "44686225444",
+      "productName": "Iberostar Waves Creta Panorama & Mare",
+      "deepLinkHotelId": "1009",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "BRI006",
+      "awProductId": "44501021204",
+      "productName": "Grand Hotel Masseria Santa Lucia",
+      "deepLinkHotelId": "1564",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "CTA010",
+      "awProductId": "42752709178",
+      "productName": "Hotel Ariston & Palazzo Santa Caterina",
+      "deepLinkHotelId": "1591",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "XRY152",
+      "awProductId": "36165731305",
+      "productName": "Hotel Iberostar Waves Royal Andalus",
+      "deepLinkHotelId": "2441",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "FUE132",
+      "awProductId": "36165731959",
+      "productName": "Alua Suites Fuerteventura",
+      "deepLinkHotelId": "2579",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "FUE189",
+      "awProductId": "36165731962",
+      "productName": "H10 Ocean Suites",
+      "deepLinkHotelId": "2585",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "FUE50",
+      "awProductId": "36165731963",
+      "productName": "Hotel SBH Crystal Beach & Suites",
+      "deepLinkHotelId": "2593",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "FUE171",
+      "awProductId": "36165731964",
+      "productName": "SBH Monica Beach Resort",
+      "deepLinkHotelId": "2595",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "FUE127",
+      "awProductId": "36971530447",
+      "productName": "Hotel IberostarSelection Fuerteventura Palace",
+      "deepLinkHotelId": "2606",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "FUE30",
+      "awProductId": "36165731968",
+      "productName": "Hotel Palm Garden",
+      "deepLinkHotelId": "2608",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "FUE147",
+      "awProductId": "36165731969",
+      "productName": "Hotel SBH Maxorata Resort",
+      "deepLinkHotelId": "2610",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "FUE108",
+      "awProductId": "36165731971",
+      "productName": "Hotel Sol Fuerteventura Jandia",
+      "deepLinkHotelId": "2616",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "LPA18",
+      "awProductId": "36165731997",
+      "productName": "Hotel Maritim Playa",
+      "deepLinkHotelId": "2762",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "LPA267",
+      "awProductId": "36165731998",
+      "productName": "Hotel HL Miraflor Suites",
+      "deepLinkHotelId": "2765",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "LPA324",
+      "awProductId": "38157624135",
+      "productName": "Appartements Nogal",
+      "deepLinkHotelId": "2770",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "LPA219",
+      "awProductId": "36165732081",
+      "productName": "HL Suitehotel Playa del Inglés",
+      "deepLinkHotelId": "2775",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "LPA259",
+      "awProductId": "36165732083",
+      "productName": "HL Rondo Hotel",
+      "deepLinkHotelId": "2783",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "ACE01",
+      "awProductId": "40345629517",
+      "productName": "Hotel Las Costas",
+      "deepLinkHotelId": "3036",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "ACE97",
+      "awProductId": "36165732115",
+      "productName": "Hotel Floresta",
+      "deepLinkHotelId": "3055",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "ACE186",
+      "awProductId": "36165732116",
+      "productName": "Hotel Hyde Park Lane",
+      "deepLinkHotelId": "3056",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "ACE314",
+      "awProductId": "43829131978",
+      "productName": "Hotel Lanzarote Village",
+      "deepLinkHotelId": "3059",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI549",
+      "awProductId": "44269596329",
+      "productName": "Iberostar Waves Alcudia Park",
+      "deepLinkHotelId": "3074",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI534",
+      "awProductId": "36601728907",
+      "productName": "Iberostar Waves Ciudad Blanca",
+      "deepLinkHotelId": "3080",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI132",
+      "awProductId": "36165731312",
+      "productName": "Blau Punta Reina Resort",
+      "deepLinkHotelId": "3140",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI486",
+      "awProductId": "44518085116",
+      "productName": "Hotel CM Playa del Moro",
+      "deepLinkHotelId": "3176",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI596",
+      "awProductId": "36165732134",
+      "productName": "Hotel Capricho",
+      "deepLinkHotelId": "3200",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI760",
+      "awProductId": "44796777875",
+      "productName": "Iberostar Waves Pinos Park",
+      "deepLinkHotelId": "3202",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI392",
+      "awProductId": "38372504809",
+      "productName": "Hotel Zafiro Alzinar Mar",
+      "deepLinkHotelId": "3268",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI236",
+      "awProductId": "38188962195",
+      "productName": "Hotel Valentin Reina Paguera",
+      "deepLinkHotelId": "3433",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI857",
+      "awProductId": "36165731314",
+      "productName": "Hotel Valentin Somni Suite",
+      "deepLinkHotelId": "3435",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI795",
+      "awProductId": "43819942950",
+      "productName": "MYSEAHOUSE Flamingo",
+      "deepLinkHotelId": "3465",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI586",
+      "awProductId": "36165731317",
+      "productName": "Iberostar W.Bahia d.Palma",
+      "deepLinkHotelId": "3492",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "TFS226",
+      "awProductId": "37433733643",
+      "productName": "Iberostar Hotel Waves Bouganville Playa",
+      "deepLinkHotelId": "3661",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "TFS377",
+      "awProductId": "44344983704",
+      "productName": "Iberostar Hotel Waves Las Dalias",
+      "deepLinkHotelId": "3684",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "TFS375",
+      "awProductId": "43909689138",
+      "productName": "Iberostar Selection Sabila",
+      "deepLinkHotelId": "3702",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "TFS13",
+      "awProductId": "37782440589",
+      "productName": "Hotel Silken Saaj Mar",
+      "deepLinkHotelId": "3757",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "MIR226",
+      "awProductId": "43909689139",
+      "productName": "Dar Khayam",
+      "deepLinkHotelId": "3997",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "NBE817",
+      "awProductId": "44416881949",
+      "productName": "Nozha Beach Resort & spa",
+      "deepLinkHotelId": "4015",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "MIR189",
+      "awProductId": "44099453057",
+      "productName": "Hotel Mahdia Beach & Aquapark",
+      "deepLinkHotelId": "4039",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "MIR147",
+      "awProductId": "43819943006",
+      "productName": "Hotel Mahdia Palace Thalasso",
+      "deepLinkHotelId": "4040",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "NBE203",
+      "awProductId": "36860067010",
+      "productName": "Hotel Marhaba Palace",
+      "deepLinkHotelId": "4074",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "MIR192",
+      "awProductId": "44111472439",
+      "productName": "Hilton Skanes Monastir Beach Resort",
+      "deepLinkHotelId": "4098",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT184",
+      "awProductId": "36165731330",
+      "productName": "Alaaddin Beach Hotel",
+      "deepLinkHotelId": "4518",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT471",
+      "awProductId": "36165731333",
+      "productName": "Hotel Eftalia Downtown",
+      "deepLinkHotelId": "4569",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT39",
+      "awProductId": "36165731334",
+      "productName": "Gardenia Hotel Alanya",
+      "deepLinkHotelId": "4577",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT113",
+      "awProductId": "36165731338",
+      "productName": "Aska Hotels Just In Beach",
+      "deepLinkHotelId": "4598",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT02",
+      "awProductId": "36165731339",
+      "productName": "Kahya Hotel",
+      "deepLinkHotelId": "4599",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT592",
+      "awProductId": "36165731341",
+      "productName": "Riviera Hotel and Spa",
+      "deepLinkHotelId": "4636",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT644",
+      "awProductId": "36165731343",
+      "productName": "Riviera Zen",
+      "deepLinkHotelId": "4639",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT328",
+      "awProductId": "36165731567",
+      "productName": "Savk Hotel",
+      "deepLinkHotelId": "4641",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT255",
+      "awProductId": "36165731359",
+      "productName": "The Sense Deluxe Hotel",
+      "deepLinkHotelId": "4872",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT240",
+      "awProductId": "36165731360",
+      "productName": "Seher Kumköy Star Resort & Spa",
+      "deepLinkHotelId": "4880",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT103",
+      "awProductId": "36165731365",
+      "productName": "Hotel Oleander Beach Resort",
+      "deepLinkHotelId": "4896",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT106",
+      "awProductId": "36165731366",
+      "productName": "VONRESORT Golden Beach",
+      "deepLinkHotelId": "4902",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT553",
+      "awProductId": "36165731367",
+      "productName": "Hotel Seher Resort & Spa",
+      "deepLinkHotelId": "4905",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT246",
+      "awProductId": "36165731368",
+      "productName": "Side Prenses Hotel",
+      "deepLinkHotelId": "4908",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT673",
+      "awProductId": "42141775168",
+      "productName": "Diamond De Luxe Hotel & Spa",
+      "deepLinkHotelId": "4926",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT88",
+      "awProductId": "36165731374",
+      "productName": "Club Hotel Turan Prince World",
+      "deepLinkHotelId": "4928",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AUH123",
+      "awProductId": "40191048467",
+      "productName": "Beach Rotana Abu Dhabi",
+      "deepLinkHotelId": "4998",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "DXB121",
+      "awProductId": "36186728987",
+      "productName": "Al Habtoor Grand ResortAutograph Collection",
+      "deepLinkHotelId": "5002",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "LCA183",
+      "awProductId": "36709270867",
+      "productName": "Atlantica Golden Beach",
+      "deepLinkHotelId": "5120",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "LCA199",
+      "awProductId": "37218200829",
+      "productName": "Louis Ledra Beach",
+      "deepLinkHotelId": "5141",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "LCA180",
+      "awProductId": "44146294561",
+      "productName": "Olympic Lagoon Resort Paphos",
+      "deepLinkHotelId": "5149",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "LCA174",
+      "awProductId": "36165731381",
+      "productName": "Louis Phaethon Beach",
+      "deepLinkHotelId": "5153",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT190",
+      "awProductId": "36165731384",
+      "productName": "Limak Limra Hotel & Resort",
+      "deepLinkHotelId": "5922",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT209",
+      "awProductId": "37511918627",
+      "productName": "Nerton Hotel",
+      "deepLinkHotelId": "5928",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI338",
+      "awProductId": "43582435724",
+      "productName": "Hotel Alcúdia Garden",
+      "deepLinkHotelId": "6629",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "TFS376",
+      "awProductId": "43876884775",
+      "productName": "Iberostar Selection Anthelia",
+      "deepLinkHotelId": "6884",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT161",
+      "awProductId": "36165732664",
+      "productName": "Alaiye Kleopatra",
+      "deepLinkHotelId": "7237",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "LPA129",
+      "awProductId": "41263841115",
+      "productName": "Don Palomon",
+      "deepLinkHotelId": "11642",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "SDQ165",
+      "awProductId": "43744952943",
+      "productName": "Bahia Principe Explore El Portillo",
+      "deepLinkHotelId": "12000",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT273",
+      "awProductId": "36165731410",
+      "productName": "VONRESORT Golden Coast",
+      "deepLinkHotelId": "13280",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT312",
+      "awProductId": "38037851739",
+      "productName": "Grand Seker Hotel",
+      "deepLinkHotelId": "13508",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AYT202",
+      "awProductId": "36165731411",
+      "productName": "Gypsophila Holiday",
+      "deepLinkHotelId": "13683",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "POP153",
+      "awProductId": "36964065511",
+      "productName": "Iberostar Waves Costa Dorada",
+      "deepLinkHotelId": "14542",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "HER525",
+      "awProductId": "44678867678",
+      "productName": "Iberostar Selection Creta Marine",
+      "deepLinkHotelId": "14545",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "AUH221",
+      "awProductId": "40191048468",
+      "productName": "InterContinental Abu Dhabi",
+      "deepLinkHotelId": "14864",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "DXB155",
+      "awProductId": "44790394650",
+      "productName": "Hotel Jumeira Rotana",
+      "deepLinkHotelId": "15122",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "MLE011S",
+      "awProductId": "44379705449",
+      "productName": "Kuredu Island Resort & Spa",
+      "deepLinkHotelId": "15580",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI485",
+      "awProductId": "36170365141",
+      "productName": "Iberostar Waves Cala Millor",
+      "deepLinkHotelId": "16947",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI192",
+      "awProductId": "36165732283",
+      "productName": "App.-Hotel Novo Mar",
+      "deepLinkHotelId": "18057",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI344",
+      "awProductId": "41426221157",
+      "productName": "Paradiso Garden",
+      "deepLinkHotelId": "18691",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "DXB156",
+      "awProductId": "44790394651",
+      "productName": "Sheraton Jumeirah Beach",
+      "deepLinkHotelId": "19798",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "POP175",
+      "awProductId": "41962648057",
+      "productName": "Playabachata Spa Resort",
+      "deepLinkHotelId": "20425",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "POP114",
+      "awProductId": "41962648044",
+      "productName": "Viva Heavens by Wyndham",
+      "deepLinkHotelId": "20756",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "PMI343",
+      "awProductId": "36165731424",
+      "productName": "Hotel Zafiro Tropic",
+      "deepLinkHotelId": "24230",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "POP05",
+      "awProductId": "41962648046",
+      "productName": "Marien Puerto Plata",
+      "deepLinkHotelId": "26467",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "TFS220",
+      "awProductId": "43499017030",
+      "productName": "Hotel Bahia Principe Escape Tenerife",
+      "deepLinkHotelId": "26584",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "SDQ213",
+      "awProductId": "43448461087",
+      "productName": "Viva V Samana by Wyndham",
+      "deepLinkHotelId": "27775",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "POP118",
+      "awProductId": "44230111622",
+      "productName": "Senator Puerto Plata Spa Resort",
+      "deepLinkHotelId": "28488",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "ACE155",
+      "awProductId": "36165732323",
+      "productName": "Secrets Lanzarote Resort& Spa",
+      "deepLinkHotelId": "28925",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "LCA171",
+      "awProductId": "36165731623",
+      "productName": "Louis Paphos Breeze",
+      "deepLinkHotelId": "29406",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "DXB103",
+      "awProductId": "44760882106",
+      "productName": "Hotel Towers Rotana",
+      "deepLinkHotelId": "29612",
+      "inTargetRegionByGiataId": false
+    },
+    {
+      "merchantProductId": "DXB213",
+      "awProductId": "44790394652",
+      "productName": "Grand Hyatt Dubai Resort & Waterpark",
+      "deepLinkHotelId": "33395",
+      "inTargetRegionByGiataId": false
+    }
+  ]
+}

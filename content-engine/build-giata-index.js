@@ -9,6 +9,18 @@
 const fs   = require('fs');
 const path = require('path');
 
+// .env.local dosyasını yükle (update-google-ratings.js ile aynı pattern)
+try {
+  const envFile = path.join(__dirname, '..', '.env.local');
+  if (fs.existsSync(envFile)) {
+    const lines = fs.readFileSync(envFile, 'utf-8').split('\n');
+    for (const line of lines) {
+      const m = line.match(/^([A-Z_][A-Z0-9_]*)=(.*)/);
+      if (m && !process.env[m[1]]) process.env[m[1]] = m[2].trim().replace(/^['"]|['"]$/g, '');
+    }
+  }
+} catch (e) { /* ignore */ }
+
 const API_KEY = process.env.GIATA_API_KEY;
 if (!API_KEY) {
   console.log('INFO: GIATA_API_KEY nicht gesetzt - Build uebersprungen.');
@@ -70,7 +82,25 @@ function extractInfo(d, cc) {
   return { giataId: String(d.giataId || d.id), name: name, city: city, cityEn: cityEn, cc: cc || '', country: country, stars: stars, factIds: factIds };
 }
 
+const MAX_INDEX_AGE_DAYS = 7; // Index nur neu bauen wenn älter als 7 Tage
+
 async function main() {
+  // ── Früher Ausstieg wenn Index aktuell genug ist ────────────────────────────
+  if (fs.existsSync(OUTPUT)) {
+    try {
+      var existing = JSON.parse(fs.readFileSync(OUTPUT, 'utf8'));
+      var ts = existing._generatedAt || null;
+      if (ts) {
+        var ageDays = (Date.now() - new Date(ts).getTime()) / (1000 * 86400);
+        if (ageDays < MAX_INDEX_AGE_DAYS) {
+          console.log('INFO: Giata index is ' + ageDays.toFixed(1) + ' days old (< ' + MAX_INDEX_AGE_DAYS + ' days). Skipping rebuild.');
+          process.exit(0);
+        }
+        console.log('INFO: Giata index is ' + ageDays.toFixed(1) + ' days old. Rebuilding...');
+      }
+    } catch(e) { /* Index unlesbar – neu bauen */ }
+  }
+
   console.log('Building Giata search index...');
   var index = [];
 
@@ -104,8 +134,16 @@ async function main() {
   }
 
   index.sort(function(a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
-  fs.writeFileSync(OUTPUT, JSON.stringify(index), 'utf8');
-  console.log('Done! ' + index.length + ' hotels saved to ' + OUTPUT);
+
+  if (index.length === 0) {
+    console.log('WARNING: 0 hotels found (GIATA API may be down). Keeping existing file.');
+    process.exit(0);
+  }
+
+  // Timestamp mitspeichern damit der nächste Build weiß wie alt der Index ist
+  var output = { _generatedAt: new Date().toISOString(), hotels: index };
+  fs.writeFileSync(OUTPUT, JSON.stringify(output), 'utf8');
+  console.log('Done! ' + index.length + ' hotels saved to ' + OUTPUT + ' (generated: ' + output._generatedAt + ')');
 }
 
 main().catch(function(e) {

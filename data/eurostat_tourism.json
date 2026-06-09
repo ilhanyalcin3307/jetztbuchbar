@@ -1,0 +1,284 @@
+{
+  "generated_at": "2026-05-25T06:31:28.745Z",
+  "source": "Eurostat REST API – https://ec.europa.eu/eurostat/api/dissemination/",
+  "note": "Değerler: seyahat/geceleme sayısı (NR). DE/AT: purpose=TOTAL, duration=N_GE1 (1+ gece). TR otel: c_resid=FOR (yabancı ziyaretçi).",
+  "datasets": {
+    "germany_outbound": {
+      "label": "Almanya – Yurt Dışı Seyahatler (tour_dem_ttw)",
+      "dataset_label": "Trips by detailed country/world region of main destination",
+      "last_updated": "2026-05-08T11:00:00+0200",
+      "filters_applied": {
+        "purpose": "TOTAL (tüm seyahat amaçları)",
+        "duration": "N_GE1 (1+ gece)"
+      },
+      "time_series_summary": {
+        "first_year": "2012",
+        "last_year": "2024",
+        "years_count": 13,
+        "yearly_data": {
+          "2012": 1502782784,
+          "2013": 1505519650,
+          "2014": 1435151282,
+          "2015": 1505541579,
+          "2016": 1558077392,
+          "2017": 1481581715,
+          "2018": 1634404673,
+          "2019": 1589217909,
+          "2020": 758813013,
+          "2021": 928304859,
+          "2022": 1178743295,
+          "2023": 1330113231,
+          "2024": 1474152652
+        },
+        "average_per_year": 1375569541,
+        "peak_year": {
+          "year": "2018",
+          "value": 1634404673
+        },
+        "lowest_year": {
+          "year": "2020",
+          "value": 758813013
+        },
+        "total_sum": 17882404034
+      },
+      "top_destinations": [
+        {
+          "code": "DE",
+          "name": "Germany",
+          "total_trips_all_years": 1965340417
+        },
+        {
+          "code": "AT",
+          "name": "Austria",
+          "total_trips_all_years": 147498908
+        },
+        {
+          "code": "IT",
+          "name": "Italy",
+          "total_trips_all_years": 141306052
+        },
+        {
+          "code": "ES",
+          "name": "Spain",
+          "total_trips_all_years": 122893498
+        },
+        {
+          "code": "NL",
+          "name": "Netherlands",
+          "total_trips_all_years": 75061405
+        },
+        {
+          "code": "FR",
+          "name": "France",
+          "total_trips_all_years": 72799381
+        },
+        {
+          "code": "TR",
+          "name": "Türkiye",
+          "total_trips_all_years": 46224559
+        },
+        {
+          "code": "CH",
+          "name": "Switzerland",
+          "total_trips_all_years": 40139950
+        },
+        {
+          "code": "PL",
+          "name": "Poland",
+          "total_trips_all_years": 37055550
+        },
+        {
+          "code": "UK",
+          "name": "United Kingdom",
+          "total_trips_all_years": 34786302
+        },
+        {
+          "code": "EL",
+          "name": "Greece",
+          "total_trips_all_years": 33048396
+        },
+        {
+          "code": "HR",
+          "name": "Croatia",
+          "total_trips_all_years": 27997222
+        },
+        {
+          "code": "DK",
+          "name": "Denmark",
+          "total_trips_all_years": 27936962
+        },
+        {
+          "code": "US",
+          "name": "United States",
+          "total_trips_all_years": 26966972
+        },
+        {
+          "code": "CZ",
+          "name": "Czechia",
+          "total_trips_all_years": 25708433
+        }
+      ]
+    },
+    "austria_outbound": {
+      "label": "Avusturya – Yurt Dışı Seyahatler (tour_dem_ttw)",
+      "dataset_label": "Trips by detailed country/world region of main destination",
+      "last_updated": "2026-05-08T11:00:00+0200",
+      "filters_applied": {
+        "purpose": "TOTAL (tüm seyahat amaçları)",
+        "duration": "N_GE1 (1+ gece)"
+      },
+      "time_series_summary": {
+        "first_year": "2012",
+        "last_year": "2024",
+        "years_count": 13,
+        "yearly_data": {
+          "2012": 136366663,
+          "2013": 138808543,
+          "2014": 139704704,
+          "2015": 134717163,
+          "2016": 147020787,
+          "2017": 144335783,
+          "2018": 145688761,
+          "2019": 154502815,
+          "2020": 74899070,
+          "2021": 97737902,
+          "2022": 155565841,
+          "2023": 167841205,
+          "2024": 170280942
+        },
+        "average_per_year": 139036168,
+        "peak_year": {
+          "year": "2024",
+          "value": 170280942
+        },
+        "lowest_year": {
+          "year": "2020",
+          "value": 74899070
+        },
+        "total_sum": 1807470179
+      },
+      "top_destinations": [
+        {
+          "code": "AT",
+          "name": "Austria",
+          "total_trips_all_years": 159709381
+        },
+        {
+          "code": "DE",
+          "name": "Germany",
+          "total_trips_all_years": 29342323
+        },
+        {
+          "code": "IT",
+          "name": "Italy",
+          "total_trips_all_years": 28498396
+        },
+        {
+          "code": "HR",
+          "name": "Croatia",
+          "total_trips_all_years": 15598143
+        },
+        {
+          "code": "ES",
+          "name": "Spain",
+          "total_trips_all_years": 7562549
+        },
+        {
+          "code": "HU",
+          "name": "Hungary",
+          "total_trips_all_years": 5421156
+        },
+        {
+          "code": "EL",
+          "name": "Greece",
+          "total_trips_all_years": 5292827
+        },
+        {
+          "code": "FR",
+          "name": "France",
+          "total_trips_all_years": 4274151
+        },
+        {
+          "code": "CZ",
+          "name": "Czechia",
+          "total_trips_all_years": 4000545
+        },
+        {
+          "code": "CH",
+          "name": "Switzerland",
+          "total_trips_all_years": 3606568
+        },
+        {
+          "code": "UK",
+          "name": "United Kingdom",
+          "total_trips_all_years": 3596297
+        },
+        {
+          "code": "TR",
+          "name": "Türkiye",
+          "total_trips_all_years": 3421818
+        },
+        {
+          "code": "SI",
+          "name": "Slovenia",
+          "total_trips_all_years": 3318001
+        },
+        {
+          "code": "PL",
+          "name": "Poland",
+          "total_trips_all_years": 2269629
+        },
+        {
+          "code": "SK",
+          "name": "Slovakia",
+          "total_trips_all_years": 2028865
+        }
+      ]
+    },
+    "turkey_hotel_nights": {
+      "label": "Türkiye – Yabancı Ziyaretçi Geceleme Sayıları (tour_occ_ninat)",
+      "dataset_label": "Nights spent at tourist accommodation establishments",
+      "last_updated": "2026-05-22T11:00:00+0200",
+      "filters_applied": {
+        "purpose": "TOTAL (tüm seyahat amaçları)",
+        "duration": "N/A",
+        "c_resid": "FOR (yabancı ziyaretçi)"
+      },
+      "time_series_summary": {
+        "first_year": "2013",
+        "last_year": "2024",
+        "years_count": 11,
+        "yearly_data": {
+          "2013": 89594261,
+          "2014": 97581075,
+          "2015": 96400316,
+          "2016": 65793316,
+          "2018": 112245139,
+          "2019": 132808208,
+          "2020": 40095043,
+          "2021": 93123579,
+          "2022": 148552999,
+          "2023": 130592641,
+          "2024": 139599507
+        },
+        "average_per_year": 104216917,
+        "peak_year": {
+          "year": "2022",
+          "value": 148552999
+        },
+        "lowest_year": {
+          "year": "2020",
+          "value": 40095043
+        },
+        "total_sum": 1146386084
+      },
+      "top_destinations": [
+        {
+          "code": "FOR",
+          "name": "Foreign country",
+          "total_trips_all_years": 1146386084
+        }
+      ]
+    }
+  }
+}

@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="canonical" href="https://jetztbuchbar.de/" />
+  <link rel="canonical" href="https://www.jetztbuchbar.de/" />
 
-  <title>Hotels vergleichen &amp; günstig buchen – mit KI-Empfehlung | JetztBuchbar</title>
-  <meta name="description" content="Bis zu 4 Hotels direkt vergleichen – Ausstattung, Lage und Bewertung auf einen Blick. Mit automatischer Empfehlung. Türkei, Griechenland, Spanien und mehr." />
+  <title>Hotels vergleichen mit JB-Score – Ehrlich, unabhängig &amp; kostenlos | JetztBuchbar</title>
+  <meta name="description" content="Über 2.000 Hotels mit verifizierter Ausstattung, Sicherheitslage &amp; Gästebewertungen ehrlich vergleichen. Finde dein bestes Hotel – kostenlos. Türkei, Griechenland, Spanien und mehr." />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="JetztBuchbar.de – Flüge &amp; Hotels günstig buchen" />
-  <meta property="og:description" content="Flüge und Hotels direkt vergleichen und günstig buchen. Sofort buchbar." />
+  <meta property="og:title" content="JetztBuchbar.de – Hotels ehrlich vergleichen &amp; bewerten" />
+  <meta property="og:description" content="Über 2.000 Hotels mit verifizierter Ausstattung, Sicherheitslage &amp; Gästebewertungen. Finde dein bestes Hotel – kostenlos." />
   <meta property="og:url" content="https://www.jetztbuchbar.de/" />
     <meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80" />
   <meta property="og:image:width" content="1200" />
@@ -18,8 +18,8 @@
   <meta property="og:type" content="website" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="JetztBuchbar.de – Flüge &amp; Hotels günstig buchen" />
-  <meta name="twitter:description" content="Flüge und Hotels direkt vergleichen und günstig buchen. Sofort buchbar." />
+  <meta name="twitter:title" content="JetztBuchbar.de – Hotels ehrlich vergleichen &amp; bewerten" />
+  <meta name="twitter:description" content="Über 2.000 Hotels mit verifizierter Ausstattung, Sicherheitslage &amp; Gästebewertungen. Finde dein bestes Hotel – kostenlos." />
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80" />
   <meta name="twitter:site" content="@jetztbuchbar" />
 <!-- JSON-LD: WebSite + Organization -->
@@ -47,8 +47,7 @@
         "url": "https://www.jetztbuchbar.de/",
         "logo": "https://www.jetztbuchbar.de/",
         "sameAs": [
-          "https://www.instagram.com/jetztbuchbar.de/",
-          "https://www.facebook.com/jetztbuchbar/"
+          "https://www.instagram.com/jbscore.jetztbuchbar/"
         ],
         "address": {
           "@type": "PostalAddress",
@@ -381,8 +380,240 @@
       text-shadow: 0 1px 4px rgba(0,0,0,0.6);
     }
 
+    .theme-carousel-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      margin-top: 0.35rem;
+    }
+    .theme-carousel-row h3 {
+      font-size: 1.03rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .theme-carousel-row h3 span {
+      color: var(--accent);
+    }
+
+    .awin-carousel {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 0.45rem;
+    }
+    .awin-carousel::-webkit-scrollbar { display: none; }
+
+    .awin-banner-card {
+      flex: 0 0 clamp(220px, 24vw, 300px);
+      scroll-snap-align: start;
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .awin-banner-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }
+
+    .awin-banner-card img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .awin-banner-card:hover img { transform: scale(1.04); }
+
+    .awin-banner-card {
+      flex: 0 0 clamp(185px, 20vw, 240px);
+      scroll-snap-align: start;
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .awin-badge {
+      position: absolute;
+      top: 0.7rem;
+      left: 0.7rem;
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 0.2rem 0.55rem;
+      z-index: 2;
+    }
+
+    .awin-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.86) 0%, rgba(0,0,0,0.3) 52%, transparent 78%);
+      display: flex;
+      align-items: flex-end;
+      padding: 0.95rem;
+    }
+
+    .awin-banner-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.62);
+      display: -webkit-box;
+      line-clamp: 3;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .partner-cruise-carousel {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 0.45rem;
+    }
+
+    .partner-cruise-carousel::-webkit-scrollbar { display: none; }
+
+    .partner-cruise-card {
+      flex: 0 0 clamp(250px, 25vw, 330px);
+      scroll-snap-align: start;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .partner-cruise-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,200,150,0.6);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }
+
+    .partner-cruise-visual {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: #0f0f0f;
+    }
+
+    .partner-cruise-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .partner-cruise-card:hover .partner-cruise-visual img { transform: scale(1.05); }
+
+    .partner-badge {
+      position: absolute;
+      top: 0.6rem;
+      left: 0.6rem;
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 999px;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 0.18rem 0.5rem;
+      z-index: 2;
+    }
+
+    .partner-cruise-body {
+      padding: 0.85rem 0.9rem 1rem;
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .partner-cruise-title {
+      font-size: 0.93rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text);
+      display: -webkit-box;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .partner-cruise-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .partner-cruise-price {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      margin-top: 0.2rem;
+    }
+
+    .partner-cruise-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 0.15rem;
+    }
+
+    .partner-cruise-cta::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+
+    .partner-cruise-card:hover .partner-cruise-cta::after { transform: translateX(3px); }
+
+    .partner-cruise-empty {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding: 0.75rem 0.1rem;
+    }
+
     @media (max-width: 600px) {
       .dest-grid { grid-template-columns: repeat(2, 1fr); }
+      .awin-banner-card { flex: 0 0 min(56vw, 240px); }
+      .partner-cruise-card { flex: 0 0 min(78vw, 320px); }
     }
 
     /* ── STORY GRID (Länderkarten 9:16, Instagram-Story-Format) ── */
@@ -461,6 +692,25 @@
       -webkit-backdrop-filter: blur(4px);
       flex-shrink: 0;
       line-height: 1;
+    }
+    .story-price-chip {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.65rem;
+      z-index: 2;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 999px;
+      padding: 0.18rem 0.5rem;
+      color: #fff;
+      font-size: 0.62rem;
+      font-weight: 800;
+      line-height: 1.1;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      white-space: nowrap;
+      display: none;
     }
     .story-name {
       color: #fff;
@@ -566,7 +816,8 @@
     .hs-ac-item:hover,.hs-ac-item.active { background:rgba(255,255,255,.07); }
     .hs-ac-name { font-weight:600;color:var(--text); }
     .hs-ac-loc { font-size:.72rem;color:var(--text-muted); }
-    .hs-btn { padding:.6rem .95rem;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .18s;font-family:inherit;flex-shrink:0; }
+    .hs-actions { display:flex;gap:.5rem;margin-top:.5rem; }
+    .hs-btn { padding:.68rem 1rem;border-radius:10px;font-size:.88rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .18s;font-family:inherit;flex:1; }
     .hs-btn-search { background:var(--accent);color:#000;border:1px solid var(--accent); }
     .hs-btn-search:hover { background:#00e0ab; }
     .hs-btn-compare { background:transparent;color:var(--text-muted);border:1px solid rgba(255,255,255,.16); }
@@ -578,7 +829,7 @@
     .hs-chip-rm { background:none;border:none;color:rgba(0,200,150,.6);cursor:pointer;font-size:.8rem;padding:0;line-height:1;margin-left:2px;transition:color .2s; }
     .hs-chip-rm:hover { color:var(--accent); }
     .hs-hint { font-size:.76rem;color:var(--text-muted);margin-top:.45rem;text-align:center; }
-    @media(max-width:600px){.hs-bar{flex-wrap:wrap}.hs-input-wrap{width:100%}.hs-btn{flex:1}}
+    @media(max-width:600px){.hs-input-wrap{width:100%}}
 
     .hc-demo-banner {
       display: flex;
@@ -923,6 +1174,14 @@
   gtag('config', 'G-YCDTX8ZEQ3');
 </script>
   <style>@keyframes jb-pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,200,150,.55)}60%{box-shadow:0 0 0 5px rgba(0,200,150,0)}}</style>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wzrhhc1m1p");
+</script>
 </head>
 <body>
 
@@ -943,6 +1202,8 @@
           <input type="text" id="hs-input" placeholder="Hotelname oder Ort suchen…" autocomplete="off" />
           <div class="hs-autocomplete" id="hs-autocomplete"></div>
         </div>
+      </div>
+      <div class="hs-actions">
         <button class="hs-btn hs-btn-search" id="hs-btn-search">Suchen</button>
         <button class="hs-btn hs-btn-compare" id="hs-btn-compare">⇄ Vergleichen</button>
       </div>
@@ -950,6 +1211,9 @@
       <p class="hs-hint" id="hs-hint" style="display:none">Hotel auswählen &amp; zum Vergleich hinzufügen (max. 3)</p>
     </div>
   </div>
+
+  <!-- ── HOTEL-FINDER QUIZ ── -->
+  <div id="hotel-finder-quiz" hidden aria-hidden="true"></div>
 
   <!-- ── REISEZIEL-BATTLE ── -->
   <style>
@@ -1584,6 +1848,18 @@
           <span class="story-btn">Mehr Details →</span>
         </div>
       </a>
+      <a href="/malediven/" class="story-card">
+        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=75&auto=format&fit=crop" alt="Malediven" loading="lazy" class="story-img">
+        <div class="story-overlay"></div>
+        <div class="story-top">
+          <div class="story-flag">🇲🇻</div>
+          <span class="story-name">Malediven</span>
+        </div>
+        <div class="story-bottom">
+          <span class="story-count" data-count-cc="MV"></span>
+          <span class="story-btn">Mehr Details →</span>
+        </div>
+      </a>
       <a href="/tunesien/" class="story-card">
         <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?w=600&q=75&auto=format&fit=crop" alt="Tunesien" loading="lazy" class="story-img">
         <div class="story-overlay"></div>
@@ -1624,15 +1900,102 @@
     </div><!-- /.story-scroll-wrap -->
     <script>
       (function(){
-        fetch('/api/giata?action=counts')
-          .then(function(r){ return r.ok ? r.json() : null; })
-          .then(function(d){
-            if (!d || !d.counts) return;
+        var CC_TO_COUNTRY = {
+          TR: 'Türkei', GR: 'Griechenland', ES: 'Spanien', IT: 'Italien', PT: 'Portugal',
+          HR: 'Kroatien', FR: 'Frankreich', EG: 'Ägypten', AE: 'Vereinigte Arabische Emirate',
+          BG: 'Bulgarien', MA: 'Marokko', TN: 'Tunesien', JO: 'Jordanien', MT: 'Malta',
+          CY: 'Zypern', CV: 'Kap Verde', MV: 'Malediven'
+        };
+
+        function fmtPrice(value) {
+          if (!Number.isFinite(value)) return '';
+          return Number(Math.round(value)).toLocaleString('de-DE');
+        }
+
+        function normalizeKey(value) {
+          return String(value || '')
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/ß/g, 'ss')
+            .replace(/[^a-z0-9]+/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+        }
+
+        function applyCountryPrices(priceMins) {
+          var minByCountry = (priceMins && priceMins.byCountry) ? priceMins.byCountry : null;
+          if (!minByCountry) return;
+
+          document.querySelectorAll('[data-count-cc]').forEach(function(el){
+            var cc = String(el.getAttribute('data-count-cc') || '').toUpperCase();
+            var card = el.closest('.story-card');
+            if (!card || !cc) return;
+
+            var countryName = CC_TO_COUNTRY[cc] || '';
+            var minPrice = countryName ? minByCountry[countryName] : null;
+            if (!Number.isFinite(minPrice)) return;
+
+            var chip = card.querySelector('.story-price-chip');
+            if (!chip) {
+              chip = document.createElement('span');
+              chip.className = 'story-price-chip';
+              card.appendChild(chip);
+            }
+            chip.textContent = 'ab ' + fmtPrice(minPrice) + ' € p.P.';
+            chip.style.display = 'inline-flex';
+          });
+        }
+
+        function applyCityPrices(priceMins) {
+          if (!priceMins || !priceMins.byCity) return;
+
+          var minByCity = {};
+          Object.keys(priceMins.byCity).forEach(function(city){
+            minByCity[normalizeKey(city)] = priceMins.byCity[city];
+          });
+
+          var citySection = document.getElementById('city-region-cards');
+          if (!citySection) return;
+
+          citySection.querySelectorAll('.story-card').forEach(function(card){
+            var nameEl = card.querySelector('.story-name');
+            if (!nameEl) return;
+
+            var cityKey = normalizeKey(nameEl.textContent || '');
+            if (!cityKey) return;
+
+            var minPrice = minByCity[cityKey];
+            if (!Number.isFinite(minPrice)) return;
+
+            var chip = card.querySelector('.story-price-chip');
+            if (!chip) {
+              chip = document.createElement('span');
+              chip.className = 'story-price-chip';
+              card.appendChild(chip);
+            }
+            chip.textContent = 'ab ' + fmtPrice(minPrice) + ' € p.P.';
+            chip.style.display = 'inline-flex';
+          });
+        }
+
+        Promise.all([
+          fetch('/api/giata?action=counts').then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }),
+          fetch('/api/giata?action=price-mins').then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; })
+        ]).then(function(results){
+          var countsData = results[0];
+          var priceMins = results[1];
+
+          if (countsData && countsData.counts) {
             document.querySelectorAll('[data-count-cc]').forEach(function(el){
-              var n = d.counts[el.getAttribute('data-count-cc')];
+              var n = countsData.counts[el.getAttribute('data-count-cc')];
               if (n) el.textContent = n + ' Hotels';
             });
-          }).catch(function(){});
+          }
+
+          applyCountryPrices(priceMins);
+          applyCityPrices(priceMins);
+        });
       })();
     </script>
   </section>
@@ -1649,10 +2012,11 @@
     <p class="destinations-sub">Die exklusivsten 5-Sterne-Resorts weltweit – Infinity-Pool, Privat-Spa und höchste Ausstattungsqualität. Nur die besten 8 Premium-Hotels.</p>
     <div data-hotel-carousel="*" data-hotel-carousel-type="luxury"></div>
   </section>
+  <script src="/components/hotel-finder-quiz.js" defer></script>
   <script src="/components/hotel-carousel.js" defer></script>
 
   <!-- ── STÄDTE & REGIONEN ── -->
-  <section class="destinations" style="padding-top:0;">
+  <section class="destinations" style="padding-top:0;" id="city-region-cards">
     <h2>Städte &amp; <span>Regionen</span></h2>
     <p class="destinations-sub">Santorini, Istanbul, Mallorca &amp; Co.: Die beliebtesten Urlaubsziele Europas und des Mittelmeerraums – mit Reiseguides, Geheimtipps und direkten Buchungsangeboten.</p>
     <div class="story-grid">
@@ -1903,54 +2267,64 @@
   <section class="destinations" style="padding-top:0;">
     <h2>Reise-<span>Themen</span></h2>
     <p class="destinations-sub">All-Inclusive-Urlaub, Flitterwochen, Last-Minute-Deals oder Familienreisen mit Kindern – hier findest du passende Angebote für jeden Reisestil und jedes Budget.</p>
-    <div class="dest-grid">
-      <a href="/themen/all-inclusive/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="All Inclusive" loading="lazy">
-        <div class="dest-card-label"><span>All Inclusive</span></div>
-      </a>
-      <a href="/themen/flitterwochen/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Flitterwochen" loading="lazy">
-        <div class="dest-card-label"><span>Flitterwochen</span></div>
-      </a>
-      <a href="/themen/last-minute/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Last Minute" loading="lazy">
-        <div class="dest-card-label"><span>Last Minute</span></div>
-      </a>
-      <a href="/themen/urlaub-mit-kindern/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1476673160081-cf065607f449?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Urlaub mit Kindern" loading="lazy">
-        <div class="dest-card-label"><span>Urlaub mit Kindern</span></div>
-      </a>
-      <a href="/themen/tickets/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Tickets & Aktivitäten" loading="lazy">
-        <div class="dest-card-label"><span>Tickets &amp; Aktivitäten</span></div>
-      </a>
+    <div class="theme-carousel-stack">
+      <div class="theme-carousel-row">
+        <h3>💍 <span>Flitterwochen</span> – romantische Top-Hotels mit Live-Preisen</h3>
+        <div data-hotel-carousel="*" data-hotel-carousel-type="honeymoon"></div>
+      </div>
+      <div class="theme-carousel-row">
+        <h3>👨‍👩‍👧‍👦 <span>Urlaub mit Kindern</span> – familienfreundliche Hotels mit Preis</h3>
+        <div data-hotel-carousel="*" data-hotel-carousel-type="family"></div>
+      </div>
+      <div class="theme-carousel-row">
+        <h3>🏖️ <span>All Inclusive</span> – starke Paket-Hotels mit Live-Preis</h3>
+        <div data-hotel-carousel="*" data-hotel-carousel-type="allinclusive"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── KREUZFAHRTEN (Berge & Meer) ── -->
+  <section class="destinations" style="padding-top:0;">
+    <h2>Kreuzfahrten <span>Deals</span></h2>
+    <p class="destinations-sub">Partnerangebote von Berge &amp; Meer: ausgewählte Kreuzfahrt-Deals mit direkter Weiterleitung zum Veranstalter.</p>
+    <div id="bm-cruise-carousel" class="partner-cruise-carousel" aria-label="Berge und Meer Kreuzfahrten Carousel">
+      <div class="partner-cruise-empty">Kreuzfahrt-Angebote werden geladen...</div>
+    </div>
+  </section>
+
+  <section class="destinations" style="padding-top:0;">
+    <h2>Kurzurlaub <span>Gutscheine</span></h2>
+    <p class="destinations-sub">we-are.travel Gutschein-Deals für Wellness, Städtereisen und spontane Kurztrips. Wähle ein Angebot und öffne die Detailseite mit Buchungsoption.</p>
+    <div id="wat-voucher-carousel" class="partner-cruise-carousel" aria-label="we are travel Kurzurlaub Gutschein Carousel">
+      <div class="partner-cruise-empty">Gutschein-Angebote werden geladen...</div>
     </div>
   </section>
 
   <!-- ── AKTIVITÄTEN ── -->
   <section class="destinations" style="padding-top:0;">
     <h2>Aktiv im <span>Urlaub</span></h2>
-    <p class="destinations-sub">Schnorcheln auf Kreta, Surfen auf Kap Verde, Wandern in Kroatien: Aktive Urlauber finden hier die besten Outdoor-Erlebnisse und Abenteuerangebote im Mittelmeer.</p>
-    <div class="dest-grid">
-      <a href="/malta/tauchen/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Tauchen Malta" loading="lazy">
-        <div class="dest-card-label"><span>Tauchen – Malta</span></div>
+    <p class="destinations-sub">Entdecke die besten Ideen für Aktivurlaub 2026: von Schnorcheln auf Kreta über Surfen auf Kap Verde bis Wandern in Kroatien und Wüstensafari in Dubai – mit inspirierenden Angeboten für dein nächstes Abenteuer.</p>
+    <div class="awin-carousel" aria-label="RSD Travel Banner Carousel">
+      <a href="https://www.awin1.com/cread.php?s=3696535&v=84281&q=495764&r=2914133" target="_blank" rel="sponsored noopener noreferrer" class="awin-banner-card" aria-label="RSD Reisen Werbebanner 1 öffnen">
+        <img src="https://www.awin1.com/cshow.php?s=3696535&v=84281&q=495764&r=2914133" alt="RSD Reisen Werbebanner 1" loading="lazy">
       </a>
-      <a href="/kap-verde/surfen/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1651666990398-5585ad2c9eac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Surfen Kap Verde" loading="lazy">
-        <div class="dest-card-label"><span>Surfen – Kap Verde</span></div>
+      <a href="https://www.awin1.com/cread.php?s=3865189&v=84281&q=512468&r=2914133" target="_blank" rel="sponsored noopener noreferrer" class="awin-banner-card" aria-label="RSD Reisen Werbebanner 2 öffnen">
+        <img src="https://www.awin1.com/cshow.php?s=3865189&v=84281&q=512468&r=2914133" alt="RSD Reisen Werbebanner 2" loading="lazy">
       </a>
-      <a href="/kroatien/wandern/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1700571552167-49641e9e026e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Wandern Kroatien" loading="lazy">
-        <div class="dest-card-label"><span>Wandern – Kroatien</span></div>
+      <a href="https://www.awin1.com/cread.php?s=3813860&v=84281&q=495772&r=2914133" target="_blank" rel="sponsored noopener noreferrer" class="awin-banner-card" aria-label="RSD Reisen Werbebanner 3 öffnen">
+        <img src="https://www.awin1.com/cshow.php?s=3813860&v=84281&q=495772&r=2914133" alt="RSD Reisen Werbebanner 3" loading="lazy">
       </a>
-      <a href="/dubai/wuestensafari/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1638024510305-c36fcc0bf3b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Wüstensafari Dubai" loading="lazy">
-        <div class="dest-card-label"><span>Wüstensafari – Dubai</span></div>
+      <a href="https://www.awin1.com/cread.php?s=3696539&v=84281&q=495765&r=2914133" target="_blank" rel="sponsored noopener noreferrer" class="awin-banner-card" aria-label="RSD Reisen Werbebanner 4 öffnen">
+        <img src="https://www.awin1.com/cshow.php?s=3696539&v=84281&q=495765&r=2914133" alt="RSD Reisen Werbebanner 4" loading="lazy">
       </a>
-      <a href="/griechenland/schnorcheln-kreta/" class="dest-card">
-        <img src="https://images.unsplash.com/photo-1467044705596-744699fa8931?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=600&q=70" alt="Schnorcheln Kreta" loading="lazy">
-        <div class="dest-card-label"><span>Schnorcheln – Kreta</span></div>
+      <a href="https://www.awin1.com/cread.php?s=3816836&v=84281&q=495768&r=2914133" target="_blank" rel="sponsored noopener noreferrer" class="awin-banner-card" aria-label="RSD Reisen Werbebanner 5 öffnen">
+        <img src="https://www.awin1.com/cshow.php?s=3816836&v=84281&q=495768&r=2914133" alt="RSD Reisen Werbebanner 5" loading="lazy">
+      </a>
+      <a href="https://www.awin1.com/cread.php?s=4020509&v=84281&q=528008&r=2914133" target="_blank" rel="sponsored noopener noreferrer" class="awin-banner-card" aria-label="RSD Reisen Werbebanner 6 öffnen">
+        <img src="https://www.awin1.com/cshow.php?s=4020509&v=84281&q=528008&r=2914133" alt="RSD Reisen Werbebanner 6" loading="lazy">
+      </a>
+      <a href="https://www.awin1.com/cread.php?s=3961739&v=84281&q=495773&r=2914133" target="_blank" rel="sponsored noopener noreferrer" class="awin-banner-card" aria-label="RSD Reisen Werbebanner 7 öffnen">
+        <img src="https://www.awin1.com/cshow.php?s=3961739&v=84281&q=495773&r=2914133" alt="RSD Reisen Werbebanner 7" loading="lazy">
       </a>
     </div>
   </section>
@@ -2044,6 +2418,7 @@
       compareMode = on;
       if (btnCompare) btnCompare.classList.toggle('active', on);
       if (hintEl) hintEl.style.display = on ? '' : 'none';
+      if (btnSearch) btnSearch.style.display = on ? 'none' : '';
     }
     function updateChips() {
       if (!chipsEl) return;
@@ -2152,8 +2527,138 @@
   })();
   </script>
 
-<!--Start of Crisp Chat-->
-<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="bd983cbc-0fb7-4b1e-9d37-4c2c02ba1f0b";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
-<!--End of Crisp Chat-->
+  <script>
+  (function () {
+    var wrap = document.getElementById('wat-voucher-carousel');
+    if (!wrap) return;
+
+    function esc(s) {
+      return String(s || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function eur(v) {
+      if (typeof v !== 'number' || !isFinite(v)) return '';
+      try {
+        return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v);
+      } catch (_) {
+        return Math.round(v) + ' €';
+      }
+    }
+
+    fetch('/data/wearetravel-offers.json', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('feed')); })
+      .then(function (data) {
+        var offers = (data && data.offers) || [];
+        if (!offers.length) {
+          wrap.innerHTML = '<div class="partner-cruise-empty">Aktuell sind keine Gutschein-Angebote verfügbar.</div>';
+          return;
+        }
+
+        wrap.innerHTML = offers.slice(0, 12).map(function (o) {
+          var p = (o.price != null) ? eur(o.price) : '';
+          var offerParam = encodeURIComponent(o.id || '');
+          return '' +
+            '<a class="partner-cruise-card" href="/kurzurlaub-gutscheine/?offer=' + offerParam + '&src=index" rel="noopener noreferrer" ' +
+              'data-operator="we_are_travel" data-product-type="shorttrip_voucher" data-placement="index_voucher_carousel" ' +
+              'aria-label="Gutschein-Details öffnen: ' + esc(o.name) + '">' +
+              '<div class="partner-cruise-visual">' +
+                '<img src="' + esc(o.image) + '" alt="' + esc(o.name) + '" loading="lazy">' +
+              '</div>' +
+              '<div class="partner-cruise-body">' +
+                '<div class="partner-cruise-title">' + esc(o.name) + '</div>' +
+                '<div class="partner-cruise-meta">we-are.travel · Kurzurlaub</div>' +
+                (p ? ('<div class="partner-cruise-price">ab ' + esc(p) + '</div>') : '') +
+                '<span class="partner-cruise-cta">Details ansehen</span>' +
+              '</div>' +
+            '</a>';
+        }).join('');
+      })
+      .catch(function () {
+        wrap.innerHTML = '<div class="partner-cruise-empty">Gutschein-Angebote konnten nicht geladen werden.</div>';
+      });
+  })();
+  </script>
+
+  <script>
+  (function () {
+    var wrap = document.getElementById('bm-cruise-carousel');
+    if (!wrap) return;
+
+    function esc(s) {
+      return String(s || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function eur(v) {
+      if (typeof v !== 'number' || !isFinite(v)) return '';
+      try {
+        return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v);
+      } catch (_) {
+        return Math.round(v) + ' €';
+      }
+    }
+
+    fetch('/data/berge-und-meer-cruise.json', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('feed')); })
+      .then(function (data) {
+        var offers = (data && data.offers) || [];
+        if (!offers.length) {
+          wrap.innerHTML = '<div class="partner-cruise-empty">Aktuell sind keine Kreuzfahrt-Angebote verfügbar.</div>';
+          return;
+        }
+
+        wrap.innerHTML = offers.slice(0, 12).map(function (o) {
+          var p = (o.price != null) ? eur(o.price) : '';
+          var offerParam = encodeURIComponent(o.id || '');
+          return '' +
+            '<a class="partner-cruise-card" href="/kreuzfahrten/?offer=' + offerParam + '&src=index" rel="noopener noreferrer" ' +
+              'data-operator="berge_meer" data-product-type="cruise" data-placement="index_cruise_carousel" ' +
+              'aria-label="Kreuzfahrt-Details öffnen: ' + esc(o.name) + '">' +
+              '<div class="partner-cruise-visual">' +
+                '<img src="' + esc(o.image) + '" alt="' + esc(o.name) + '" loading="lazy">' +
+              '</div>' +
+              '<div class="partner-cruise-body">' +
+                '<div class="partner-cruise-title">' + esc(o.name) + '</div>' +
+                '<div class="partner-cruise-meta">Berge &amp; Meer · Kreuzfahrt</div>' +
+                (p ? ('<div class="partner-cruise-price">ab ' + esc(p) + '</div>') : '') +
+                '<span class="partner-cruise-cta">Details ansehen</span>' +
+              '</div>' +
+            '</a>';
+        }).join('');
+      })
+      .catch(function () {
+        wrap.innerHTML = '<div class="partner-cruise-empty">Kreuzfahrt-Angebote konnten nicht geladen werden.</div>';
+      });
+  })();
+  </script>
+
+  <script>
+  (function () {
+    document.addEventListener('click', function (e) {
+      var link = e.target && e.target.closest ? e.target.closest('a[href*="awin1.com"]') : null;
+      if (!link) return;
+      if (typeof window.gtag !== 'function') return;
+
+      window.gtag('event', 'affiliate_click', {
+        event_category: 'affiliate',
+        event_label: link.getAttribute('href') || '',
+        link_url: link.getAttribute('href') || '',
+        link_text: (link.getAttribute('aria-label') || link.textContent || '').trim(),
+        operator: link.dataset.operator || (link.href.indexOf('awin1.com') > -1 ? 'awin' : ''),
+        product_type: link.dataset.productType || '',
+        placement: link.dataset.placement || '',
+        page_location: window.location.href
+      });
+    }, true);
+  })();
+  </script>
+
 </body>
 </html>

@@ -1,0 +1,3054 @@
+{
+  "generatedAt": "2026-06-03T08:05:27.507Z",
+  "source": "alltours_feed.csv",
+  "stats": {
+    "totalOffers": 21181,
+    "candidateMatches": 4454,
+    "liveEligibleOffers": 4313,
+    "deeplinkMatches": 4235,
+    "overrideMatches": 17,
+    "exactMatches": 19,
+    "strongMatches": 42,
+    "probableMatches": 141,
+    "excludedOffers": 0,
+    "unmatchedOffers": 16727,
+    "matchedHotels": 883,
+    "candidateMatchRate": 21.03,
+    "liveMatchRate": 20.36
+  },
+  "notes": [
+    "Travel:destination_city und Travel:destination_country sind im gelieferten Feed leer.",
+    "Primaeres Match-Signal ist merchant_deep_link -> hoteldetail/<id>, falls die ID als GIATA-Hotel existiert.",
+    "Probable-Matches werden nicht in den Live-Output uebernommen und sollten per Override freigeschaltet werden.",
+    "Manuelle Regeln koennen in data/alltours-overrides.json hinterlegt werden."
+  ],
+  "overridesSummary": {
+    "matchByMerchantProductId": 3,
+    "matchByAwProductId": 0,
+    "excludeMerchantProductIds": 0,
+    "excludeAwProductIds": 0
+  },
+  "probableReviewQueue": [
+    {
+      "giataId": "490",
+      "giataName": "Canvas by Mitsis Alexander the Great",
+      "productName": "Alexander the Great",
+      "score": 0.855,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "LCA170"
+    },
+    {
+      "giataId": "52047",
+      "giataName": "Hotel Santa Mónica Playa",
+      "productName": "Hotel Santa Monica Suites",
+      "score": 0.87,
+      "giataStars": 3,
+      "offerStars": 4.5,
+      "merchantProductId": "LPA812"
+    },
+    {
+      "giataId": "28715",
+      "giataName": "Hipotels Bahía Cala Millor",
+      "productName": "Cala Millor Park Hipotels",
+      "score": 0.8625,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI848"
+    },
+    {
+      "giataId": "17108",
+      "giataName": "Maspalomas Resort by Dunas",
+      "productName": "Mirador Maspalomas by Dunas",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "LPA01"
+    },
+    {
+      "giataId": "240863",
+      "giataName": "Rixos The Palm Hotel & Suites",
+      "productName": "Royal Palm Resort & SPA",
+      "score": 0.8333,
+      "giataStars": 5,
+      "offerStars": 4.5,
+      "merchantProductId": "FUE200"
+    },
+    {
+      "giataId": "1352580",
+      "giataName": "Barceló Playa Blanca Royal Level Adults Only",
+      "productName": "Hotel Barceló Playa Blanca",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "ACE222"
+    },
+    {
+      "giataId": "3082",
+      "giataName": "allsun Hotel Eden Alcúdia",
+      "productName": "allsun Hotel Eden Playa",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI305"
+    },
+    {
+      "giataId": "3705",
+      "giataName": "Tagoro Family & Fun",
+      "productName": "Hotel Gran Tagoro Family & Fun",
+      "score": 0.8625,
+      "giataStars": 4,
+      "offerStars": 5,
+      "merchantProductId": "ACE804"
+    },
+    {
+      "giataId": "93124",
+      "giataName": "Cleopatra Luxury Resort Makadi Bay",
+      "productName": "Cleopatra Luxury Beach Hotel",
+      "score": 0.805,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "HRG189"
+    },
+    {
+      "giataId": "86957",
+      "giataName": "Coral Cotillo Beach Hotel",
+      "productName": "Hotel Coral Cotillo Reef",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "FUE221"
+    },
+    {
+      "giataId": "1512932",
+      "giataName": "Holiday Inn Resort Bodrum West Beach",
+      "productName": "Bodrum Holiday Resort",
+      "score": 0.805,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "BJV137"
+    },
+    {
+      "giataId": "3528",
+      "giataName": "Hipotels Mediterráneo",
+      "productName": "Hipotels Mediterraneo Clu",
+      "score": 0.8467,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI306"
+    },
+    {
+      "giataId": "753099",
+      "giataName": "La Mer Resort & Spa",
+      "productName": "Hotel La Mer",
+      "score": 0.8033,
+      "giataStars": 5,
+      "offerStars": 4,
+      "merchantProductId": "TIV154"
+    },
+    {
+      "giataId": "24222",
+      "giataName": "Zafiro Can Picafort",
+      "productName": "Can Picafort Palace",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI460"
+    },
+    {
+      "giataId": "3143",
+      "giataName": "VIVA Cala Mesquida Suites & Spa Adults only 16+",
+      "productName": "Viva Cala Mesquida Resort",
+      "score": 0.81,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI353"
+    },
+    {
+      "giataId": "24221",
+      "giataName": "VIVA Blue & Spa",
+      "productName": "Viva Blue Resort",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "HRG238"
+    },
+    {
+      "giataId": "705",
+      "giataName": "Canvas by Mitsis Family Village",
+      "productName": "Canvas by Mitsis Messonghi",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "CFU101"
+    },
+    {
+      "giataId": "1029",
+      "giataName": "Hotel Blue Sea Beach Affiliated by Meliá",
+      "productName": "Hotel Blue Sea Beach",
+      "score": 0.855,
+      "giataStars": 5,
+      "offerStars": 4.5,
+      "merchantProductId": "RHO304"
+    },
+    {
+      "giataId": "664",
+      "giataName": "Kontokali Bay Resort & Spa",
+      "productName": "The Bay Hotel and Suites",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "ZTH110"
+    },
+    {
+      "giataId": "60875",
+      "giataName": "MLL Blue Bay",
+      "productName": "Blue Bay Beach Resort",
+      "score": 0.8033,
+      "giataStars": 3,
+      "offerStars": 4,
+      "merchantProductId": "RHO234"
+    },
+    {
+      "giataId": "7051",
+      "giataName": "Best Front Marítim",
+      "productName": "Best Maritim",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "BCN181"
+    },
+    {
+      "giataId": "753099",
+      "giataName": "La Mer Resort & Spa",
+      "productName": "Hotel La Mer",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "JTR106"
+    },
+    {
+      "giataId": "14562",
+      "giataName": "JAZ Elite Palace – Adults Only",
+      "productName": "Hotel Jaz Elite Negma",
+      "score": 0.7967,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "HRG269"
+    },
+    {
+      "giataId": "100468",
+      "giataName": "Domes of Elounda, Autograph Collection",
+      "productName": "Domes of Corfu, Autograph Collection",
+      "score": 0.8,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "CFU258"
+    },
+    {
+      "giataId": "54509",
+      "giataName": "Casa Blue Resort",
+      "productName": "Casa Blue Hotel",
+      "score": 0.82,
+      "giataStars": 5,
+      "offerStars": 3,
+      "merchantProductId": "JSI136"
+    },
+    {
+      "giataId": "2802",
+      "giataName": "TUI Blue Suite Princess",
+      "productName": "Blue Princess Beach",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "CFU196"
+    },
+    {
+      "giataId": "60875",
+      "giataName": "MLL Blue Bay",
+      "productName": "Blue Bay Resort",
+      "score": 0.8033,
+      "giataStars": 3,
+      "offerStars": 4,
+      "merchantProductId": "HER133"
+    },
+    {
+      "giataId": "201312",
+      "giataName": "Castello Boutique Resort & Spa",
+      "productName": "Boutique 5 Hotel & Spa",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "RHO831"
+    },
+    {
+      "giataId": "7350",
+      "giataName": "Blue Sea Island",
+      "productName": "Hotel Island Blue",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 3.5,
+      "merchantProductId": "RHO241"
+    },
+    {
+      "giataId": "363446",
+      "giataName": "THB Gran Bahía",
+      "productName": "App. THB Gran Bahía",
+      "score": 0.8925,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI333"
+    },
+    {
+      "giataId": "363696",
+      "giataName": "Regnum Carya",
+      "productName": "Hotel Regnum Carya Golf & Spa Resort",
+      "score": 0.785,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "AYT574"
+    },
+    {
+      "giataId": "490",
+      "giataName": "Canvas by Mitsis Alexander the Great",
+      "productName": "Alexander the Great",
+      "score": 0.855,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "LCA170"
+    },
+    {
+      "giataId": "52047",
+      "giataName": "Hotel Santa Mónica Playa",
+      "productName": "Hotel Santa Monica Suites",
+      "score": 0.87,
+      "giataStars": 3,
+      "offerStars": 4.5,
+      "merchantProductId": "LPA812"
+    },
+    {
+      "giataId": "17108",
+      "giataName": "Maspalomas Resort by Dunas",
+      "productName": "Mirador Maspalomas by Dunas",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "LPA01"
+    },
+    {
+      "giataId": "240863",
+      "giataName": "Rixos The Palm Hotel & Suites",
+      "productName": "Royal Palm Resort & SPA",
+      "score": 0.8333,
+      "giataStars": 5,
+      "offerStars": 4.5,
+      "merchantProductId": "FUE200"
+    },
+    {
+      "giataId": "3082",
+      "giataName": "allsun Hotel Eden Alcúdia",
+      "productName": "allsun Hotel Eden Playa",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI305"
+    },
+    {
+      "giataId": "93124",
+      "giataName": "Cleopatra Luxury Resort Makadi Bay",
+      "productName": "Cleopatra Luxury Beach Hotel",
+      "score": 0.805,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "HRG189"
+    },
+    {
+      "giataId": "86957",
+      "giataName": "Coral Cotillo Beach Hotel",
+      "productName": "Hotel Coral Cotillo Reef",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "FUE221"
+    },
+    {
+      "giataId": "1512932",
+      "giataName": "Holiday Inn Resort Bodrum West Beach",
+      "productName": "Bodrum Holiday Resort",
+      "score": 0.805,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "ADB237"
+    },
+    {
+      "giataId": "753099",
+      "giataName": "La Mer Resort & Spa",
+      "productName": "Hotel La Mer",
+      "score": 0.8033,
+      "giataStars": 5,
+      "offerStars": 4,
+      "merchantProductId": "TGD154"
+    },
+    {
+      "giataId": "24221",
+      "giataName": "VIVA Blue & Spa",
+      "productName": "Viva Blue Resort",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "HRG238"
+    },
+    {
+      "giataId": "705",
+      "giataName": "Canvas by Mitsis Family Village",
+      "productName": "Canvas by Mitsis Messonghi",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "CFU101"
+    },
+    {
+      "giataId": "1249",
+      "giataName": "Blue Sea Holiday Village",
+      "productName": "Blue Sea Beach Resort",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "RHO304"
+    },
+    {
+      "giataId": "664",
+      "giataName": "Kontokali Bay Resort & Spa",
+      "productName": "The Bay Hotel & Suites",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "ZTH110"
+    },
+    {
+      "giataId": "60875",
+      "giataName": "MLL Blue Bay",
+      "productName": "Blue Bay Beach Resort",
+      "score": 0.8033,
+      "giataStars": 3,
+      "offerStars": 4,
+      "merchantProductId": "RHO234"
+    },
+    {
+      "giataId": "14562",
+      "giataName": "JAZ Elite Palace – Adults Only",
+      "productName": "Hotel Jaz Elite Negma",
+      "score": 0.7967,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "HRG269"
+    },
+    {
+      "giataId": "100468",
+      "giataName": "Domes of Elounda, Autograph Collection",
+      "productName": "Domes of Corfu, Autograph Collection",
+      "score": 0.8,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "CFU258"
+    },
+    {
+      "giataId": "54509",
+      "giataName": "Casa Blue Resort",
+      "productName": "Casa Blue Hotel",
+      "score": 0.82,
+      "giataStars": 5,
+      "offerStars": 3,
+      "merchantProductId": "JSI136"
+    },
+    {
+      "giataId": "2802",
+      "giataName": "TUI Blue Suite Princess",
+      "productName": "Blue Princess Beach",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "CFU196"
+    },
+    {
+      "giataId": "60875",
+      "giataName": "MLL Blue Bay",
+      "productName": "Blue Bay Resort",
+      "score": 0.8033,
+      "giataStars": 3,
+      "offerStars": 4,
+      "merchantProductId": "HER133"
+    },
+    {
+      "giataId": "201312",
+      "giataName": "Castello Boutique Resort & Spa",
+      "productName": "Boutique 5 Hotel & Spa",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "RHO831"
+    },
+    {
+      "giataId": "7350",
+      "giataName": "Blue Sea Island",
+      "productName": "Hotel Island Blue",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 3.5,
+      "merchantProductId": "RHO241"
+    },
+    {
+      "giataId": "363696",
+      "giataName": "Regnum Carya",
+      "productName": "Hotel Regnum Carya Golf & Spa Resort",
+      "score": 0.785,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "AYT574"
+    },
+    {
+      "giataId": "4418",
+      "giataName": "MARTI La Perla",
+      "productName": "Hotel La Perla",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "VRN274"
+    },
+    {
+      "giataId": "261733",
+      "giataName": "Hotel Vibra Marco Polo I",
+      "productName": "Hotel Marco Polo",
+      "score": 0.8633,
+      "giataStars": 3,
+      "offerStars": 3,
+      "merchantProductId": "VRN086"
+    },
+    {
+      "giataId": "3493",
+      "giataName": "Iberostar Selection Playa de Palma",
+      "productName": "Iberostar Waves Bahía de Palma",
+      "score": 0.8125,
+      "giataStars": 5,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI586"
+    },
+    {
+      "giataId": "490",
+      "giataName": "Canvas by Mitsis Alexander the Great",
+      "productName": "Alexander the Great",
+      "score": 0.855,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "LCA170"
+    },
+    {
+      "giataId": "52047",
+      "giataName": "Hotel Santa Mónica Playa",
+      "productName": "Hotel Santa Monica Suites",
+      "score": 0.87,
+      "giataStars": 3,
+      "offerStars": 4.5,
+      "merchantProductId": "LPA812"
+    },
+    {
+      "giataId": "28715",
+      "giataName": "Hipotels Bahía Cala Millor",
+      "productName": "Hipotels Cala Millor Park",
+      "score": 0.8625,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI848"
+    },
+    {
+      "giataId": "17108",
+      "giataName": "Maspalomas Resort by Dunas",
+      "productName": "Mirador Maspalomas by Dunas",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "LPA01"
+    },
+    {
+      "giataId": "240863",
+      "giataName": "Rixos The Palm Hotel & Suites",
+      "productName": "Royal Palm Resort & SPA",
+      "score": 0.8333,
+      "giataStars": 5,
+      "offerStars": 4.5,
+      "merchantProductId": "FUE200"
+    },
+    {
+      "giataId": "574182",
+      "giataName": "Hipotels Playa de Palma Palace",
+      "productName": "Hipotels Gran Playa de Palma",
+      "score": 0.8125,
+      "giataStars": 5,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI22"
+    },
+    {
+      "giataId": "1352580",
+      "giataName": "Barceló Playa Blanca Royal Level Adults Only",
+      "productName": "Hotel Barceló Playa Blanca",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "ACE222"
+    },
+    {
+      "giataId": "3082",
+      "giataName": "allsun Hotel Eden Alcúdia",
+      "productName": "allsun Hotel Eden Playa",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI305"
+    },
+    {
+      "giataId": "3705",
+      "giataName": "Tagoro Family & Fun",
+      "productName": "Hotel Gran Tagoro Family & Fun",
+      "score": 0.8625,
+      "giataStars": 4,
+      "offerStars": 5,
+      "merchantProductId": "ACE804"
+    },
+    {
+      "giataId": "93124",
+      "giataName": "Cleopatra Luxury Resort Makadi Bay",
+      "productName": "Cleopatra Luxury Beach Hotel",
+      "score": 0.805,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "HRG189"
+    },
+    {
+      "giataId": "86957",
+      "giataName": "Coral Cotillo Beach Hotel",
+      "productName": "Hotel Coral Cotillo Reef",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "FUE221"
+    },
+    {
+      "giataId": "1512932",
+      "giataName": "Holiday Inn Resort Bodrum West Beach",
+      "productName": "Bodrum Holiday Resort",
+      "score": 0.805,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "BJV137"
+    },
+    {
+      "giataId": "3528",
+      "giataName": "Hipotels Mediterráneo",
+      "productName": "Hipotels Mediterraneo Clu",
+      "score": 0.8467,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI306"
+    },
+    {
+      "giataId": "753099",
+      "giataName": "La Mer Resort & Spa",
+      "productName": "Hotel La Mer",
+      "score": 0.8033,
+      "giataStars": 5,
+      "offerStars": 4,
+      "merchantProductId": "TIV154"
+    },
+    {
+      "giataId": "24222",
+      "giataName": "Zafiro Can Picafort",
+      "productName": "Can Picafort Palace",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI460"
+    },
+    {
+      "giataId": "3143",
+      "giataName": "VIVA Cala Mesquida Suites & Spa Adults only 16+",
+      "productName": "VIVA Cala Mesquida Resort & Spa",
+      "score": 0.88,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI353"
+    },
+    {
+      "giataId": "24221",
+      "giataName": "VIVA Blue & Spa",
+      "productName": "Viva Blue Resort",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "HRG238"
+    },
+    {
+      "giataId": "705",
+      "giataName": "Canvas by Mitsis Family Village",
+      "productName": "Canvas by Mitsis Messonghi",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "CFU101"
+    },
+    {
+      "giataId": "1249",
+      "giataName": "Blue Sea Holiday Village",
+      "productName": "Blue Sea Beach Resort",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "RHO304"
+    },
+    {
+      "giataId": "664",
+      "giataName": "Kontokali Bay Resort & Spa",
+      "productName": "The Bay Hotel and Suites",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "ZTH110"
+    },
+    {
+      "giataId": "60875",
+      "giataName": "MLL Blue Bay",
+      "productName": "Blue Bay Beach Resort",
+      "score": 0.8033,
+      "giataStars": 3,
+      "offerStars": 4,
+      "merchantProductId": "RHO234"
+    },
+    {
+      "giataId": "7051",
+      "giataName": "Best Front Marítim",
+      "productName": "Hotel Best Maritim",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "BCN181"
+    },
+    {
+      "giataId": "753099",
+      "giataName": "La Mer Resort & Spa",
+      "productName": "Hotel La Mer",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "JTR106"
+    },
+    {
+      "giataId": "14562",
+      "giataName": "JAZ Elite Palace – Adults Only",
+      "productName": "Hotel Jaz Elite Negma",
+      "score": 0.7967,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "HRG269"
+    },
+    {
+      "giataId": "100468",
+      "giataName": "Domes of Elounda, Autograph Collection",
+      "productName": "Domes of Corfu, Autograph Collection",
+      "score": 0.8,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "CFU258"
+    },
+    {
+      "giataId": "54509",
+      "giataName": "Casa Blue Resort",
+      "productName": "Casa Blue Hotel",
+      "score": 0.82,
+      "giataStars": 5,
+      "offerStars": 3,
+      "merchantProductId": "JSI136"
+    },
+    {
+      "giataId": "2802",
+      "giataName": "TUI Blue Suite Princess",
+      "productName": "Blue Princess Beach",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "CFU196"
+    },
+    {
+      "giataId": "60875",
+      "giataName": "MLL Blue Bay",
+      "productName": "Blue Bay Resort",
+      "score": 0.8033,
+      "giataStars": 3,
+      "offerStars": 4,
+      "merchantProductId": "HER133"
+    },
+    {
+      "giataId": "201312",
+      "giataName": "Castello Boutique Resort & Spa",
+      "productName": "Boutique 5 Hotel & Spa",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "RHO831"
+    },
+    {
+      "giataId": "7350",
+      "giataName": "Blue Sea Island",
+      "productName": "Hotel Island Blue",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 3.5,
+      "merchantProductId": "RHO241"
+    },
+    {
+      "giataId": "363446",
+      "giataName": "THB Gran Bahía",
+      "productName": "App. THB Gran Bahía",
+      "score": 0.8925,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI333"
+    },
+    {
+      "giataId": "363696",
+      "giataName": "Regnum Carya",
+      "productName": "Hotel Regnum Carya Golf & Spa Resort",
+      "score": 0.785,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "AYT574"
+    },
+    {
+      "giataId": "490",
+      "giataName": "Canvas by Mitsis Alexander the Great",
+      "productName": "Alexander the Great",
+      "score": 0.855,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "LCA170"
+    },
+    {
+      "giataId": "52047",
+      "giataName": "Hotel Santa Mónica Playa",
+      "productName": "Hotel Santa Monica Suites",
+      "score": 0.87,
+      "giataStars": 3,
+      "offerStars": 4.5,
+      "merchantProductId": "LPA812"
+    },
+    {
+      "giataId": "17108",
+      "giataName": "Maspalomas Resort by Dunas",
+      "productName": "Mirador Maspalomas by Dunas",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "LPA01"
+    },
+    {
+      "giataId": "240863",
+      "giataName": "Rixos The Palm Hotel & Suites",
+      "productName": "Royal Palm Resort & SPA",
+      "score": 0.8333,
+      "giataStars": 5,
+      "offerStars": 4.5,
+      "merchantProductId": "FUE200"
+    },
+    {
+      "giataId": "3082",
+      "giataName": "allsun Hotel Eden Alcúdia",
+      "productName": "allsun Hotel Eden Playa",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI305"
+    },
+    {
+      "giataId": "93124",
+      "giataName": "Cleopatra Luxury Resort Makadi Bay",
+      "productName": "Cleopatra Luxury Beach Hotel",
+      "score": 0.805,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "HRG189"
+    },
+    {
+      "giataId": "86957",
+      "giataName": "Coral Cotillo Beach Hotel",
+      "productName": "Hotel Coral Cotillo Reef",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "FUE221"
+    },
+    {
+      "giataId": "1512932",
+      "giataName": "Holiday Inn Resort Bodrum West Beach",
+      "productName": "Bodrum Holiday Resort",
+      "score": 0.805,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "ADB237"
+    },
+    {
+      "giataId": "753099",
+      "giataName": "La Mer Resort & Spa",
+      "productName": "Hotel La Mer",
+      "score": 0.8033,
+      "giataStars": 5,
+      "offerStars": 4,
+      "merchantProductId": "TGD154"
+    },
+    {
+      "giataId": "24221",
+      "giataName": "VIVA Blue & Spa",
+      "productName": "Viva Blue Resort",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "HRG238"
+    },
+    {
+      "giataId": "705",
+      "giataName": "Canvas by Mitsis Family Village",
+      "productName": "Canvas by Mitsis Messonghi",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "CFU101"
+    },
+    {
+      "giataId": "1249",
+      "giataName": "Blue Sea Holiday Village",
+      "productName": "Blue Sea Beach Resort",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "RHO304"
+    },
+    {
+      "giataId": "664",
+      "giataName": "Kontokali Bay Resort & Spa",
+      "productName": "The Bay Hotel and Suites",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "ZTH110"
+    },
+    {
+      "giataId": "60875",
+      "giataName": "MLL Blue Bay",
+      "productName": "Blue Bay Beach Resort",
+      "score": 0.8033,
+      "giataStars": 3,
+      "offerStars": 4,
+      "merchantProductId": "RHO234"
+    },
+    {
+      "giataId": "753099",
+      "giataName": "La Mer Resort & Spa",
+      "productName": "Hotel La Mer",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "JTR106"
+    },
+    {
+      "giataId": "14562",
+      "giataName": "JAZ Elite Palace – Adults Only",
+      "productName": "Hotel Jaz Elite Negma",
+      "score": 0.7967,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "RMF269"
+    },
+    {
+      "giataId": "100468",
+      "giataName": "Domes of Elounda, Autograph Collection",
+      "productName": "Domes of Corfu, Autograph Collection",
+      "score": 0.8,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "CFU258"
+    },
+    {
+      "giataId": "54509",
+      "giataName": "Casa Blue Resort",
+      "productName": "Casa Blue Hotel",
+      "score": 0.82,
+      "giataStars": 5,
+      "offerStars": 3,
+      "merchantProductId": "JSI136"
+    },
+    {
+      "giataId": "2802",
+      "giataName": "TUI Blue Suite Princess",
+      "productName": "Blue Princess Beach",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "CFU196"
+    },
+    {
+      "giataId": "60875",
+      "giataName": "MLL Blue Bay",
+      "productName": "Blue Bay Resort",
+      "score": 0.8033,
+      "giataStars": 3,
+      "offerStars": 4,
+      "merchantProductId": "HER133"
+    },
+    {
+      "giataId": "201312",
+      "giataName": "Castello Boutique Resort & Spa",
+      "productName": "Boutique 5 Hotel & Spa",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "RHO831"
+    },
+    {
+      "giataId": "7350",
+      "giataName": "Blue Sea Island",
+      "productName": "Hotel Island Blue",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 3.5,
+      "merchantProductId": "RHO241"
+    },
+    {
+      "giataId": "363696",
+      "giataName": "Regnum Carya",
+      "productName": "Hotel Regnum Carya Golf & Spa Resort",
+      "score": 0.785,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "AYT574"
+    },
+    {
+      "giataId": "4418",
+      "giataName": "MARTI La Perla",
+      "productName": "Hotel La Perla",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "VRN274"
+    },
+    {
+      "giataId": "261733",
+      "giataName": "Hotel Vibra Marco Polo I",
+      "productName": "Hotel Marco Polo",
+      "score": 0.8633,
+      "giataStars": 3,
+      "offerStars": 3,
+      "merchantProductId": "VRN086"
+    },
+    {
+      "giataId": "14562",
+      "giataName": "JAZ Elite Palace – Adults Only",
+      "productName": "Hotel Jaz Elite Negma",
+      "score": 0.7967,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "RMF269"
+    },
+    {
+      "giataId": "54509",
+      "giataName": "Casa Blue Resort",
+      "productName": "Casa Blue Hotel",
+      "score": 0.82,
+      "giataStars": 5,
+      "offerStars": 3,
+      "merchantProductId": "JSI136"
+    },
+    {
+      "giataId": "14562",
+      "giataName": "JAZ Elite Palace – Adults Only",
+      "productName": "Hotel Jaz Elite Negma",
+      "score": 0.7967,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "RMF269"
+    },
+    {
+      "giataId": "54509",
+      "giataName": "Casa Blue Resort",
+      "productName": "Casa Blue Hotel",
+      "score": 0.82,
+      "giataStars": 5,
+      "offerStars": 3,
+      "merchantProductId": "JSI136"
+    },
+    {
+      "giataId": "490",
+      "giataName": "Canvas by Mitsis Alexander the Great",
+      "productName": "Alexander the Great",
+      "score": 0.855,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "LCA170"
+    },
+    {
+      "giataId": "52047",
+      "giataName": "Hotel Santa Mónica Playa",
+      "productName": "Hotel Santa Monica Suites",
+      "score": 0.87,
+      "giataStars": 3,
+      "offerStars": 4.5,
+      "merchantProductId": "LPA812"
+    },
+    {
+      "giataId": "17108",
+      "giataName": "Maspalomas Resort by Dunas",
+      "productName": "Mirador Maspalomas by Dunas",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "LPA01"
+    },
+    {
+      "giataId": "240863",
+      "giataName": "Rixos The Palm Hotel & Suites",
+      "productName": "Royal Palm Resort & SPA",
+      "score": 0.8333,
+      "giataStars": 5,
+      "offerStars": 4.5,
+      "merchantProductId": "FUE200"
+    },
+    {
+      "giataId": "3082",
+      "giataName": "allsun Hotel Eden Alcúdia",
+      "productName": "allsun Hotel Eden Playa",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "PMI305"
+    },
+    {
+      "giataId": "93124",
+      "giataName": "Cleopatra Luxury Resort Makadi Bay",
+      "productName": "Cleopatra Luxury Beach Hotel",
+      "score": 0.805,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "HRG189"
+    },
+    {
+      "giataId": "86957",
+      "giataName": "Coral Cotillo Beach Hotel",
+      "productName": "Hotel Coral Cotillo Reef",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "FUE221"
+    },
+    {
+      "giataId": "1512932",
+      "giataName": "Holiday Inn Resort Bodrum West Beach",
+      "productName": "Bodrum Holiday Resort",
+      "score": 0.805,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "ADB237"
+    },
+    {
+      "giataId": "753099",
+      "giataName": "La Mer Resort & Spa",
+      "productName": "Hotel La Mer",
+      "score": 0.8033,
+      "giataStars": 5,
+      "offerStars": 4,
+      "merchantProductId": "TGD154"
+    },
+    {
+      "giataId": "24221",
+      "giataName": "VIVA Blue & Spa",
+      "productName": "Viva Blue Resort",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "HRG238"
+    },
+    {
+      "giataId": "705",
+      "giataName": "Canvas by Mitsis Family Village",
+      "productName": "Canvas by Mitsis Messonghi",
+      "score": 0.7967,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "CFU101"
+    },
+    {
+      "giataId": "1249",
+      "giataName": "Blue Sea Holiday Village",
+      "productName": "Blue Sea Beach Resort",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 4.5,
+      "merchantProductId": "RHO304"
+    },
+    {
+      "giataId": "664",
+      "giataName": "Kontokali Bay Resort & Spa",
+      "productName": "The Bay Hotel & Suites",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "ZTH110"
+    },
+    {
+      "giataId": "60875",
+      "giataName": "MLL Blue Bay",
+      "productName": "Blue Bay Beach Resort",
+      "score": 0.8033,
+      "giataStars": 3,
+      "offerStars": 4,
+      "merchantProductId": "RHO234"
+    },
+    {
+      "giataId": "14562",
+      "giataName": "JAZ Elite Palace – Adults Only",
+      "productName": "Hotel Jaz Elite Negma",
+      "score": 0.7967,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "RMF269"
+    },
+    {
+      "giataId": "100468",
+      "giataName": "Domes of Elounda, Autograph Collection",
+      "productName": "Domes of Corfu, Autograph Collection",
+      "score": 0.8,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "CFU258"
+    },
+    {
+      "giataId": "54509",
+      "giataName": "Casa Blue Resort",
+      "productName": "Casa Blue Hotel",
+      "score": 0.82,
+      "giataStars": 5,
+      "offerStars": 3,
+      "merchantProductId": "JSI136"
+    },
+    {
+      "giataId": "2802",
+      "giataName": "TUI Blue Suite Princess",
+      "productName": "Blue Princess Beach",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "CFU196"
+    },
+    {
+      "giataId": "60875",
+      "giataName": "MLL Blue Bay",
+      "productName": "Blue Bay Resort",
+      "score": 0.8033,
+      "giataStars": 3,
+      "offerStars": 4,
+      "merchantProductId": "HER133"
+    },
+    {
+      "giataId": "201312",
+      "giataName": "Castello Boutique Resort & Spa",
+      "productName": "Boutique 5 Hotel & Spa",
+      "score": 0.8633,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "RHO831"
+    },
+    {
+      "giataId": "7350",
+      "giataName": "Blue Sea Island",
+      "productName": "Hotel Island Blue",
+      "score": 0.8333,
+      "giataStars": 4,
+      "offerStars": 3.5,
+      "merchantProductId": "RHO241"
+    },
+    {
+      "giataId": "363696",
+      "giataName": "Regnum Carya",
+      "productName": "Hotel Regnum Carya Golf & Spa Resort",
+      "score": 0.785,
+      "giataStars": 5,
+      "offerStars": 5,
+      "merchantProductId": "AYT574"
+    },
+    {
+      "giataId": "4418",
+      "giataName": "MARTI La Perla",
+      "productName": "Hotel La Perla",
+      "score": 0.8633,
+      "giataStars": 4,
+      "offerStars": 4,
+      "merchantProductId": "VRN274"
+    },
+    {
+      "giataId": "261733",
+      "giataName": "Hotel Vibra Marco Polo I",
+      "productName": "Hotel Marco Polo",
+      "score": 0.8633,
+      "giataStars": 3,
+      "offerStars": 3,
+      "merchantProductId": "VRN086"
+    }
+  ],
+  "unmatchedSamples": [
+    {
+      "productName": "Hotel Utopia Beach",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 719,
+      "merchantProductId": "HRG121"
+    },
+    {
+      "productName": "Mövenpick Resort El Quseir",
+      "stars": 5,
+      "boardBasis": "Halbpension",
+      "price": 937,
+      "merchantProductId": "RMF242"
+    },
+    {
+      "productName": "Hotel Villa Taina",
+      "stars": 3,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 1180,
+      "merchantProductId": "POP106"
+    },
+    {
+      "productName": "Gran Ventana Beach Resort",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 1312,
+      "merchantProductId": "POP08"
+    },
+    {
+      "productName": "Bahia Principe Escape Samaná",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1377,
+      "merchantProductId": "SDQ126"
+    },
+    {
+      "productName": "Anissa Beach & Village Hotel",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 1233,
+      "merchantProductId": "HER467"
+    },
+    {
+      "productName": "Iberostar Waves Creta Panorama & Mare",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 1182,
+      "merchantProductId": "HER370"
+    },
+    {
+      "productName": "Grand Hotel Masseria Santa Lucia",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 657,
+      "merchantProductId": "BRI006"
+    },
+    {
+      "productName": "Hotel Ariston & Palazzo Santa Caterina",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 1260,
+      "merchantProductId": "CTA010"
+    },
+    {
+      "productName": "Hotel Iberostar Waves Royal Andalus",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 1188,
+      "merchantProductId": "XRY152"
+    },
+    {
+      "productName": "Alua Suites Fuerteventura",
+      "stars": 4.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 866,
+      "merchantProductId": "FUE132"
+    },
+    {
+      "productName": "H10 Ocean Suites",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 1023,
+      "merchantProductId": "FUE189"
+    },
+    {
+      "productName": "Hotel SBH Crystal Beach & Suites",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 716,
+      "merchantProductId": "FUE50"
+    },
+    {
+      "productName": "SBH Monica Beach Resort",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 820,
+      "merchantProductId": "FUE171"
+    },
+    {
+      "productName": "Hotel IberostarSelection Fuerteventura Palace",
+      "stars": 5,
+      "boardBasis": "Halbpension",
+      "price": 1391,
+      "merchantProductId": "FUE127"
+    },
+    {
+      "productName": "Hotel Palm Garden",
+      "stars": 3,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 486,
+      "merchantProductId": "FUE30"
+    },
+    {
+      "productName": "Hotel SBH Maxorata Resort",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 791,
+      "merchantProductId": "FUE147"
+    },
+    {
+      "productName": "Hotel Sol Fuerteventura Jandia",
+      "stars": 4,
+      "boardBasis": "Halbpension plus",
+      "price": 739,
+      "merchantProductId": "FUE108"
+    },
+    {
+      "productName": "Hotel Maritim Playa",
+      "stars": 3.5,
+      "boardBasis": "Frühstück",
+      "price": 621,
+      "merchantProductId": "LPA18"
+    },
+    {
+      "productName": "Hotel HL Miraflor Suites",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 650,
+      "merchantProductId": "LPA267"
+    },
+    {
+      "productName": "Appartements Nogal",
+      "stars": 3,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 500,
+      "merchantProductId": "LPA324"
+    },
+    {
+      "productName": "HL Suitehotel Playa del Inglés",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 830,
+      "merchantProductId": "LPA219"
+    },
+    {
+      "productName": "HL Rondo Hotel",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 591,
+      "merchantProductId": "LPA259"
+    },
+    {
+      "productName": "Hotel Las Costas",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 782,
+      "merchantProductId": "ACE01"
+    },
+    {
+      "productName": "Hotel Floresta",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 730,
+      "merchantProductId": "ACE97"
+    },
+    {
+      "productName": "Hotel Hyde Park Lane",
+      "stars": 4,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 649,
+      "merchantProductId": "ACE186"
+    },
+    {
+      "productName": "Hotel Lanzarote Village",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 792,
+      "merchantProductId": "ACE314"
+    },
+    {
+      "productName": "Iberostar Waves Alcudia Park",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 1637,
+      "merchantProductId": "PMI549"
+    },
+    {
+      "productName": "Iberostar Waves Ciudad Blanca",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 1441,
+      "merchantProductId": "PMI534"
+    },
+    {
+      "productName": "Blau Punta Reina Resort",
+      "stars": 4.5,
+      "boardBasis": "Halbpension plus",
+      "price": 981,
+      "merchantProductId": "PMI132"
+    },
+    {
+      "productName": "Hotel CM Playa del Moro",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 716,
+      "merchantProductId": "PMI486"
+    },
+    {
+      "productName": "Hotel Capricho",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 688,
+      "merchantProductId": "PMI596"
+    },
+    {
+      "productName": "Iberostar Waves Pinos Park",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 1333,
+      "merchantProductId": "PMI760"
+    },
+    {
+      "productName": "Hotel Zafiro Alzinar Mar",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 930,
+      "merchantProductId": "PMI392"
+    },
+    {
+      "productName": "Hotel Valentin Reina Paguera",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 831,
+      "merchantProductId": "PMI236"
+    },
+    {
+      "productName": "Hotel Valentin Somni Suite",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 996,
+      "merchantProductId": "PMI857"
+    },
+    {
+      "productName": "MYSEAHOUSE Flamingo",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 1294,
+      "merchantProductId": "PMI795"
+    },
+    {
+      "productName": "Iberostar W.Bahia d.Palma",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 1276,
+      "merchantProductId": "PMI586"
+    },
+    {
+      "productName": "Iberostar Hotel Waves Bouganville Playa",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 1008,
+      "merchantProductId": "TFS226"
+    },
+    {
+      "productName": "Iberostar Hotel Waves Las Dalias",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 1275,
+      "merchantProductId": "TFS377"
+    },
+    {
+      "productName": "Iberostar Selection Sabila",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1195,
+      "merchantProductId": "TFS375"
+    },
+    {
+      "productName": "Hotel Silken Saaj Mar",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 919,
+      "merchantProductId": "TFS13"
+    },
+    {
+      "productName": "Dar Khayam",
+      "stars": 3.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 654,
+      "merchantProductId": "MIR226"
+    },
+    {
+      "productName": "Nozha Beach Resort & spa",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 715,
+      "merchantProductId": "NBE817"
+    },
+    {
+      "productName": "Hotel Mahdia Beach & Aquapark",
+      "stars": 4,
+      "boardBasis": "All Inclusive plus",
+      "price": 753,
+      "merchantProductId": "MIR189"
+    },
+    {
+      "productName": "Hotel Mahdia Palace Thalasso",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 601,
+      "merchantProductId": "MIR147"
+    },
+    {
+      "productName": "Hotel Marhaba Palace",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 962,
+      "merchantProductId": "NBE203"
+    },
+    {
+      "productName": "Hilton Skanes Monastir Beach Resort",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1221,
+      "merchantProductId": "MIR192"
+    },
+    {
+      "productName": "Alaaddin Beach Hotel",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 666,
+      "merchantProductId": "AYT184"
+    },
+    {
+      "productName": "Hotel Eftalia Downtown",
+      "stars": 3.5,
+      "boardBasis": "Frühstück",
+      "price": 342,
+      "merchantProductId": "AYT471"
+    },
+    {
+      "productName": "Gardenia Hotel Alanya",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 523,
+      "merchantProductId": "AYT39"
+    },
+    {
+      "productName": "Aska Hotels Just In Beach",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 718,
+      "merchantProductId": "AYT113"
+    },
+    {
+      "productName": "Kahya Hotel",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 652,
+      "merchantProductId": "AYT02"
+    },
+    {
+      "productName": "Riviera Hotel and Spa",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 631,
+      "merchantProductId": "AYT592"
+    },
+    {
+      "productName": "Riviera Zen",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 662,
+      "merchantProductId": "AYT644"
+    },
+    {
+      "productName": "Savk Hotel",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 480,
+      "merchantProductId": "AYT328"
+    },
+    {
+      "productName": "The Sense Deluxe Hotel",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 786,
+      "merchantProductId": "AYT255"
+    },
+    {
+      "productName": "Seher Kumköy Star Resort & Spa",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 753,
+      "merchantProductId": "AYT240"
+    },
+    {
+      "productName": "Hotel Oleander Beach Resort",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 983,
+      "merchantProductId": "AYT103"
+    },
+    {
+      "productName": "VONRESORT Golden Beach",
+      "stars": 4,
+      "boardBasis": "All Inclusive plus",
+      "price": 874,
+      "merchantProductId": "AYT106"
+    },
+    {
+      "productName": "Hotel Seher Resort & Spa",
+      "stars": 4.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 598,
+      "merchantProductId": "AYT553"
+    },
+    {
+      "productName": "Side Prenses Hotel",
+      "stars": 4.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 975,
+      "merchantProductId": "AYT246"
+    },
+    {
+      "productName": "Diamond De Luxe Hotel & Spa",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 1027,
+      "merchantProductId": "AYT673"
+    },
+    {
+      "productName": "Club Hotel Turan Prince World",
+      "stars": 4.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 900,
+      "merchantProductId": "AYT88"
+    },
+    {
+      "productName": "Beach Rotana Abu Dhabi",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1049,
+      "merchantProductId": "AUH123"
+    },
+    {
+      "productName": "Al Habtoor Grand ResortAutograph Collection",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1773,
+      "merchantProductId": "DXB121"
+    },
+    {
+      "productName": "Atlantica Golden Beach",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 1013,
+      "merchantProductId": "LCA183"
+    },
+    {
+      "productName": "Louis Ledra Beach",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 1268,
+      "merchantProductId": "LCA199"
+    },
+    {
+      "productName": "Olympic Lagoon Resort Paphos",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 1922,
+      "merchantProductId": "LCA180"
+    },
+    {
+      "productName": "Louis Phaethon Beach",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 1227,
+      "merchantProductId": "LCA174"
+    },
+    {
+      "productName": "Limak Limra Hotel & Resort",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 911,
+      "merchantProductId": "AYT190"
+    },
+    {
+      "productName": "Nerton Hotel",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 882,
+      "merchantProductId": "AYT209"
+    },
+    {
+      "productName": "Hotel Alcúdia Garden",
+      "stars": 4,
+      "boardBasis": "Halbpension plus",
+      "price": 916,
+      "merchantProductId": "PMI338"
+    },
+    {
+      "productName": "Iberostar Selection Anthelia",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1254,
+      "merchantProductId": "TFS376"
+    },
+    {
+      "productName": "Alaiye Kleopatra",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 536,
+      "merchantProductId": "AYT161"
+    },
+    {
+      "productName": "Don Palomon",
+      "stars": 3.5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 608,
+      "merchantProductId": "LPA129"
+    },
+    {
+      "productName": "Bahia Principe Explore El Portillo",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 1933,
+      "merchantProductId": "SDQ165"
+    },
+    {
+      "productName": "VONRESORT Golden Coast",
+      "stars": 4.5,
+      "boardBasis": "All Inclusive plus",
+      "price": 896,
+      "merchantProductId": "AYT273"
+    },
+    {
+      "productName": "Grand Seker Hotel",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 620,
+      "merchantProductId": "AYT312"
+    },
+    {
+      "productName": "Gypsophila Holiday",
+      "stars": 4.5,
+      "boardBasis": "All Inclusive plus",
+      "price": 777,
+      "merchantProductId": "AYT202"
+    },
+    {
+      "productName": "Iberostar Waves Costa Dorada",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 1509,
+      "merchantProductId": "POP153"
+    },
+    {
+      "productName": "Iberostar Selection Creta Marine",
+      "stars": 5,
+      "boardBasis": "Halbpension",
+      "price": 1325,
+      "merchantProductId": "HER525"
+    },
+    {
+      "productName": "InterContinental Abu Dhabi",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 993,
+      "merchantProductId": "AUH221"
+    },
+    {
+      "productName": "Hotel Jumeira Rotana",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 839,
+      "merchantProductId": "DXB155"
+    },
+    {
+      "productName": "Kuredu Island Resort & Spa",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 1588,
+      "merchantProductId": "MLE011S"
+    },
+    {
+      "productName": "Iberostar Waves Cala Millor",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 1126,
+      "merchantProductId": "PMI485"
+    },
+    {
+      "productName": "App.-Hotel Novo Mar",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 919,
+      "merchantProductId": "PMI192"
+    },
+    {
+      "productName": "Paradiso Garden",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 1073,
+      "merchantProductId": "PMI344"
+    },
+    {
+      "productName": "Sheraton Jumeirah Beach",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1459,
+      "merchantProductId": "DXB156"
+    },
+    {
+      "productName": "Playabachata Spa Resort",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 1202,
+      "merchantProductId": "POP175"
+    },
+    {
+      "productName": "Viva Heavens by Wyndham",
+      "stars": 4.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 1405,
+      "merchantProductId": "POP114"
+    },
+    {
+      "productName": "Hotel Zafiro Tropic",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 1093,
+      "merchantProductId": "PMI343"
+    },
+    {
+      "productName": "Marien Puerto Plata",
+      "stars": 4.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 1289,
+      "merchantProductId": "POP05"
+    },
+    {
+      "productName": "Hotel Bahia Principe Escape Tenerife",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 1032,
+      "merchantProductId": "TFS220"
+    },
+    {
+      "productName": "Viva V Samana by Wyndham",
+      "stars": 4.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 1851,
+      "merchantProductId": "SDQ213"
+    },
+    {
+      "productName": "Senator Puerto Plata Spa Resort",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 1451,
+      "merchantProductId": "POP118"
+    },
+    {
+      "productName": "Secrets Lanzarote Resort& Spa",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1156,
+      "merchantProductId": "ACE155"
+    },
+    {
+      "productName": "Louis Paphos Breeze",
+      "stars": 4,
+      "boardBasis": "All Inclusive plus",
+      "price": 1198,
+      "merchantProductId": "LCA171"
+    },
+    {
+      "productName": "Hotel Towers Rotana",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 734,
+      "merchantProductId": "DXB103"
+    },
+    {
+      "productName": "Grand Hyatt Dubai Resort & Waterpark",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1521,
+      "merchantProductId": "DXB213"
+    },
+    {
+      "productName": "Viva Tangerine by Wyndham",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 1252,
+      "merchantProductId": "POP102"
+    },
+    {
+      "productName": "Jaz Solaya",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 831,
+      "merchantProductId": "RMF128"
+    },
+    {
+      "productName": "Hotel Three Corners Equinox",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 761,
+      "merchantProductId": "RMF127"
+    },
+    {
+      "productName": "Iberostar Waves Herceg Novi",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 1333,
+      "merchantProductId": "DBV201"
+    },
+    {
+      "productName": "Iberostar Waves Bellevue",
+      "stars": 4.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 1306,
+      "merchantProductId": "DBV100"
+    },
+    {
+      "productName": "Sun Beach Park",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 486,
+      "merchantProductId": "AYT829"
+    },
+    {
+      "productName": "Khalidiya Palace Rayhaan",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1227,
+      "merchantProductId": "AUH100"
+    },
+    {
+      "productName": "Sunis Kumköy Beach Resort & Spa",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 1257,
+      "merchantProductId": "AYT875"
+    },
+    {
+      "productName": "Fujairah Rotana Resort & Spa",
+      "stars": 5,
+      "boardBasis": "Vollpension plus",
+      "price": 1494,
+      "merchantProductId": "DXB214"
+    },
+    {
+      "productName": "Rixos Al Mairid Ras Al Khaimah",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 2373,
+      "merchantProductId": "DXB108"
+    },
+    {
+      "productName": "Alba Royal",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 942,
+      "merchantProductId": "AYT911"
+    },
+    {
+      "productName": "Hotel Paradis Palace",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 639,
+      "merchantProductId": "MIR31"
+    },
+    {
+      "productName": "Hotel Three Corners Fayrouz Plaza",
+      "stars": 4.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 856,
+      "merchantProductId": "RMF102"
+    },
+    {
+      "productName": "Hotel Emotions by Hodelpa Puerto Plata",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 1279,
+      "merchantProductId": "POP108"
+    },
+    {
+      "productName": "Numa Port Hotel",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 551,
+      "merchantProductId": "AYT701"
+    },
+    {
+      "productName": "Miramar Al Aqah Beach Resort & Spa",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 852,
+      "merchantProductId": "DXB120"
+    },
+    {
+      "productName": "Hotel Amwaj Rotana",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 916,
+      "merchantProductId": "DXB102"
+    },
+    {
+      "productName": "Three Corners Sea Beach",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 765,
+      "merchantProductId": "RMF101"
+    },
+    {
+      "productName": "Hotel Skanes Serail",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 582,
+      "merchantProductId": "MIR198"
+    },
+    {
+      "productName": "Atlantis The Palm",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 2856,
+      "merchantProductId": "DXB139"
+    },
+    {
+      "productName": "Hotel Blue Reef Resort",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 621,
+      "merchantProductId": "RMF135"
+    },
+    {
+      "productName": "Hotel JOIA El Mirador by Iberostar",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 2109,
+      "merchantProductId": "TFS280"
+    },
+    {
+      "productName": "The Cove Rotana Resort",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1069,
+      "merchantProductId": "DXB105"
+    },
+    {
+      "productName": "Hotel Sunis Evren Beach Resort & Spa",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 1071,
+      "merchantProductId": "AYT874"
+    },
+    {
+      "productName": "Mövenpick Resort & Marine Spa",
+      "stars": 5,
+      "boardBasis": "Halbpension",
+      "price": 688,
+      "merchantProductId": "MIR150"
+    },
+    {
+      "productName": "Sofitel Dubai Jumeirah Beach",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1237,
+      "merchantProductId": "DXB148"
+    },
+    {
+      "productName": "Oaks Ibn Battuta Gate",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1007,
+      "merchantProductId": "DXB136"
+    },
+    {
+      "productName": "JOIA Salome by Iberostar",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 2144,
+      "merchantProductId": "TFS281"
+    },
+    {
+      "productName": "Cardina Resort",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 643,
+      "merchantProductId": "RMF120"
+    },
+    {
+      "productName": "Hotel Three Corners Happy Life",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 765,
+      "merchantProductId": "RMF116"
+    },
+    {
+      "productName": "Seher Sun Palace Resort& Spa",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 582,
+      "merchantProductId": "AYT546"
+    },
+    {
+      "productName": "Port Side Resort",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 817,
+      "merchantProductId": "AYT186"
+    },
+    {
+      "productName": "Hilton Marsa Alam Nubian",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 939,
+      "merchantProductId": "RMF115"
+    },
+    {
+      "productName": "Park Hyatt Abu Dhabi",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1566,
+      "merchantProductId": "DXB128"
+    },
+    {
+      "productName": "Waldorf Astoria Ras Al Khaimah",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1514,
+      "merchantProductId": "DXB211"
+    },
+    {
+      "productName": "Commodore Elite Suite",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 1257,
+      "merchantProductId": "AYT902"
+    },
+    {
+      "productName": "Hotel LRS Lake & River Side",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 568,
+      "merchantProductId": "AYT504"
+    },
+    {
+      "productName": "Merve Sun Hotel",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 463,
+      "merchantProductId": "AYT509"
+    },
+    {
+      "productName": "Concorde Moreen Beach Resort & Spa",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 826,
+      "merchantProductId": "RMF124"
+    },
+    {
+      "productName": "Seashell Resort And Spa",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 1075,
+      "merchantProductId": "AYT894"
+    },
+    {
+      "productName": "Sofitel Dubai The Palm",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1523,
+      "merchantProductId": "DXB149"
+    },
+    {
+      "productName": "Double Tree by Hilton Resort &Spa Marjan Island",
+      "stars": 5,
+      "boardBasis": "Halbpension",
+      "price": 1251,
+      "merchantProductId": "DXB257"
+    },
+    {
+      "productName": "Hotel Orange Palace Side",
+      "stars": 4.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 753,
+      "merchantProductId": "AYT515"
+    },
+    {
+      "productName": "Side Premium Hotel",
+      "stars": 4.5,
+      "boardBasis": "All Inclusive plus",
+      "price": 773,
+      "merchantProductId": "AYT237"
+    },
+    {
+      "productName": "Ajman Saray - A Luxury Collection Resort",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 838,
+      "merchantProductId": "DXB180"
+    },
+    {
+      "productName": "Diamond Elite Hotel & Spa",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 737,
+      "merchantProductId": "AYT526"
+    },
+    {
+      "productName": "Waldorf Astoria Dubai Palm Jumeirah",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1810,
+      "merchantProductId": "DXB177"
+    },
+    {
+      "productName": "Hotel LRS Port River & Spa",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 674,
+      "merchantProductId": "AYT363"
+    },
+    {
+      "productName": "VONRESORT Elite",
+      "stars": 4.5,
+      "boardBasis": "All Inclusive plus",
+      "price": 939,
+      "merchantProductId": "AYT921"
+    },
+    {
+      "productName": "Side Sunport Hotel & Spa",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 851,
+      "merchantProductId": "AYT527"
+    },
+    {
+      "productName": "Hotel Diamond Premium",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 755,
+      "merchantProductId": "AYT530"
+    },
+    {
+      "productName": "Haydarpasha Palace",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 999,
+      "merchantProductId": "AYT540"
+    },
+    {
+      "productName": "Iberostar Selection Llaut Palma",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1326,
+      "merchantProductId": "PMI656"
+    },
+    {
+      "productName": "Side Royal Palace",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 734,
+      "merchantProductId": "AYT555"
+    },
+    {
+      "productName": "Dukes The Palm, a Royal Hideaway Hotel",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1237,
+      "merchantProductId": "DXB216"
+    },
+    {
+      "productName": "Nikki Beach Resort & Spa",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1810,
+      "merchantProductId": "DXB255"
+    },
+    {
+      "productName": "Dreams Onyx Resort & Spa",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 1964,
+      "merchantProductId": "PUJ167"
+    },
+    {
+      "productName": "Hotel Seashell Vega",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 866,
+      "merchantProductId": "AYT586"
+    },
+    {
+      "productName": "Hotel Radisson Individuals Marina Port Ghalib",
+      "stars": 5,
+      "boardBasis": "Alles Inklusive",
+      "price": 807,
+      "merchantProductId": "RMF133"
+    },
+    {
+      "productName": "InterContinental Fujairah Resort",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1146,
+      "merchantProductId": "DXB244"
+    },
+    {
+      "productName": "Hotel Eftalia Ocean Resort & Spa",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 801,
+      "merchantProductId": "AYT600"
+    },
+    {
+      "productName": "The Retreat Palm Dubai MGallery by Sofitel",
+      "stars": 5,
+      "boardBasis": "Halbpension",
+      "price": 977,
+      "merchantProductId": "DXB228"
+    },
+    {
+      "productName": "Saadiyat Rotana Resort & Villas",
+      "stars": 5.5,
+      "boardBasis": "Frühstück",
+      "price": 1614,
+      "merchantProductId": "DXB226"
+    },
+    {
+      "productName": "Hotel Al Bandar Rotana",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 996,
+      "merchantProductId": "DXB238"
+    },
+    {
+      "productName": "Hotel Aloft The Palm",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 1084,
+      "merchantProductId": "DXB252"
+    },
+    {
+      "productName": "Hotel Lava Beach",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 891,
+      "merchantProductId": "ACE188"
+    },
+    {
+      "productName": "Side Royal Style Hotel",
+      "stars": 5,
+      "boardBasis": "All Inclusive plus",
+      "price": 784,
+      "merchantProductId": "AYT635"
+    },
+    {
+      "productName": "Hotel Andaz Dubai The Palm by Hyatt",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1310,
+      "merchantProductId": "DXB260"
+    },
+    {
+      "productName": "Hampton by Hilton Marjan Island",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 852,
+      "merchantProductId": "DXB259"
+    },
+    {
+      "productName": "Hotel Holiday Time",
+      "stars": 2,
+      "boardBasis": "Frühstück",
+      "price": 611,
+      "merchantProductId": "SPC157"
+    },
+    {
+      "productName": "Iberostar Waves Slavija Budva",
+      "stars": 5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 1257,
+      "merchantProductId": "TIV129"
+    },
+    {
+      "productName": "Radisson Resort Marjan Island",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 919,
+      "merchantProductId": "DXB269"
+    },
+    {
+      "productName": "Centara Mirage Beach Resort Dubai",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 1349,
+      "merchantProductId": "DXB264"
+    },
+    {
+      "productName": "Lazuli Hotel Marsa Alam",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 657,
+      "merchantProductId": "HRG351"
+    },
+    {
+      "productName": "Hotel Side Golden Rock",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 584,
+      "merchantProductId": "AYT739"
+    },
+    {
+      "productName": "Voco Dubai The Palm",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 1189,
+      "merchantProductId": "DXB271"
+    },
+    {
+      "productName": "Seher Side Quality Resort",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 627,
+      "merchantProductId": "AYT945"
+    },
+    {
+      "productName": "Hotel Aladdin Beach Resort",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 768,
+      "merchantProductId": "HRG115"
+    },
+    {
+      "productName": "Arabella Azur Resort",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 775,
+      "merchantProductId": "HRG44"
+    },
+    {
+      "productName": "Hotel Arabia Azur Resort",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 734,
+      "merchantProductId": "HRG35"
+    },
+    {
+      "productName": "Hotel Giftun Azur Beach Resort",
+      "stars": 3.5,
+      "boardBasis": "Alles Inklusive",
+      "price": 639,
+      "merchantProductId": "HRG60"
+    },
+    {
+      "productName": "Hotel Marlin Inn Azur",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 642,
+      "merchantProductId": "HRG07"
+    },
+    {
+      "productName": "Hotel Pharaoh Azur Resort",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 681,
+      "merchantProductId": "HRG62"
+    },
+    {
+      "productName": "Club Paradisio El Gouna",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 1008,
+      "merchantProductId": "HRG249"
+    },
+    {
+      "productName": "Menaville Safaga",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 577,
+      "merchantProductId": "HRG96"
+    },
+    {
+      "productName": "Hotel Plaza & Plaza Regency",
+      "stars": 3.5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 397,
+      "merchantProductId": "MLA10"
+    },
+    {
+      "productName": "Osborne Hotel",
+      "stars": 3.5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 879,
+      "merchantProductId": "MLA19"
+    },
+    {
+      "productName": "Auramar Beach Resort",
+      "stars": 3,
+      "boardBasis": "Alles Inklusive",
+      "price": 939,
+      "merchantProductId": "FAO109"
+    },
+    {
+      "productName": "Hotel Vila Galé Cerro Alagoa",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 815,
+      "merchantProductId": "FAO27"
+    },
+    {
+      "productName": "Sol E Mar Hotel",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 1104,
+      "merchantProductId": "FAO30"
+    },
+    {
+      "productName": "Hotel Golden Club Cabanas",
+      "stars": 3.5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 637,
+      "merchantProductId": "FAO93"
+    },
+    {
+      "productName": "Vasco Da Gama",
+      "stars": 3.5,
+      "boardBasis": "Frühstück",
+      "price": 1148,
+      "merchantProductId": "FAO207"
+    },
+    {
+      "productName": "AP Hotel Oriental Beach - Adults Only",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 1444,
+      "merchantProductId": "FAO832"
+    },
+    {
+      "productName": "Pedras Da Rainha",
+      "stars": 3,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 623,
+      "merchantProductId": "FAO45"
+    },
+    {
+      "productName": "The Cliff Bay",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 1847,
+      "merchantProductId": "FNC196"
+    },
+    {
+      "productName": "Enotel Magnólia",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 1105,
+      "merchantProductId": "FNC10"
+    },
+    {
+      "productName": "Best Siroco",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 779,
+      "merchantProductId": "AGP150"
+    },
+    {
+      "productName": "Hotel Best Triton",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 682,
+      "merchantProductId": "AGP153"
+    },
+    {
+      "productName": "Hotel H10 Ocean Dunas",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 869,
+      "merchantProductId": "FUE55"
+    },
+    {
+      "productName": "Fuentepark",
+      "stars": 3.5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 655,
+      "merchantProductId": "FUE105"
+    },
+    {
+      "productName": "KN Hotel Matas Blancas",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 602,
+      "merchantProductId": "FUE144"
+    },
+    {
+      "productName": "Bungalows Cordial Green Golf",
+      "stars": 3.5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 434,
+      "merchantProductId": "LPA238"
+    },
+    {
+      "productName": "Bungalows Cordial Sandy Golf",
+      "stars": 3,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 428,
+      "merchantProductId": "LPA274"
+    },
+    {
+      "productName": "Hotel Cristina by Tigotan",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 665,
+      "merchantProductId": "LPA140"
+    },
+    {
+      "productName": "Tabaiba Princess",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 1465,
+      "merchantProductId": "LPA236"
+    },
+    {
+      "productName": "Cordial Biarritz B.",
+      "stars": 4,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 811,
+      "merchantProductId": "LPA250"
+    },
+    {
+      "productName": "MUR Appartements Buenos Aires",
+      "stars": 3.5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 494,
+      "merchantProductId": "LPA187"
+    },
+    {
+      "productName": "Hotel Caserio",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 676,
+      "merchantProductId": "LPA61"
+    },
+    {
+      "productName": "Ecuador",
+      "stars": 3,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 439,
+      "merchantProductId": "LPA188"
+    },
+    {
+      "productName": "Hotel Europalace",
+      "stars": 3.5,
+      "boardBasis": "Halbpension",
+      "price": 637,
+      "merchantProductId": "LPA213"
+    },
+    {
+      "productName": "Abora Continental Lopesan",
+      "stars": 4,
+      "boardBasis": "Alles Inklusive",
+      "price": 887,
+      "merchantProductId": "LPA163"
+    },
+    {
+      "productName": "Las Faluas Apartments",
+      "stars": 3,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 408,
+      "merchantProductId": "LPA216"
+    },
+    {
+      "productName": "Hotel Servatur Playa Bonita",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 580,
+      "merchantProductId": "LPA12"
+    },
+    {
+      "productName": "Montemayor Apartments",
+      "stars": 3.5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 798,
+      "merchantProductId": "LPA241"
+    },
+    {
+      "productName": "MUR Hotel Neptuno",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 641,
+      "merchantProductId": "LPA186"
+    },
+    {
+      "productName": "MUR Bungalows Parque Romantico",
+      "stars": 3,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 536,
+      "merchantProductId": "LPA152"
+    },
+    {
+      "productName": "Hotel Blue Sea Rey Carlos",
+      "stars": 3.5,
+      "boardBasis": "Frühstück",
+      "price": 539,
+      "merchantProductId": "LPA181"
+    },
+    {
+      "productName": "Gloria Palace San Agustin Thalasso & Hotel",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 1000,
+      "merchantProductId": "LPA26"
+    },
+    {
+      "productName": "Vista Oasis",
+      "stars": 3,
+      "boardBasis": "Frühstück",
+      "price": 523,
+      "merchantProductId": "LPA222"
+    },
+    {
+      "productName": "Beatriz Costa Teguise",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 645,
+      "merchantProductId": "ACE76"
+    },
+    {
+      "productName": "H10 Lanzarote Gardens",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 741,
+      "merchantProductId": "ACE213"
+    },
+    {
+      "productName": "Hotel Alexandre Grand Teguise Playa",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 928,
+      "merchantProductId": "ACE116"
+    },
+    {
+      "productName": "H10 White Suites",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 975,
+      "merchantProductId": "ACE192"
+    },
+    {
+      "productName": "Elba Lanz Royal Village",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 928,
+      "merchantProductId": "ACE162"
+    },
+    {
+      "productName": "H10 Lanzarote Princess",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 887,
+      "merchantProductId": "ACE211"
+    },
+    {
+      "productName": "Dreams Lanzarote PlayaDorada Resort",
+      "stars": 5,
+      "boardBasis": "Frühstück",
+      "price": 977,
+      "merchantProductId": "ACE156"
+    },
+    {
+      "productName": "H10 Timanfaya Palace",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 876,
+      "merchantProductId": "ACE183"
+    },
+    {
+      "productName": "Hotel Beatriz Playa& Spa",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 650,
+      "merchantProductId": "ACE80"
+    },
+    {
+      "productName": "Hotel LIVVO Las Gaviotas",
+      "stars": 3.5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 805,
+      "merchantProductId": "ACE800"
+    },
+    {
+      "productName": "Hotel Costa Mar",
+      "stars": 3,
+      "boardBasis": "Halbpension",
+      "price": 570,
+      "merchantProductId": "ACE805"
+    },
+    {
+      "productName": "Hotel Seaside Los Jameos",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 977,
+      "merchantProductId": "ACE200"
+    },
+    {
+      "productName": "Hotel THB Flora",
+      "stars": 4,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 606,
+      "merchantProductId": "ACE16"
+    },
+    {
+      "productName": "Hotel EREZA Los Hibiscos",
+      "stars": 3.5,
+      "boardBasis": "Halbpension",
+      "price": 717,
+      "merchantProductId": "ACE148"
+    },
+    {
+      "productName": "Hotel BG Rei del Mediterrani",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 910,
+      "merchantProductId": "PMI40"
+    },
+    {
+      "productName": "Hipotels Flamenco",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 897,
+      "merchantProductId": "PMI847"
+    },
+    {
+      "productName": "Hipotels Said",
+      "stars": 4.5,
+      "boardBasis": "Halbpension",
+      "price": 861,
+      "merchantProductId": "PMI08"
+    },
+    {
+      "productName": "Hotel THB El Cid",
+      "stars": 4.5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 1166,
+      "merchantProductId": "PMI106"
+    },
+    {
+      "productName": "BG Java Hotel",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 758,
+      "merchantProductId": "PMI426"
+    },
+    {
+      "productName": "BG Tonga Tower Design Hotel & Suites",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 789,
+      "merchantProductId": "PMI376"
+    },
+    {
+      "productName": "Hipotels Eurotel Punta Rotja",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 700,
+      "merchantProductId": "PMI899"
+    },
+    {
+      "productName": "Hotel HM Gran Fiesta",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 1002,
+      "merchantProductId": "PMI530"
+    },
+    {
+      "productName": "THB Maria Isabel Hotel",
+      "stars": 4.5,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 700,
+      "merchantProductId": "PMI24"
+    },
+    {
+      "productName": "Universal Hotel Neptuno",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 985,
+      "merchantProductId": "PMI879"
+    },
+    {
+      "productName": "Hotel HM Tropical",
+      "stars": 4.5,
+      "boardBasis": "Frühstück",
+      "price": 1002,
+      "merchantProductId": "PMI238"
+    },
+    {
+      "productName": "THB Felip",
+      "stars": 4,
+      "boardBasis": "Ohne Verpflegung",
+      "price": 651,
+      "merchantProductId": "PMI176"
+    },
+    {
+      "productName": "Blue Sea Lagos De Cesar",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 707,
+      "merchantProductId": "TFS147"
+    },
+    {
+      "productName": "Hotel Arenas del Mar",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 851,
+      "merchantProductId": "TFS116"
+    },
+    {
+      "productName": "Spring Arona Gran",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 885,
+      "merchantProductId": "TFS06"
+    },
+    {
+      "productName": "Hotel H10 Big Sur",
+      "stars": 4,
+      "boardBasis": "Halbpension",
+      "price": 902,
+      "merchantProductId": "TFS135"
+    },
+    {
+      "productName": "ADRIAN Hoteles Colón Guanahani",
+      "stars": 4,
+      "boardBasis": "Frühstück",
+      "price": 1153,
+      "merchantProductId": "TFS801"
+    }
+  ]
+}

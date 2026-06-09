@@ -108,6 +108,47 @@
     .social-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.2s, color 0.2s, background 0.2s; }
     .social-icon:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,200,150,0.08); }
     @media (max-width: 600px) { nav { gap: 1.25rem; } footer { flex-direction: column; align-items: flex-start; } }
+
+    /* ── Contact main layout ── */
+    .contact-main { display: grid; grid-template-columns: 1fr 360px; gap: 2.5rem; max-width: 1020px; margin: 0 auto; padding: clamp(3rem,7vw,5rem) clamp(1.25rem,5vw,3rem); align-items: start; }
+    .section-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 1.5rem; }
+
+    /* ── Inline form ── */
+    .kt-section-lbl { font-size:.68rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.9px;margin:1.1rem 0 .65rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.07); }
+    .kt-section-lbl:first-child { margin-top:0;border-top:none;padding-top:0; }
+    .kt-row { margin-bottom:.9rem; }
+    .kt-row label { display:block;font-size:.72rem;color:var(--text-muted);margin-bottom:.3rem;font-weight:600;letter-spacing:.3px; }
+    .kt-row input,.kt-row select { width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.6rem .8rem;color:var(--text);font-size:.88rem;transition:border-color .2s;box-sizing:border-box; }
+    .kt-row input:focus,.kt-row select:focus { outline:none;border-color:var(--accent); }
+    .kt-row select option { background:#1a1a1a; }
+    .kt-row-2 { display:grid;grid-template-columns:1fr 1fr;gap:.75rem; }
+    .kt-row-2>div input,.kt-row-2>div select { width:100%; }
+    .kt-ages-hint { font-size:.7rem;color:var(--text-muted);margin-bottom:.7rem; }
+    .kt-ages-grid { display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem; }
+    .kt-ages-grid input { width:68px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.55rem .5rem;color:var(--text);font-size:.88rem;text-align:center;box-sizing:border-box; }
+    .kt-ages-grid input:focus { outline:none;border-color:var(--accent); }
+    .kt-radio-row { display:flex;gap:1rem;margin-top:.25rem;flex-wrap:wrap; }
+    .kt-radio-lbl { display:flex;align-items:center;gap:.4rem;font-size:.88rem;color:var(--text);cursor:pointer;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.5rem .85rem;transition:border-color .2s; }
+    .kt-radio-lbl:has(input:checked) { border-color:var(--accent);color:var(--accent); }
+    .kt-radio-lbl input[type=radio] { accent-color:var(--accent); }
+    .kt-submit { width:100%;background:var(--accent);color:#0a0a0a;border:none;border-radius:10px;padding:.85rem;font-weight:800;font-size:.95rem;cursor:pointer;transition:opacity .2s;margin-top:.4rem; }
+    .kt-submit:hover { opacity:.88; }
+    .kt-submit:disabled { opacity:.5;cursor:not-allowed; }
+    .kt-error { background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.3);border-radius:8px;padding:.7rem;font-size:.78rem;color:#ff8888;margin-top:.5rem; }
+    .kt-success { text-align:center;padding:2rem 0; }
+    .kt-success-icon { font-size:2.5rem;margin-bottom:.75rem; }
+    .kt-success h4 { font-size:1.1rem;color:var(--accent);margin-bottom:.5rem; }
+    .kt-success p { font-size:.85rem;color:var(--text-muted);line-height:1.5; }
+
+    /* ── Info sidebar ── */
+    .info-cards { display:flex;flex-direction:column;gap:1rem; }
+    .info-card { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.35rem; }
+    .info-icon { font-size:1.4rem; }
+    .info-label { font-size:.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px; }
+    .info-val { font-size:.9rem;color:var(--text);transition:color .2s; }
+    a.info-val:hover { color:var(--accent); }
+
+    @media (max-width: 760px) { .contact-main { grid-template-columns: 1fr; } }
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCDTX8ZEQ3"></script>
@@ -125,11 +166,11 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Kontakt – JetztBuchbar.de | Wir helfen gerne",
-  "url": "https://jetztbuchbar.de/kontakt",
+  "url": "https://www.jetztbuchbar.de/kontakt",
   "publisher": {
     "@type": "Organization",
     "name": "JetztBuchbar.de",
-    "url": "https://jetztbuchbar.de"
+    "url": "https://www.jetztbuchbar.de"
   }
 }
   </script>
@@ -142,17 +183,25 @@
       "@type": "ListItem",
       "position": 1,
       "name": "Startseite",
-      "item": "https://jetztbuchbar.de/"
+      "item": "https://www.jetztbuchbar.de/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Kontakt",
-      "item": "https://jetztbuchbar.de/kontakt/"
+      "item": "https://www.jetztbuchbar.de/kontakt/"
     }
   ]
 }
   </script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wzrhhc1m1p");
+</script>
 </head>
 <body>
 
@@ -160,44 +209,121 @@
 
   <!-- Hero -->
   <div class="hero">
-    <span class="hero-icon">💬</span>
-    <h1>Wie können wir <span>helfen?</span></h1>
-    <p class="hero-sub">Fragen zu Buchungen, Reiseempfehlungen oder Kooperationsanfragen – wir melden uns schnell zurück.</p>
+    <span class="hero-icon">✉️</span>
+    <h1>Schreib uns eine <span>Nachricht</span></h1>
+    <p class="hero-sub">Reiseplanung, Anfrage oder Kooperation – wir melden uns innerhalb von 24 Stunden persönlich zurück.</p>
   </div>
 
-  <!-- Kontaktkarten -->
-  <div class="contact-section">
-    <div class="contact-grid">
+  <!-- Main: Form + Info -->
+  <div class="contact-main">
 
-      <div class="contact-card highlight">
-        <div class="card-icon">💬</div>
-        <div class="card-title">Live-Chat</div>
-        <div class="card-desc">Sofortantwort über unseren Live-Chat – klicke einfach unten rechts auf das Chat-Symbol.</div>
-        <a href="#" class="card-action" onclick="window.$crisp && $crisp.push(['do','chat:open']); return false;">Chat öffnen</a>
+    <!-- Inline Form -->
+    <div class="contact-form-wrap">
+      <h2 class="section-title">Anfrage senden</h2>
+      <form id="kt-form" novalidate>
+
+        <div class="kt-section-lbl">🌍 Reiseziel oder Thema</div>
+        <div class="kt-row">
+          <label for="kt-topic">Reiseziel / Betreff *</label>
+          <input type="text" id="kt-topic" required placeholder="z.&#160;B. Türkei, Griechenland, Kooperation …">
+        </div>
+
+        <div class="kt-section-lbl">📅 Reisedaten</div>
+        <div class="kt-row kt-row-2">
+          <div><label for="kt-checkin">Check-in *</label><input type="date" id="kt-checkin" required></div>
+          <div><label for="kt-checkout">Check-out *</label><input type="date" id="kt-checkout" required></div>
+        </div>
+
+        <div class="kt-section-lbl">👥 Reisende</div>
+        <div class="kt-row kt-row-2">
+          <div>
+            <label for="kt-adults">Erwachsene *</label>
+            <select id="kt-adults" required>
+              <option value="1">1 Erwachsener</option>
+              <option value="2" selected>2 Erwachsene</option>
+              <option value="3">3 Erwachsene</option>
+              <option value="4">4 Erwachsene</option>
+              <option value="5">5 Erwachsene</option>
+              <option value="6">6 Erwachsene</option>
+            </select>
+          </div>
+          <div>
+            <label for="kt-children">Kinder (unter 18)</label>
+            <select id="kt-children">
+              <option value="0" selected>Keine</option>
+              <option value="1">1 Kind</option>
+              <option value="2">2 Kinder</option>
+              <option value="3">3 Kinder</option>
+              <option value="4">4 Kinder</option>
+            </select>
+          </div>
+        </div>
+        <div id="kt-ages-wrap" style="display:none">
+          <p class="kt-ages-hint">Alter der Kinder bei Reiseantritt (0–17 Jahre)</p>
+          <div class="kt-ages-grid" id="kt-ages-grid"></div>
+        </div>
+
+        <div class="kt-section-lbl">✈️ Flug</div>
+        <div class="kt-row">
+          <label>Flug gewünscht?</label>
+          <div class="kt-radio-row">
+            <label class="kt-radio-lbl"><input type="radio" name="kt-flight" value="nein" checked> Nur Hotel</label>
+            <label class="kt-radio-lbl"><input type="radio" name="kt-flight" value="ja"> Mit Flug</label>
+          </div>
+        </div>
+        <div id="kt-airport-wrap" class="kt-row" style="display:none">
+          <label for="kt-airport">Abflughafen</label>
+          <input type="text" id="kt-airport" placeholder="z.&#160;B. Frankfurt, München, Wien …">
+        </div>
+
+        <div class="kt-section-lbl">📧 Kontaktdaten</div>
+        <div class="kt-row">
+          <label for="kt-name">Name *</label>
+          <input type="text" id="kt-name" required placeholder="Ihr Name" autocomplete="name">
+        </div>
+        <div class="kt-row">
+          <label for="kt-email">E-Mail *</label>
+          <input type="email" id="kt-email" required placeholder="ihre@email.de" autocomplete="email">
+        </div>
+
+        <div id="kt-err" class="kt-error" style="display:none"></div>
+        <button type="submit" class="kt-submit" id="kt-submit">Anfrage senden →</button>
+      </form>
+
+      <div id="kt-success" style="display:none" class="kt-success">
+        <div class="kt-success-icon">✅</div>
+        <h4>Anfrage gesendet!</h4>
+        <p>Wir melden uns innerhalb von 24 Stunden mit einem persönlichen Angebot bei Ihnen.</p>
       </div>
-
-      <div class="contact-card">
-        <div class="card-icon">✉️</div>
-        <div class="card-title">E-Mail</div>
-        <div class="card-desc">Schreib uns eine E-Mail – wir antworten in der Regel innerhalb von 24 Stunden.</div>
-        <a href="mailto:sales@jetztbuchbar.de" class="card-action ghost">sales@jetztbuchbar.de</a>
-      </div>
-
-      <div class="contact-card">
-        <div class="card-icon">📸</div>
-        <div class="card-title">Instagram</div>
-        <div class="card-desc">Folge uns für Reiseinspirationen und schreib uns per DM.</div>
-        <a href="https://www.instagram.com/jetztbuchbar.de/" target="_blank" rel="noopener" class="card-action ghost">@jetztbuchbar.de</a>
-      </div>
-
-      <div class="contact-card">
-        <div class="card-icon">📘</div>
-        <div class="card-title">Facebook</div>
-        <div class="card-desc">Aktuelle Angebote und Community – schreib uns auch dort.</div>
-        <a href="https://www.facebook.com/jetztbuchbar/" target="_blank" rel="noopener" class="card-action ghost">jetztbuchbar</a>
-      </div>
-
     </div>
+
+    <!-- Info Sidebar -->
+    <div class="contact-info-wrap">
+      <h2 class="section-title">Kontaktinfos</h2>
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-icon">✉️</div>
+          <div class="info-label">E-Mail</div>
+          <a href="mailto:sales@jetztbuchbar.de" class="info-val">sales@jetztbuchbar.de</a>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📍</div>
+          <div class="info-label">Adresse</div>
+          <span class="info-val">Wien, Österreich</span>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📸</div>
+          <div class="info-label">Instagram</div>
+          <a href="https://www.instagram.com/jbscore.jetztbuchbar/" target="_blank" rel="noopener" class="info-val">@jbscore.jetztbuchbar</a>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">⏱️</div>
+          <div class="info-label">Antwortzeit</div>
+          <span class="info-val">Innerhalb von 24 Stunden</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- FAQ -->
@@ -254,9 +380,123 @@
       <span style="font-size:.78rem;color:#555;">© 2026 JetztBuchbar.de · Wien, Österreich</span>
     </div>
   </footer>
+  <!-- EmailJS Contact Form Logic -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    var EJS_KEY    = 'rJZMY5EEUvbFNQH6t';
+    var EJS_SVC    = 'service_s34phfh';
+    var EJS_NOTIFY = 'template_nfdnxi4';
+    var EJS_REPLY  = 'template_69aohml';
+    emailjs.init(EJS_KEY);
 
-<!--Start of Crisp Chat-->
-<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="bd983cbc-0fb7-4b1e-9d37-4c2c02ba1f0b";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
-<!--End of Crisp Chat-->
+    var todayStr   = new Date().toISOString().split('T')[0];
+    var checkinEl  = document.getElementById('kt-checkin');
+    var checkoutEl = document.getElementById('kt-checkout');
+    checkinEl.min  = todayStr;
+    checkoutEl.min = todayStr;
+
+    checkinEl.addEventListener('change', function () {
+      checkoutEl.min = this.value || todayStr;
+    });
+
+    document.getElementById('kt-children').addEventListener('change', function () {
+      var n    = parseInt(this.value, 10);
+      var wrap = document.getElementById('kt-ages-wrap');
+      var grid = document.getElementById('kt-ages-grid');
+      grid.innerHTML = '';
+      if (n > 0) {
+        for (var i = 1; i <= n; i++) {
+          var inp = document.createElement('input');
+          inp.type = 'number'; inp.min = '0'; inp.max = '17';
+          inp.placeholder = 'Kind ' + i;
+          inp.id = 'kt-age-' + i;
+          inp.setAttribute('aria-label', 'Alter Kind ' + i);
+          grid.appendChild(inp);
+        }
+        wrap.style.display = '';
+      } else {
+        wrap.style.display = 'none';
+      }
+    });
+
+    document.querySelectorAll('input[name="kt-flight"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        document.getElementById('kt-airport-wrap').style.display =
+          this.value === 'ja' ? '' : 'none';
+      });
+    });
+
+    document.getElementById('kt-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var topic    = document.getElementById('kt-topic').value.trim();
+      var name     = document.getElementById('kt-name').value.trim();
+      var email    = document.getElementById('kt-email').value.trim();
+      var checkin  = checkinEl.value;
+      var checkout = checkoutEl.value;
+      var adults   = document.getElementById('kt-adults').value;
+      var childN   = parseInt(document.getElementById('kt-children').value, 10);
+      var errEl    = document.getElementById('kt-err');
+      var btnSub   = document.getElementById('kt-submit');
+
+      if (!topic || !name || !email || !checkin || !checkout) {
+        errEl.textContent = 'Bitte alle Pflichtfelder (*) ausfüllen.';
+        errEl.style.display = '';
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errEl.textContent = 'Bitte eine gültige E-Mail-Adresse eingeben.';
+        errEl.style.display = '';
+        return;
+      }
+      errEl.style.display = 'none';
+
+      var personsStr = adults + (adults === '1' ? ' Erwachsener' : ' Erwachsene');
+      if (childN > 0) {
+        var ages = [];
+        for (var i = 1; i <= childN; i++) {
+          var ageEl = document.getElementById('kt-age-' + i);
+          if (ageEl && ageEl.value !== '') ages.push(ageEl.value + ' J.');
+        }
+        personsStr += ', ' + childN + (childN === 1 ? ' Kind' : ' Kinder');
+        if (ages.length) personsStr += ' (Alter: ' + ages.join(', ') + ')';
+      }
+
+      var flightVal = document.querySelector('input[name="kt-flight"]:checked').value;
+      var flightStr = flightVal === 'ja'
+        ? '\u2708 Ja, ab ' + (document.getElementById('kt-airport').value.trim() || '\u2013')
+        : 'Kein Flug gew\u00fcnscht';
+
+      var params = {
+        hotel_name:  topic,
+        hotel_stars: '\u2013',
+        hotel_url:   'https://www.jetztbuchbar.de/kontakt.html',
+        user_name:   name,
+        user_email:  email,
+        user_phone:  flightStr,
+        checkin:     checkin,
+        checkout:    checkout,
+        persons:     personsStr
+      };
+
+      btnSub.disabled = true;
+      btnSub.textContent = 'Wird gesendet \u2026';
+
+      Promise.all([
+        emailjs.send(EJS_SVC, EJS_NOTIFY, params),
+        emailjs.send(EJS_SVC, EJS_REPLY,  params)
+      ]).then(function () {
+        document.getElementById('kt-form').style.display = 'none';
+        document.getElementById('kt-success').style.display = '';
+      }).catch(function () {
+        errEl.textContent = 'Fehler beim Senden. Bitte schreib uns direkt: sales@jetztbuchbar.de';
+        errEl.style.display = '';
+        btnSub.disabled = false;
+        btnSub.textContent = 'Anfrage senden \u2192';
+      });
+    });
+  })();
+  </script>
 </body>
 </html>

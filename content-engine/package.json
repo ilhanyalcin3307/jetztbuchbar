@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "update:wearetravel": "node update-wearetravel-offers.js"
   },
   "dependencies": {
     "node-cron": "^3.0.3",

@@ -1374,6 +1374,44 @@
     .rb-badge-tl { left: 16px; }
     .rb-badge-tr { right: 16px; }
 
+    .rb-country-score {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 16;
+      min-width: 96px;
+      text-align: center;
+      background: rgba(8,8,8,.78);
+      border: 1px solid rgba(0,200,150,.45);
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 4px 10px;
+      color: #d8fff3;
+      box-shadow: 0 8px 20px rgba(0,0,0,.38);
+      pointer-events: none;
+    }
+    .rb-country-score span {
+      display: block;
+      font-size: .56rem;
+      line-height: 1;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: rgba(216,255,243,.78);
+      margin-bottom: 2px;
+      font-weight: 700;
+    }
+    .rb-country-score strong {
+      display: block;
+      font-size: .88rem;
+      line-height: 1;
+      letter-spacing: .02em;
+      color: #00e5ab;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+
     /* ── Textblock (unten, über Gradient) ── */
     .rb-half-body {
       position: absolute;
@@ -1456,24 +1494,6 @@
       transition: opacity .3s ease;
     }
     .rb-tagline span:last-child { text-align: right; }
-    .rb-card:hover .rb-tagline { opacity: 0; }
-
-    /* ── Hover CTA (slide up) ── */
-    .rb-hover-cta {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      z-index: 30;
-      padding: .9rem 1.25rem;
-      text-align: center;
-      font-size: .88rem;
-      font-weight: 800;
-      color: #0a0a0a;
-      background: linear-gradient(90deg, #00c896, #00e5ab);
-      letter-spacing: .01em;
-      transform: translateY(100%);
-      transition: transform .35s cubic-bezier(.22,.68,0,1.2);
-    }
-    .rb-card:hover .rb-hover-cta { transform: translateY(0); }
 
     /* ── Responsive ── */
     @media (max-width: 639px) {
@@ -1483,6 +1503,9 @@
       .rb-badge { font-size: .65rem; padding: 4px 9px; top: 12px; }
       .rb-badge-tl { left: 12px; }
       .rb-badge-tr { right: 12px; }
+      .rb-country-score { top: 11px; min-width: 84px; padding: 4px 8px; }
+      .rb-country-score span { font-size: .52rem; }
+      .rb-country-score strong { font-size: .8rem; }
       .rb-half-body { padding: 0 14px 18px; }
       .rb-vs { width: 64px; height: 64px; }
     }
@@ -1500,7 +1523,7 @@
       <a href="/vergleiche/mallorca-vs-kreta/" class="rb-card">
         <div class="rb-split">
           <!-- Linke Hälfte: Mallorca -->
-          <div class="rb-half">
+          <div class="rb-half" data-cc="ES">
             <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=75&auto=format&fit=crop" alt="Mallorca" loading="lazy">
             <div class="rb-badge rb-badge-tl">✈️ Nur 2h Flug</div>
             <div class="rb-half-body">
@@ -1510,7 +1533,7 @@
             </div>
           </div>
           <!-- Rechte Hälfte: Kreta -->
-          <div class="rb-half">
+          <div class="rb-half" data-cc="GR">
             <img src="https://images.unsplash.com/photo-1555993539-1732b0258235?w=700&q=75&auto=format&fit=crop" alt="Kreta" loading="lazy">
             <div class="rb-badge rb-badge-tr">💶 25% Günstiger</div>
             <div class="rb-half-body">
@@ -1525,14 +1548,13 @@
           <span>🎉 Party &amp; Lifestyle</span>
           <span>🏛️ Antike Kultur</span>
         </div>
-        <div class="rb-hover-cta">Wer gewinnt? Zum Vergleich →</div>
       </a>
 
       <!-- ── Karte 2: Türkei vs. Ägypten ── -->
       <a href="/vergleiche/tuerkei-vs-aegypten/" class="rb-card">
         <div class="rb-split">
           <!-- Linke Hälfte: Türkei -->
-          <div class="rb-half">
+          <div class="rb-half" data-cc="TR">
             <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=700&q=75&auto=format&fit=crop" alt="Türkei" loading="lazy">
             <div class="rb-badge rb-badge-tl">👨‍👩‍👧 Familien-König</div>
             <div class="rb-half-body">
@@ -1542,7 +1564,7 @@
             </div>
           </div>
           <!-- Rechte Hälfte: Ägypten -->
-          <div class="rb-half">
+          <div class="rb-half" data-cc="EG">
             <img src="https://images.unsplash.com/photo-1539768942893-daf53e448371?w=700&q=75&auto=format&fit=crop" alt="Ägypten" loading="lazy">
             <div class="rb-badge rb-badge-tr">☀️ Ganzjahres-Sonne</div>
             <div class="rb-half-body">
@@ -1557,14 +1579,13 @@
           <span>🏖️ Premium Resorts</span>
           <span>🤿 Unterwasserwelt</span>
         </div>
-        <div class="rb-hover-cta">Wer gewinnt? Zum Vergleich →</div>
       </a>
 
       <!-- ── Karte 3: Dubai vs. Abu Dhabi ── -->
       <a href="/vergleiche/dubai-vs-abu-dhabi/" class="rb-card">
         <div class="rb-split">
           <!-- Linke Hälfte: Dubai -->
-          <div class="rb-half">
+          <div class="rb-half" data-cc="AE">
             <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=700&q=75&auto=format&fit=crop" alt="Dubai" loading="lazy">
             <div class="rb-badge rb-badge-tl">🏙️ Skyline &amp; Luxus</div>
             <div class="rb-half-body">
@@ -1574,7 +1595,7 @@
             </div>
           </div>
           <!-- Rechte Hälfte: Abu Dhabi -->
-          <div class="rb-half">
+          <div class="rb-half" data-cc="AE">
             <img src="https://images.unsplash.com/photo-1558008258-3256797b43f3?w=700&q=75&auto=format&fit=crop" alt="Abu Dhabi" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1568699804053-91a45cc7e7f6?w=700&q=75&auto=format&fit=crop'">
             <div class="rb-badge rb-badge-tr">🏛️ Louvre &amp; Ruhe</div>
             <div class="rb-half-body">
@@ -1589,13 +1610,12 @@
           <span>✨ Glamour &amp; Nightlife</span>
           <span>🕌 Kultur &amp; Tradition</span>
         </div>
-        <div class="rb-hover-cta">Wer gewinnt? Zum Vergleich →</div>
       </a>
 
       <!-- Karte 4: Griechenland vs Kroatien -->
       <a href="/vergleiche/griechenland-vs-kroatien/" class="rb-card">
         <div class="rb-split">
-          <div class="rb-half">
+          <div class="rb-half" data-cc="GR">
             <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=700&q=75&auto=format&fit=crop" alt="Griechenland" loading="lazy">
             <div class="rb-badge rb-badge-tl">🏛️ Antike Inseln</div>
             <div class="rb-half-body">
@@ -1604,7 +1624,7 @@
               <div class="rb-temp">🌡️ 28°C · Jun–Sep</div>
             </div>
           </div>
-          <div class="rb-half">
+          <div class="rb-half" data-cc="HR">
             <img src="https://images.unsplash.com/photo-1612621450155-a574ebb71f9e?w=700&q=75&auto=format&fit=crop" alt="Kroatien" loading="lazy">
             <div class="rb-badge rb-badge-tr">🌊 Klarste Meere</div>
             <div class="rb-half-body">
@@ -1619,13 +1639,12 @@
           <span>🗿 Santorini &amp; Mykonos</span>
           <span>🏔️ Nationalparks &amp; Seen</span>
         </div>
-        <div class="rb-hover-cta">Wer gewinnt? Zum Vergleich →</div>
       </a>
 
       <!-- Karte 5: Portugal vs Marokko -->
       <a href="/vergleiche/portugal-vs-marokko/" class="rb-card">
         <div class="rb-split">
-          <div class="rb-half">
+          <div class="rb-half" data-cc="PT">
             <img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=700&q=75&auto=format&fit=crop" alt="Portugal" loading="lazy">
             <div class="rb-badge rb-badge-tl">🏄 Surf-Paradies</div>
             <div class="rb-half-body">
@@ -1634,7 +1653,7 @@
               <div class="rb-temp">🌡️ 25°C · Jun–Sep</div>
             </div>
           </div>
-          <div class="rb-half">
+          <div class="rb-half" data-cc="MA">
             <img src="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=700&q=75&auto=format&fit=crop" alt="Marokko" loading="lazy">
             <div class="rb-badge rb-badge-tr">🐪 Sahara &amp; Souks</div>
             <div class="rb-half-body">
@@ -1649,13 +1668,12 @@
           <span>🌊 Atlantikküste</span>
           <span>🕌 1001 Nacht</span>
         </div>
-        <div class="rb-hover-cta">Wer gewinnt? Zum Vergleich →</div>
       </a>
 
       <!-- Karte 6: Zypern vs Malta -->
       <a href="/vergleiche/zypern-vs-malta/" class="rb-card">
         <div class="rb-split">
-          <div class="rb-half">
+          <div class="rb-half" data-cc="CY">
             <img src="https://images.unsplash.com/photo-1664993118495-6647529d58d5?w=700&q=75&auto=format&fit=crop" alt="Zypern" loading="lazy">
             <div class="rb-badge rb-badge-tl">☀️ 350 Sonnentage</div>
             <div class="rb-half-body">
@@ -1664,7 +1682,7 @@
               <div class="rb-temp">🌡️ 29°C · Jun–Sep</div>
             </div>
           </div>
-          <div class="rb-half">
+          <div class="rb-half" data-cc="MT">
             <img src="https://images.unsplash.com/photo-1730190206154-66bf41958e62?w=700&q=75&auto=format&fit=crop" alt="Malta" loading="lazy">
             <div class="rb-badge rb-badge-tr">🤿 Weltklasse-Tauchen</div>
             <div class="rb-half-body">
@@ -1679,12 +1697,94 @@
           <span>🏖️ Aphrodites Insel</span>
           <span>🏰 Ritter-Geschichte</span>
         </div>
-        <div class="rb-hover-cta">Wer gewinnt? Zum Vergleich →</div>
       </a>
 
     </div>
     </div><!-- /.rb-scroll-wrap -->
   </section>
+
+  <script>
+    (function(){
+      function ensureJBScore() {
+        if (window.JBScore && typeof window.JBScore.calcScore === 'function') {
+          return Promise.resolve();
+        }
+        return new Promise(function(resolve){
+          var existing = document.querySelector('script[data-jb-score-loader="1"]');
+          if (existing) {
+            existing.addEventListener('load', function(){ resolve(); }, { once: true });
+            existing.addEventListener('error', function(){ resolve(); }, { once: true });
+            return;
+          }
+          var s = document.createElement('script');
+          s.src = '/components/jb-score.js';
+          s.defer = true;
+          s.setAttribute('data-jb-score-loader', '1');
+          s.onload = function(){ resolve(); };
+          s.onerror = function(){ resolve(); };
+          document.head.appendChild(s);
+        });
+      }
+
+      function extractScore(hotel) {
+        if (window.JBScore && typeof window.JBScore.calcScore === 'function') {
+          var s = Number(window.JBScore.calcScore(hotel));
+          if (Number.isFinite(s)) return s;
+        }
+        var fallback = Number(
+          hotel && (hotel.score || hotel.jbScore || hotel.totalScore || hotel._score)
+        );
+        return Number.isFinite(fallback) ? fallback : null;
+      }
+
+      function computeCountryAverages(hotels) {
+        var totals = Object.create(null);
+        var counts = Object.create(null);
+
+        (hotels || []).forEach(function(hotel){
+          var cc = String((hotel && hotel.cc) || '').toUpperCase();
+          if (!cc) return;
+          var score = extractScore(hotel);
+          if (!Number.isFinite(score)) return;
+          totals[cc] = (totals[cc] || 0) + score;
+          counts[cc] = (counts[cc] || 0) + 1;
+        });
+
+        var avg = Object.create(null);
+        Object.keys(totals).forEach(function(cc){
+          if (!counts[cc]) return;
+          avg[cc] = totals[cc] / counts[cc];
+        });
+        return avg;
+      }
+
+      function injectCountryScores(avgByCc) {
+        var halves = document.querySelectorAll('.rb-half[data-cc]');
+        halves.forEach(function(half){
+          var cc = String(half.getAttribute('data-cc') || '').toUpperCase();
+          var avg = Number(avgByCc[cc]);
+          if (!cc || !Number.isFinite(avg)) return;
+
+          var badge = document.createElement('div');
+          badge.className = 'rb-country-score';
+          badge.innerHTML = '<span>&Oslash; JB-Score</span><strong>' + avg.toFixed(1) + '</strong>';
+          half.appendChild(badge);
+        });
+      }
+
+      ensureJBScore()
+        .then(function(){
+          return fetch('/api/giata-search-index.json')
+            .then(function(r){ return r.ok ? r.json() : []; })
+            .catch(function(){ return []; });
+        })
+        .then(function(indexData){
+          var averages = computeCountryAverages(indexData);
+          injectCountryScores(averages);
+        })
+        .catch(function(){});
+    })();
+  </script>
 
   <!-- ── REISEZIELE ── -->
   <section class="destinations">

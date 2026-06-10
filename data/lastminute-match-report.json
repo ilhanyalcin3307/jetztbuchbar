@@ -1,0 +1,4997 @@
+{
+  "generatedAt": "2026-06-10T07:22:44.565Z",
+  "source": "lastminute-feed.csv",
+  "provider": "Lastminute",
+  "stats": {
+    "totalOffers": 17993,
+    "offersWithIbeId": 17993,
+    "candidateMatches": 621,
+    "liveEligibleOffers": 534,
+    "directGiataIdMatches": 0,
+    "overrideMatches": 530,
+    "exactMatches": 0,
+    "strongMatches": 4,
+    "probableMatches": 87,
+    "excludedOffers": 0,
+    "unmatchedOffers": 17372,
+    "skippedWithoutLink": 0,
+    "skippedWithoutPrice": 0,
+    "skippedWithoutHotelName": 0,
+    "matchedHotels": 165,
+    "candidateMatchRate": 3.45,
+    "liveMatchRate": 2.97
+  },
+  "notes": [
+    "Lastminute-IBE-ID wird aus merchant_deep_link /tsx/<id> extrahiert.",
+    "Travel:-Felder wie hotel_name, hotel_stars und destination_country sind im Feed meist leer.",
+    "Live-Output uebernimmt directGiataId/exact/strong/override, probable bleibt in Review-Queue.",
+    "Manuelle Zuordnung kann in data/lastminute-overrides.json gepflegt werden (matchByIbeId)."
+  ],
+  "overridesSummary": {
+    "matchByIbeId": 163,
+    "matchByMerchantProductId": 0,
+    "excludeIbeIds": 0,
+    "excludeMerchantProductIds": 0
+  },
+  "probableReviewQueue": [
+    {
+      "ibeId": "2644168",
+      "giataId": "475124",
+      "giataName": "B&B HOTEL Milano San Siro",
+      "giataCity": "Mailand",
+      "productName": "Düsseldorf - Mailand - Idea Hotel Milano San Siro",
+      "hotelName": "Idea Hotel Milano San Siro",
+      "destinationCity": "Mailand",
+      "score": 0.8825,
+      "merchantProductId": "DUS_130522__2644168_LASTMINUTE_2026-07-07_2026-07-09"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "Düsseldorf - Costa Barcelona, Spanien - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Costa Barcelona, Spanien",
+      "score": 0.8425,
+      "merchantProductId": "DUS__COSTA_BARCELONA_92389_LASTMINUTE_2026-06-29_2026-07-01"
+    },
+    {
+      "ibeId": "2638605",
+      "giataId": "17614",
+      "giataName": "Mon Repos Palace",
+      "giataCity": "Korfu-Stadt",
+      "productName": "Düsseldorf - Sirmione - Hotel Mon Repos",
+      "hotelName": "Hotel Mon Repos",
+      "destinationCity": "Sirmione",
+      "score": 0.9,
+      "merchantProductId": "DUS_130695__2638605_LASTMINUTE_2026-10-06_2026-10-08"
+    },
+    {
+      "ibeId": "2644168",
+      "giataId": "475124",
+      "giataName": "B&B HOTEL Milano San Siro",
+      "giataCity": "Mailand",
+      "productName": "Frankfurt - Mailand - Idea Hotel Milano San Siro",
+      "hotelName": "Idea Hotel Milano San Siro",
+      "destinationCity": "Mailand",
+      "score": 0.8825,
+      "merchantProductId": "FRA_130522__2644168_LASTMINUTE_2026-07-10_2026-07-12"
+    },
+    {
+      "ibeId": "7581969",
+      "giataId": "34005",
+      "giataName": "Royal Atlantis Beach",
+      "giataCity": "Manavgat",
+      "productName": "Hannover - Istanbul - Atlantis Royal Hotel",
+      "hotelName": "Atlantis Royal Hotel",
+      "destinationCity": "Istanbul",
+      "score": 0.9,
+      "merchantProductId": "HAJ_153601__7581969_LASTMINUTE_2026-12-10_2026-12-13"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "Frankfurt - Calella - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Calella",
+      "score": 0.8425,
+      "merchantProductId": "FRA_136302__92389_LASTMINUTE_2026-09-14_2026-09-18"
+    },
+    {
+      "ibeId": "1535090",
+      "giataId": "223484",
+      "giataName": "St. George Beach Hotel & Spa Resort",
+      "giataCity": "Paphos",
+      "productName": "Memmingen - Malta - The St. George’s Park Hotel",
+      "hotelName": "The St. George’s Park Hotel",
+      "destinationCity": "Malta",
+      "score": 0.9,
+      "merchantProductId": "FMM__MALTA_1535090_LASTMINUTE_2026-06-29_2026-07-01"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "München - Costa Barcelona, Spanien - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Costa Barcelona, Spanien",
+      "score": 0.8425,
+      "merchantProductId": "MUC__COSTA_BARCELONA_92389_LASTMINUTE_2026-06-17_2026-06-19"
+    },
+    {
+      "ibeId": "1535090",
+      "giataId": "223484",
+      "giataName": "St. George Beach Hotel & Spa Resort",
+      "giataCity": "Paphos",
+      "productName": "Memmingen - St. Julianʼs - The St. George’s Park Hotel",
+      "hotelName": "The St. George’s Park Hotel",
+      "destinationCity": "St. Julianʼs",
+      "score": 0.9,
+      "merchantProductId": "FMM_155068__1535090_LASTMINUTE_2026-10-29_2026-11-02"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "Köln Bonn - Calella - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Calella",
+      "score": 0.8425,
+      "merchantProductId": "CGN_136302__92389_LASTMINUTE_2026-06-14_2026-06-18"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "Karlsruhe Baden Baden - Costa Barcelona, Spanien - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Costa Barcelona, Spanien",
+      "score": 0.8425,
+      "merchantProductId": "FKB__COSTA_BARCELONA_92389_LASTMINUTE_2026-06-30_2026-07-03"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "Hamburg - Costa Barcelona, Spanien - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Costa Barcelona, Spanien",
+      "score": 0.8425,
+      "merchantProductId": "HAM__COSTA_BARCELONA_92389_LASTMINUTE_2026-06-15_2026-06-17"
+    },
+    {
+      "ibeId": "2644168",
+      "giataId": "475124",
+      "giataName": "B&B HOTEL Milano San Siro",
+      "giataCity": "Mailand",
+      "productName": "München - Mailand - Idea Hotel Milano San Siro",
+      "hotelName": "Idea Hotel Milano San Siro",
+      "destinationCity": "Mailand",
+      "score": 0.8825,
+      "merchantProductId": "MUC_130522__2644168_LASTMINUTE_2026-07-28_2026-07-31"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "Stuttgart - Calella - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Calella",
+      "score": 0.8425,
+      "merchantProductId": "STR_136302__92389_LASTMINUTE_2026-07-05_2026-07-09"
+    },
+    {
+      "ibeId": "648759",
+      "giataId": "735",
+      "giataName": "Stella Maris Hotel",
+      "giataCity": "Marmari",
+      "productName": "Düsseldorf - Blanes - Hotel Stella Maris",
+      "hotelName": "Hotel Stella Maris",
+      "destinationCity": "Blanes",
+      "score": 0.9,
+      "merchantProductId": "DUS_136342__648759_LASTMINUTE_2026-06-21_2026-06-25"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "Köln Bonn - Costa Barcelona, Spanien - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Costa Barcelona, Spanien",
+      "score": 0.8425,
+      "merchantProductId": "CGN__COSTA_BARCELONA_92389_LASTMINUTE_2026-06-18_2026-06-21"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "Hamburg - Calella - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Calella",
+      "score": 0.8425,
+      "merchantProductId": "HAM_136302__92389_LASTMINUTE_2026-06-26_2026-06-30"
+    },
+    {
+      "ibeId": "55669",
+      "giataId": "51125",
+      "giataName": "Holiday World Village Affiliated by Meliá",
+      "giataCity": "Benalmadena",
+      "productName": "Düsseldorf - Benalmadena - Holiday World Riwo, Affiliated by Meliá",
+      "hotelName": "Holiday World Riwo, Affiliated by Meliá",
+      "destinationCity": "Benalmadena",
+      "score": 0.91,
+      "merchantProductId": "DUS_136974__55669_LASTMINUTE_2027-02-04_2027-02-08"
+    },
+    {
+      "ibeId": "13336700",
+      "giataId": "1424426",
+      "giataName": "a&o Firenze Campo di Marte",
+      "giataCity": "Florenz",
+      "productName": "Köln Bonn - Florenz - a&o Hostel Firenze Campo di Marte",
+      "hotelName": "a&o Hostel Firenze Campo di Marte",
+      "destinationCity": "Florenz",
+      "score": 0.91,
+      "merchantProductId": "CGN_131376__13336700_LASTMINUTE_2026-06-12_2026-06-14"
+    },
+    {
+      "ibeId": "648759",
+      "giataId": "735",
+      "giataName": "Stella Maris Hotel",
+      "giataCity": "Marmari",
+      "productName": "Karlsruhe Baden Baden - Blanes - Hotel Stella Maris",
+      "hotelName": "Hotel Stella Maris",
+      "destinationCity": "Blanes",
+      "score": 0.9,
+      "merchantProductId": "FKB_136342__648759_LASTMINUTE_2026-07-20_2026-07-24"
+    },
+    {
+      "ibeId": "2626273",
+      "giataId": "21171",
+      "giataName": "ALEGRIA Fenals Mar",
+      "giataCity": "Lloret de Mar",
+      "productName": "Hamburg - Lloret de Mar - Suites del Mar Fenals Apartments",
+      "hotelName": "Suites del Mar Fenals Apartments",
+      "destinationCity": "Lloret de Mar",
+      "score": 0.9033,
+      "merchantProductId": "HAM_136363__2626273_LASTMINUTE_2026-06-26_2026-06-30"
+    },
+    {
+      "ibeId": "648759",
+      "giataId": "735",
+      "giataName": "Stella Maris Hotel",
+      "giataCity": "Marmari",
+      "productName": "Frankfurt - Blanes - Hotel Stella Maris",
+      "hotelName": "Hotel Stella Maris",
+      "destinationCity": "Blanes",
+      "score": 0.9,
+      "merchantProductId": "FRA_136342__648759_LASTMINUTE_2026-06-15_2026-06-20"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "München - Calella - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Calella",
+      "score": 0.8425,
+      "merchantProductId": "MUC_136302__92389_LASTMINUTE_2026-09-21_2026-09-26"
+    },
+    {
+      "ibeId": "2626273",
+      "giataId": "21171",
+      "giataName": "ALEGRIA Fenals Mar",
+      "giataCity": "Lloret de Mar",
+      "productName": "München - Lloret de Mar - Suites del Mar Fenals Apartments",
+      "hotelName": "Suites del Mar Fenals Apartments",
+      "destinationCity": "Lloret de Mar",
+      "score": 0.9033,
+      "merchantProductId": "MUC_136363__2626273_LASTMINUTE_2026-11-01_2026-11-06"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "Berlin - Costa Barcelona, Spanien - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Costa Barcelona, Spanien",
+      "score": 0.8425,
+      "merchantProductId": "BER__COSTA_BARCELONA_92389_LASTMINUTE_2026-06-13_2026-06-16"
+    },
+    {
+      "ibeId": "1535090",
+      "giataId": "223484",
+      "giataName": "St. George Beach Hotel & Spa Resort",
+      "giataCity": "Paphos",
+      "productName": "Berlin - St. Julianʼs - The St. George’s Park Hotel",
+      "hotelName": "The St. George’s Park Hotel",
+      "destinationCity": "St. Julianʼs",
+      "score": 0.9,
+      "merchantProductId": "BER_155068__1535090_LASTMINUTE_2026-11-06_2026-11-11"
+    },
+    {
+      "ibeId": "1535090",
+      "giataId": "223484",
+      "giataName": "St. George Beach Hotel & Spa Resort",
+      "giataCity": "Paphos",
+      "productName": "Köln Bonn - St. Julianʼs - The St. George’s Park Hotel",
+      "hotelName": "The St. George’s Park Hotel",
+      "destinationCity": "St. Julianʼs",
+      "score": 0.9,
+      "merchantProductId": "CGN_155068__1535090_LASTMINUTE_2026-10-26_2026-11-01"
+    },
+    {
+      "ibeId": "648759",
+      "giataId": "735",
+      "giataName": "Stella Maris Hotel",
+      "giataCity": "Marmari",
+      "productName": "Stuttgart - Blanes - Hotel Stella Maris",
+      "hotelName": "Hotel Stella Maris",
+      "destinationCity": "Blanes",
+      "score": 0.9,
+      "merchantProductId": "STR_136342__648759_LASTMINUTE_2026-10-05_2026-10-09"
+    },
+    {
+      "ibeId": "648759",
+      "giataId": "735",
+      "giataName": "Stella Maris Hotel",
+      "giataCity": "Marmari",
+      "productName": "München - Blanes - Hotel Stella Maris",
+      "hotelName": "Hotel Stella Maris",
+      "destinationCity": "Blanes",
+      "score": 0.9,
+      "merchantProductId": "MUC_136342__648759_LASTMINUTE_2026-07-02_2026-07-06"
+    },
+    {
+      "ibeId": "402149",
+      "giataId": "182867",
+      "giataName": "Iberostar Selection Santa Eulalia Ibiza",
+      "giataCity": "Santa Eulalia del Rio",
+      "productName": "Düsseldorf - Santa Eulalia del Río - Iberostar Selection Santa Eulalia Adults-Only Ibiza",
+      "hotelName": "Iberostar Selection Santa Eulalia Adults-Only Ibiza",
+      "destinationCity": "Santa Eulalia del Río",
+      "score": 0.9283,
+      "merchantProductId": "DUS_136348__402149_LASTMINUTE_2027-03-22_2027-03-26"
+    },
+    {
+      "ibeId": "13336700",
+      "giataId": "1424426",
+      "giataName": "a&o Firenze Campo di Marte",
+      "giataCity": "Florenz",
+      "productName": "Hannover - Florenz - a&o Hostel Firenze Campo di Marte",
+      "hotelName": "a&o Hostel Firenze Campo di Marte",
+      "destinationCity": "Florenz",
+      "score": 0.91,
+      "merchantProductId": "HAJ_131376__13336700_LASTMINUTE_2026-09-06_2026-09-09"
+    },
+    {
+      "ibeId": "324244",
+      "giataId": "424785",
+      "giataName": "Novotel Marsa Alam Beach Resort",
+      "giataCity": "al-Qusair",
+      "productName": "München - El Quseir - ONATTI Beach Resort - Marsa Alam",
+      "hotelName": "Marsa Alam",
+      "destinationCity": "El Quseir",
+      "score": 0.8633,
+      "merchantProductId": "MUC_151208__324244_LASTMINUTE_2026-06-19_2026-06-24"
+    },
+    {
+      "ibeId": "324244",
+      "giataId": "424785",
+      "giataName": "Novotel Marsa Alam Beach Resort",
+      "giataCity": "al-Qusair",
+      "productName": "Düsseldorf - El Quseir - ONATTI Beach Resort - Marsa Alam",
+      "hotelName": "Marsa Alam",
+      "destinationCity": "El Quseir",
+      "score": 0.8633,
+      "merchantProductId": "DUS_151208__324244_LASTMINUTE_2026-06-16_2026-06-23"
+    },
+    {
+      "ibeId": "648759",
+      "giataId": "735",
+      "giataName": "Stella Maris Hotel",
+      "giataCity": "Marmari",
+      "productName": "Nürnberg - Blanes - Hotel Stella Maris",
+      "hotelName": "Hotel Stella Maris",
+      "destinationCity": "Blanes",
+      "score": 0.9,
+      "merchantProductId": "NUE_136342__648759_LASTMINUTE_2026-06-15_2026-06-20"
+    },
+    {
+      "ibeId": "648759",
+      "giataId": "735",
+      "giataName": "Stella Maris Hotel",
+      "giataCity": "Marmari",
+      "productName": "Köln Bonn - Blanes - Hotel Stella Maris",
+      "hotelName": "Hotel Stella Maris",
+      "destinationCity": "Blanes",
+      "score": 0.9,
+      "merchantProductId": "CGN_136342__648759_LASTMINUTE_2026-08-08_2026-08-12"
+    },
+    {
+      "ibeId": "148342",
+      "giataId": "4841",
+      "giataName": "Club Marco Polo",
+      "giataCity": "Kemer",
+      "productName": "Hamburg - Garda - Hotel Marco Polo",
+      "hotelName": "Hotel Marco Polo",
+      "destinationCity": "Garda",
+      "score": 0.9,
+      "merchantProductId": "HAM_131082__148342_LASTMINUTE_2026-10-05_2026-10-10"
+    },
+    {
+      "ibeId": "101634989",
+      "giataId": "1045623",
+      "giataName": "URBANSEA Holiday Homes",
+      "giataCity": "Las Palmas",
+      "productName": "Düsseldorf - Novalja - Terra Park Phalaris - Holiday Homes",
+      "hotelName": "Holiday Homes",
+      "destinationCity": "Novalja",
+      "score": 0.8633,
+      "merchantProductId": "DUS_155408__101634989_LASTMINUTE_2026-06-23_2026-06-30"
+    },
+    {
+      "ibeId": "648759",
+      "giataId": "735",
+      "giataName": "Stella Maris Hotel",
+      "giataCity": "Marmari",
+      "productName": "Hannover - Blanes - Hotel Stella Maris",
+      "hotelName": "Hotel Stella Maris",
+      "destinationCity": "Blanes",
+      "score": 0.9,
+      "merchantProductId": "HAJ_136342__648759_LASTMINUTE_2026-08-08_2026-08-12"
+    },
+    {
+      "ibeId": "85030",
+      "giataId": "3606",
+      "giataName": "SOL Milanos Pingüinos",
+      "giataCity": "Son Bou",
+      "productName": "Berlin - Son Bou - SOL by Meliá Milanos Pingüinos",
+      "hotelName": "SOL by Meliá Milanos Pingüinos",
+      "destinationCity": "Son Bou",
+      "score": 0.8825,
+      "merchantProductId": "BER_138162__85030_LASTMINUTE_2026-10-05_2026-10-10"
+    },
+    {
+      "ibeId": "1535090",
+      "giataId": "223484",
+      "giataName": "St. George Beach Hotel & Spa Resort",
+      "giataCity": "Paphos",
+      "productName": "Nürnberg - Malta - The St. George’s Park Hotel",
+      "hotelName": "The St. George’s Park Hotel",
+      "destinationCity": "Malta",
+      "score": 0.9,
+      "merchantProductId": "NUE__MALTA_1535090_LASTMINUTE_2026-06-15_2026-06-18"
+    },
+    {
+      "ibeId": "648759",
+      "giataId": "735",
+      "giataName": "Stella Maris Hotel",
+      "giataCity": "Marmari",
+      "productName": "Hamburg - Blanes - Hotel Stella Maris",
+      "hotelName": "Hotel Stella Maris",
+      "destinationCity": "Blanes",
+      "score": 0.9,
+      "merchantProductId": "HAM_136342__648759_LASTMINUTE_2026-07-23_2026-07-27"
+    },
+    {
+      "ibeId": "85030",
+      "giataId": "3606",
+      "giataName": "SOL Milanos Pingüinos",
+      "giataCity": "Son Bou",
+      "productName": "München - Son Bou - SOL by Meliá Milanos Pingüinos",
+      "hotelName": "SOL by Meliá Milanos Pingüinos",
+      "destinationCity": "Son Bou",
+      "score": 0.8825,
+      "merchantProductId": "MUC_138162__85030_LASTMINUTE_2026-10-15_2026-10-21"
+    },
+    {
+      "ibeId": "324244",
+      "giataId": "424785",
+      "giataName": "Novotel Marsa Alam Beach Resort",
+      "giataCity": "al-Qusair",
+      "productName": "Nürnberg - El Quseir - ONATTI Beach Resort - Marsa Alam",
+      "hotelName": "Marsa Alam",
+      "destinationCity": "El Quseir",
+      "score": 0.8633,
+      "merchantProductId": "NUE_151208__324244_LASTMINUTE_2026-06-23_2026-06-29"
+    },
+    {
+      "ibeId": "143656",
+      "giataId": "134233",
+      "giataName": "Atrium Prestige",
+      "giataCity": "Lachania",
+      "productName": "München - Lachania - Atrium Prestige Thalasso Spa Resort and Villas",
+      "hotelName": "Atrium Prestige Thalasso Spa Resort and Villas",
+      "destinationCity": "Lachania",
+      "score": 0.825,
+      "merchantProductId": "MUC_150108__143656_LASTMINUTE_2026-10-26_2026-10-30"
+    },
+    {
+      "ibeId": "92389",
+      "giataId": "36392",
+      "giataName": "htop Summer Sun",
+      "giataCity": "Santa Susanna",
+      "productName": "Nürnberg - Calella - htop Summer Sun #htopEnjoy",
+      "hotelName": "htop Summer Sun #htopEnjoy",
+      "destinationCity": "Calella",
+      "score": 0.8425,
+      "merchantProductId": "NUE_136302__92389_LASTMINUTE_2026-08-01_2026-08-08"
+    },
+    {
+      "ibeId": "1780745",
+      "giataId": "248429",
+      "giataName": "Jumeirah Dar Al Masyaf",
+      "giataCity": "Dubai",
+      "productName": "München - Dubai - Al Dar Hotel",
+      "hotelName": "Al Dar Hotel",
+      "destinationCity": "Dubai",
+      "score": 0.845,
+      "merchantProductId": "MUC_157094__1780745_LASTMINUTE_2026-08-10_2026-08-17"
+    },
+    {
+      "ibeId": "143656",
+      "giataId": "134233",
+      "giataName": "Atrium Prestige",
+      "giataCity": "Lachania",
+      "productName": "Frankfurt - Lachania - Atrium Prestige Thalasso Spa Resort and Villas",
+      "hotelName": "Atrium Prestige Thalasso Spa Resort and Villas",
+      "destinationCity": "Lachania",
+      "score": 0.825,
+      "merchantProductId": "FRA_150108__143656_LASTMINUTE_2026-06-11_2026-06-15"
+    },
+    {
+      "ibeId": "11369",
+      "giataId": "392261",
+      "giataName": "Boheme Mykonos Town - Small Luxury Hotels of the World",
+      "giataCity": "Mykonos-Stadt",
+      "productName": "Hamburg - Riga - Grand Palace Hotel - Small Luxury Hotels of the World",
+      "hotelName": "Small Luxury Hotels of the World",
+      "destinationCity": "Riga",
+      "score": 0.83,
+      "merchantProductId": "HAM_157053__11369_LASTMINUTE_2026-06-10_2026-06-12"
+    },
+    {
+      "ibeId": "85030",
+      "giataId": "3606",
+      "giataName": "SOL Milanos Pingüinos",
+      "giataCity": "Son Bou",
+      "productName": "Nürnberg - Son Bou - SOL by Meliá Milanos Pingüinos",
+      "hotelName": "SOL by Meliá Milanos Pingüinos",
+      "destinationCity": "Son Bou",
+      "score": 0.8825,
+      "merchantProductId": "NUE_138162__85030_LASTMINUTE_2026-09-06_2026-09-10"
+    },
+    {
+      "ibeId": "148342",
+      "giataId": "4841",
+      "giataName": "Club Marco Polo",
+      "giataCity": "Kemer",
+      "productName": "Bremen - Garda - Hotel Marco Polo",
+      "hotelName": "Hotel Marco Polo",
+      "destinationCity": "Garda",
+      "score": 0.9,
+      "merchantProductId": "BRE_131082__148342_LASTMINUTE_2026-07-07_2026-07-14"
+    },
+    {
+      "ibeId": "813903",
+      "giataId": "2205",
+      "giataName": "Savoy Palace - The Leading Hotels of the World - Savoy Signature",
+      "giataCity": "Funchal",
+      "productName": "Köln Bonn - Paguera - Castell Son Claret - The Leading Hotels of the World",
+      "hotelName": "The Leading Hotels of the World",
+      "destinationCity": "Paguera",
+      "score": 0.84,
+      "merchantProductId": "CGN_136290__813903_LASTMINUTE_2026-11-03_2026-11-07"
+    },
+    {
+      "ibeId": "143656",
+      "giataId": "134233",
+      "giataName": "Atrium Prestige",
+      "giataCity": "Lachania",
+      "productName": "Berlin - Lachania - Atrium Prestige Thalasso Spa Resort and Villas",
+      "hotelName": "Atrium Prestige Thalasso Spa Resort and Villas",
+      "destinationCity": "Lachania",
+      "score": 0.825,
+      "merchantProductId": "BER_150108__143656_LASTMINUTE_2026-06-27_2026-07-01"
+    },
+    {
+      "ibeId": "143656",
+      "giataId": "134233",
+      "giataName": "Atrium Prestige",
+      "giataCity": "Lachania",
+      "productName": "Köln Bonn - Lachania - Atrium Prestige Thalasso Spa Resort and Villas",
+      "hotelName": "Atrium Prestige Thalasso Spa Resort and Villas",
+      "destinationCity": "Lachania",
+      "score": 0.825,
+      "merchantProductId": "CGN_150108__143656_LASTMINUTE_2026-06-19_2026-06-23"
+    },
+    {
+      "ibeId": "813903",
+      "giataId": "2205",
+      "giataName": "Savoy Palace - The Leading Hotels of the World - Savoy Signature",
+      "giataCity": "Funchal",
+      "productName": "Memmingen - Paguera - Castell Son Claret - The Leading Hotels of the World",
+      "hotelName": "The Leading Hotels of the World",
+      "destinationCity": "Paguera",
+      "score": 0.84,
+      "merchantProductId": "FMM_136290__813903_LASTMINUTE_2026-10-29_2026-11-02"
+    },
+    {
+      "ibeId": "143656",
+      "giataId": "134233",
+      "giataName": "Atrium Prestige",
+      "giataCity": "Lachania",
+      "productName": "Hamburg - Lachania - Atrium Prestige Thalasso Spa Resort and Villas",
+      "hotelName": "Atrium Prestige Thalasso Spa Resort and Villas",
+      "destinationCity": "Lachania",
+      "score": 0.825,
+      "merchantProductId": "HAM_150108__143656_LASTMINUTE_2026-06-11_2026-06-15"
+    },
+    {
+      "ibeId": "4260573",
+      "giataId": "699090",
+      "giataName": "Maya Bistro Hotel Beach",
+      "giataCity": "Sigacik",
+      "productName": "Hamburg - Seferihisar - Maya Bistro Hotel & Beach",
+      "hotelName": "Maya Bistro Hotel & Beach",
+      "destinationCity": "Seferihisar",
+      "score": 0.9,
+      "merchantProductId": "HAM_153751__4260573_LASTMINUTE_2026-06-28_2026-07-05"
+    },
+    {
+      "ibeId": "21244",
+      "giataId": "302404",
+      "giataName": "Precise Resort El Rompido - The Club",
+      "giataCity": "El Rompido",
+      "productName": "Frankfurt - Islantilla - Precise Resort El Rompido-The Hotel",
+      "hotelName": "Precise Resort El Rompido-The Hotel",
+      "destinationCity": "Islantilla",
+      "score": 0.9,
+      "merchantProductId": "FRA_137236__21244_LASTMINUTE_2026-07-05_2026-07-11"
+    },
+    {
+      "ibeId": "85030",
+      "giataId": "3606",
+      "giataName": "SOL Milanos Pingüinos",
+      "giataCity": "Son Bou",
+      "productName": "Frankfurt - Son Bou - SOL by Meliá Milanos Pingüinos",
+      "hotelName": "SOL by Meliá Milanos Pingüinos",
+      "destinationCity": "Son Bou",
+      "score": 0.8825,
+      "merchantProductId": "FRA_138162__85030_LASTMINUTE_2026-08-11_2026-08-16"
+    },
+    {
+      "ibeId": "813903",
+      "giataId": "2205",
+      "giataName": "Savoy Palace - The Leading Hotels of the World - Savoy Signature",
+      "giataCity": "Funchal",
+      "productName": "Hannover - Paguera - Castell Son Claret - The Leading Hotels of the World",
+      "hotelName": "The Leading Hotels of the World",
+      "destinationCity": "Paguera",
+      "score": 0.84,
+      "merchantProductId": "HAJ_136290__813903_LASTMINUTE_2026-10-28_2026-11-01"
+    },
+    {
+      "ibeId": "813903",
+      "giataId": "2205",
+      "giataName": "Savoy Palace - The Leading Hotels of the World - Savoy Signature",
+      "giataCity": "Funchal",
+      "productName": "Frankfurt - Paguera - Castell Son Claret - The Leading Hotels of the World",
+      "hotelName": "The Leading Hotels of the World",
+      "destinationCity": "Paguera",
+      "score": 0.84,
+      "merchantProductId": "FRA_136290__813903_LASTMINUTE_2026-10-14_2026-10-18"
+    },
+    {
+      "ibeId": "143656",
+      "giataId": "134233",
+      "giataName": "Atrium Prestige",
+      "giataCity": "Lachania",
+      "productName": "Bremen - Lachania - Atrium Prestige Thalasso Spa Resort and Villas",
+      "hotelName": "Atrium Prestige Thalasso Spa Resort and Villas",
+      "destinationCity": "Lachania",
+      "score": 0.825,
+      "merchantProductId": "BRE_150108__143656_LASTMINUTE_2026-10-21_2026-10-25"
+    },
+    {
+      "ibeId": "813903",
+      "giataId": "2205",
+      "giataName": "Savoy Palace - The Leading Hotels of the World - Savoy Signature",
+      "giataCity": "Funchal",
+      "productName": "Bremen - Paguera - Castell Son Claret - The Leading Hotels of the World",
+      "hotelName": "The Leading Hotels of the World",
+      "destinationCity": "Paguera",
+      "score": 0.84,
+      "merchantProductId": "BRE_136290__813903_LASTMINUTE_2026-10-14_2026-10-18"
+    },
+    {
+      "ibeId": "813903",
+      "giataId": "2205",
+      "giataName": "Savoy Palace - The Leading Hotels of the World - Savoy Signature",
+      "giataCity": "Funchal",
+      "productName": "Münster - Paguera - Castell Son Claret - The Leading Hotels of the World",
+      "hotelName": "The Leading Hotels of the World",
+      "destinationCity": "Paguera",
+      "score": 0.84,
+      "merchantProductId": "FMO_136290__813903_LASTMINUTE_2026-09-28_2026-10-02"
+    },
+    {
+      "ibeId": "85030",
+      "giataId": "3606",
+      "giataName": "SOL Milanos Pingüinos",
+      "giataCity": "Son Bou",
+      "productName": "Hannover - Son Bou - SOL by Meliá Milanos Pingüinos",
+      "hotelName": "SOL by Meliá Milanos Pingüinos",
+      "destinationCity": "Son Bou",
+      "score": 0.8825,
+      "merchantProductId": "HAJ_138162__85030_LASTMINUTE_2026-08-22_2026-08-29"
+    },
+    {
+      "ibeId": "1538290",
+      "giataId": "5178",
+      "giataName": "Four Seasons Hotel",
+      "giataCity": "Limassol",
+      "productName": "Frankfurt - Kingston - Hotel Four Seasons",
+      "hotelName": "Hotel Four Seasons",
+      "destinationCity": "Kingston",
+      "score": 0.9,
+      "merchantProductId": "FRA_164067__1538290_LASTMINUTE_2026-09-14_2026-09-21"
+    },
+    {
+      "ibeId": "813903",
+      "giataId": "2205",
+      "giataName": "Savoy Palace - The Leading Hotels of the World - Savoy Signature",
+      "giataCity": "Funchal",
+      "productName": "Leipzig Halle - Paguera - Castell Son Claret - The Leading Hotels of the World",
+      "hotelName": "The Leading Hotels of the World",
+      "destinationCity": "Paguera",
+      "score": 0.84,
+      "merchantProductId": "LEJ_136290__813903_LASTMINUTE_2026-10-01_2026-10-05"
+    },
+    {
+      "ibeId": "813903",
+      "giataId": "2205",
+      "giataName": "Savoy Palace - The Leading Hotels of the World - Savoy Signature",
+      "giataCity": "Funchal",
+      "productName": "Saarbrücken - Paguera - Castell Son Claret - The Leading Hotels of the World",
+      "hotelName": "The Leading Hotels of the World",
+      "destinationCity": "Paguera",
+      "score": 0.84,
+      "merchantProductId": "SCN_136290__813903_LASTMINUTE_2026-06-13_2026-06-17"
+    },
+    {
+      "ibeId": "143656",
+      "giataId": "134233",
+      "giataName": "Atrium Prestige",
+      "giataCity": "Lachania",
+      "productName": "Leipzig Halle - Lachania - Atrium Prestige Thalasso Spa Resort and Villas",
+      "hotelName": "Atrium Prestige Thalasso Spa Resort and Villas",
+      "destinationCity": "Lachania",
+      "score": 0.825,
+      "merchantProductId": "LEJ_150108__143656_LASTMINUTE_2026-10-15_2026-10-21"
+    },
+    {
+      "ibeId": "813903",
+      "giataId": "2205",
+      "giataName": "Savoy Palace - The Leading Hotels of the World - Savoy Signature",
+      "giataCity": "Funchal",
+      "productName": "Erfurt - Paguera - Castell Son Claret - The Leading Hotels of the World",
+      "hotelName": "The Leading Hotels of the World",
+      "destinationCity": "Paguera",
+      "score": 0.84,
+      "merchantProductId": "ERF_136290__813903_LASTMINUTE_2026-07-29_2026-08-02"
+    },
+    {
+      "ibeId": "1538290",
+      "giataId": "5178",
+      "giataName": "Four Seasons Hotel",
+      "giataCity": "Limassol",
+      "productName": "Stuttgart - Kingston - Hotel Four Seasons",
+      "hotelName": "Hotel Four Seasons",
+      "destinationCity": "Kingston",
+      "score": 0.9,
+      "merchantProductId": "STR_164067__1538290_LASTMINUTE_2027-04-05_2027-04-11"
+    },
+    {
+      "ibeId": "323141",
+      "giataId": "38789",
+      "giataName": "LUX* South Ari Atoll",
+      "giataCity": "Dhiddhoofinolhu",
+      "productName": "Frankfurt - Nalaguraidhoo - LUX South Ari Atoll Resort & Villas",
+      "hotelName": "LUX South Ari Atoll Resort & Villas",
+      "destinationCity": "Nalaguraidhoo",
+      "score": 0.87,
+      "merchantProductId": "FRA_188388__323141_LASTMINUTE_2026-09-23_2026-09-30"
+    },
+    {
+      "ibeId": "323141",
+      "giataId": "38789",
+      "giataName": "LUX* South Ari Atoll",
+      "giataCity": "Dhiddhoofinolhu",
+      "productName": "München - Nalaguraidhoo - LUX South Ari Atoll Resort & Villas",
+      "hotelName": "LUX South Ari Atoll Resort & Villas",
+      "destinationCity": "Nalaguraidhoo",
+      "score": 0.87,
+      "merchantProductId": "MUC_188388__323141_LASTMINUTE_2026-09-01_2026-09-08"
+    },
+    {
+      "ibeId": "52888",
+      "giataId": "392261",
+      "giataName": "Boheme Mykonos Town - Small Luxury Hotels of the World",
+      "giataCity": "Mykonos-Stadt",
+      "productName": "Saarbrücken - Elounda - Phāea Blue - Small Luxury Hotels of the World",
+      "hotelName": "Small Luxury Hotels of the World",
+      "destinationCity": "Elounda",
+      "score": 0.83,
+      "merchantProductId": "SCN_149599__52888_LASTMINUTE_2026-07-14_2026-07-19"
+    },
+    {
+      "ibeId": "143656",
+      "giataId": "134233",
+      "giataName": "Atrium Prestige",
+      "giataCity": "Lachania",
+      "productName": "Dortmund - Lachania - Atrium Prestige Thalasso Spa Resort and Villas",
+      "hotelName": "Atrium Prestige Thalasso Spa Resort and Villas",
+      "destinationCity": "Lachania",
+      "score": 0.825,
+      "merchantProductId": "DTM_150108__143656_LASTMINUTE_2026-06-29_2026-07-05"
+    },
+    {
+      "ibeId": "323141",
+      "giataId": "38789",
+      "giataName": "LUX* South Ari Atoll",
+      "giataCity": "Dhiddhoofinolhu",
+      "productName": "Berlin - Nalaguraidhoo - LUX South Ari Atoll Resort & Villas",
+      "hotelName": "LUX South Ari Atoll Resort & Villas",
+      "destinationCity": "Nalaguraidhoo",
+      "score": 0.87,
+      "merchantProductId": "BER_188388__323141_LASTMINUTE_2026-09-30_2026-10-07"
+    },
+    {
+      "ibeId": "85030",
+      "giataId": "3606",
+      "giataName": "SOL Milanos Pingüinos",
+      "giataCity": "Son Bou",
+      "productName": "Leipzig Halle - Son Bou - SOL by Meliá Milanos Pingüinos",
+      "hotelName": "SOL by Meliá Milanos Pingüinos",
+      "destinationCity": "Son Bou",
+      "score": 0.8825,
+      "merchantProductId": "LEJ_138162__85030_LASTMINUTE_2026-09-20_2026-09-26"
+    },
+    {
+      "ibeId": "323141",
+      "giataId": "38789",
+      "giataName": "LUX* South Ari Atoll",
+      "giataCity": "Dhiddhoofinolhu",
+      "productName": "Köln Bonn - Nalaguraidhoo - LUX South Ari Atoll Resort & Villas",
+      "hotelName": "LUX South Ari Atoll Resort & Villas",
+      "destinationCity": "Nalaguraidhoo",
+      "score": 0.87,
+      "merchantProductId": "CGN_188388__323141_LASTMINUTE_2026-10-05_2026-10-14"
+    },
+    {
+      "ibeId": "323141",
+      "giataId": "38789",
+      "giataName": "LUX* South Ari Atoll",
+      "giataCity": "Dhiddhoofinolhu",
+      "productName": "Düsseldorf - Nalaguraidhoo - LUX South Ari Atoll Resort & Villas",
+      "hotelName": "LUX South Ari Atoll Resort & Villas",
+      "destinationCity": "Nalaguraidhoo",
+      "score": 0.87,
+      "merchantProductId": "DUS_188388__323141_LASTMINUTE_2026-09-15_2026-09-23"
+    },
+    {
+      "ibeId": "323141",
+      "giataId": "38789",
+      "giataName": "LUX* South Ari Atoll",
+      "giataCity": "Dhiddhoofinolhu",
+      "productName": "Stuttgart - Nalaguraidhoo - LUX South Ari Atoll Resort & Villas",
+      "hotelName": "LUX South Ari Atoll Resort & Villas",
+      "destinationCity": "Nalaguraidhoo",
+      "score": 0.87,
+      "merchantProductId": "STR_188388__323141_LASTMINUTE_2026-09-14_2026-09-24"
+    },
+    {
+      "ibeId": "741545",
+      "giataId": "90818",
+      "giataName": "JA Manafaru Maldives",
+      "giataCity": "Manafaru",
+      "productName": "Frankfurt - Haa Alif Atoll - JA Manafaru",
+      "hotelName": "JA Manafaru",
+      "destinationCity": "Haa Alif Atoll",
+      "score": 0.8633,
+      "merchantProductId": "FRA_255235__741545_LASTMINUTE_2026-09-23_2026-09-30"
+    },
+    {
+      "ibeId": "52888",
+      "giataId": "392261",
+      "giataName": "Boheme Mykonos Town - Small Luxury Hotels of the World",
+      "giataCity": "Mykonos-Stadt",
+      "productName": "Erfurt - Elounda - Phāea Blue - Small Luxury Hotels of the World",
+      "hotelName": "Small Luxury Hotels of the World",
+      "destinationCity": "Elounda",
+      "score": 0.83,
+      "merchantProductId": "ERF_149599__52888_LASTMINUTE_2026-08-17_2026-08-23"
+    },
+    {
+      "ibeId": "323141",
+      "giataId": "38789",
+      "giataName": "LUX* South Ari Atoll",
+      "giataCity": "Dhiddhoofinolhu",
+      "productName": "Hamburg - Nalaguraidhoo - LUX South Ari Atoll Resort & Villas",
+      "hotelName": "LUX South Ari Atoll Resort & Villas",
+      "destinationCity": "Nalaguraidhoo",
+      "score": 0.87,
+      "merchantProductId": "HAM_188388__323141_LASTMINUTE_2026-09-16_2026-09-26"
+    },
+    {
+      "ibeId": "741545",
+      "giataId": "90818",
+      "giataName": "JA Manafaru Maldives",
+      "giataCity": "Manafaru",
+      "productName": "München - Haa Alif Atoll - JA Manafaru",
+      "hotelName": "JA Manafaru",
+      "destinationCity": "Haa Alif Atoll",
+      "score": 0.8633,
+      "merchantProductId": "MUC_255235__741545_LASTMINUTE_2026-08-07_2026-08-15"
+    },
+    {
+      "ibeId": "323141",
+      "giataId": "38789",
+      "giataName": "LUX* South Ari Atoll",
+      "giataCity": "Dhiddhoofinolhu",
+      "productName": "Hannover - Nalaguraidhoo - LUX South Ari Atoll Resort & Villas",
+      "hotelName": "LUX South Ari Atoll Resort & Villas",
+      "destinationCity": "Nalaguraidhoo",
+      "score": 0.87,
+      "merchantProductId": "HAJ_188388__323141_LASTMINUTE_2026-11-28_2026-12-07"
+    },
+    {
+      "ibeId": "323141",
+      "giataId": "38789",
+      "giataName": "LUX* South Ari Atoll",
+      "giataCity": "Dhiddhoofinolhu",
+      "productName": "Nürnberg - Nalaguraidhoo - LUX South Ari Atoll Resort & Villas",
+      "hotelName": "LUX South Ari Atoll Resort & Villas",
+      "destinationCity": "Nalaguraidhoo",
+      "score": 0.87,
+      "merchantProductId": "NUE_188388__323141_LASTMINUTE_2026-08-24_2026-09-07"
+    },
+    {
+      "ibeId": "52888",
+      "giataId": "392261",
+      "giataName": "Boheme Mykonos Town - Small Luxury Hotels of the World",
+      "giataCity": "Mykonos-Stadt",
+      "productName": "Dresden - Elounda - Phāea Blue - Small Luxury Hotels of the World",
+      "hotelName": "Small Luxury Hotels of the World",
+      "destinationCity": "Elounda",
+      "score": 0.83,
+      "merchantProductId": "DRS_149599__52888_LASTMINUTE_2026-09-05_2026-09-12"
+    },
+    {
+      "ibeId": "323141",
+      "giataId": "38789",
+      "giataName": "LUX* South Ari Atoll",
+      "giataCity": "Dhiddhoofinolhu",
+      "productName": "Bremen - Nalaguraidhoo - LUX South Ari Atoll Resort & Villas",
+      "hotelName": "LUX South Ari Atoll Resort & Villas",
+      "destinationCity": "Nalaguraidhoo",
+      "score": 0.87,
+      "merchantProductId": "BRE_188388__323141_LASTMINUTE_2026-11-02_2026-11-14"
+    }
+  ],
+  "unmatchedSamples": [
+    {
+      "ibeId": "194494",
+      "productName": "Frankfurt - London - Central Hotel Golders Green",
+      "hotelName": "Central Hotel Golders Green",
+      "destinationCity": "London",
+      "merchantProductId": "FRA_141660__194494_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 94.81
+    },
+    {
+      "ibeId": "13398705",
+      "productName": "Frankfurt - London - Cosy Rooms",
+      "hotelName": "Cosy Rooms",
+      "destinationCity": "London",
+      "merchantProductId": "FRA_141660__13398705_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 98.7
+    },
+    {
+      "ibeId": "391086",
+      "productName": "Frankfurt - London - Flexistay Norbury Aparthotel",
+      "hotelName": "Flexistay Norbury Aparthotel",
+      "destinationCity": "London",
+      "merchantProductId": "FRA_141660__391086_LASTMINUTE_2026-06-24_2026-06-26",
+      "price": 99.83
+    },
+    {
+      "ibeId": "147995",
+      "productName": "Düsseldorf - Gardasee, Italien - Hotel Rivus",
+      "hotelName": "Hotel Rivus",
+      "destinationCity": "Gardasee, Italien",
+      "merchantProductId": "DUS__LAGO_GARDA_147995_LASTMINUTE_2026-10-06_2026-10-08",
+      "price": 104.18
+    },
+    {
+      "ibeId": "222614",
+      "productName": "Frankfurt - London - Best Western London Ilford Hotel",
+      "hotelName": "Best Western London Ilford Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "FRA_141660__222614_LASTMINUTE_2026-06-15_2026-06-17",
+      "price": 105.47
+    },
+    {
+      "ibeId": "2648723",
+      "productName": "Frankfurt - London - Church Street Hotel by Belvilla near King's College Hospital",
+      "hotelName": "Church Street Hotel by Belvilla near King's College Hospital",
+      "destinationCity": "London",
+      "merchantProductId": "FRA_141660__2648723_LASTMINUTE_2026-06-24_2026-06-26",
+      "price": 105.55
+    },
+    {
+      "ibeId": "2781155",
+      "productName": "Frankfurt - London - Lucky 8 Hotel",
+      "hotelName": "Lucky 8 Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "FRA_141660__2781155_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 105.79
+    },
+    {
+      "ibeId": "468919",
+      "productName": "Frankfurt - London - Arinza Hotel, London Ilford",
+      "hotelName": "Arinza Hotel, London Ilford",
+      "destinationCity": "London",
+      "merchantProductId": "FRA_141660__468919_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 106.28
+    },
+    {
+      "ibeId": "1846888",
+      "productName": "Frankfurt - London - Dreams Hotel",
+      "hotelName": "Dreams Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "FRA_141660__1846888_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 106.69
+    },
+    {
+      "ibeId": "346258",
+      "productName": "Frankfurt - London - Britannia Inn Hotel",
+      "hotelName": "Britannia Inn Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "FRA_141660__346258_LASTMINUTE_2026-10-02_2026-10-04",
+      "price": 109.92
+    },
+    {
+      "ibeId": "101093880",
+      "productName": "Memmingen - Tiranë - Golden Flower Hotel",
+      "hotelName": "Golden Flower Hotel",
+      "destinationCity": "Tiranë",
+      "merchantProductId": "FMM_156955__101093880_LASTMINUTE_2026-06-15_2026-06-18",
+      "price": 111.14
+    },
+    {
+      "ibeId": "155184",
+      "productName": "Memmingen - Tiranë - Hotel Baron",
+      "hotelName": "Hotel Baron",
+      "destinationCity": "Tiranë",
+      "merchantProductId": "FMM_156955__155184_LASTMINUTE_2026-06-15_2026-06-18",
+      "price": 116.29
+    },
+    {
+      "ibeId": "394613",
+      "productName": "Berlin - Bratislava - Hotel Viktor",
+      "hotelName": "Hotel Viktor",
+      "destinationCity": "Bratislava",
+      "merchantProductId": "BER_154835__394613_LASTMINUTE_2026-07-17_2026-07-19",
+      "price": 118.19
+    },
+    {
+      "ibeId": "4937612",
+      "productName": "Memmingen - Sarandë - Hotel Vila Alvin & Apartments",
+      "hotelName": "Hotel Vila Alvin & Apartments",
+      "destinationCity": "Sarandë",
+      "merchantProductId": "FMM_180539__4937612_LASTMINUTE_2026-06-15_2026-06-19",
+      "price": 118.72
+    },
+    {
+      "ibeId": "8147149",
+      "productName": "Memmingen - Albaniens Küste - Green Garden Villa",
+      "hotelName": "Green Garden Villa",
+      "destinationCity": "Albaniens Küste",
+      "merchantProductId": "FMM__ALBANIA_COAST_8147149_LASTMINUTE_2026-10-09_2026-10-11",
+      "price": 120.75
+    },
+    {
+      "ibeId": "8147149",
+      "productName": "Memmingen - Albanische Riviera - Green Garden Villa",
+      "hotelName": "Green Garden Villa",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "FMM__ALBANIAN_RIVIERA_8147149_LASTMINUTE_2026-10-09_2026-10-11",
+      "price": 120.75
+    },
+    {
+      "ibeId": "14163950",
+      "productName": "Memmingen - Tiranë - Jata Hotel",
+      "hotelName": "Jata Hotel",
+      "destinationCity": "Tiranë",
+      "merchantProductId": "FMM_156955__14163950_LASTMINUTE_2026-06-15_2026-06-18",
+      "price": 122.8
+    },
+    {
+      "ibeId": "7348114",
+      "productName": "Hamburg - Milton Keynes - easyHotel Milton Keynes",
+      "hotelName": "easyHotel Milton Keynes",
+      "destinationCity": "Milton Keynes",
+      "merchantProductId": "HAM_141696__7348114_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 125.35
+    },
+    {
+      "ibeId": "745404",
+      "productName": "Memmingen - Sardinien, Italien - Villaggio Camping Nurral",
+      "hotelName": "Villaggio Camping Nurral",
+      "destinationCity": "Sardinien, Italien",
+      "merchantProductId": "FMM__SARDEGNA_745404_LASTMINUTE_2026-06-27_2026-06-29",
+      "price": 126.27
+    },
+    {
+      "ibeId": "745404",
+      "productName": "Memmingen - Nordsardinien – Region Alghero, Italien - Villaggio Camping Nurral",
+      "hotelName": "Villaggio Camping Nurral",
+      "destinationCity": "Nordsardinien – Region Alghero, Italien",
+      "merchantProductId": "FMM__SARDEGNA_OVEST_745404_LASTMINUTE_2026-06-27_2026-06-29",
+      "price": 126.27
+    },
+    {
+      "ibeId": "11187630",
+      "productName": "Frankfurt - London - Travelodge London Kingston Upon Thames",
+      "hotelName": "Travelodge London Kingston Upon Thames",
+      "destinationCity": "London",
+      "merchantProductId": "FRA_141660__11187630_LASTMINUTE_2026-10-02_2026-10-04",
+      "price": 127.18
+    },
+    {
+      "ibeId": "1519785",
+      "productName": "Düsseldorf - Sirmione - Hotel Holiday",
+      "hotelName": "Hotel Holiday",
+      "destinationCity": "Sirmione",
+      "merchantProductId": "DUS_130695__1519785_LASTMINUTE_2026-10-06_2026-10-08",
+      "price": 128.46
+    },
+    {
+      "ibeId": "346258",
+      "productName": "Karlsruhe Baden Baden - London - Britannia Inn Hotel",
+      "hotelName": "Britannia Inn Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "FKB_141660__346258_LASTMINUTE_2026-08-04_2026-08-06",
+      "price": 129.72
+    },
+    {
+      "ibeId": "165258",
+      "productName": "Frankfurt - Luton - Thistle Express London Luton",
+      "hotelName": "Thistle Express London Luton",
+      "destinationCity": "Luton",
+      "merchantProductId": "FRA_141907__165258_LASTMINUTE_2026-08-21_2026-08-24",
+      "price": 129.82
+    },
+    {
+      "ibeId": "4458785",
+      "productName": "Memmingen - Tiranë - Arc Hotel Tirana",
+      "hotelName": "Arc Hotel Tirana",
+      "destinationCity": "Tiranë",
+      "merchantProductId": "FMM_156955__4458785_LASTMINUTE_2026-06-15_2026-06-18",
+      "price": 130.19
+    },
+    {
+      "ibeId": "7517593",
+      "productName": "Memmingen - Albanische Riviera - Hotel Beler",
+      "hotelName": "Hotel Beler",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "FMM__ALBANIAN_RIVIERA_7517593_LASTMINUTE_2026-10-09_2026-10-11",
+      "price": 130.86
+    },
+    {
+      "ibeId": "2629533",
+      "productName": "Berlin - Budapest - Bed Breakfast Hotel Budapest",
+      "hotelName": "Bed Breakfast Hotel Budapest",
+      "destinationCity": "Budapest",
+      "merchantProductId": "BER_153870__2629533_LASTMINUTE_2026-08-24_2026-08-26",
+      "price": 131.51
+    },
+    {
+      "ibeId": "27578",
+      "productName": "Frankfurt - London - King Solomon Hotel- Golders Green",
+      "hotelName": "King Solomon Hotel- Golders Green",
+      "destinationCity": "London",
+      "merchantProductId": "FRA_141660__27578_LASTMINUTE_2026-10-02_2026-10-04",
+      "price": 133.55
+    },
+    {
+      "ibeId": "25351",
+      "productName": "Düsseldorf - Castelnuovo del Garda - Hotel Centro Turistico Gardesano",
+      "hotelName": "Hotel Centro Turistico Gardesano",
+      "destinationCity": "Castelnuovo del Garda",
+      "merchantProductId": "DUS_130664__25351_LASTMINUTE_2026-10-06_2026-10-08",
+      "price": 134.65
+    },
+    {
+      "ibeId": "194494",
+      "productName": "Karlsruhe Baden Baden - London - Central Hotel Golders Green",
+      "hotelName": "Central Hotel Golders Green",
+      "destinationCity": "London",
+      "merchantProductId": "FKB_141660__194494_LASTMINUTE_2026-07-06_2026-07-08",
+      "price": 134.83
+    },
+    {
+      "ibeId": "413879",
+      "productName": "Berlin - Mailand - B&B Music",
+      "hotelName": "B&B Music",
+      "destinationCity": "Mailand",
+      "merchantProductId": "BER_130522__413879_LASTMINUTE_2026-08-23_2026-08-25",
+      "price": 134.99
+    },
+    {
+      "ibeId": "38011",
+      "productName": "Hamburg - Milton Keynes - Ramada by Wyndham Milton Keynes",
+      "hotelName": "Ramada by Wyndham Milton Keynes",
+      "destinationCity": "Milton Keynes",
+      "merchantProductId": "HAM_141696__38011_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 135.99
+    },
+    {
+      "ibeId": "13398705",
+      "productName": "Karlsruhe Baden Baden - London - Cosy Rooms",
+      "hotelName": "Cosy Rooms",
+      "destinationCity": "London",
+      "merchantProductId": "FKB_141660__13398705_LASTMINUTE_2026-12-05_2026-12-07",
+      "price": 136.75
+    },
+    {
+      "ibeId": "3898146",
+      "productName": "Frankfurt - Ilford - Premier Inn London Dagenham",
+      "hotelName": "Premier Inn London Dagenham",
+      "destinationCity": "Ilford",
+      "merchantProductId": "FRA_142110__3898146_LASTMINUTE_2026-08-21_2026-08-24",
+      "price": 136.85
+    },
+    {
+      "ibeId": "13507821",
+      "productName": "Berlin - Mailand - Mi Casa FRASCHINI",
+      "hotelName": "Mi Casa FRASCHINI",
+      "destinationCity": "Mailand",
+      "merchantProductId": "BER_130522__13507821_LASTMINUTE_2026-08-23_2026-08-25",
+      "price": 137.21
+    },
+    {
+      "ibeId": "637104",
+      "productName": "Nürnberg - London - Park Grand Heathrow",
+      "hotelName": "Park Grand Heathrow",
+      "destinationCity": "London",
+      "merchantProductId": "NUE_141660__637104_LASTMINUTE_2026-07-27_2026-07-29",
+      "price": 139.47
+    },
+    {
+      "ibeId": "483821",
+      "productName": "Düsseldorf - Sirmione - Hotel Bella Peschiera",
+      "hotelName": "Hotel Bella Peschiera",
+      "destinationCity": "Sirmione",
+      "merchantProductId": "DUS_130695__483821_LASTMINUTE_2026-10-06_2026-10-08",
+      "price": 139.65
+    },
+    {
+      "ibeId": "4011808",
+      "productName": "Nürnberg - London - Premier Inn London Eltham",
+      "hotelName": "Premier Inn London Eltham",
+      "destinationCity": "London",
+      "merchantProductId": "NUE_141660__4011808_LASTMINUTE_2026-07-27_2026-07-29",
+      "price": 140.78
+    },
+    {
+      "ibeId": "4378746",
+      "productName": "Nürnberg - London - Travelodge London Crystal Palace",
+      "hotelName": "Travelodge London Crystal Palace",
+      "destinationCity": "London",
+      "merchantProductId": "NUE_141660__4378746_LASTMINUTE_2026-07-27_2026-07-29",
+      "price": 141.92
+    },
+    {
+      "ibeId": "6080789",
+      "productName": "Memmingen - Sofia - CityHome Aparthotel",
+      "hotelName": "CityHome Aparthotel",
+      "destinationCity": "Sofia",
+      "merchantProductId": "FMM_154762__6080789_LASTMINUTE_2026-07-03_2026-07-06",
+      "price": 142.83
+    },
+    {
+      "ibeId": "165258",
+      "productName": "Hamburg - Luton - Thistle Express London Luton",
+      "hotelName": "Thistle Express London Luton",
+      "destinationCity": "Luton",
+      "merchantProductId": "HAM_141907__165258_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 143.03
+    },
+    {
+      "ibeId": "134969",
+      "productName": "Nürnberg - London - ibis London Barking",
+      "hotelName": "ibis London Barking",
+      "destinationCity": "London",
+      "merchantProductId": "NUE_141660__134969_LASTMINUTE_2026-07-27_2026-07-29",
+      "price": 143.8
+    },
+    {
+      "ibeId": "101446505",
+      "productName": "Memmingen - Durres - Briel Hotel",
+      "hotelName": "Briel Hotel",
+      "destinationCity": "Durres",
+      "merchantProductId": "FMM_169276__101446505_LASTMINUTE_2026-06-15_2026-06-19",
+      "price": 143.24
+    },
+    {
+      "ibeId": "346258",
+      "productName": "Berlin - London - Britannia Inn Hotel",
+      "hotelName": "Britannia Inn Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "BER_141660__346258_LASTMINUTE_2026-10-02_2026-10-04",
+      "price": 143.28
+    },
+    {
+      "ibeId": "101737103",
+      "productName": "Berlin - Mailand - Breda Suites Hotel Milano",
+      "hotelName": "Breda Suites Hotel Milano",
+      "destinationCity": "Mailand",
+      "merchantProductId": "BER_130522__101737103_LASTMINUTE_2026-08-23_2026-08-25",
+      "price": 143.46
+    },
+    {
+      "ibeId": "4404142",
+      "productName": "Hamburg - Milton Keynes - Travelodge Milton Keynes Central",
+      "hotelName": "Travelodge Milton Keynes Central",
+      "destinationCity": "Milton Keynes",
+      "merchantProductId": "HAM_141696__4404142_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 143.84
+    },
+    {
+      "ibeId": "168438",
+      "productName": "Düsseldorf - Sirmione - Le Terrazze sul Lago Hotel & Residence",
+      "hotelName": "Le Terrazze sul Lago Hotel & Residence",
+      "destinationCity": "Sirmione",
+      "merchantProductId": "DUS_130695__168438_LASTMINUTE_2026-10-06_2026-10-08",
+      "price": 143.95
+    },
+    {
+      "ibeId": "10134881",
+      "productName": "Hamburg - Milton Keynes - Premier Inn Milton Keynes Central - Avebury Boulevard",
+      "hotelName": "Avebury Boulevard",
+      "destinationCity": "Milton Keynes",
+      "merchantProductId": "HAM_141696__10134881_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 146.54
+    },
+    {
+      "ibeId": "4378746",
+      "productName": "Köln Bonn - London - Travelodge London Crystal Palace",
+      "hotelName": "Travelodge London Crystal Palace",
+      "destinationCity": "London",
+      "merchantProductId": "CGN_141660__4378746_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 146.81
+    },
+    {
+      "ibeId": "4437436",
+      "productName": "Hamburg - Milton Keynes - Travelodge Milton Keynes Shenley Church",
+      "hotelName": "Travelodge Milton Keynes Shenley Church",
+      "destinationCity": "Milton Keynes",
+      "merchantProductId": "HAM_141696__4437436_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 148.25
+    },
+    {
+      "ibeId": "4733738",
+      "productName": "Hamburg - Milton Keynes - Premier Inn Milton Keynes Central - Theatre District",
+      "hotelName": "Theatre District",
+      "destinationCity": "Milton Keynes",
+      "merchantProductId": "HAM_141696__4733738_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 149.27
+    },
+    {
+      "ibeId": "194494",
+      "productName": "Köln Bonn - London - Central Hotel Golders Green",
+      "hotelName": "Central Hotel Golders Green",
+      "destinationCity": "London",
+      "merchantProductId": "CGN_141660__194494_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 150.02
+    },
+    {
+      "ibeId": "100701123",
+      "productName": "Memmingen - Durres - Hotel Vila Aaron",
+      "hotelName": "Hotel Vila Aaron",
+      "destinationCity": "Durres",
+      "merchantProductId": "FMM_169276__100701123_LASTMINUTE_2026-06-22_2026-06-26",
+      "price": 150.02
+    },
+    {
+      "ibeId": "10148467",
+      "productName": "Frankfurt - Albaniens Küste - Apart-Hotel Lili2",
+      "hotelName": "Apart-Hotel Lili2",
+      "destinationCity": "Albaniens Küste",
+      "merchantProductId": "FRA__ALBANIA_COAST_10148467_LASTMINUTE_2026-10-01_2026-10-04",
+      "price": 150.16
+    },
+    {
+      "ibeId": "10148467",
+      "productName": "Frankfurt - Albanische Riviera - Apart-Hotel Lili2",
+      "hotelName": "Apart-Hotel Lili2",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "FRA__ALBANIAN_RIVIERA_10148467_LASTMINUTE_2026-10-01_2026-10-04",
+      "price": 150.16
+    },
+    {
+      "ibeId": "1002327",
+      "productName": "Hamburg - Luton - Premier Inn Luton Town Centre",
+      "hotelName": "Premier Inn Luton Town Centre",
+      "destinationCity": "Luton",
+      "merchantProductId": "HAM_141907__1002327_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 151.43
+    },
+    {
+      "ibeId": "4937612",
+      "productName": "Berlin - Albaniens Küste - Hotel Vila Alvin & Apartments",
+      "hotelName": "Hotel Vila Alvin & Apartments",
+      "destinationCity": "Albaniens Küste",
+      "merchantProductId": "BER__ALBANIA_COAST_4937612_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 151.47
+    },
+    {
+      "ibeId": "4937612",
+      "productName": "Berlin - Albanische Riviera - Hotel Vila Alvin & Apartments",
+      "hotelName": "Hotel Vila Alvin & Apartments",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "BER__ALBANIAN_RIVIERA_4937612_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 151.47
+    },
+    {
+      "ibeId": "10206889",
+      "productName": "Memmingen - Albaniens Küste - Maison Apartments",
+      "hotelName": "Maison Apartments",
+      "destinationCity": "Albaniens Küste",
+      "merchantProductId": "FMM__ALBANIA_COAST_10206889_LASTMINUTE_2026-10-09_2026-10-11",
+      "price": 151.56
+    },
+    {
+      "ibeId": "10206889",
+      "productName": "Memmingen - Albanische Riviera - Maison Apartments",
+      "hotelName": "Maison Apartments",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "FMM__ALBANIAN_RIVIERA_10206889_LASTMINUTE_2026-10-09_2026-10-11",
+      "price": 151.56
+    },
+    {
+      "ibeId": "3898227",
+      "productName": "Hamburg - Milton Keynes - Premier Inn Milton Keynes - Willen Lake",
+      "hotelName": "Willen Lake",
+      "destinationCity": "Milton Keynes",
+      "merchantProductId": "HAM_141696__3898227_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 151.86
+    },
+    {
+      "ibeId": "3898225",
+      "productName": "Hamburg - Milton Keynes - Premier Inn Milton Keynes Sw - Furzton Lake",
+      "hotelName": "Furzton Lake",
+      "destinationCity": "Milton Keynes",
+      "merchantProductId": "HAM_141696__3898225_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 151.86
+    },
+    {
+      "ibeId": "13398705",
+      "productName": "Berlin - London - Cosy Rooms",
+      "hotelName": "Cosy Rooms",
+      "destinationCity": "London",
+      "merchantProductId": "BER_141660__13398705_LASTMINUTE_2026-10-02_2026-10-04",
+      "price": 152.22
+    },
+    {
+      "ibeId": "101873682",
+      "productName": "Memmingen - Durres - Enles Garden Beach Apartments",
+      "hotelName": "Enles Garden Beach Apartments",
+      "destinationCity": "Durres",
+      "merchantProductId": "FMM_169276__101873682_LASTMINUTE_2026-06-15_2026-06-19",
+      "price": 152.45
+    },
+    {
+      "ibeId": "1527511",
+      "productName": "Köln Bonn - London - Travelodge London Woolwich",
+      "hotelName": "Travelodge London Woolwich",
+      "destinationCity": "London",
+      "merchantProductId": "CGN_141660__1527511_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 152.58
+    },
+    {
+      "ibeId": "3898226",
+      "productName": "Hamburg - Milton Keynes - Premier Inn Milton Keynes South",
+      "hotelName": "Premier Inn Milton Keynes South",
+      "destinationCity": "Milton Keynes",
+      "merchantProductId": "HAM_141696__3898226_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 152.62
+    },
+    {
+      "ibeId": "690053",
+      "productName": "Memmingen - Tiranë - Hotel Green",
+      "hotelName": "Hotel Green",
+      "destinationCity": "Tiranë",
+      "merchantProductId": "FMM_156955__690053_LASTMINUTE_2026-06-24_2026-06-27",
+      "price": 152.96
+    },
+    {
+      "ibeId": "7517593",
+      "productName": "Memmingen - Vlorë - Hotel Beler",
+      "hotelName": "Hotel Beler",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "FMM_161895__7517593_LASTMINUTE_2026-10-12_2026-10-17",
+      "price": 153.7
+    },
+    {
+      "ibeId": "703497",
+      "productName": "Frankfurt - Albaniens Küste - Bougainville Bay Hotel",
+      "hotelName": "Bougainville Bay Hotel",
+      "destinationCity": "Albaniens Küste",
+      "merchantProductId": "FRA__ALBANIA_COAST_703497_LASTMINUTE_2026-09-25_2026-09-27",
+      "price": 153.8
+    },
+    {
+      "ibeId": "703497",
+      "productName": "Frankfurt - Albanische Riviera - Bougainville Bay Hotel",
+      "hotelName": "Bougainville Bay Hotel",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "FRA__ALBANIAN_RIVIERA_703497_LASTMINUTE_2026-09-25_2026-09-27",
+      "price": 153.8
+    },
+    {
+      "ibeId": "98234",
+      "productName": "Köln Bonn - Manchester - Manchester Airport Stanley Hotel by Belvilla",
+      "hotelName": "Manchester Airport Stanley Hotel by Belvilla",
+      "destinationCity": "Manchester",
+      "merchantProductId": "CGN_141646__98234_LASTMINUTE_2026-07-16_2026-07-19",
+      "price": 153.41
+    },
+    {
+      "ibeId": "336629",
+      "productName": "Memmingen - Sofia - City Avenue Hotel",
+      "hotelName": "City Avenue Hotel",
+      "destinationCity": "Sofia",
+      "merchantProductId": "FMM_154762__336629_LASTMINUTE_2026-07-03_2026-07-06",
+      "price": 153.42
+    },
+    {
+      "ibeId": "5293514",
+      "productName": "Memmingen - Sofia - Generaator Sofia",
+      "hotelName": "Generaator Sofia",
+      "destinationCity": "Sofia",
+      "merchantProductId": "FMM_154762__5293514_LASTMINUTE_2026-07-03_2026-07-06",
+      "price": 154.3
+    },
+    {
+      "ibeId": "1027183",
+      "productName": "Köln Bonn - London - OYO Bostons Manor Hotel, Hanwell London",
+      "hotelName": "OYO Bostons Manor Hotel, Hanwell London",
+      "destinationCity": "London",
+      "merchantProductId": "CGN_141660__1027183_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 154.33
+    },
+    {
+      "ibeId": "5731908",
+      "productName": "Düsseldorf - Isola di Capo Rizzuto - Residence Capo Rizzuto",
+      "hotelName": "Residence Capo Rizzuto",
+      "destinationCity": "Isola di Capo Rizzuto",
+      "merchantProductId": "DUS_131099__5731908_LASTMINUTE_2026-06-23_2026-06-27",
+      "price": 154.47
+    },
+    {
+      "ibeId": "4937612",
+      "productName": "Karlsruhe Baden Baden - Sarandë - Hotel Vila Alvin & Apartments",
+      "hotelName": "Hotel Vila Alvin & Apartments",
+      "destinationCity": "Sarandë",
+      "merchantProductId": "FKB_180539__4937612_LASTMINUTE_2026-06-11_2026-06-16",
+      "price": 155.31
+    },
+    {
+      "ibeId": "2557021",
+      "productName": "Hamburg - Milton Keynes - Swan Hotel",
+      "hotelName": "Swan Hotel",
+      "destinationCity": "Milton Keynes",
+      "merchantProductId": "HAM_141696__2557021_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 155.34
+    },
+    {
+      "ibeId": "100343367",
+      "productName": "Memmingen - Vlorë - Vila 42",
+      "hotelName": "Vila 42",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "FMM_161895__100343367_LASTMINUTE_2026-06-15_2026-06-19",
+      "price": 156
+    },
+    {
+      "ibeId": "346258",
+      "productName": "Bremen - London - Britannia Inn Hotel",
+      "hotelName": "Britannia Inn Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "BRE_141660__346258_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 156.07
+    },
+    {
+      "ibeId": "10208981",
+      "productName": "Frankfurt - Ilford - Premier Inn London Romford Town Centre",
+      "hotelName": "Premier Inn London Romford Town Centre",
+      "destinationCity": "Ilford",
+      "merchantProductId": "FRA_142110__10208981_LASTMINUTE_2026-08-21_2026-08-24",
+      "price": 156.7
+    },
+    {
+      "ibeId": "2620822",
+      "productName": "Memmingen - Vlorë - Aliko Hotel",
+      "hotelName": "Aliko Hotel",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "FMM_161895__2620822_LASTMINUTE_2026-06-15_2026-06-19",
+      "price": 156.42
+    },
+    {
+      "ibeId": "101772414",
+      "productName": "Memmingen - Vlorë - Tonis Rooms Vlore",
+      "hotelName": "Tonis Rooms Vlore",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "FMM_161895__101772414_LASTMINUTE_2026-10-12_2026-10-17",
+      "price": 156.47
+    },
+    {
+      "ibeId": "3897997",
+      "productName": "Hamburg - Luton - Premier Inn Dunstable South A5",
+      "hotelName": "Premier Inn Dunstable South A5",
+      "destinationCity": "Luton",
+      "merchantProductId": "HAM_141907__3897997_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 156.79
+    },
+    {
+      "ibeId": "413879",
+      "productName": "Düsseldorf - Mailand - B&B Music",
+      "hotelName": "B&B Music",
+      "destinationCity": "Mailand",
+      "merchantProductId": "DUS_130522__413879_LASTMINUTE_2026-08-19_2026-08-22",
+      "price": 156.82
+    },
+    {
+      "ibeId": "1624807",
+      "productName": "Memmingen - Vlorë - Hotel Ble Ble Vlore",
+      "hotelName": "Hotel Ble Ble Vlore",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "FMM_161895__1624807_LASTMINUTE_2026-06-22_2026-06-26",
+      "price": 157.41
+    },
+    {
+      "ibeId": "719717",
+      "productName": "Dortmund - Krakau - Leone Aparthotel",
+      "hotelName": "Leone Aparthotel",
+      "destinationCity": "Krakau",
+      "merchantProductId": "DTM_154010__719717_LASTMINUTE_2026-07-28_2026-07-31",
+      "price": 157.57
+    },
+    {
+      "ibeId": "1794874",
+      "productName": "Düsseldorf - Costa Dorada, Spanien - Apolo Suites Rentalmar",
+      "hotelName": "Apolo Suites Rentalmar",
+      "destinationCity": "Costa Dorada, Spanien",
+      "merchantProductId": "DUS__COSTA_DORADA_1794874_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 157.98
+    },
+    {
+      "ibeId": "5532154",
+      "productName": "Nürnberg - Antalya-Region, Türkei - Ozgur Hotel",
+      "hotelName": "Ozgur Hotel",
+      "destinationCity": "Antalya-Region, Türkei",
+      "merchantProductId": "NUE__ANTALYA_5532154_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 158.36
+    },
+    {
+      "ibeId": "5532154",
+      "productName": "Nürnberg - Türkische Riviera - Ozgur Hotel",
+      "hotelName": "Ozgur Hotel",
+      "destinationCity": "Türkische Riviera",
+      "merchantProductId": "NUE__TURKISH_RIVIERA_5532154_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 158.36
+    },
+    {
+      "ibeId": "176040",
+      "productName": "Hamburg - Cambridge, Cambridgeshire - Ramada by Wyndham Cambridge",
+      "hotelName": "Ramada by Wyndham Cambridge",
+      "destinationCity": "Cambridge, Cambridgeshire",
+      "merchantProductId": "HAM_141648__176040_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 158.38
+    },
+    {
+      "ibeId": "2781155",
+      "productName": "Berlin - London - Lucky 8 Hotel",
+      "hotelName": "Lucky 8 Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "BER_141660__2781155_LASTMINUTE_2026-10-02_2026-10-04",
+      "price": 158.76
+    },
+    {
+      "ibeId": "4172109",
+      "productName": "Memmingen - Tiranë - Hotel Pandora Residence",
+      "hotelName": "Hotel Pandora Residence",
+      "destinationCity": "Tiranë",
+      "merchantProductId": "FMM_156955__4172109_LASTMINUTE_2026-06-24_2026-06-27",
+      "price": 158.86
+    },
+    {
+      "ibeId": "58991",
+      "productName": "Nürnberg - Barcelona - Travelodge Barcelona del Vallès",
+      "hotelName": "Travelodge Barcelona del Vallès",
+      "destinationCity": "Barcelona",
+      "merchantProductId": "NUE_136284__58991_LASTMINUTE_2026-12-10_2026-12-12",
+      "price": 159.02
+    },
+    {
+      "ibeId": "58991",
+      "productName": "Nürnberg - Katalonien - Travelodge Barcelona del Vallès",
+      "hotelName": "Travelodge Barcelona del Vallès",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "NUE__CATALONIA_58991_LASTMINUTE_2026-12-10_2026-12-12",
+      "price": 159.02
+    },
+    {
+      "ibeId": "3898230",
+      "productName": "Hamburg - Luton - Premier Inn Luton - Airport",
+      "hotelName": "Airport",
+      "destinationCity": "Luton",
+      "merchantProductId": "HAM_141907__3898230_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 159.08
+    },
+    {
+      "ibeId": "468919",
+      "productName": "Bremen - London - Arinza Hotel, London Ilford",
+      "hotelName": "Arinza Hotel, London Ilford",
+      "destinationCity": "London",
+      "merchantProductId": "BRE_141660__468919_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 159.2
+    },
+    {
+      "ibeId": "14195007",
+      "productName": "Memmingen - Tiranë - Tirana Budget Retreat Hotel",
+      "hotelName": "Tirana Budget Retreat Hotel",
+      "destinationCity": "Tiranë",
+      "merchantProductId": "FMM_156955__14195007_LASTMINUTE_2026-06-24_2026-06-27",
+      "price": 159.11
+    },
+    {
+      "ibeId": "194494",
+      "productName": "Bremen - London - Central Hotel Golders Green",
+      "hotelName": "Central Hotel Golders Green",
+      "destinationCity": "London",
+      "merchantProductId": "BRE_141660__194494_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 159.14
+    },
+    {
+      "ibeId": "579516",
+      "productName": "Hamburg - Luton - Ibis London Luton Airport",
+      "hotelName": "Ibis London Luton Airport",
+      "destinationCity": "Luton",
+      "merchantProductId": "HAM_141907__579516_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 159.52
+    },
+    {
+      "ibeId": "3898323",
+      "productName": "Hamburg - London - Premier Inn London Croydon - Purley A23",
+      "hotelName": "Purley A23",
+      "destinationCity": "London",
+      "merchantProductId": "HAM_141660__3898323_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 159.54
+    },
+    {
+      "ibeId": "616868",
+      "productName": "Memmingen - Sofia - Hotel Brod - Free Parking",
+      "hotelName": "Free Parking",
+      "destinationCity": "Sofia",
+      "merchantProductId": "FMM_154762__616868_LASTMINUTE_2026-07-03_2026-07-06",
+      "price": 159.94
+    },
+    {
+      "ibeId": "55615",
+      "productName": "Düsseldorf - Costa Barcelona, Spanien - Hotel 153",
+      "hotelName": "Hotel 153",
+      "destinationCity": "Costa Barcelona, Spanien",
+      "merchantProductId": "DUS__COSTA_BARCELONA_55615_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 160.7
+    },
+    {
+      "ibeId": "55615",
+      "productName": "Düsseldorf - Costa del Garraf, Spanien - Hotel 153",
+      "hotelName": "Hotel 153",
+      "destinationCity": "Costa del Garraf, Spanien",
+      "merchantProductId": "DUS__COSTA_DEL_GARRAF_55615_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 160.7
+    },
+    {
+      "ibeId": "9229071",
+      "productName": "Hamburg - Clacton-On-Sea - Pier Hotel Clacton on Sea By OYO",
+      "hotelName": "Pier Hotel Clacton on Sea By OYO",
+      "destinationCity": "Clacton-On-Sea",
+      "merchantProductId": "HAM_142446__9229071_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 160.43
+    },
+    {
+      "ibeId": "11187630",
+      "productName": "Berlin - London - Travelodge London Kingston Upon Thames",
+      "hotelName": "Travelodge London Kingston Upon Thames",
+      "destinationCity": "London",
+      "merchantProductId": "BER_141660__11187630_LASTMINUTE_2026-10-02_2026-10-04",
+      "price": 160.54
+    },
+    {
+      "ibeId": "468919",
+      "productName": "Berlin - London - Arinza Hotel, London Ilford",
+      "hotelName": "Arinza Hotel, London Ilford",
+      "destinationCity": "London",
+      "merchantProductId": "BER_141660__468919_LASTMINUTE_2026-10-02_2026-10-04",
+      "price": 160.92
+    },
+    {
+      "ibeId": "7355642",
+      "productName": "Köln Bonn - Istanbul - The Lola Hotel",
+      "hotelName": "The Lola Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "CGN_153601__7355642_LASTMINUTE_2026-06-15_2026-06-17",
+      "price": 161.44
+    },
+    {
+      "ibeId": "39481",
+      "productName": "Hamburg - Colchester - Brook Red Lion Hotel",
+      "hotelName": "Brook Red Lion Hotel",
+      "destinationCity": "Colchester",
+      "merchantProductId": "HAM_141688__39481_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 161.46
+    },
+    {
+      "ibeId": "1493836",
+      "productName": "Hamburg - Cambridge, Cambridgeshire - Travelodge Cambridge Fourwentways",
+      "hotelName": "Travelodge Cambridge Fourwentways",
+      "destinationCity": "Cambridge, Cambridgeshire",
+      "merchantProductId": "HAM_141648__1493836_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 161.46
+    },
+    {
+      "ibeId": "8679730",
+      "productName": "Hamburg - London - Premier Inn London Sutton",
+      "hotelName": "Premier Inn London Sutton",
+      "destinationCity": "London",
+      "merchantProductId": "HAM_141660__8679730_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 161.51
+    },
+    {
+      "ibeId": "1551956",
+      "productName": "Köln Bonn - Istanbul - New Fatih Hotel",
+      "hotelName": "New Fatih Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "CGN_153601__1551956_LASTMINUTE_2026-06-15_2026-06-17",
+      "price": 161.61
+    },
+    {
+      "ibeId": "39320",
+      "productName": "Hamburg - Luton - The Old Palace Lodge",
+      "hotelName": "The Old Palace Lodge",
+      "destinationCity": "Luton",
+      "merchantProductId": "HAM_141907__39320_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 161.66
+    },
+    {
+      "ibeId": "52634",
+      "productName": "Memmingen - Sofia - Hotel California",
+      "hotelName": "Hotel California",
+      "destinationCity": "Sofia",
+      "merchantProductId": "FMM_154762__52634_LASTMINUTE_2026-07-03_2026-07-06",
+      "price": 162.12
+    },
+    {
+      "ibeId": "1775880",
+      "productName": "Köln Bonn - Mailand - HQ Aparthotel Milano Inn - Smart Suites",
+      "hotelName": "Smart Suites",
+      "destinationCity": "Mailand",
+      "merchantProductId": "CGN_130522__1775880_LASTMINUTE_2026-07-13_2026-07-15",
+      "price": 162.41
+    },
+    {
+      "ibeId": "102133953",
+      "productName": "Memmingen - Vlorë - Alv Rent Room",
+      "hotelName": "Alv Rent Room",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "FMM_161895__102133953_LASTMINUTE_2026-06-15_2026-06-19",
+      "price": 162.54
+    },
+    {
+      "ibeId": "468919",
+      "productName": "Hamburg - London - Arinza Hotel, London Ilford",
+      "hotelName": "Arinza Hotel, London Ilford",
+      "destinationCity": "London",
+      "merchantProductId": "HAM_141660__468919_LASTMINUTE_2026-10-13_2026-10-15",
+      "price": 162.58
+    },
+    {
+      "ibeId": "6107585",
+      "productName": "Köln Bonn - Istanbul - HOTEL MİKLAGORD",
+      "hotelName": "HOTEL MİKLAGORD",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "CGN_153601__6107585_LASTMINUTE_2026-06-15_2026-06-17",
+      "price": 163.8
+    },
+    {
+      "ibeId": "100186876",
+      "productName": "Berlin - Albaniens Küste - Olivet Hotel",
+      "hotelName": "Olivet Hotel",
+      "destinationCity": "Albaniens Küste",
+      "merchantProductId": "BER__ALBANIA_COAST_100186876_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 163.24
+    },
+    {
+      "ibeId": "100186876",
+      "productName": "Berlin - Albanische Riviera - Olivet Hotel",
+      "hotelName": "Olivet Hotel",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "BER__ALBANIAN_RIVIERA_100186876_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 163.24
+    },
+    {
+      "ibeId": "69975",
+      "productName": "Hamburg - Luton - OYO The Chiltern Hotel",
+      "hotelName": "OYO The Chiltern Hotel",
+      "destinationCity": "Luton",
+      "merchantProductId": "HAM_141907__69975_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 163.63
+    },
+    {
+      "ibeId": "1027183",
+      "productName": "Hamburg - London - OYO Bostons Manor Hotel, Hanwell London",
+      "hotelName": "OYO Bostons Manor Hotel, Hanwell London",
+      "destinationCity": "London",
+      "merchantProductId": "HAM_141660__1027183_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 163.66
+    },
+    {
+      "ibeId": "5886303",
+      "productName": "Köln Bonn - Istanbul - Hotel Megaron",
+      "hotelName": "Hotel Megaron",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "CGN_153601__5886303_LASTMINUTE_2026-06-15_2026-06-17",
+      "price": 163.71
+    },
+    {
+      "ibeId": "3897904",
+      "productName": "Hamburg - Ilford - Premier Inn London Romford West",
+      "hotelName": "Premier Inn London Romford West",
+      "destinationCity": "Ilford",
+      "merchantProductId": "HAM_142110__3897904_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 163.98
+    },
+    {
+      "ibeId": "13818331",
+      "productName": "Memmingen - Borsh - Friends House - Borsh Hotel",
+      "hotelName": "Borsh Hotel",
+      "destinationCity": "Borsh",
+      "merchantProductId": "FMM_275182__13818331_LASTMINUTE_2026-06-13_2026-06-17",
+      "price": 164.05
+    },
+    {
+      "ibeId": "12495817",
+      "productName": "Nürnberg - Antalya-Region, Türkei - Paşa Restaurant & Pansiyon",
+      "hotelName": "Paşa Restaurant & Pansiyon",
+      "destinationCity": "Antalya-Region, Türkei",
+      "merchantProductId": "NUE__ANTALYA_12495817_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 164.7
+    },
+    {
+      "ibeId": "12495817",
+      "productName": "Nürnberg - Türkische Riviera - Paşa Restaurant & Pansiyon",
+      "hotelName": "Paşa Restaurant & Pansiyon",
+      "destinationCity": "Türkische Riviera",
+      "merchantProductId": "NUE__TURKISH_RIVIERA_12495817_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 164.7
+    },
+    {
+      "ibeId": "5525705",
+      "productName": "Köln Bonn - Istanbul - Demare Hotel",
+      "hotelName": "Demare Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "CGN_153601__5525705_LASTMINUTE_2026-06-15_2026-06-17",
+      "price": 165.17
+    },
+    {
+      "ibeId": "13016913",
+      "productName": "Köln Bonn - Istanbul - The Red Tent Grand Suites",
+      "hotelName": "The Red Tent Grand Suites",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "CGN_153601__13016913_LASTMINUTE_2026-06-15_2026-06-17",
+      "price": 165.23
+    },
+    {
+      "ibeId": "12682077",
+      "productName": "Köln Bonn - Istanbul - Nora Airport Hotel",
+      "hotelName": "Nora Airport Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "CGN_153601__12682077_LASTMINUTE_2026-06-15_2026-06-17",
+      "price": 165.23
+    },
+    {
+      "ibeId": "11187630",
+      "productName": "Bremen - London - Travelodge London Kingston Upon Thames",
+      "hotelName": "Travelodge London Kingston Upon Thames",
+      "destinationCity": "London",
+      "merchantProductId": "BRE_141660__11187630_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 165.29
+    },
+    {
+      "ibeId": "13398705",
+      "productName": "Bremen - London - Cosy Rooms",
+      "hotelName": "Cosy Rooms",
+      "destinationCity": "London",
+      "merchantProductId": "BRE_141660__13398705_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 165.39
+    },
+    {
+      "ibeId": "821426",
+      "productName": "Hamburg - Luton - Stuart Hotel",
+      "hotelName": "Stuart Hotel",
+      "destinationCity": "Luton",
+      "merchantProductId": "HAM_141907__821426_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 165.89
+    },
+    {
+      "ibeId": "12655496",
+      "productName": "Hannover - Istanbul - Simge",
+      "hotelName": "Simge",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "HAJ_153601__12655496_LASTMINUTE_2026-09-15_2026-09-18",
+      "price": 166.4
+    },
+    {
+      "ibeId": "4884304",
+      "productName": "Nürnberg - Antalya-Region, Türkei - HMA Hotel & Suites",
+      "hotelName": "HMA Hotel & Suites",
+      "destinationCity": "Antalya-Region, Türkei",
+      "merchantProductId": "NUE__ANTALYA_4884304_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 166.15
+    },
+    {
+      "ibeId": "4884304",
+      "productName": "Nürnberg - Türkische Riviera - HMA Hotel & Suites",
+      "hotelName": "HMA Hotel & Suites",
+      "destinationCity": "Türkische Riviera",
+      "merchantProductId": "NUE__TURKISH_RIVIERA_4884304_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 166.15
+    },
+    {
+      "ibeId": "8418157",
+      "productName": "Köln Bonn - Istanbul - Cnr İnci Hotel",
+      "hotelName": "Cnr İnci Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "CGN_153601__8418157_LASTMINUTE_2026-06-15_2026-06-17",
+      "price": 166.54
+    },
+    {
+      "ibeId": "4618137",
+      "productName": "Köln Bonn - Istanbul - Riverland Suites Apart Hotel",
+      "hotelName": "Riverland Suites Apart Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "CGN_153601__4618137_LASTMINUTE_2026-06-15_2026-06-17",
+      "price": 166.61
+    },
+    {
+      "ibeId": "92695",
+      "productName": "Düsseldorf - Katalonien - Apartaments Els Llorers",
+      "hotelName": "Apartaments Els Llorers",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "DUS__CATALONIA_92695_LASTMINUTE_2026-09-27_2026-09-29",
+      "price": 167.6
+    },
+    {
+      "ibeId": "92695",
+      "productName": "Düsseldorf - Costa Brava, Spanien - Apartaments Els Llorers",
+      "hotelName": "Apartaments Els Llorers",
+      "destinationCity": "Costa Brava, Spanien",
+      "merchantProductId": "DUS__COSTA_BRAVA_92695_LASTMINUTE_2026-09-27_2026-09-29",
+      "price": 167.6
+    },
+    {
+      "ibeId": "2519973",
+      "productName": "Köln Bonn - Mailand - Hotel Tiffany Milano",
+      "hotelName": "Hotel Tiffany Milano",
+      "destinationCity": "Mailand",
+      "merchantProductId": "CGN_130522__2519973_LASTMINUTE_2026-07-13_2026-07-15",
+      "price": 167.12
+    },
+    {
+      "ibeId": "1532447",
+      "productName": "Karlsruhe Baden Baden - Mallorca, Spanien - Africamar",
+      "hotelName": "Africamar",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "FKB__MAIORCA_1532447_LASTMINUTE_2026-07-22_2026-07-24",
+      "price": 167.82
+    },
+    {
+      "ibeId": "7391682",
+      "productName": "Memmingen - Montenegros Küste - Apartments & Rooms Rozana",
+      "hotelName": "Apartments & Rooms Rozana",
+      "destinationCity": "Montenegros Küste",
+      "merchantProductId": "FMM__MONTENEGRO_COAST_7391682_LASTMINUTE_2026-08-28_2026-08-30",
+      "price": 168.15
+    },
+    {
+      "ibeId": "3898146",
+      "productName": "Hamburg - Ilford - Premier Inn London Dagenham",
+      "hotelName": "Premier Inn London Dagenham",
+      "destinationCity": "Ilford",
+      "merchantProductId": "HAM_142110__3898146_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 168.25
+    },
+    {
+      "ibeId": "4604375",
+      "productName": "Hamburg - Cambridge, Cambridgeshire - Travelodge Cambridge Swavesey",
+      "hotelName": "Travelodge Cambridge Swavesey",
+      "destinationCity": "Cambridge, Cambridgeshire",
+      "merchantProductId": "HAM_141648__4604375_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 168.39
+    },
+    {
+      "ibeId": "13818331",
+      "productName": "Berlin - Albanische Riviera - Friends House - Borsh Hotel",
+      "hotelName": "Borsh Hotel",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "BER__ALBANIAN_RIVIERA_13818331_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 168.44
+    },
+    {
+      "ibeId": "1698879",
+      "productName": "Nürnberg - Mallorca, Spanien - Hotel Cassandra",
+      "hotelName": "Hotel Cassandra",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "NUE__MAIORCA_1698879_LASTMINUTE_2026-06-23_2026-06-25",
+      "price": 168.73
+    },
+    {
+      "ibeId": "330012",
+      "productName": "Berlin - Rom - Seven Hills Camping Village",
+      "hotelName": "Seven Hills Camping Village",
+      "destinationCity": "Rom",
+      "merchantProductId": "BER_131028__330012_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 168.81
+    },
+    {
+      "ibeId": "770771",
+      "productName": "Hamburg - London - Premier Inn London Croydon Town Centre",
+      "hotelName": "Premier Inn London Croydon Town Centre",
+      "destinationCity": "London",
+      "merchantProductId": "HAM_141660__770771_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 169.02
+    },
+    {
+      "ibeId": "2647550",
+      "productName": "Düsseldorf - Barcelona - Moderno",
+      "hotelName": "Moderno",
+      "destinationCity": "Barcelona",
+      "merchantProductId": "DUS_136284__2647550_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 169.28
+    },
+    {
+      "ibeId": "12238208",
+      "productName": "Memmingen - Himarë - Mema Rooms",
+      "hotelName": "Mema Rooms",
+      "destinationCity": "Himarë",
+      "merchantProductId": "FMM_174131__12238208_LASTMINUTE_2026-10-12_2026-10-17",
+      "price": 169.38
+    },
+    {
+      "ibeId": "12584926",
+      "productName": "Frankfurt - Lerida - B&B HOTEL Lleida",
+      "hotelName": "B&B HOTEL Lleida",
+      "destinationCity": "Lerida",
+      "merchantProductId": "FRA_162879__12584926_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 169.46
+    },
+    {
+      "ibeId": "12584926",
+      "productName": "Frankfurt - Katalonien - B&B HOTEL Lleida",
+      "hotelName": "B&B HOTEL Lleida",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "FRA__CATALONIA_12584926_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 169.46
+    },
+    {
+      "ibeId": "911740",
+      "productName": "Düsseldorf - Costa del Sol, Spanien - Hotel Velis",
+      "hotelName": "Hotel Velis",
+      "destinationCity": "Costa del Sol, Spanien",
+      "merchantProductId": "DUS__COSTA_DEL_SOL_911740_LASTMINUTE_2026-09-02_2026-09-05",
+      "price": 169.83
+    },
+    {
+      "ibeId": "2629203",
+      "productName": "Düsseldorf - Gargnano - Hotel Danieli La Castellana lago di Garda",
+      "hotelName": "Hotel Danieli La Castellana lago di Garda",
+      "destinationCity": "Gargnano",
+      "merchantProductId": "DUS_131083__2629203_LASTMINUTE_2026-10-06_2026-10-08",
+      "price": 170.06
+    },
+    {
+      "ibeId": "3897905",
+      "productName": "Hamburg - Ilford - Premier Inn London Romford - Mercury Gardens",
+      "hotelName": "Mercury Gardens",
+      "destinationCity": "Ilford",
+      "merchantProductId": "HAM_142110__3897905_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 170.54
+    },
+    {
+      "ibeId": "1551956",
+      "productName": "Berlin - Istanbul - New Fatih Hotel",
+      "hotelName": "New Fatih Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "BER_153601__1551956_LASTMINUTE_2026-06-13_2026-06-16",
+      "price": 170.65
+    },
+    {
+      "ibeId": "648774",
+      "productName": "Düsseldorf - Katalonien - htop Palm Beach & SPA #htopEnjoy",
+      "hotelName": "htop Palm Beach & SPA #htopEnjoy",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "DUS__CATALONIA_648774_LASTMINUTE_2026-09-27_2026-09-29",
+      "price": 170.73
+    },
+    {
+      "ibeId": "648774",
+      "productName": "Düsseldorf - Costa Brava, Spanien - htop Palm Beach & SPA #htopEnjoy",
+      "hotelName": "htop Palm Beach & SPA #htopEnjoy",
+      "destinationCity": "Costa Brava, Spanien",
+      "merchantProductId": "DUS__COSTA_BRAVA_648774_LASTMINUTE_2026-09-27_2026-09-29",
+      "price": 170.73
+    },
+    {
+      "ibeId": "246077",
+      "productName": "Berlin - Valencia - Flag Hotel Valencia",
+      "hotelName": "Flag Hotel Valencia",
+      "destinationCity": "Valencia",
+      "merchantProductId": "BER_136306__246077_LASTMINUTE_2026-10-04_2026-10-07",
+      "price": 170.86
+    },
+    {
+      "ibeId": "246077",
+      "productName": "Berlin - Costa Valencia, Spanien - Flag Hotel Valencia",
+      "hotelName": "Flag Hotel Valencia",
+      "destinationCity": "Costa Valencia, Spanien",
+      "merchantProductId": "BER__COSTA_VALENCIA_246077_LASTMINUTE_2026-10-04_2026-10-07",
+      "price": 170.86
+    },
+    {
+      "ibeId": "6179848",
+      "productName": "Nürnberg - Antalya-Region, Türkei - Hotel Gold Stone",
+      "hotelName": "Hotel Gold Stone",
+      "destinationCity": "Antalya-Region, Türkei",
+      "merchantProductId": "NUE__ANTALYA_6179848_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 171.7
+    },
+    {
+      "ibeId": "6179848",
+      "productName": "Nürnberg - Türkische Riviera - Hotel Gold Stone",
+      "hotelName": "Hotel Gold Stone",
+      "destinationCity": "Türkische Riviera",
+      "merchantProductId": "NUE__TURKISH_RIVIERA_6179848_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 171.7
+    },
+    {
+      "ibeId": "54875",
+      "productName": "Düsseldorf - Katalonien - BLUESEA Montevista Hawai",
+      "hotelName": "BLUESEA Montevista Hawai",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "DUS__CATALONIA_54875_LASTMINUTE_2026-09-27_2026-09-29",
+      "price": 171.16
+    },
+    {
+      "ibeId": "54875",
+      "productName": "Düsseldorf - Costa Brava, Spanien - BLUESEA Montevista Hawai",
+      "hotelName": "BLUESEA Montevista Hawai",
+      "destinationCity": "Costa Brava, Spanien",
+      "merchantProductId": "DUS__COSTA_BRAVA_54875_LASTMINUTE_2026-09-27_2026-09-29",
+      "price": 171.16
+    },
+    {
+      "ibeId": "10905691",
+      "productName": "Düsseldorf - Costa Dorada, Spanien - Alannia Salou",
+      "hotelName": "Alannia Salou",
+      "destinationCity": "Costa Dorada, Spanien",
+      "merchantProductId": "DUS__COSTA_DORADA_10905691_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 171.21
+    },
+    {
+      "ibeId": "7355642",
+      "productName": "Berlin - Istanbul - The Lola Hotel",
+      "hotelName": "The Lola Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "BER_153601__7355642_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 171.52
+    },
+    {
+      "ibeId": "14011879",
+      "productName": "Berlin - Valencia - SH Campus Lyceum",
+      "hotelName": "SH Campus Lyceum",
+      "destinationCity": "Valencia",
+      "merchantProductId": "BER_136306__14011879_LASTMINUTE_2026-10-04_2026-10-07",
+      "price": 171.79
+    },
+    {
+      "ibeId": "14011879",
+      "productName": "Berlin - Costa Valencia, Spanien - SH Campus Lyceum",
+      "hotelName": "SH Campus Lyceum",
+      "destinationCity": "Costa Valencia, Spanien",
+      "merchantProductId": "BER__COSTA_VALENCIA_14011879_LASTMINUTE_2026-10-04_2026-10-07",
+      "price": 171.79
+    },
+    {
+      "ibeId": "10795253",
+      "productName": "Nürnberg - Antalya-Region, Türkei - BELCAN Hotel",
+      "hotelName": "BELCAN Hotel",
+      "destinationCity": "Antalya-Region, Türkei",
+      "merchantProductId": "NUE__ANTALYA_10795253_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 172.07
+    },
+    {
+      "ibeId": "10795253",
+      "productName": "Nürnberg - Türkische Riviera - BELCAN Hotel",
+      "hotelName": "BELCAN Hotel",
+      "destinationCity": "Türkische Riviera",
+      "merchantProductId": "NUE__TURKISH_RIVIERA_10795253_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 172.07
+    },
+    {
+      "ibeId": "173463",
+      "productName": "Köln Bonn - Mailand - Hotel Kristall",
+      "hotelName": "Hotel Kristall",
+      "destinationCity": "Mailand",
+      "merchantProductId": "CGN_130522__173463_LASTMINUTE_2026-07-13_2026-07-15",
+      "price": 172.5
+    },
+    {
+      "ibeId": "429589",
+      "productName": "Nürnberg - Antalya-Region, Türkei - Atalla Hotel",
+      "hotelName": "Atalla Hotel",
+      "destinationCity": "Antalya-Region, Türkei",
+      "merchantProductId": "NUE__ANTALYA_429589_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 172.6
+    },
+    {
+      "ibeId": "429589",
+      "productName": "Nürnberg - Türkische Riviera - Atalla Hotel",
+      "hotelName": "Atalla Hotel",
+      "destinationCity": "Türkische Riviera",
+      "merchantProductId": "NUE__TURKISH_RIVIERA_429589_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 172.6
+    },
+    {
+      "ibeId": "2414234",
+      "productName": "Hamburg - Cambridge, Cambridgeshire - Holiday Inn Express CAMBRIDGE by IHG",
+      "hotelName": "Holiday Inn Express CAMBRIDGE by IHG",
+      "destinationCity": "Cambridge, Cambridgeshire",
+      "merchantProductId": "HAM_141648__2414234_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 172.19
+    },
+    {
+      "ibeId": "59150",
+      "productName": "Frankfurt - Lerida - B&B HOTEL Ciudad de Lleida",
+      "hotelName": "B&B HOTEL Ciudad de Lleida",
+      "destinationCity": "Lerida",
+      "merchantProductId": "FRA_162879__59150_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 172.53
+    },
+    {
+      "ibeId": "59150",
+      "productName": "Frankfurt - Katalonien - B&B HOTEL Ciudad de Lleida",
+      "hotelName": "B&B HOTEL Ciudad de Lleida",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "FRA__CATALONIA_59150_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 172.53
+    },
+    {
+      "ibeId": "2732021",
+      "productName": "Memmingen - Sardinien, Italien - Alghero Vacanze Hotel",
+      "hotelName": "Alghero Vacanze Hotel",
+      "destinationCity": "Sardinien, Italien",
+      "merchantProductId": "FMM__SARDEGNA_2732021_LASTMINUTE_2026-06-27_2026-06-29",
+      "price": 172.72
+    },
+    {
+      "ibeId": "2732021",
+      "productName": "Memmingen - Nordsardinien – Region Alghero, Italien - Alghero Vacanze Hotel",
+      "hotelName": "Alghero Vacanze Hotel",
+      "destinationCity": "Nordsardinien – Region Alghero, Italien",
+      "merchantProductId": "FMM__SARDEGNA_OVEST_2732021_LASTMINUTE_2026-06-27_2026-06-29",
+      "price": 172.72
+    },
+    {
+      "ibeId": "2642765",
+      "productName": "Nürnberg - Antalya-Region, Türkei - Kleopatra Life Hotel",
+      "hotelName": "Kleopatra Life Hotel",
+      "destinationCity": "Antalya-Region, Türkei",
+      "merchantProductId": "NUE__ANTALYA_2642765_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 173.02
+    },
+    {
+      "ibeId": "2642765",
+      "productName": "Nürnberg - Türkische Riviera - Kleopatra Life Hotel",
+      "hotelName": "Kleopatra Life Hotel",
+      "destinationCity": "Türkische Riviera",
+      "merchantProductId": "NUE__TURKISH_RIVIERA_2642765_LASTMINUTE_2027-02-28_2027-03-02",
+      "price": 173.02
+    },
+    {
+      "ibeId": "330012",
+      "productName": "München - Rom - Seven Hills Camping Village",
+      "hotelName": "Seven Hills Camping Village",
+      "destinationCity": "Rom",
+      "merchantProductId": "MUC_131028__330012_LASTMINUTE_2026-09-09_2026-09-12",
+      "price": 173.6
+    },
+    {
+      "ibeId": "172313",
+      "productName": "Düsseldorf - Katalonien - Vintage Hotel Mercedes",
+      "hotelName": "Vintage Hotel Mercedes",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "DUS__CATALONIA_172313_LASTMINUTE_2026-09-27_2026-09-29",
+      "price": 173.11
+    },
+    {
+      "ibeId": "330012",
+      "productName": "Hamburg - Rom - Seven Hills Camping Village",
+      "hotelName": "Seven Hills Camping Village",
+      "destinationCity": "Rom",
+      "merchantProductId": "HAM_131028__330012_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 173.52
+    },
+    {
+      "ibeId": "4944292",
+      "productName": "Memmingen - Ksamil - Mihasi Apartments",
+      "hotelName": "Mihasi Apartments",
+      "destinationCity": "Ksamil",
+      "merchantProductId": "FMM_259932__4944292_LASTMINUTE_2026-06-13_2026-06-17",
+      "price": 173.59
+    },
+    {
+      "ibeId": "10034032",
+      "productName": "Hamburg - Croydon - ibis London Sutton Point",
+      "hotelName": "ibis London Sutton Point",
+      "destinationCity": "Croydon",
+      "merchantProductId": "HAM_141657__10034032_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 174.25
+    },
+    {
+      "ibeId": "2627739",
+      "productName": "Hamburg - Barcelona - Hotel El Castell",
+      "hotelName": "Hotel El Castell",
+      "destinationCity": "Barcelona",
+      "merchantProductId": "HAM_136284__2627739_LASTMINUTE_2026-12-10_2026-12-12",
+      "price": 174.33
+    },
+    {
+      "ibeId": "2627739",
+      "productName": "Hamburg - Katalonien - Hotel El Castell",
+      "hotelName": "Hotel El Castell",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "HAM__CATALONIA_2627739_LASTMINUTE_2026-12-10_2026-12-12",
+      "price": 174.33
+    },
+    {
+      "ibeId": "10208981",
+      "productName": "Hamburg - Ilford - Premier Inn London Romford Town Centre",
+      "hotelName": "Premier Inn London Romford Town Centre",
+      "destinationCity": "Ilford",
+      "merchantProductId": "HAM_142110__10208981_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 174.36
+    },
+    {
+      "ibeId": "92789",
+      "productName": "Nürnberg - Mallorca, Spanien - Petit Hotel Hostatgeria Sant Salvador",
+      "hotelName": "Petit Hotel Hostatgeria Sant Salvador",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "NUE__MAIORCA_92789_LASTMINUTE_2026-06-30_2026-07-02",
+      "price": 174.66
+    },
+    {
+      "ibeId": "12584926",
+      "productName": "Düsseldorf - Lerida - B&B HOTEL Lleida",
+      "hotelName": "B&B HOTEL Lleida",
+      "destinationCity": "Lerida",
+      "merchantProductId": "DUS_162879__12584926_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 174.67
+    },
+    {
+      "ibeId": "194549",
+      "productName": "Köln Bonn - Mailand - Hotel Europa",
+      "hotelName": "Hotel Europa",
+      "destinationCity": "Mailand",
+      "merchantProductId": "CGN_130522__194549_LASTMINUTE_2026-07-13_2026-07-15",
+      "price": 174.86
+    },
+    {
+      "ibeId": "4448284",
+      "productName": "Memmingen - Sarandë - Bebi Hotel And Apartments",
+      "hotelName": "Bebi Hotel And Apartments",
+      "destinationCity": "Sarandë",
+      "merchantProductId": "FMM_180539__4448284_LASTMINUTE_2026-06-13_2026-06-17",
+      "price": 175.14
+    },
+    {
+      "ibeId": "5304039",
+      "productName": "Düsseldorf - Costa Barcelona, Spanien - Hostal Casa Torrent",
+      "hotelName": "Hostal Casa Torrent",
+      "destinationCity": "Costa Barcelona, Spanien",
+      "merchantProductId": "DUS__COSTA_BARCELONA_5304039_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 175.23
+    },
+    {
+      "ibeId": "4539654",
+      "productName": "Hamburg - Ilford - Travelodge London Chigwell",
+      "hotelName": "Travelodge London Chigwell",
+      "destinationCity": "Ilford",
+      "merchantProductId": "HAM_142110__4539654_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 175.31
+    },
+    {
+      "ibeId": "9059730",
+      "productName": "Hamburg - Croydon - Travelodge Caterham Whyteleafe",
+      "hotelName": "Travelodge Caterham Whyteleafe",
+      "destinationCity": "Croydon",
+      "merchantProductId": "HAM_141657__9059730_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 175.44
+    },
+    {
+      "ibeId": "1551956",
+      "productName": "Frankfurt - Istanbul - New Fatih Hotel",
+      "hotelName": "New Fatih Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "FRA_153601__1551956_LASTMINUTE_2026-06-14_2026-06-16",
+      "price": 175.63
+    },
+    {
+      "ibeId": "10292165",
+      "productName": "Memmingen - Sarandë - Relax Mea Hotel",
+      "hotelName": "Relax Mea Hotel",
+      "destinationCity": "Sarandë",
+      "merchantProductId": "FMM_180539__10292165_LASTMINUTE_2026-06-13_2026-06-17",
+      "price": 175.76
+    },
+    {
+      "ibeId": "23537",
+      "productName": "Köln Bonn - Mailand - Hotel Molise 2",
+      "hotelName": "Hotel Molise 2",
+      "destinationCity": "Mailand",
+      "merchantProductId": "CGN_130522__23537_LASTMINUTE_2026-07-13_2026-07-15",
+      "price": 175.94
+    },
+    {
+      "ibeId": "7355642",
+      "productName": "Frankfurt - Istanbul - The Lola Hotel",
+      "hotelName": "The Lola Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "FRA_153601__7355642_LASTMINUTE_2026-06-14_2026-06-16",
+      "price": 176.03
+    },
+    {
+      "ibeId": "8147149",
+      "productName": "Frankfurt - Ksamil - Green Garden Villa",
+      "hotelName": "Green Garden Villa",
+      "destinationCity": "Ksamil",
+      "merchantProductId": "FRA_259932__8147149_LASTMINUTE_2026-09-30_2026-10-04",
+      "price": 176.34
+    },
+    {
+      "ibeId": "2628393",
+      "productName": "Stuttgart - Budapest - Villa Kristal Hotel",
+      "hotelName": "Villa Kristal Hotel",
+      "destinationCity": "Budapest",
+      "merchantProductId": "STR_153870__2628393_LASTMINUTE_2027-04-23_2027-04-26",
+      "price": 176.36
+    },
+    {
+      "ibeId": "52536",
+      "productName": "Stuttgart - Budapest - Equity Point Budapest",
+      "hotelName": "Equity Point Budapest",
+      "destinationCity": "Budapest",
+      "merchantProductId": "STR_153870__52536_LASTMINUTE_2027-04-23_2027-04-26",
+      "price": 176.38
+    },
+    {
+      "ibeId": "5525705",
+      "productName": "Berlin - Istanbul - Demare Hotel",
+      "hotelName": "Demare Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "BER_153601__5525705_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 176.84
+    },
+    {
+      "ibeId": "7289170",
+      "productName": "Memmingen - Neapel, Italien - Il Cuore di Napoli",
+      "hotelName": "Il Cuore di Napoli",
+      "destinationCity": "Neapel, Italien",
+      "merchantProductId": "FMM__NAPLES_FR_7289170_LASTMINUTE_2026-08-06_2026-08-09",
+      "price": 176.84
+    },
+    {
+      "ibeId": "100186876",
+      "productName": "Karlsruhe Baden Baden - Vlorë - Olivet Hotel",
+      "hotelName": "Olivet Hotel",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "FKB_161895__100186876_LASTMINUTE_2026-06-24_2026-06-28",
+      "price": 176.85
+    },
+    {
+      "ibeId": "6124042",
+      "productName": "Düsseldorf - Lissabon - O Elétrico Guesthouse",
+      "hotelName": "O Elétrico Guesthouse",
+      "destinationCity": "Lissabon",
+      "merchantProductId": "DUS_150683__6124042_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 176.97
+    },
+    {
+      "ibeId": "6124042",
+      "productName": "Düsseldorf - Lissabon und Küste, Portugal - O Elétrico Guesthouse",
+      "hotelName": "O Elétrico Guesthouse",
+      "destinationCity": "Lissabon und Küste, Portugal",
+      "merchantProductId": "DUS__LISSABON_UND_KUSTE_6124042_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 176.97
+    },
+    {
+      "ibeId": "92695",
+      "productName": "Berlin - Katalonien - Apartaments Els Llorers",
+      "hotelName": "Apartaments Els Llorers",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "BER__CATALONIA_92695_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 177.13
+    },
+    {
+      "ibeId": "92695",
+      "productName": "Berlin - Costa Brava, Spanien - Apartaments Els Llorers",
+      "hotelName": "Apartaments Els Llorers",
+      "destinationCity": "Costa Brava, Spanien",
+      "merchantProductId": "BER__COSTA_BRAVA_92695_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 177.13
+    },
+    {
+      "ibeId": "847465",
+      "productName": "Berlin - Mallorca, Spanien - Villa Palmer",
+      "hotelName": "Villa Palmer",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "BER__MAIORCA_847465_LASTMINUTE_2026-11-20_2026-11-22",
+      "price": 177.43
+    },
+    {
+      "ibeId": "649597",
+      "productName": "Berlin - Venedig - Camping Serenissima",
+      "hotelName": "Camping Serenissima",
+      "destinationCity": "Venedig",
+      "merchantProductId": "BER_130975__649597_LASTMINUTE_2026-08-24_2026-08-27",
+      "price": 177.69
+    },
+    {
+      "ibeId": "649597",
+      "productName": "Berlin - Venedig, Italien - Camping Serenissima",
+      "hotelName": "Camping Serenissima",
+      "destinationCity": "Venedig, Italien",
+      "merchantProductId": "BER__VENEZIA_649597_LASTMINUTE_2026-08-24_2026-08-27",
+      "price": 177.69
+    },
+    {
+      "ibeId": "15315885",
+      "productName": "Leipzig Halle - Türkische Riviera - Port Liman Apart",
+      "hotelName": "Port Liman Apart",
+      "destinationCity": "Türkische Riviera",
+      "merchantProductId": "LEJ__TURKISH_RIVIERA_15315885_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 177.99
+    },
+    {
+      "ibeId": "15315885",
+      "productName": "Leipzig Halle - Antalya-Region, Türkei - Port Liman Apart",
+      "hotelName": "Port Liman Apart",
+      "destinationCity": "Antalya-Region, Türkei",
+      "merchantProductId": "LEJ__ANTALYA_15315885_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 177.99
+    },
+    {
+      "ibeId": "847465",
+      "productName": "Memmingen - Mallorca, Spanien - Villa Palmer",
+      "hotelName": "Villa Palmer",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "FMM__MAIORCA_847465_LASTMINUTE_2026-11-27_2026-11-29",
+      "price": 178.17
+    },
+    {
+      "ibeId": "14131917",
+      "productName": "Berlin - Istanbul - Rota Star Hotel Beyoğlu",
+      "hotelName": "Rota Star Hotel Beyoğlu",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "BER_153601__14131917_LASTMINUTE_2026-06-13_2026-06-16",
+      "price": 178.21
+    },
+    {
+      "ibeId": "12487833",
+      "productName": "Berlin - Paris Orly - Résidence Artemis Paris Orly Aéroport",
+      "hotelName": "Résidence Artemis Paris Orly Aéroport",
+      "destinationCity": "Paris Orly",
+      "merchantProductId": "BER_162761__12487833_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 178.53
+    },
+    {
+      "ibeId": "8147149",
+      "productName": "Dortmund - Ksamil - Green Garden Villa",
+      "hotelName": "Green Garden Villa",
+      "destinationCity": "Ksamil",
+      "merchantProductId": "DTM_259932__8147149_LASTMINUTE_2026-09-21_2026-09-25",
+      "price": 178.65
+    },
+    {
+      "ibeId": "14061899",
+      "productName": "Berlin - Istanbul - R&W SUİTES",
+      "hotelName": "R&W SUİTES",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "BER_153601__14061899_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 178.72
+    },
+    {
+      "ibeId": "4618137",
+      "productName": "Berlin - Istanbul - Riverland Suites Apart Hotel",
+      "hotelName": "Riverland Suites Apart Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "BER_153601__4618137_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 178.76
+    },
+    {
+      "ibeId": "5795843",
+      "productName": "Berlin - Istanbul - Marpalace Hotel",
+      "hotelName": "Marpalace Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "BER_153601__5795843_LASTMINUTE_2026-06-13_2026-06-16",
+      "price": 179.12
+    },
+    {
+      "ibeId": "10034032",
+      "productName": "Frankfurt - Croydon - ibis London Sutton Point",
+      "hotelName": "ibis London Sutton Point",
+      "destinationCity": "Croydon",
+      "merchantProductId": "FRA_141657__10034032_LASTMINUTE_2026-08-21_2026-08-24",
+      "price": 179.32
+    },
+    {
+      "ibeId": "12089198",
+      "productName": "Berlin - Istanbul - Days Inn by Wyndham Istanbul Arnavutkoy",
+      "hotelName": "Days Inn by Wyndham Istanbul Arnavutkoy",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "BER_153601__12089198_LASTMINUTE_2026-06-13_2026-06-16",
+      "price": 179.38
+    },
+    {
+      "ibeId": "6107585",
+      "productName": "Frankfurt - Istanbul - HOTEL MİKLAGORD",
+      "hotelName": "HOTEL MİKLAGORD",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "FRA_153601__6107585_LASTMINUTE_2026-06-14_2026-06-16",
+      "price": 179.58
+    },
+    {
+      "ibeId": "5886303",
+      "productName": "Berlin - Istanbul - Hotel Megaron",
+      "hotelName": "Hotel Megaron",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "BER_153601__5886303_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 179.75
+    },
+    {
+      "ibeId": "12089198",
+      "productName": "Stuttgart - Istanbul - Days Inn by Wyndham Istanbul Arnavutkoy",
+      "hotelName": "Days Inn by Wyndham Istanbul Arnavutkoy",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "STR_153601__12089198_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 180.29
+    },
+    {
+      "ibeId": "13016913",
+      "productName": "Frankfurt - Istanbul - The Red Tent Grand Suites",
+      "hotelName": "The Red Tent Grand Suites",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "FRA_153601__13016913_LASTMINUTE_2026-06-14_2026-06-16",
+      "price": 180.42
+    },
+    {
+      "ibeId": "10122147",
+      "productName": "Hamburg - Cambridge, Cambridgeshire - Hyatt Centric Cambridge",
+      "hotelName": "Hyatt Centric Cambridge",
+      "destinationCity": "Cambridge, Cambridgeshire",
+      "merchantProductId": "HAM_141648__10122147_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 180.54
+    },
+    {
+      "ibeId": "5525705",
+      "productName": "Frankfurt - Istanbul - Demare Hotel",
+      "hotelName": "Demare Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "FRA_153601__5525705_LASTMINUTE_2026-06-14_2026-06-16",
+      "price": 180.56
+    },
+    {
+      "ibeId": "11963193",
+      "productName": "Stuttgart - Istanbul - Heaven Inn Airport Hotel",
+      "hotelName": "Heaven Inn Airport Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "STR_153601__11963193_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 180.63
+    },
+    {
+      "ibeId": "10269876",
+      "productName": "Frankfurt - Istanbul - Medusa Apart Hotel",
+      "hotelName": "Medusa Apart Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "FRA_153601__10269876_LASTMINUTE_2026-06-14_2026-06-16",
+      "price": 180.76
+    },
+    {
+      "ibeId": "1551956",
+      "productName": "Stuttgart - Istanbul - New Fatih Hotel",
+      "hotelName": "New Fatih Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "STR_153601__1551956_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 180.88
+    },
+    {
+      "ibeId": "92482",
+      "productName": "Düsseldorf - Girona - B&B HOTEL Girona 3",
+      "hotelName": "B&B HOTEL Girona 3",
+      "destinationCity": "Girona",
+      "merchantProductId": "DUS_136845__92482_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 180.88
+    },
+    {
+      "ibeId": "496578",
+      "productName": "Düsseldorf - Malcesine - Hotel Gallo",
+      "hotelName": "Hotel Gallo",
+      "destinationCity": "Malcesine",
+      "merchantProductId": "DUS_131113__496578_LASTMINUTE_2026-10-06_2026-10-10",
+      "price": 180.95
+    },
+    {
+      "ibeId": "14131917",
+      "productName": "Frankfurt - Istanbul - Rota Star Hotel Beyoğlu",
+      "hotelName": "Rota Star Hotel Beyoğlu",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "FRA_153601__14131917_LASTMINUTE_2026-06-14_2026-06-16",
+      "price": 181
+    },
+    {
+      "ibeId": "1794874",
+      "productName": "Berlin - Costa Dorada, Spanien - Apolo Suites Rentalmar",
+      "hotelName": "Apolo Suites Rentalmar",
+      "destinationCity": "Costa Dorada, Spanien",
+      "merchantProductId": "BER__COSTA_DORADA_1794874_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 181.8
+    },
+    {
+      "ibeId": "5795843",
+      "productName": "Frankfurt - Istanbul - Marpalace Hotel",
+      "hotelName": "Marpalace Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "FRA_153601__5795843_LASTMINUTE_2026-06-14_2026-06-16",
+      "price": 181.44
+    },
+    {
+      "ibeId": "171038",
+      "productName": "Hamburg - Cambridge, Cambridgeshire - Cambridge Bar Hill Hotel, BW Signature Collection",
+      "hotelName": "Cambridge Bar Hill Hotel, BW Signature Collection",
+      "destinationCity": "Cambridge, Cambridgeshire",
+      "merchantProductId": "HAM_141648__171038_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 181.56
+    },
+    {
+      "ibeId": "8572533",
+      "productName": "Düsseldorf - Limone sul Garda - Residence Al Parco",
+      "hotelName": "Residence Al Parco",
+      "destinationCity": "Limone sul Garda",
+      "merchantProductId": "DUS_130672__8572533_LASTMINUTE_2026-10-06_2026-10-10",
+      "price": 181.58
+    },
+    {
+      "ibeId": "322625",
+      "productName": "Leipzig Halle - Türkische Riviera - Kleopatra blue hawai hotel",
+      "hotelName": "Kleopatra blue hawai hotel",
+      "destinationCity": "Türkische Riviera",
+      "merchantProductId": "LEJ__TURKISH_RIVIERA_322625_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 181.65
+    },
+    {
+      "ibeId": "322625",
+      "productName": "Leipzig Halle - Antalya-Region, Türkei - Kleopatra blue hawai hotel",
+      "hotelName": "Kleopatra blue hawai hotel",
+      "destinationCity": "Antalya-Region, Türkei",
+      "merchantProductId": "LEJ__ANTALYA_322625_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 181.65
+    },
+    {
+      "ibeId": "607792",
+      "productName": "Berlin - Venedig - hu Venezia Camping in Town",
+      "hotelName": "hu Venezia Camping in Town",
+      "destinationCity": "Venedig",
+      "merchantProductId": "BER_130975__607792_LASTMINUTE_2026-08-24_2026-08-27",
+      "price": 181.83
+    },
+    {
+      "ibeId": "607792",
+      "productName": "Berlin - Venedig, Italien - hu Venezia Camping in Town",
+      "hotelName": "hu Venezia Camping in Town",
+      "destinationCity": "Venedig, Italien",
+      "merchantProductId": "BER__VENEZIA_607792_LASTMINUTE_2026-08-24_2026-08-27",
+      "price": 181.83
+    },
+    {
+      "ibeId": "4618137",
+      "productName": "Frankfurt - Istanbul - Riverland Suites Apart Hotel",
+      "hotelName": "Riverland Suites Apart Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "FRA_153601__4618137_LASTMINUTE_2026-06-14_2026-06-16",
+      "price": 181.93
+    },
+    {
+      "ibeId": "3898203",
+      "productName": "Hamburg - Cambridge, Cambridgeshire - Premier Inn Cambridge - A14 J32",
+      "hotelName": "A14 J32",
+      "destinationCity": "Cambridge, Cambridgeshire",
+      "merchantProductId": "HAM_141648__3898203_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 181.93
+    },
+    {
+      "ibeId": "39574",
+      "productName": "Frankfurt - Croydon - Coulsdon Manor Hotel and Golf Club",
+      "hotelName": "Coulsdon Manor Hotel and Golf Club",
+      "destinationCity": "Croydon",
+      "merchantProductId": "FRA_141657__39574_LASTMINUTE_2026-08-21_2026-08-24",
+      "price": 182.12
+    },
+    {
+      "ibeId": "14656580",
+      "productName": "Memmingen - Belgrad - Hotel Dum by Muskat",
+      "hotelName": "Hotel Dum by Muskat",
+      "destinationCity": "Belgrad",
+      "merchantProductId": "FMM_160232__14656580_LASTMINUTE_2026-11-01_2026-11-04",
+      "price": 182.24
+    },
+    {
+      "ibeId": "318591",
+      "productName": "Frankfurt - Scilla - Grand Hotel Victoria",
+      "hotelName": "Grand Hotel Victoria",
+      "destinationCity": "Scilla",
+      "merchantProductId": "FRA_130938__318591_LASTMINUTE_2026-11-16_2026-11-20",
+      "price": 182.36
+    },
+    {
+      "ibeId": "13398705",
+      "productName": "Memmingen - London - Cosy Rooms",
+      "hotelName": "Cosy Rooms",
+      "destinationCity": "London",
+      "merchantProductId": "FMM_141660__13398705_LASTMINUTE_2026-11-06_2026-11-08",
+      "price": 182.65
+    },
+    {
+      "ibeId": "1756293",
+      "productName": "Memmingen - Sutomore - ApartHotel Stijovic",
+      "hotelName": "ApartHotel Stijovic",
+      "destinationCity": "Sutomore",
+      "merchantProductId": "FMM_170102__1756293_LASTMINUTE_2026-08-28_2026-08-30",
+      "price": 183.44
+    },
+    {
+      "ibeId": "10247005",
+      "productName": "Frankfurt - Ilford - Spark by Hilton London Romford",
+      "hotelName": "Spark by Hilton London Romford",
+      "destinationCity": "Ilford",
+      "merchantProductId": "FRA_142110__10247005_LASTMINUTE_2026-08-21_2026-08-24",
+      "price": 183.79
+    },
+    {
+      "ibeId": "346258",
+      "productName": "Dortmund - London - Britannia Inn Hotel",
+      "hotelName": "Britannia Inn Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "DTM_141660__346258_LASTMINUTE_2026-07-17_2026-07-19",
+      "price": 184.01
+    },
+    {
+      "ibeId": "326947",
+      "productName": "Berlin - Mailand - Enterprise Hotel Design & Boutique",
+      "hotelName": "Enterprise Hotel Design & Boutique",
+      "destinationCity": "Mailand",
+      "merchantProductId": "BER_130522__326947_LASTMINUTE_2026-08-23_2026-08-25",
+      "price": 184.04
+    },
+    {
+      "ibeId": "10269876",
+      "productName": "Stuttgart - Istanbul - Medusa Apart Hotel",
+      "hotelName": "Medusa Apart Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "STR_153601__10269876_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 184.24
+    },
+    {
+      "ibeId": "86469",
+      "productName": "Hamburg - Colchester - Holiday Inn COLCHESTER by IHG",
+      "hotelName": "Holiday Inn COLCHESTER by IHG",
+      "destinationCity": "Colchester",
+      "merchantProductId": "HAM_141688__86469_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 184.27
+    },
+    {
+      "ibeId": "39574",
+      "productName": "Hamburg - Croydon - Coulsdon Manor Hotel and Golf Club",
+      "hotelName": "Coulsdon Manor Hotel and Golf Club",
+      "destinationCity": "Croydon",
+      "merchantProductId": "HAM_141657__39574_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 184.42
+    },
+    {
+      "ibeId": "759435",
+      "productName": "Memmingen - Mallorca, Spanien - La Concha Soul Boutique Hotel",
+      "hotelName": "La Concha Soul Boutique Hotel",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "FMM__MAIORCA_759435_LASTMINUTE_2026-11-27_2026-11-29",
+      "price": 184.44
+    },
+    {
+      "ibeId": "670747",
+      "productName": "Stuttgart - Istanbul - İstanbul Dede Hotel",
+      "hotelName": "İstanbul Dede Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "STR_153601__670747_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 184.73
+    },
+    {
+      "ibeId": "10011766",
+      "productName": "Stuttgart - Istanbul - Melanj Airport Hotel",
+      "hotelName": "Melanj Airport Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "STR_153601__10011766_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 184.75
+    },
+    {
+      "ibeId": "3434390",
+      "productName": "Stuttgart - Istanbul - Royal İnci Hotel",
+      "hotelName": "Royal İnci Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "STR_153601__3434390_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 184.77
+    },
+    {
+      "ibeId": "330012",
+      "productName": "Frankfurt - Rom - Seven Hills Camping Village",
+      "hotelName": "Seven Hills Camping Village",
+      "destinationCity": "Rom",
+      "merchantProductId": "FRA_131028__330012_LASTMINUTE_2026-07-04_2026-07-07",
+      "price": 184.88
+    },
+    {
+      "ibeId": "5112016",
+      "productName": "Düsseldorf - Istanbul - Seven Days Hotel - İstanbul",
+      "hotelName": "İstanbul",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "DUS_153601__5112016_LASTMINUTE_2026-06-10_2026-06-13",
+      "price": 185.1
+    },
+    {
+      "ibeId": "9758134",
+      "productName": "Stuttgart - Istanbul - Fly And Stay Airport Hotel",
+      "hotelName": "Fly And Stay Airport Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "STR_153601__9758134_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 185.16
+    },
+    {
+      "ibeId": "59150",
+      "productName": "Düsseldorf - Lerida - B&B HOTEL Ciudad de Lleida",
+      "hotelName": "B&B HOTEL Ciudad de Lleida",
+      "destinationCity": "Lerida",
+      "merchantProductId": "DUS_162879__59150_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 185.19
+    },
+    {
+      "ibeId": "7355642",
+      "productName": "Hannover - Istanbul - The Lola Hotel",
+      "hotelName": "The Lola Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "HAJ_153601__7355642_LASTMINUTE_2026-12-10_2026-12-13",
+      "price": 185.28
+    },
+    {
+      "ibeId": "5886303",
+      "productName": "Hannover - Istanbul - Hotel Megaron",
+      "hotelName": "Hotel Megaron",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "HAJ_153601__5886303_LASTMINUTE_2026-12-10_2026-12-13",
+      "price": 185.62
+    },
+    {
+      "ibeId": "101510419",
+      "productName": "Memmingen - Borsh - Vila Florika Hotel",
+      "hotelName": "Vila Florika Hotel",
+      "destinationCity": "Borsh",
+      "merchantProductId": "FMM_275182__101510419_LASTMINUTE_2026-06-22_2026-06-26",
+      "price": 185.75
+    },
+    {
+      "ibeId": "10247005",
+      "productName": "Hamburg - Ilford - Spark by Hilton London Romford",
+      "hotelName": "Spark by Hilton London Romford",
+      "destinationCity": "Ilford",
+      "merchantProductId": "HAM_142110__10247005_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 186.33
+    },
+    {
+      "ibeId": "4085926",
+      "productName": "Hamburg - Ilford - McCafferty's Guesthouse Ilford",
+      "hotelName": "McCafferty's Guesthouse Ilford",
+      "destinationCity": "Ilford",
+      "merchantProductId": "HAM_142110__4085926_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 186.37
+    },
+    {
+      "ibeId": "7355642",
+      "productName": "München - Istanbul - The Lola Hotel",
+      "hotelName": "The Lola Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "MUC_153601__7355642_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 186.45
+    },
+    {
+      "ibeId": "10245367",
+      "productName": "Hamburg - Cambridge, Cambridgeshire - Holiday Inn Express CAMBRIDGE WEST - CAMBOURNE by IHG",
+      "hotelName": "CAMBOURNE by IHG",
+      "destinationCity": "Cambridge, Cambridgeshire",
+      "merchantProductId": "HAM_141648__10245367_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 186.47
+    },
+    {
+      "ibeId": "172043",
+      "productName": "München - Rom - GP Hotel",
+      "hotelName": "GP Hotel",
+      "destinationCity": "Rom",
+      "merchantProductId": "MUC_131028__172043_LASTMINUTE_2026-08-11_2026-08-13",
+      "price": 186.69
+    },
+    {
+      "ibeId": "9218797",
+      "productName": "München - Rom - Palazzo Sant'Antonio Roma",
+      "hotelName": "Palazzo Sant'Antonio Roma",
+      "destinationCity": "Rom",
+      "merchantProductId": "MUC_131028__9218797_LASTMINUTE_2026-08-11_2026-08-13",
+      "price": 187.27
+    },
+    {
+      "ibeId": "847918",
+      "productName": "Karlsruhe Baden Baden - Mallorca, Spanien - Hotel Cupidor",
+      "hotelName": "Hotel Cupidor",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "FKB__MAIORCA_847918_LASTMINUTE_2026-07-22_2026-07-24",
+      "price": 187.39
+    },
+    {
+      "ibeId": "13818331",
+      "productName": "Karlsruhe Baden Baden - Borsh - Friends House - Borsh Hotel",
+      "hotelName": "Borsh Hotel",
+      "destinationCity": "Borsh",
+      "merchantProductId": "FKB_275182__13818331_LASTMINUTE_2026-06-24_2026-06-28",
+      "price": 187.41
+    },
+    {
+      "ibeId": "2635193",
+      "productName": "Hannover - Istanbul - Sultan Palace Hotel",
+      "hotelName": "Sultan Palace Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "HAJ_153601__2635193_LASTMINUTE_2026-12-10_2026-12-13",
+      "price": 187.43
+    },
+    {
+      "ibeId": "123068",
+      "productName": "Hamburg - Cambridge, Cambridgeshire - Cambridge Belfry Hotel & Spa",
+      "hotelName": "Cambridge Belfry Hotel & Spa",
+      "destinationCity": "Cambridge, Cambridgeshire",
+      "merchantProductId": "HAM_141648__123068_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 187.56
+    },
+    {
+      "ibeId": "5112016",
+      "productName": "Hannover - Istanbul - Seven Days Hotel - İstanbul",
+      "hotelName": "İstanbul",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "HAJ_153601__5112016_LASTMINUTE_2026-12-10_2026-12-13",
+      "price": 187.62
+    },
+    {
+      "ibeId": "165028",
+      "productName": "Köln Bonn - Wien - Hotel Hadrigan",
+      "hotelName": "Hotel Hadrigan",
+      "destinationCity": "Wien",
+      "merchantProductId": "CGN_151210__165028_LASTMINUTE_2026-06-27_2026-06-29",
+      "price": 187.76
+    },
+    {
+      "ibeId": "174103",
+      "productName": "Hamburg - Clacton-On-Sea - Premier Inn Clacton-On-Sea",
+      "hotelName": "Premier Inn Clacton-On-Sea",
+      "destinationCity": "Clacton-On-Sea",
+      "merchantProductId": "HAM_142446__174103_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 188.12
+    },
+    {
+      "ibeId": "1682945",
+      "productName": "Düsseldorf - Istanbul - Sultanahmet La Petite Hotel",
+      "hotelName": "Sultanahmet La Petite Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "DUS_153601__1682945_LASTMINUTE_2026-06-10_2026-06-13",
+      "price": 188.61
+    },
+    {
+      "ibeId": "100186876",
+      "productName": "Karlsruhe Baden Baden - Albaniens Küste - Olivet Hotel",
+      "hotelName": "Olivet Hotel",
+      "destinationCity": "Albaniens Küste",
+      "merchantProductId": "FKB__ALBANIA_COAST_100186876_LASTMINUTE_2026-07-05_2026-07-08",
+      "price": 188.75
+    },
+    {
+      "ibeId": "100186876",
+      "productName": "Karlsruhe Baden Baden - Albanische Riviera - Olivet Hotel",
+      "hotelName": "Olivet Hotel",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "FKB__ALBANIAN_RIVIERA_100186876_LASTMINUTE_2026-07-05_2026-07-08",
+      "price": 188.75
+    },
+    {
+      "ibeId": "148514",
+      "productName": "Düsseldorf - Garda - Residenza Panorama",
+      "hotelName": "Residenza Panorama",
+      "destinationCity": "Garda",
+      "merchantProductId": "DUS_131082__148514_LASTMINUTE_2026-10-06_2026-10-10",
+      "price": 188.78
+    },
+    {
+      "ibeId": "1028124",
+      "productName": "Düsseldorf - Istanbul - Divani Ali Hotel",
+      "hotelName": "Divani Ali Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "DUS_153601__1028124_LASTMINUTE_2026-06-10_2026-06-13",
+      "price": 188.91
+    },
+    {
+      "ibeId": "5518893",
+      "productName": "Hannover - Istanbul - Honey Hotel",
+      "hotelName": "Honey Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "HAJ_153601__5518893_LASTMINUTE_2026-12-10_2026-12-13",
+      "price": 188.97
+    },
+    {
+      "ibeId": "10269876",
+      "productName": "Hannover - Istanbul - Medusa Apart Hotel",
+      "hotelName": "Medusa Apart Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "HAJ_153601__10269876_LASTMINUTE_2026-09-15_2026-09-18",
+      "price": 189.01
+    },
+    {
+      "ibeId": "9393774",
+      "productName": "Memmingen - Vlorë - New Donantelo Hotel",
+      "hotelName": "New Donantelo Hotel",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "FMM_161895__9393774_LASTMINUTE_2026-06-13_2026-06-17",
+      "price": 189.12
+    },
+    {
+      "ibeId": "55615",
+      "productName": "Berlin - Katalonien - Hotel 153",
+      "hotelName": "Hotel 153",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "BER__CATALONIA_55615_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 189.14
+    },
+    {
+      "ibeId": "55615",
+      "productName": "Berlin - Costa Barcelona, Spanien - Hotel 153",
+      "hotelName": "Hotel 153",
+      "destinationCity": "Costa Barcelona, Spanien",
+      "merchantProductId": "BER__COSTA_BARCELONA_55615_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 189.14
+    },
+    {
+      "ibeId": "55615",
+      "productName": "Berlin - Costa del Garraf, Spanien - Hotel 153",
+      "hotelName": "Hotel 153",
+      "destinationCity": "Costa del Garraf, Spanien",
+      "merchantProductId": "BER__COSTA_DEL_GARRAF_55615_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 189.14
+    },
+    {
+      "ibeId": "147995",
+      "productName": "Düsseldorf - Peschiera del Garda - Hotel Rivus",
+      "hotelName": "Hotel Rivus",
+      "destinationCity": "Peschiera del Garda",
+      "merchantProductId": "DUS_131154__147995_LASTMINUTE_2026-10-06_2026-10-10",
+      "price": 189.44
+    },
+    {
+      "ibeId": "468919",
+      "productName": "Dortmund - London - Arinza Hotel, London Ilford",
+      "hotelName": "Arinza Hotel, London Ilford",
+      "destinationCity": "London",
+      "merchantProductId": "DTM_141660__468919_LASTMINUTE_2026-07-17_2026-07-19",
+      "price": 189.47
+    },
+    {
+      "ibeId": "2001282",
+      "productName": "München - Rom - Hotel IMPERATORI",
+      "hotelName": "Hotel IMPERATORI",
+      "destinationCity": "Rom",
+      "merchantProductId": "MUC_131028__2001282_LASTMINUTE_2026-08-11_2026-08-13",
+      "price": 189.54
+    },
+    {
+      "ibeId": "759435",
+      "productName": "Berlin - Mallorca, Spanien - La Concha Soul Boutique Hotel",
+      "hotelName": "La Concha Soul Boutique Hotel",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "BER__MAIORCA_759435_LASTMINUTE_2026-11-20_2026-11-22",
+      "price": 189.86
+    },
+    {
+      "ibeId": "621198",
+      "productName": "München - Rom - Ibis Roma Fiera",
+      "hotelName": "Ibis Roma Fiera",
+      "destinationCity": "Rom",
+      "merchantProductId": "MUC_131028__621198_LASTMINUTE_2026-08-14_2026-08-16",
+      "price": 189.88
+    },
+    {
+      "ibeId": "2781155",
+      "productName": "Memmingen - London - Lucky 8 Hotel",
+      "hotelName": "Lucky 8 Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "FMM_141660__2781155_LASTMINUTE_2026-11-06_2026-11-08",
+      "price": 189.96
+    },
+    {
+      "ibeId": "2910613",
+      "productName": "München - Rom - Hotel Bella Vita",
+      "hotelName": "Hotel Bella Vita",
+      "destinationCity": "Rom",
+      "merchantProductId": "MUC_131028__2910613_LASTMINUTE_2026-08-11_2026-08-13",
+      "price": 190.04
+    },
+    {
+      "ibeId": "1029174",
+      "productName": "Frankfurt - Lerida - Zenit Lleida",
+      "hotelName": "Zenit Lleida",
+      "destinationCity": "Lerida",
+      "merchantProductId": "FRA_162879__1029174_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 190.9
+    },
+    {
+      "ibeId": "1029174",
+      "productName": "Frankfurt - Katalonien - Zenit Lleida",
+      "hotelName": "Zenit Lleida",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "FRA__CATALONIA_1029174_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 190.9
+    },
+    {
+      "ibeId": "39786",
+      "productName": "Hamburg - Clacton-On-Sea - Esplanade Hotel - Clacton On Sea, Beachfront Hotel by OYO",
+      "hotelName": "Clacton On Sea, Beachfront Hotel by OYO",
+      "destinationCity": "Clacton-On-Sea",
+      "merchantProductId": "HAM_142446__39786_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 190.14
+    },
+    {
+      "ibeId": "5886303",
+      "productName": "München - Istanbul - Hotel Megaron",
+      "hotelName": "Hotel Megaron",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "MUC_153601__5886303_LASTMINUTE_2026-06-15_2026-06-18",
+      "price": 190.29
+    },
+    {
+      "ibeId": "253505",
+      "productName": "Frankfurt - Rom - Fabulous village",
+      "hotelName": "Fabulous village",
+      "destinationCity": "Rom",
+      "merchantProductId": "FRA_131028__253505_LASTMINUTE_2026-11-26_2026-11-28",
+      "price": 190.42
+    },
+    {
+      "ibeId": "12467706",
+      "productName": "Berlin - Paris Orly - Résidence Hermès Paris Orly Aéroport",
+      "hotelName": "Résidence Hermès Paris Orly Aéroport",
+      "destinationCity": "Paris Orly",
+      "merchantProductId": "BER_162761__12467706_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 190.93
+    },
+    {
+      "ibeId": "171276",
+      "productName": "Berlin - Paris Charles de Gaulle - Campanile Paris CDG Airport Villepinte",
+      "hotelName": "Campanile Paris CDG Airport Villepinte",
+      "destinationCity": "Paris Charles de Gaulle",
+      "merchantProductId": "BER_163023__171276_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 190.93
+    },
+    {
+      "ibeId": "863371",
+      "productName": "Hamburg - Colchester - The North Hill Hotel, Colchester",
+      "hotelName": "The North Hill Hotel, Colchester",
+      "destinationCity": "Colchester",
+      "merchantProductId": "HAM_141688__863371_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 191.8
+    },
+    {
+      "ibeId": "1846888",
+      "productName": "Bremen - London - Dreams Hotel",
+      "hotelName": "Dreams Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "BRE_141660__1846888_LASTMINUTE_2026-08-19_2026-08-22",
+      "price": 191.9
+    },
+    {
+      "ibeId": "4085926",
+      "productName": "Frankfurt - Ilford - McCafferty's Guesthouse Ilford",
+      "hotelName": "McCafferty's Guesthouse Ilford",
+      "destinationCity": "Ilford",
+      "merchantProductId": "FRA_142110__4085926_LASTMINUTE_2026-08-21_2026-08-24",
+      "price": 191.34
+    },
+    {
+      "ibeId": "5525705",
+      "productName": "Düsseldorf - Istanbul - Demare Hotel",
+      "hotelName": "Demare Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "DUS_153601__5525705_LASTMINUTE_2026-06-15_2026-06-18",
+      "price": 191.35
+    },
+    {
+      "ibeId": "14904157",
+      "productName": "Hamburg - Colchester - Ryegate House Colchester",
+      "hotelName": "Ryegate House Colchester",
+      "destinationCity": "Colchester",
+      "merchantProductId": "HAM_141688__14904157_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 191.73
+    },
+    {
+      "ibeId": "894526",
+      "productName": "Memmingen - London - Best Western Greater London",
+      "hotelName": "Best Western Greater London",
+      "destinationCity": "London",
+      "merchantProductId": "FMM_141660__894526_LASTMINUTE_2026-11-06_2026-11-08",
+      "price": 191.86
+    },
+    {
+      "ibeId": "4944292",
+      "productName": "Karlsruhe Baden Baden - Ksamil - Mihasi Apartments",
+      "hotelName": "Mihasi Apartments",
+      "destinationCity": "Ksamil",
+      "merchantProductId": "FKB_259932__4944292_LASTMINUTE_2026-06-24_2026-06-28",
+      "price": 191.99
+    },
+    {
+      "ibeId": "5525705",
+      "productName": "München - Istanbul - Demare Hotel",
+      "hotelName": "Demare Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "MUC_153601__5525705_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 192.01
+    },
+    {
+      "ibeId": "104392",
+      "productName": "Hamburg - Colchester - Best Western The Rose & Crown Hotel",
+      "hotelName": "Best Western The Rose & Crown Hotel",
+      "destinationCity": "Colchester",
+      "merchantProductId": "HAM_141688__104392_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 192.05
+    },
+    {
+      "ibeId": "870708",
+      "productName": "Friedrichshafen - Mallorca, Spanien - Hotel Bella Mar",
+      "hotelName": "Hotel Bella Mar",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "FDH__MAIORCA_870708_LASTMINUTE_2026-06-15_2026-06-18",
+      "price": 192.09
+    },
+    {
+      "ibeId": "2086673",
+      "productName": "Düsseldorf - Istanbul - Rozza Hotel",
+      "hotelName": "Rozza Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "DUS_153601__2086673_LASTMINUTE_2026-06-10_2026-06-13",
+      "price": 192.27
+    },
+    {
+      "ibeId": "344592",
+      "productName": "Düsseldorf - Istanbul - Pearl Hotel İstanbul",
+      "hotelName": "Pearl Hotel İstanbul",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "DUS_153601__344592_LASTMINUTE_2026-06-10_2026-06-13",
+      "price": 192.27
+    },
+    {
+      "ibeId": "13818331",
+      "productName": "Karlsruhe Baden Baden - Albanische Riviera - Friends House - Borsh Hotel",
+      "hotelName": "Borsh Hotel",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "FKB__ALBANIAN_RIVIERA_13818331_LASTMINUTE_2026-07-05_2026-07-08",
+      "price": 192.36
+    },
+    {
+      "ibeId": "58991",
+      "productName": "Frankfurt - Barcelona - Travelodge Barcelona del Vallès",
+      "hotelName": "Travelodge Barcelona del Vallès",
+      "destinationCity": "Barcelona",
+      "merchantProductId": "FRA_136284__58991_LASTMINUTE_2026-08-05_2026-08-07",
+      "price": 192.49
+    },
+    {
+      "ibeId": "5526070",
+      "productName": "Düsseldorf - Edinburgh - Burntisland House",
+      "hotelName": "Burntisland House",
+      "destinationCity": "Edinburgh",
+      "merchantProductId": "DUS_141816__5526070_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 192.51
+    },
+    {
+      "ibeId": "5526070",
+      "productName": "Düsseldorf - Schottland, Vereinigtes Königreich - Burntisland House",
+      "hotelName": "Burntisland House",
+      "destinationCity": "Schottland, Vereinigtes Königreich",
+      "merchantProductId": "DUS__SCOTLAND_5526070_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 192.51
+    },
+    {
+      "ibeId": "7541212",
+      "productName": "Frankfurt - Albaniens Küste - CLASS Hotel",
+      "hotelName": "CLASS Hotel",
+      "destinationCity": "Albaniens Küste",
+      "merchantProductId": "FRA__ALBANIA_COAST_7541212_LASTMINUTE_2026-09-25_2026-09-28",
+      "price": 192.52
+    },
+    {
+      "ibeId": "7541212",
+      "productName": "Frankfurt - Albanische Riviera - CLASS Hotel",
+      "hotelName": "CLASS Hotel",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "FRA__ALBANIAN_RIVIERA_7541212_LASTMINUTE_2026-09-25_2026-09-28",
+      "price": 192.52
+    },
+    {
+      "ibeId": "1518335",
+      "productName": "Düsseldorf - Istanbul - TAXİM ELEGANCE SUİTES",
+      "hotelName": "TAXİM ELEGANCE SUİTES",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "DUS_153601__1518335_LASTMINUTE_2026-06-10_2026-06-13",
+      "price": 192.78
+    },
+    {
+      "ibeId": "924508",
+      "productName": "Frankfurt - Scilla - Albergo delle Rose",
+      "hotelName": "Albergo delle Rose",
+      "destinationCity": "Scilla",
+      "merchantProductId": "FRA_130938__924508_LASTMINUTE_2026-11-16_2026-11-20",
+      "price": 192.78
+    },
+    {
+      "ibeId": "2781155",
+      "productName": "Dortmund - London - Lucky 8 Hotel",
+      "hotelName": "Lucky 8 Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "DTM_141660__2781155_LASTMINUTE_2026-07-17_2026-07-19",
+      "price": 192.84
+    },
+    {
+      "ibeId": "74653",
+      "productName": "Hamburg - Colchester - The George Hotel Colchester",
+      "hotelName": "The George Hotel Colchester",
+      "destinationCity": "Colchester",
+      "merchantProductId": "HAM_141688__74653_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 192.84
+    },
+    {
+      "ibeId": "38412",
+      "productName": "Memmingen - London - Kingsland Hotel",
+      "hotelName": "Kingsland Hotel",
+      "destinationCity": "London",
+      "merchantProductId": "FMM_141660__38412_LASTMINUTE_2026-11-06_2026-11-08",
+      "price": 192.85
+    },
+    {
+      "ibeId": "253505",
+      "productName": "Berlin - Rom - Fabulous village",
+      "hotelName": "Fabulous village",
+      "destinationCity": "Rom",
+      "merchantProductId": "BER_131028__253505_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 192.88
+    },
+    {
+      "ibeId": "98714",
+      "productName": "Memmingen - Mallorca, Spanien - Apartamentos Vistasol",
+      "hotelName": "Apartamentos Vistasol",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "FMM__MAIORCA_98714_LASTMINUTE_2026-11-27_2026-11-29",
+      "price": 192.88
+    },
+    {
+      "ibeId": "1919334",
+      "productName": "Düsseldorf - Lerida - Hotel Real",
+      "hotelName": "Hotel Real",
+      "destinationCity": "Lerida",
+      "merchantProductId": "DUS_162879__1919334_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 192.96
+    },
+    {
+      "ibeId": "5548901",
+      "productName": "Düsseldorf - Istanbul - Chez Bore",
+      "hotelName": "Chez Bore",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "DUS_153601__5548901_LASTMINUTE_2026-06-10_2026-06-13",
+      "price": 193
+    },
+    {
+      "ibeId": "4481648",
+      "productName": "Köln Bonn - Brighton - Albany, Brighton & Hove",
+      "hotelName": "Albany, Brighton & Hove",
+      "destinationCity": "Brighton",
+      "merchantProductId": "CGN_141769__4481648_LASTMINUTE_2026-08-24_2026-08-27",
+      "price": 193.4
+    },
+    {
+      "ibeId": "641421",
+      "productName": "Berlin - Kreta, Griechenland - Astir Studios",
+      "hotelName": "Astir Studios",
+      "destinationCity": "Kreta, Griechenland",
+      "merchantProductId": "BER__CRETA_641421_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 193.9
+    },
+    {
+      "ibeId": "641421",
+      "productName": "Berlin - Kreta Ost -  Heraklion, Rethymno, Agios Nikolaos, Griechenland - Astir Studios",
+      "hotelName": "Astir Studios",
+      "destinationCity": "Kreta Ost -  Heraklion, Rethymno, Agios Nikolaos, Griechenland",
+      "merchantProductId": "BER__CRETE_EST_641421_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 193.9
+    },
+    {
+      "ibeId": "2629486",
+      "productName": "Köln Bonn - Bulgarien - Schwarzmeerküste - Hotel Palitra",
+      "hotelName": "Hotel Palitra",
+      "destinationCity": "Bulgarien - Schwarzmeerküste",
+      "merchantProductId": "CGN__BOURGAS_COAST_2629486_LASTMINUTE_2026-06-13_2026-06-15",
+      "price": 193.48
+    },
+    {
+      "ibeId": "159181",
+      "productName": "München - Rom - Aparthotel Colombo Roma",
+      "hotelName": "Aparthotel Colombo Roma",
+      "destinationCity": "Rom",
+      "merchantProductId": "MUC_131028__159181_LASTMINUTE_2026-08-11_2026-08-13",
+      "price": 193.55
+    },
+    {
+      "ibeId": "15378060",
+      "productName": "München - Rom - Tiber Suite",
+      "hotelName": "Tiber Suite",
+      "destinationCity": "Rom",
+      "merchantProductId": "MUC_131028__15378060_LASTMINUTE_2026-08-11_2026-08-13",
+      "price": 193.61
+    },
+    {
+      "ibeId": "2640906",
+      "productName": "Düsseldorf - Costa del Garraf, Spanien - Masd Mediterraneo Hotel Apartamentos Spa",
+      "hotelName": "Masd Mediterraneo Hotel Apartamentos Spa",
+      "destinationCity": "Costa del Garraf, Spanien",
+      "merchantProductId": "DUS__COSTA_DEL_GARRAF_2640906_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 193.68
+    },
+    {
+      "ibeId": "1075894",
+      "productName": "Köln Bonn - Wien - Hotel Viki",
+      "hotelName": "Hotel Viki",
+      "destinationCity": "Wien",
+      "merchantProductId": "CGN_151210__1075894_LASTMINUTE_2026-08-04_2026-08-06",
+      "price": 193.83
+    },
+    {
+      "ibeId": "1743708",
+      "productName": "Memmingen - Mallorca, Spanien - Santuari de Cura",
+      "hotelName": "Santuari de Cura",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "FMM__MAIORCA_1743708_LASTMINUTE_2026-06-30_2026-07-02",
+      "price": 193.93
+    },
+    {
+      "ibeId": "56154",
+      "productName": "Berlin - Mallorca, Spanien - Petit Hotel Hostatgeria La Victoria",
+      "hotelName": "Petit Hotel Hostatgeria La Victoria",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "BER__MAIORCA_56154_LASTMINUTE_2026-11-20_2026-11-22",
+      "price": 194.02
+    },
+    {
+      "ibeId": "196043",
+      "productName": "Memmingen - Chalkidiki, Griechenland - Olympic Kosma Hotel",
+      "hotelName": "Olympic Kosma Hotel",
+      "destinationCity": "Chalkidiki, Griechenland",
+      "merchantProductId": "FMM__HALKIDIKI_196043_LASTMINUTE_2026-09-30_2026-10-02",
+      "price": 194.08
+    },
+    {
+      "ibeId": "4618137",
+      "productName": "München - Istanbul - Riverland Suites Apart Hotel",
+      "hotelName": "Riverland Suites Apart Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "MUC_153601__4618137_LASTMINUTE_2026-06-15_2026-06-18",
+      "price": 194.54
+    },
+    {
+      "ibeId": "85107",
+      "productName": "Frankfurt - Girona - Hotel Palau de Girona",
+      "hotelName": "Hotel Palau de Girona",
+      "destinationCity": "Girona",
+      "merchantProductId": "FRA_136845__85107_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 194.68
+    },
+    {
+      "ibeId": "98234",
+      "productName": "Düsseldorf - Manchester - Manchester Airport Stanley Hotel by Belvilla",
+      "hotelName": "Manchester Airport Stanley Hotel by Belvilla",
+      "destinationCity": "Manchester",
+      "merchantProductId": "DUS_141646__98234_LASTMINUTE_2026-07-10_2026-07-12",
+      "price": 195.07
+    },
+    {
+      "ibeId": "194494",
+      "productName": "Dortmund - London - Central Hotel Golders Green",
+      "hotelName": "Central Hotel Golders Green",
+      "destinationCity": "London",
+      "merchantProductId": "DTM_141660__194494_LASTMINUTE_2026-09-04_2026-09-06",
+      "price": 195.2
+    },
+    {
+      "ibeId": "10905691",
+      "productName": "Berlin - Costa Dorada, Spanien - Alannia Salou",
+      "hotelName": "Alannia Salou",
+      "destinationCity": "Costa Dorada, Spanien",
+      "merchantProductId": "BER__COSTA_DORADA_10905691_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 195.4
+    },
+    {
+      "ibeId": "4011808",
+      "productName": "Bremen - London - Premier Inn London Eltham",
+      "hotelName": "Premier Inn London Eltham",
+      "destinationCity": "London",
+      "merchantProductId": "BRE_141660__4011808_LASTMINUTE_2026-08-19_2026-08-22",
+      "price": 195.43
+    },
+    {
+      "ibeId": "1624807",
+      "productName": "Karlsruhe Baden Baden - Vlorë - Hotel Ble Ble Vlore",
+      "hotelName": "Hotel Ble Ble Vlore",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "FKB_161895__1624807_LASTMINUTE_2026-06-11_2026-06-16",
+      "price": 195.56
+    },
+    {
+      "ibeId": "13352",
+      "productName": "Düsseldorf - Costa del Garraf, Spanien - Hotel SB BCN Events 4* Sup",
+      "hotelName": "Hotel SB BCN Events 4* Sup",
+      "destinationCity": "Costa del Garraf, Spanien",
+      "merchantProductId": "DUS__COSTA_DEL_GARRAF_13352_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 195.66
+    },
+    {
+      "ibeId": "5795843",
+      "productName": "München - Istanbul - Marpalace Hotel",
+      "hotelName": "Marpalace Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "MUC_153601__5795843_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 195.81
+    },
+    {
+      "ibeId": "2416733",
+      "productName": "Düsseldorf - Barcelona - Occidental Atenea Mar- Adults Only",
+      "hotelName": "Occidental Atenea Mar- Adults Only",
+      "destinationCity": "Barcelona",
+      "merchantProductId": "DUS_136284__2416733_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 195.98
+    },
+    {
+      "ibeId": "2416733",
+      "productName": "Düsseldorf - Katalonien - Occidental Atenea Mar- Adults Only",
+      "hotelName": "Occidental Atenea Mar- Adults Only",
+      "destinationCity": "Katalonien",
+      "merchantProductId": "DUS__CATALONIA_2416733_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 195.98
+    },
+    {
+      "ibeId": "8914304",
+      "productName": "München - Istanbul - Han Suite Hotel",
+      "hotelName": "Han Suite Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "MUC_153601__8914304_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 196.7
+    },
+    {
+      "ibeId": "151632",
+      "productName": "Berlin - Costa Brava, Spanien - Hotel Portofino",
+      "hotelName": "Hotel Portofino",
+      "destinationCity": "Costa Brava, Spanien",
+      "merchantProductId": "BER__COSTA_BRAVA_151632_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 196.21
+    },
+    {
+      "ibeId": "38048",
+      "productName": "Frankfurt - Luton - Holiday Inn Express LONDON - LUTON AIRPORT by IHG",
+      "hotelName": "LUTON AIRPORT by IHG",
+      "destinationCity": "Luton",
+      "merchantProductId": "FRA_141907__38048_LASTMINUTE_2026-08-21_2026-08-24",
+      "price": 196.32
+    },
+    {
+      "ibeId": "1994909",
+      "productName": "Berlin - Paris Orly - B&B HOTEL Orly Rungis Aéroport 3 étoiles",
+      "hotelName": "B&B HOTEL Orly Rungis Aéroport 3 étoiles",
+      "destinationCity": "Paris Orly",
+      "merchantProductId": "BER_162761__1994909_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 196.52
+    },
+    {
+      "ibeId": "1925703",
+      "productName": "Frankfurt - Lerida - Nastasi Hotel & Spa",
+      "hotelName": "Nastasi Hotel & Spa",
+      "destinationCity": "Lerida",
+      "merchantProductId": "FRA_162879__1925703_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 196.53
+    },
+    {
+      "ibeId": "100115472",
+      "productName": "München - Istanbul - Taksim Cinar Suit",
+      "hotelName": "Taksim Cinar Suit",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "MUC_153601__100115472_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 196.73
+    },
+    {
+      "ibeId": "253505",
+      "productName": "Hamburg - Rom - Fabulous village",
+      "hotelName": "Fabulous village",
+      "destinationCity": "Rom",
+      "merchantProductId": "HAM_131028__253505_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 196.92
+    },
+    {
+      "ibeId": "2631161",
+      "productName": "Memmingen - Norddalmatien, Kroatien - Hotel Porto",
+      "hotelName": "Hotel Porto",
+      "destinationCity": "Norddalmatien, Kroatien",
+      "merchantProductId": "FMM__NORTH_DALMATIA_ZADAR_AREA_2631161_LASTMINUTE_2026-07-29_2026-07-31",
+      "price": 197.12
+    },
+    {
+      "ibeId": "1028124",
+      "productName": "München - Istanbul - Divani Ali Hotel",
+      "hotelName": "Divani Ali Hotel",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "MUC_153601__1028124_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 197.13
+    },
+    {
+      "ibeId": "7517593",
+      "productName": "Frankfurt - Vlorë - Hotel Beler",
+      "hotelName": "Hotel Beler",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "FRA_161895__7517593_LASTMINUTE_2026-09-30_2026-10-04",
+      "price": 197.43
+    },
+    {
+      "ibeId": "820995",
+      "productName": "Memmingen - Chalkidiki, Griechenland - Olympic Kosma Hotel",
+      "hotelName": "Olympic Kosma Hotel",
+      "destinationCity": "Chalkidiki, Griechenland",
+      "merchantProductId": "FMM__HALKIDIKI_820995_LASTMINUTE_2026-09-30_2026-10-02",
+      "price": 197.67
+    },
+    {
+      "ibeId": "2618228",
+      "productName": "Düsseldorf - Istrien, Kroatien - Hotel Scaletta",
+      "hotelName": "Hotel Scaletta",
+      "destinationCity": "Istrien, Kroatien",
+      "merchantProductId": "DUS__ISTRIA_2618228_LASTMINUTE_2026-07-07_2026-07-09",
+      "price": 197.97
+    },
+    {
+      "ibeId": "2345381",
+      "productName": "Leipzig Halle - Lykische Küste, Türkei - Park Avrupa Hotel",
+      "hotelName": "Park Avrupa Hotel",
+      "destinationCity": "Lykische Küste, Türkei",
+      "merchantProductId": "LEJ__LYKISCHE_KUSTE_2345381_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 198.6
+    },
+    {
+      "ibeId": "85107",
+      "productName": "Düsseldorf - Girona - Hotel Palau de Girona",
+      "hotelName": "Hotel Palau de Girona",
+      "destinationCity": "Girona",
+      "merchantProductId": "DUS_136845__85107_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 198.49
+    },
+    {
+      "ibeId": "92789",
+      "productName": "Düsseldorf - Mallorca, Spanien - Petit Hotel Hostatgeria Sant Salvador",
+      "hotelName": "Petit Hotel Hostatgeria Sant Salvador",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "DUS__MAIORCA_92789_LASTMINUTE_2026-06-30_2026-07-02",
+      "price": 198.81
+    },
+    {
+      "ibeId": "12584926",
+      "productName": "Berlin - Lerida - B&B HOTEL Lleida",
+      "hotelName": "B&B HOTEL Lleida",
+      "destinationCity": "Lerida",
+      "merchantProductId": "BER_162879__12584926_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 198.96
+    },
+    {
+      "ibeId": "92877",
+      "productName": "Düsseldorf - Costa del Garraf, Spanien - Hotel Canal Olímpic",
+      "hotelName": "Hotel Canal Olímpic",
+      "destinationCity": "Costa del Garraf, Spanien",
+      "merchantProductId": "DUS__COSTA_DEL_GARRAF_92877_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 198.97
+    },
+    {
+      "ibeId": "7271199",
+      "productName": "München - Istanbul - THE LAİLA HOTEL",
+      "hotelName": "THE LAİLA HOTEL",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "MUC_153601__7271199_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 199.02
+    },
+    {
+      "ibeId": "50813",
+      "productName": "Berlin - Roissy-en-France - Campanile PRIME - Le Blanc Mesnil",
+      "hotelName": "Le Blanc Mesnil",
+      "destinationCity": "Roissy-en-France",
+      "merchantProductId": "BER_140949__50813_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 199.22
+    },
+    {
+      "ibeId": "670404",
+      "productName": "Frankfurt - Albaniens Küste - Hotel Saranda International",
+      "hotelName": "Hotel Saranda International",
+      "destinationCity": "Albaniens Küste",
+      "merchantProductId": "FRA__ALBANIA_COAST_670404_LASTMINUTE_2026-10-09_2026-10-11",
+      "price": 199.22
+    },
+    {
+      "ibeId": "670404",
+      "productName": "Frankfurt - Albanische Riviera - Hotel Saranda International",
+      "hotelName": "Hotel Saranda International",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "FRA__ALBANIAN_RIVIERA_670404_LASTMINUTE_2026-10-09_2026-10-11",
+      "price": 199.22
+    },
+    {
+      "ibeId": "246989",
+      "productName": "Köln Bonn - Wien - Senator Hotel Vienna",
+      "hotelName": "Senator Hotel Vienna",
+      "destinationCity": "Wien",
+      "merchantProductId": "CGN_151210__246989_LASTMINUTE_2026-08-04_2026-08-06",
+      "price": 199.25
+    },
+    {
+      "ibeId": "1624807",
+      "productName": "Karlsruhe Baden Baden - Albanische Riviera - Hotel Ble Ble Vlore",
+      "hotelName": "Hotel Ble Ble Vlore",
+      "destinationCity": "Albanische Riviera",
+      "merchantProductId": "FKB__ALBANIAN_RIVIERA_1624807_LASTMINUTE_2026-07-05_2026-07-08",
+      "price": 199.39
+    },
+    {
+      "ibeId": "235452",
+      "productName": "Nürnberg - Mallorca, Spanien - MLL Mediterranean Bay - Adults Only",
+      "hotelName": "Adults Only",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "NUE__MAIORCA_235452_LASTMINUTE_2026-06-23_2026-06-25",
+      "price": 199.48
+    },
+    {
+      "ibeId": "11439160",
+      "productName": "Memmingen - Costa Blanca, Spanien - Old Town La Estación",
+      "hotelName": "Old Town La Estación",
+      "destinationCity": "Costa Blanca, Spanien",
+      "merchantProductId": "FMM__COSTA_BLANCA_11439160_LASTMINUTE_2026-07-01_2026-07-04",
+      "price": 199.72
+    },
+    {
+      "ibeId": "1058567",
+      "productName": "Memmingen - Sarajevo - Hotel Story",
+      "hotelName": "Hotel Story",
+      "destinationCity": "Sarajevo",
+      "merchantProductId": "FMM_157766__1058567_LASTMINUTE_2026-06-19_2026-06-21",
+      "price": 199.81
+    },
+    {
+      "ibeId": "10660837",
+      "productName": "Memmingen - Caserta - Terra Muronis Hotel Diffuso",
+      "hotelName": "Terra Muronis Hotel Diffuso",
+      "destinationCity": "Caserta",
+      "merchantProductId": "FMM_130351__10660837_LASTMINUTE_2026-08-06_2026-08-09",
+      "price": 200.11
+    },
+    {
+      "ibeId": "14109260",
+      "productName": "München - Istanbul - Demhat Hotel Old City",
+      "hotelName": "Demhat Hotel Old City",
+      "destinationCity": "Istanbul",
+      "merchantProductId": "MUC_153601__14109260_LASTMINUTE_2026-06-16_2026-06-19",
+      "price": 200.17
+    },
+    {
+      "ibeId": "92482",
+      "productName": "Frankfurt - Girona - B&B HOTEL Girona 3",
+      "hotelName": "B&B HOTEL Girona 3",
+      "destinationCity": "Girona",
+      "merchantProductId": "FRA_136845__92482_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 200.33
+    },
+    {
+      "ibeId": "101701977",
+      "productName": "Frankfurt - Castelsardo - Acqua di Mare Residence",
+      "hotelName": "Acqua di Mare Residence",
+      "destinationCity": "Castelsardo",
+      "merchantProductId": "FRA_131045__101701977_LASTMINUTE_2026-06-22_2026-06-26",
+      "price": 200.52
+    },
+    {
+      "ibeId": "39726",
+      "productName": "Hamburg - Colchester - Delta Hotels by Marriott Colchester",
+      "hotelName": "Delta Hotels by Marriott Colchester",
+      "destinationCity": "Colchester",
+      "merchantProductId": "HAM_141688__39726_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 200.62
+    },
+    {
+      "ibeId": "8673104",
+      "productName": "Düsseldorf - La Spezia - Collimare Rooms & Sailing near 5 Terre",
+      "hotelName": "Collimare Rooms & Sailing near 5 Terre",
+      "destinationCity": "La Spezia",
+      "merchantProductId": "DUS_255579__8673104_LASTMINUTE_2027-05-10_2027-05-12",
+      "price": 200.92
+    },
+    {
+      "ibeId": "8673104",
+      "productName": "Düsseldorf - Ligurien, Italien - Collimare Rooms & Sailing near 5 Terre",
+      "hotelName": "Collimare Rooms & Sailing near 5 Terre",
+      "destinationCity": "Ligurien, Italien",
+      "merchantProductId": "DUS__LIGURIA_8673104_LASTMINUTE_2027-05-10_2027-05-12",
+      "price": 200.92
+    },
+    {
+      "ibeId": "8673104",
+      "productName": "Düsseldorf - Cinque Terre, Italien - Collimare Rooms & Sailing near 5 Terre",
+      "hotelName": "Collimare Rooms & Sailing near 5 Terre",
+      "destinationCity": "Cinque Terre, Italien",
+      "merchantProductId": "DUS__CINQUE_TERRE_8673104_LASTMINUTE_2027-05-10_2027-05-12",
+      "price": 200.92
+    },
+    {
+      "ibeId": "2491538",
+      "productName": "Düsseldorf - Girona - Best Western Premier CMC Girona",
+      "hotelName": "Best Western Premier CMC Girona",
+      "destinationCity": "Girona",
+      "merchantProductId": "DUS_136845__2491538_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 201.21
+    },
+    {
+      "ibeId": "246077",
+      "productName": "Frankfurt - Valencia - Flag Hotel Valencia",
+      "hotelName": "Flag Hotel Valencia",
+      "destinationCity": "Valencia",
+      "merchantProductId": "FRA_136306__246077_LASTMINUTE_2026-09-04_2026-09-06",
+      "price": 201.27
+    },
+    {
+      "ibeId": "246077",
+      "productName": "Frankfurt - Costa Valencia, Spanien - Flag Hotel Valencia",
+      "hotelName": "Flag Hotel Valencia",
+      "destinationCity": "Costa Valencia, Spanien",
+      "merchantProductId": "FRA__COSTA_VALENCIA_246077_LASTMINUTE_2026-09-04_2026-09-06",
+      "price": 201.27
+    },
+    {
+      "ibeId": "2635616",
+      "productName": "München - Costa Brava, Spanien - Hotel Golden Sand",
+      "hotelName": "Hotel Golden Sand",
+      "destinationCity": "Costa Brava, Spanien",
+      "merchantProductId": "MUC__COSTA_BRAVA_2635616_LASTMINUTE_2026-06-17_2026-06-19",
+      "price": 201.65
+    },
+    {
+      "ibeId": "175034",
+      "productName": "Düsseldorf - Garda - Residence Parco Del Garda",
+      "hotelName": "Residence Parco Del Garda",
+      "destinationCity": "Garda",
+      "merchantProductId": "DUS_131082__175034_LASTMINUTE_2026-10-06_2026-10-10",
+      "price": 201.81
+    },
+    {
+      "ibeId": "27354",
+      "productName": "Düsseldorf - Girona - Hotel Costabella",
+      "hotelName": "Hotel Costabella",
+      "destinationCity": "Girona",
+      "merchantProductId": "DUS_136845__27354_LASTMINUTE_2026-12-14_2026-12-16",
+      "price": 201.81
+    },
+    {
+      "ibeId": "13507821",
+      "productName": "Hamburg - Mailand - Mi Casa FRASCHINI",
+      "hotelName": "Mi Casa FRASCHINI",
+      "destinationCity": "Mailand",
+      "merchantProductId": "HAM_130522__13507821_LASTMINUTE_2026-09-21_2026-09-23",
+      "price": 202.08
+    },
+    {
+      "ibeId": "82762",
+      "productName": "Düsseldorf - Tropea - Residenza Mediterranea",
+      "hotelName": "Residenza Mediterranea",
+      "destinationCity": "Tropea",
+      "merchantProductId": "DUS_130035__82762_LASTMINUTE_2026-06-23_2026-06-27",
+      "price": 202.3
+    },
+    {
+      "ibeId": "135446",
+      "productName": "Berlin - Stockholm - Ariston Hotell",
+      "hotelName": "Ariston Hotell",
+      "destinationCity": "Stockholm",
+      "merchantProductId": "BER_156137__135446_LASTMINUTE_2026-08-19_2026-08-21",
+      "price": 202.44
+    },
+    {
+      "ibeId": "2633620",
+      "productName": "Karlsruhe Baden Baden - Alcoy - Hotel Reconquista",
+      "hotelName": "Hotel Reconquista",
+      "destinationCity": "Alcoy",
+      "merchantProductId": "FKB_137262__2633620_LASTMINUTE_2026-06-22_2026-06-25",
+      "price": 202.56
+    },
+    {
+      "ibeId": "2633620",
+      "productName": "Karlsruhe Baden Baden - Costa Blanca, Spanien - Hotel Reconquista",
+      "hotelName": "Hotel Reconquista",
+      "destinationCity": "Costa Blanca, Spanien",
+      "merchantProductId": "FKB__COSTA_BLANCA_2633620_LASTMINUTE_2026-06-22_2026-06-25",
+      "price": 202.56
+    },
+    {
+      "ibeId": "3752756",
+      "productName": "Hamburg - Frankfurt am Main - THE PLACE HOTEL - Frankfurt City Messe",
+      "hotelName": "Frankfurt City Messe",
+      "destinationCity": "Frankfurt am Main",
+      "merchantProductId": "HAM_145016__3752756_LASTMINUTE_2026-12-18_2026-12-20",
+      "price": 202.62
+    },
+    {
+      "ibeId": "164776",
+      "productName": "Berlin - Barcelona - Eurohotel Barcelona Granvia Fira",
+      "hotelName": "Eurohotel Barcelona Granvia Fira",
+      "destinationCity": "Barcelona",
+      "merchantProductId": "BER_136284__164776_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 202.73
+    },
+    {
+      "ibeId": "3708475",
+      "productName": "Frankfurt - Tropea - HOTEL MERCURIO SUL MARE - Fish restaurant and private beach",
+      "hotelName": "Fish restaurant and private beach",
+      "destinationCity": "Tropea",
+      "merchantProductId": "FRA_130035__3708475_LASTMINUTE_2026-11-16_2026-11-20",
+      "price": 202.97
+    },
+    {
+      "ibeId": "51539",
+      "productName": "Berlin - Charenton-le-Pont - Kyriad - Créteil - Bonneuil-sur-Marne",
+      "hotelName": "Bonneuil-sur-Marne",
+      "destinationCity": "Charenton-le-Pont",
+      "merchantProductId": "BER_139136__51539_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 203.06
+    },
+    {
+      "ibeId": "4465699",
+      "productName": "Düsseldorf - Korfu, Griechenland - Trabukos Beach Complex",
+      "hotelName": "Trabukos Beach Complex",
+      "destinationCity": "Korfu, Griechenland",
+      "merchantProductId": "DUS__CORFU_4465699_LASTMINUTE_2026-06-11_2026-06-14",
+      "price": 203.09
+    },
+    {
+      "ibeId": "7488695",
+      "productName": "Memmingen - Castellammare di Stabia - Villa Donna Carmela",
+      "hotelName": "Villa Donna Carmela",
+      "destinationCity": "Castellammare di Stabia",
+      "merchantProductId": "FMM_131654__7488695_LASTMINUTE_2026-08-06_2026-08-09",
+      "price": 203.4
+    },
+    {
+      "ibeId": "7488695",
+      "productName": "Memmingen - Sorrentoküste, Neapel - Villa Donna Carmela",
+      "hotelName": "Villa Donna Carmela",
+      "destinationCity": "Sorrentoküste, Neapel",
+      "merchantProductId": "FMM__SORRENTO_COAST_7488695_LASTMINUTE_2026-08-06_2026-08-09",
+      "price": 203.4
+    },
+    {
+      "ibeId": "54875",
+      "productName": "München - Costa Brava, Spanien - BLUESEA Montevista Hawai",
+      "hotelName": "BLUESEA Montevista Hawai",
+      "destinationCity": "Costa Brava, Spanien",
+      "merchantProductId": "MUC__COSTA_BRAVA_54875_LASTMINUTE_2026-06-17_2026-06-19",
+      "price": 203.7
+    },
+    {
+      "ibeId": "9393774",
+      "productName": "Dortmund - Vlorë - New Donantelo Hotel",
+      "hotelName": "New Donantelo Hotel",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "DTM_161895__9393774_LASTMINUTE_2026-09-21_2026-09-25",
+      "price": 203.37
+    },
+    {
+      "ibeId": "621198",
+      "productName": "Frankfurt - Rom - Ibis Roma Fiera",
+      "hotelName": "Ibis Roma Fiera",
+      "destinationCity": "Rom",
+      "merchantProductId": "FRA_131028__621198_LASTMINUTE_2026-08-29_2026-08-31",
+      "price": 203.63
+    },
+    {
+      "ibeId": "101772414",
+      "productName": "Frankfurt - Vlorë - Tonis Rooms Vlore",
+      "hotelName": "Tonis Rooms Vlore",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "FRA_161895__101772414_LASTMINUTE_2026-09-30_2026-10-04",
+      "price": 203.73
+    },
+    {
+      "ibeId": "7335820",
+      "productName": "Hamburg - Clacton-On-Sea - The Aviator, formerly Smugglers Cove, Clacton On Sea by Marston's Inns",
+      "hotelName": "The Aviator, formerly Smugglers Cove, Clacton On Sea by Marston's Inns",
+      "destinationCity": "Clacton-On-Sea",
+      "merchantProductId": "HAM_142446__7335820_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 204.6
+    },
+    {
+      "ibeId": "847465",
+      "productName": "Berlin - Magaluf - Villa Palmer",
+      "hotelName": "Villa Palmer",
+      "destinationCity": "Magaluf",
+      "merchantProductId": "BER_255608__847465_LASTMINUTE_2026-11-23_2026-11-27",
+      "price": 204.9
+    },
+    {
+      "ibeId": "17629",
+      "productName": "Berlin - Stockholm - Scandic Skärholmen",
+      "hotelName": "Scandic Skärholmen",
+      "destinationCity": "Stockholm",
+      "merchantProductId": "BER_156137__17629_LASTMINUTE_2026-08-19_2026-08-21",
+      "price": 204.25
+    },
+    {
+      "ibeId": "3405935",
+      "productName": "Berlin - Paris - Campanile Paris Est - Porte de Bagnolet",
+      "hotelName": "Porte de Bagnolet",
+      "destinationCity": "Paris",
+      "merchantProductId": "BER_139497__3405935_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 204.29
+    },
+    {
+      "ibeId": "6794234",
+      "productName": "Köln Bonn - München - Ramada Encore by Wyndham Munich Messe",
+      "hotelName": "Ramada Encore by Wyndham Munich Messe",
+      "destinationCity": "München",
+      "merchantProductId": "CGN_145846__6794234_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 204.46
+    },
+    {
+      "ibeId": "6794234",
+      "productName": "Köln Bonn - Bayern, Deutschland - Ramada Encore by Wyndham Munich Messe",
+      "hotelName": "Ramada Encore by Wyndham Munich Messe",
+      "destinationCity": "Bayern, Deutschland",
+      "merchantProductId": "CGN__BAYERN_6794234_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 204.46
+    },
+    {
+      "ibeId": "6794234",
+      "productName": "Köln Bonn - Oberbayern, Deutschland - Ramada Encore by Wyndham Munich Messe",
+      "hotelName": "Ramada Encore by Wyndham Munich Messe",
+      "destinationCity": "Oberbayern, Deutschland",
+      "merchantProductId": "CGN__OBERBAYERN_6794234_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 204.46
+    },
+    {
+      "ibeId": "4944292",
+      "productName": "Dortmund - Ksamil - Mihasi Apartments",
+      "hotelName": "Mihasi Apartments",
+      "destinationCity": "Ksamil",
+      "merchantProductId": "DTM_259932__4944292_LASTMINUTE_2026-09-21_2026-09-25",
+      "price": 204.74
+    },
+    {
+      "ibeId": "13665405",
+      "productName": "Hannover - Sardinien, Italien - Residence Il Borgo di Badesi",
+      "hotelName": "Residence Il Borgo di Badesi",
+      "destinationCity": "Sardinien, Italien",
+      "merchantProductId": "HAJ__SARDEGNA_13665405_LASTMINUTE_2026-06-11_2026-06-14",
+      "price": 204.89
+    },
+    {
+      "ibeId": "13665405",
+      "productName": "Hannover - Nordsardinien – Region Alghero, Italien - Residence Il Borgo di Badesi",
+      "hotelName": "Residence Il Borgo di Badesi",
+      "destinationCity": "Nordsardinien – Region Alghero, Italien",
+      "merchantProductId": "HAJ__SARDEGNA_OVEST_13665405_LASTMINUTE_2026-06-11_2026-06-14",
+      "price": 204.89
+    },
+    {
+      "ibeId": "7663184",
+      "productName": "Hamburg - Frankfurt am Main - Hotel Garni Frankfurt",
+      "hotelName": "Hotel Garni Frankfurt",
+      "destinationCity": "Frankfurt am Main",
+      "merchantProductId": "HAM_145016__7663184_LASTMINUTE_2026-12-18_2026-12-20",
+      "price": 204.96
+    },
+    {
+      "ibeId": "2623021",
+      "productName": "Memmingen - Obzor - Obzor Beach Resort",
+      "hotelName": "Obzor Beach Resort",
+      "destinationCity": "Obzor",
+      "merchantProductId": "FMM_154814__2623021_LASTMINUTE_2026-06-17_2026-06-21",
+      "price": 205.9
+    },
+    {
+      "ibeId": "13231621",
+      "productName": "Berlin - Stockholm - Edsviken Hotell",
+      "hotelName": "Edsviken Hotell",
+      "destinationCity": "Stockholm",
+      "merchantProductId": "BER_156137__13231621_LASTMINUTE_2026-08-19_2026-08-21",
+      "price": 205.34
+    },
+    {
+      "ibeId": "9218797",
+      "productName": "Frankfurt - Rom - Palazzo Sant'Antonio Roma",
+      "hotelName": "Palazzo Sant'Antonio Roma",
+      "destinationCity": "Rom",
+      "merchantProductId": "FRA_131028__9218797_LASTMINUTE_2026-11-26_2026-11-28",
+      "price": 205.41
+    },
+    {
+      "ibeId": "165171",
+      "productName": "Frankfurt - Monopoli - Semiramide Palace Hotel",
+      "hotelName": "Semiramide Palace Hotel",
+      "destinationCity": "Monopoli",
+      "merchantProductId": "FRA_130168__165171_LASTMINUTE_2026-06-22_2026-06-26",
+      "price": 205.62
+    },
+    {
+      "ibeId": "245989",
+      "productName": "Düsseldorf - Bologna - NH Bologna Villanova",
+      "hotelName": "NH Bologna Villanova",
+      "destinationCity": "Bologna",
+      "merchantProductId": "DUS_131690__245989_LASTMINUTE_2026-07-12_2026-07-14",
+      "price": 205.91
+    },
+    {
+      "ibeId": "245989",
+      "productName": "Düsseldorf - Emilia Romagna, Italien - NH Bologna Villanova",
+      "hotelName": "NH Bologna Villanova",
+      "destinationCity": "Emilia Romagna, Italien",
+      "merchantProductId": "DUS__EMILIA_ROMAGNA_245989_LASTMINUTE_2026-07-12_2026-07-14",
+      "price": 205.91
+    },
+    {
+      "ibeId": "93491",
+      "productName": "Frankfurt - Rom - Serendipity",
+      "hotelName": "Serendipity",
+      "destinationCity": "Rom",
+      "merchantProductId": "FRA_131028__93491_LASTMINUTE_2026-11-26_2026-11-28",
+      "price": 205.94
+    },
+    {
+      "ibeId": "51280",
+      "productName": "Berlin - Paris - Campanile NATURE - Paris Ouest Gennevilliers Port",
+      "hotelName": "Paris Ouest Gennevilliers Port",
+      "destinationCity": "Paris",
+      "merchantProductId": "BER_139497__51280_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 206.11
+    },
+    {
+      "ibeId": "10033263",
+      "productName": "Frankfurt - Croydon - Aparthotel Adagio London Sutton Point",
+      "hotelName": "Aparthotel Adagio London Sutton Point",
+      "destinationCity": "Croydon",
+      "merchantProductId": "FRA_141657__10033263_LASTMINUTE_2026-08-21_2026-08-24",
+      "price": 206.19
+    },
+    {
+      "ibeId": "847465",
+      "productName": "Düsseldorf - Mallorca, Spanien - Villa Palmer",
+      "hotelName": "Villa Palmer",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "DUS__MAIORCA_847465_LASTMINUTE_2026-12-04_2026-12-07",
+      "price": 206.21
+    },
+    {
+      "ibeId": "7549320",
+      "productName": "Berlin - Lukove - Bunec Beach Resort",
+      "hotelName": "Bunec Beach Resort",
+      "destinationCity": "Lukove",
+      "merchantProductId": "BER_275077__7549320_LASTMINUTE_2026-06-22_2026-06-24",
+      "price": 206.59
+    },
+    {
+      "ibeId": "1867199",
+      "productName": "Berlin - Rom - Des Epoques Hotel",
+      "hotelName": "Des Epoques Hotel",
+      "destinationCity": "Rom",
+      "merchantProductId": "BER_131028__1867199_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 206.65
+    },
+    {
+      "ibeId": "160999",
+      "productName": "Berlin - Marne-La-Vallee - Campanile NATURE - Marne La Vallée - Chelles",
+      "hotelName": "Chelles",
+      "destinationCity": "Marne-La-Vallee",
+      "merchantProductId": "BER_140628__160999_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 206.66
+    },
+    {
+      "ibeId": "2503903",
+      "productName": "Berlin - Rom - Hotel Priscilla",
+      "hotelName": "Hotel Priscilla",
+      "destinationCity": "Rom",
+      "merchantProductId": "BER_131028__2503903_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 206.77
+    },
+    {
+      "ibeId": "76754",
+      "productName": "Hamburg - Croydon - Holiday Inn LONDON - SUTTON by IHG",
+      "hotelName": "SUTTON by IHG",
+      "destinationCity": "Croydon",
+      "merchantProductId": "HAM_141657__76754_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 206.79
+    },
+    {
+      "ibeId": "7435686",
+      "productName": "Leipzig Halle - Lykische Küste, Türkei - LİMAN BOUTIQUE OTEL",
+      "hotelName": "LİMAN BOUTIQUE OTEL",
+      "destinationCity": "Lykische Küste, Türkei",
+      "merchantProductId": "LEJ__LYKISCHE_KUSTE_7435686_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 206.79
+    },
+    {
+      "ibeId": "5415684",
+      "productName": "Frankfurt - Sarandë - Hotel Venera",
+      "hotelName": "Hotel Venera",
+      "destinationCity": "Sarandë",
+      "merchantProductId": "FRA_180539__5415684_LASTMINUTE_2026-09-30_2026-10-04",
+      "price": 206.85
+    },
+    {
+      "ibeId": "51368",
+      "productName": "Berlin - Paris Orly - Ibis Budget Fresnes Orly",
+      "hotelName": "Ibis Budget Fresnes Orly",
+      "destinationCity": "Paris Orly",
+      "merchantProductId": "BER_162761__51368_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 206.95
+    },
+    {
+      "ibeId": "3358040",
+      "productName": "Memmingen - Pozzuoli - Hotel Happy Days",
+      "hotelName": "Hotel Happy Days",
+      "destinationCity": "Pozzuoli",
+      "merchantProductId": "FMM_131165__3358040_LASTMINUTE_2026-08-06_2026-08-09",
+      "price": 207.09
+    },
+    {
+      "ibeId": "7517593",
+      "productName": "Dortmund - Vlorë - Hotel Beler",
+      "hotelName": "Hotel Beler",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "DTM_161895__7517593_LASTMINUTE_2026-09-21_2026-09-25",
+      "price": 207.8
+    },
+    {
+      "ibeId": "2629486",
+      "productName": "Memmingen - Varna - Hotel Palitra",
+      "hotelName": "Hotel Palitra",
+      "destinationCity": "Varna",
+      "merchantProductId": "FMM_154765__2629486_LASTMINUTE_2026-06-24_2026-06-28",
+      "price": 207.26
+    },
+    {
+      "ibeId": "13665405",
+      "productName": "Frankfurt - Nordsardinien – Region Alghero, Italien - Residence Il Borgo di Badesi",
+      "hotelName": "Residence Il Borgo di Badesi",
+      "destinationCity": "Nordsardinien – Region Alghero, Italien",
+      "merchantProductId": "FRA__SARDEGNA_OVEST_13665405_LASTMINUTE_2026-06-11_2026-06-14",
+      "price": 207.28
+    },
+    {
+      "ibeId": "13665405",
+      "productName": "Frankfurt - Sardinien, Italien - Residence Il Borgo di Badesi",
+      "hotelName": "Residence Il Borgo di Badesi",
+      "destinationCity": "Sardinien, Italien",
+      "merchantProductId": "FRA__SARDEGNA_13665405_LASTMINUTE_2026-06-11_2026-06-14",
+      "price": 207.28
+    },
+    {
+      "ibeId": "50134",
+      "productName": "Berlin - Paris - Campanile PRIME - Paris Pantin",
+      "hotelName": "Paris Pantin",
+      "destinationCity": "Paris",
+      "merchantProductId": "BER_139497__50134_LASTMINUTE_2026-08-21_2026-08-23",
+      "price": 207.38
+    },
+    {
+      "ibeId": "2510622",
+      "productName": "Berlin - Rom - Hotel Alba Roma",
+      "hotelName": "Hotel Alba Roma",
+      "destinationCity": "Rom",
+      "merchantProductId": "BER_131028__2510622_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 207.39
+    },
+    {
+      "ibeId": "1743708",
+      "productName": "Düsseldorf - Mallorca, Spanien - Santuari de Cura",
+      "hotelName": "Santuari de Cura",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "DUS__MAIORCA_1743708_LASTMINUTE_2026-06-30_2026-07-02",
+      "price": 207.59
+    },
+    {
+      "ibeId": "147995",
+      "productName": "Berlin - Peschiera del Garda - Hotel Rivus",
+      "hotelName": "Hotel Rivus",
+      "destinationCity": "Peschiera del Garda",
+      "merchantProductId": "BER_131154__147995_LASTMINUTE_2026-11-02_2026-11-06",
+      "price": 207.63
+    },
+    {
+      "ibeId": "976890",
+      "productName": "Hamburg - Frankfurt am Main - Hotel Offenbacher Hof",
+      "hotelName": "Hotel Offenbacher Hof",
+      "destinationCity": "Frankfurt am Main",
+      "merchantProductId": "HAM_145016__976890_LASTMINUTE_2026-12-18_2026-12-20",
+      "price": 207.89
+    },
+    {
+      "ibeId": "2378934",
+      "productName": "Memmingen - Malta - Cardor Holiday Complex",
+      "hotelName": "Cardor Holiday Complex",
+      "destinationCity": "Malta",
+      "merchantProductId": "FMM__MALTA_2378934_LASTMINUTE_2026-07-06_2026-07-08",
+      "price": 207.91
+    },
+    {
+      "ibeId": "2650750",
+      "productName": "Hamburg - Frankfurt am Main - NH Frankfurt Niederrad",
+      "hotelName": "NH Frankfurt Niederrad",
+      "destinationCity": "Frankfurt am Main",
+      "merchantProductId": "HAM_145016__2650750_LASTMINUTE_2026-12-18_2026-12-20",
+      "price": 207.95
+    },
+    {
+      "ibeId": "51122",
+      "productName": "Berlin - Ivry-sur-Seine - Campanile Créteil Centre",
+      "hotelName": "Campanile Créteil Centre",
+      "destinationCity": "Ivry-sur-Seine",
+      "merchantProductId": "BER_139210__51122_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 208.05
+    },
+    {
+      "ibeId": "2415562",
+      "productName": "Berlin - Rom - Hotel Artis",
+      "hotelName": "Hotel Artis",
+      "destinationCity": "Rom",
+      "merchantProductId": "BER_131028__2415562_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 208.07
+    },
+    {
+      "ibeId": "14011879",
+      "productName": "Frankfurt - Valencia - SH Campus Lyceum",
+      "hotelName": "SH Campus Lyceum",
+      "destinationCity": "Valencia",
+      "merchantProductId": "FRA_136306__14011879_LASTMINUTE_2026-09-04_2026-09-06",
+      "price": 208.6
+    },
+    {
+      "ibeId": "14011879",
+      "productName": "Frankfurt - Costa Valencia, Spanien - SH Campus Lyceum",
+      "hotelName": "SH Campus Lyceum",
+      "destinationCity": "Costa Valencia, Spanien",
+      "merchantProductId": "FRA__COSTA_VALENCIA_14011879_LASTMINUTE_2026-09-04_2026-09-06",
+      "price": 208.6
+    },
+    {
+      "ibeId": "937772",
+      "productName": "Memmingen - Neapel - Best Western Hotel dei Mille",
+      "hotelName": "Best Western Hotel dei Mille",
+      "destinationCity": "Neapel",
+      "merchantProductId": "FMM_131653__937772_LASTMINUTE_2026-08-06_2026-08-09",
+      "price": 208.14
+    },
+    {
+      "ibeId": "937772",
+      "productName": "Memmingen - Neapel, Italien - Best Western Hotel dei Mille",
+      "hotelName": "Best Western Hotel dei Mille",
+      "destinationCity": "Neapel, Italien",
+      "merchantProductId": "FMM__NAPLES_FR_937772_LASTMINUTE_2026-08-06_2026-08-09",
+      "price": 208.14
+    },
+    {
+      "ibeId": "783693",
+      "productName": "Berlin - Paris Orly - Villa Paris Orly",
+      "hotelName": "Villa Paris Orly",
+      "destinationCity": "Paris Orly",
+      "merchantProductId": "BER_162761__783693_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 208.36
+    },
+    {
+      "ibeId": "24131",
+      "productName": "Memmingen - Pozzuoli - Hotel Santa Marta",
+      "hotelName": "Hotel Santa Marta",
+      "destinationCity": "Pozzuoli",
+      "merchantProductId": "FMM_131165__24131_LASTMINUTE_2026-08-06_2026-08-09",
+      "price": 208.78
+    },
+    {
+      "ibeId": "2648668",
+      "productName": "Köln Bonn - München - NH München Messe",
+      "hotelName": "NH München Messe",
+      "destinationCity": "München",
+      "merchantProductId": "CGN_145846__2648668_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 208.84
+    },
+    {
+      "ibeId": "2648668",
+      "productName": "Köln Bonn - Bayern, Deutschland - NH München Messe",
+      "hotelName": "NH München Messe",
+      "destinationCity": "Bayern, Deutschland",
+      "merchantProductId": "CGN__BAYERN_2648668_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 208.84
+    },
+    {
+      "ibeId": "2648668",
+      "productName": "Köln Bonn - Oberbayern, Deutschland - NH München Messe",
+      "hotelName": "NH München Messe",
+      "destinationCity": "Oberbayern, Deutschland",
+      "merchantProductId": "CGN__OBERBAYERN_2648668_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 208.84
+    },
+    {
+      "ibeId": "181056",
+      "productName": "Stuttgart - Hamburg - acora City Apart Living the City - Digital Access Apartments",
+      "hotelName": "Digital Access Apartments",
+      "destinationCity": "Hamburg",
+      "merchantProductId": "STR_143696__181056_LASTMINUTE_2027-02-10_2027-02-12",
+      "price": 208.92
+    },
+    {
+      "ibeId": "2510622",
+      "productName": "Frankfurt - Rom - Hotel Alba Roma",
+      "hotelName": "Hotel Alba Roma",
+      "destinationCity": "Rom",
+      "merchantProductId": "FRA_131028__2510622_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 208.96
+    },
+    {
+      "ibeId": "248850",
+      "productName": "Berlin - Stockholm - Sure Hotel by Best Western Stockholm Alvsjo",
+      "hotelName": "Sure Hotel by Best Western Stockholm Alvsjo",
+      "destinationCity": "Stockholm",
+      "merchantProductId": "BER_156137__248850_LASTMINUTE_2026-08-19_2026-08-21",
+      "price": 209.17
+    },
+    {
+      "ibeId": "13665405",
+      "productName": "Düsseldorf - Nordsardinien – Region Alghero, Italien - Residence Il Borgo di Badesi",
+      "hotelName": "Residence Il Borgo di Badesi",
+      "destinationCity": "Nordsardinien – Region Alghero, Italien",
+      "merchantProductId": "DUS__SARDEGNA_OVEST_13665405_LASTMINUTE_2026-06-12_2026-06-14",
+      "price": 209.38
+    },
+    {
+      "ibeId": "13665405",
+      "productName": "Düsseldorf - Sardinien, Italien - Residence Il Borgo di Badesi",
+      "hotelName": "Residence Il Borgo di Badesi",
+      "destinationCity": "Sardinien, Italien",
+      "merchantProductId": "DUS__SARDEGNA_13665405_LASTMINUTE_2026-06-12_2026-06-14",
+      "price": 209.38
+    },
+    {
+      "ibeId": "101772414",
+      "productName": "Dortmund - Vlorë - Tonis Rooms Vlore",
+      "hotelName": "Tonis Rooms Vlore",
+      "destinationCity": "Vlorë",
+      "merchantProductId": "DTM_161895__101772414_LASTMINUTE_2026-09-21_2026-09-25",
+      "price": 209.46
+    },
+    {
+      "ibeId": "847465",
+      "productName": "Köln Bonn - Mallorca, Spanien - Villa Palmer",
+      "hotelName": "Villa Palmer",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "CGN__MAIORCA_847465_LASTMINUTE_2026-11-09_2026-11-12",
+      "price": 209.53
+    },
+    {
+      "ibeId": "1074605",
+      "productName": "Berlin - Stockholm - Hotel Expo Stockholm",
+      "hotelName": "Hotel Expo Stockholm",
+      "destinationCity": "Stockholm",
+      "merchantProductId": "BER_156137__1074605_LASTMINUTE_2026-08-19_2026-08-21",
+      "price": 209.55
+    },
+    {
+      "ibeId": "3354730",
+      "productName": "Köln Bonn - München - Super 8 by Wyndham Munich City North",
+      "hotelName": "Super 8 by Wyndham Munich City North",
+      "destinationCity": "München",
+      "merchantProductId": "CGN_145846__3354730_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 209.64
+    },
+    {
+      "ibeId": "3354730",
+      "productName": "Köln Bonn - Bayern, Deutschland - Super 8 by Wyndham Munich City North",
+      "hotelName": "Super 8 by Wyndham Munich City North",
+      "destinationCity": "Bayern, Deutschland",
+      "merchantProductId": "CGN__BAYERN_3354730_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 209.64
+    },
+    {
+      "ibeId": "3354730",
+      "productName": "Köln Bonn - Oberbayern, Deutschland - Super 8 by Wyndham Munich City North",
+      "hotelName": "Super 8 by Wyndham Munich City North",
+      "destinationCity": "Oberbayern, Deutschland",
+      "merchantProductId": "CGN__OBERBAYERN_3354730_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 209.64
+    },
+    {
+      "ibeId": "4786189",
+      "productName": "Hamburg - Clacton-On-Sea - Travelodge Clacton-on-Sea Central",
+      "hotelName": "Travelodge Clacton-on-Sea Central",
+      "destinationCity": "Clacton-On-Sea",
+      "merchantProductId": "HAM_142446__4786189_LASTMINUTE_2026-08-13_2026-08-15",
+      "price": 209.93
+    },
+    {
+      "ibeId": "2854927",
+      "productName": "Memmingen - Sarajevo - Apartments Hayat Hills",
+      "hotelName": "Apartments Hayat Hills",
+      "destinationCity": "Sarajevo",
+      "merchantProductId": "FMM_157766__2854927_LASTMINUTE_2026-06-19_2026-06-21",
+      "price": 210.11
+    },
+    {
+      "ibeId": "1867199",
+      "productName": "Hamburg - Rom - Des Epoques Hotel",
+      "hotelName": "Des Epoques Hotel",
+      "destinationCity": "Rom",
+      "merchantProductId": "HAM_131028__1867199_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 210.29
+    },
+    {
+      "ibeId": "440906",
+      "productName": "Köln Bonn - Bulgarien - Schwarzmeerküste - Family Hotel Albizia Beach",
+      "hotelName": "Family Hotel Albizia Beach",
+      "destinationCity": "Bulgarien - Schwarzmeerküste",
+      "merchantProductId": "CGN__BOURGAS_COAST_440906_LASTMINUTE_2026-06-13_2026-06-15",
+      "price": 210.38
+    },
+    {
+      "ibeId": "2503903",
+      "productName": "Hamburg - Rom - Hotel Priscilla",
+      "hotelName": "Hotel Priscilla",
+      "destinationCity": "Rom",
+      "merchantProductId": "HAM_131028__2503903_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 210.41
+    },
+    {
+      "ibeId": "49047",
+      "productName": "Berlin - Paris - Aparthotel Adagio Access Paris Vanves - Porte de Châtillon",
+      "hotelName": "Porte de Châtillon",
+      "destinationCity": "Paris",
+      "merchantProductId": "BER_139497__49047_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 210.48
+    },
+    {
+      "ibeId": "11185881",
+      "productName": "Köln Bonn - München - ibis Styles Muenchen Perlach",
+      "hotelName": "ibis Styles Muenchen Perlach",
+      "destinationCity": "München",
+      "merchantProductId": "CGN_145846__11185881_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 210.57
+    },
+    {
+      "ibeId": "11185881",
+      "productName": "Köln Bonn - Bayern, Deutschland - ibis Styles Muenchen Perlach",
+      "hotelName": "ibis Styles Muenchen Perlach",
+      "destinationCity": "Bayern, Deutschland",
+      "merchantProductId": "CGN__BAYERN_11185881_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 210.57
+    },
+    {
+      "ibeId": "11185881",
+      "productName": "Köln Bonn - Oberbayern, Deutschland - ibis Styles Muenchen Perlach",
+      "hotelName": "ibis Styles Muenchen Perlach",
+      "destinationCity": "Oberbayern, Deutschland",
+      "merchantProductId": "CGN__OBERBAYERN_11185881_LASTMINUTE_2026-08-17_2026-08-19",
+      "price": 210.57
+    },
+    {
+      "ibeId": "190154",
+      "productName": "Berlin - Paris - Appart’City Confort Paris Villejuif",
+      "hotelName": "Appart’City Confort Paris Villejuif",
+      "destinationCity": "Paris",
+      "merchantProductId": "BER_139497__190154_LASTMINUTE_2026-09-03_2026-09-05",
+      "price": 210.64
+    },
+    {
+      "ibeId": "175663",
+      "productName": "Frankfurt - Hammamet - Hotel Le Khalife",
+      "hotelName": "Hotel Le Khalife",
+      "destinationCity": "Hammamet",
+      "merchantProductId": "FRA_155003__175663_LASTMINUTE_2026-06-18_2026-06-22",
+      "price": 210.87
+    },
+    {
+      "ibeId": "2510622",
+      "productName": "Hamburg - Rom - Hotel Alba Roma",
+      "hotelName": "Hotel Alba Roma",
+      "destinationCity": "Rom",
+      "merchantProductId": "HAM_131028__2510622_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 211.02
+    },
+    {
+      "ibeId": "4944292",
+      "productName": "Frankfurt - Ksamil - Mihasi Apartments",
+      "hotelName": "Mihasi Apartments",
+      "destinationCity": "Ksamil",
+      "merchantProductId": "FRA_259932__4944292_LASTMINUTE_2026-09-30_2026-10-04",
+      "price": 211.26
+    },
+    {
+      "ibeId": "129146",
+      "productName": "Karlsruhe Baden Baden - Alcoy - Hotel Sercotel Ciutat D'Alcoi",
+      "hotelName": "Hotel Sercotel Ciutat D'Alcoi",
+      "destinationCity": "Alcoy",
+      "merchantProductId": "FKB_137262__129146_LASTMINUTE_2026-06-22_2026-06-25",
+      "price": 211.43
+    },
+    {
+      "ibeId": "1819594",
+      "productName": "Frankfurt - Rom - Hotel Infinito - Gruppo BLAM HOTELS",
+      "hotelName": "Gruppo BLAM HOTELS",
+      "destinationCity": "Rom",
+      "merchantProductId": "FRA_131028__1819594_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 211.51
+    },
+    {
+      "ibeId": "2000580",
+      "productName": "Frankfurt - Rom - Hotel Espana - Gruppo BLAM HOTELS",
+      "hotelName": "Gruppo BLAM HOTELS",
+      "destinationCity": "Rom",
+      "merchantProductId": "FRA_131028__2000580_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 211.51
+    },
+    {
+      "ibeId": "188375",
+      "productName": "Köln Bonn - Mallorca, Spanien - Apartamentos Habitat",
+      "hotelName": "Apartamentos Habitat",
+      "destinationCity": "Mallorca, Spanien",
+      "merchantProductId": "CGN__MAIORCA_188375_LASTMINUTE_2026-11-09_2026-11-12",
+      "price": 211.62
+    },
+    {
+      "ibeId": "2415562",
+      "productName": "Dortmund - Rom - Hotel Artis",
+      "hotelName": "Hotel Artis",
+      "destinationCity": "Rom",
+      "merchantProductId": "DTM_131028__2415562_LASTMINUTE_2027-03-12_2027-03-14",
+      "price": 211.64
+    },
+    {
+      "ibeId": "98714",
+      "productName": "Düsseldorf - Palma de Mallorca - Apartamentos Vistasol",
+      "hotelName": "Apartamentos Vistasol",
+      "destinationCity": "Palma de Mallorca",
+      "merchantProductId": "DUS_315752__98714_LASTMINUTE_2026-11-15_2026-11-19",
+      "price": 211.65
+    },
+    {
+      "ibeId": "2415562",
+      "productName": "Hamburg - Rom - Hotel Artis",
+      "hotelName": "Hotel Artis",
+      "destinationCity": "Rom",
+      "merchantProductId": "HAM_131028__2415562_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 211.68
+    },
+    {
+      "ibeId": "4465699",
+      "productName": "München - Kavos - Trabukos Beach Complex",
+      "hotelName": "Trabukos Beach Complex",
+      "destinationCity": "Kavos",
+      "merchantProductId": "MUC_163658__4465699_LASTMINUTE_2026-06-13_2026-06-17",
+      "price": 212
+    },
+    {
+      "ibeId": "248765",
+      "productName": "Frankfurt - Rom - Hotel Philia",
+      "hotelName": "Hotel Philia",
+      "destinationCity": "Rom",
+      "merchantProductId": "FRA_131028__248765_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 212.04
+    },
+    {
+      "ibeId": "4000912",
+      "productName": "Memmingen - Durres - Haka Guesthouse",
+      "hotelName": "Haka Guesthouse",
+      "destinationCity": "Durres",
+      "merchantProductId": "FMM_169276__4000912_LASTMINUTE_2026-07-15_2026-07-19",
+      "price": 212.12
+    },
+    {
+      "ibeId": "28068",
+      "productName": "Frankfurt - Rom - LH Hotel Excel Roma Montemario",
+      "hotelName": "LH Hotel Excel Roma Montemario",
+      "destinationCity": "Rom",
+      "merchantProductId": "FRA_131028__28068_LASTMINUTE_2026-12-11_2026-12-13",
+      "price": 212.13
+    },
+    {
+      "ibeId": "702015",
+      "productName": "Berlin - Orikum - Grand Hotel Aita",
+      "hotelName": "Grand Hotel Aita",
+      "destinationCity": "Orikum",
+      "merchantProductId": "BER_264750__702015_LASTMINUTE_2026-11-23_2026-11-25",
+      "price": 212.14
+    },
+    {
+      "ibeId": "8602075",
+      "productName": "Berlin - Stockholm - Part-Time Home Täby",
+      "hotelName": "Part-Time Home Täby",
+      "destinationCity": "Stockholm",
+      "merchantProductId": "BER_156137__8602075_LASTMINUTE_2026-08-19_2026-08-21",
+      "price": 212.21
+    },
+    {
+      "ibeId": "5503382",
+      "productName": "Leipzig Halle - Lykische Küste, Türkei - Park Marina Hotel",
+      "hotelName": "Park Marina Hotel",
+      "destinationCity": "Lykische Küste, Türkei",
+      "merchantProductId": "LEJ__LYKISCHE_KUSTE_5503382_LASTMINUTE_2026-06-12_2026-06-15",
+      "price": 212.26
+    }
+  ]
+}

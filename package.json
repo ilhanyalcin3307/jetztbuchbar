@@ -4,6 +4,9 @@
   "scripts": {
     "build": "node content-engine/build-giata-index.js && node content-engine/patch-hotel-ranking.js",
     "alltours:analyze": "node content-engine/analyze-alltours-feed.js",
+    "lastminute:analyze": "node content-engine/analyze-lastminute-feed.js",
+    "lastminute:build-overrides": "node content-engine/build-lastminute-overrides.js",
+    "lastminute:refresh": "npm run lastminute:analyze && npm run lastminute:build-overrides && npm run lastminute:analyze",
     "alltours:rescue-zero-pages": "node content-engine/build-unmatched-overrides.js",
     "alltours:review": "node content-engine/review-alltours-probables.js"
   }

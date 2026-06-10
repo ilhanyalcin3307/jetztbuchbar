@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title id="page-title">Hotel Details – JetztBuchbar</title>
   <meta name="description" id="page-desc" content="Hotelprofil mit Lage, Ausstattung, Zimmern, Bewertungen und Buchungsoptionen. JetztBuchbar.de zeigt verifizierte Hotel-Details für deine Reiseplanung." />
-  <meta name="robots" content="noindex,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <link rel="canonical" id="page-canonical" href="https://www.jetztbuchbar.de/hotel.html" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@jetztbuchbar" />
@@ -231,6 +231,14 @@
     .hd-name { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.4rem; }
     .hd-stars { color: #f5a623; font-size: 1.3rem; margin-bottom: 0.35rem; }
     .hd-location { color: var(--text-muted); font-size: 0.95rem; }
+    .hd-destination-link { margin-top: 0.45rem; }
+    .hd-destination-link a {
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
 
     .hd-section { margin-bottom: 2.75rem; }
     .hd-section-title {
@@ -749,6 +757,7 @@
           </div>
           <div class="hd-stars" id="hd-stars"></div>
           <div class="hd-location" id="hd-location"></div>
+          <div class="hd-destination-link" id="hd-destination-link" style="display:none"></div>
         </div>
 
         <!-- Karte -->
@@ -1522,17 +1531,121 @@
       return Math.round(price);
     }
 
+    function normalizeCity(value) {
+      return String(value || '')
+        .toLowerCase()
+        .replace(/ı/g, 'i').replace(/İ/g, 'i')
+        .replace(/ş/g, 's').replace(/Ş/g, 's')
+        .replace(/ç/g, 'c').replace(/Ç/g, 'c')
+        .replace(/ğ/g, 'g').replace(/Ğ/g, 'g')
+        .replace(/ü/g, 'u').replace(/Ü/g, 'u')
+        .replace(/ö/g, 'o').replace(/Ö/g, 'o')
+        .replace(/[^a-z0-9]/g, '');
+    }
+
+    function resolveDestinationLink(hotel) {
+      var country = String(hotel.country || '').toLowerCase();
+      var city = normalizeCity(hotel.city || '');
+
+      if (country.indexOf('türk') !== -1 || country.indexOf('turk') !== -1) {
+        var trMap = {
+          antalya: '/tuerkei/antalya/',
+          alanya: '/tuerkei/alanya/',
+          fethiye: '/tuerkei/fethiye/',
+          marmaris: '/tuerkei/marmaris/',
+          bodrum: '/tuerkei/bodrum/',
+          side: '/tuerkei/side/',
+          izmir: '/tuerkei/izmir/',
+          cesme: '/tuerkei/cesme/',
+          kusadasi: '/tuerkei/kusadasi/'
+        };
+        return trMap[city] || '/tuerkei/';
+      }
+
+      if (country.indexOf('griech') !== -1 || country.indexOf('greece') !== -1) {
+        var grMap = {
+          zakynthos: '/griechenland/zakynthos/',
+          zante: '/griechenland/zakynthos/',
+          korfu: '/griechenland/korfu/',
+          corfu: '/griechenland/korfu/',
+          rhodos: '/griechenland/rhodos/',
+          rhodes: '/griechenland/rhodos/',
+          kreta: '/griechenland/kreta/',
+          crete: '/griechenland/kreta/',
+          santorini: '/griechenland/santorini/',
+          mykonos: '/griechenland/mykonos/'
+        };
+        return grMap[city] || '/griechenland/';
+      }
+
+      if (country.indexOf('span') !== -1) {
+        var esMap = {
+          barcelona: '/spanien/barcelona/',
+          mallorca: '/spanien/mallorca/',
+          ibiza: '/spanien/ibiza/',
+          tenerife: '/spanien/teneriffa/',
+          teneriffa: '/spanien/teneriffa/'
+        };
+        return esMap[city] || '/spanien/';
+      }
+
+      return '/';
+    }
+
     // ── JB Experten-Score berechnen (via JBScore Engine) ───────────
     // Berechnung erfolgt in renderHotel mit JBScore.calcScore(h, {warningPenalty})
 
     // ── Haupt-Render ─────────────────────────────────────────────────
     function renderHotel(h) {
+      function withEllipsis(text, maxLen) {
+        var value = String(text || '').trim();
+        if (value.length <= maxLen) return value;
+        return value.slice(0, maxLen - 1).trimEnd() + '…';
+      }
+
+      function buildSeoTitle(hotelName, scoreLabel, destination, year) {
+        var candidates = [
+          hotelName + ' – JBScore ' + scoreLabel + ' | Unabhängige Hotelbewertung ' + destination + ' ' + year,
+          hotelName + ' – JBScore ' + scoreLabel + ' | Hotelbewertung ' + destination + ' ' + year,
+          hotelName + ' | JBScore ' + scoreLabel + ' ' + destination + ' ' + year,
+          hotelName + ' | JBScore ' + scoreLabel + ' ' + destination
+        ];
+
+        for (var i = 0; i < candidates.length; i++) {
+          if (candidates[i].length <= 60) return candidates[i];
+        }
+
+        var fixedPart = ' | JBScore ' + scoreLabel + ' ' + destination + ' ' + year;
+        var maxHotelLen = Math.max(8, 60 - fixedPart.length);
+        return withEllipsis(hotelName, maxHotelLen) + fixedPart;
+      }
+
+      function buildSeoDescription(hotelName, scoreLabel, destination) {
+        var candidates = [
+          hotelName + ' in ' + destination + ': JBScore ' + scoreLabel + ' – Basierend auf echten Gästebewertungen, GIATA-Daten & Sicherheitsinfos. Jetzt unabhängig vergleichen auf JetztBuchbar.de',
+          hotelName + ' in ' + destination + ': JBScore ' + scoreLabel + ' – Basierend auf Gästebewertungen, GIATA-Daten & Sicherheitsinfos. Jetzt vergleichen.',
+          hotelName + ' in ' + destination + ': JBScore ' + scoreLabel + '. Unabhängige Bewertung mit GIATA-Daten und Sicherheitsinfos auf JetztBuchbar.de.'
+        ];
+
+        for (var i = 0; i < candidates.length; i++) {
+          if (candidates[i].length <= 155) return candidates[i];
+        }
+
+        return withEllipsis(candidates[candidates.length - 1], 155);
+      }
+
       var params = new URLSearchParams(location.search);
       var displayName = h.name || (params.get('slug') || '').replace(/-/g, ' ') || 'Hotel';
-      var pageTitle = displayName + ' – Details & Anfrage | JetztBuchbar';
-      document.getElementById('page-title').textContent = pageTitle;
       var loc = [h.city, h.country].filter(Boolean).join(', ');
-      var descText = displayName + (loc ? ' in ' + loc : '') + ' – Ausstattung, Zimmer, Fotos und Angebot auf JetztBuchbar.';
+      var primaryDestination = h.city || h.country || 'Reiseziel';
+
+      var JBS = window.JBScore || {};
+      var jbScore = JBS.calcScore ? JBS.calcScore(h, { warningPenalty: h._warningPenalty || 0 }) : 60;
+      var scoreLabel = (Math.max(1, Math.min(100, Number(jbScore))) / 10).toFixed(1);
+      var pageTitle = buildSeoTitle(displayName, scoreLabel, primaryDestination, 2026);
+      var descText = buildSeoDescription(displayName, scoreLabel, primaryDestination);
+
+      document.getElementById('page-title').textContent = pageTitle;
       document.getElementById('page-desc').setAttribute('content', descText);
       var ogTitleEl = document.getElementById('page-og-title');
       if (ogTitleEl) ogTitleEl.setAttribute('content', pageTitle);
@@ -1549,11 +1662,18 @@
       if (ogUrlEl) ogUrlEl.setAttribute('content', canonicalValue);
 
       // JSON-LD
+      var ratingCount = Number(h.googleReviews || 0);
       var schema = {
-        '@context': 'https://schema.org', '@type': 'LodgingBusiness',
+        '@context': 'https://schema.org', '@type': 'Hotel',
         'name': displayName, 'description': descText,
         'url': 'https://www.jetztbuchbar.de/hotel.html?id=' + encodeURIComponent(h.giataId || hotelId),
-        'address': { '@type': 'PostalAddress', 'addressLocality': h.city || '', 'addressCountry': h.country || '' }
+        'address': { '@type': 'PostalAddress', 'addressLocality': h.city || '', 'addressCountry': h.country || '' },
+        'aggregateRating': {
+          '@type': 'AggregateRating',
+          'ratingValue': scoreLabel,
+          'bestRating': '10',
+          'ratingCount': String(ratingCount > 0 ? ratingCount : 1)
+        }
       };
       if (h.stars) schema['starRating'] = { '@type': 'Rating', 'ratingValue': String(h.stars), 'bestRating': '5' };
       if (h.lat && h.lng) schema['geo'] = { '@type': 'GeoCoordinates', 'latitude': h.lat, 'longitude': h.lng };
@@ -1571,10 +1691,14 @@
       document.getElementById('hd-name').textContent = h.name || '';
       document.getElementById('hd-stars').textContent = h.stars ? '★'.repeat(h.stars) + '☆'.repeat(Math.max(0, 5 - h.stars)) : '';
       document.getElementById('hd-location').textContent = loc ? '📍 ' + loc : '';
+      var destinationEl = document.getElementById('hd-destination-link');
+      if (destinationEl) {
+        var destinationHref = resolveDestinationLink(h);
+        destinationEl.innerHTML = '<a href="' + esc(destinationHref) + '">↩ Mehr Hotels in dieser Destination ansehen</a>';
+        destinationEl.style.display = '';
+      }
 
       // ── JB Experten-Score Siegel befüllen ─────────────────────────
-      var JBS = window.JBScore || {};
-      var jbScore = JBS.calcScore ? JBS.calcScore(h, { warningPenalty: h._warningPenalty || 0 }) : 60;
       _hdHotelStars = h.stars ? h.stars + ' ★' : '–';
       var sidebarLblEl = document.getElementById('jb-score-sidebar-label');
       if (sidebarLblEl) sidebarLblEl.textContent = jbScore + '/100 Experten-Score';

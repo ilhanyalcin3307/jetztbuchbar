@@ -1,3 +1,6 @@
 .vercel
 .env.local
 .env*.local
+
+data/lidlreisen-feed.csv
+.DS_Store

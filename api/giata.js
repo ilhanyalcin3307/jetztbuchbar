@@ -5,6 +5,7 @@
 const GIATA_BASE = 'https://giatadrive.com/api/v1';
 const fs   = require('fs');
 const path = require('path');
+const ENABLE_LASTMINUTE = false;
 
 // Google Places ratings (statik önbellek — content-engine/update-google-ratings.js ile güncellenir)
 function loadGoogleRatings() {
@@ -40,16 +41,36 @@ function loadLidlOffers() {
   } catch (e) { return {}; }
 }
 
+function loadLastminuteOffers() {
+  try {
+    const p = path.join(__dirname, '..', 'data', 'lastminute-offers.json');
+    const raw = JSON.parse(fs.readFileSync(p, 'utf-8'));
+    const hotels = Array.isArray(raw) ? raw : (raw.hotels || []);
+    return hotels.reduce(function(map, hotel) {
+      const gid = String(hotel.giataId || '');
+      if (gid) map[gid] = hotel;
+      return map;
+    }, {});
+  } catch (e) { return {}; }
+}
+
 const GOOGLE_RATINGS = loadGoogleRatings();
 const ALLTOURS_OFFERS = loadAlltoursOffers();
 const LIDL_OFFERS = loadLidlOffers();
+const LASTMINUTE_OFFERS = ENABLE_LASTMINUTE ? loadLastminuteOffers() : {};
 
 function getAffiliateProviderEntries(giataId) {
   const gid = String(giataId || '');
-  return [
+  const providers = [
     { provider: 'Alltours', entry: ALLTOURS_OFFERS[gid] || null },
     { provider: 'Lidl Reisen', entry: LIDL_OFFERS[gid] || null }
-  ].filter(function(item) {
+  ];
+
+  if (ENABLE_LASTMINUTE) {
+    providers.push({ provider: 'Lastminute', entry: LASTMINUTE_OFFERS[gid] || null });
+  }
+
+  return providers.filter(function(item) {
     return item.entry && item.entry.bestOffer;
   });
 }
@@ -144,6 +165,8 @@ module.exports = async function handler(req, res) {
       indexSize:   index ? index.length : 0,
       alltoursOffers: Object.keys(ALLTOURS_OFFERS).length,
       lidlOffers: Object.keys(LIDL_OFFERS).length,
+      lastminuteActive: ENABLE_LASTMINUTE,
+      lastminuteOffers: Object.keys(LASTMINUTE_OFFERS).length,
     });
   }
 
@@ -578,7 +601,14 @@ function buildAffiliateOffer(giataId) {
 }
 
 function getAffiliateOfferHotels() {
-  return Object.values(ALLTOURS_OFFERS || {}).concat(Object.values(LIDL_OFFERS || {}));
+  const hotels = Object.values(ALLTOURS_OFFERS || {})
+    .concat(Object.values(LIDL_OFFERS || {}));
+
+  if (ENABLE_LASTMINUTE) {
+    return hotels.concat(Object.values(LASTMINUTE_OFFERS || {}));
+  }
+
+  return hotels;
 }
 
 // Vollständige Daten für die Detailseite (alle Bilder, alle Texte, Zimmertypen)

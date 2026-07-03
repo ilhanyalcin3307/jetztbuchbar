@@ -18,13 +18,24 @@
   <meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80" />
   <meta property="og:type" content="website" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
   <script>
     (function () {
       try {
         var params = new URLSearchParams(window.location.search);
         var slug = (params.get('slug') || '').trim();
         var hid = (params.get('id') || '').trim();
-        var label = slug ? slug.replace(/-/g, ' ').replace(/\s+/g, ' ').trim() : 'Hotel';
+
+        // Keep a single canonical query shape for crawlers.
+        if (hid && slug) {
+          window.location.replace(window.location.pathname + '?id=' + encodeURIComponent(hid));
+          return;
+        }
+
+        var label = slug ? slug.replace(/-/g, ' ').replace(/\s+/g, ' ').trim() : (hid ? ('Hotel ' + hid) : 'Hotel');
         label = label ? label.charAt(0).toUpperCase() + label.slice(1) : 'Hotel';
 
         var titleTxt = label + ' – Hotelprofil, Ausstattung & Lage | JetztBuchbar';
@@ -62,15 +73,27 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #0a0a0a; --bg-card: #121212; --bg-card2: #161616;
-      --accent: #00c896; --accent-dark: #00a87e;
-      --text: #f0f0f0; --text-muted: #888; --text-dim: #555;
-      --border: #1e1e1e; --radius: 12px;
+      --bg: #08110f;
+      --bg-card: rgba(15, 24, 21, 0.92);
+      --bg-card2: rgba(20, 31, 27, 0.96);
+      --accent: #2dd4aa;
+      --accent-dark: #17b38d;
+      --accent-soft: rgba(45, 212, 170, 0.12);
+      --text: #f3f6f4;
+      --text-muted: #9aa8a1;
+      --text-dim: #66736d;
+      --border: rgba(255,255,255,0.08);
+      --radius: 20px;
+      --shadow: 0 24px 60px rgba(0,0,0,0.28);
     }
     html { scroll-behavior: smooth; }
     body {
-      background: var(--bg); color: var(--text);
-      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(45,212,170,0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.04), transparent 24%),
+        linear-gradient(180deg, #07100e 0%, #0b1513 42%, #08110f 100%);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
       line-height: 1.6; -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
@@ -79,13 +102,13 @@
     header {
       position: sticky; top: 0; z-index: 300;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 clamp(1.25rem, 5vw, 3rem); height: 64px;
-      background: rgba(10,10,10,0.92); backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border);
+      padding: 0 clamp(1rem, 4vw, 2.75rem); height: 72px;
+      background: rgba(7,16,14,0.72); backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
-    nav { display: flex; gap: 2rem; }
-    nav a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+    .logo { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.03em; color: var(--accent); }
+    nav { display: flex; gap: 1.5rem; }
+    nav a { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); transition: color 0.2s; }
     nav a:hover { color: var(--accent); }
 
     /* ── LOADING ── */
@@ -102,10 +125,11 @@
       color: var(--text-muted);
     }
     .hd-seo-fallback-card {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--bg-card);
-      padding: 1rem 1.05rem;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(18,29,26,0.96), rgba(11,18,16,0.96));
+      box-shadow: var(--shadow);
+      padding: 1.1rem 1.15rem;
     }
     .hd-seo-fallback h2 {
       font-size: 1.08rem;
@@ -134,8 +158,10 @@
     /* ── HERO GALLERY ── */
     .hd-gallery {
       position: relative; width: 100%;
-      background: #000; overflow: hidden;
+      background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.55)), #000;
+      overflow: hidden;
       aspect-ratio: 16 / 6;
+      box-shadow: inset 0 -1px 0 rgba(255,255,255,0.06), 0 18px 40px rgba(0,0,0,0.25);
     }
     @media (max-width: 640px) { .hd-gallery { aspect-ratio: 4 / 3; } }
 
@@ -180,11 +206,11 @@
 
     /* ── TWO-COLUMN WRAPPER ── */
     .hd-wrapper {
-      max-width: 1220px; margin: 0 auto;
-      padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 3vw, 2rem);
+      max-width: 1280px; margin: 0 auto;
+      padding: clamp(1.4rem, 3vw, 2.5rem) clamp(1rem, 3vw, 2rem) 5rem;
       display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 2rem;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 1.5rem;
       align-items: start;
     }
     @media (max-width: 900px) {
@@ -198,14 +224,15 @@
     .hd-mobile-cta {
       display: none;
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
-      background: var(--bg-card, #121212);
-      border-top: 1px solid var(--border, #1e1e1e);
+      background: rgba(9, 17, 15, 0.88);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255,255,255,0.07);
       padding: .75rem 1rem calc(.75rem + env(safe-area-inset-bottom));
       gap: .6rem;
     }
     .hd-mobile-cta-btn {
       flex: 1; padding: .78rem;
-      background: var(--accent); color: #000;
+      background: linear-gradient(135deg, var(--accent) 0%, #7cf0cf 100%); color: #04110d;
       border: none; border-radius: 8px;
       font-size: .9rem; font-weight: 800; cursor: pointer;
       font-family: inherit;
@@ -213,7 +240,7 @@
     .hd-mobile-cta-score {
       display: flex; align-items: center; justify-content: center;
       flex-direction: column; gap: 1px; flex-shrink: 0;
-      background: rgba(0,200,150,.1); border: 1px solid rgba(0,200,150,.25);
+      background: rgba(45,212,170,.12); border: 1px solid rgba(45,212,170,.26);
       border-radius: 8px; padding: .4rem .7rem; min-width: 56px;
     }
     .hd-mobile-cta-score-val { font-size: .95rem; font-weight: 900; color: var(--accent); line-height: 1; }
@@ -222,15 +249,29 @@
     /* ── MAIN ── */
     .hd-back {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      color: var(--text-muted); font-size: 0.85rem;
-      margin-bottom: 1.5rem; transition: color 0.2s;
+      color: var(--text-muted); font-size: 0.84rem;
+      margin-bottom: 0.25rem; transition: color 0.2s;
     }
     .hd-back:hover { color: var(--accent); }
 
-    .hd-hotel-header { margin-bottom: 2rem; }
-    .hd-name { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.4rem; }
-    .hd-stars { color: #f5a623; font-size: 1.3rem; margin-bottom: 0.35rem; }
-    .hd-location { color: var(--text-muted); font-size: 0.95rem; }
+    .hd-hotel-header {
+      margin: 0 0 1.2rem;
+      padding: 1.15rem 1.15rem 1.2rem;
+      background: linear-gradient(180deg, rgba(18,29,26,0.88), rgba(12,19,17,0.92));
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .hd-name {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      font-weight: 600;
+      line-height: 1.05;
+      margin-bottom: 0.45rem;
+      letter-spacing: -0.03em;
+    }
+    .hd-stars { color: #f4c36a; font-size: 1.05rem; margin-bottom: 0.35rem; letter-spacing: 0.06em; }
+    .hd-location { color: var(--text-muted); font-size: 0.96rem; }
     .hd-destination-link { margin-top: 0.45rem; }
     .hd-destination-link a {
       color: var(--accent);
@@ -241,10 +282,18 @@
     }
 
     .hd-section { margin-bottom: 2.75rem; }
+    .hd-section {
+      background: linear-gradient(180deg, rgba(16,26,23,0.92), rgba(11,18,16,0.94));
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 1.35rem 1.35rem 1.2rem;
+      margin-bottom: 1.2rem;
+    }
     .hd-section-title {
-      font-size: 1.1rem; font-weight: 700; color: var(--accent);
-      padding-bottom: 0.6rem; margin-bottom: 1.2rem;
-      border-bottom: 1px solid var(--border);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 1rem; font-weight: 800; color: var(--text);
+      padding-bottom: 0.8rem; margin-bottom: 1rem;
     }
 
     /* ── MAP ── */
@@ -280,16 +329,19 @@
     /* ── ZIMMERTYPEN ── */
     .hd-room-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: 0.85rem;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
     }
     .hd-room-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1rem 1.1rem;
+      background: rgba(17,27,24,0.95);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px; padding: 1rem 1.05rem;
       display: flex; flex-direction: column; gap: 0.6rem;
-      transition: border-color 0.2s; overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.16);
     }
-    .hd-room-card:hover { border-color: rgba(0,200,150,0.35); }
+    .hd-room-card:hover { border-color: rgba(45,212,170,0.28); transform: translateY(-2px); box-shadow: 0 18px 32px rgba(0,0,0,0.22); }
     .hd-room-name { font-weight: 700; font-size: 0.9rem; line-height: 1.3; }
     .hd-room-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
     .hd-room-tag {
@@ -298,13 +350,13 @@
     }
     .hd-room-anfragen {
       margin-top: auto;
-      background: none; border: 1px solid var(--accent);
-      color: var(--accent); border-radius: 6px;
+      background: rgba(45,212,170,0.08); border: 1px solid rgba(45,212,170,0.32);
+      color: var(--accent); border-radius: 10px;
       font-size: 0.78rem; font-weight: 700; padding: 0.38rem 0.6rem;
       cursor: pointer; transition: background 0.2s;
       align-self: flex-start;
     }
-    .hd-room-anfragen:hover { background: rgba(0,200,150,0.12); }
+    .hd-room-anfragen:hover { background: rgba(45,212,170,0.16); }
     /* Room image slider */
     .hd-room-imgs-wrap {
       position: relative; margin: -1rem -1.1rem 0.85rem;
@@ -365,9 +417,11 @@
     .hd-sidebar { position: sticky; top: 80px; }
 
     .hd-sidebar-card {
-      background: var(--bg-card2); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.4rem;
+      background: linear-gradient(180deg, rgba(20,31,27,0.95), rgba(12,19,17,0.98));
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 24px; padding: 1.35rem;
       display: flex; flex-direction: column; gap: 0.5rem;
+      box-shadow: var(--shadow);
     }
     .hd-sb-name { font-size: 1.05rem; font-weight: 800; line-height: 1.3; }
     .hd-sb-stars { color: #f5a623; font-size: 1.1rem; }
@@ -377,9 +431,9 @@
     .hd-sb-offer {
       margin-top: .5rem;
       padding: .9rem;
-      border: 1px solid rgba(0,200,150,.18);
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(0,200,150,.08), rgba(0,200,150,.03));
+      border: 1px solid rgba(45,212,170,.18);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(45,212,170,.08), rgba(45,212,170,.03));
       min-height: 148px;
       display: flex;
       flex-direction: column;
@@ -457,10 +511,10 @@
       display: block;
       width: 100%;
       padding: 0.85rem;
-      background: #fff;
-      color: #0d0d0d;
+      background: linear-gradient(135deg, #e8fff8 0%, #baf7e6 100%);
+      color: #07110f;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 0.95rem;
       font-weight: 800;
       text-align: center;
@@ -496,29 +550,29 @@
 
     .hd-anfragen-btn {
       width: 100%; padding: 0.85rem;
-      background: var(--accent); color: #000;
+      background: linear-gradient(135deg, var(--accent) 0%, #7cf0cf 100%); color: #04110d;
       border: none; border-radius: 8px;
       font-size: 0.95rem; font-weight: 800;
       cursor: pointer; transition: background 0.2s, transform 0.15s;
       margin-top: 0.5rem;
     }
-    .hd-anfragen-btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .hd-anfragen-btn:hover { transform: translateY(-1px); }
     .hd-sb-hint { text-align: center; font-size: 0.73rem; color: var(--text-dim); }
 
     /* ── COMPARE BUTTON ── */
     .hd-compare-btn {
       width: 100%; padding: 0.65rem;
       background: transparent; color: var(--accent);
-      border: 1px solid rgba(0,200,150,.35); border-radius: 8px;
+      border: 1px solid rgba(45,212,170,.35); border-radius: 12px;
       font-size: 0.82rem; font-weight: 700;
       cursor: pointer; transition: all 0.2s; margin-top: 0.55rem;
       font-family: inherit;
     }
-    .hd-compare-btn:hover { background: rgba(0,200,150,.08); border-color: var(--accent); }
+    .hd-compare-btn:hover { background: rgba(45,212,170,.08); border-color: var(--accent); }
     .hd-share-btn {
       width: 100%; padding: 0.6rem;
       background: transparent; color: var(--text-muted);
-      border: 1px solid var(--border); border-radius: 8px;
+      border: 1px solid var(--border); border-radius: 12px;
       font-size: 0.85rem; font-weight: 600; font-family: inherit;
       cursor: pointer; transition: all 0.2s; margin-top: 0.55rem;
     }
@@ -527,14 +581,14 @@
     .hd-compare-picker { margin-top: 0.55rem; position: relative; }
     .hd-compare-picker input {
       width: 100%; background: rgba(255,255,255,.05); border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.58rem 0.75rem 0.58rem 2.1rem;
+      border-radius: 12px; padding: 0.58rem 0.75rem 0.58rem 2.1rem;
       color: var(--text); font-size: 0.82rem; outline: none; font-family: inherit;
     }
     .hd-compare-picker input:focus { border-color: var(--accent); }
     .hdc-icon { position: absolute; left: .7rem; top: .62rem; pointer-events: none; font-size: .8rem; }
     .hdc-ac {
       position: absolute; top: calc(100% + 4px); left: 0; right: 0;
-      background: #181818; border: 1px solid var(--border); border-radius: 10px;
+      background: #111915; border: 1px solid var(--border); border-radius: 14px;
       z-index: 500; display: none; max-height: 200px; overflow-y: auto;
       box-shadow: 0 8px 24px rgba(0,0,0,.7); scrollbar-width: thin;
     }
@@ -557,10 +611,12 @@
       padding: 1rem;
     }
     .hdam-box {
-      background: #1a1a1a; border: 1px solid var(--accent);
-      border-radius: 16px; padding: 1.75rem 1.5rem;
+      background: linear-gradient(180deg, rgba(18,29,26,0.98), rgba(10,17,15,0.98));
+      border: 1px solid rgba(45,212,170,0.35);
+      border-radius: 20px; padding: 1.75rem 1.5rem;
       width: 100%; max-width: 440px; max-height: 92vh; overflow-y: auto;
       position: relative;
+      box-shadow: var(--shadow);
     }
     .hdam-close {
       position: absolute; top: 1rem; right: 1rem;
@@ -661,7 +717,7 @@
       gap: 0.35rem;
     }
     .jb-seal-sidebar-score {
-      font-size: 1rem; font-weight: 800; color: var(--accent); letter-spacing: -0.4px;
+      font-size: 1rem; font-weight: 800; color: var(--accent); letter-spacing: -0.03em;
     }
     .jb-seal-sidebar-sub {
       font-size: 0.67rem; color: var(--text-dim); line-height: 1.45; max-width: 210px;
@@ -672,7 +728,9 @@
       .jb-seal svg { width: 46px; height: 46px; }
     }
     @media (max-width: 900px) {
-      .hd-root { padding-bottom: 80px; }
+      #hd-root { padding-bottom: 96px; }
+      .hd-hotel-header { padding: 1rem; }
+      .hd-section { padding: 1.1rem; }
     }
   </style>
 <!-- Google tag (gtag.js) -->
@@ -720,9 +778,42 @@
 <script src="/components/header.js"></script>
 
   <div id="hd-loading">⏳ Lade Hotel…</div>
+  <script>
+  (function() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var slug = (params.get('slug') || '').trim();
+      var id = (params.get('id') || '').trim();
+      var name = 'Hotel';
+
+      if (slug) {
+        name = slug.replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
+        name = name.charAt(0).toUpperCase() + name.slice(1);
+      } else if (id) {
+        name = 'Hotel ' + id;
+      }
+
+      var titleEl = document.getElementById('hd-fallback-title');
+      if (titleEl) {
+        titleEl.textContent = name + ' – Lage, Ausstattung & Fotos | JetztBuchbar';
+      }
+
+      var fallbackNameEl = document.getElementById('hd-fallback-hotel-name');
+      if (fallbackNameEl) {
+        fallbackNameEl.textContent = name;
+      }
+
+      var copyEl = document.getElementById('hd-fallback-copy');
+      if (copyEl) {
+        copyEl.textContent = 'Wir laden die verifizierten Daten von ' + name + ' inklusive Lage, Ausstattungsmerkmale, Zimmertypen und aktuellen Angeboten.';
+      }
+    } catch(e) {}
+  })();
+</script>
   <section id="hd-seo-fallback" class="hd-seo-fallback" aria-live="polite">
     <div class="hd-seo-fallback-card">
       <h2 id="hd-fallback-title">Hotelprofil wird geladen</h2>
+      <p><strong>Hotelname:</strong> <span id="hd-fallback-hotel-name">Ausgewaehltes Hotel</span></p>
       <p id="hd-fallback-copy">Wir laden aktuell die verifizierten Hoteldaten inklusive Lage, Ausstattungsmerkmale, Zimmertypen, Fotos und Angebotsinformationen.</p>
       <ul>
         <li>Standortdaten mit Kartenansicht zur Reiseplanung.</li>
@@ -1636,6 +1727,8 @@
 
       var params = new URLSearchParams(location.search);
       var displayName = h.name || (params.get('slug') || '').replace(/-/g, ' ') || 'Hotel';
+      var fallbackNameLive = document.getElementById('hd-fallback-hotel-name');
+      if (fallbackNameLive) fallbackNameLive.textContent = displayName;
       var loc = [h.city, h.country].filter(Boolean).join(', ');
       var primaryDestination = h.city || h.country || 'Reiseziel';
 
@@ -1656,7 +1749,17 @@
       var twDescEl = document.getElementById('page-twitter-desc');
       if (twDescEl) twDescEl.setAttribute('content', descText);
       var canonicalEl = document.getElementById('page-canonical');
-      var canonicalValue = 'https://www.jetztbuchbar.de/hotel.html?id=' + encodeURIComponent(h.giataId || hotelId);
+      var canonicalSlug = (params.get('slug') || '').trim();
+      if (!canonicalSlug && displayName) {
+        canonicalSlug = displayName
+          .toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, ' ')
+          .trim()
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-');
+      }
+      var canonicalValue = 'https://www.jetztbuchbar.de/hotel.html?id=' + encodeURIComponent(h.giataId || hotelId)
+        + (canonicalSlug ? ('&slug=' + encodeURIComponent(canonicalSlug)) : '');
       if (canonicalEl) canonicalEl.setAttribute('href', canonicalValue);
       var ogUrlEl = document.getElementById('page-og-url');
       if (ogUrlEl) ogUrlEl.setAttribute('content', canonicalValue);
@@ -1666,7 +1769,7 @@
       var schema = {
         '@context': 'https://schema.org', '@type': 'Hotel',
         'name': displayName, 'description': descText,
-        'url': 'https://www.jetztbuchbar.de/hotel.html?id=' + encodeURIComponent(h.giataId || hotelId),
+        'url': canonicalValue,
         'address': { '@type': 'PostalAddress', 'addressLocality': h.city || '', 'addressCountry': h.country || '' },
         'aggregateRating': {
           '@type': 'AggregateRating',
@@ -1756,11 +1859,15 @@
     }
 
     // ── Start ────────────────────────────────────────────────────────
-    var hotelId = new URLSearchParams(location.search).get('id');
+    var startParams = new URLSearchParams(location.search);
+    var hotelId = startParams.get('id');
+    var requestedSlug = (startParams.get('slug') || '').replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
     if (!hotelId) {
       document.getElementById('hd-loading').textContent = '❌ Kein Hotel ausgewählt. Bitte zurück zur Übersicht.';
       var ft = document.getElementById('hd-fallback-title');
-      if (ft) ft.textContent = 'Kein Hotel ausgewählt';
+      if (ft) ft.textContent = requestedSlug ? (requestedSlug + ' – Hotelprofil wird geladen') : 'Kein Hotel ausgewählt';
+      var fn = document.getElementById('hd-fallback-hotel-name');
+      if (fn) fn.textContent = requestedSlug || 'Kein Hotel ausgewaehlt';
       var fc = document.getElementById('hd-fallback-copy');
       if (fc) fc.textContent = 'Bitte öffne ein Hotel über die Such- oder Vergleichsseite, damit wir die vollständigen verifizierten Detaildaten anzeigen können.';
     } else {
@@ -1769,6 +1876,11 @@
       if (slug0) {
         var ft2 = document.getElementById('hd-fallback-title');
         if (ft2) ft2.textContent = slug0 + ' – Hotelprofil wird geladen';
+        var fn2 = document.getElementById('hd-fallback-hotel-name');
+        if (fn2) fn2.textContent = slug0;
+      } else {
+        var fn3 = document.getElementById('hd-fallback-hotel-name');
+        if (fn3) fn3.textContent = 'Hotel ' + hotelId;
       }
       withJBScore(function() {
         fetch('/api/giata?action=detail&id=' + encodeURIComponent(hotelId))

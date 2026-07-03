@@ -37,34 +37,34 @@
     var style = document.createElement('style');
     style.id = 'hr-styles';
     style.textContent = [
-      '.hr-list{display:flex;flex-direction:column;gap:.9rem}',
-      '.hr-card{display:flex;align-items:stretch;background:var(--bg-card,#111);border:1px solid var(--border,#1e1e1e);border-radius:var(--radius,14px);overflow:hidden;transition:border-color .2s,transform .2s}',
-      '.hr-card:hover{border-color:rgba(0,200,150,.3);transform:translateY(-2px)}',
-      '.hr-rank-col{display:flex;align-items:center;justify-content:center;min-width:3rem;padding:0 .5rem;background:rgba(255,255,255,.02);border-right:1px solid var(--border,#1e1e1e);flex-shrink:0}',
-      '.hr-rank-num{font-size:1.35rem;font-weight:900;color:var(--text-muted,#777)}',
+      '.hr-list{display:flex;flex-direction:column;gap:1rem}',
+      '.hr-card{display:flex;align-items:stretch;background:linear-gradient(180deg,rgba(18,29,26,.96),rgba(11,18,16,.98));border:1px solid rgba(255,255,255,.07);border-radius:22px;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s;box-shadow:0 16px 38px rgba(0,0,0,.18)}',
+      '.hr-card:hover{border-color:rgba(45,212,170,.28);transform:translateY(-2px);box-shadow:0 22px 42px rgba(0,0,0,.28)}',
+      '.hr-rank-col{display:flex;align-items:center;justify-content:center;min-width:3.2rem;padding:0 .5rem;background:rgba(255,255,255,.02);border-right:1px solid rgba(255,255,255,.07);flex-shrink:0}',
+      '.hr-rank-num{font-size:1.35rem;font-weight:900;color:#9aa8a1}',
       '.hr-rank-num.r1{color:#f59e0b}.hr-rank-num.r2{color:#9ca3af}.hr-rank-num.r3{color:#cd7f32}',
-      '.hr-img-wrap{width:160px;min-width:160px;flex-shrink:0;overflow:hidden;background:rgba(255,255,255,.03);position:relative}',
+      '.hr-img-wrap{width:170px;min-width:170px;flex-shrink:0;overflow:hidden;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.34));position:relative}',
       '.hr-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}',
       '.hr-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:rgba(255,255,255,.15)}',
-      '.hr-body{flex:1;padding:1rem 1.25rem;display:flex;flex-direction:column;justify-content:center;gap:.25rem;min-width:0}',
-      '.hr-name{font-size:1rem;font-weight:700;color:var(--text,#f0f0f0);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+      '.hr-body{flex:1;padding:1rem 1.2rem 1.05rem;display:flex;flex-direction:column;justify-content:center;gap:.28rem;min-width:0}',
+      '.hr-name{font-size:1rem;font-weight:800;color:#f3f6f4;line-height:1.28;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.02em}',
       '.hr-meta{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}',
       '.hr-stars{color:#f59e0b;font-size:.82rem;letter-spacing:1px;flex-shrink:0}',
-      '.hr-loc{font-size:.8rem;color:var(--text-muted,#777)}',
+      '.hr-loc{font-size:.8rem;color:#9aa8a1}',
       '.hr-badges{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.4rem}',
-      '.hr-badge{background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.18);border-radius:6px;padding:.15rem .45rem;font-size:.74rem;color:var(--accent,#00c896);white-space:nowrap}',
+      '.hr-badge{background:rgba(45,212,170,.08);border:1px solid rgba(45,212,170,.16);border-radius:999px;padding:.15rem .48rem;font-size:.74rem;color:#2dd4aa;white-space:nowrap}',
       '.hr-score-row{margin-top:.55rem;display:flex;align-items:center;gap:.7rem}',
       '.hr-score-bar-outer{flex:1;height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}',
-      '.hr-score-bar-inner{height:100%;background:var(--accent,#00c896);border-radius:3px;width:0;transition:width 1s ease .2s}',
-      '.hr-score-label{font-size:.78rem;font-weight:700;color:var(--accent,#00c896);white-space:nowrap}',
-      '.hr-skeleton{background:rgba(255,255,255,.04);border-radius:var(--radius,14px);height:90px;animation:hr-pulse 1.4s ease-in-out infinite}',
+      '.hr-score-bar-inner{height:100%;background:#2dd4aa;border-radius:3px;width:0;transition:width 1s ease .2s}',
+      '.hr-score-label{font-size:.78rem;font-weight:700;color:#2dd4aa;white-space:nowrap}',
+      '.hr-skeleton{background:rgba(255,255,255,.04);border-radius:22px;height:90px;animation:hr-pulse 1.4s ease-in-out infinite}',
       '.hr-skeleton+.hr-skeleton{animation-delay:.2s}.hr-skeleton+.hr-skeleton+.hr-skeleton{animation-delay:.4s}',
       '@keyframes hr-pulse{0%,100%{opacity:.35}50%{opacity:.7}}',
-      '@media(max-width:580px){.hr-img-wrap{width:90px;min-width:90px}.hr-rank-col{min-width:2.25rem}.hr-body{padding:.7rem .85rem}.hr-name{font-size:.88rem}}',
-      '.jb-views{font-size:.71rem;color:var(--text-muted,#777);margin-top:.15rem;min-height:.85rem;line-height:1.3}',
+      '@media(max-width:580px){.hr-img-wrap{width:92px;min-width:92px}.hr-rank-col{min-width:2.35rem}.hr-body{padding:.76rem .88rem}.hr-name{font-size:.88rem}}',
+      '.jb-views{font-size:.71rem;color:#9aa8a1;margin-top:.15rem;min-height:.85rem;line-height:1.3}',
       '.hr-breakdown{margin-top:.55rem;display:flex;flex-direction:column;gap:.22rem}',
       '.hr-bd-row{display:flex;align-items:center;gap:.45rem}',
-      '.hr-bd-label{font-size:.69rem;color:var(--text-muted,#777);width:8.5rem;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+      '.hr-bd-label{font-size:.69rem;color:#9aa8a1;width:8.5rem;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
       '.hr-bd-bar-outer{flex:1;height:3px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;min-width:2rem}',
       '.hr-bd-bar-inner{height:100%;border-radius:2px;width:0;transition:width 1s ease .35s}',
       '.hr-bd-score{font-size:.7rem;font-weight:700;min-width:1.8rem;text-align:right;flex-shrink:0}',
@@ -74,18 +74,18 @@
       '.hr-img-strip img{width:100%;height:100%;object-fit:cover;display:block;flex-shrink:0}',
       '.hr-img-dots{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:center;gap:4px;padding:4px 0;background:linear-gradient(transparent,rgba(0,0,0,.55));z-index:4}',
       '.hr-img-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);border:none;padding:0;cursor:pointer;transition:background .2s,transform .2s;flex-shrink:0}',
-      '.hr-img-dot.active{background:#fff;transform:scale(1.25)}',
-      '.hr-img-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(0,0,0,.45);border:none;color:#fff;width:22px;height:28px;border-radius:4px;font-size:1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;padding:0}',
+      '.hr-img-dot.active{background:#2dd4aa;transform:scale(1.25)}',
+      '.hr-img-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(8,16,14,.45);border:none;color:#fff;width:22px;height:28px;border-radius:6px;font-size:1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;padding:0}',
       '.hr-img-carousel:hover .hr-img-nav{opacity:1}',
       '.hr-img-prev{left:3px}.hr-img-next{right:3px}',
       /* ── JB Score Badge ── */
-      '.hr-score-badge{position:absolute;top:7px;right:7px;width:56px;height:56px;border-radius:50%;border:2.5px solid var(--badge-c,#00c896);background:rgba(8,8,8,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:4;box-shadow:0 0 0 1px rgba(0,200,150,.25),0 3px 12px rgba(0,0,0,.6);overflow:hidden;gap:0}',
+      '.hr-score-badge{position:absolute;top:8px;right:8px;width:58px;height:58px;border-radius:50%;border:2.5px solid var(--badge-c,#2dd4aa);background:rgba(8,16,14,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:4;box-shadow:0 0 0 1px rgba(45,212,170,.22),0 3px 12px rgba(0,0,0,.6);overflow:hidden;gap:0}',
       '.hr-score-badge-num{font-size:1.25rem;font-weight:900;line-height:1;margin-top:1px}',
       '.hr-score-badge-band{background:#c0603a;width:100%;text-align:center;font-size:.46rem;font-weight:800;letter-spacing:.1em;color:#fff;padding:1px 0;margin-top:2px;text-transform:uppercase}',
       '.hr-score-badge-stars{font-size:.4rem;color:#f59e0b;letter-spacing:1px;margin-top:1px;line-height:1}',
       /* ── Sofort Anfragen Button ── */
-      '.hr-anfrage-btn{margin-top:.65rem;width:100%;padding:.5rem .75rem;background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.3);border-radius:8px;color:var(--accent,#00c896);font-size:.8rem;font-weight:700;cursor:pointer;transition:background .2s,border-color .2s;text-align:center}',
-      '.hr-anfrage-btn:hover{background:rgba(0,200,150,.2);border-color:var(--accent,#00c896)}',
+      '.hr-anfrage-btn{margin-top:.65rem;width:100%;padding:.54rem .8rem;background:linear-gradient(135deg,#2dd4aa,#7cf0cf);border:1px solid rgba(45,212,170,.2);border-radius:12px;color:#04110d;font-size:.8rem;font-weight:800;cursor:pointer;transition:background .2s,border-color .2s;text-align:center}',
+      '.hr-anfrage-btn:hover{background:linear-gradient(135deg,#38e2b8,#8ef5dc);border-color:#38e2b8}',
       '@media(max-width:580px){.hr-img-nav{display:none}}'
     ].join('');
     document.head.appendChild(style);
@@ -297,7 +297,7 @@
           renderHotels(container, valid);
           jbLoadViews(container);
         } else {
-          container.innerHTML = '<p style="color:var(--text-muted,#777);text-align:center;padding:2rem 0;">Keine Hotel-Daten verfügbar.</p>';
+          container.innerHTML = '<p style="color:#9aa8a1;text-align:center;padding:2rem 0;">Keine Hotel-Daten verfügbar.</p>';
         }
       });
       }
@@ -315,7 +315,7 @@
           .then(function (data) {
             var ids = (data.hotels || []).map(function (h) { return h.giataId; }).filter(Boolean);
             if (!ids.length) {
-              container.innerHTML = '<p style="color:var(--text-muted,#777);text-align:center;padding:2rem 0;">Keine Hotel-Daten verfügbar.</p>';
+              container.innerHTML = '<p style="color:#9aa8a1;text-align:center;padding:2rem 0;">Keine Hotel-Daten verfügbar.</p>';
               return;
             }
             fetchAndRenderByIds(ids);
